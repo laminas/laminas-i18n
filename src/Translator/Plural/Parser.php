@@ -1,16 +1,14 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator\Plural;
+namespace Laminas\I18n\Translator\Plural;
 
-use Zend\I18n\Exception;
+use Laminas\I18n\Exception;
 
 /**
  * Plural rule parser.
@@ -18,8 +16,8 @@ use Zend\I18n\Exception;
  * This plural rule parser is implemented after the article "Top Down Operator
  * Precedence" described in <http://javascript.crockford.com/tdop/tdop.html>.
  *
- * @category   Zend
- * @package    Zend_I18n
+ * @category   Laminas
+ * @package    Laminas_I18n
  * @subpackage Translator
  */
 class Parser
