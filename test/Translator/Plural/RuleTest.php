@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator\Plural;
+namespace LaminasTest\I18n\Translator\Plural;
 
+use Laminas\I18n\Translator\Plural\Rule;
 use PHPUnit\Framework\TestCase;
-use Zend\I18n\Translator\Plural\Rule;
 
 class RuleTest extends TestCase
 {

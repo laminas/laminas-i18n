@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\View\Helper;
+namespace Laminas\I18n\View\Helper;
 
+use Laminas\I18n\Exception;
+use Laminas\View\Helper\AbstractHelper;
 use Locale;
 use NumberFormatter;
-use Zend\I18n\Exception;
-use Zend\View\Helper\AbstractHelper;
 
 /**
  * View helper for formatting dates.
