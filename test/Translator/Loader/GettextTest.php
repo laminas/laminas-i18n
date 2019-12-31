@@ -1,15 +1,16 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator\Loader;
+namespace LaminasTest\I18n\Translator\Loader;
 
-use PHPUnit\Framework\TestCase;
+use Laminas\I18n\Translator\Loader\Gettext as GettextLoader;
 use Locale;
-use Zend\I18n\Translator\Loader\Gettext as GettextLoader;
+use PHPUnit\Framework\TestCase;
 
 class GettextTest extends TestCase
 {
@@ -43,7 +44,7 @@ class GettextTest extends TestCase
     public function testLoaderFailsToLoadMissingFile()
     {
         $loader = new GettextLoader();
-        $this->expectException('Zend\I18n\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('Could not find or open file');
         $loader->load('en_EN', 'missing');
     }
@@ -51,7 +52,7 @@ class GettextTest extends TestCase
     public function testLoaderFailsToLoadBadFile()
     {
         $loader = new GettextLoader();
-        $this->expectException('Zend\I18n\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('is not a valid gettext file');
         $loader->load('en_EN', $this->testFilesDir . '/failed.mo');
     }
@@ -60,14 +61,14 @@ class GettextTest extends TestCase
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.mo');
-        $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $domain);
+        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $domain);
     }
 
     public function testLoaderLoadsBigEndianFile()
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_bigendian.mo');
-        $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $domain);
+        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $domain);
     }
 
     public function testLoaderReturnsValidTextDomain()

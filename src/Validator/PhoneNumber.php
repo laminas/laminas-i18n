@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Validator;
+namespace Laminas\I18n\Validator;
 
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Validator\AbstractValidator;
 use Locale;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\AbstractValidator;
 
 class PhoneNumber extends AbstractValidator
 {
