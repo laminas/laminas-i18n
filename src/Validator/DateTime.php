@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Validator;
+namespace Laminas\I18n\Validator;
 
-use Locale;
 use IntlDateFormatter;
+use Laminas\Validator\AbstractValidator;
+use Laminas\Validator\Exception;
+use Locale;
 use Traversable;
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\Exception;
 
 class DateTime extends AbstractValidator
 {
