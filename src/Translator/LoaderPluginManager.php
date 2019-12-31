@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator;
+namespace Laminas\I18n\Translator;
 
-use Zend\I18n\Exception;
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\I18n\Exception;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 /**
  * Plugin manager implementation for translation loaders.
@@ -27,9 +26,9 @@ class LoaderPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'gettext'  => 'Zend\I18n\Translator\Loader\Gettext',
-        'ini'      => 'Zend\I18n\Translator\Loader\Ini',
-        'phparray' => 'Zend\I18n\Translator\Loader\PhpArray',
+        'gettext'  => 'Laminas\I18n\Translator\Loader\Gettext',
+        'ini'      => 'Laminas\I18n\Translator\Loader\Ini',
+        'phparray' => 'Laminas\I18n\Translator\Loader\PhpArray',
     );
 
     /**
