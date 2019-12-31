@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
+    <link rel="canonical" href="https://docs.laminas.dev/translation/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Translation - laminas-i18n - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../filters/" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../validators/" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-i18n</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-i18n/" class="header__link header__link--github" title="Go to repository of laminas-i18n">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#adding-translations" class="toc__link">Adding translations</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#supported-formats" class="toc__link">Supported formats</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#setting-a-locale" class="toc__link">Setting a locale</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#translating-messages" class="toc__link">Translating messages</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#caching" class="toc__link">Caching</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-i18n</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Translation</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="translation">Translation</h1>
+<p>laminas-i18n comes with a complete translation suite supporting all major formats
+and including popular features such as plural translations and text domains. The
+Translator subcomponent is mostly dependency free, except for the fallback to a
+default locale, where it relies on the PHP's intl extension.</p>
+<p>The translator itself is initialized without any parameters, as any
+configuration to it is optional. A translator without any translations will do
+nothing but return all messages verbatim.</p>
+<h2 id="adding-translations">Adding translations</h2>
+<p>Two options exist for adding translations to the translator:</p>
+<ul>
+<li>Add every translation file individually; use this for translation formats that
+  store multiple locales in the same file.</li>
+<li>Add translation files based on a pattern; use this for formats that use one
+  file per locale.</li>
+</ul>
+<p>To add a single file to the translator, use the <code>addTranslationFile()</code> method:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\I18n\Translator\Translator;</span>
+
+<span class=x>$translator = new Translator();</span>
+<span class=x>$translator-&gt;addTranslationFile($type, $filename, $textDomain, $locale);</span>
+</pre></div></p>
+<p>where the arguments are:</p>
+<ul>
+<li><code>$type</code>: the name of the format loader to use; see the next section for
+  details.</li>
+<li><code>$filename</code>: the file containing translations.</li>
+<li><code>$textDomain</code>: a "category" name for translations. If this is omitted, it
+  defaults to "default". Use text domains to segregate translations by context.</li>
+<li><code>$locale</code>: the language strings are translated from; this argument is only
+  required for formats which contain translations for single locales.</li>
+</ul>
+<p>When storing one locale per file, you should specify those files via a pattern.
+This allows you to add new translations to the file system, without touching
+your code. Patterns are added with the <code>addTranslationFilePattern()</code> method:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\I18n\Translator\Translator;</span>
+
+<span class=x>$translator = new Translator();</span>
+<span class=x>$translator-&gt;addTranslationFilePattern($type, $baseDir, $pattern, $textDomain);</span>
+</pre></div></p>
+<p>where the arguments are roughly the same as for <code>addTranslationFile()</code>, with a
+few differences:</p>
+<ul>
+<li><code>$baseDir</code> is a directory containing translation files.</li>
+<li><code>$pattern</code> is an <code>sprintf()</code>-formatted string describing a pattern for
+  locating files under <code>$baseDir</code>. The <code>$pattern</code> should contain a substitution
+  character for the <code>$locale</code> &mdash; which is omitted from the
+  <code>addTranslationFilePattern()</code> call, but passed whenever a translation is
+  requested. Use either <code>%s</code> or <code>%1$s</code> in the <code>$pattern</code> as a placeholder for
+  the locale. As an example, if your translation files are located in
+  <code>/var/messages/&lt;LOCALE&gt;/messages.mo</code>, your pattern would be
+  <code>/var/messages/%s/messages.mo</code>.</li>
+</ul>
+<h2 id="supported-formats">Supported formats</h2>
+<p>The translator supports the following major translation formats:</p>
+<ul>
+<li>PHP arrays</li>
+<li>Gettext</li>
+<li>INI</li>
+</ul>
+<p>Additionally, you can use custom formats by implementing one or more of
+<code>Laminas\I18n\Translator\Loader\FileLoaderInterface</code> or
+<code>Laminas\I18n\Translator\Loader\RemoteLoaderInterface</code>, and registering your loader
+with the <code>Translator</code> instance's composed plugin manager.</p>
+<h2 id="setting-a-locale">Setting a locale</h2>
+<p>By default, the translator will get the locale to use from ext/intl's <code>Locale</code>
+class. If you want to set an alternative locale explicitly, you can do so by
+passing it to the <code>setLocale()</code> method.</p>
+<p>When there is no translation for a specific message identifier in a locale, the
+message identifier itself will be returned by default. Alternately, you can set
+a fallback locale which is used to retrieve a fallback translation. To do so,
+pass it to the <code>setFallbackLocale()</code> method.</p>
+<h2 id="translating-messages">Translating messages</h2>
+<p>Translating messages is accomplished by calling the <code>translate()</code> method of the
+translator:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$translator-&gt;translate($message, $textDomain, $locale);</span>
+</pre></div></p>
+<p>The message is the message identifier to translate. If it does not exist in the
+loader, or is empty, the original message ID will be returned. The text domain
+parameter is the one you specified when adding translations. If omitted, the
+"default" text domain will be used. The locale parameter will usually not be
+used in this context, as by default the locale is taken from the locale set in
+the translator.</p>
+<p>To translate plural messages, you can use the <code>translatePlural()</code> method. It
+works similarly to <code>translate()</code>, but instead of a single message, it takes a
+singular value, a plural value, and an additional integer number on which the
+returned plural form is based:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$translator-&gt;translatePlural($singular, $plural, $number, $textDomain, $locale);</span>
+</pre></div></p>
+<p>Plural translations are only available if the underlying format supports the
+translation of plural messages and plural rule definitions.</p>
+<h2 id="caching">Caching</h2>
+<p>In production, it makes sense to cache your translations. This not only saves
+you from loading and parsing the individual formats each time, but also
+guarantees an optimized loading procedure. To enable caching, pass a
+<code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code> method. To disable the cache,
+pass a <code>null</code> value to the method.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../introduction/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../view-helpers/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/translation.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../filters/" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../validators/" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-i18n//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-i18n//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-i18n';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-i18n" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

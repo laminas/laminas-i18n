@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
+    <link rel="canonical" href="https://docs.laminas.dev/view-helpers/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>View Helpers - laminas-i18n - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../filters/" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../validators/" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-i18n</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-i18n/" class="header__link header__link--github" title="Go to repository of laminas-i18n">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#currencyformat-helper" class="toc__link">CurrencyFormat Helper</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#dateformat-helper" class="toc__link">DateFormat Helper</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#numberformat-helper" class="toc__link">NumberFormat Helper</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#plural-helper" class="toc__link">Plural Helper</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#translate-helper" class="toc__link">Translate Helper</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#translateplural-helper" class="toc__link">TranslatePlural Helper</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#abstract-translator-helper" class="toc__link">Abstract Translator Helper</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-i18n</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">View Helpers</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="view-helpers">View Helpers</h1>
+<p>laminas-i18n ships with a set of laminas-view helper classes related to
+internationalization: e.g., formatting a date, formatting currency, or
+displaying translated content.</p>
+<p>See the <a href="https://docs.laminas.dev/laminas-view/helpers/intro/">laminas-view helpers documentation</a>
+for more information.</p>
+<blockquote>
+<h3>IDE auto-completion in templates</h3>
+<p>The <code>Laminas\I18n\View\HelperTrait</code> trait can be used to provide auto-completion
+for modern IDEs. It defines the aliases of the view helpers in a DocBlock as
+<code>@method</code> tags.</p>
+<h4>Usage</h4>
+<p>In order to allow auto-completion in templates, <code>$this</code> variable should be
+type-hinted via a DocBlock at the top of your template. It is recommended that
+you always add the <code>Laminas\View\Renderer\PhpRenderer</code> as the first type, so that
+the IDE can auto-suggest the default view helpers from <code>laminas-view</code>. Next,
+chain the <code>HelperTrait</code> from <code>laminas-i18n</code> with a pipe symbol (a.k.a. vertical
+bar) <code>|</code>:</p>
+<pre class=codehilite><code class=language-php>
+/**
+ * @var Laminas\View\Renderer\PhpRenderer|Laminas\I18n\View\HelperTrait $this
+ */
+</code></pre>
+<p>You may chain as many <code>HelperTrait</code> traits as you like, depending on view
+helpers from which Laminas component you are using and would like to
+provide auto-completion for.</p>
+</blockquote>
+<h2 id="currencyformat-helper">CurrencyFormat Helper</h2>
+<p>The <code>CurrencyFormat</code> view helper can be used to simplify rendering of localized
+currency values. It acts as a wrapper for the <code>NumberFormatter</code> class within the
+internationalization extension (ext/intl).</p>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view:</span>
+
+<span class=x>echo $this-&gt;currencyFormat(1234.56, &#39;USD&#39;, null, &#39;en_US&#39;);</span>
+<span class=x>// Returns: &quot;$1,234.56&quot;</span>
+
+<span class=x>echo $this-&gt;currencyFormat(1234.56, &#39;EUR&#39;, null, &#39;de_DE&#39;);</span>
+<span class=x>// Returns: &quot;1.234,56 €&quot;</span>
+
+<span class=x>echo $this-&gt;currencyFormat(1234.56, &#39;USD&#39;, true, &#39;en_US&#39;);</span>
+<span class=x>// Returns: &quot;$1,234.56&quot;</span>
+
+<span class=x>echo $this-&gt;currencyFormat(1234.56, &#39;USD&#39;, false, &#39;en_US&#39;);</span>
+<span class=x>// Returns: &quot;$1,235&quot;</span>
+
+<span class=x>echo $this-&gt;currencyFormat(12345678.90, &#39;EUR&#39;, true, &#39;de_DE&#39;, &#39;#0.# kg&#39;);</span>
+<span class=x>// Returns: &quot;12345678,90 kg&quot;</span>
+
+<span class=x>echo $this-&gt;currencyFormat(12345678.90, &#39;EUR&#39;, false, &#39;de_DE&#39;, &#39;#0.# kg&#39;);</span>
+<span class=x>// Returns: &quot;12345679 kg&quot;</span>
+</pre></div></p>
+<h3>Method description</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>currencyFormat(</span>
+<span class=x>    float $number [,</span>
+<span class=x>    string $currencyCode = null [,</span>
+<span class=x>    bool $showDecimals = null [,</span>
+<span class=x>    string $locale = null [,</span>
+<span class=x>    string $pattern = null</span>
+<span class=x>] ] ] ]) : string</span>
+</pre></div></p>
+<p>where:</p>
+<ul>
+<li><code>$number</code>: the numeric currency value.</li>
+<li><code>$currencyCode</code>: the 3-letter ISO 4217 currency code indicating the currency
+  to use. If unset, it will use the default value current in the helper
+  instance (<code>null</code> by default).</li>
+<li><code>$showDecimals</code>: Boolean <code>false</code> indicates that no decimals should be
+  represented. If unset, it will use the value current in the helper instance
+  (<code>true</code> by default).</li>
+<li><code>$locale</code>: Locale in which the currency would be formatted (locale name, e.g.
+  <code>en_US</code>). If unset, it will use the default locale (default is the value of
+  <code>Locale::getDefault()</code>).</li>
+<li><code>$pattern</code>: Pattern string the formatter should use. If unset, it will use the
+  value current in the helper instance (<code>null</code> by default).</li>
+</ul>
+<h3>Available Functionality</h3>
+<h4>Set the currency code and the locale</h4>
+<p>The <code>$currencyCode</code> and <code>$locale</code> options can be set prior to formatting and
+will be applied each time the helper is used:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+
+<span class=x>$this-&gt;plugin(&#39;currencyformat&#39;)-&gt;setCurrencyCode(&#39;USD&#39;)-&gt;setLocale(&#39;en_US&#39;);</span>
+
+<span class=x>echo $this-&gt;currencyFormat(1234.56);</span>
+<span class=x>// This returns: &quot;$1,234.56&quot;</span>
+
+<span class=x>echo $this-&gt;currencyFormat(5678.90);</span>
+<span class=x>// This returns: &quot;$5,678.90&quot;</span>
+</pre></div></p>
+<p>The method signatures are:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>setCurrencyCode(string $currencyCode) : CurrencyFormat</span>
+</pre></div></p>
+<p>where <code>$currencyCode</code> is the 3-letter ISO 4217 currency code, and</p>
+<p> <div class=codehilite><pre><span></span><span class=x>setLocale(string $locale) : CurrencyFormat</span>
+</pre></div></p>
+<p>where <code>$locale</code> is the locale with which to format the number.</p>
+<h4>Show decimals</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+
+<span class=x>$this-&gt;plugin(&#39;currencyformat&#39;)-&gt;setShouldShowDecimals(false);</span>
+
+<span class=x>echo $this-&gt;currencyFormat(1234.56, &#39;USD&#39;, null, &#39;en_US&#39;);</span>
+<span class=x>// This returns: &quot;$1,235&quot;</span>
+</pre></div></p>
+<p>with the following method signature:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>setShouldShowDecimals(bool $showDecimals) : CurrencyFormat</span>
+</pre></div></p>
+<p>where <code>$showDecimals</code> indicates whether or not decimal values will be displayed.</p>
+<h4>Set the currency pattern</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+
+<span class=x>$this-&gt;plugin(&#39;currencyformat&#39;)-&gt;setCurrencyPattern(&#39;#0.# kg&#39;);</span>
+
+<span class=x>echo $this-&gt;currencyFormat(12345678.90, &#39;EUR&#39;, null, &#39;de_DE&#39;);</span>
+<span class=x>// This returns: &quot;12345678,90 kg&quot;</span>
+</pre></div></p>
+<p>with the following method signature:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>setCurrencyPattern(string $currencyPattern) : CurrencyFormat</span>
+</pre></div></p>
+<p>where <code>$currencyPattern</code> is a valid <a href="http://www.icu-project.org/apiref/icu4c/classDecimalFormat.html#details">ICU DecimalFormat pattern</a>;
+see the <a href="https://www.php.net/manual/numberformatter.setpattern.php">NumberFormatter::setPattern() documentation</a>
+for more information.</p>
+<h2 id="dateformat-helper">DateFormat Helper</h2>
+<p>The <code>DateFormat</code> view helper can be used to simplify rendering of localized
+date/time values. It acts as a wrapper for the <code>IntlDateFormatter</code> class within
+ext/intl.</p>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+
+<span class=x>// Date and Time</span>
+<span class=x>echo $this-&gt;dateFormat(</span>
+<span class=x>    new DateTime(),</span>
+<span class=x>    IntlDateFormatter::MEDIUM, // date</span>
+<span class=x>    IntlDateFormatter::MEDIUM, // time</span>
+<span class=x>    &quot;en_US&quot;</span>
+<span class=x>);</span>
+<span class=x>// This returns: &quot;Jul 2, 2012 6:44:03 PM&quot;</span>
+
+<span class=x>// Date Only</span>
+<span class=x>echo $this-&gt;dateFormat(</span>
+<span class=x>    new DateTime(),</span>
+<span class=x>    IntlDateFormatter::LONG, // date</span>
+<span class=x>    IntlDateFormatter::NONE, // time</span>
+<span class=x>    &quot;en_US&quot;</span>
+<span class=x>);</span>
+<span class=x>// This returns: &quot;July 2, 2012&quot;</span>
+
+<span class=x>// Time Only</span>
+<span class=x>echo $this-&gt;dateFormat(</span>
+<span class=x>    new DateTime(),</span>
+<span class=x>    IntlDateFormatter::NONE,  // date</span>
+<span class=x>    IntlDateFormatter::SHORT, // time</span>
+<span class=x>    &quot;en_US&quot;</span>
+<span class=x>);</span>
+<span class=x>// This returns: &quot;6:44 PM&quot;</span>
+</pre></div></p>
+<h3>Method description</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>dateFormat(</span>
+<span class=x>    mixed $date [,</span>
+<span class=x>    int $dateType = null [,</span>
+<span class=x>    int $timeType = null [,</span>
+<span class=x>    string $locale = null</span>
+<span class=x>] ] ]) : string</span>
+</pre></div></p>
+<p>where:</p>
+<ul>
+<li><code>$date</code>: The value to format. This may be a <code>DateTime</code> instance, an integer
+  representing a Unix timestamp value, or an array in the format returned by
+  <code>localtime()</code>.</li>
+<li><code>$dateType</code>: Date type to use (none, short, medium, long, full). This is one
+  of the <a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">IntlDateFormatter constants</a>.
+  Defaults to <code>IntlDateFormatter::NONE</code>.</li>
+<li><code>$timeType</code>: Time type to use (none, short, medium, long, full). This is one
+  of the <a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">IntlDateFormatter constants</a>.
+  Defaults to <code>IntlDateFormatter::NONE</code>.</li>
+<li><code>$locale</code>: Locale in which the date would be formatted (locale name, e.g.
+  <code>en_US</code>). If unset, it will use the default locale (return value of
+  <code>Locale::getDefault()</code>).</li>
+</ul>
+<h3>Public Methods</h3>
+<p>The <code>$locale</code> option can be set prior to formatting with the <code>setLocale()</code>
+method and will be applied each time the helper is used.</p>
+<p>By default, the system's default timezone will be used when formatting. This
+overrides any timezone that may be set inside a <code>DateTime</code> object. To change the
+timezone when formatting, use the <code>setTimezone()</code> method.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+<span class=x>$this-&gt;plugin(&#39;dateFormat&#39;)</span>
+<span class=x>    -&gt;setTimezone(&#39;America/New_York&#39;)</span>
+<span class=x>    -&gt;setLocale(&#39;en_US&#39;);</span>
+
+<span class=x>echo $this-&gt;dateFormat(new DateTime(), IntlDateFormatter::MEDIUM);  // &quot;Jul 2, 2012&quot;</span>
+<span class=x>echo $this-&gt;dateFormat(new DateTime(), IntlDateFormatter::SHORT);   // &quot;7/2/12&quot;</span>
+</pre></div></p>
+<h2 id="numberformat-helper">NumberFormat Helper</h2>
+<p>The <code>NumberFormat</code> view helper can be used to simplify rendering of
+locale-specific number and/or percentage strings. It acts as a wrapper for the
+<code>NumberFormatter</code> class within ext/intl.</p>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+
+<span class=x>// Example of Decimal formatting:</span>
+<span class=x>echo $this-&gt;numberFormat(</span>
+<span class=x>    1234567.891234567890000,</span>
+<span class=x>    NumberFormatter::DECIMAL,</span>
+<span class=x>    NumberFormatter::TYPE_DEFAULT,</span>
+<span class=x>    &#39;de_DE&#39;</span>
+<span class=x>);</span>
+<span class=x>// This returns: &quot;1.234.567,891&quot;</span>
+
+<span class=x>// Example of Percent formatting:</span>
+<span class=x>echo $this-&gt;numberFormat(</span>
+<span class=x>    0.80,</span>
+<span class=x>    NumberFormatter::PERCENT,</span>
+<span class=x>    NumberFormatter::TYPE_DEFAULT,</span>
+<span class=x>    &#39;en_US&#39;</span>
+<span class=x>);</span>
+<span class=x>// This returns: &quot;80%&quot;</span>
+
+<span class=x>// Example of Scientific notation formatting:</span>
+<span class=x>echo $this-&gt;numberFormat(</span>
+<span class=x>    0.00123456789,</span>
+<span class=x>    NumberFormatter::SCIENTIFIC,</span>
+<span class=x>    NumberFormatter::TYPE_DEFAULT,</span>
+<span class=x>    &#39;fr_FR&#39;</span>
+<span class=x>);</span>
+<span class=x>// This returns: &quot;1,23456789E-3&quot;</span>
+</pre></div></p>
+<h3>Method description</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>numberFormat(</span>
+<span class=x>    int|float $number [,</span>
+<span class=x>    int $formatStyle = null [,</span>
+<span class=x>    int $formatType = null [,</span>
+<span class=x>    string $locale = null [,</span>
+<span class=x>    int $decimals = null [,</span>
+<span class=x>    array $textAttributes = null</span>
+<span class=x>] ] ] ] ]) : string</span>
+</pre></div></p>
+<p>where:</p>
+<ul>
+<li><code>$number</code>: the number to format.</li>
+<li><code>$formatStyle</code>: one of the <code>NumberFormatter</code> styles:
+  <code>NumberFormatter::DECIMAL</code>, <code>NumberFormatter::CURRENCY</code>, etc.</li>
+<li><code>$formatType</code>: one of the <code>NumberFormatter</code> types:
+  <code>NumberFormatter::TYPE_DEFAULT</code> (basic numeric),
+  <code>NumberFormatter::TYPE_CURRENCY</code>, etc.</li>
+<li><code>$locale</code>: a valid locale to use when formatting the number.</li>
+<li><code>$decimals</code>: the number of digits beyond the decimal point to display.</li>
+<li><code>$textAttributes</code>: text attributes to use with the number (e.g., prefix and/or
+  suffix for positive/negative numbers, currency code):
+  <code>NumberFormatter::POSITIVE_PREFIX</code>, <code>NumberFormatter::NEGATIVE_PREFIX</code>, etc.</li>
+</ul>
+<h3>Public Methods</h3>
+<p>Each of the <code>$formatStyle</code>, <code>$formatType</code>, <code>$locale</code>, and <code>$textAttributes</code>
+options can be set prior to formatting and will be applied each time the helper
+is used.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+<span class=x>$this-&gt;plugin(&quot;numberformat&quot;)</span>
+<span class=x>            -&gt;setFormatStyle(NumberFormatter::PERCENT)</span>
+<span class=x>            -&gt;setFormatType(NumberFormatter::TYPE_DOUBLE)</span>
+<span class=x>            -&gt;setLocale(&quot;en_US&quot;)</span>
+<span class=x>            -&gt;setTextAttributes([</span>
+<span class=x>                NumberFormatter::POSITIVE_PREFIX =&gt; &#39;^ &#39;,</span>
+<span class=x>                NumberFormatter::NEGATIVE_PREFIX =&gt; &#39;v &#39;,</span>
+<span class=x>            ]);</span>
+
+<span class=x>echo $this-&gt;numberFormat(0.56);   // &quot;^ 56%&quot;</span>
+<span class=x>echo $this-&gt;numberFormat(-0.90);  // &quot;v 90%&quot;</span>
+</pre></div></p>
+<h2 id="plural-helper">Plural Helper</h2>
+<p>Most languages have specific rules for handling plurals. For instance, in
+English, we say "0 cars" and "2 cars" (plural) while we say "1 car" (singular).
+On the other hand, French uses the singular form for both 0 and 1 ("0 voiture"
+and "1 voiture") and the plural form otherwise ("3 voitures").</p>
+<p>Therefore we often need to handle plural cases even without translation (mono-lingual
+application). The <code>Plural</code> helper was created for this.</p>
+<blockquote>
+<h3>Plural helper does not translate</h3>
+<p>If you need to handle both plural cases <em>and</em> translations, you must use the
+<code>TranslatePlural</code> helper; <code>Plural</code> does not translate.</p>
+</blockquote>
+<p>Internally, the <code>Plural</code> helper uses the <code>Laminas\I18n\Translator\Plural\Rule</code> class to handle rules.</p>
+<h3>Setup</h3>
+<p>Defining plural rules is left to the developer. To help you with this process,
+here are some links with up-to-date plural rules for tons of languages:</p>
+<ul>
+<li><a href="http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html">http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Localization_and_Plurals">https://developer.mozilla.org/en-US/docs/Localization_and_Plurals</a></li>
+</ul>
+<h3>Basic Usage</h3>
+<p>First, define a rule. As an example, you could add the following code in your
+<code>Module</code> class:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Get the ViewHelperPlugin Manager from the ServiceManager, so we can fetch the</span>
+<span class=x>// Plural helper and add the plural rule for the application&#39;s language:</span>
+<span class=x>$viewHelperManager = $serviceManager-&gt;get(&#39;ViewHelperManager&#39;);</span>
+<span class=x>$pluralHelper      = $viewHelperManager-&gt;get(&#39;Plural&#39;);</span>
+
+<span class=x>// Here is the rule for French</span>
+<span class=x>$pluralHelper-&gt;setPluralRule(&#39;nplurals=2; plural=(n==0 || n==1 ? 0 : 1)&#39;);</span>
+</pre></div></p>
+<p>The string reads as follows:</p>
+<ol>
+<li>First, we specify how many plural forms we have. For French, only two (singular/plural).</li>
+<li>Next, we specify the rule. Here, if the count is 0 or 1, this is rule n°0
+   (singular) while it's rule n°1 otherwise.</li>
+</ol>
+<p>As noted earlier earlier, English considers "1" as singular and "0/other" as
+plural. Here is how that would be declared:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Here is the rule for English</span>
+<span class=x>$pluralHelper-&gt;setPluralRule(&#39;nplurals=2; plural=(n==1 ? 0 : 1)&#39;);</span>
+</pre></div></p>
+<p>Now that we have defined the rule, we can use it in our views:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within a view script...</span>
+<span class=x>// If the rule defined in Module.php is the English one:</span>
+
+<span class=x>echo $this-&gt;plural(array(&#39;car&#39;, &#39;cars&#39;), 0); // prints &quot;cars&quot;</span>
+<span class=x>echo $this-&gt;plural(array(&#39;car&#39;, &#39;cars&#39;), 1); // prints &quot;car&quot;</span>
+
+<span class=x>// If the rule defined in Module.php is the French one:</span>
+<span class=x>echo $this-&gt;plural(array(&#39;voiture&#39;, &#39;voitures&#39;), 0); // prints &quot;voiture&quot;</span>
+<span class=x>echo $this-&gt;plural(array(&#39;voiture&#39;, &#39;voitures&#39;), 1); // prints &quot;voiture&quot;</span>
+<span class=x>echo $this-&gt;plural(array(&#39;voiture&#39;, &#39;voitures&#39;), 2); // prints &quot;voitures&quot;</span>
+</pre></div></p>
+<h2 id="translate-helper">Translate Helper</h2>
+<p>The <code>Translate</code> view helper can be used to translate content. It acts as a
+wrapper for the <code>Laminas\I18n\Translator\Translator</code> class.</p>
+<h3>Setup</h3>
+<p>Before using the <code>Translate</code> view helper, you must have first created a
+<code>Translator</code> object and have attached it to the view helper. If you use the
+<code>Laminas\View\HelperPluginManager</code> to invoke the view helper, this will be done
+automatically for you.</p>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view...</span>
+
+<span class=x>echo $this-&gt;translate(&quot;Some translated text.&quot;);</span>
+<span class=x>echo $this-&gt;translate(&quot;Translated text from a custom text domain.&quot;, &quot;customDomain&quot;);</span>
+<span class=x>echo sprintf($this-&gt;translate(&quot;The current time is %s.&quot;), $currentTime);</span>
+<span class=x>echo $this-&gt;translate(&quot;Translate in a specific locale&quot;, &quot;default&quot;, &quot;de_DE&quot;);</span>
+</pre></div></p>
+<h3>Method description</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>translate(</span>
+<span class=x>    string $message [,</span>
+<span class=x>    string $textDomain = null [,</span>
+<span class=x>    string $locale = null</span>
+<span class=x>] ]) : string</span>
+</pre></div></p>
+<p>where:</p>
+<ul>
+<li><code>$message</code>: The message to translate.</li>
+<li><code>$textDomain</code>: The text domain/context of the translation; defaults to
+  "default".</li>
+<li><code>$locale</code>: Locale to which the message should be translated (locale name, e.g.
+  <code>en_US</code>). If unset, it will use the default locale (return value of
+  <code>Locale::getDefault()</code>).</li>
+</ul>
+<h3>Gettext</h3>
+<p>The <code>xgettext</code> utility can be used to compile <code>*.po</code> files from PHP source files containing the
+translate view helper.</p>
+<p> <div class=codehilite><pre><span></span>$ xgettext --language<span class=o>=</span>php --add-location --keyword<span class=o>=</span>translate --keyword<span class=o>=</span>translatePlural:1,2 my-view-file.phtml
+</pre></div></p>
+<p>See the <a href="http://en.wikipedia.org/wiki/Gettext">Gettext Wikipedia page</a> for more information.</p>
+<h3>Public Methods</h3>
+<p>Public methods for setting a <code>Laminas\I18n\Translator\Translator</code> and a default
+text domain are inherited from the <a href="#abstract-translator-helper">AbstractTranslatorHelper</a>.</p>
+<h2 id="translateplural-helper">TranslatePlural Helper</h2>
+<p>The <code>TranslatePlural</code> view helper can be used to translate words which take into
+account numeric meanings. English, for example, has a singular definition of
+"car", for one car, and the plural definition, "cars", meaning zero "cars"
+or more than one car. Other languages like Russian or Polish have more plurals
+with different rules.</p>
+<p>The helper acts as a wrapper for the <code>Laminas\I18n\Translator\Translator</code> class.</p>
+<h3>Setup</h3>
+<p>Before using the <code>TranslatePlural</code> view helper, you must have first created a
+<code>Translator</code> object and have attached it to the view helper. If you use the
+<code>Laminas\View\HelperPluginManager</code> to invoke the view helper, this will be done
+automatically for you.</p>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>// Within your view</span>
+<span class=x>echo $this-&gt;translatePlural(&quot;car&quot;, &quot;cars&quot;, $num);</span>
+
+<span class=x>// Use a custom domain</span>
+<span class=x>echo $this-&gt;translatePlural(&quot;monitor&quot;, &quot;monitors&quot;, $num, &quot;customDomain&quot;);</span>
+
+<span class=x>// Change locale</span>
+<span class=x>echo $this-&gt;translatePlural(&quot;locale&quot;, &quot;locales&quot;, $num, &quot;default&quot;, &quot;de_DE&quot;);</span>
+</pre></div></p>
+<h3>Method description</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>translatePlural(</span>
+<span class=x>    string $singular,</span>
+<span class=x>    string $plural,</span>
+<span class=x>    int $number [,</span>
+<span class=x>    string $textDomain = null [,</span>
+<span class=x>    string $locale = null</span>
+<span class=x>] ]) : string</span>
+</pre></div></p>
+<p>where:</p>
+<ul>
+<li><code>$singular</code>: The message to use for singular values.</li>
+<li><code>$plural</code>: The message to use for plural values.</li>
+<li><code>$number</code>: The number to evaluate in order to determine which number to use.</li>
+<li><code>$textDomain</code>: The text domain/context of the translation; defaults to
+  "default".</li>
+<li><code>$locale</code>: Locale to which the message should be translated (locale name, e.g.
+  <code>en_US</code>). If unset, it will use the default locale (return value of
+  <code>Locale::getDefault()</code>).</li>
+</ul>
+<h3>Gettext</h3>
+<p>The <code>xgettext</code> utility can be used to compile <code>*.po</code> files from PHP source files containing the
+translate view helper.</p>
+<p> <div class=codehilite><pre><span></span>$ xgettext --language<span class=o>=</span>php --add-location --keyword<span class=o>=</span>translate --keyword<span class=o>=</span>translatePlural:1,2 my-view-file.phtml
+</pre></div></p>
+<p>See the <a href="http://en.wikipedia.org/wiki/Gettext">Gettext Wikipedia page</a> for more information.</p>
+<h3>Public Methods</h3>
+<p>Public methods for setting a <code>Laminas\I18n\Translator\Translator</code> and a default
+text domain are inherited from the <a href="#abstract-translator-helper">AbstractTranslatorHelper</a>.</p>
+<h2 id="abstract-translator-helper">Abstract Translator Helper</h2>
+<p>The <code>AbstractTranslatorHelper</code> view helper is used as a base abstract class for
+any helpers that need to translate content. It provides an implementation for
+the <code>Laminas\I18n\Translator\TranslatorAwareInterface</code>, allowing translator
+injection as well as text domain injection.</p>
+<h3>Public Methods</h3>
+<h4>setTranslator()</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>setTranslator(</span>
+<span class=x>    Translator $translator [ ,</span>
+<span class=x>    string $textDomain = null</span>
+<span class=x>] ) : void</span>
+</pre></div></p>
+<p>Sets the <code>Laminas\I18n\Translator\Translator</code> instance to use in the helper. The
+<code>$textDomain</code> argument is optional, and provided as a convenienct to allow
+setting both the translator and text domain simultaneously.</p>
+<h4>getTranslator()</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>getTranslator() : Translator</span>
+</pre></div></p>
+<p>Returns the <code>Laminas\I18n\Translator\Translator</code> instance used by the helper.</p>
+<h4>hasTranslator()</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>hasTranslator() : bool</span>
+</pre></div></p>
+<p>Returns true if the helper composes a <code>Laminas\I18n\Translator\Translator</code> instance.</p>
+<h4>setTranslatorEnabled()</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>setTranslatorEnabled(bool $enabled) : void</span>
+</pre></div></p>
+<p>Sets whether or not translations are enabled.</p>
+<h4>isTranslatorEnabled()</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>isTranslatorEnabled() : bool</span>
+</pre></div></p>
+<p>Returns true if translations are enabled.</p>
+<h4>setTranslatorTextDomain()</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>setTranslatorTextDomain(string $textDomain) : void</span>
+</pre></div></p>
+<p>Sets the default translation text domain to use with the helper.</p>
+<h4>getTranslatorTextDomain()</h4>
+<p> <div class=codehilite><pre><span></span><span class=x>getTranslatorTextDomain() : string</span>
+</pre></div></p>
+<p>Returns the current text domain used by the helper.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../translation/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../filters/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/view-helpers.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../filters/" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../validators/" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-i18n//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-i18n//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-i18n';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-i18n" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

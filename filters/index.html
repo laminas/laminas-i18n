@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
+    <link rel="canonical" href="https://docs.laminas.dev/filters/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Filters - laminas-i18n - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../validators/" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-i18n</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-i18n/" class="header__link header__link--github" title="Go to repository of laminas-i18n">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#alnum" class="toc__link">Alnum</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#alpha" class="toc__link">Alpha</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#numberformat" class="toc__link">NumberFormat</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#numberparse" class="toc__link">NumberParse</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-i18n</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Filters</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="filters">Filters</h1>
+<p>laminas-i18n ships with a set of internationalization-related filters.</p>
+<h2 id="alnum">Alnum</h2>
+<p>The <code>Alnum</code> filter can be used to return only alphabetic characters and digits in the unicode
+"letter" and "number" categories, respectively. All other characters are suppressed.</p>
+<h3>Supported Options</h3>
+<p>The following options are supported for <code>Alnum</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>Alnum([ boolean $allowWhiteSpace [, string $locale ]])</span>
+</pre></div></p>
+<ul>
+<li><code>$allowWhiteSpace</code>: If set to true, whitespace characters are allowed;
+  otherwise they are suppressed. Default is <code>false</code> (whitespace is not allowed).
+  Methods for getting/setting the allowWhiteSpace option are also available
+  (<code>getAllowWhiteSpace()</code> and <code>setAllowWhiteSpace()</code>).</li>
+<li><code>$locale</code>: The locale string used in identifying the characters to filter
+  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
+  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
+  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
+</ul>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>// Default settings, deny whitespace</span>
+<span class=x>$filter = new \Laminas\I18n\Filter\Alnum();</span>
+<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
+<span class=x>// Returns &quot;Thisismycontent123&quot;</span>
+
+<span class=x>// First param in constructor is $allowWhiteSpace</span>
+<span class=x>$filter = new \Laminas\I18n\Filter\Alnum(true);</span>
+<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
+<span class=x>// Returns &quot;This is my content 123&quot;</span>
+</pre></div></p>
+<blockquote>
+<h3>Supported languages</h3>
+<p><code>Alnum</code> works for most languages, except Chinese, Japanese and Korean. Within
+these languages, the English alphabet is used instead of the characters from
+these languages. The language itself is detected using the <code>Locale</code> class.</p>
+</blockquote>
+<h2 id="alpha">Alpha</h2>
+<p>The <code>Alpha</code> filter can be used to return only alphabetic characters in the unicode "letter"
+category. All other characters are suppressed.</p>
+<h3>Supported Options</h3>
+<p>The following options are supported for <code>Alpha</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>Alpha([ boolean $allowWhiteSpace [, string $locale ]])</span>
+</pre></div></p>
+<ul>
+<li><code>$allowWhiteSpace</code>: If set to true, whitespace characters are allowed;
+  otherwise they are suppressed. Default is <code>false</code> (whitespace is not allowed).
+  Methods for getting/setting the allowWhiteSpace option are also available
+  (<code>getAllowWhiteSpace()</code> and <code>setAllowWhiteSpace()</code>).</li>
+<li><code>$locale</code>: The locale string used in identifying the characters to filter
+  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
+  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
+  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
+</ul>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>// Default settings, deny whitespace</span>
+<span class=x>$filter = new \Laminas\I18n\Filter\Alpha();</span>
+<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
+<span class=x>// Returns &quot;Thisismycontent&quot;</span>
+
+<span class=x>// Allow whitespace</span>
+<span class=x>$filter = new \Laminas\I18n\Filter\Alpha(true);</span>
+<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
+<span class=x>// Returns &quot;This is my content &quot;</span>
+</pre></div></p>
+<blockquote>
+<h3>Supported languages</h3>
+<p><code>Alnum</code> works for most languages, except Chinese, Japanese and Korean. Within
+these languages, the English alphabet is used instead of the characters from
+these languages. The language itself is detected using the <code>Locale</code> class.</p>
+</blockquote>
+<h2 id="numberformat">NumberFormat</h2>
+<p>The <code>NumberFormat</code> filter can be used to return locale-specific number and
+percentage strings. It extends the <code>NumberParse</code> filter, which acts as wrapper
+for the <code>NumberFormatter</code> class within ext/intl.</p>
+<h3>Supported Options</h3>
+<p>The following options are supported for <code>NumberFormat</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>NumberFormat([ string $locale [, int $style [, int $type ]]])</span>
+</pre></div></p>
+<ul>
+<li><code>$locale</code>: The locale string used in identifying the characters to filter
+  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
+  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
+  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
+<li><code>$style</code>: (Optional) Style of the formatting, one of the <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle"><code>NumberFormatter</code>
+  format style constants</a>.
+  If unset, it will use <code>NumberFormatter::DEFAULT_STYLE</code> as the default style.
+  Methods for getting/setting the format style are also available (<code>getStyle()</code>
+  and <code>setStyle()</code>).</li>
+<li><code>$type</code>: (Optional) The <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types"><code>NumberFormatter</code> formatting type</a>
+  to use. If unset, it will use <code>NumberFormatter::TYPE_DOUBLE</code> as the default
+  type.  Methods for getting/setting the format type are also available
+  (<code>getType()</code> and <code>setType()</code>).</li>
+</ul>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>$filter = new \Laminas\I18n\Filter\NumberFormat(&#39;de_DE&#39;);</span>
+<span class=x>echo $filter-&gt;filter(1234567.8912346);</span>
+<span class=x>// Returns &quot;1.234.567,891&quot;</span>
+
+<span class=x>$filter = new \Laminas\I18n\Filter\NumberFormat(&#39;en_US&#39;, NumberFormatter::PERCENT);</span>
+<span class=x>echo $filter-&gt;filter(0.80);</span>
+<span class=x>// Returns &quot;80%&quot;</span>
+
+<span class=x>$filter = new \Laminas\I18n\Filter\NumberFormat(&#39;fr_FR&#39;, NumberFormatter::SCIENTIFIC);</span>
+<span class=x>echo $filter-&gt;filter(0.00123456789);</span>
+<span class=x>// Returns &quot;1,23456789E-3&quot;</span>
+</pre></div></p>
+<h2 id="numberparse">NumberParse</h2>
+<p>The <code>NumberParse</code> filter can be used to parse a number from a string. It acts as
+a wrapper for the <code>NumberFormatter</code> class within ext/intl.</p>
+<h3>Supported Options</h3>
+<p>The following options are supported for <code>NumberParse</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>NumberParse([ string $locale [, int $style [, int $type ]]])</span>
+</pre></div></p>
+<ul>
+<li><code>$locale</code>: The locale string used in identifying the characters to filter
+  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
+  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
+  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
+<li><code>$style</code>: (Optional) Style of the parsing, one of the <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle"><code>NumberFormatter</code> format style constants</a>.
+  If unset, it will use <code>NumberFormatter::DEFAULT_STYLE</code> as the default style.
+  Methods for getting/setting the parse style are also available (<code>getStyle()</code>
+  and <code>setStyle()</code>).</li>
+<li><code>$type</code>: (Optional) The <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types"><code>NumberFormatter</code> parsing type</a>
+  to use. If unset, it will use <code>NumberFormatter::TYPE_DOUBLE</code> as the default
+  type.  Methods for getting/setting the parse type are also available
+  (<code>getType()</code> and <code>setType()</code>).</li>
+</ul>
+<h3>Basic Usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>$filter = new \Laminas\I18n\Filter\NumberParse(&#39;de_DE&#39;);</span>
+<span class=x>echo $filter-&gt;filter(&#39;1.234.567,891&#39;);</span>
+<span class=x>// Returns 1234567.8912346</span>
+
+<span class=x>$filter = new \Laminas\I18n\Filter\NumberParse(&#39;en_US&#39;, NumberFormatter::PERCENT);</span>
+<span class=x>echo $filter-&gt;filter(&#39;80%&#39;);</span>
+<span class=x>// Returns 0.80</span>
+
+<span class=x>$filter = new \Laminas\I18n\Filter\NumberParse(&#39;fr_FR&#39;, NumberFormatter::SCIENTIFIC);</span>
+<span class=x>echo $filter-&gt;filter(&#39;1,23456789E-3&#39;);</span>
+<span class=x>// Returns 0.00123456789</span>
+</pre></div></p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../view-helpers/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../validators/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/filters.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../validators/" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-i18n//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-i18n//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-i18n';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-i18n" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

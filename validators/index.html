@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
+    <link rel="canonical" href="https://docs.laminas.dev/validators/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Validators - laminas-i18n - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../filters/" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-i18n</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-i18n/" class="header__link header__link--github" title="Go to repository of laminas-i18n">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#alnum" class="toc__link">Alnum</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#alpha" class="toc__link">Alpha</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#isfloat" class="toc__link">IsFloat</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#isint" class="toc__link">IsInt</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#postcode" class="toc__link">PostCode</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-i18n</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Validators</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="validators">Validators</h1>
+<p>laminas-i18n provides a set of validators that use internationalization
+capabilities.</p>
+<h2 id="alnum">Alnum</h2>
+<p><code>Laminas\I18n\Validator\Alnum</code> allows you to validate if a given value contains
+only alphabetical characters and digits. There is no length limitation for the
+input you want to validate.</p>
+<h3>Supported options</h3>
+<p>The following options are supported for <code>Laminas\I18n\Validator\Alnum</code>:</p>
+<ul>
+<li><code>allowWhiteSpace</code>: Whether or not whitespace characters are allowed. This
+  option defaults to <code>FALSE</code>.</li>
+</ul>
+<h3>Basic usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\Alnum();</span>
+<span class=x>if ($validator-&gt;isValid(&#39;Abcd12&#39;)) {</span>
+<span class=x>    // value contains only allowed chars</span>
+<span class=x>} else {</span>
+<span class=x>    // false</span>
+<span class=x>}</span>
+</pre></div></p>
+<h3>Using whitespace</h3>
+<p>By default, whitespace is not accepted as it is not part of the alphabet.
+However, if you want to validate complete sentences or phrases, you may need to
+allow whitespace; this can be done via the <code>allowWhiteSpace</code> option, either at
+instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.</p>
+<p>To get the current state of the flag, use the <code>getAllowWhiteSpace()</code> method.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\Alnum([&#39;allowWhiteSpace&#39; =&gt; true]);</span>
+
+<span class=x>// or set it via method call:</span>
+<span class=x>$validator-&gt;setAllowWhiteSpace(true);</span>
+
+<span class=x>if ($validator-&gt;isValid(&#39;Abcd and 12&#39;)) {</span>
+<span class=x>    // value contains only allowed chars</span>
+<span class=x>} else {</span>
+<span class=x>    // false</span>
+<span class=x>}</span>
+</pre></div></p>
+<h3>Using different languages</h3>
+<p>Several languages supported by ext/intl use alphabets where characters are
+formed from multiple bytes, including <em>Korean</em>, <em>Japanese</em>, and <em>Chinese</em>. Such
+languages therefore are unsupported with regards to the <code>Alnum</code> validator.</p>
+<p>When using the <code>Alnum</code> validator with these languages, the input will be validated
+using the English alphabet.</p>
+<h2 id="alpha">Alpha</h2>
+<p><code>Laminas\I18n\Validator\Alpha</code> allows you to validate if a given value contains
+only alphabetical characters. There is no length limitation for the input you
+want to validate. This validator is identical to the <code>Laminas\I18n\Validator\Alnum</code>
+validator with the exception that it does not accept digits.</p>
+<h3>Supported options</h3>
+<p>The following options are supported for <code>Laminas\I18n\Validator\Alpha</code>:</p>
+<ul>
+<li><code>allowWhiteSpace</code>: Whether or not whitespace characters are allowed. This
+  option defaults to <code>FALSE</code>.</li>
+</ul>
+<h3>Basic usage</h3>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\Alpha();</span>
+<span class=x>if ($validator-&gt;isValid(&#39;Abcd&#39;)) {</span>
+<span class=x>    // value contains only allowed chars</span>
+<span class=x>} else {</span>
+<span class=x>    // false</span>
+<span class=x>}</span>
+</pre></div></p>
+<h3>Using whitespace</h3>
+<p>By default, whitespace is not accepted as it is not part of the alphabet.
+However, if you want to validate complete sentences or phrases, you may need to
+allow whitespace; this can be done via the <code>allowWhiteSpace</code> option, either at
+instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.</p>
+<p>To get the current state of the flag, use the <code>getAllowWhiteSpace()</code> method.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\Alpha([&#39;allowWhiteSpace&#39; =&gt; true]);</span>
+
+<span class=x>// or set it via method call:</span>
+<span class=x>$validator-&gt;setAllowWhiteSpace(true);</span>
+
+<span class=x>if ($validator-&gt;isValid(&#39;Abcd and efg&#39;)) {</span>
+<span class=x>    // value contains only allowed chars</span>
+<span class=x>} else {</span>
+<span class=x>    // false</span>
+<span class=x>}</span>
+</pre></div></p>
+<h3>Using different languages</h3>
+<p>When using <code>Laminas\I18n\Validator\Alpha</code>, the language provided by the user's
+browser will be used to set the allowed characters. For locales outside of
+English, this means that additional alphabetic characters may be used
+&mdash; such as <code>ä</code>, <code>ö</code> and <code>ü</code> from the German alphabet.</p>
+<p>Which characters are allowed depends completely on the language, as every
+language defines its own set of characters.</p>
+<p>Three languages supported by ext/intl, however, define multibyte characters,
+which cannot be matched as alphabetic characters using normal string or regular
+expression options. These include <em>Korean</em>, <em>Japanese</em>, and <em>Chinese</em>.</p>
+<p>As a result, when using the <code>Alpha</code> validator with these languages, the input
+will be validated using the English alphabet.</p>
+<h2 id="isfloat">IsFloat</h2>
+<p><code>Laminas\I18n\Validator\IsFloat</code> allows you to validate if a given value contains a
+floating-point value. This validator takes into account localized input.</p>
+<h3>Supported options</h3>
+<p>The following options are supported for <code>Laminas\I18n\Validator\IsFloat</code>:</p>
+<ul>
+<li><code>locale</code>: Sets the locale to use when validating localized float values.</li>
+</ul>
+<h3>Basic float validation</h3>
+<p>By default, if no locale is provided, <code>IsFloat</code> will use the system locale.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\IsFloat();</span>
+
+<span class=x>$validator-&gt;isValid(1234.5);    // returns true</span>
+<span class=x>$validator-&gt;isValid(&#39;10a01&#39;);   // returns false</span>
+<span class=x>$validator-&gt;isValid(&#39;1,234.5&#39;); // returns true</span>
+</pre></div></p>
+<p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
+<h3>Localized float validation</h3>
+<p>Float values are often written differently based on the country or region. For
+example, using English, you might write <code>1.5</code>, whereas in german you would write
+<code>1,5</code>, and in other languages you might use grouping.</p>
+<p><code>Laminas\I18n\Validator\IsFloat</code> is able to validate such notations. However, it is
+limited to the locale you set. See the following code:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\IsFloat([&#39;locale&#39; =&gt; &#39;de&#39;]);</span>
+
+<span class=x>$validator-&gt;isValid(1234.5);    // returns true</span>
+<span class=x>$validator-&gt;isValid(&quot;1 234,5&quot;); // returns false</span>
+<span class=x>$validator-&gt;isValid(&quot;1.234&quot;);   // returns true</span>
+</pre></div></p>
+<p>By using a locale, your input is validated based on the locale provided. Using a
+notation not specific to the locale results in a <code>false</code> evaulation.</p>
+<p>The default validation locale can also be set after instantiation using
+<code>setLocale()</code>, and retrieved using <code>getLocale()</code>.</p>
+<h3>Migration from 2.0-2.3 to 2.4+</h3>
+<p>Version 2.4 adds support for PHP 7. In PHP 7, <code>float</code> is a reserved keyword,
+which required renaming the <code>Float</code> validator. If you were using the <code>Float</code>
+validator directly previously, you will now receive an <code>E_USER_DEPRECATED</code>
+notice on instantiation. Please update your code to refer to the <code>IsFloat</code> class
+instead.</p>
+<p>Users pulling their <code>Float</code> validator instance from the validator plugin manager
+receive an <code>IsFloat</code> instance instead starting in 2.4.0.</p>
+<h2 id="isint">IsInt</h2>
+<p><code>Laminas\I18n\Validator\IsInt</code> validates if a given value is an integer, using the
+locale provided.</p>
+<h3>Supported Options</h3>
+<p>The following options are supported for <code>Laminas\I18n\Validator\IsInt</code>:</p>
+<ul>
+<li><code>locale</code>: Sets the locale to use when validating localized integers.</li>
+<li><code>strict</code>: Sets whether or not the value's data type should be checked.</li>
+</ul>
+<h3>Basic integer validation</h3>
+<p>When no locale is provided to the validator, it uses the system locale:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\IsInt();</span>
+
+<span class=x>$validator-&gt;isValid(1234);    // returns true</span>
+<span class=x>$validator-&gt;isValid(1234.5);  // returns false</span>
+<span class=x>$validator-&gt;isValid(&#39;1,234&#39;); // returns true</span>
+</pre></div></p>
+<p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
+<h3>Strict validation</h3>
+<p>By default, the value's data type is not enforced.</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-7><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-7-0_php-panel role=tab id=tab-group-7-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-0_php-panel aria-selected=true>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-7-1_php-panel role=tab id=tab-group-7-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-1_php-panel aria-selected=false>Php</a></li></ul><div class=tab-content><div id=tab-group-7-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-7-0_php-tab><div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\IsInt();</span>
+
+<span class=x>$validator-&gt;isValid(1234);    // returns true</span>
+<span class=x>$validator-&gt;isValid(&#39;1234&#39;);  // returns true</span>
+</pre></div></div><div id=tab-group-7-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-7-1_php-tab><div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\IsInt();</span>
+<span class=x>$validator-&gt;setStrict(true);</span>
+
+<span class=x>$validator-&gt;isValid(1234);    // returns true</span>
+<span class=x>$validator-&gt;isValid(&#39;1234&#39;);  // returns false</span>
+</pre></div></div></div></div>
+
+<h3>Localized integer validation</h3>
+<p>Integer values are often written differently based on country or region. For
+example, using English, you may write "1234" or "1,234"; both are integer
+values, but the grouping is optional. In German, you'd write "1.234", and in
+French, "1 234".</p>
+<p><code>Laminas\I18n\Validator\IsInt</code> will use a provided locale when evaluating the
+validity of an integer value. In such cases, it doesn't simply strip the
+validator, but instead validates that the correct separator as defined by the
+locale is used.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\IsInt([&#39;locale&#39; =&gt; &#39;de&#39;]);</span>
+
+<span class=x>$validator-&gt;isValid(1234);    // returns true</span>
+<span class=x>$validator-&gt;isValid(&quot;1,234&quot;); // returns false</span>
+<span class=x>$validator-&gt;isValid(&quot;1.234&quot;); // returns true</span>
+</pre></div></p>
+<p>By using a locale, your input is validated based on the locale provided. Using a
+notation not specific to the locale results in a <code>false</code> evaulation.</p>
+<p>The default validation locale can also be set after instantiation using
+<code>setLocale()</code>, and retrieved using <code>getLocale()</code>.</p>
+<h3>Migration from 2.0-2.3 to 2.4+</h3>
+<p>Version 2.4 adds support for PHP 7. In PHP 7, <code>int</code> is a reserved keyword, which
+required renaming the <code>Int</code> validator. If you were using the <code>Int</code> validator
+directly previously, you will now receive an <code>E_USER_DEPRECATED</code> notice on
+instantiation. Please update your code to refer to the <code>IsInt</code> class instead.</p>
+<p>Users pulling their <code>Int</code> validator instance from the validator plugin manager
+receive an <code>IsInt</code> instance instead starting in 2.4.0.</p>
+<h2 id="postcode">PostCode</h2>
+<p><code>Laminas\I18n\Validator\PostCode</code> allows you to determine if a given value is a
+valid postal code. Postal codes are specific to cities, and in some locales
+termed ZIP codes.</p>
+<p><code>Laminas\I18n\Validator\PostCode</code> knows more than 160 different postal code
+formats. To select the correct format there are two ways. You can either use a
+fully qualified locale, or you can set your own format manually.</p>
+<h3>Supported options</h3>
+<p>The following options are supported for <code>Laminas\I18n\Validator\PostCode</code>:</p>
+<ul>
+<li><code>format</code>: Sets a postcode format which will be used for validation of the
+  input.</li>
+<li><code>locale</code>: Sets a locale from which the postcode will be taken from.</li>
+</ul>
+<h3>Usage</h3>
+<p>Using a locale is more convenient as laminas-validator already knows the
+appropriate postal code format for each locale; however, you need to use the
+fully qualified locale (one containing a region specifier) to do so. For
+instance, the locale <code>de</code> is a locale but could not be used with
+<code>Laminas\I18n\Validator\PostCode</code> as it does not include the region; <code>de_AT</code>,
+however, would be a valid locale, as it specifies the region code (<code>AT</code>, for
+Austria).</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\PostCode(&#39;de_AT&#39;);</span>
+</pre></div></p>
+<p>When you don't set a locale yourself, then <code>Laminas\I18n\Validator\PostCode</code> will
+use the application wide set locale, or, when there is none, the locale returned
+by <code>Locale</code>.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// application wide locale within your bootstrap</span>
+<span class=x>Locale::setDefault(&#39;de_AT&#39;);</span>
+
+<span class=x>$validator = new Laminas\I18n\Validator\PostCode();</span>
+</pre></div></p>
+<p>You can also change the locale afterwards by calling <code>setLocale()</code>. And of
+course you can get the actual used locale by calling <code>getLocale()</code>.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\PostCode(&#39;de_AT&#39;);</span>
+<span class=x>$validator-&gt;setLocale(&#39;en_GB&#39;);</span>
+</pre></div></p>
+<p>Postal code formats are regular expression strings. When the international
+postal code format, which is used by setting the locale, does not fit your
+needs, then you can also manually set a format by calling <code>setFormat()</code>.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\PostCode(&#39;de_AT&#39;);</span>
+<span class=x>$validator-&gt;setFormat(&#39;AT-\d{5}&#39;);</span>
+</pre></div></p>
+<blockquote>
+<h3>Conventions for self defined formats</h3>
+<p>When using self defined formats, you should omit the regex delimiters and
+anchors (<code>'/^'</code> and  <code>'$/'</code>). They are attached automatically.</p>
+<p>You should also be aware that postcode values will always be validated in a
+strict way. This means that they have to be written standalone without
+additional characters when they are not covered by the format.</p>
+</blockquote>
+<h3>Constructor options</h3>
+<p>At its most basic, you may pass a string representing a fully qualified locale
+to the constructor of <code>Laminas\I18n\Validator\PostCode</code>.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\PostCode(&#39;de_AT&#39;);</span>
+</pre></div></p>
+<p>Additionally, you may pass either an array or a <code>Traversable</code> instance to the
+constructor. When you do so, you must include either the key <code>locale</code> or
+<code>format</code>; these will be used to set the appropriate values in the validator
+object.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$validator = new Laminas\I18n\Validator\PostCode([</span>
+<span class=x>    &#39;locale&#39; =&gt; &#39;de_AT&#39;,</span>
+<span class=x>    &#39;format&#39; =&gt; &#39;AT_\d+&#39;</span>
+<span class=x>]);</span>
+</pre></div></p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../filters/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-i18n</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../filters/" class="subnavigation__link">Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Validators</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-i18n//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-i18n//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-i18n';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-i18n" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
