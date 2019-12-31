@@ -1,18 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator\Loader;
+namespace LaminasTest\I18n\Translator\Loader;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use Laminas\I18n\Translator\Loader\PhpArray as PhpArrayLoader;
 use Locale;
-use Zend\I18n\Translator\Loader\PhpArray as PhpArrayLoader;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class PhpArrayTest extends TestCase
 {
@@ -35,14 +33,14 @@ class PhpArrayTest extends TestCase
     public function testLoaderFailsToLoadMissingFile()
     {
         $loader = new PhpArrayLoader();
-        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException', 'Could not open file');
+        $this->setExpectedException('Laminas\I18n\Exception\InvalidArgumentException', 'Could not open file');
         $loader->load('en_EN', 'missing');
     }
 
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new PhpArrayLoader();
-        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
+        $this->setExpectedException('Laminas\I18n\Exception\InvalidArgumentException',
                                     'Expected an array, but received');
         $loader->load('en_EN', $this->testFilesDir . '/failed.php');
     }
@@ -51,7 +49,7 @@ class PhpArrayTest extends TestCase
     {
         $loader = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.php');
-        $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
+        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $textDomain);
     }
 
     public function testLoaderReturnsValidTextDomain()
