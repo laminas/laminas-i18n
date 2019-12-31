@@ -1,13 +1,12 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
+nav:
     - index.md
     - Reference:
         - Translation: translation.md
         - 'View Helpers': view-helpers.md
         - Filters: filters.md
         - Validators: validators.md
-site_name: zend-i18n
-site_description: Zend\I18n
-repo_url: 'https://github.com/zendframework/zend-i18n'
-copyright: 'Copyright (c) 2005-2018 <a href="https://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-i18n
+site_description: Laminas\I18n
+repo_url: 'https://github.com/laminas/laminas-i18n'

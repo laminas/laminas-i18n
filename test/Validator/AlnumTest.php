@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace LaminasTest\I18n\Validator;
 
+use Laminas\I18n\Validator\Alnum as AlnumValidator;
 use PHPUnit\Framework\TestCase;
-use Zend\I18n\Validator\Alnum as AlnumValidator;
 
 /**
- * @group      Zend_Validator
+ * @group      Laminas_Validator
  */
 class AlnumTest extends TestCase
 {
@@ -127,7 +126,7 @@ class AlnumTest extends TestCase
     }
 
     /**
-     * @ZF-4352
+     * @Laminas-4352
      */
     public function testNonStringValidation()
     {
@@ -135,7 +134,7 @@ class AlnumTest extends TestCase
     }
 
     /**
-     * @ZF-7475
+     * @Laminas-7475
      */
     public function testIntegerValidation()
     {
