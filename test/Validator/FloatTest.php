@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace LaminasTest\I18n\Validator;
 
-use Zend\I18n\Validator\Float as FloatValidator;
+use Laminas\I18n\Validator\Float as FloatValidator;
 use Locale;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
+ * @category   Laminas
+ * @package    Laminas_Validator
  * @subpackage UnitTests
- * @group      Zend_Validator
+ * @group      Laminas_Validator
  */
 class FloatTest extends \PHPUnit_Framework_TestCase
 {
@@ -87,7 +85,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-4352
+     * @Laminas-4352
      */
     public function testNonStringValidation()
     {
@@ -95,7 +93,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-7489
+     * @Laminas-7489
      */
     public function testUsingApplicationLocale()
     {
@@ -106,7 +104,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-7987
+     * @Laminas-7987
      */
     public function testLocaleDeFloatType()
     {
@@ -116,7 +114,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-7987
+     * @Laminas-7987
      */
     public function testPhpLocaleDeFloatType()
     {
@@ -126,7 +124,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-7987
+     * @Laminas-7987
      */
     public function testPhpLocaleFrFloatType()
     {
@@ -145,7 +143,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-8919
+     * @Laminas-8919
      * @dataProvider deLocaleStringsProvider
      */
     public function testPhpLocaleDeStringType($float, $expected)
@@ -168,7 +166,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-8919
+     * @Laminas-8919
      * @dataProvider frLocaleStringsProvider
      */
     public function testPhpLocaleFrStringType($float, $expected)
@@ -187,7 +185,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-8919
+     * @Laminas-8919
      * @dataProvider enLocaleStringsProvider
      */
     public function testPhpLocaleEnStringType($float, $expected)
