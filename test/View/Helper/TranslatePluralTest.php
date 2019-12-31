@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\View\Helper;
+namespace LaminasTest\I18n\View\Helper;
 
-use Zend\I18n\View\Helper\TranslatePlural as TranslatePluralHelper;
+use Laminas\I18n\View\Helper\TranslatePlural as TranslatePluralHelper;
 
 /**
- * @group      Zend_View
- * @group      Zend_View_Helper
+ * @group      Laminas_View
+ * @group      Laminas_View_Helper
  */
 class TranslatePluralTest extends \PHPUnit_Framework_TestCase
 {
@@ -46,7 +45,7 @@ class TranslatePluralTest extends \PHPUnit_Framework_TestCase
 
     public function testInvokingWithoutTranslatorWillRaiseException()
     {
-        $this->setExpectedException('Zend\I18n\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\I18n\Exception\RuntimeException');
         $this->helper->__invoke('singular', 'plural', 1);
     }
 
@@ -57,7 +56,7 @@ class TranslatePluralTest extends \PHPUnit_Framework_TestCase
         $numberInput   = 1;
         $expected      = 'translated';
 
-        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $translatorMock = $this->getMock('Laminas\I18n\Translator\Translator');
         $translatorMock->expects($this->once())
                        ->method('translatePlural')
                        ->with(
@@ -83,7 +82,7 @@ class TranslatePluralTest extends \PHPUnit_Framework_TestCase
         $textDomain    = 'textDomain';
         $locale        = 'en_US';
 
-        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $translatorMock = $this->getMock('Laminas\I18n\Translator\Translator');
         $translatorMock->expects($this->once())
                        ->method('translatePlural')
                        ->with(
