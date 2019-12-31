@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n;
+namespace Laminas\I18n;
 
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 class ConfigProvider
 {
     /**
-     * Return general-purpose zend-i18n configuration.
+     * Return general-purpose laminas-i18n configuration.
      *
      * @return array
      */
@@ -36,6 +37,10 @@ class ConfigProvider
         return [
             'aliases' => [
                 'TranslatorPluginManager' => Translator\LoaderPluginManager::class,
+
+                // Legacy Zend Framework aliases
+                \Zend\I18n\Translator\TranslatorInterface::class => Translator\TranslatorInterface::class,
+                \Zend\I18n\Translator\LoaderPluginManager::class => Translator\LoaderPluginManager::class,
             ],
             'factories' => [
                 Translator\TranslatorInterface::class => Translator\TranslatorServiceFactory::class,
@@ -45,7 +50,7 @@ class ConfigProvider
     }
 
     /**
-     * Return zend-filter configuration.
+     * Return laminas-filter configuration.
      *
      * @return array
      */
@@ -63,6 +68,12 @@ class ConfigProvider
                 'numberparse'  => Filter\NumberParse::class,
                 'numberParse'  => Filter\NumberParse::class,
                 'NumberParse'  => Filter\NumberParse::class,
+
+                // Legacy Zend Framework aliases
+                \Zend\I18n\Filter\Alnum::class => Filter\Alnum::class,
+                \Zend\I18n\Filter\Alpha::class => Filter\Alpha::class,
+                \Zend\I18n\Filter\NumberFormat::class => Filter\NumberFormat::class,
+                \Zend\I18n\Filter\NumberParse::class => Filter\NumberParse::class,
             ],
             'factories' => [
                 Filter\Alnum::class        => InvokableFactory::class,
@@ -74,7 +85,7 @@ class ConfigProvider
     }
 
     /**
-     * Return zend-validator configuration.
+     * Return laminas-validator configuration.
      *
      * @return array
      */
@@ -105,6 +116,15 @@ class ConfigProvider
                 'postcode'    => Validator\PostCode::class,
                 'postCode'    => Validator\PostCode::class,
                 'PostCode'    => Validator\PostCode::class,
+
+                // Legacy Zend Framework aliases
+                \Zend\I18n\Validator\Alnum::class => Validator\Alnum::class,
+                \Zend\I18n\Validator\Alpha::class => Validator\Alpha::class,
+                \Zend\I18n\Validator\DateTime::class => Validator\DateTime::class,
+                \Zend\I18n\Validator\IsFloat::class => Validator\IsFloat::class,
+                \Zend\I18n\Validator\IsInt::class => Validator\IsInt::class,
+                \Zend\I18n\Validator\PhoneNumber::class => Validator\PhoneNumber::class,
+                \Zend\I18n\Validator\PostCode::class => Validator\PostCode::class,
             ],
             'factories' => [
                 Validator\Alnum::class       => InvokableFactory::class,
@@ -119,7 +139,7 @@ class ConfigProvider
     }
 
     /**
-     * Return zend-view helper configuration.
+     * Return laminas-view helper configuration.
      *
      * Obsoletes View\HelperConfig.
      *
@@ -145,6 +165,14 @@ class ConfigProvider
                 'translateplural' => View\Helper\TranslatePlural::class,
                 'translatePlural' => View\Helper\TranslatePlural::class,
                 'TranslatePlural' => View\Helper\TranslatePlural::class,
+
+                // Legacy Zend Framework aliases
+                \Zend\I18n\View\Helper\CurrencyFormat::class => View\Helper\CurrencyFormat::class,
+                \Zend\I18n\View\Helper\DateFormat::class => View\Helper\DateFormat::class,
+                \Zend\I18n\View\Helper\NumberFormat::class => View\Helper\NumberFormat::class,
+                \Zend\I18n\View\Helper\Plural::class => View\Helper\Plural::class,
+                \Zend\I18n\View\Helper\Translate::class => View\Helper\Translate::class,
+                \Zend\I18n\View\Helper\TranslatePlural::class => View\Helper\TranslatePlural::class,
             ],
             'factories' => [
                 View\Helper\CurrencyFormat::class  => InvokableFactory::class,
