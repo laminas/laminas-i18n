@@ -1,21 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator;
+namespace LaminasTest\I18n\Translator;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use Laminas\EventManager\EventInterface;
+use Laminas\I18n\Translator\TextDomain;
+use Laminas\I18n\Translator\Translator;
+use LaminasTest\I18n\Translator\TestAsset\Loader as TestLoader;
 use Locale;
-use Zend\EventManager\EventInterface;
-use Zend\I18n\Translator\Translator;
-use Zend\I18n\Translator\TextDomain;
-use ZendTest\I18n\Translator\TestAsset\Loader as TestLoader;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class TranslatorTest extends TestCase
 {
@@ -68,7 +66,7 @@ class TranslatorTest extends TestCase
             )
         ));
 
-        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
         $this->assertEquals('de_DE', $translator->getLocale());
     }
 
@@ -91,7 +89,7 @@ class TranslatorTest extends TestCase
         ));
 
         //Test translator instance
-        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
 
         //Test translations
         $this->assertEquals('Nachricht 1', $translator->translate('Message 1')); //translation-de_DE.php
@@ -141,8 +139,8 @@ class TranslatorTest extends TestCase
             )
         ));
 
-        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
-        $this->assertInstanceOf('Zend\Cache\Storage\StorageInterface', $translator->getCache());
+        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf('Laminas\Cache\Storage\StorageInterface', $translator->getCache());
     }
 
     public function testDefaultLocale()
@@ -168,11 +166,11 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsLoadedFromCache()
     {
-        $cache = \Zend\Cache\StorageFactory::factory(array('adapter' => 'memory'));
+        $cache = \Laminas\Cache\StorageFactory::factory(array('adapter' => 'memory'));
         $this->translator->setCache($cache);
 
         $cache->addItem(
-            'Zend_I18n_Translator_Messages_' . md5('default' . 'en_EN'),
+            'Laminas_I18n_Translator_Messages_' . md5('default' . 'en_EN'),
             new TextDomain(array('foo' => 'bar'))
         );
 
@@ -181,7 +179,7 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsAreStoredInCache()
     {
-        $cache = \Zend\Cache\StorageFactory::factory(array('adapter' => 'memory'));
+        $cache = \Laminas\Cache\StorageFactory::factory(array('adapter' => 'memory'));
         $this->translator->setCache($cache);
 
         $loader = new TestLoader();
@@ -191,8 +189,8 @@ class TranslatorTest extends TestCase
 
         $this->assertEquals('bar', $this->translator->translate('foo'));
 
-        $item = $cache->getItem('Zend_I18n_Translator_Messages_' . md5('default' . 'en_EN'));
-        $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $item);
+        $item = $cache->getItem('Laminas_I18n_Translator_Messages_' . md5('default' . 'en_EN'));
+        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $item);
         $this->assertEquals('bar', $item['foo']);
     }
 
@@ -269,7 +267,7 @@ class TranslatorTest extends TestCase
 
         $this->translator->translate('foo', 'bar', 'baz');
 
-        $this->assertInstanceOf('Zend\EventManager\Event', $actualEvent);
+        $this->assertInstanceOf('Laminas\EventManager\Event', $actualEvent);
         $this->assertEquals(
             array(
                 'message'     => 'foo',
@@ -319,7 +317,7 @@ class TranslatorTest extends TestCase
 
         $this->translator->translate('foo', 'bar', 'baz');
 
-        $this->assertInstanceOf('Zend\EventManager\Event', $actualEvent);
+        $this->assertInstanceOf('Laminas\EventManager\Event', $actualEvent);
         $this->assertEquals(
             array(
                 'locale'      => 'baz',
