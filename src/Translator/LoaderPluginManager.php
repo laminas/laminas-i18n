@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator;
+namespace Laminas\I18n\Translator;
 
-use Zend\I18n\Exception;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception\InvalidServiceException;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\I18n\Exception;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 /**
  * Plugin manager implementation for translation loaders.
@@ -35,9 +36,9 @@ use Zend\ServiceManager\Factory\InvokableFactory;
  * more easily. That can be done by extending it:
  *
  * <code>
- * use Zend\I18n\Translator\TranslatorServiceFactory;
- * // or Zend\Mvc\I18n\TranslatorServiceFactory
- * use Zend\ServiceManager\ServiceLocatorInterface;
+ * use Laminas\I18n\Translator\TranslatorServiceFactory;
+ * // or Laminas\Mvc\I18n\TranslatorServiceFactory
+ * use Laminas\ServiceManager\ServiceLocatorInterface;
  *
  * class MyTranslatorServiceFactory extends TranslatorServiceFactory
  * {
@@ -62,6 +63,16 @@ class LoaderPluginManager extends AbstractPluginManager
         'phparray' => Loader\PhpArray::class,
         'phpArray' => Loader\PhpArray::class,
         'PhpArray' => Loader\PhpArray::class,
+
+        // Legacy Zend Framework aliases
+        \Zend\I18n\Translator\Loader\Gettext::class => Loader\Gettext::class,
+        \Zend\I18n\Translator\Loader\Ini::class => Loader\Ini::class,
+        \Zend\I18n\Translator\Loader\PhpArray::class => Loader\PhpArray::class,
+
+        // v2 normalized FQCNs
+        'zendi18ntranslatorloadergettext' => Loader\Gettext::class,
+        'zendi18ntranslatorloaderini' => Loader\Ini::class,
+        'zendi18ntranslatorloaderphparray' => Loader\PhpArray::class,
     ];
 
     protected $factories = [
@@ -71,9 +82,9 @@ class LoaderPluginManager extends AbstractPluginManager
         // Legacy (v2) due to alias resolution; canonical form of resolved
         // alias is used to look up the factory, while the non-normalized
         // resolved alias is used as the requested name passed to the factory.
-        'zendi18ntranslatorloadergettext'  => InvokableFactory::class,
-        'zendi18ntranslatorloaderini'      => InvokableFactory::class,
-        'zendi18ntranslatorloaderphparray' => InvokableFactory::class
+        'laminasi18ntranslatorloadergettext'  => InvokableFactory::class,
+        'laminasi18ntranslatorloaderini'      => InvokableFactory::class,
+        'laminasi18ntranslatorloaderphparray' => InvokableFactory::class
     ];
 
     /**

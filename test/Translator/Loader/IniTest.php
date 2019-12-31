@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator\Loader;
+namespace LaminasTest\I18n\Translator\Loader;
 
+use Laminas\I18n\Translator\Loader\Ini as IniLoader;
 use PHPUnit\Framework\TestCase;
-use Zend\I18n\Translator\Loader\Ini as IniLoader;
 
 class IniTest extends TestCase
 {
@@ -32,7 +33,7 @@ class IniTest extends TestCase
     public function testLoaderFailsToLoadMissingFile()
     {
         $loader = new IniLoader();
-        $this->expectException('Zend\I18n\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('Could not find or open file');
         $loader->load('en_EN', 'missing');
     }
@@ -41,13 +42,13 @@ class IniTest extends TestCase
     {
         $loader = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.ini');
-        $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
+        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $textDomain);
     }
 
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new IniLoader();
-        $this->expectException('Zend\I18n\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
     }
@@ -55,7 +56,7 @@ class IniTest extends TestCase
     public function testLoaderFailsToLoadBadSyntax()
     {
         $loader = new IniLoader();
-        $this->expectException('Zend\I18n\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
     }

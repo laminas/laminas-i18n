@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\View;
+namespace Laminas\I18n\View;
 
 use IntlDateFormatter;
 
@@ -15,14 +16,14 @@ use IntlDateFormatter;
  * Helper trait for auto-completion of code in modern IDEs.
  *
  * The trait provides convenience methods for view helpers,
- * defined by the zend-i18n component. It is designed to be used
- * for type-hinting $this variable inside zend-view templates via doc blocks.
+ * defined by the laminas-i18n component. It is designed to be used
+ * for type-hinting $this variable inside laminas-view templates via doc blocks.
  *
  * The base class is PhpRenderer, followed by the helper trait from
- * the zend-i18n component. However, multiple helper traits from different
- * Zend Framework components can be chained afterwards.
+ * the laminas-i18n component. However, multiple helper traits from different
+ * Laminas components can be chained afterwards.
  *
- * @example @var \Zend\View\Renderer\PhpRenderer|\Zend\I18n\View\HelperTrait $this
+ * @example @var \Laminas\View\Renderer\PhpRenderer|\Laminas\I18n\View\HelperTrait $this
  *
  * @method string currencyFormat(float $number, string|null $currencyCode = null, bool|null $showDecimals = null, string|null $locale = null, string|null $pattern = null)
  * @method string dateFormat(\DateTime|int|array $date, int $dateType = IntlDateFormatter::NONE, int $timeType = IntlDateFormatter::NONE, string|null $locale = null, string|null $pattern = null)
