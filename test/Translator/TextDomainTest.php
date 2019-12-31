@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator;
+namespace LaminasTest\I18n\Translator;
 
+use Laminas\I18n\Translator\Plural\Rule as PluralRule;
+use Laminas\I18n\Translator\TextDomain;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\I18n\Translator\TextDomain;
-use Zend\I18n\Translator\Plural\Rule as PluralRule;
 
 class TextDomainTest extends TestCase
 {
@@ -56,7 +55,7 @@ class TextDomainTest extends TestCase
 
     public function testMergingIncompatibleTextDomains()
     {
-        $this->setExpectedException('Zend\I18n\Exception\RuntimeException', 'is not compatible');
+        $this->setExpectedException('Laminas\I18n\Exception\RuntimeException', 'is not compatible');
 
         $domainA = new TextDomain();
         $domainB = new TextDomain();
