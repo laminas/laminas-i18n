@@ -1,30 +1,28 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator;
+namespace LaminasTest\I18n\Translator;
 
+use Laminas\I18n\Translator\TranslatorServiceFactory;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\I18n\Translator\TranslatorServiceFactory;
 
 class TranslatorServiceFactoryTest extends TestCase
 {
     public function testCreateServiceWithNoTranslatorKeyDefined()
     {
         $slContents = array(array('Configuration', array()));
-        $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
+        $serviceLocator = $this->getMock('Laminas\ServiceManager\ServiceLocatorInterface');
         $serviceLocator->expects($this->once())
                        ->method('get')
                        ->will($this->returnValueMap($slContents));
 
         $factory = new TranslatorServiceFactory();
         $translator = $factory->createService($serviceLocator);
-        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
     }
 }
