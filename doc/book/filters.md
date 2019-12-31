@@ -1,6 +1,6 @@
 # Filters
 
-zend-i18n ships with a set of internationalization-related filters.
+laminas-i18n ships with a set of internationalization-related filters.
 
 ## Alnum
 
@@ -28,12 +28,12 @@ Alnum([ boolean $allowWhiteSpace [, string $locale ]])
 
 ```php
 // Default settings, deny whitespace
-$filter = new \Zend\I18n\Filter\Alnum();
+$filter = new \Laminas\I18n\Filter\Alnum();
 echo $filter->filter("This is (my) content: 123");
 // Returns "Thisismycontent123"
 
 // First param in constructor is $allowWhiteSpace
-$filter = new \Zend\I18n\Filter\Alnum(true);
+$filter = new \Laminas\I18n\Filter\Alnum(true);
 echo $filter->filter("This is (my) content: 123");
 // Returns "This is my content 123"
 ```
@@ -70,12 +70,12 @@ Alpha([ boolean $allowWhiteSpace [, string $locale ]])
 
 ```php
 // Default settings, deny whitespace
-$filter = new \Zend\I18n\Filter\Alpha();
+$filter = new \Laminas\I18n\Filter\Alpha();
 echo $filter->filter("This is (my) content: 123");
 // Returns "Thisismycontent"
 
 // Allow whitespace
-$filter = new \Zend\I18n\Filter\Alpha(true);
+$filter = new \Laminas\I18n\Filter\Alpha(true);
 echo $filter->filter("This is (my) content: 123");
 // Returns "This is my content "
 ```
@@ -118,15 +118,15 @@ NumberFormat([ string $locale [, int $style [, int $type ]]])
 ### Basic Usage
 
 ```php
-$filter = new \Zend\I18n\Filter\NumberFormat('de_DE');
+$filter = new \Laminas\I18n\Filter\NumberFormat('de_DE');
 echo $filter->filter(1234567.8912346);
 // Returns "1.234.567,891"
 
-$filter = new \Zend\I18n\Filter\NumberFormat('en_US', NumberFormatter::PERCENT);
+$filter = new \Laminas\I18n\Filter\NumberFormat('en_US', NumberFormatter::PERCENT);
 echo $filter->filter(0.80);
 // Returns "80%"
 
-$filter = new \Zend\I18n\Filter\NumberFormat('fr_FR', NumberFormatter::SCIENTIFIC);
+$filter = new \Laminas\I18n\Filter\NumberFormat('fr_FR', NumberFormatter::SCIENTIFIC);
 echo $filter->filter(0.00123456789);
 // Returns "1,23456789E-3"
 ```
@@ -160,15 +160,15 @@ NumberParse([ string $locale [, int $style [, int $type ]]])
 ### Basic Usage
 
 ```php
-$filter = new \Zend\I18n\Filter\NumberParse('de_DE');
+$filter = new \Laminas\I18n\Filter\NumberParse('de_DE');
 echo $filter->filter('1.234.567,891');
 // Returns 1234567.8912346
 
-$filter = new \Zend\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
+$filter = new \Laminas\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
 echo $filter->filter('80%');
 // Returns 0.80
 
-$filter = new \Zend\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
+$filter = new \Laminas\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
 echo $filter->filter('1,23456789E-3');
 // Returns 0.00123456789
 ```
