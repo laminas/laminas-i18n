@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace LaminasTest\I18n\Validator;
 
-use PHPUnit\Framework\TestCase;
-use Zend\I18n\Validator\IsInt as IsIntValidator;
+use Laminas\I18n\Validator\IsInt as IsIntValidator;
+use Laminas\Validator\Exception;
 use Locale;
-use Zend\Validator\Exception;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @group      Zend_Validator
+ * @group      Laminas_Validator
  */
 class IsIntTest extends TestCase
 {
@@ -94,7 +95,7 @@ class IsIntTest extends TestCase
     }
 
     /**
-     * @ZF-4352
+     * @Laminas-4352
      */
     public function testNonStringValidation()
     {
@@ -102,7 +103,7 @@ class IsIntTest extends TestCase
     }
 
     /**
-     * @ZF-7489
+     * @Laminas-7489
      */
     public function testUsingApplicationLocale()
     {
@@ -112,7 +113,7 @@ class IsIntTest extends TestCase
     }
 
     /**
-     * @ZF-7703
+     * @Laminas-7703
      */
     public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale()
     {

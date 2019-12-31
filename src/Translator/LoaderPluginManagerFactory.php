@@ -1,21 +1,22 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator;
+namespace Laminas\I18n\Translator;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Config;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Config;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class LoaderPluginManagerFactory implements FactoryInterface
 {
     /**
-     * zend-servicemanager v2 options passed to factory.
+     * laminas-servicemanager v2 options passed to factory.
      *
      * @param array
      */
@@ -34,7 +35,7 @@ class LoaderPluginManagerFactory implements FactoryInterface
         $options = $options ?: [];
         $pluginManager = new LoaderPluginManager($container, $options);
 
-        // If this is in a zend-mvc application, the ServiceListener will inject
+        // If this is in a laminas-mvc application, the ServiceListener will inject
         // merged configuration during bootstrap.
         if ($container->has('ServiceListener')) {
             return $pluginManager;
@@ -59,7 +60,7 @@ class LoaderPluginManagerFactory implements FactoryInterface
     }
 
     /**
-     * zend-servicemanager v2 factory to return LoaderPluginManager
+     * laminas-servicemanager v2 factory to return LoaderPluginManager
      *
      * @param ServiceLocatorInterface $container
      * @return LoaderPluginManager

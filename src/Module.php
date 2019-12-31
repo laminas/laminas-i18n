@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n;
+namespace Laminas\I18n;
 
 class Module
 {
     /**
-     * Return zend-i18n configuration for zend-mvc application.
+     * Return laminas-i18n configuration for laminas-mvc application.
      *
      * @return array
      */
@@ -28,7 +29,7 @@ class Module
     /**
      * Register a specification for the TranslatorPluginManager with the ServiceListener.
      *
-     * @param \Zend\ModuleManager\ModuleManager $moduleManager
+     * @param \Laminas\ModuleManager\ModuleManager $moduleManager
      * @return void
      */
     public function init($moduleManager)
@@ -40,7 +41,7 @@ class Module
         $serviceListener->addServiceManager(
             'TranslatorPluginManager',
             'translator_plugins',
-            'Zend\ModuleManager\Feature\TranslatorPluginProviderInterface',
+            'Laminas\ModuleManager\Feature\TranslatorPluginProviderInterface',
             'getTranslatorPluginConfig'
         );
     }
