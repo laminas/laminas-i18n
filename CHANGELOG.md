@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#45](https://github.com/zendframework/zend-i18n/pull/45) fixes the
+- [zendframework/zend-i18n#45](https://github.com/zendframework/zend-i18n/pull/45) fixes the
   `Module::init()` method to properly receive a `ModuleManager` instance, and
   not expect a `ModuleEvent`.
 
@@ -26,9 +26,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#41](https://github.com/zendframework/zend-i18n/pull/41) adds
-  `Zend\I18n\Module::init()`, which registers a specification for the translator
-  loader plugin manager with `Zend\ModuleManager\Listener\ServiceListener`.
+- [zendframework/zend-i18n#41](https://github.com/zendframework/zend-i18n/pull/41) adds
+  `Laminas\I18n\Module::init()`, which registers a specification for the translator
+  loader plugin manager with `Laminas\ModuleManager\Listener\ServiceListener`.
 
 ### Deprecated
 
@@ -46,21 +46,21 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#40](https://github.com/zendframework/zend-i18n/pull/40) adds:
-  - `Zend\I18n\Translator\LoaderPluginManagerFactory`, which provides a factory
-    for container-interop-compatible containers (including zend-servicemanager)
+- [zendframework/zend-i18n#40](https://github.com/zendframework/zend-i18n/pull/40) adds:
+  - `Laminas\I18n\Translator\LoaderPluginManagerFactory`, which provides a factory
+    for container-interop-compatible containers (including laminas-servicemanager)
     for creating and returning a `LoaderPluginManager` instance.
-  - `Zend\I18n\ConfigProvider` (which provides an invokable configuration
-    provider class; this could be used with zend-expressive) and
-    `Zend\I18n\Module` (which provides a zend-mvc/zend-modulemanager module
-    providing service configuration for ZF applications); these provide
-    configuration for zend-i18n services, including filters, validators, and
+  - `Laminas\I18n\ConfigProvider` (which provides an invokable configuration
+    provider class; this could be used with mezzio) and
+    `Laminas\I18n\Module` (which provides a laminas-mvc/laminas-modulemanager module
+    providing service configuration for Laminas applications); these provide
+    configuration for laminas-i18n services, including filters, validators, and
     view helpers.
 
 ### Deprecated
 
-- [#40](https://github.com/zendframework/zend-i18n/pull/40) deprecates
-  `Zend\I18n\View\HelperConfig`, as the functionality is made obsolete by the
+- [zendframework/zend-i18n#40](https://github.com/zendframework/zend-i18n/pull/40) deprecates
+  `Laminas\I18n\View\HelperConfig`, as the functionality is made obsolete by the
   new `Module` class. The class will be removed with the 3.0 release.
 
 ### Removed
@@ -69,25 +69,25 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#35](https://github.com/zendframework/zend-i18n/pull/35) updates the
-  dependencies for zend-validator and zend-cache to use versions that are
-  forwards-compatible with zend-servicemanager v3, and re-enables their tests
+- [zendframework/zend-i18n#35](https://github.com/zendframework/zend-i18n/pull/35) updates the
+  dependencies for laminas-validator and laminas-cache to use versions that are
+  forwards-compatible with laminas-servicemanager v3, and re-enables their tests
   during continuous integration.
 
 ## 2.6.0 - 2016-02-10
 
 ### Added
 
-- [#8](https://github.com/zendframework/zend-i18n/pull/8) adds support for
+- [zendframework/zend-i18n#8](https://github.com/zendframework/zend-i18n/pull/8) adds support for
   Vietnamese postal codes.
-- [#18](https://github.com/zendframework/zend-i18n/pull/18) adds support for
+- [zendframework/zend-i18n#18](https://github.com/zendframework/zend-i18n/pull/18) adds support for
   `NumberFormatter` text attributes to the `NumberFormat` view helper.
-- [#28](https://github.com/zendframework/zend-i18n/pull/28),
-  [#29](https://github.com/zendframework/zend-i18n/pull/29),
-  [#30](https://github.com/zendframework/zend-i18n/pull/30),
-  [#31](https://github.com/zendframework/zend-i18n/pull/31), and
-  [#34](https://github.com/zendframework/zend-i18n/pull/34) prepared the
-  documentation for publication at https://zendframework.github.io/zend-i18n/
+- [zendframework/zend-i18n#28](https://github.com/zendframework/zend-i18n/pull/28),
+  [zendframework/zend-i18n#29](https://github.com/zendframework/zend-i18n/pull/29),
+  [zendframework/zend-i18n#30](https://github.com/zendframework/zend-i18n/pull/30),
+  [zendframework/zend-i18n#31](https://github.com/zendframework/zend-i18n/pull/31), and
+  [zendframework/zend-i18n#34](https://github.com/zendframework/zend-i18n/pull/34) prepared the
+  documentation for publication at https://docs.laminas.dev/laminas-i18n/
 
 ### Deprecated
 
@@ -99,18 +99,18 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#12](https://github.com/zendframework/zend-i18n/pull/12),
-  [#21](https://github.com/zendframework/zend-i18n/pull/21), and
-  [#22](https://github.com/zendframework/zend-i18n/pull/22) update the
-  component to be forwards compatible with the v3 versions of zend-stdlib,
-  zend-servicemanager, and zend-eventmanager.
-- [#8](https://github.com/zendframework/zend-i18n/pull/8) updates the regex for
+- [zendframework/zend-i18n#12](https://github.com/zendframework/zend-i18n/pull/12),
+  [zendframework/zend-i18n#21](https://github.com/zendframework/zend-i18n/pull/21), and
+  [zendframework/zend-i18n#22](https://github.com/zendframework/zend-i18n/pull/22) update the
+  component to be forwards compatible with the v3 versions of laminas-stdlib,
+  laminas-servicemanager, and laminas-eventmanager.
+- [zendframework/zend-i18n#8](https://github.com/zendframework/zend-i18n/pull/8) updates the regex for
   the Mauritius postal code to follow the currently adopted format.
-- [#13](https://github.com/zendframework/zend-i18n/pull/13) updates the regex for
+- [zendframework/zend-i18n#13](https://github.com/zendframework/zend-i18n/pull/13) updates the regex for
   Serbian postal codes to only accept 5 digits.
-- [#19](https://github.com/zendframework/zend-i18n/pull/19) fixes the behavior
+- [zendframework/zend-i18n#19](https://github.com/zendframework/zend-i18n/pull/19) fixes the behavior
   of the DateTime validator to ensure it can be called multiple times with
   multiple values.
-- [#33](https://github.com/zendframework/zend-i18n/pull/33) adds a check for
+- [zendframework/zend-i18n#33](https://github.com/zendframework/zend-i18n/pull/33) adds a check for
   null messages in `Translator::getTranslatedMessage()` to prevent illegal
   offset warnings.
