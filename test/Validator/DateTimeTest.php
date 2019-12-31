@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace LaminasTest\I18n\Validator;
 
-use Zend\I18n\Validator\DateTime as DateTimeValidator;
+use Laminas\I18n\Validator\DateTime as DateTimeValidator;
 use Locale;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
+ * @category   Laminas
+ * @package    Laminas_Validator
  * @subpackage UnitTests
- * @group      Zend_Validator
+ * @group      Laminas_Validator
  */
 class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
