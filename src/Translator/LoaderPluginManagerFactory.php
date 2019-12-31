@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator;
+namespace Laminas\I18n\Translator;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class LoaderPluginManagerFactory implements FactoryInterface
 {
     /**
-     * zend-servicemanager v2 options passed to factory.
+     * laminas-servicemanager v2 options passed to factory.
      *
      * @param array
      */
@@ -35,7 +36,7 @@ class LoaderPluginManagerFactory implements FactoryInterface
     }
 
     /**
-     * zend-servicemanager v2 factory to return LoaderPluginManager
+     * laminas-servicemanager v2 factory to return LoaderPluginManager
      *
      * @param ServiceLocatorInterface $container
      * @return LoaderPluginManager

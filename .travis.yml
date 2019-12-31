@@ -1,5 +1,3 @@
-sudo: false
-
 language: php
 
 branches:
@@ -11,14 +9,14 @@ cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.local
-    - zf-mkdoc-theme
+    - laminas-mkdoc-theme
 
 env:
   global:
-    - SITE_URL: https://zendframework.github.io/zend-i18n
+    - SITE_URL: https://docs.laminas.dev/laminas-i18n
     - GH_USER_NAME: "Matthew Weier O'Phinney"
     - GH_USER_EMAIL: matthew@weierophinney.net
-    - GH_REF: github.com/zendframework/zend-i18n.git
+    - GH_REF: github.com/laminas/laminas-i18n.git
     - secure: "ACz/CDPU1Nv2mqQL7UZaULiHrlIafQW/ytNc8ijY1fLwrEt1uglh0bqwmW8mu0PN+dcKUTveDSLR2SPUiyXRkUZkehET9pl+Et4gYQ+4ulxvN4El1lQsGHky+xlAVVDuX5v9yWd+0k8FbklDdVmPc6EpXDCj+ul9noMg90K283Fe5/nRmZTmBBCkxBFLsXSmtiCWpuTuWIdGxz4rdTtl8LcpYQx/oxMy5e50HTbgmUfEEr9yeEfw/i0RWCo6+fjM/y+ZB0IHApDYMmR5yp0ZmFm+d/ISmd1rdmYxgrsUAIWwfd7Q/ukF4C0iZVfg1q14bLJqVkCxPJlNVjbFxbJ0EfpyJJqpQPNvHMo92BqbcRDcBSfwoRyeiE0vyH/T2ni38ZuA16qOd/WJILtNHtPVesyJQV5D2vi8b2fAq2givp28/BxXC/7RVzvyv2INZJXrjrJkbbzphf6bAxxyrvDlE+i01N/yy84bkDHMzdQstDLMC0sZa2GicZDg6box/BlquXjy75n+NBYBfyBhftKIJkeDoSPSZxUWfbm7EX1GoPzl1AbTKhhTlbWLMp1jhJQyi2KjrkpyYtS2IH6vnH1fc85QdZhrRfrHDpHm5+kQ5pbPW/pCDX/1BwPJQ9CZELoENicX1r4uzZA2M1hCzrSEbKyapMC8SmoJ4pdOybAn7Ow="
 
 matrix:
@@ -54,16 +52,15 @@ matrix:
     - php: hhvm
 
 notifications:
-  irc: "irc.freenode.org#zftalk.dev"
   email: false
 
 before_install:
   - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
   - composer self-update
-  - if [[ $SERVICE_MANAGER_VERSION != '' ]]; then composer require --dev --no-update "zendframework/zend-servicemanager:$SERVICE_MANAGER_VERSION" ; fi
-  - if [[ $SERVICE_MANAGER_VERSION == '' ]]; then composer require --dev --no-update "zendframework/zend-servicemanager:^3.0.3" ; fi
-  - if [[ $EVENT_MANAGER_VERSION != '' ]]; then composer require --dev --no-update "zendframework/zend-eventmanager:$EVENT_MANAGER_VERSION" ; fi
-  - if [[ $EVENT_MANAGER_VERSION == '' ]]; then composer require --dev --no-update "zendframework/zend-eventmanager:^3.0" ; fi
+  - if [[ $SERVICE_MANAGER_VERSION != '' ]]; then composer require --dev --no-update "laminas/laminas-servicemanager:$SERVICE_MANAGER_VERSION" ; fi
+  - if [[ $SERVICE_MANAGER_VERSION == '' ]]; then composer require --dev --no-update "laminas/laminas-servicemanager:^3.0.3" ; fi
+  - if [[ $EVENT_MANAGER_VERSION != '' ]]; then composer require --dev --no-update "laminas/laminas-eventmanager:$EVENT_MANAGER_VERSION" ; fi
+  - if [[ $EVENT_MANAGER_VERSION == '' ]]; then composer require --dev --no-update "laminas/laminas-eventmanager:^3.0" ; fi
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer require --dev satooshi/php-coveralls:^1.0 ; fi
 
 install:
@@ -73,10 +70,10 @@ script:
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then ./vendor/bin/phpunit -c phpunit.xml.travis --coverage-clover clover.xml ; fi
   - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then ./vendor/bin/phpunit -c phpunit.xml.travis ; fi
   - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/php-cs-fixer fix -v --diff --dry-run ; fi
-  - if [[ $DEPLOY_DOCS == "true" && "$TRAVIS_TEST_RESULT" == "0" ]]; then wget -O theme-installer.sh "https://raw.githubusercontent.com/zendframework/zf-mkdoc-theme/master/theme-installer.sh" ; chmod 755 theme-installer.sh ; ./theme-installer.sh ; fi
+  - if [[ $DEPLOY_DOCS == "true" && "$TRAVIS_TEST_RESULT" == "0" ]]; then wget -O theme-installer.sh "https://raw.githubusercontent.com/laminas/laminas-mkdoc-theme/master/theme-installer.sh" ; chmod 755 theme-installer.sh ; ./theme-installer.sh ; fi
 
 after_success:
-  - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation" ; ./zf-mkdoc-theme/deploy.sh ; echo "Completed deploying documentation" ; fi
+  - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation" ; ./laminas-mkdoc-theme/deploy.sh ; echo "Completed deploying documentation" ; fi
 
 after_script:
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then ./vendor/bin/coveralls -v ; fi
