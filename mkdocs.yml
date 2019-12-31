@@ -1,13 +1,12 @@
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - Home: index.md
-    - Introduction: introduction.md
-    - Reference:
-        - Translation: translation.md
-        - 'View Helpers': view-helpers.md
-        - Filters: filters.md
-        - Validators: validators.md
+    - { Home: index.md }
+    - { Introduction: introduction.md }
+    - { Reference: [{ Translation: translation.md }, { 'View Helpers': view-helpers.md }, { Filters: filters.md }, { Validators: validators.md }] }
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
 repo_url: 'https://github.com/laminas/laminas-i18n'
+extra:
+    project: Components
+    project_url: 'https://docs.laminas.dev'
