@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Filter;
+namespace Laminas\I18n\Filter;
 
 use Locale;
 use Traversable;
@@ -62,7 +63,7 @@ class Alnum extends AbstractLocale
     }
 
     /**
-     * Defined by Zend\Filter\FilterInterface
+     * Defined by Laminas\Filter\FilterInterface
      *
      * Returns $value as string with all non-alphanumeric characters removed
      *

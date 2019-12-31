@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace LaminasTest\I18n\Validator;
 
+use Laminas\I18n\Validator\PostCode as PostCodeValidator;
 use PHPUnit\Framework\TestCase;
-use Zend\I18n\Validator\PostCode as PostCodeValidator;
 
 /**
- * @group      Zend_Validator
+ * @group      Laminas_Validator
  */
 class PostCodeTest extends TestCase
 {
@@ -21,7 +22,7 @@ class PostCodeTest extends TestCase
     protected $validator;
 
     /**
-     * Creates a new Zend\PostCode object for each test method
+     * Creates a new Laminas\PostCode object for each test method
      *
      * @return void
      */
@@ -103,7 +104,7 @@ class PostCodeTest extends TestCase
      */
     public function testSettingLocalesWithoutRegion()
     {
-        $this->expectException('Zend\Validator\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('Locale must contain a region');
         $this->validator->setLocale('de')->isValid('1000');
     }
@@ -113,7 +114,7 @@ class PostCodeTest extends TestCase
      */
     public function testSettingLocalesWithoutPostalCodes()
     {
-        $this->expectException('Zend\Validator\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('A postcode-format string has to be given for validation');
         $this->validator->setLocale('gez_ER')->isValid('1000');
     }
@@ -137,20 +138,20 @@ class PostCodeTest extends TestCase
 
     public function testSetGetFormatThrowsExceptionOnNullFormat()
     {
-        $this->expectException('Zend\Validator\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('A postcode-format string has to be given');
         $this->validator->setLocale(null)->setFormat(null)->isValid('1000');
     }
 
     public function testSetGetFormatThrowsExceptionOnEmptyFormat()
     {
-        $this->expectException('Zend\Validator\Exception\InvalidArgumentException');
+        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
         $this->expectExceptionMessage('A postcode-format string has to be given');
         $this->validator->setLocale(null)->setFormat('')->isValid('1000');
     }
 
     /**
-     * @group ZF-9212
+     * @group Laminas-9212
      */
     public function testErrorMessageText()
     {
@@ -162,7 +163,7 @@ class PostCodeTest extends TestCase
      /**
      * Test service class with invalid validation
      *
-     * @group ZF2-44
+     * @group Laminas-44
      */
     public function testServiceClass()
     {

@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-i18n for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-i18n/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator\Loader;
+namespace Laminas\I18n\Translator\Loader;
 
-use Zend\I18n\Exception;
-use Zend\I18n\Translator\Plural\Rule as PluralRule;
-use Zend\I18n\Translator\TextDomain;
-use Zend\Stdlib\ErrorHandler;
+use Laminas\I18n\Exception;
+use Laminas\I18n\Translator\Plural\Rule as PluralRule;
+use Laminas\I18n\Translator\TextDomain;
+use Laminas\Stdlib\ErrorHandler;
 
 /**
  * Gettext loader.
