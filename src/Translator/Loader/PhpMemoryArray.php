@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator\Loader;
+namespace Laminas\I18n\Translator\Loader;
 
-use Zend\I18n\Exception;
-use Zend\I18n\Translator\Plural\Rule as PluralRule;
-use Zend\I18n\Translator\TextDomain;
+use Laminas\I18n\Exception;
+use Laminas\I18n\Translator\Plural\Rule as PluralRule;
+use Laminas\I18n\Translator\TextDomain;
 
 /**
  * PHP array loader.
@@ -34,8 +33,8 @@ class PhpMemoryArray implements RemoteLoaderInterface
      * @param  string $locale
      * @param  string $textDomain
      *
-     * @throws \Zend\I18n\Exception\InvalidArgumentException
-     * @return \Zend\I18n\Translator\TextDomain|null
+     * @throws \Laminas\I18n\Exception\InvalidArgumentException
+     * @return \Laminas\I18n\Translator\TextDomain|null
      */
     public function load($locale, $textDomain)
     {

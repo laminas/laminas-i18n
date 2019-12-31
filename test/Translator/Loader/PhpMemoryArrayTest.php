@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator\Loader;
+namespace LaminasTest\I18n\Translator\Loader;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use Laminas\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;
 use Locale;
-use Zend\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class PhpMemoryArrayTest extends TestCase
 {
@@ -40,7 +39,7 @@ class PhpMemoryArrayTest extends TestCase
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new PhpMemoryArrayLoader('foo');
-        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
+        $this->setExpectedException('Laminas\I18n\Exception\InvalidArgumentException',
                                     'Expected an array, but received');
         $loader->load('en_US', 'default');
     }
@@ -48,7 +47,7 @@ class PhpMemoryArrayTest extends TestCase
     public function testLoaderFailsToLoadMissingTextDomain()
     {
         $loader = new PhpMemoryArrayLoader(array());
-        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
+        $this->setExpectedException('Laminas\I18n\Exception\InvalidArgumentException',
                                     'Expected textdomain "default" to be an array, but it is not set');
         $loader->load('en_US', 'default');
     }
@@ -56,7 +55,7 @@ class PhpMemoryArrayTest extends TestCase
     public function testLoaderFailsToLoadNonArrayLocale()
     {
         $loader = new PhpMemoryArrayLoader(array('default' => array()));
-        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
+        $this->setExpectedException('Laminas\I18n\Exception\InvalidArgumentException',
                                     'Expected locale "en_US" to be an array, but it is not set');
         $loader->load('en_US', 'default');
     }
@@ -65,7 +64,7 @@ class PhpMemoryArrayTest extends TestCase
     {
         $loader = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_empty.php');
         $textDomain = $loader->load('en_US', 'default');
-        $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
+        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $textDomain);
     }
 
     public function testLoaderReturnsValidTextDomain()

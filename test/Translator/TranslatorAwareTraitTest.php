@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Translator;
+namespace LaminasTest\I18n\Translator;
 
+use \Laminas\I18n\Translator\Translator;
 use \PHPUnit_Framework_TestCase as TestCase;
-use \Zend\I18n\Translator\Translator;
 
 /**
  * @requires PHP 5.4
@@ -19,7 +18,7 @@ class TranslatorAwareTraitTest extends TestCase
 {
     public function testSetTranslator()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals(null, 'translator', $object);
 
@@ -32,7 +31,7 @@ class TranslatorAwareTraitTest extends TestCase
 
     public function testSetTranslatorAndTextDomain()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals(null, 'translator', $object);
         $this->assertAttributeEquals('default', 'translatorTextDomain', $object);
@@ -48,7 +47,7 @@ class TranslatorAwareTraitTest extends TestCase
 
     public function testGetTranslator()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertNull($object->getTranslator());
 
@@ -61,7 +60,7 @@ class TranslatorAwareTraitTest extends TestCase
 
     public function testHasTranslator()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertFalse($object->hasTranslator());
 
@@ -74,7 +73,7 @@ class TranslatorAwareTraitTest extends TestCase
 
     public function testSetTranslatorEnabled()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals(true, 'translatorEnabled', $object);
 
@@ -91,7 +90,7 @@ class TranslatorAwareTraitTest extends TestCase
 
     public function testIsTranslatorEnabled()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertTrue($object->isTranslatorEnabled());
 
@@ -102,7 +101,7 @@ class TranslatorAwareTraitTest extends TestCase
 
     public function testSetTranslatorTextDomain()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertAttributeEquals('default', 'translatorTextDomain', $object);
 
@@ -115,7 +114,7 @@ class TranslatorAwareTraitTest extends TestCase
 
     public function testGetTranslatorTextDomain()
     {
-        $object = $this->getObjectForTrait('\Zend\I18n\Translator\TranslatorAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
         $this->assertEquals('default', $object->getTranslatorTextDomain());
 
