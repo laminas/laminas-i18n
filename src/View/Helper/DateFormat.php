@@ -1,26 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\View\Helper;
+namespace Laminas\I18n\View\Helper;
 
 use DateTime;
 use IntlDateFormatter;
+use Laminas\I18n\Exception;
+use Laminas\View\Helper\AbstractHelper;
 use Locale;
-use Zend\I18n\Exception;
-use Zend\View\Helper\AbstractHelper;
 
 /**
  * View helper for formatting dates.
  *
- * @category   Zend
- * @package    Zend_I18n
+ * @category   Laminas
+ * @package    Laminas_I18n
  * @subpackage View
  */
 class DateFormat extends AbstractHelper
