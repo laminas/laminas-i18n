@@ -1,6 +1,6 @@
 # Translation
 
-zend-i18n comes with a complete translation suite supporting all major formats
+laminas-i18n comes with a complete translation suite supporting all major formats
 and including popular features such as plural translations and text domains. The
 Translator subcomponent is mostly dependency free, except for the fallback to a
 default locale, where it relies on the PHP's intl extension.
@@ -21,7 +21,7 @@ Two options exist for adding translations to the translator:
 To add a single file to the translator, use the `addTranslationFile()` method:
 
 ```php
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 $translator = new Translator();
 $translator->addTranslationFile($type, $filename, $textDomain, $locale);
@@ -48,7 +48,7 @@ This allows you to add new translations to the file system, without touching
 your code. Patterns are added with the `addTranslationFilePattern()` method:
 
 ```php
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 $translator = new Translator();
 $translator->addTranslationFilePattern($type, $baseDir, $pattern, $textDomain);
@@ -76,8 +76,8 @@ The translator supports the following major translation formats:
 - INI
 
 Additionally, you can use custom formats by implementing one or more of
-`Zend\I18n\Translator\Loader\FileLoaderInterface` or
-`Zend\I18n\Translator\Loader\RemoteLoaderInterface`, and registering your loader
+`Laminas\I18n\Translator\Loader\FileLoaderInterface` or
+`Laminas\I18n\Translator\Loader\RemoteLoaderInterface`, and registering your loader
 with the `Translator` instance's composed plugin manager.
 
 ## Setting a locale
@@ -124,5 +124,5 @@ translation of plural messages and plural rule definitions.
 In production, it makes sense to cache your translations. This not only saves
 you from loading and parsing the individual formats each time, but also
 guarantees an optimized loading procedure. To enable caching, pass a
-`Zend\Cache\Storage\Adapter` to the `setCache()` method. To disable the cache,
+`Laminas\Cache\Storage\Adapter` to the `setCache()` method. To disable the cache,
 pass a `null` value to the method.

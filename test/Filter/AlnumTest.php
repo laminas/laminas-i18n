@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Filter;
+namespace LaminasTest\I18n\Filter;
 
-use PHPUnit\Framework\TestCase;
-use Zend\I18n\Filter\Alnum as AlnumFilter;
+use Laminas\I18n\Filter\Alnum as AlnumFilter;
 use Locale;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @group      Zend_Filter
+ * @group      Laminas_Filter
  */
 class AlnumTest extends TestCase
 {

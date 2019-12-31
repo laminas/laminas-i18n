@@ -1,26 +1,25 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\I18n\Translator;
+namespace Laminas\I18n\Translator;
 
+use Laminas\Cache;
+use Laminas\Cache\Storage\StorageInterface as CacheStorage;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\I18n\Exception;
+use Laminas\I18n\Translator\Loader\FileLoaderInterface;
+use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Stdlib\ArrayUtils;
 use Locale;
 use Traversable;
-use Zend\Cache;
-use Zend\Cache\Storage\StorageInterface as CacheStorage;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerInterface;
-use Zend\I18n\Exception;
-use Zend\I18n\Translator\Loader\FileLoaderInterface;
-use Zend\I18n\Translator\Loader\RemoteLoaderInterface;
-use Zend\Stdlib\ArrayUtils;
-use Zend\ServiceManager\ServiceManager;
 
 /**
  * Translator.
@@ -577,7 +576,7 @@ class Translator implements TranslatorInterface
         }
 
         if (null !== ($cache = $this->getCache())) {
-            $cacheId = 'Zend_I18n_Translator_Messages_' . md5($textDomain . $locale);
+            $cacheId = 'Laminas_I18n_Translator_Messages_' . md5($textDomain . $locale);
 
             if (null !== ($result = $cache->getItem($cacheId))) {
                 $this->messages[$textDomain][$locale] = $result;
