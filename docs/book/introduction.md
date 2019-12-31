@@ -1,6 +1,6 @@
 # Introduction
 
-`Zend\I18n` comes with a complete translation suite which supports all major
+`Laminas\I18n` comes with a complete translation suite which supports all major
 formats and includes popular features like plural translations and text domains.
 The Translator component is mostly dependency free, except for the fallback to a
 default locale, where it relies on the Intl PHP extension.
