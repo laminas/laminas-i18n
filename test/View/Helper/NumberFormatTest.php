@@ -1,23 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\View\Helper;
+namespace LaminasTest\I18n\View\Helper;
 
+use Laminas\I18n\View\Helper\NumberFormat as NumberFormatHelper;
 use Locale;
 use NumberFormatter;
-use Zend\I18n\View\Helper\NumberFormat as NumberFormatHelper;
 
 /**
- * Test class for Zend\View\Helper\Currency
+ * Test class for Laminas\View\Helper\Currency
  *
- * @group      Zend_View
- * @group      Zend_View_Helper
+ * @group      Laminas_View
+ * @group      Laminas_View_Helper
  */
 class NumberFormatTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,10 +33,10 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (! interface_exists('Zend\View\Helper\HelperInterface')) {
+        if (! interface_exists('Laminas\View\Helper\HelperInterface')) {
             $this->markTestSkipped(
-                'Skipping tests that utilize zend-view until that component is '
-                . 'forwards-compatible with zend-stdlib and zend-servicemanager v3'
+                'Skipping tests that utilize laminas-view until that component is '
+                . 'forwards-compatible with laminas-stdlib and laminas-servicemanager v3'
             );
         }
 

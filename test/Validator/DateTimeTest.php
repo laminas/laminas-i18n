@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace LaminasTest\I18n\Validator;
 
 use DateTime;
 use IntlDateFormatter;
+use Laminas\I18n\Validator\DateTime as DateTimeValidator;
 use Locale;
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Runner_Version;
-use Zend\I18n\Validator\DateTime as DateTimeValidator;
 
 class DateTimeTest extends PHPUnit_Framework_TestCase
 {
@@ -35,10 +34,10 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (! interface_exists('Zend\Validator\ValidatorInterface')) {
+        if (! interface_exists('Laminas\Validator\ValidatorInterface')) {
             $this->markTestSkipped(
-                'Skipping tests that utilize zend-validator until that component is '
-                . 'forwards-compatible with zend-stdlib and zend-servicemanager v3'
+                'Skipping tests that utilize laminas-validator until that component is '
+                . 'forwards-compatible with laminas-stdlib and laminas-servicemanager v3'
             );
         }
 

@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-i18n for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-i18n/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace LaminasTest\I18n\Validator;
 
-use Zend\I18n\Validator\IsFloat as IsFloatValidator;
+use Laminas\I18n\Validator\IsFloat as IsFloatValidator;
 use Locale;
 use NumberFormatter;
 
 /**
- * @group      Zend_Validator
+ * @group      Laminas_Validator
  */
 class IsFloatTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,10 +29,10 @@ class IsFloatTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (! interface_exists('Zend\Validator\ValidatorInterface')) {
+        if (! interface_exists('Laminas\Validator\ValidatorInterface')) {
             $this->markTestSkipped(
-                'Skipping tests that utilize zend-validator until that component is '
-                . 'forwards-compatible with zend-stdlib and zend-servicemanager v3'
+                'Skipping tests that utilize laminas-validator until that component is '
+                . 'forwards-compatible with laminas-stdlib and laminas-servicemanager v3'
             );
         }
 
@@ -205,7 +204,7 @@ class IsFloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-4352
+     * @Laminas-4352
      */
     public function testNonStringValidation()
     {
@@ -213,7 +212,7 @@ class IsFloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-7489
+     * @Laminas-7489
      */
     public function testUsingApplicationLocale()
     {

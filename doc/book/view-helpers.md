@@ -1,10 +1,10 @@
 # View Helpers
 
-zend-i18n ships with a set of zend-view helper classes related to
+laminas-i18n ships with a set of laminas-view helper classes related to
 internationalization: e.g., formatting a date, formatting currency, or
 displaying translated content.
 
-See the [zend-view helpers documentation](http://framework.zend.com/manual/current/en/modules/zend.view.helpers.html#zend-view-helpers)
+See the [laminas-view helpers documentation](https://docs.laminas.dev/laminas.view.helpers.html#laminas-view-helpers)
 for more information.
 
 ## CurrencyFormat Helper
@@ -324,7 +324,7 @@ application). The `Plural` helper was created for this.
 > If you need to handle both plural cases *and* translations, you must use the
 > `TranslatePlural` helper; `Plural` does not translate.
 
-Internally, the `Plural` helper uses the `Zend\I18n\Translator\Plural\Rule` class to handle rules.
+Internally, the `Plural` helper uses the `Laminas\I18n\Translator\Plural\Rule` class to handle rules.
 
 ### Setup
 
@@ -381,13 +381,13 @@ echo $this->plural(array('voiture', 'voitures'), 2); // prints "voitures"
 ## Translate Helper
 
 The `Translate` view helper can be used to translate content. It acts as a
-wrapper for the `Zend\I18n\Translator\Translator` class.
+wrapper for the `Laminas\I18n\Translator\Translator` class.
 
 ### Setup
 
 Before using the `Translate` view helper, you must have first created a
 `Translator` object and have attached it to the view helper. If you use the
-`Zend\View\HelperPluginManager` to invoke the view helper, this will be done
+`Laminas\View\HelperPluginManager` to invoke the view helper, this will be done
 automatically for you.
 
 ### Basic Usage
@@ -433,7 +433,7 @@ See the [Gettext Wikipedia page](http://en.wikipedia.org/wiki/Gettext) for more 
 
 ### Public Methods
 
-Public methods for setting a `Zend\I18n\Translator\Translator` and a default
+Public methods for setting a `Laminas\I18n\Translator\Translator` and a default
 text domain are inherited from the [AbstractTranslatorHelper](#abstract-translator-helper).
 
 ## TranslatePlural Helper
@@ -444,13 +444,13 @@ account numeric meanings. English, for example, has a singular definition of
 or more than one car. Other languages like Russian or Polish have more plurals
 with different rules.
 
-The helper acts as a wrapper for the `Zend\I18n\Translator\Translator` class.
+The helper acts as a wrapper for the `Laminas\I18n\Translator\Translator` class.
 
 ### Setup
 
 Before using the `TranslatePlural` view helper, you must have first created a
 `Translator` object and have attached it to the view helper. If you use the
-`Zend\View\HelperPluginManager` to invoke the view helper, this will be done
+`Laminas\View\HelperPluginManager` to invoke the view helper, this will be done
 automatically for you.
 
 ### Basic Usage
@@ -491,14 +491,14 @@ where:
 
 ### Public Methods
 
-Public methods for setting a `Zend\I18n\Translator\Translator` and a default
+Public methods for setting a `Laminas\I18n\Translator\Translator` and a default
 text domain are inherited from the [AbstractTranslatorHelper](#abstract-translator-helper).
 
 ## Abstract Translator Helper
 
 The `AbstractTranslatorHelper` view helper is used as a base abstract class for
 any helpers that need to translate content. It provides an implementation for
-the `Zend\I18n\Translator\TranslatorAwareInterface`, allowing translator
+the `Laminas\I18n\Translator\TranslatorAwareInterface`, allowing translator
 injection as well as text domain injection.
 
 ### Public Methods
@@ -512,7 +512,7 @@ setTranslator(
 ] ) : void
 ```
 
-Sets the `Zend\I18n\Translator\Translator` instance to use in the helper. The
+Sets the `Laminas\I18n\Translator\Translator` instance to use in the helper. The
 `$textDomain` argument is optional, and provided as a convenienct to allow
 setting both the translator and text domain simultaneously.
 
@@ -522,7 +522,7 @@ setting both the translator and text domain simultaneously.
 getTranslator() : Translator
 ```
 
-Returns the `Zend\I18n\Translator\Translator` instance used by the helper.
+Returns the `Laminas\I18n\Translator\Translator` instance used by the helper.
 
 #### hasTranslator()
 
@@ -530,7 +530,7 @@ Returns the `Zend\I18n\Translator\Translator` instance used by the helper.
 hasTranslator() : bool
 ```
 
-Returns true if the helper composes a `Zend\I18n\Translator\Translator` instance.
+Returns true if the helper composes a `Laminas\I18n\Translator\Translator` instance.
 
 #### setTranslatorEnabled()
 
