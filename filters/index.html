@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -247,8 +251,7 @@
 "letter" and "number" categories, respectively. All other characters are suppressed.</p>
 <h3>Supported Options</h3>
 <p>The following options are supported for <code>Alnum</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>Alnum([ boolean $allowWhiteSpace [, string $locale ]])</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>Alnum([ boolean $allowWhiteSpace [, string $locale ]])</code></pre>
 <ul>
 <li><code>$allowWhiteSpace</code>: If set to true, whitespace characters are allowed;
   otherwise they are suppressed. Default is <code>false</code> (whitespace is not allowed).
@@ -260,16 +263,15 @@
   available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
 </ul>
 <h3>Basic Usage</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>// Default settings, deny whitespace</span>
-<span class=x>$filter = new \Laminas\I18n\Filter\Alnum();</span>
-<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
-<span class=x>// Returns &quot;Thisismycontent123&quot;</span>
+<pre class=codehilite><code class=language-php>// Default settings, deny whitespace
+$filter = new \Laminas\I18n\Filter\Alnum();
+echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
+// Returns &quot;Thisismycontent123&quot;
 
-<span class=x>// First param in constructor is $allowWhiteSpace</span>
-<span class=x>$filter = new \Laminas\I18n\Filter\Alnum(true);</span>
-<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
-<span class=x>// Returns &quot;This is my content 123&quot;</span>
-</pre></div></p>
+// First param in constructor is $allowWhiteSpace
+$filter = new \Laminas\I18n\Filter\Alnum(true);
+echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
+// Returns &quot;This is my content 123&quot;</code></pre>
 <blockquote>
 <h3>Supported languages</h3>
 <p><code>Alnum</code> works for most languages, except Chinese, Japanese and Korean. Within
@@ -281,8 +283,7 @@ these languages. The language itself is detected using the <code>Locale</code> c
 category. All other characters are suppressed.</p>
 <h3>Supported Options</h3>
 <p>The following options are supported for <code>Alpha</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>Alpha([ boolean $allowWhiteSpace [, string $locale ]])</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>Alpha([ boolean $allowWhiteSpace [, string $locale ]])</code></pre>
 <ul>
 <li><code>$allowWhiteSpace</code>: If set to true, whitespace characters are allowed;
   otherwise they are suppressed. Default is <code>false</code> (whitespace is not allowed).
@@ -294,16 +295,15 @@ category. All other characters are suppressed.</p>
   available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
 </ul>
 <h3>Basic Usage</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>// Default settings, deny whitespace</span>
-<span class=x>$filter = new \Laminas\I18n\Filter\Alpha();</span>
-<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
-<span class=x>// Returns &quot;Thisismycontent&quot;</span>
+<pre class=codehilite><code class=language-php>// Default settings, deny whitespace
+$filter = new \Laminas\I18n\Filter\Alpha();
+echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
+// Returns &quot;Thisismycontent&quot;
 
-<span class=x>// Allow whitespace</span>
-<span class=x>$filter = new \Laminas\I18n\Filter\Alpha(true);</span>
-<span class=x>echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);</span>
-<span class=x>// Returns &quot;This is my content &quot;</span>
-</pre></div></p>
+// Allow whitespace
+$filter = new \Laminas\I18n\Filter\Alpha(true);
+echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
+// Returns &quot;This is my content &quot;</code></pre>
 <blockquote>
 <h3>Supported languages</h3>
 <p><code>Alnum</code> works for most languages, except Chinese, Japanese and Korean. Within
@@ -316,8 +316,7 @@ percentage strings. It extends the <code>NumberParse</code> filter, which acts a
 for the <code>NumberFormatter</code> class within ext/intl.</p>
 <h3>Supported Options</h3>
 <p>The following options are supported for <code>NumberFormat</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>NumberFormat([ string $locale [, int $style [, int $type ]]])</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>NumberFormat([ string $locale [, int $style [, int $type ]]])</code></pre>
 <ul>
 <li><code>$locale</code>: The locale string used in identifying the characters to filter
   (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
@@ -334,25 +333,23 @@ for the <code>NumberFormatter</code> class within ext/intl.</p>
   (<code>getType()</code> and <code>setType()</code>).</li>
 </ul>
 <h3>Basic Usage</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>$filter = new \Laminas\I18n\Filter\NumberFormat(&#39;de_DE&#39;);</span>
-<span class=x>echo $filter-&gt;filter(1234567.8912346);</span>
-<span class=x>// Returns &quot;1.234.567,891&quot;</span>
+<pre class=codehilite><code class=language-php>$filter = new \Laminas\I18n\Filter\NumberFormat('de_DE');
+echo $filter-&gt;filter(1234567.8912346);
+// Returns &quot;1.234.567,891&quot;
 
-<span class=x>$filter = new \Laminas\I18n\Filter\NumberFormat(&#39;en_US&#39;, NumberFormatter::PERCENT);</span>
-<span class=x>echo $filter-&gt;filter(0.80);</span>
-<span class=x>// Returns &quot;80%&quot;</span>
+$filter = new \Laminas\I18n\Filter\NumberFormat('en_US', NumberFormatter::PERCENT);
+echo $filter-&gt;filter(0.80);
+// Returns &quot;80%&quot;
 
-<span class=x>$filter = new \Laminas\I18n\Filter\NumberFormat(&#39;fr_FR&#39;, NumberFormatter::SCIENTIFIC);</span>
-<span class=x>echo $filter-&gt;filter(0.00123456789);</span>
-<span class=x>// Returns &quot;1,23456789E-3&quot;</span>
-</pre></div></p>
+$filter = new \Laminas\I18n\Filter\NumberFormat('fr_FR', NumberFormatter::SCIENTIFIC);
+echo $filter-&gt;filter(0.00123456789);
+// Returns &quot;1,23456789E-3&quot;</code></pre>
 <h2 id="numberparse">NumberParse</h2>
 <p>The <code>NumberParse</code> filter can be used to parse a number from a string. It acts as
 a wrapper for the <code>NumberFormatter</code> class within ext/intl.</p>
 <h3>Supported Options</h3>
 <p>The following options are supported for <code>NumberParse</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>NumberParse([ string $locale [, int $style [, int $type ]]])</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>NumberParse([ string $locale [, int $style [, int $type ]]])</code></pre>
 <ul>
 <li><code>$locale</code>: The locale string used in identifying the characters to filter
   (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
@@ -368,18 +365,17 @@ a wrapper for the <code>NumberFormatter</code> class within ext/intl.</p>
   (<code>getType()</code> and <code>setType()</code>).</li>
 </ul>
 <h3>Basic Usage</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>$filter = new \Laminas\I18n\Filter\NumberParse(&#39;de_DE&#39;);</span>
-<span class=x>echo $filter-&gt;filter(&#39;1.234.567,891&#39;);</span>
-<span class=x>// Returns 1234567.8912346</span>
+<pre class=codehilite><code class=language-php>$filter = new \Laminas\I18n\Filter\NumberParse('de_DE');
+echo $filter-&gt;filter('1.234.567,891');
+// Returns 1234567.8912346
 
-<span class=x>$filter = new \Laminas\I18n\Filter\NumberParse(&#39;en_US&#39;, NumberFormatter::PERCENT);</span>
-<span class=x>echo $filter-&gt;filter(&#39;80%&#39;);</span>
-<span class=x>// Returns 0.80</span>
+$filter = new \Laminas\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
+echo $filter-&gt;filter('80%');
+// Returns 0.80
 
-<span class=x>$filter = new \Laminas\I18n\Filter\NumberParse(&#39;fr_FR&#39;, NumberFormatter::SCIENTIFIC);</span>
-<span class=x>echo $filter-&gt;filter(&#39;1,23456789E-3&#39;);</span>
-<span class=x>// Returns 0.00123456789</span>
-</pre></div></p>
+$filter = new \Laminas\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
+echo $filter-&gt;filter('1,23456789E-3');
+// Returns 0.00123456789</code></pre>
 
 
 
@@ -519,9 +515,10 @@ a wrapper for the <code>NumberFormatter</code> class within ext/intl.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -558,7 +555,7 @@ a wrapper for the <code>NumberFormatter</code> class within ext/intl.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-i18n//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-i18n/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -567,8 +564,8 @@ a wrapper for the <code>NumberFormatter</code> class within ext/intl.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-i18n//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-i18n/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
