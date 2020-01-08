@@ -1,6 +1,6 @@
 # laminas-i18n
 
-[![Build Status](https://travis-ci.org/laminas/laminas-i18n.svg?branch=master)](https://travis-ci.org/laminas/laminas-i18n)
+[![Build Status](https://travis-ci.com/laminas/laminas-i18n.svg?branch=master)](https://travis-ci.com/laminas/laminas-i18n)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-i18n/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-i18n?branch=master)
 
 `Laminas\I18n` comes with a complete translation suite which supports all major

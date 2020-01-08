@@ -13,4 +13,3 @@ site_description: 'Provide translations for your application, and filter and val
 repo_url: 'https://github.com/laminas/laminas-i18n'
 extra:
     project: Components
-    project_url: 'https://docs.laminas.dev'
