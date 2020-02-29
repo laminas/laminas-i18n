@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://docs.laminas.dev/laminas-i18n/</loc>
-     <lastmod>2020-02-28</lastmod>
+     <lastmod>2020-02-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-i18n/introduction/</loc>
-     <lastmod>2020-02-28</lastmod>
+     <lastmod>2020-02-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-i18n/translation/</loc>
-     <lastmod>2020-02-28</lastmod>
+     <lastmod>2020-02-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-i18n/view-helpers/</loc>
-     <lastmod>2020-02-28</lastmod>
+     <lastmod>2020-02-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-i18n/filters/</loc>
-     <lastmod>2020-02-28</lastmod>
+     <lastmod>2020-02-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-i18n/validators/</loc>
-     <lastmod>2020-02-28</lastmod>
+     <lastmod>2020-02-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
