@@ -162,7 +162,7 @@ NumberParse([ string $locale [, int $style [, int $type ]]])
 ```php
 $filter = new \Laminas\I18n\Filter\NumberParse('de_DE');
 echo $filter->filter('1.234.567,891');
-// Returns 1234567.8912346
+// Returns 1234567.891
 
 $filter = new \Laminas\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
 echo $filter->filter('80%');
