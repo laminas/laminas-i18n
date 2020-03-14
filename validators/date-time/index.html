@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/filters/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/date-time/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Filters - laminas-i18n - Laminas Docs</title>
+    <title>DateTime - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -115,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-i18n</a>
+            <a href="../..">laminas-i18n</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -130,7 +130,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                                <a href="../../introduction/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -149,19 +149,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../translation/" class="subnavigation__link">Translation</a>
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+        <a href="../../view-helpers/" class="subnavigation__link">View Helpers</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Filters</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/" class="subnavigation__link">Filters</a>
     </li>
 
                                     
@@ -172,19 +172,19 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/" class="subnavigation__link">Standard Validators</a>
+        <a href="../" class="subnavigation__link">Standard Validators</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/date-time/" class="subnavigation__link">DateTime</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
@@ -268,19 +268,31 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#alnum" class="toc__link nav-link">Alnum</a>
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#alpha" class="toc__link nav-link">Alpha</a>
+                        <a href="#set-locale" class="toc__link nav-link">Set Locale</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#numberformat" class="toc__link nav-link">NumberFormat</a>
+                        <a href="#define-custom-pattern" class="toc__link nav-link">Define Custom Pattern</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#numberparse" class="toc__link nav-link">NumberParse</a>
+                        <a href="#using-date-type" class="toc__link nav-link">Using Date Type</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#using-time-type" class="toc__link nav-link">Using Time Type</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#using-calendar" class="toc__link nav-link">Using Calendar</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#using-timezone" class="toc__link nav-link">Using Timezone</a>
                     </li>
                 
             </ul>
@@ -297,7 +309,7 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item"><a href="..">laminas-i18n</a></li>
+                <li class="breadcrumb-item"><a href="../..">laminas-i18n</a></li>
 
                 
                     
@@ -307,8 +319,15 @@
                         
                     
                 
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Validators</li>
+                        
+                    
+                
 
-                <li class="breadcrumb-item active" aria-current="page">Filters</li>
+                <li class="breadcrumb-item active" aria-current="page">DateTime</li>
             
         
     </ol>
@@ -321,141 +340,153 @@
 
     
     
-        <h2 class="chapter__headline">Reference</h2>
+        <h2 class="chapter__headline">Validators</h2>
     
 
-    <h1 id="filters">Filters</h1>
-<p>laminas-i18n ships with a set of internationalization-related filters.</p>
-<h2 id="alnum">Alnum</h2>
-<p>The <code>Alnum</code> filter can be used to return only alphabetic characters and digits in the unicode
-"letter" and "number" categories, respectively. All other characters are suppressed.</p>
-<h3>Supported Options</h3>
-<p>The following options are supported for <code>Alnum</code>:</p>
-<pre class=codehilite><code class=language-php>Alnum([ boolean $allowWhiteSpace [, string $locale ]])</code></pre>
+    <h1 id="datetime">DateTime</h1>
+<p><code>Laminas\I18n\Validator\DateTime</code> allows you to determine if a given value <strong>is a 
+valid date, time or datetime</strong>.<br />
+Internally, PHP's <code>IntlDateFormatter</code> tries to create a date time for the given
+value.</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+
+var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true
+var_dump($validator-&gt;isValid('20190229 10:00 pm')); // false
+var_dump($validator-&gt;isValid('20200229 10:00 pm')); // true</code></pre>
+<p>By default, if no locale is provided, <code>DateTime</code> will use the system locale
+provided by PHP's <code>Locale::getDefault()</code> and the default timezone provided
+by PHP's <code>date_default_timezone_get</code>.</p>
+<p>(The above example assumes that the environment locale is set to <code>en_EN</code> and
+the timezone is set to <code>Europe/London</code>.)</p>
+<h2 id="set-locale">Set Locale</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'de']);
+
+var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+$validator-&gt;setLocale('de');
+
+var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre></div></div></div>
+
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'en_US']);
+
+echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
+<h3>Default Value</h3>
+<p>By default, if no locale is provided, <code>DateTime</code> will use the system locale
+provided by PHP's <code>Locale::getDefault()</code>.</p>
+<h2 id="define-custom-pattern">Define Custom Pattern</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
+
+var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+$validator-&gt;setPattern('yyyy-MM-DD');
+
+var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre></div></div></div>
+
+<p>Possible patterns are documented at
+<a href="http://userguide.icu-project.org/formatparse/datetime">http://userguide.icu-project.org/formatparse/datetime</a>.</p>
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getPattern()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
+
+echo $validator-&gt;getPattern(); // 'yyyy-MM-DD'</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>null</code>.</p>
+<h2 id="using-date-type">Using Date Type</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-5><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-5-0_php-panel role=tab id=tab-group-5-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-5-1_php-panel role=tab id=tab-group-5-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-5-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-5-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
+
+var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre></div><div id=tab-group-5-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-5-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+$validator-&gt;setDateType(IntlDateFormatter::MEDIUM);
+
+var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre></div></div></div>
+
+<p>Possible values for the date type option are the following
+<a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
 <ul>
-<li><code>$allowWhiteSpace</code>: If set to true, whitespace characters are allowed;
-  otherwise they are suppressed. Default is <code>false</code> (whitespace is not allowed).
-  Methods for getting/setting the allowWhiteSpace option are also available
-  (<code>getAllowWhiteSpace()</code> and <code>setAllowWhiteSpace()</code>).</li>
-<li><code>$locale</code>: The locale string used in identifying the characters to filter
-  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
-  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
-  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
+<li><code>IntlDateFormatter::NONE</code> - Do not include this element</li>
+<li><code>IntlDateFormatter::FULL</code> - Fullstyle (Tuesday, April 12, 1952 AD)</li>
+<li><code>IntlDateFormatter::LONG</code> - Long style (January 12, 1952)</li>
+<li><code>IntlDateFormatter::MEDIUM</code> - Medium style (Jan 12, 1952)</li>
+<li><code>IntlDateFormatter::SHORT</code> - Short style (12/13/52)</li>
 </ul>
-<h3>Basic Usage</h3>
-<pre class=codehilite><code class=language-php>// Default settings, deny whitespace
-$filter = new \Laminas\I18n\Filter\Alnum();
-echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
-// Returns &quot;Thisismycontent123&quot;
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getDateType()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
 
-// First param in constructor is $allowWhiteSpace
-$filter = new \Laminas\I18n\Filter\Alnum(true);
-echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
-// Returns &quot;This is my content 123&quot;</code></pre>
-<blockquote>
-<h3>Supported languages</h3>
-<p><code>Alnum</code> works for most languages, except Chinese, Japanese and Korean. Within
-these languages, the English alphabet is used instead of the characters from
-these languages. The language itself is detected using the <code>Locale</code> class.</p>
-</blockquote>
-<h2 id="alpha">Alpha</h2>
-<p>The <code>Alpha</code> filter can be used to return only alphabetic characters in the unicode "letter"
-category. All other characters are suppressed.</p>
-<h3>Supported Options</h3>
-<p>The following options are supported for <code>Alpha</code>:</p>
-<pre class=codehilite><code class=language-php>Alpha([ boolean $allowWhiteSpace [, string $locale ]])</code></pre>
+echo $validator-&gt;getDateType(); // 'MMM d, y' (IntlDateFormatter::MEDIUM)</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
+<h2 id="using-time-type">Using Time Type</h2>
+<p>Sets time type to use (none, short, medium, long, full).</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-7><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-7-0_php-panel role=tab id=tab-group-7-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-7-1_php-panel role=tab id=tab-group-7-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-7-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-7-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
+
+var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre></div><div id=tab-group-7-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-7-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+$validator-&gt;setTimeType(IntlDateFormatter::MEDIUM);
+
+var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre></div></div></div>
+
+<p>Possible values for the date type option are the following
+<a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
 <ul>
-<li><code>$allowWhiteSpace</code>: If set to true, whitespace characters are allowed;
-  otherwise they are suppressed. Default is <code>false</code> (whitespace is not allowed).
-  Methods for getting/setting the allowWhiteSpace option are also available
-  (<code>getAllowWhiteSpace()</code> and <code>setAllowWhiteSpace()</code>).</li>
-<li><code>$locale</code>: The locale string used in identifying the characters to filter
-  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
-  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
-  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
+<li><code>IntlDateFormatter::NONE</code> - Do not include this element</li>
+<li><code>IntlDateFormatter::FULL</code> - Fullstyle (3:30:42pm PST)</li>
+<li><code>IntlDateFormatter::LONG</code> - Long style (3:30:32pm)</li>
+<li><code>IntlDateFormatter::MEDIUM</code> - Medium style (3:30:32pm)</li>
+<li><code>IntlDateFormatter::SHORT</code> - Short style (3:30pm)</li>
 </ul>
-<h3>Basic Usage</h3>
-<pre class=codehilite><code class=language-php>// Default settings, deny whitespace
-$filter = new \Laminas\I18n\Filter\Alpha();
-echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
-// Returns &quot;Thisismycontent&quot;
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getTimeType()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
 
-// Allow whitespace
-$filter = new \Laminas\I18n\Filter\Alpha(true);
-echo $filter-&gt;filter(&quot;This is (my) content: 123&quot;);
-// Returns &quot;This is my content &quot;</code></pre>
-<blockquote>
-<h3>Supported languages</h3>
-<p><code>Alnum</code> works for most languages, except Chinese, Japanese and Korean. Within
-these languages, the English alphabet is used instead of the characters from
-these languages. The language itself is detected using the <code>Locale</code> class.</p>
-</blockquote>
-<h2 id="numberformat">NumberFormat</h2>
-<p>The <code>NumberFormat</code> filter can be used to return locale-specific number and
-percentage strings. It extends the <code>NumberParse</code> filter, which acts as wrapper
-for the <code>NumberFormatter</code> class within ext/intl.</p>
-<h3>Supported Options</h3>
-<p>The following options are supported for <code>NumberFormat</code>:</p>
-<pre class=codehilite><code class=language-php>NumberFormat([ string $locale [, int $style [, int $type ]]])</code></pre>
+echo $validator-&gt;getTimeType(); // 'h:mm:ss a' (IntlDateFormatter::MEDIUM)</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
+<h2 id="using-calendar">Using Calendar</h2>
+<p>To demonstrate the calendar option, additional settings are needed.</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-9><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-9-0_php-panel role=tab id=tab-group-9-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-9-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-9-1_php-panel role=tab id=tab-group-9-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-9-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-9-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-9-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime([
+    'calendar'  =&gt; IntlDateFormatter::TRADITIONAL,
+    'date_type' =&gt; IntlDateFormatter::MEDIUM,
+    'locale'    =&gt; 'de_DE@calendar=buddhist',
+    'timezone'  =&gt; 'Europe/Berlin',
+]);
+
+var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre></div><div id=tab-group-9-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-9-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+$validator-&gt;setCalendar(IntlDateFormatter::TRADITIONAL);
+$validator-&gt;setDateType(IntlDateFormatter::MEDIUM);
+$validator-&gt;setLocale('de_DE@calendar=buddhist');
+$validator-&gt;setTimezone('Europe/Berlin');
+
+var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre></div></div></div>
+
+<p>Possible values for the calendar option are the following
+<a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
 <ul>
-<li><code>$locale</code>: The locale string used in identifying the characters to filter
-  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
-  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
-  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
-<li><code>$style</code>: (Optional) Style of the formatting, one of the <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle"><code>NumberFormatter</code>
-  format style constants</a>.
-  If unset, it will use <code>NumberFormatter::DEFAULT_STYLE</code> as the default style.
-  Methods for getting/setting the format style are also available (<code>getStyle()</code>
-  and <code>setStyle()</code>).</li>
-<li><code>$type</code>: (Optional) The <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types"><code>NumberFormatter</code> formatting type</a>
-  to use. If unset, it will use <code>NumberFormatter::TYPE_DOUBLE</code> as the default
-  type.  Methods for getting/setting the format type are also available
-  (<code>getType()</code> and <code>setType()</code>).</li>
+<li><code>IntlDateFormatter::TRADITIONAL</code> - Non-Gregorian Calendar</li>
+<li><code>IntlDateFormatter::GREGORIAN</code> - Gregorian Calendar</li>
 </ul>
-<h3>Basic Usage</h3>
-<pre class=codehilite><code class=language-php>$filter = new \Laminas\I18n\Filter\NumberFormat('de_DE');
-echo $filter-&gt;filter(1234567.8912346);
-// Returns &quot;1.234.567,891&quot;
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getCalendar()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['calendar' =&gt; IntlDateFormatter::TRADITIONAL]);
 
-$filter = new \Laminas\I18n\Filter\NumberFormat('en_US', NumberFormatter::PERCENT);
-echo $filter-&gt;filter(0.80);
-// Returns &quot;80%&quot;
+echo $validator-&gt;getCalendar(); // '0' (IntlDateFormatter::TRADITIONAL)</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>IntlDateFormatter::GREGORIAN</code>.</p>
+<h2 id="using-timezone">Using Timezone</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-11><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-11-0_php-panel role=tab id=tab-group-11-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-11-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-11-1_php-panel role=tab id=tab-group-11-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-11-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-11-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-11-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
 
-$filter = new \Laminas\I18n\Filter\NumberFormat('fr_FR', NumberFormatter::SCIENTIFIC);
-echo $filter-&gt;filter(0.00123456789);
-// Returns &quot;1,23456789E-3&quot;</code></pre>
-<h2 id="numberparse">NumberParse</h2>
-<p>The <code>NumberParse</code> filter can be used to parse a number from a string. It acts as
-a wrapper for the <code>NumberFormatter</code> class within ext/intl.</p>
-<h3>Supported Options</h3>
-<p>The following options are supported for <code>NumberParse</code>:</p>
-<pre class=codehilite><code class=language-php>NumberParse([ string $locale [, int $style [, int $type ]]])</code></pre>
-<ul>
-<li><code>$locale</code>: The locale string used in identifying the characters to filter
-  (locale name, e.g.  <code>en_US</code>). If unset, it will use the default locale
-  (<code>Locale::getDefault()</code>). Methods for getting/setting the locale are also
-  available (<code>getLocale()</code> and <code>setLocale()</code>).</li>
-<li><code>$style</code>: (Optional) Style of the parsing, one of the <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle"><code>NumberFormatter</code> format style constants</a>.
-  If unset, it will use <code>NumberFormatter::DEFAULT_STYLE</code> as the default style.
-  Methods for getting/setting the parse style are also available (<code>getStyle()</code>
-  and <code>setStyle()</code>).</li>
-<li><code>$type</code>: (Optional) The <a href="https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types"><code>NumberFormatter</code> parsing type</a>
-  to use. If unset, it will use <code>NumberFormatter::TYPE_DOUBLE</code> as the default
-  type.  Methods for getting/setting the parse type are also available
-  (<code>getType()</code> and <code>setType()</code>).</li>
-</ul>
-<h3>Basic Usage</h3>
-<pre class=codehilite><code class=language-php>$filter = new \Laminas\I18n\Filter\NumberParse('de_DE');
-echo $filter-&gt;filter('1.234.567,891');
-// Returns 1234567.891
+var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre></div><div id=tab-group-11-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-11-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+$validator-&gt;setTimezone('Europe/London');
 
-$filter = new \Laminas\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
-echo $filter-&gt;filter('80%');
-// Returns 0.80
+var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre></div></div></div>
 
-$filter = new \Laminas\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
-echo $filter-&gt;filter('1,23456789E-3');
-// Returns 0.00123456789</code></pre>
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getTimezone()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
+
+echo $validator-&gt;getTimezone(); // 'Europe/London'</code></pre>
+<h3>Default Value</h3>
+<p>By default, if no timezone is provided, <code>DateTime</code> will use the system timezone
+provided by PHP's <code>date_default_timezone_get()</code>.</p>
 
 
 
@@ -466,7 +497,7 @@ echo $filter-&gt;filter('1,23456789E-3');
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../view-helpers/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -475,7 +506,7 @@ echo $filter-&gt;filter('1,23456789E-3');
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../validators/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../phone-number/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -489,7 +520,7 @@ echo $filter-&gt;filter('1,23456789E-3');
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/filters.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/date-time.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -510,7 +541,7 @@ echo $filter-&gt;filter('1,23456789E-3');
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-i18n</a>
+            <a href="../..">laminas-i18n</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -525,7 +556,7 @@ echo $filter-&gt;filter('1,23456789E-3');
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                                <a href="../../introduction/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -544,19 +575,19 @@ echo $filter-&gt;filter('1,23456789E-3');
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../translation/" class="subnavigation__link">Translation</a>
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+        <a href="../../view-helpers/" class="subnavigation__link">View Helpers</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Filters</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/" class="subnavigation__link">Filters</a>
     </li>
 
                                     
@@ -567,19 +598,19 @@ echo $filter-&gt;filter('1,23456789E-3');
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/" class="subnavigation__link">Standard Validators</a>
+        <a href="../" class="subnavigation__link">Standard Validators</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/date-time/" class="subnavigation__link">DateTime</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
@@ -678,13 +709,13 @@ echo $filter-&gt;filter('1,23456789E-3');
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-i18n';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     
