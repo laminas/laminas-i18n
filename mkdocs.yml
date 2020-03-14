@@ -7,7 +7,9 @@ nav:
         - Translation: translation.md
         - 'View Helpers': view-helpers.md
         - Filters: filters.md
-        - Validators: validators.md
+        - Validators:
+            - 'Standard Validators': validators.md
+            - PhoneNumber: validators/phone-number.md
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
 repo_url: 'https://github.com/laminas/laminas-i18n'
