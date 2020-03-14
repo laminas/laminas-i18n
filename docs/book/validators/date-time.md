@@ -16,8 +16,8 @@ var_dump($validator->isValid('20200229 10:00 pm')); // true
 ```
 
 By default, if no locale is provided, `DateTime` will use the system locale
-provide by PHP's `Locale::getDefault()` and the default timezone provide by 
-PHP's `date_default_timezone_get`.
+provided by PHP's `Locale::getDefault()` and the default timezone provided
+by PHP's `date_default_timezone_get`.
 
 (The above example assumes that the environment locale is set to `en_EN` and
 the timezone is set to `Europe/London`.)
@@ -50,7 +50,7 @@ echo $validator->getLocale(); // 'en_US'
 ### Default Value
 
 By default, if no locale is provided, `DateTime` will use the system locale
-provide by PHP's `Locale::getDefault()`.
+provided by PHP's `Locale::getDefault()`.
 
 ## Define Custom Pattern
 
@@ -100,7 +100,7 @@ var_dump($validator->isValid('Feb 28, 2020')); // true
 ```
 
 Possible values for the date type option are the following
-[constants of PHP's `IntlDateFormatter` class](http://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
+[constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
 * `IntlDateFormatter::NONE` - Do not include this element
 * `IntlDateFormatter::FULL` - Fullstyle (Tuesday, April 12, 1952 AD)
@@ -140,7 +140,7 @@ var_dump($validator->isValid('8:05:40 pm')); // true
 ```
 
 Possible values for the date type option are the following
-[constants of PHP's `IntlDateFormatter` class](http://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
+[constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
 * `IntlDateFormatter::NONE` - Do not include this element
 * `IntlDateFormatter::FULL` - Fullstyle (3:30:42pm PST)
@@ -188,7 +188,7 @@ var_dump($validator->isValid('28.02.2562 BE')); // true
 ```
 
 Possible values for the calendar option are the following
-[constants of PHP's `IntlDateFormatter` class](http://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
+[constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
 * `IntlDateFormatter::TRADITIONAL` - Non-Gregorian Calendar
 * `IntlDateFormatter::GREGORIAN` - Gregorian Calendar
@@ -235,4 +235,4 @@ echo $validator->getTimezone(); // 'Europe/London'
 ### Default Value
 
 By default, if no timezone is provided, `DateTime` will use the system timezone
-provide by PHP's `date_default_timezone_get()`.
+provided by PHP's `date_default_timezone_get()`.
