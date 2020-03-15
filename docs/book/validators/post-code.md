@@ -66,7 +66,7 @@ echo $validator->getLocale(); // 'de_AT'
 ### Default Value
 
 By default, if no locale is provided, `PostCode` will use the system locale
-provide by PHP's `Locale::getDefault()` and `Locale::getRegion()` to extract
+provided by PHP's `Locale::getDefault()` and `Locale::getRegion()` to extract
 the region code.
 
 ## Using Custom Format
