@@ -17,7 +17,7 @@ var_dump($validator->isValid(1010)); // true
 ```
 
 By default, if no country code is provided, `PostCode` will use the system
-locale provide by PHP's `Locale::getDefault()` and `Locale::getRegion()` to
+locale provided by PHP's `Locale::getDefault()` and `Locale::getRegion()` to
 extract the region code.
 
 (The above example assumes that the environment locale is set to `de_AT`.)
