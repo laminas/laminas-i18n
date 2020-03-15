@@ -75,7 +75,6 @@ Postal code formats are regular expression strings. When the international
 postal code format, which is used by setting the locale, does not fit your
 needs, then you can also manually set a format by calling `setFormat()`.
 
-
 ```php fct_label="Constructor Usage"
 $validator = new Laminas\I18n\Validator\PostCode(['format' => 'AT-\d{4}']);
 
