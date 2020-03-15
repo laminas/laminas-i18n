@@ -10,8 +10,8 @@ French, `1 234`.
 
 `Laminas\I18n\Validator\IsInt` will use a provided locale when evaluating the
 validity of an integer value. In such cases, it doesn't simply strip the
-separator, but instead validates that the correct separator as defined by the
-locale is used.
+separator, but instead validates that the correct separator as defined by used
+locale.
 
 ## Basic Usage
 
