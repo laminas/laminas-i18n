@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/translation/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/is-int/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Translation - laminas-i18n - Laminas Docs</title>
+    <title>IsInt - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -115,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-i18n</a>
+            <a href="../..">laminas-i18n</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -130,7 +130,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                                <a href="../../introduction/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -148,20 +148,20 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Translation</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+        <a href="../../view-helpers/" class="subnavigation__link">View Helpers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../filters/" class="subnavigation__link">Filters</a>
+        <a href="../../filters/" class="subnavigation__link">Filters</a>
     </li>
 
                                     
@@ -172,25 +172,25 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/" class="subnavigation__link">Standard Validators</a>
+        <a href="../" class="subnavigation__link">Standard Validators</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/is-int/" class="subnavigation__link">IsInt</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
@@ -274,23 +274,15 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#adding-translations" class="toc__link nav-link">Adding translations</a>
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#supported-formats" class="toc__link nav-link">Supported formats</a>
+                        <a href="#using-locale" class="toc__link nav-link">Using Locale</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#setting-a-locale" class="toc__link nav-link">Setting a locale</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#translating-messages" class="toc__link nav-link">Translating messages</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#caching" class="toc__link nav-link">Caching</a>
+                        <a href="#strict-validation" class="toc__link nav-link">Strict Validation</a>
                     </li>
                 
             </ul>
@@ -307,7 +299,7 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item"><a href="..">laminas-i18n</a></li>
+                <li class="breadcrumb-item"><a href="../..">laminas-i18n</a></li>
 
                 
                     
@@ -317,8 +309,15 @@
                         
                     
                 
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Validators</li>
+                        
+                    
+                
 
-                <li class="breadcrumb-item active" aria-current="page">Translation</li>
+                <li class="breadcrumb-item active" aria-current="page">IsInt</li>
             
         
     </ol>
@@ -331,102 +330,73 @@
 
     
     
-        <h2 class="chapter__headline">Reference</h2>
+        <h2 class="chapter__headline">Validators</h2>
     
 
-    <h1 id="translation">Translation</h1>
-<p>laminas-i18n comes with a complete translation suite supporting all major formats
-and including popular features such as plural translations and text domains. The
-Translator subcomponent is mostly dependency free, except for the fallback to a
-default locale, where it relies on the PHP's intl extension.</p>
-<p>The translator itself is initialized without any parameters, as any
-configuration to it is optional. A translator without any translations will do
-nothing but return all messages verbatim.</p>
-<h2 id="adding-translations">Adding translations</h2>
-<p>Two options exist for adding translations to the translator:</p>
-<ul>
-<li>Add every translation file individually; use this for translation formats that
-  store multiple locales in the same file.</li>
-<li>Add translation files based on a pattern; use this for formats that use one
-  file per locale.</li>
-</ul>
-<p>To add a single file to the translator, use the <code>addTranslationFile()</code> method:</p>
-<pre class=codehilite><code class=language-php>use Laminas\I18n\Translator\Translator;
+    <h1 id="isint">IsInt</h1>
+<p><code>Laminas\I18n\Validator\IsInt</code> validates if a given value <strong>is an integer</strong>, using
+the locale provided.</p>
+<p>Integer values are often written differently based on country or region. For
+example, using English, you may write <code>1234</code> or <code>1,234</code>; both are integer
+values, but the grouping is optional. In German, you'd write <code>1.234</code>, and in
+French, <code>1 234</code>.</p>
+<p><code>Laminas\I18n\Validator\IsInt</code> will use a provided locale when evaluating the
+validity of an integer value. In such cases, it doesn't simply strip the
+separator, but instead validates that the correct separator as defined by used
+locale.</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
 
-$translator = new Translator();
-$translator-&gt;addTranslationFile($type, $filename, $textDomain, $locale);</code></pre>
-<p>where the arguments are:</p>
-<ul>
-<li><code>$type</code>: the name of the format loader to use; see the next section for
-  details.</li>
-<li><code>$filename</code>: the file containing translations.</li>
-<li><code>$textDomain</code>: a "category" name for translations. If this is omitted, it
-  defaults to "default". Use text domains to segregate translations by context.</li>
-<li><code>$locale</code>: the language strings are translated from; this argument is only
-  required for formats which contain translations for single locales.</li>
-</ul>
-<p>When storing one locale per file, you should specify those files via a pattern.
-This allows you to add new translations to the file system, without touching
-your code. Patterns are added with the <code>addTranslationFilePattern()</code> method:</p>
-<pre class=codehilite><code class=language-php>use Laminas\I18n\Translator\Translator;
+$validator-&gt;isValid(1234);    // returns true
+$validator-&gt;isValid(1234.5);  // returns false
+$validator-&gt;isValid('1,234'); // returns true</code></pre>
+<p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
+provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
+<p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
+<p>Using a notation not specific to the locale results in a <code>false</code> evaulation.</p>
+<h2 id="using-locale">Using Locale</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
 
-$translator = new Translator();
-$translator-&gt;addTranslationFilePattern($type, $baseDir, $pattern, $textDomain);</code></pre>
-<p>where the arguments are roughly the same as for <code>addTranslationFile()</code>, with a
-few differences:</p>
-<ul>
-<li><code>$baseDir</code> is a directory containing translation files.</li>
-<li><code>$pattern</code> is an <code>sprintf()</code>-formatted string describing a pattern for
-  locating files under <code>$baseDir</code>. The <code>$pattern</code> should contain a substitution
-  character for the <code>$locale</code> &mdash; which is omitted from the
-  <code>addTranslationFilePattern()</code> call, but passed whenever a translation is
-  requested. Use either <code>%s</code> or <code>%1$s</code> in the <code>$pattern</code> as a placeholder for
-  the locale. As an example, if your translation files are located in
-  <code>/var/messages/&lt;LOCALE&gt;/messages.mo</code>, your pattern would be
-  <code>/var/messages/%s/messages.mo</code>.</li>
-</ul>
-<h2 id="supported-formats">Supported formats</h2>
-<p>The translator supports the following major translation formats:</p>
-<ul>
-<li>PHP arrays</li>
-<li>Gettext</li>
-<li>INI</li>
-</ul>
-<p>Additionally, you can use custom formats by implementing one or more of
-<code>Laminas\I18n\Translator\Loader\FileLoaderInterface</code> or
-<code>Laminas\I18n\Translator\Loader\RemoteLoaderInterface</code>, and registering your loader
-with the <code>Translator</code> instance's composed plugin manager.</p>
-<h2 id="setting-a-locale">Setting a locale</h2>
-<p>By default, the translator will get the locale to use from ext/intl's <code>Locale</code>
-class. If you want to set an alternative locale explicitly, you can do so by
-passing it to the <code>setLocale()</code> method.</p>
-<p>When there is no translation for a specific message identifier in a locale, the
-message identifier itself will be returned by default. Alternately, you can set
-a fallback locale which is used to retrieve a fallback translation. To do so,
-pass it to the <code>setFallbackLocale()</code> method.</p>
-<h2 id="translating-messages">Translating messages</h2>
-<p>Translating messages is accomplished by calling the <code>translate()</code> method of the
-translator:</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;translate($message, $textDomain, $locale);</code></pre>
-<p>The message is the message identifier to translate. If it does not exist in the
-loader, or is empty, the original message ID will be returned. The text domain
-parameter is the one you specified when adding translations. If omitted, the
-"default" text domain will be used. The locale parameter will usually not be
-used in this context, as by default the locale is taken from the locale set in
-the translator.</p>
-<p>To translate plural messages, you can use the <code>translatePlural()</code> method. It
-works similarly to <code>translate()</code>, but instead of a single message, it takes a
-singular value, a plural value, and an additional integer number on which the
-returned plural form is based:</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;translatePlural($singular, $plural, $number, $textDomain, $locale);</code></pre>
-<p>Plural translations are only available if the underlying format supports the
-translation of plural messages and plural rule definitions.</p>
-<h2 id="caching">Caching</h2>
-<p>In production, it makes sense to cache your translations. This not only saves
-you from loading and parsing the individual formats each time, but also
-guarantees an optimized loading procedure. To enable caching, pass a
-<code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code> method. To disable the cache,
-pass a <code>null</code> value to the method.</p>
+$validator-&gt;isValid(1234); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+$validator-&gt;setLocale('en_US');
+
+$validator-&gt;isValid(1234); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('en_US');
+
+$validator = new Laminas\I18n\Validator\IsInt();
+
+$validator-&gt;isValid(1234); // true</code></pre></div></div></div>
+
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
+
+echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
+<h3>Default Value</h3>
+<p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
+provided by PHP's <code>Locale::getDefault()</code>.</p>
+<h2 id="strict-validation">Strict Validation</h2>
+<p>By default, the value's data type is not enforced.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+
+$validator-&gt;isValid(1234);   // true
+$validator-&gt;isValid('1234'); // true</code></pre>
+<p>To enforced a strict validation set the <code>strict</code> option to <code>true</code>.</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-4><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-4-0_php-panel role=tab id=tab-group-4-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-4-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-4-1_php-panel role=tab id=tab-group-4-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-4-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-4-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-4-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
+
+$validator-&gt;isValid(1234);   // true
+$validator-&gt;isValid('1234'); // false</code></pre></div><div id=tab-group-4-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-4-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+$validator-&gt;setStrict(true)
+
+$validator-&gt;isValid(1234);   // true
+$validator-&gt;isValid('1234'); // false</code></pre></div></div></div>
+
+<h3>Get Current Value</h3>
+<p>To get the current value of this option, use the <code>getStrict()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
+
+echo $validator-&gt;getStrict(); // true</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>false</code>.</p>
 
 
 
@@ -437,7 +407,7 @@ pass a <code>null</code> value to the method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../introduction/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../date-time/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -446,7 +416,7 @@ pass a <code>null</code> value to the method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../view-helpers/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../phone-number/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -460,7 +430,7 @@ pass a <code>null</code> value to the method.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/translation.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/is-int.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -481,7 +451,7 @@ pass a <code>null</code> value to the method.</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-i18n</a>
+            <a href="../..">laminas-i18n</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -496,7 +466,7 @@ pass a <code>null</code> value to the method.</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                                <a href="../../introduction/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -514,20 +484,20 @@ pass a <code>null</code> value to the method.</p>
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Translation</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+        <a href="../../view-helpers/" class="subnavigation__link">View Helpers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../filters/" class="subnavigation__link">Filters</a>
+        <a href="../../filters/" class="subnavigation__link">Filters</a>
     </li>
 
                                     
@@ -538,25 +508,25 @@ pass a <code>null</code> value to the method.</p>
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/" class="subnavigation__link">Standard Validators</a>
+        <a href="../" class="subnavigation__link">Standard Validators</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/is-int/" class="subnavigation__link">IsInt</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
@@ -655,13 +625,13 @@ pass a <code>null</code> value to the method.</p>
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-i18n';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     

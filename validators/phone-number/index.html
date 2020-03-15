@@ -183,6 +183,12 @@
 
             
                 
+    <li class="subnavigation__list-item ">
+        <a href="../is-int/" class="subnavigation__link">IsInt</a>
+    </li>
+
+            
+                
     <li class="subnavigation__list-item subnavigation__list-item--active">
         <a href="./" class="subnavigation__link">PhoneNumber</a>
     </li>
@@ -343,7 +349,7 @@
 
 var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
 <p>By default, if no country code is provided, <code>PhoneNumber</code> will use the system
-locale provide by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
+locale provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
 extract the country code.</p>
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
 <h2 id="using-country">Using Country</h2>
@@ -366,7 +372,7 @@ var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre></div></div
 echo $validator-&gt;getCountry(); // 'US'</code></pre>
 <h3>Default Value</h3>
 <p>By default, if no country is provided, <code>PhoneNumber</code> will use the system locale
-provide by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
+provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
 the region code.</p>
 <h2 id="using-allowed-phone-number-patterns">Using Allowed Phone Number Patterns</h2>
 <div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber([
@@ -473,7 +479,7 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../date-time/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../is-int/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -577,6 +583,12 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
                 
     <li class="subnavigation__list-item ">
         <a href="../date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             

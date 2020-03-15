@@ -184,6 +184,12 @@
             
                 
     <li class="subnavigation__list-item ">
+        <a href="is-int/" class="subnavigation__link">IsInt</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
         <a href="phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
@@ -277,10 +283,6 @@
                 
                     <li class="toc__entry">
                         <a href="#isfloat" class="toc__link nav-link">IsFloat</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#isint" class="toc__link nav-link">IsInt</a>
                     </li>
                 
                     <li class="toc__entry">
@@ -462,59 +464,6 @@ notice on instantiation. Please update your code to refer to the <code>IsFloat</
 instead.</p>
 <p>Users pulling their <code>Float</code> validator instance from the validator plugin manager
 receive an <code>IsFloat</code> instance instead starting in 2.4.0.</p>
-<h2 id="isint">IsInt</h2>
-<p><code>Laminas\I18n\Validator\IsInt</code> validates if a given value is an integer, using the
-locale provided.</p>
-<h3>Supported Options</h3>
-<p>The following options are supported for <code>Laminas\I18n\Validator\IsInt</code>:</p>
-<ul>
-<li><code>locale</code>: Sets the locale to use when validating localized integers.</li>
-<li><code>strict</code>: Sets whether or not the value's data type should be checked.</li>
-</ul>
-<h3>Basic integer validation</h3>
-<p>When no locale is provided to the validator, it uses the system locale:</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
-
-$validator-&gt;isValid(1234);    // returns true
-$validator-&gt;isValid(1234.5);  // returns false
-$validator-&gt;isValid('1,234'); // returns true</code></pre>
-<p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
-<h3>Strict validation</h3>
-<p>By default, the value's data type is not enforced.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-7><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-7-0_php-panel role=tab id=tab-group-7-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-0_php-panel aria-selected=true>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-7-1_php-panel role=tab id=tab-group-7-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-1_php-panel aria-selected=false>Php</a></li></ul><div class=tab-content><div id=tab-group-7-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-7-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
-
-$validator-&gt;isValid(1234);    // returns true
-$validator-&gt;isValid('1234');  // returns true</code></pre></div><div id=tab-group-7-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-7-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
-$validator-&gt;setStrict(true);
-
-$validator-&gt;isValid(1234);    // returns true
-$validator-&gt;isValid('1234');  // returns false</code></pre></div></div></div>
-
-<h3>Localized integer validation</h3>
-<p>Integer values are often written differently based on country or region. For
-example, using English, you may write "1234" or "1,234"; both are integer
-values, but the grouping is optional. In German, you'd write "1.234", and in
-French, "1 234".</p>
-<p><code>Laminas\I18n\Validator\IsInt</code> will use a provided locale when evaluating the
-validity of an integer value. In such cases, it doesn't simply strip the
-validator, but instead validates that the correct separator as defined by the
-locale is used.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'de']);
-
-$validator-&gt;isValid(1234);    // returns true
-$validator-&gt;isValid(&quot;1,234&quot;); // returns false
-$validator-&gt;isValid(&quot;1.234&quot;); // returns true</code></pre>
-<p>By using a locale, your input is validated based on the locale provided. Using a
-notation not specific to the locale results in a <code>false</code> evaulation.</p>
-<p>The default validation locale can also be set after instantiation using
-<code>setLocale()</code>, and retrieved using <code>getLocale()</code>.</p>
-<h3>Migration from 2.0-2.3 to 2.4+</h3>
-<p>Version 2.4 adds support for PHP 7. In PHP 7, <code>int</code> is a reserved keyword, which
-required renaming the <code>Int</code> validator. If you were using the <code>Int</code> validator
-directly previously, you will now receive an <code>E_USER_DEPRECATED</code> notice on
-instantiation. Please update your code to refer to the <code>IsInt</code> class instead.</p>
-<p>Users pulling their <code>Int</code> validator instance from the validator plugin manager
-receive an <code>IsInt</code> instance instead starting in 2.4.0.</p>
 <h2 id="postcode">PostCode</h2>
 <p><code>Laminas\I18n\Validator\PostCode</code> allows you to determine if a given value is a
 valid postal code. Postal codes are specific to cities, and in some locales
@@ -692,6 +641,12 @@ object.</p>
                 
     <li class="subnavigation__list-item ">
         <a href="date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
