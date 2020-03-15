@@ -125,7 +125,7 @@ class.
 ```php fct_label="Constructor Usage"
 $validator = new Laminas\I18n\Validator\PostCode(
     [
-        'service' => function ($value) {
+        'service' => static function ($value) {
             // Allow only certain districts in town
             if (in_array($value, range(1010, 1423), false)) {
                 return true;
@@ -143,7 +143,7 @@ var_dump($validator->isValid(1600)); // false
 
 ```php fct_label="Setter Usage"
 $validator = new Laminas\I18n\Validator\PostCode();
-$validator->setService(function ($value) {
+$validator->setService(static function ($value) {
    // Allow only certain districts in town
    if (in_array($value, range(1010, 1423), false)) {
        return true;
