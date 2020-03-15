@@ -35,7 +35,7 @@ Austria).
 ```php fct_label="Constructor Usage"
 $validator = new Laminas\I18n\Validator\PostCode(['locale' => 'de_AT']);
 
-$validator->isValid(1010); // true
+var_dump($validator->isValid(1010)); // true
 ```
 
 ```php fct_label="Setter Usage"
@@ -50,7 +50,7 @@ Locale::setDefault('de_AT');
 
 $validator = new Laminas\I18n\Validator\PostCode();
 
-$validator->isValid(1010); // true
+var_dump($validator->isValid(1010)); // true
 ```
 
 ### Get Current Value
@@ -79,14 +79,14 @@ needs, then you can also manually set a format by calling `setFormat()`.
 ```php fct_label="Constructor Usage"
 $validator = new Laminas\I18n\Validator\PostCode(['format' => 'AT-\d{4}']);
 
-$validator->isValid('AT-1010'); // true
+var_dump($validator->isValid('AT-1010')); // true
 ```
 
 ```php fct_label="Setter Usage"
 $validator = new Laminas\I18n\Validator\PostCode();
 $validator->setFormat('AT-\d{4}');
 
-$validator->isValid('AT-1010'); // true
+var_dump($validator->isValid('AT-1010')); // true
 ```
 
 ### Conventions for self defined Formats
