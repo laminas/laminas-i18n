@@ -12,7 +12,7 @@ var_dump($validator->isValid('+4930123456')); // true
 ```
 
 By default, if no country code is provided, `PhoneNumber` will use the system
-locale provide by PHP's `Locale::getDefault()` and `Locale::getRegion()` to
+locale provided by PHP's `Locale::getDefault()` and `Locale::getRegion()` to
 extract the country code.
 
 (The above example assumes that the environment locale is set to `de_DE`.)
@@ -55,7 +55,7 @@ echo $validator->getCountry(); // 'US'
 ### Default Value
 
 By default, if no country is provided, `PhoneNumber` will use the system locale
-provide by PHP's `Locale::getDefault()` and `Locale::getRegion()` to extract
+provided by PHP's `Locale::getDefault()` and `Locale::getRegion()` to extract
 the region code.
 
 ## Using Allowed Phone Number Patterns
