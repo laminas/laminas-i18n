@@ -24,7 +24,7 @@ $validator->isValid('1,234'); // returns true
 ```
 
 By default, if no locale is provided, `IsInt` will use the system locale
-provide by PHP's `Locale` class and the `getDefault()` method.
+provided by PHP's `Locale` class and the `getDefault()` method.
 
 (The above example assumes that the environment locale is set to `en`.)
 
