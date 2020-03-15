@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/is-int/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/post-code/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>IsInt - laminas-i18n - Laminas Docs</title>
+    <title>PostCode - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -183,8 +183,8 @@
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">IsInt</a>
+    <li class="subnavigation__list-item ">
+        <a href="../is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
@@ -195,8 +195,8 @@
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../post-code/" class="subnavigation__link">PostCode</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">PostCode</a>
     </li>
 
             
@@ -288,7 +288,11 @@
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#strict-validation" class="toc__link nav-link">Strict Validation</a>
+                        <a href="#using-custom-format" class="toc__link nav-link">Using Custom Format</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#using-callback-service" class="toc__link nav-link">Using Callback Service</a>
                     </li>
                 
             </ul>
@@ -323,7 +327,7 @@
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">IsInt</li>
+                <li class="breadcrumb-item active" aria-current="page">PostCode</li>
             
         
     </ol>
@@ -339,70 +343,109 @@
         <h2 class="chapter__headline">Validators</h2>
     
 
-    <h1 id="isint">IsInt</h1>
-<p><code>Laminas\I18n\Validator\IsInt</code> validates if a given value <strong>is an integer</strong>, using
-the locale provided.</p>
-<p>Integer values are often written differently based on country or region. For
-example, using English, you may write <code>1234</code> or <code>1,234</code>; both are integer
-values, but the grouping is optional. In German, you'd write <code>1.234</code>, and in
-French, <code>1 234</code>.</p>
-<p><code>Laminas\I18n\Validator\IsInt</code> will use a provided locale when evaluating the
-validity of an integer value. In such cases, it doesn't simply strip the
-separator, but instead validates that the correct separator as defined by used
-locale.</p>
+    <h1 id="postcode">PostCode</h1>
+<p><code>Laminas\I18n\Validator\PostCode</code> allows you to determine if a given value <strong>is a
+valid postal code</strong>. Postal codes are specific to cities, and in some locales
+termed ZIP codes.</p>
+<p><code>Laminas\I18n\Validator\PostCode</code> knows more than 160 different postal code
+formats. To select the correct format there are two ways. You can either use a
+fully qualified locale, or you can set your own format manually.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
 
-$validator-&gt;isValid(1234);    // returns true
-$validator-&gt;isValid(1234.5);  // returns false
-$validator-&gt;isValid('1,234'); // returns true</code></pre>
-<p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
-provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
-<p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
-<p>Using a notation not specific to the locale results in a <code>false</code> evaulation.</p>
+var_dump($validator-&gt;isValid(1010)); // true</code></pre>
+<p>By default, if no country code is provided, <code>PostCode</code> will use the system
+locale provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
+extract the region code.</p>
+<p>(The above example assumes that the environment locale is set to <code>de_AT</code>.)</p>
 <h2 id="using-locale">Using Locale</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
+<p>Using a locale is more convenient as laminas-validator already knows the
+appropriate postal code format for each locale; however, you need to use the
+fully qualified locale (one containing a region specifier) to do so. For
+instance, the locale <code>de</code> is a locale but could not be used with
+<code>Laminas\I18n\Validator\PostCode</code> as it does not include the region; <code>de_AT</code>,
+however, would be a valid locale, as it specifies the region code (<code>AT</code>, for
+Austria).</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
 
-$validator-&gt;isValid(1234); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
-$validator-&gt;setLocale('en_US');
+var_dump($validator-&gt;isValid(1010)); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
+$validator-&gt;setLocale('de_AT');
 
-$validator-&gt;isValid(1234); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('en_US');
+$validator-&gt;isValid(1010); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('de_AT');
 
-$validator = new Laminas\I18n\Validator\IsInt();
+$validator = new Laminas\I18n\Validator\PostCode();
 
-$validator-&gt;isValid(1234); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid(1010)); // true</code></pre></div></div></div>
 
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
 
-echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
+echo $validator-&gt;getLocale(); // 'de_AT'</code></pre>
 <h3>Default Value</h3>
-<p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
-provided by PHP's <code>Locale::getDefault()</code>.</p>
-<h2 id="strict-validation">Strict Validation</h2>
-<p>By default, the value's data type is not enforced.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+<p>By default, if no locale is provided, <code>PostCode</code> will use the system locale
+provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
+the region code.</p>
+<h2 id="using-custom-format">Using Custom Format</h2>
+<p>Postal code formats are regular expression strings. When the international
+postal code format, which is used by setting the locale, does not fit your
+needs, then you can also manually set a format by calling <code>setFormat()</code>.</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
 
-$validator-&gt;isValid(1234);   // true
-$validator-&gt;isValid('1234'); // true</code></pre>
-<p>To enforced a strict validation set the <code>strict</code> option to <code>true</code>.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-4><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-4-0_php-panel role=tab id=tab-group-4-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-4-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-4-1_php-panel role=tab id=tab-group-4-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-4-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-4-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-4-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
+var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
+$validator-&gt;setFormat('AT-\d{4}');
 
-$validator-&gt;isValid(1234);   // true
-$validator-&gt;isValid('1234'); // false</code></pre></div><div id=tab-group-4-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-4-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
-$validator-&gt;setStrict(true)
+var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre></div></div></div>
 
-$validator-&gt;isValid(1234);   // true
-$validator-&gt;isValid('1234'); // false</code></pre></div></div></div>
-
+<h3>Conventions for self defined Formats</h3>
+<p>When using self defined formats, you should omit the regex delimiters and
+anchors (<code>'/^'</code> and  <code>'$/'</code>). They are attached automatically.</p>
+<p>You should also be aware that postcode values will always be validated in a
+strict way. This means that they have to be written standalone without
+additional characters when they are not covered by the format.</p>
 <h3>Get Current Value</h3>
-<p>To get the current value of this option, use the <code>getStrict()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
+<p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
 
-echo $validator-&gt;getStrict(); // true</code></pre>
+echo $validator-&gt;getFormat(); // 'AT-\d{4}'</code></pre>
 <h3>Default Value</h3>
-<p>The default value of this option is <code>false</code>.</p>
+<p>The default value of this option is <code>null</code>.</p>
+<h2 id="using-callback-service">Using Callback Service</h2>
+<p>The <code>PostCode</code> validator allows additional validations via an optional service
+callback. The callback runs before the standard validation of the <code>PostCode</code>
+class.</p>
+<p>Internally, the additional validation is done by
+<a href="https://docs.laminas.dev/laminas-validator/validators/callback/">laminas-validator's <code>Callback</code></a>
+class.</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-5><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-5-0_php-panel role=tab id=tab-group-5-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-5-1_php-panel role=tab id=tab-group-5-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-5-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-5-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode([
+    'service' =&gt; static function ($value) {
+        // Allow only certain districts in town
+        if (in_array($value, range(1010, 1423), false)) {
+            return true;
+        }
+
+        return false;
+    },
+    'locale'  =&gt; 'de_AT',
+]);
+
+var_dump($validator-&gt;isValid(1010)); // true
+var_dump($validator-&gt;isValid(1600)); // false</code></pre></div><div id=tab-group-5-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-5-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
+$validator-&gt;setService(static function ($value) {
+   // Allow only certain districts in town
+   if (in_array($value, range(1010, 1423), false)) {
+       return true;
+   }
+
+   return false;
+});
+$validator-&gt;setLocale('de_AT');
+
+var_dump($validator-&gt;isValid(1010)); // true
+var_dump($validator-&gt;isValid(1600)); // false</code></pre></div></div></div>
+
+<h3>Default Value</h3>
+<p>The default value of this option is <code>null</code>.</p>
 
 
 
@@ -413,7 +456,7 @@ echo $validator-&gt;getStrict(); // true</code></pre>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../date-time/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../phone-number/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -421,10 +464,6 @@ echo $validator-&gt;getStrict(); // true</code></pre>
 
         
         <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../phone-number/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
             
         </li>
     </ul>
@@ -436,7 +475,7 @@ echo $validator-&gt;getStrict(); // true</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/is-int.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/post-code.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -525,8 +564,8 @@ echo $validator-&gt;getStrict(); // true</code></pre>
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">IsInt</a>
+    <li class="subnavigation__list-item ">
+        <a href="../is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
@@ -537,8 +576,8 @@ echo $validator-&gt;getStrict(); // true</code></pre>
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../post-code/" class="subnavigation__link">PostCode</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">PostCode</a>
     </li>
 
             

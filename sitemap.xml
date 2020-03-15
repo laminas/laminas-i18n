@@ -35,5 +35,9 @@
      <loc>https://docs.laminas.dev/laminas-i18n/validators/phone-number/</loc>
      <lastmod>2020-03-15</lastmod>
      <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-i18n/validators/post-code/</loc>
+     <lastmod>2020-03-15</lastmod>
+     <changefreq>daily</changefreq>
     </url>
 </urlset>

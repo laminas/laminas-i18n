@@ -194,6 +194,12 @@
     </li>
 
             
+                
+    <li class="subnavigation__list-item ">
+        <a href="post-code/" class="subnavigation__link">PostCode</a>
+    </li>
+
+            
         </ul>
     </li>
 
@@ -283,10 +289,6 @@
                 
                     <li class="toc__entry">
                         <a href="#isfloat" class="toc__link nav-link">IsFloat</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#postcode" class="toc__link nav-link">PostCode</a>
                     </li>
                 
             </ul>
@@ -464,65 +466,6 @@ notice on instantiation. Please update your code to refer to the <code>IsFloat</
 instead.</p>
 <p>Users pulling their <code>Float</code> validator instance from the validator plugin manager
 receive an <code>IsFloat</code> instance instead starting in 2.4.0.</p>
-<h2 id="postcode">PostCode</h2>
-<p><code>Laminas\I18n\Validator\PostCode</code> allows you to determine if a given value is a
-valid postal code. Postal codes are specific to cities, and in some locales
-termed ZIP codes.</p>
-<p><code>Laminas\I18n\Validator\PostCode</code> knows more than 160 different postal code
-formats. To select the correct format there are two ways. You can either use a
-fully qualified locale, or you can set your own format manually.</p>
-<h3>Supported options</h3>
-<p>The following options are supported for <code>Laminas\I18n\Validator\PostCode</code>:</p>
-<ul>
-<li><code>format</code>: Sets a postcode format which will be used for validation of the
-  input.</li>
-<li><code>locale</code>: Sets a locale from which the postcode will be taken from.</li>
-</ul>
-<h3>Usage</h3>
-<p>Using a locale is more convenient as laminas-validator already knows the
-appropriate postal code format for each locale; however, you need to use the
-fully qualified locale (one containing a region specifier) to do so. For
-instance, the locale <code>de</code> is a locale but could not be used with
-<code>Laminas\I18n\Validator\PostCode</code> as it does not include the region; <code>de_AT</code>,
-however, would be a valid locale, as it specifies the region code (<code>AT</code>, for
-Austria).</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode('de_AT');</code></pre>
-<p>When you don't set a locale yourself, then <code>Laminas\I18n\Validator\PostCode</code> will
-use the application wide set locale, or, when there is none, the locale returned
-by <code>Locale</code>.</p>
-<pre class=codehilite><code class=language-php>// application wide locale within your bootstrap
-Locale::setDefault('de_AT');
-
-$validator = new Laminas\I18n\Validator\PostCode();</code></pre>
-<p>You can also change the locale afterwards by calling <code>setLocale()</code>. And of
-course you can get the actual used locale by calling <code>getLocale()</code>.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode('de_AT');
-$validator-&gt;setLocale('en_GB');</code></pre>
-<p>Postal code formats are regular expression strings. When the international
-postal code format, which is used by setting the locale, does not fit your
-needs, then you can also manually set a format by calling <code>setFormat()</code>.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode('de_AT');
-$validator-&gt;setFormat('AT-\d{5}');</code></pre>
-<blockquote>
-<h3>Conventions for self defined formats</h3>
-<p>When using self defined formats, you should omit the regex delimiters and
-anchors (<code>'/^'</code> and  <code>'$/'</code>). They are attached automatically.</p>
-<p>You should also be aware that postcode values will always be validated in a
-strict way. This means that they have to be written standalone without
-additional characters when they are not covered by the format.</p>
-</blockquote>
-<h3>Constructor options</h3>
-<p>At its most basic, you may pass a string representing a fully qualified locale
-to the constructor of <code>Laminas\I18n\Validator\PostCode</code>.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode('de_AT');</code></pre>
-<p>Additionally, you may pass either an array or a <code>Traversable</code> instance to the
-constructor. When you do so, you must include either the key <code>locale</code> or
-<code>format</code>; these will be used to set the appropriate values in the validator
-object.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode([
-    'locale' =&gt; 'de_AT',
-    'format' =&gt; 'AT_\d+'
-]);</code></pre>
 
 
 
@@ -653,6 +596,12 @@ object.</p>
                 
     <li class="subnavigation__list-item ">
         <a href="phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
