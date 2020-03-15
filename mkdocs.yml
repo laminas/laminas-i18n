@@ -10,6 +10,7 @@ nav:
         - Validators:
             - 'Standard Validators': validators.md
             - DateTime: validators/date-time.md
+            - IsInt: validators/is-int.md
             - PhoneNumber: validators/phone-number.md
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
