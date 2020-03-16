@@ -1,13 +1,13 @@
 # Alnum
 
-`Laminas\I18nn\Validator\Alnum` allows you to validate if a given value
+`Laminas\I18n\Validator\Alnum` allows you to validate if a given value
 **contains only alphabetical characters and digits**. There is no length
 limitation for the input you want to validate.
 
 ## Basic Usage
 
 ```php
-$validator = new Laminas\I18nn\Validator\Alnum();
+$validator = new Laminas\I18n\Validator\Alnum();
 
 if ($validator->isValid('Abcd12')) {
     // value contains only allowed chars
@@ -24,7 +24,7 @@ allow whitespace; this can be done via the `allowWhiteSpace` option, either at
 instantiation or afterwards via the `setAllowWhiteSpace()` method.  
 
 ```php fct_label="Constructor Usage"
-$validator = new Laminas\I18nn\Validator\Alnum(['allowWhiteSpace' => true]);
+$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' => true]);
 
 if ($validator->isValid('Abcd and 12')) {
     // value contains only allowed chars
@@ -34,7 +34,7 @@ if ($validator->isValid('Abcd and 12')) {
 ```
 
 ```php fct_label="Setter Usage"
-$validator = new Laminas\I18nn\Validator\Alnum();
+$validator = new Laminas\I18n\Validator\Alnum();
 $validator->setAllowWhiteSpace(true);
 
 if ($validator->isValid('Abcd and 12')) {
@@ -49,7 +49,7 @@ if ($validator->isValid('Abcd and 12')) {
 To get the current value of this option, use the `getAllowWhiteSpace()` method.
 
 ```php
-$validator = new Laminas\I18nn\Validator\Alnum(['allowWhiteSpace' => true]);
+$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' => true]);
 
 $validator->getAllowWhiteSpace(); // true
 ```
