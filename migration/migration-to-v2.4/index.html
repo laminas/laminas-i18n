@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/migration/migration-to-v2.4/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-i18n - Laminas Docs</title>
+    <title>Migration from Versions prior to 2.4 - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -114,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-i18n</a>
+            <a href="../..">laminas-i18n</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -129,7 +130,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                                <a href="../../introduction/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -148,19 +149,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../translation/" class="subnavigation__link">Translation</a>
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+        <a href="../../view-helpers/" class="subnavigation__link">View Helpers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../filters/" class="subnavigation__link">Filters</a>
+        <a href="../../filters/" class="subnavigation__link">Filters</a>
     </li>
 
                                     
@@ -171,37 +172,37 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/" class="subnavigation__link">Standard Validators</a>
+        <a href="../../validators/" class="subnavigation__link">Standard Validators</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/is-int/" class="subnavigation__link">IsInt</a>
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
@@ -227,8 +228,8 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../migration/migration-to-v2.4/" class="subnavigation__link">Migration from Versions prior to 2.4</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Migration from Versions prior to 2.4</a>
     </li>
 
                                     
@@ -299,21 +300,121 @@
                 
                 
                     
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#general" class="toc__link nav-link">General</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#validators" class="toc__link nav-link">Validators</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
                 
 
                 
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
-<h1 class="content__title">404</h1>
-<blockquote>
-    <h3>Something went wrong!</h3>
-    <p>
-        We're sorry, but the page you are looking for does not exist.
-    </p>
-</blockquote>
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-i18n</a></li>
 
-<a href="../." class="btn btn-default" role="button">Go to homepage</a>
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Migration</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Migration from Versions prior to 2.4</li>
+            
+        
+    </ol>
+</nav>
 
 
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Migration</h2>
+    
+
+    <h1 id="migration-from-versions-prior-to-24">Migration from Versions prior to 2.4</h1>
+<h2 id="general">General</h2>
+<p>Version 2.4 adds support for PHP 7.</p>
+<h2 id="validators">Validators</h2>
+<h3>IsFloat</h3>
+<p>In PHP 7, <code>float</code> is a reserved keyword, which required renaming the
+<code>Laminas\I18n\Validator\Float</code> validator. If you were using the
+<code>Laminas\I18n\Validator\Float</code> validator directly previously, you will now
+receive an <code>E_USER_DEPRECATED</code> notice on instantiation. Please update your code
+to refer to the <code>Laminas\I18n\Validator\IsFloat</code> class instead.</p>
+<p>Users pulling their <code>Laminas\I18n\Validator\Float</code> validator instance from the
+validator plugin manager receive an <code>Laminas\I18n\Validator\IsFloat</code> instance
+instead starting in 2.4.0.</p>
+<h3>IsInt</h3>
+<p>In PHP 7, <code>int</code> is a reserved keyword, which required renaming the 
+<code>Laminas\I18n\Validator\Int</code> validator. If you were using the
+<code>Laminas\I18n\Validator\Int</code> validator directly previously, you will now
+receive an <code>E_USER_DEPRECATED</code> notice on instantiation. Please update your code
+to refer to the <code>Laminas\I18n\Validator\IsInt</code> class instead.</p>
+<p>Users pulling their <code>Laminas\I18n\Validator\Int</code> validator instance from the
+validator plugin manager receive an <code>Laminas\I18n\Validator\IsInt</code> instance
+instead starting in 2.4.0.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../validators/post-code/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/migration/migration-to-v2.4.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 
@@ -328,7 +429,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-i18n</a>
+            <a href="../..">laminas-i18n</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -343,7 +444,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../introduction/" class="subnavigation__link">Introduction</a>
+                                <a href="../../introduction/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -362,19 +463,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../translation/" class="subnavigation__link">Translation</a>
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../view-helpers/" class="subnavigation__link">View Helpers</a>
+        <a href="../../view-helpers/" class="subnavigation__link">View Helpers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../filters/" class="subnavigation__link">Filters</a>
+        <a href="../../filters/" class="subnavigation__link">Filters</a>
     </li>
 
                                     
@@ -385,37 +486,37 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/" class="subnavigation__link">Standard Validators</a>
+        <a href="../../validators/" class="subnavigation__link">Standard Validators</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/is-int/" class="subnavigation__link">IsInt</a>
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../validators/post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
@@ -441,8 +542,8 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../migration/migration-to-v2.4/" class="subnavigation__link">Migration from Versions prior to 2.4</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Migration from Versions prior to 2.4</a>
     </li>
 
                                     
@@ -537,13 +638,13 @@
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-i18n';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     
