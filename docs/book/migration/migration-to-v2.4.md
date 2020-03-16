@@ -1,4 +1,4 @@
-# Migration to Version 2.4
+# Migration from Versions prior to 2.4
 
 ## General
 

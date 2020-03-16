@@ -15,7 +15,7 @@ nav:
             - PhoneNumber: validators/phone-number.md
             - PostCode: validators/post-code.md
     - Migration:
-        - 'Migration to Version 2.4': migration/migration-to-v2.4.md
+        - 'Migration from Versions prior to 2.4': migration/migration-to-v2.4.md
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
 repo_url: 'https://github.com/laminas/laminas-i18n'
