@@ -3,6 +3,10 @@ site_dir: docs/html
 nav:
     - Home: index.md
     - Introduction: introduction.md
+    - Translator:
+        - Caching: translator/caching.md
+        - Factory: translator/factory.md
+        - 'Format Examples': translator/format-examples.md
     - Reference:
         - Translation: translation.md
         - 'View Helpers': view-helpers.md
