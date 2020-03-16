@@ -1,8 +1,7 @@
 # Alnum
 
 `Laminas\I18n\Validator\Alnum` allows you to validate if a given value
-**contains only alphabetical characters and digits**. There is no length
-limitation for the input you want to validate.
+**contains only alphabetical characters and digits**.
 
 ## Basic Usage
 
