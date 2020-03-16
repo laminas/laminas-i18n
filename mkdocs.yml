@@ -10,6 +10,7 @@ nav:
         - Validators:
             - 'Standard Validators': validators.md
             - DateTime: validators/date-time.md
+            - IsFloat: validators/is-float.md
             - IsInt: validators/is-int.md
             - PhoneNumber: validators/phone-number.md
             - PostCode: validators/post-code.md
