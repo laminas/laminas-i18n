@@ -1,10 +1,9 @@
 # Alpha
 
 `Laminas\I18n\Validator\Alpha` allows you to validate if a given value
-**contains only alphabetical characters**. There is no length limitation for the
-input you want to validate. This validator is identical to the
-`Laminas\I18n\Validator\Alnum` validator with the exception that it does not
-accept digits.
+**contains only alphabetical characters**. This validator is identical to the
+[`Laminas\I18n\Validator\Alnum` validator](alnum.md) with the exception that it
+does not accept digits.
 
 ## Basic Usage
 
