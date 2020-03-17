@@ -114,7 +114,7 @@ echo $this->currencyFormat(1234.56, 'EUR'); // '12345678,90 kg'
 
 Valid patterns are documented at
 [ICU DecimalFormat](http://www.icu-project.org/apiref/icu4c/classDecimalFormat.html#details);
-see the [NumberFormatter::setPattern documentation](http://php.net/manual/en/numberformatter.setpattern.php)
+see the [NumberFormatter::setPattern documentation](https://www.php.net/manual/numberformatter.setpattern.php)
 for more information.
 
 ### Get current Value

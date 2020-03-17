@@ -18,7 +18,7 @@ locale provided by PHP's `Locale` class and the `getDefault()` method.
 ## Using Format Style
 
 This option sets the style of the formatting; one of the 
-[`NumberFormatter` format style constants](http://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle).
+[`NumberFormatter` format style constants](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle).
 
 ```php fct_label="Constructor Usage"
 // Example 1
@@ -58,7 +58,7 @@ The default value of this option is `NumberFormatter::DEFAULT_STYLE`.
 
 ## Using Format Type
 
-The format type speficied the [`NumberFormatter` formatting type](http://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types)
+The format type speficied the [`NumberFormatter` formatting type](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types)
 to use.
 
 ```php fct_label="Constructor Usage"
@@ -155,7 +155,7 @@ and maximum fraction digits will not be set on the `NumberFormatter`.
 
 This option sets the text attributes of the formatting, like prefix and suffix 
 for positive and negative numbers. See
-[`NumberFormatter` text attribute constants](http://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute).
+[`NumberFormatter` text attribute constants](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute).
 
 ```php fct_label="Invoke Usage"
 echo $this->numberFormat(

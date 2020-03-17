@@ -84,7 +84,7 @@ echo $this->dateFormat(new DateTime(), IntlDateFormatter::MEDIUM); // 'Feb 22, 2
 (The above example assumes that the environment locale is set to `en_US`.)
 
 Possible values for the date type option are the following
-[constants of PHP's `IntlDateFormatter` class](http://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
+[constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
 * `IntlDateFormatter::NONE` - Do not include this element
 * `IntlDateFormatter::FULL` - Fullstyle (Tuesday, April 12, 1952 AD)
@@ -108,7 +108,7 @@ echo $this->dateFormat(new DateTime(), IntlDateFormatter::NONE, IntlDateFormatte
 (The above example assumes that the environment locale is set to `en_US`.)
 
 Possible values for the date type option are the following
-[constants of PHP's `IntlDateFormatter` class](http://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
+[constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
 * `IntlDateFormatter::NONE` - Do not include this element
 * `IntlDateFormatter::FULL` - Fullstyle (3:30:42pm PST)
