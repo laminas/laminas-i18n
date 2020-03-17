@@ -9,6 +9,7 @@ nav:
         - Filters: filters.md
         - Validators:
             - 'Standard Validators': validators.md
+            - Alnum: validators/alnum.md
             - Alpha: validators/alpha.md
             - DateTime: validators/date-time.md
             - IsFloat: validators/is-float.md
