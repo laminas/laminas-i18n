@@ -8,7 +8,7 @@ nav:
         - 'View Helpers': view-helpers.md
         - Filters: filters.md
         - Validators:
-            - 'Standard Validators': validators.md
+            - Introduction: validators/introduction.md
             - Alnum: validators/alnum.md
             - Alpha: validators/alpha.md
             - DateTime: validators/date-time.md
