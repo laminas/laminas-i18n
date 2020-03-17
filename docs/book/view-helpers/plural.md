@@ -49,8 +49,8 @@ The string reads as follows:
 
 #### Rule for English
 
-As noted earlier earlier, English considers "1" as singular and "0/other" as
-plural. Here is how that would be declared:
+As noted earlier, English considers "1" as singular and "0/other" as plural.
+Here is how that would be declared:
 
 ```php
 $pluralHelper->setPluralRule('nplurals=2; plural=(n==1 ? 0 : 1)');
