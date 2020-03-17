@@ -8,7 +8,7 @@ nav:
         - 'View Helpers': view-helpers.md
         - Filters: filters.md
         - Validators:
-            - 'Standard Validators': validators.md
+            - Introduction: validators/introduction.md
             - Alnum: validators/alnum.md
             - Alpha: validators/alpha.md
             - DateTime: validators/date-time.md
@@ -20,6 +20,8 @@ nav:
         - 'Stand-Alone': application-integration/stand-alone.md
     - Migration:
         - 'Migration from Versions prior to 2.4': migration/migration-to-v2.4.md
+    - '_hidden-legacy-page-links':
+        - '_validators': validators.md
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
 repo_url: 'https://github.com/laminas/laminas-i18n'
