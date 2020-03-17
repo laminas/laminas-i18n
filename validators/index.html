@@ -178,6 +178,12 @@
             
                 
     <li class="subnavigation__list-item ">
+        <a href="alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
         <a href="alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
@@ -333,17 +339,6 @@
 
     
     
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#alnum" class="toc__link nav-link">Alnum</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
 
                 
 
@@ -392,45 +387,6 @@
     <h1 id="validators">Validators</h1>
 <p>laminas-i18n provides a set of validators that use internationalization
 capabilities.</p>
-<h2 id="alnum">Alnum</h2>
-<p><code>Laminas\I18n\Validator\Alnum</code> allows you to validate if a given value contains
-only alphabetical characters and digits. There is no length limitation for the
-input you want to validate.</p>
-<h3>Supported options</h3>
-<p>The following options are supported for <code>Laminas\I18n\Validator\Alnum</code>:</p>
-<ul>
-<li><code>allowWhiteSpace</code>: Whether or not whitespace characters are allowed. This
-  option defaults to <code>FALSE</code>.</li>
-</ul>
-<h3>Basic usage</h3>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum();
-if ($validator-&gt;isValid('Abcd12')) {
-    // value contains only allowed chars
-} else {
-    // false
-}</code></pre>
-<h3>Using whitespace</h3>
-<p>By default, whitespace is not accepted as it is not part of the alphabet.
-However, if you want to validate complete sentences or phrases, you may need to
-allow whitespace; this can be done via the <code>allowWhiteSpace</code> option, either at
-instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.</p>
-<p>To get the current state of the flag, use the <code>getAllowWhiteSpace()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
-
-// or set it via method call:
-$validator-&gt;setAllowWhiteSpace(true);
-
-if ($validator-&gt;isValid('Abcd and 12')) {
-    // value contains only allowed chars
-} else {
-    // false
-}</code></pre>
-<h3>Using different languages</h3>
-<p>Several languages supported by ext/intl use alphabets where characters are
-formed from multiple bytes, including <em>Korean</em>, <em>Japanese</em>, and <em>Chinese</em>. Such
-languages therefore are unsupported with regards to the <code>Alnum</code> validator.</p>
-<p>When using the <code>Alnum</code> validator with these languages, the input will be validated
-using the English alphabet.</p>
 
 
 
@@ -450,7 +406,7 @@ using the English alphabet.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="alpha/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="alnum/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -543,6 +499,12 @@ using the English alphabet.</p>
                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
         <a href="./" class="subnavigation__link">Standard Validators</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
             
