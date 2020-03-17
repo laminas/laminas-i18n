@@ -1,8 +1,9 @@
 # CurrencyFormat
 
 The `CurrencyFormat` view helper can be used to simplify **rendering of
-localized currency values**. It acts as a wrapper for the `NumberFormatter` 
-class within the PHP's internationalization extension (`ext/intl`).
+localized currency values**. It acts as a wrapper for the
+[`NumberFormatter` class](https://www.php.net/NumberFormatter) within the PHP's
+internationalization extension (`ext/intl`).
 
 ## Basic Usage
 

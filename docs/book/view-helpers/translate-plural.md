@@ -6,7 +6,8 @@ of "car", for one car, and the plural definition, "cars", meaning zero "cars"
 or more than one car. Other languages like Russian or Polish have more plurals
 with different rules.
 
-The helper acts as a wrapper for the `Laminas\I18n\Translator\Translator` class.
+The helper acts as a wrapper for the
+[`Laminas\I18n\Translator\Translator` class](../translation.md).
 
 ## Setup
 

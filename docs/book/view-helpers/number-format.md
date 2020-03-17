@@ -2,7 +2,8 @@
 
 The `NumberFormat` view helper can be used to simplify **rendering of
 locale-specific number and/or percentage strings**. It acts as a wrapper for the
-`NumberFormatter` class within PHP's internationalization extension (`ext/intl`).
+[`NumberFormatter` class](https://www.php.net/NumberFormatter) within PHP's
+internationalization extension (`ext/intl`).
 
 ## Basic Usage
 

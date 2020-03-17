@@ -1,8 +1,9 @@
 # DateFormat
 
 The `DateFormat` view helper can be used to simplify **rendering of localized
-date/time values**. It acts as a wrapper for the `IntlDateFormatter` class
-within PHP's internationalization extension (`ext/intl`).
+date/time values**. It acts as a wrapper for the
+[`IntlDateFormatter` class](https://www.php.net/IntlDateFormatter) within PHP's
+internationalization extension (`ext/intl`).
 
 ## Basic Usage
 
