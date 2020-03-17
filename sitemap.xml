@@ -24,11 +24,27 @@
      <lastmod>2020-03-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://docs.laminas.dev/laminas-i18n/view-helpers/</loc>
+     <loc>https://docs.laminas.dev/laminas-i18n/filters/introduction/</loc>
      <lastmod>2020-03-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://docs.laminas.dev/laminas-i18n/filters/</loc>
+     <loc>https://docs.laminas.dev/laminas-i18n/filters/alnum/</loc>
+     <lastmod>2020-03-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-i18n/filters/alpha/</loc>
+     <lastmod>2020-03-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-i18n/filters/number-format/</loc>
+     <lastmod>2020-03-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-i18n/filters/number-parse/</loc>
+     <lastmod>2020-03-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-i18n/view-helpers/</loc>
      <lastmod>2020-03-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -69,6 +85,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-i18n/migration/migration-to-v2.4/</loc>
+     <lastmod>2020-03-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-i18n/filters/</loc>
      <lastmod>2020-03-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
