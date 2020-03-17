@@ -6,8 +6,9 @@ guarantees an optimized loading procedure.
 
 > ### Installation requirements
 >
-> The cache support of laminas-i18n depends on the laminas-cache component, so
-> be sure to have it installed before getting started:
+> The cache support of laminas-i18n depends on the
+> [laminas-cache](https://docs.laminas.dev/laminas-cache/) component, so be sure
+> to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-cache
