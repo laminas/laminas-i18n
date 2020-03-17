@@ -11,9 +11,7 @@ does not accept digits.
 $validator = new Laminas\I18n\Validator\Alpha();
 
 if ($validator->isValid('Abcd')) {
-    // value contains only allowed chars
-} else {
-    // false
+    // Value contains only allowed chars
 }
 ```
 
@@ -28,9 +26,7 @@ instantiation or afterwards via the `setAllowWhiteSpace()` method.
 $validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' => true]);
 
 if ($validator->isValid('Abcd and efg')) {
-    // value contains only allowed chars
-} else {
-    // false
+    // Value contains only allowed chars
 }
 ```
 
@@ -39,9 +35,7 @@ $validator = new Laminas\I18n\Validator\Alpha();
 $validator->setAllowWhiteSpace(true);
 
 if ($validator->isValid('Abcd and efg')) {
-    // value contains only allowed chars
-} else {
-    // false
+    // Value contains only allowed chars
 }
 ```
 
