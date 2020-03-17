@@ -9,9 +9,7 @@
 $validator = new Laminas\I18n\Validator\Alnum();
 
 if ($validator->isValid('Abcd12')) {
-    // value contains only allowed chars
-} else {
-    // false
+    // Value contains only allowed chars
 }
 ```
 
@@ -26,9 +24,7 @@ instantiation or afterwards via the `setAllowWhiteSpace()` method.
 $validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' => true]);
 
 if ($validator->isValid('Abcd and 12')) {
-    // value contains only allowed chars
-} else {
-    // false
+    // Value contains only allowed chars
 }
 ```
 
@@ -37,9 +33,7 @@ $validator = new Laminas\I18n\Validator\Alnum();
 $validator->setAllowWhiteSpace(true);
 
 if ($validator->isValid('Abcd and 12')) {
-    // value contains only allowed chars
-} else {
-    // false
+    // Value contains only allowed chars
 }
 ```
 
