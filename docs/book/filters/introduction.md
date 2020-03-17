@@ -23,4 +23,3 @@ The concept and the basic usage of the filters can be found in the
 > ```bash
 > $ composer require laminas/laminas-filter
 > ```
-

@@ -46,4 +46,3 @@ examples of usage can be found there:
 * [Setting Style](number-parse.md#using-style)
 * [Setting Type](number-parse.md#using-type)
 * [Setting Custom NumberFormatter](number-parse.md#using-custom-numberformatter)
- 
