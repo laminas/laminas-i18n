@@ -8,6 +8,12 @@ nav:
         - Caching: translator/caching.md
         - Factory: translator/factory.md
         - 'Format Examples': translator/format-examples.md
+    - Filters:
+        - Introduction: filters/introduction.md
+        - Alnum: filters/alnum.md
+        - Alpha: filters/alpha.md
+        - NumberFormat: filters/number-format.md
+        - NumberParse: filters/number-parse.md
     - Reference:
         - 'View Helpers': view-helpers.md
         - Validators:
