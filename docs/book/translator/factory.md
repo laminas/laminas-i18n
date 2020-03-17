@@ -95,21 +95,19 @@ optional. The default value for `text_domain` is `default`.
 ```php
 $translator->getPluginManager()->setService(
     'translation-de_DE', // Custom name
-    new \Laminas\I18n\Translator\Loader\PhpMemoryArray(
-        [
-            'default' => [
-                'de_DE' => [
-                    'car'   => 'Auto',
-                    'train' => 'Zug',
-                ],
+    new \Laminas\I18n\Translator\Loader\PhpMemoryArray([
+        'default' => [
+            'de_DE' => [
+                'car'   => 'Auto',
+                'train' => 'Zug',
             ],
-            'album'   => [
-                'de_DE' => [
-                    'music' => 'Musik',
-                ],
+        ],
+        'album'   => [
+            'de_DE' => [
+                'music' => 'Musik',
             ],
-        ]
-    )
+        ],
+    ])
 );
 ```
 
