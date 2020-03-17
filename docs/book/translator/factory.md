@@ -14,7 +14,7 @@ $translator = Laminas\I18n\Translator\Translator::factory([
 $translator = Laminas\I18n\Translator\Translator::factory([
     'locale' => [
         'de_DE', // Default locale
-        'en_EN', // Fallback locale
+        'en_GB', // Fallback locale
     ],
 ]);
 ```
