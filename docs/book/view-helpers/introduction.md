@@ -37,10 +37,7 @@ injection as well as text domain injection.
 #### setTranslator()
 
 ```php
-setTranslator(
-    Translator $translator [ ,
-    string $textDomain = null
-] ) : void
+setTranslator(Translator $translator, string $textDomain = null) : void
 ```
 
 Sets the `Laminas\I18n\Translator\Translator` instance to use in the helper. The
