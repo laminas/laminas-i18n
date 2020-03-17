@@ -87,7 +87,7 @@ echo $filter->getLocale(); // 'en_US'
 ### Default Value
 
 By default, if no locale is provided, `Alnum` will use the system locale
-provide by PHP's `Locale::getDefault()`.
+provided by PHP's `Locale::getDefault()`.
 
 ## Supported Languages
 
