@@ -10,7 +10,6 @@ nav:
         - 'Format Examples': translator/format-examples.md
     - Reference:
         - 'View Helpers': view-helpers.md
-        - Filters: filters.md
         - Validators:
             - Introduction: validators/introduction.md
             - Alnum: validators/alnum.md
@@ -25,6 +24,7 @@ nav:
     - Migration:
         - 'Migration from Versions prior to 2.4': migration/migration-to-v2.4.md
     - '_hidden-legacy-page-links':
+        - '_filters': filters.md
         - '_validators': validators.md
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
