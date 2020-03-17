@@ -90,6 +90,7 @@ provided by PHP's `Locale::getDefault()`.
 
 ## Supported languages
 
-`Alpha` works for most languages, except Chinese, Japanese and Korean. Within
-these languages, the English alphabet is used instead of the characters from
-these languages. The language itself is detected using PHP's `Locale` class.
+`Alpha` works for most languages, except *Korean*, *Japanese*, and *Chinese*.
+Within these languages, the English alphabet is used instead of the characters
+from these languages. The language itself is detected using PHP's `Locale`
+class.

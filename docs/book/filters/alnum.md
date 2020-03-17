@@ -91,6 +91,7 @@ provided by PHP's `Locale::getDefault()`.
 
 ## Supported Languages
 
-`Alnum` works for most languages, except Chinese, Japanese and Korean. Within
-these languages, the English alphabet is used instead of the characters from
-these languages. The language itself is detected using PHP's `Locale` class.
+`Alnum` works for most languages, except *Korean*, *Japanese*, and *Chinese*.
+Within these languages, the English alphabet is used instead of the characters
+from these languages. The language itself is detected using PHP's `Locale`
+class.
