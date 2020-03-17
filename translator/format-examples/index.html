@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/phone-number/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/translator/format-examples/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>PhoneNumber - laminas-i18n - Laminas Docs</title>
+    <title>Format Examples - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -163,19 +163,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+        <a href="../caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
+        <a href="../factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -215,49 +215,49 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-int/" class="subnavigation__link">IsInt</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">PhoneNumber</a>
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
@@ -387,23 +387,11 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
+                        <a href="#php" class="toc__link nav-link">PHP</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#using-country" class="toc__link nav-link">Using Country</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#using-allowed-phone-number-patterns" class="toc__link nav-link">Using Allowed Phone Number Patterns</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#strict-validation" class="toc__link nav-link">Strict Validation</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#specify-country-code-on-validation" class="toc__link nav-link">Specify Country Code on Validation</a>
+                        <a href="#ini" class="toc__link nav-link">INI</a>
                     </li>
                 
             </ul>
@@ -426,19 +414,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Validators</li>
+                            <li class="breadcrumb-item">Translator</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">PhoneNumber</li>
+                <li class="breadcrumb-item active" aria-current="page">Format Examples</li>
             
         
     </ol>
@@ -451,137 +432,78 @@
 
     
     
-        <h2 class="chapter__headline">Validators</h2>
+        <h2 class="chapter__headline">Translator</h2>
     
 
-    <h1 id="phonenumber">PhoneNumber</h1>
-<p><code>Laminas\I18n\Validator\PhoneNumber</code> allows you to determine if a given value
-<strong>is a valid phone number</strong>. Phone numbers are specific to country codes.</p>
-<h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
+    <h1 id="format-examples">Format Examples</h1>
+<h2 id="php">PHP</h2>
+<p>For example <code>languages/de_DE.php</code>:</p>
+<pre class=codehilite><code class=language-php>return [
+    // Message =&gt; Translation
+    'car'   =&gt; 'Auto',
+    'train' =&gt; 'Zug',
+];</code></pre>
+<h3>Plural</h3>
+<p>For example <code>languages/en_GB.php</code>:</p>
+<pre class=codehilite><code class=language-php>return [
+    // Rule for English
+    '' =&gt; [
+        'plural_forms' =&gt; 'nplurals=2; plural=(n==1 ? 0 : 1)',
+    ],
+    // Messages
+    'car'   =&gt; 'car',
+    'train' =&gt; 'train',
+];</code></pre>
+<p>For example <code>languages/fr_FR.php</code>:</p>
+<pre class=codehilite><code class=language-php>return [
+    // Rule for French
+    '' =&gt; [
+        'plural_forms' =&gt; 'nplurals=2; plural=(n==0 || n==1 ? 0 : 1)',
+    ],
+    // Messages
+    'car'   =&gt; 'voiture',
+    'train' =&gt; 'train',
+];</code></pre>
+<h2 id="ini">INI</h2>
+<h3>Normal Syntax</h3>
+<p>For example <code>languages/de_DE.ini</code>:</p>
+<pre class=codehilite><code class=language-ini>; Message
+identifier1.message = &quot;car&quot;
+; Translation
+identifier1.translation = &quot;Auto&quot;
 
-var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
-<p>By default, if no country code is provided, <code>PhoneNumber</code> will use the system
-locale provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
-extract the country code.</p>
-<p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
-<h2 id="using-country">Using Country</h2>
-<p>The ISO 3611 country code can be set for validations.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'DE']);
+identifier2.message = &quot;train&quot;
+identifier2.translation = &quot;Zug&quot;</code></pre>
+<h3>Simple Syntax</h3>
+<p>For example <code>languages/de_DE.ini</code>:</p>
+<pre class=codehilite><code class=language-ini>; Message
+identifier1[] = &quot;car&quot;
+; Translation
+identifier1[] = &quot;Auto&quot;
 
-var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
-$validator-&gt;setCountry('DE');
+identifier2[] = &quot;train&quot;
+identifier2[] = &quot;Zug&quot;</code></pre>
+<h3>Plural</h3>
+<p>For example <code>languages/en_GB.ini</code>:</p>
+<pre class=codehilite><code class=language-ini>[plural]
+plural_forms = 'nplurals=2; plural=(n==1 ? 0 : 1)'
 
-var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('de_DE');
+[translation]
+identifier1.message = &quot;car&quot;
+identifier1.translation = &quot;car&quot;
 
-$validator = new Laminas\I18n\Validator\PhoneNumber();
+identifier2.message = &quot;train&quot;
+identifier2.translation = &quot;train&quot;</code></pre>
+<p>For example <code>languages/fr_FR.ini</code>:</p>
+<pre class=codehilite><code class=language-ini>[plural]
+plural_forms = 'nplurals=2; plural=(n==0 || n==1 ? 0 : 1)'
 
-var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre></div></div></div>
+[translation]
+identifier1.message = &quot;car&quot;
+identifier1.translation = &quot;voiture&quot;
 
-<h3>Get Current Value</h3>
-<p>To get the current value of this option, use the <code>getCountry()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'US']);
-
-echo $validator-&gt;getCountry(); // 'US'</code></pre>
-<h3>Default Value</h3>
-<p>By default, if no country is provided, <code>PhoneNumber</code> will use the system locale
-provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
-the region code.</p>
-<h2 id="using-allowed-phone-number-patterns">Using Allowed Phone Number Patterns</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber([
-    'allowed_types' =&gt; ['emergency'],
-    'country'       =&gt; 'US',
-]);
-
-var_dump($validator-&gt;isValid(911)); // true
-var_dump($validator-&gt;isValid(999)); // false</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
-$validator-&gt;allowedTypes(['emergency']);
-$validator-&gt;setCountry('US');
-
-var_dump($validator-&gt;isValid(911)); // true
-var_dump($validator-&gt;isValid(999)); // false</code></pre></div></div></div>
-
-<p>Possible values for allowed patterns are:</p>
-<ul>
-<li><code>emergency</code></li>
-<li><code>fixed</code></li>
-<li><code>general</code></li>
-<li><code>mobile</code></li>
-<li><code>pager</code></li>
-<li><code>personal</code></li>
-<li><code>premium</code></li>
-<li><code>shared</code></li>
-<li><code>shortcode</code></li>
-<li><code>tollfree</code></li>
-<li><code>uan</code></li>
-<li><code>voicemail</code></li>
-<li><code>voip</code></li>
-</ul>
-<blockquote>
-<h3>All allowed patterns</h3>
-<p>The complete list of allowed patterns is not available for each country code.
-Please check the file for your country code with the supported types in the
-<a href="https://github.com/laminas/laminas-i18n/tree/master/src/Validator/PhoneNumber">laminas-i18n repository on GitHub</a>
-or in the <code>vendor/laminas/laminas-i18n/src/Validator/PhoneNumber</code> directory
-of your project folder.</p>
-</blockquote>
-<h3>Get Current Value</h3>
-<p>To get the current value of this option, use the <code>allowedTypes()</code> method with
-the value <code>null</code>.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['allowed_types' =&gt; ['emergency']]);
-
-var_dump($validator-&gt;allowedTypes()); // ['emergency']</code></pre>
-<h3>Default Value</h3>
-<p>The following phone number patterns are allowed per default:</p>
-<ul>
-<li><code>fixed</code></li>
-<li><code>general</code></li>
-<li><code>mobile</code></li>
-<li><code>personal</code></li>
-<li><code>tollfree</code></li>
-<li><code>uan</code></li>
-<li><code>voip</code></li>
-</ul>
-<h2 id="strict-validation">Strict Validation</h2>
-<p>By default, the phone numbers are validated against strict number patterns. To
-allow validation with all <em>possible</em> phone numbers, the <code>allow_possible</code> option
-can be used.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-5><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-5-0_php-panel role=tab id=tab-group-5-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-5-1_php-panel role=tab id=tab-group-5-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-5-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-5-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber([
-    'allow_possible' =&gt; true,
-    'allowed_types'  =&gt; ['emergency'],
-    'country'        =&gt; 'US',
-]);
-
-var_dump($validator-&gt;isValid(911)); // true
-var_dump($validator-&gt;isValid(999)); // true
-var_dump($validator-&gt;isValid(9999)); // false</code></pre></div><div id=tab-group-5-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-5-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
-$validator-&gt;allowPossible(true);
-$validator-&gt;allowedTypes(['emergency']);
-$validator-&gt;setCountry('US');
-
-var_dump($validator-&gt;isValid(911)); // true
-var_dump($validator-&gt;isValid(999)); // true
-var_dump($validator-&gt;isValid(9999)); // false</code></pre></div></div></div>
-
-<h3>Get Current Value</h3>
-<p>To get the current value of this option, use the <code>allowPossible()</code> method with
-the value <code>null</code>.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['allow_possible' =&gt; true]);
-
-var_dump($validator-&gt;allowPossible()); // true</code></pre>
-<h3>Default Value</h3>
-<p>The default value of this option is <code>false</code>.</p>
-<h2 id="specify-country-code-on-validation">Specify Country Code on Validation</h2>
-<p>The country code can be specified with the <code>context</code> parameter on the <code>isValid</code>
-method. This allows to validate phone numbers for different country codes with
-the same validator instance without the usage of the <code>setCountry()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber([
-    'country' =&gt; 'country-code', // Defines a placeholder
-]);
-
-var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'LT'])); // true
-var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'DE'])); // false
-var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); // false</code></pre>
+identifier2.message = &quot;train&quot;
+identifier2.translation = &quot;train&quot;</code></pre>
 
 
 
@@ -592,7 +514,7 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../is-int/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../factory/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -601,7 +523,7 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../post-code/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../../view-helpers/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -615,7 +537,7 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/phone-number.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/translator/format-examples.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -684,19 +606,19 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+        <a href="../caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
+        <a href="../factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -736,49 +658,49 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-int/" class="subnavigation__link">IsInt</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">PhoneNumber</a>
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
