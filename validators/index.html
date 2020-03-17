@@ -178,6 +178,12 @@
             
                 
     <li class="subnavigation__list-item ">
+        <a href="alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
         <a href="date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
@@ -312,10 +318,6 @@
                         <a href="#alnum" class="toc__link nav-link">Alnum</a>
                     </li>
                 
-                    <li class="toc__entry">
-                        <a href="#alpha" class="toc__link nav-link">Alpha</a>
-                    </li>
-                
             </ul>
         </div>
     
@@ -406,52 +408,6 @@ formed from multiple bytes, including <em>Korean</em>, <em>Japanese</em>, and <e
 languages therefore are unsupported with regards to the <code>Alnum</code> validator.</p>
 <p>When using the <code>Alnum</code> validator with these languages, the input will be validated
 using the English alphabet.</p>
-<h2 id="alpha">Alpha</h2>
-<p><code>Laminas\I18n\Validator\Alpha</code> allows you to validate if a given value contains
-only alphabetical characters. There is no length limitation for the input you
-want to validate. This validator is identical to the <code>Laminas\I18n\Validator\Alnum</code>
-validator with the exception that it does not accept digits.</p>
-<h3>Supported options</h3>
-<p>The following options are supported for <code>Laminas\I18n\Validator\Alpha</code>:</p>
-<ul>
-<li><code>allowWhiteSpace</code>: Whether or not whitespace characters are allowed. This
-  option defaults to <code>FALSE</code>.</li>
-</ul>
-<h3>Basic usage</h3>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alpha();
-if ($validator-&gt;isValid('Abcd')) {
-    // value contains only allowed chars
-} else {
-    // false
-}</code></pre>
-<h3>Using whitespace</h3>
-<p>By default, whitespace is not accepted as it is not part of the alphabet.
-However, if you want to validate complete sentences or phrases, you may need to
-allow whitespace; this can be done via the <code>allowWhiteSpace</code> option, either at
-instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.</p>
-<p>To get the current state of the flag, use the <code>getAllowWhiteSpace()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' =&gt; true]);
-
-// or set it via method call:
-$validator-&gt;setAllowWhiteSpace(true);
-
-if ($validator-&gt;isValid('Abcd and efg')) {
-    // value contains only allowed chars
-} else {
-    // false
-}</code></pre>
-<h3>Using different languages</h3>
-<p>When using <code>Laminas\I18n\Validator\Alpha</code>, the language provided by the user's
-browser will be used to set the allowed characters. For locales outside of
-English, this means that additional alphabetic characters may be used
-&mdash; such as <code>ä</code>, <code>ö</code> and <code>ü</code> from the German alphabet.</p>
-<p>Which characters are allowed depends completely on the language, as every
-language defines its own set of characters.</p>
-<p>Three languages supported by ext/intl, however, define multibyte characters,
-which cannot be matched as alphabetic characters using normal string or regular
-expression options. These include <em>Korean</em>, <em>Japanese</em>, and <em>Chinese</em>.</p>
-<p>As a result, when using the <code>Alpha</code> validator with these languages, the input
-will be validated using the English alphabet.</p>
 
 
 
@@ -471,7 +427,7 @@ will be validated using the English alphabet.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="date-time/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="alpha/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -564,6 +520,12 @@ will be validated using the English alphabet.</p>
                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
         <a href="./" class="subnavigation__link">Standard Validators</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
             

@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/is-float/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/alpha/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>IsFloat - laminas-i18n - Laminas Docs</title>
+    <title>Alpha - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -177,8 +177,8 @@
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Alpha</a>
     </li>
 
             
@@ -189,8 +189,8 @@
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">IsFloat</a>
+    <li class="subnavigation__list-item ">
+        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
@@ -319,7 +319,11 @@
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#using-locale" class="toc__link nav-link">Using Locale</a>
+                        <a href="#using-whitespace" class="toc__link nav-link">Using Whitespace</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#using-different-languages" class="toc__link nav-link">Using different Languages</a>
                     </li>
                 
             </ul>
@@ -354,7 +358,7 @@
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">IsFloat</li>
+                <li class="breadcrumb-item active" aria-current="page">Alpha</li>
             
         
     </ol>
@@ -370,45 +374,54 @@
         <h2 class="chapter__headline">Validators</h2>
     
 
-    <h1 id="isfloat">IsFloat</h1>
-<p><code>Laminas\I18n\Validator\IsFloat</code> allows you to validate if a given value
-<strong>contains a floating-point value</strong>. This validator takes into account localized
-input.</p>
-<p>Float values are often written differently based on the country or region. For
-example, using English, you might write <code>1.5</code>, whereas in german you would write
-<code>1,5</code>, and in other languages you might use grouping.</p>
-<p><code>Laminas\I18n\Validator\IsFloat</code> is able to validate such notations. However, it
-is limited to the locale you set.</p>
+    <h1 id="alpha">Alpha</h1>
+<p><code>Laminas\I18n\Validator\Alpha</code> allows you to validate if a given value
+<strong>contains only alphabetical characters</strong>. This validator is identical to the
+<a href="alnum.md"><code>Laminas\I18n\Validator\Alnum</code> validator</a> with the exception that it
+does not accept digits.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsFloat();
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alpha();
 
-$validator-&gt;isValid(1234.5);    // true
-$validator-&gt;isValid('10a01');   // false
-$validator-&gt;isValid('1,234.5'); // true</code></pre>
-<p>By default, if no locale is provided, <code>IsFloat</code> will use the system locale
-provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
-<p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
-<p>Using a notation not specific to the locale results in a <code>false</code> evaluation.</p>
-<h2 id="using-locale">Using Locale</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsFloat(['locale' =&gt; 'en_US']);
+if ($validator-&gt;isValid('Abcd')) {
+    // Value contains only allowed chars
+}</code></pre>
+<h2 id="using-whitespace">Using Whitespace</h2>
+<p>By default, whitespace is not accepted as it is not part of the alphabet.
+However, if you want to validate complete sentences or phrases, you may need to
+allow whitespace; this can be done via the <code>allowWhiteSpace</code> option, either at
+instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.</p>
+<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' =&gt; true]);
 
-$validator-&gt;isValid(1234.5); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsFloat();
-$validator-&gt;setLocale('en_US');
+if ($validator-&gt;isValid('Abcd and efg')) {
+    // Value contains only allowed chars
+}</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alpha();
+$validator-&gt;setAllowWhiteSpace(true);
 
-$validator-&gt;isValid(1234.5); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('en_US');
-
-$validator = new Laminas\I18n\Validator\IsFloat();
-
-$validator-&gt;isValid(1234.5); // true</code></pre></div></div></div>
+if ($validator-&gt;isValid('Abcd and efg')) {
+    // Value contains only allowed chars
+}</code></pre></div></div></div>
 
 <h3>Get Current Value</h3>
-<p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsFloat(['locale' =&gt; 'en_US']);
+<p>To get the current value of this option, use the <code>getAllowWhiteSpace()</code> method.</p>
+<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' =&gt; true]);
 
-echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
+$result = $validator-&gt;getAllowWhiteSpace(); // true</code></pre>
 <h3>Default Value</h3>
-<p>By default, if no locale is provided, <code>IsFloat</code> will use the system locale
-provided by PHP's <code>Locale::getDefault()</code>.</p>
+<p>The default value of this option is <code>false</code> that means whitespace characters are
+not allowed.</p>
+<h2 id="using-different-languages">Using different Languages</h2>
+<p>When using <code>Laminas\I18n\Validator\Alpha</code>, the language provided by the user's
+browser will be used to set the allowed characters. For locales outside of
+English, this means that additional alphabetic characters may be used
+&mdash; such as <code>ä</code>, <code>ö</code> and <code>ü</code> from the German alphabet.</p>
+<p>Which characters are allowed depends completely on the language, as every
+language defines its own set of characters.</p>
+<p>Three languages supported by PHP's internationalization extension (<code>ext/intl</code>),
+however, define multibyte characters, which cannot be matched as alphabetic
+characters using normal string or regular expression options. These include
+<em>Korean</em>, <em>Japanese</em>, and <em>Chinese</em>.</p>
+<p>As a result, when using the <code>Alpha</code> validator with these languages, the input
+will be validated using the English alphabet.</p>
 
 
 
@@ -419,7 +432,7 @@ provided by PHP's <code>Locale::getDefault()</code>.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../date-time/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -428,7 +441,7 @@ provided by PHP's <code>Locale::getDefault()</code>.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../is-int/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../date-time/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -442,7 +455,7 @@ provided by PHP's <code>Locale::getDefault()</code>.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/is-float.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/alpha.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -525,8 +538,8 @@ provided by PHP's <code>Locale::getDefault()</code>.</p>
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Alpha</a>
     </li>
 
             
@@ -537,8 +550,8 @@ provided by PHP's <code>Locale::getDefault()</code>.</p>
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">IsFloat</a>
+    <li class="subnavigation__list-item ">
+        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
