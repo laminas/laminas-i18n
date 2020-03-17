@@ -7,8 +7,10 @@ internationalization extension (`ext/intl`).
 
 ## Basic Usage
 
-The value for the date must be a `DateTime` instance, an integer representing a
-Unix timestamp value, or an array in the format returned by `localtime()`.
+The value for the date must be a
+[`DateTimeInterface`](https://www.php.net/DateTimeInterface) object, an integer
+representing a Unix timestamp value, or an array in the format returned by
+[`localtime()` function](https://www.php.net/localtime).
 
 Example with a `DateTime` instance:
 
