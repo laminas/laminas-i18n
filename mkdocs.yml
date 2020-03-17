@@ -15,7 +15,6 @@ nav:
         - NumberFormat: filters/number-format.md
         - NumberParse: filters/number-parse.md
     - Reference:
-        - 'View Helpers': view-helpers.md
         - Validators:
             - Introduction: validators/introduction.md
             - Alnum: validators/alnum.md
@@ -40,6 +39,7 @@ nav:
     - '_hidden-legacy-page-links':
         - '_filters': filters.md
         - '_validators': validators.md
+        - '_view-helpers': view-helpers.md
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
 repo_url: 'https://github.com/laminas/laminas-i18n'
