@@ -160,9 +160,9 @@ $filter->setFormatter($formatter);
 
 > ### Notice
 >
-> If a custom formatter is set, the locale and / or the style changes will
-> have no effect anymore. Set a new number formatter to change the locale and /
-> or the style.
+> If a custom formatter is set, the locale and/or the style changes will
+> have no effect anymore. Set a new number formatter to change the locale and/or
+> the style.
 
 ### Get Current Value
 
