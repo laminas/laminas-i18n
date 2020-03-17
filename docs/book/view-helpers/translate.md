@@ -61,4 +61,4 @@ echo $this->translate('car', 'default', 'de_DE'); // 'Auto'
 ### Default Value
 
 By default, if no locale is provided, `TranslatePlural` will use the system
-locale provide by PHP's `Locale::getDefault()`.
+locale provided by PHP's `Locale::getDefault()`.

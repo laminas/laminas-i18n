@@ -35,7 +35,7 @@ echo $this->dateFormat([
 ```
 
 By default, if no locale is provided, `DateFormat` will use the system
-locale provide by PHP's `Locale` class and the `getDefault()` method.
+locale provided by PHP's `Locale` class and the `getDefault()` method.
 
 (The above example assumes that the environment locale is set to `en_US`.)
 
@@ -152,7 +152,7 @@ echo $this->plugin('dateFormat')->getLocale(); // 'en_US'
 ### Default Value
 
 By default, if no locale is provided, `DateFormat` will use the system
-locale provide by PHP's `Locale::getDefault()`.
+locale provided by PHP's `Locale::getDefault()`.
 
 ## Using Timezone
 
@@ -180,4 +180,4 @@ echo $this->plugin('dateFormat')->getTimezone(); // 'America/New_York'
 ### Default Value
 
 By default, if no timezone is provided, `DateFormat` will use the system
-timezone provide by PHP's `date_default_timezone_get()`.
+timezone provided by PHP's `date_default_timezone_get()`.

@@ -11,7 +11,7 @@ echo $this->currencyFormat(1234.56, 'USD'); // '$1,234.56'
 ```
 
 By default, if no locale is provided, `CurrencyFormat` will use the system
-locale provide by PHP's `Locale` class and the `getDefault()` method.
+locale provided by PHP's `Locale` class and the `getDefault()` method.
 
 (The above example assumes that the environment locale is set to `en_US`.)
 
@@ -96,7 +96,7 @@ echo $this->plugin('currencyFormat')->getLocale(); // 'de'
 ### Default Value
 
 By default, if no locale is provided, `CurrencyFormat` will use the system
-locale provide by PHP's `Locale::getDefault()`.
+locale provided by PHP's `Locale::getDefault()`.
 
 ## Define custom Pattern
 

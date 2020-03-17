@@ -11,7 +11,7 @@ echo $this->numberFormat(1000); // '1,000'
 ```
 
 By default, if no locale is provided, `NumberFormat` will use the system
-locale provide by PHP's `Locale` class and the `getDefault()` method.
+locale provided by PHP's `Locale` class and the `getDefault()` method.
 
 (The above example assumes that the environment locale is set to `en_US`.)
 
@@ -118,7 +118,7 @@ echo $this->plugin('numberFormat')->getLocale(); // 'en_US'
 ### Default Value
 
 By default, if no locale is provided, `NumberFormat` will use the system
-locale provide by PHP's `Locale::getDefault()`.
+locale provided by PHP's `Locale::getDefault()`.
 
 ## Using Decimals
 
