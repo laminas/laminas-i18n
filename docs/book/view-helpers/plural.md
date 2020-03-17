@@ -20,8 +20,8 @@ Internally, the `Plural` helper uses the `Laminas\I18n\Translator\Plural\Rule` c
 Defining plural rules is left to the developer. To help you with this process,
 here are some links with up-to-date plural rules for tons of languages:
 
-- [http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html](http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html)
-- [https://developer.mozilla.org/en-US/docs/Localization_and_Plurals](https://developer.mozilla.org/en-US/docs/Localization_and_Plurals)
+- [www.unicode.org](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html)
+- [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_and_Plurals)
 
 ### Define plural Rules
 

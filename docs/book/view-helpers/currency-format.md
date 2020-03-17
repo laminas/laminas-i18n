@@ -113,7 +113,7 @@ echo $this->currencyFormat(1234.56, 'EUR'); // '12345678,90 kg'
 (The above example assumes that the environment locale is set to `de`.)
 
 Valid patterns are documented at
-[ICU DecimalFormat](http://www.icu-project.org/apiref/icu4c/classDecimalFormat.html#details);
+[ICU DecimalFormat](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classDecimalFormat.html#details);
 see the [NumberFormatter::setPattern documentation](https://www.php.net/manual/numberformatter.setpattern.php)
 for more information.
 
