@@ -46,7 +46,7 @@ To get the current value of this option, use the `getAllowWhiteSpace()` method.
 ```php
 $validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' => true]);
 
-$validator->getAllowWhiteSpace(); // true
+$result = $validator->getAllowWhiteSpace(); // true
 ```
 
 ### Default Value
