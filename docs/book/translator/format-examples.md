@@ -14,7 +14,7 @@ return [
 
 ### Plural
 
-For example `languages/en_EN.php`:
+For example `languages/en_GB.php`:
 
 ```php
 return [
@@ -74,7 +74,7 @@ identifier2[] = "Zug"
 
 ### Plural
 
-For example `languages/en_EN.ini`:
+For example `languages/en_GB.ini`:
 
 ```ini
 [plural]

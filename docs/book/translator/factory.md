@@ -50,7 +50,7 @@ $translator = Laminas\I18n\Translator\Translator::factory([
     'translation_files' => [
         [
             'type'     => Laminas\I18n\Translator\Loader\PhpArray::class,
-            'filename' => __DIR__ . '/languages/en_EN.php',
+            'filename' => __DIR__ . '/languages/en_GB.php',
         ],
         [
             'type'     => Laminas\I18n\Translator\Loader\PhpArray::class,
