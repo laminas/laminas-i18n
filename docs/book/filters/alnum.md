@@ -56,7 +56,7 @@ e.g. `en_US`).
 ```php fct_label="Constructor Usage"
 $filter = new Laminas\I18n\Filter\Alnum(null, 'en_US');
 
-echo $filter->filter("This is (my) content: 123"); // "Thisismycontent123"
+echo $filter->filter('This is (my) content: 123'); // "Thisismycontent123"
 ```
 
 ```php fct_label="Setter Usage"
