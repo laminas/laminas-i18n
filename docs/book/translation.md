@@ -112,11 +112,3 @@ $translator->translatePlural($singular, $plural, $number, $textDomain, $locale);
 
 Plural translations are only available if the underlying format supports the
 translation of plural messages and plural rule definitions.
-
-## Caching
-
-In production, it makes sense to cache your translations. This not only saves
-you from loading and parsing the individual formats each time, but also
-guarantees an optimized loading procedure. To enable caching, pass a
-`Laminas\Cache\Storage\Adapter` to the `setCache()` method. To disable the cache,
-pass a `null` value to the method.
