@@ -15,6 +15,8 @@ nav:
             - IsInt: validators/is-int.md
             - PhoneNumber: validators/phone-number.md
             - PostCode: validators/post-code.md
+    - 'Application Integration':
+        - 'Stand-Alone': application-integration/stand-alone.md
     - Migration:
         - 'Migration from Versions prior to 2.4': migration/migration-to-v2.4.md
 site_name: laminas-i18n
