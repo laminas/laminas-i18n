@@ -15,7 +15,6 @@ nav:
         - NumberFormat: filters/number-format.md
         - NumberParse: filters/number-parse.md
     - Reference:
-        - 'View Helpers': view-helpers.md
         - Validators:
             - Introduction: validators/introduction.md
             - Alnum: validators/alnum.md
@@ -25,6 +24,14 @@ nav:
             - IsInt: validators/is-int.md
             - PhoneNumber: validators/phone-number.md
             - PostCode: validators/post-code.md
+    - 'View Helpers':
+        - Introduction: view-helpers/introduction.md
+        - CurrencyFormat: view-helpers/currency-format.md
+        - DateFormat: view-helpers/date-format.md
+        - NumberFormat: view-helpers/number-format.md
+        - Plural: view-helpers/plural.md
+        - Translate: view-helpers/translate.md
+        - TranslatePlural: view-helpers/translate-plural.md
     - 'Application Integration':
         - 'Stand-Alone': application-integration/stand-alone.md
     - Migration:
@@ -32,6 +39,7 @@ nav:
     - '_hidden-legacy-page-links':
         - '_filters': filters.md
         - '_validators': validators.md
+        - '_view-helpers': view-helpers.md
 site_name: laminas-i18n
 site_description: 'Provide translations for your application, and filter and validate internationalized values.'
 repo_url: 'https://github.com/laminas/laminas-i18n'
