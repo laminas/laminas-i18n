@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/translator/caching/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/view-helpers/date-format/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Caching - laminas-i18n - Laminas Docs</title>
+    <title>DateFormat - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -162,20 +162,20 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Caching</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Factory</a>
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -319,43 +319,43 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     
@@ -481,19 +481,23 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#enable-caching" class="toc__link nav-link">Enable Caching</a>
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#disable-caching" class="toc__link nav-link">Disable Caching</a>
+                        <a href="#using-date-type" class="toc__link nav-link">Using Date Type</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#clear-cache" class="toc__link nav-link">Clear Cache</a>
+                        <a href="#using-time-type" class="toc__link nav-link">Using Time Type</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#get-cache-identifier" class="toc__link nav-link">Get Cache Identifier</a>
+                        <a href="#using-locale" class="toc__link nav-link">Using Locale</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#using-timezone" class="toc__link nav-link">Using Timezone</a>
                     </li>
                 
             </ul>
@@ -516,12 +520,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Translator</li>
+                            <li class="breadcrumb-item">View Helpers</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Caching</li>
+                <li class="breadcrumb-item active" aria-current="page">DateFormat</li>
             
         
     </ol>
@@ -534,48 +538,118 @@
 
     
     
-        <h2 class="chapter__headline">Translator</h2>
+        <h2 class="chapter__headline">View Helpers</h2>
     
 
-    <h1 id="caching">Caching</h1>
-<p>In production, it makes sense to cache your translations. This not only saves
-you from loading and parsing the individual formats each time, but also
-guarantees an optimized loading procedure.</p>
-<blockquote>
-<h3>Installation requirements</h3>
-<p>The cache support of laminas-i18n depends on the
-<a href="https://docs.laminas.dev/laminas-cache/">laminas-cache</a> component, so be sure
-to have it installed before getting started:</p>
-<pre class="codehilite"><code class="language-bash">
-$ composer require laminas/laminas-cache
-</code></pre>
-</blockquote>
-<h2 id="enable-caching">Enable Caching</h2>
-<p>To enable caching, pass a <code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code>
-method.</p>
-<pre class=codehilite><code class=language-php>$translator = new Laminas\I18n\Translator\Translator();
-$cache      = Laminas\Cache\StorageFactory::factory([
-    'adapter' =&gt; [
-        'name'    =&gt; Laminas\Cache\Storage\Adapter\Filesystem::class,
-        'options' =&gt; [
-            'cache_dir' =&gt; __DIR__ . '/cache',
-        ],
-    ],
-]);
-$translator-&gt;setCache($cache);</code></pre>
-<p>The explanation of creating a cache and and using different adapters for caching
-can be found in <a href="https://docs.laminas.dev/laminas-cache/">documentation of laminas-cache</a>.</p>
-<h2 id="disable-caching">Disable Caching</h2>
-<p>To disable the cache, pass a <code>null</code> value to the <code>setCache()</code> method.</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;setCache(null);</code></pre>
-<h2 id="clear-cache">Clear Cache</h2>
-<p>To clear the cache for a specific text domain and locale, use the <code>clearCache</code>
-method.</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;clearCache('default', 'en_US');</code></pre>
-<h2 id="get-cache-identifier">Get Cache Identifier</h2>
-<p>To get the cache identifier for a specific text domain and locale, use the
-<code>getCacheId</code>  method:</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;getCacheId('default', 'en_US');</code></pre>
+    <h1 id="dateformat">DateFormat</h1>
+<p>The <code>DateFormat</code> view helper can be used to simplify <strong>rendering of localized
+date/time values</strong>. It acts as a wrapper for the
+<a href="https://www.php.net/IntlDateFormatter"><code>IntlDateFormatter</code> class</a> within PHP's
+internationalization extension (<code>ext/intl</code>).</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<p>The value for the date must be a
+<a href="https://www.php.net/DateTimeInterface"><code>DateTimeInterface</code></a> object, an integer
+representing a Unix timestamp value, or an array in the format returned by
+<a href="https://www.php.net/localtime"><code>localtime()</code> function</a>.</p>
+<p>Example with a <code>DateTime</code> instance:</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(new DateTime()); // '20190222 09:07 PM'</code></pre>
+<p>Example with an Unix timestamp:</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(1550870660); // '20190222 04:24 PM'</code></pre>
+<p>Example with the format of <code>localtime()</code>:</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat([
+    'tm_sec'  =&gt; 0,   // seconds, 0 to 59
+    'tm_min'  =&gt; 30,  // minutes, 0 to 59
+    'tm_hour' =&gt; 12,  // hours, 0 to 23
+    'tm_mday' =&gt; 5,   // day of the month, 1 to 31
+    'tm_mon'  =&gt; 4,   // month of the year, 0 (Jan) to 11 (Dec)
+    'tm_year' =&gt; 119, // years since 1900
+]); // '20190505 12:30 PM'</code></pre>
+<p>By default, if no locale is provided, <code>DateFormat</code> will use the system
+locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
+<p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
+<h3>More Examples</h3>
+<p>Format date and time:</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(
+    new DateTime(),
+    IntlDateFormatter::MEDIUM, // Date
+    IntlDateFormatter::MEDIUM  // Time
+); // 'Feb 22, 2019, 9:07:38 PM'</code></pre>
+<p>Format only a date:</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(
+    new DateTime(),
+    IntlDateFormatter::LONG, // Date
+    IntlDateFormatter::NONE  // Time
+); // 'Feb 22, 2019'</code></pre>
+<p>Format only a time:</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(
+    new DateTime(),
+    IntlDateFormatter::NONE, // Date
+    IntlDateFormatter::SHORT // Time
+); // '9:07 PM'</code></pre>
+<p>(The above examples assumes that the environment locale is set to <code>en_US</code>.)</p>
+<h2 id="using-date-type">Using Date Type</h2>
+<p>Sets date type to use (none, short, medium, long, full).</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(new DateTime(), IntlDateFormatter::MEDIUM); // 'Feb 22, 2019'</code></pre>
+<p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
+<p>Possible values for the date type option are the following
+<a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
+<ul>
+<li><code>IntlDateFormatter::NONE</code> - Do not include this element</li>
+<li><code>IntlDateFormatter::FULL</code> - Fullstyle (Tuesday, April 12, 1952 AD)</li>
+<li><code>IntlDateFormatter::LONG</code> - Long style (January 12, 1952)</li>
+<li><code>IntlDateFormatter::MEDIUM</code> - Medium style (Jan 12, 1952)</li>
+<li><code>IntlDateFormatter::SHORT</code> - Short style (12/13/52)</li>
+</ul>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
+<h2 id="using-time-type">Using Time Type</h2>
+<p>Sets time type to use (none, short, medium, long, full).</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(new DateTime(), IntlDateFormatter::NONE, IntlDateFormatter::MEDIUM);
+// '9:41:58 PM'</code></pre>
+<p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
+<p>Possible values for the date type option are the following
+<a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
+<ul>
+<li><code>IntlDateFormatter::NONE</code> - Do not include this element</li>
+<li><code>IntlDateFormatter::FULL</code> - Fullstyle (3:30:42pm PST)</li>
+<li><code>IntlDateFormatter::LONG</code> - Long style (3:30:32pm)</li>
+<li><code>IntlDateFormatter::MEDIUM</code> - Medium style (3:30:32pm)</li>
+<li><code>IntlDateFormatter::SHORT</code> - Short style (3:30pm)</li>
+</ul>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
+<h2 id="using-locale">Using Locale</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-8><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-8-0_php-panel role=tab id=tab-group-8-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-8-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-8-1_php-panel role=tab id=tab-group-8-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-8-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-8-2_php-panel role=tab id=tab-group-8-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-8-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-8-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-8-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(new DateTime(), null, null, 'de_DE');
+// 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div><div id=tab-group-8-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-8-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('dateFormat')-&gt;setLocale('de_DE');
+
+echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div><div id=tab-group-8-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-8-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('de_DE');
+
+echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div></div></div>
+
+<h3>Get current Value</h3>
+<p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('dateFormat')-&gt;setLocale('en_US');
+
+echo $this-&gt;plugin('dateFormat')-&gt;getLocale(); // 'en_US'</code></pre>
+<h3>Default Value</h3>
+<p>By default, if no locale is provided, <code>DateFormat</code> will use the system
+locale provided by PHP's <code>Locale::getDefault()</code>.</p>
+<h2 id="using-timezone">Using Timezone</h2>
+<p>By default, the system's default timezone will be used when formatting. This
+overrides any timezone that may be set inside a <code>DateTime</code> object. To change the
+timezone when formatting, use the <code>setTimezone()</code> method.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('dateFormat')-&gt;setTimezone('America/New_York');
+
+echo $this-&gt;dateFormat(new DateTime(), null, null, 'en_US');
+// 'Friday, February 22, 2019 at 4:20:21 PM Eastern Standard Time'</code></pre>
+<h3>Get current Value</h3>
+<p>To get the current value of this option, use the <code>getTimezone()</code> method.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('dateFormat')-&gt;setTimezone('America/New_York');
+
+echo $this-&gt;plugin('dateFormat')-&gt;getTimezone(); // 'America/New_York'</code></pre>
+<h3>Default Value</h3>
+<p>By default, if no timezone is provided, <code>DateFormat</code> will use the system
+timezone provided by PHP's <code>date_default_timezone_get()</code>.</p>
 
 
 
@@ -586,7 +660,7 @@ method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../translation/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../currency-format/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -595,7 +669,7 @@ method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../factory/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../number-format/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -609,7 +683,7 @@ method.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/translator/caching.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/view-helpers/date-format.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -677,20 +751,20 @@ method.</p>
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Caching</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Factory</a>
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -834,43 +908,43 @@ method.</p>
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     

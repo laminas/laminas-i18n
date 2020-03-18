@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/translator/caching/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/view-helpers/currency-format/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Caching - laminas-i18n - Laminas Docs</title>
+    <title>CurrencyFormat - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -162,20 +162,20 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Caching</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Factory</a>
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -319,43 +319,43 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CurrencyFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     
@@ -481,19 +481,27 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#enable-caching" class="toc__link nav-link">Enable Caching</a>
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#disable-caching" class="toc__link nav-link">Disable Caching</a>
+                        <a href="#using-currency-code" class="toc__link nav-link">Using Currency Code</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#clear-cache" class="toc__link nav-link">Clear Cache</a>
+                        <a href="#show-or-hide-decimals" class="toc__link nav-link">Show or hide Decimals</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#get-cache-identifier" class="toc__link nav-link">Get Cache Identifier</a>
+                        <a href="#using-locale" class="toc__link nav-link">Using Locale</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#define-custom-pattern" class="toc__link nav-link">Define custom Pattern</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#multiple-executions" class="toc__link nav-link">Multiple Executions</a>
                     </li>
                 
             </ul>
@@ -516,12 +524,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Translator</li>
+                            <li class="breadcrumb-item">View Helpers</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Caching</li>
+                <li class="breadcrumb-item active" aria-current="page">CurrencyFormat</li>
             
         
     </ol>
@@ -534,48 +542,82 @@
 
     
     
-        <h2 class="chapter__headline">Translator</h2>
+        <h2 class="chapter__headline">View Helpers</h2>
     
 
-    <h1 id="caching">Caching</h1>
-<p>In production, it makes sense to cache your translations. This not only saves
-you from loading and parsing the individual formats each time, but also
-guarantees an optimized loading procedure.</p>
-<blockquote>
-<h3>Installation requirements</h3>
-<p>The cache support of laminas-i18n depends on the
-<a href="https://docs.laminas.dev/laminas-cache/">laminas-cache</a> component, so be sure
-to have it installed before getting started:</p>
-<pre class="codehilite"><code class="language-bash">
-$ composer require laminas/laminas-cache
-</code></pre>
-</blockquote>
-<h2 id="enable-caching">Enable Caching</h2>
-<p>To enable caching, pass a <code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code>
-method.</p>
-<pre class=codehilite><code class=language-php>$translator = new Laminas\I18n\Translator\Translator();
-$cache      = Laminas\Cache\StorageFactory::factory([
-    'adapter' =&gt; [
-        'name'    =&gt; Laminas\Cache\Storage\Adapter\Filesystem::class,
-        'options' =&gt; [
-            'cache_dir' =&gt; __DIR__ . '/cache',
-        ],
-    ],
-]);
-$translator-&gt;setCache($cache);</code></pre>
-<p>The explanation of creating a cache and and using different adapters for caching
-can be found in <a href="https://docs.laminas.dev/laminas-cache/">documentation of laminas-cache</a>.</p>
-<h2 id="disable-caching">Disable Caching</h2>
-<p>To disable the cache, pass a <code>null</code> value to the <code>setCache()</code> method.</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;setCache(null);</code></pre>
-<h2 id="clear-cache">Clear Cache</h2>
-<p>To clear the cache for a specific text domain and locale, use the <code>clearCache</code>
-method.</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;clearCache('default', 'en_US');</code></pre>
-<h2 id="get-cache-identifier">Get Cache Identifier</h2>
-<p>To get the cache identifier for a specific text domain and locale, use the
-<code>getCacheId</code>  method:</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;getCacheId('default', 'en_US');</code></pre>
+    <h1 id="currencyformat">CurrencyFormat</h1>
+<p>The <code>CurrencyFormat</code> view helper can be used to simplify <strong>rendering of
+localized currency values</strong>. It acts as a wrapper for the
+<a href="https://www.php.net/NumberFormatter"><code>NumberFormatter</code> class</a> within the PHP's
+internationalization extension (<code>ext/intl</code>).</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<pre class=codehilite><code class=language-php>echo $this-&gt;currencyFormat(1234.56, 'USD'); // '$1,234.56'</code></pre>
+<p>By default, if no locale is provided, <code>CurrencyFormat</code> will use the system
+locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
+<p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
+<h2 id="using-currency-code">Using Currency Code</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;currencyFormat(1234.56, 'EUR'); // '1.234,56 €'</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setCurrencyCode('EUR');
+
+echo $this-&gt;currencyFormat(1234.56); // '1.234,56 €'</code></pre></div></div></div>
+
+<p>(The above example assumes that the environment locale is set to <code>de</code>.)</p>
+<h3>Get current Value</h3>
+<p>To get the current value of this option, use the <code>getCurrencyCode()</code> method.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setCurrencyCode('USD');
+
+echo $this-&gt;plugin('currencyFormat')-&gt;getCurrencyCode(); // 'USD'</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>null</code>.</p>
+<h2 id="show-or-hide-decimals">Show or hide Decimals</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;currencyFormat(1234.56, 'EUR', false); // '1.234 €'</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setShouldShowDecimals(false);
+
+echo $this-&gt;currencyFormat(1234.56); // '1.234 €'</code></pre></div></div></div>
+
+<p>(The above example assumes that the environment locale is set to <code>de</code>.)</p>
+<h3>Get current Value</h3>
+<p>To get the current value of this option, use the <code>shouldShowDecimals()</code> method.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setShouldShowDecimals(true);
+
+echo $this-&gt;plugin('currencyFormat')-&gt;shouldShowDecimals(); // true</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>null</code> that means the decimals are showing.</p>
+<h2 id="using-locale">Using Locale</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-5><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-5-0_php-panel role=tab id=tab-group-5-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-5-1_php-panel role=tab id=tab-group-5-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-5-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-5-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;currencyFormat(1234.56, 'EUR', null, 'de'); // '1.234,56 €'</code></pre></div><div id=tab-group-5-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-5-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setLocale('de');
+
+echo $this-&gt;currencyFormat(1234.56, 'EUR'); // '1.234,56 €'</code></pre></div></div></div>
+
+<h3>Get current Value</h3>
+<p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setLocale('de');
+
+echo $this-&gt;plugin('currencyFormat')-&gt;getLocale(); // 'de'</code></pre>
+<h3>Default Value</h3>
+<p>By default, if no locale is provided, <code>CurrencyFormat</code> will use the system
+locale provided by PHP's <code>Locale::getDefault()</code>.</p>
+<h2 id="define-custom-pattern">Define custom Pattern</h2>
+<div class=md-fenced-code-tabs id=tab-tab-group-7><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-7-0_php-panel role=tab id=tab-group-7-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-7-1_php-panel role=tab id=tab-group-7-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-7-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-7-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;currencyFormat(1234.56, 'EUR', null, 'de', '#0.# kg'); // '12345678,90 kg'</code></pre></div><div id=tab-group-7-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-7-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyformat')-&gt;setCurrencyPattern('#0.# kg');
+
+echo $this-&gt;currencyFormat(1234.56, 'EUR'); // '12345678,90 kg'</code></pre></div></div></div>
+
+<p>(The above example assumes that the environment locale is set to <code>de</code>.)</p>
+<p>Valid patterns are documented at
+<a href="https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classDecimalFormat.html#details">ICU DecimalFormat</a>;
+see the <a href="https://www.php.net/manual/numberformatter.setpattern.php">NumberFormatter::setPattern documentation</a>
+for more information.</p>
+<h3>Get current Value</h3>
+<p>To get the current value of this option, use the <code>getCurrencyPattern()</code> method.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setCurrencyPattern('#0.# kg');
+
+echo $this-&gt;plugin('currencyFormat')-&gt;getCurrencyPattern(); // '#0.# kg'</code></pre>
+<h3>Default Value</h3>
+<p>The default value of this option is <code>null</code>.</p>
+<h2 id="multiple-executions">Multiple Executions</h2>
+<p>If the different options are set prior to formatting then it will be applied
+each time the helper is used.</p>
+<pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyformat')-&gt;setCurrencyCode('USD')-&gt;setLocale('en_US');
+
+echo $this-&gt;currencyFormat(1234.56); // '$1,234.56'
+echo $this-&gt;currencyFormat(5678.90); // '$5,678.90'</code></pre>
 
 
 
@@ -586,7 +628,7 @@ method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../translation/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../introduction/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -595,7 +637,7 @@ method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../factory/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../date-format/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -609,7 +651,7 @@ method.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/translator/caching.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/view-helpers/currency-format.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -677,20 +719,20 @@ method.</p>
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Caching</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Factory</a>
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -834,43 +876,43 @@ method.</p>
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CurrencyFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     

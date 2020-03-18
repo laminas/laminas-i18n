@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/translator/caching/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/view-helpers/introduction/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Caching - laminas-i18n - Laminas Docs</title>
+    <title>Introduction - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -162,20 +162,20 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Caching</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Factory</a>
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -318,44 +318,44 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     
@@ -481,19 +481,7 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#enable-caching" class="toc__link nav-link">Enable Caching</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#disable-caching" class="toc__link nav-link">Disable Caching</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#clear-cache" class="toc__link nav-link">Clear Cache</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#get-cache-identifier" class="toc__link nav-link">Get Cache Identifier</a>
+                        <a href="#abstract-translator-helper" class="toc__link nav-link">Abstract Translator Helper</a>
                     </li>
                 
             </ul>
@@ -516,12 +504,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Translator</li>
+                            <li class="breadcrumb-item">View Helpers</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Caching</li>
+                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
             
         
     </ol>
@@ -534,48 +522,62 @@
 
     
     
-        <h2 class="chapter__headline">Translator</h2>
+        <h2 class="chapter__headline">View Helpers</h2>
     
 
-    <h1 id="caching">Caching</h1>
-<p>In production, it makes sense to cache your translations. This not only saves
-you from loading and parsing the individual formats each time, but also
-guarantees an optimized loading procedure.</p>
+    <h1 id="introduction">Introduction</h1>
+<p>laminas-i18n ships with a set of laminas-view helper classes related to
+internationalization.</p>
+<ul>
+<li><a href="../currency-format/">CurrencyFormat</a></li>
+<li><a href="../date-format/">DateFormat</a></li>
+<li><a href="../number-format/">NumberFormat</a></li>
+<li><a href="../plural/">Plural</a></li>
+<li><a href="../translate/">Translate</a></li>
+<li><a href="../translate-plural/">TranslatePlural</a></li>
+</ul>
+<p>These helpers are based on Laminas component for the view layer:
+<a href="https://docs.laminas.dev/laminas-view/">laminas-view</a> and their
+<a href="https://docs.laminas.dev/laminas-view/helpers/intro/">helpers</a>.</p>
 <blockquote>
-<h3>Installation requirements</h3>
-<p>The cache support of laminas-i18n depends on the
-<a href="https://docs.laminas.dev/laminas-cache/">laminas-cache</a> component, so be sure
+<h3>Installation Requirements</h3>
+<p>The view-helper support of laminas-i18n depends on the
+<a href="https://docs.laminas.dev/laminas-view/">laminas-view</a> component, so be sure
 to have it installed before getting started:</p>
 <pre class="codehilite"><code class="language-bash">
-$ composer require laminas/laminas-cache
+$ composer require laminas/laminas-view
 </code></pre>
 </blockquote>
-<h2 id="enable-caching">Enable Caching</h2>
-<p>To enable caching, pass a <code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code>
-method.</p>
-<pre class=codehilite><code class=language-php>$translator = new Laminas\I18n\Translator\Translator();
-$cache      = Laminas\Cache\StorageFactory::factory([
-    'adapter' =&gt; [
-        'name'    =&gt; Laminas\Cache\Storage\Adapter\Filesystem::class,
-        'options' =&gt; [
-            'cache_dir' =&gt; __DIR__ . '/cache',
-        ],
-    ],
-]);
-$translator-&gt;setCache($cache);</code></pre>
-<p>The explanation of creating a cache and and using different adapters for caching
-can be found in <a href="https://docs.laminas.dev/laminas-cache/">documentation of laminas-cache</a>.</p>
-<h2 id="disable-caching">Disable Caching</h2>
-<p>To disable the cache, pass a <code>null</code> value to the <code>setCache()</code> method.</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;setCache(null);</code></pre>
-<h2 id="clear-cache">Clear Cache</h2>
-<p>To clear the cache for a specific text domain and locale, use the <code>clearCache</code>
-method.</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;clearCache('default', 'en_US');</code></pre>
-<h2 id="get-cache-identifier">Get Cache Identifier</h2>
-<p>To get the cache identifier for a specific text domain and locale, use the
-<code>getCacheId</code>  method:</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;getCacheId('default', 'en_US');</code></pre>
+<h2 id="abstract-translator-helper">Abstract Translator Helper</h2>
+<p>The <code>AbstractTranslatorHelper</code> view helper is used as a base abstract class for
+any helpers that need to translate content. It provides an implementation for
+the <code>Laminas\I18n\Translator\TranslatorAwareInterface</code>, allowing translator
+injection as well as text domain injection.</p>
+<h3>Public Methods</h3>
+<h4>setTranslator()</h4>
+<pre class=codehilite><code class=language-php>setTranslator(Translator $translator, string $textDomain = null) : void</code></pre>
+<p>Sets the <code>Laminas\I18n\Translator\Translator</code> instance to use in the helper. The
+<code>$textDomain</code> argument is optional, and provided as a convenienct to allow
+setting both the translator and text domain simultaneously.</p>
+<h4>getTranslator()</h4>
+<pre class=codehilite><code class=language-php>getTranslator() : Translator</code></pre>
+<p>Returns the <code>Laminas\I18n\Translator\Translator</code> instance used by the helper.</p>
+<h4>hasTranslator()</h4>
+<pre class=codehilite><code class=language-php>hasTranslator() : bool</code></pre>
+<p>Returns true if the helper composes a <code>Laminas\I18n\Translator\Translator</code>
+instance.</p>
+<h4>setTranslatorEnabled()</h4>
+<pre class=codehilite><code class=language-php>setTranslatorEnabled(bool $enabled) : void</code></pre>
+<p>Sets whether or not translations are enabled.</p>
+<h4>isTranslatorEnabled()</h4>
+<pre class=codehilite><code class=language-php>isTranslatorEnabled() : bool</code></pre>
+<p>Returns true if translations are enabled.</p>
+<h4>setTranslatorTextDomain()</h4>
+<pre class=codehilite><code class=language-php>setTranslatorTextDomain(string $textDomain) : void</code></pre>
+<p>Sets the default translation text domain to use with the helper.</p>
+<h4>getTranslatorTextDomain()</h4>
+<pre class=codehilite><code class=language-php>getTranslatorTextDomain() : string</code></pre>
+<p>Returns the current text domain used by the helper.</p>
 
 
 
@@ -586,7 +588,7 @@ method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../translation/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../validators/post-code/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -595,7 +597,7 @@ method.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../factory/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../currency-format/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -609,7 +611,7 @@ method.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/translator/caching.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/view-helpers/introduction.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -677,20 +679,20 @@ method.</p>
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Caching</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Factory</a>
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -833,44 +835,44 @@ method.</p>
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     
