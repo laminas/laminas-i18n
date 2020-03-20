@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#29](https://github.com/laminas/laminas-i18n/pull/29) fixes typehint in `DateFormat` view helper.
 
 ## 2.10.1 - 2019-12-12
 
