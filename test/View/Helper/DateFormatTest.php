@@ -10,6 +10,7 @@ namespace LaminasTest\I18n\View\Helper;
 
 use DateTime;
 use IntlDateFormatter;
+use IntlGregorianCalendar;
 use Laminas\I18n\View\Helper\DateFormat as DateFormatHelper;
 use Locale;
 use PHPUnit\Framework\TestCase;
@@ -299,5 +300,14 @@ class DateFormatTest extends TestCase
         $date = new DateTime('2018-01-01');
 
         self::assertSame('Jan 1, 2018', $helper($date, IntlDateFormatter::MEDIUM));
+    }
+
+    public function testIntlCalendarIsHandledAsWell()
+    {
+        $calendar = new IntlGregorianCalendar(2013, 6, 1);
+
+        $helper = new DateFormatHelper();
+        $helper->setTimezone('Europe/Berlin');
+        $this->assertEquals('01-07-2013', $helper->__invoke($calendar, null, null, 'it_IT', 'dd-MM-Y'));
     }
 }
