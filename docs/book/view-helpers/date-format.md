@@ -7,15 +7,23 @@ internationalization extension (`ext/intl`).
 
 ## Basic Usage
 
-The value for the date must be a
-[`DateTimeInterface`](https://www.php.net/DateTimeInterface) object, an integer
-representing a Unix timestamp value, or an array in the format returned by
-[`localtime()` function](https://www.php.net/localtime).
+The value for the date must be:
+
+* an object which implements the [`DateTimeInterface`](https://www.php.net/DateTimeInterface),
+* an [`IntlCalendar`](https://www.php.net/IntlCalendar) object,
+* an integer representing a Unix timestamp value
+* or an array in the format returned by [`localtime()` function](https://www.php.net/localtime)
 
 Example with a `DateTime` instance:
 
 ```php
 echo $this->dateFormat(new DateTime()); // '20190222 09:07 PM'
+```
+
+Example with an `IntlCalendar` instance:
+
+```php
+echo $this->dateFormat(IntlCalendar::createInstance()); // '20190222 09:07 PM'
 ```
 
 Example with an Unix timestamp:
