@@ -26,7 +26,7 @@ use IntlDateFormatter;
  * @example @var \Laminas\View\Renderer\PhpRenderer|\Laminas\I18n\View\HelperTrait $this
  *
  * @method string currencyFormat(float $number, string|null $currencyCode = null, bool|null $showDecimals = null, string|null $locale = null, string|null $pattern = null)
- * @method string dateFormat(\DateTimeInterface|int|array $date, int $dateType = IntlDateFormatter::NONE, int $timeType = IntlDateFormatter::NONE, string|null $locale = null, string|null $pattern = null)
+ * @method string dateFormat(\DateTimeInterface|\IntlCalendar|int|array $date, int $dateType = IntlDateFormatter::NONE, int $timeType = IntlDateFormatter::NONE, string|null $locale = null, string|null $pattern = null)
  * @method string numberFormat(int|float $number, int|null $formatStyle = null, int|null $formatType = null, string|null $locale = null, int|null $decimals = null, array|null $textAttributes = null)
  * @method string plural(array|string $strings, int $number)
  * @method string translate(string $message, string|null $textDomain = null, string|null $locale = null)
