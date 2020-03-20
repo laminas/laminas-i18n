@@ -547,12 +547,17 @@ date/time values</strong>. It acts as a wrapper for the
 <a href="https://www.php.net/IntlDateFormatter"><code>IntlDateFormatter</code> class</a> within PHP's
 internationalization extension (<code>ext/intl</code>).</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<p>The value for the date must be a
-<a href="https://www.php.net/DateTimeInterface"><code>DateTimeInterface</code></a> object, an integer
-representing a Unix timestamp value, or an array in the format returned by
-<a href="https://www.php.net/localtime"><code>localtime()</code> function</a>.</p>
+<p>The value for the date must be:</p>
+<ul>
+<li>an object which implements the <a href="https://www.php.net/DateTimeInterface"><code>DateTimeInterface</code></a>,</li>
+<li>an <a href="https://www.php.net/IntlCalendar"><code>IntlCalendar</code></a> object,</li>
+<li>an integer representing a Unix timestamp value</li>
+<li>or an array in the format returned by <a href="https://www.php.net/localtime"><code>localtime()</code> function</a></li>
+</ul>
 <p>Example with a <code>DateTime</code> instance:</p>
 <pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(new DateTime()); // '20190222 09:07 PM'</code></pre>
+<p>Example with an <code>IntlCalendar</code> instance:</p>
+<pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(IntlCalendar::createInstance()); // '20190222 09:07 PM'</code></pre>
 <p>Example with an Unix timestamp:</p>
 <pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(1550870660); // '20190222 04:24 PM'</code></pre>
 <p>Example with the format of <code>localtime()</code>:</p>
@@ -619,10 +624,10 @@ locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</c
 <h3>Default Value</h3>
 <p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
 <h2 id="using-locale">Using Locale</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-8><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-8-0_php-panel role=tab id=tab-group-8-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-8-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-8-1_php-panel role=tab id=tab-group-8-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-8-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-8-2_php-panel role=tab id=tab-group-8-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-8-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-8-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-8-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(new DateTime(), null, null, 'de_DE');
-// 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div><div id=tab-group-8-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-8-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('dateFormat')-&gt;setLocale('de_DE');
+<div class=md-fenced-code-tabs id=tab-tab-group-9><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-9-0_php-panel role=tab id=tab-group-9-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-9-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-9-1_php-panel role=tab id=tab-group-9-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-9-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-9-2_php-panel role=tab id=tab-group-9-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-9-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-9-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-9-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;dateFormat(new DateTime(), null, null, 'de_DE');
+// 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div><div id=tab-group-9-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-9-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('dateFormat')-&gt;setLocale('de_DE');
 
-echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div><div id=tab-group-8-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-8-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('de_DE');
+echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div><div id=tab-group-9-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-9-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('de_DE');
 
 echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre></div></div></div>
 
