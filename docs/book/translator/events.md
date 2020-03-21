@@ -86,11 +86,12 @@ The default value of this option is `false`.
 ```php
 $eventManager = $translator->getEventManager(); // instance of `Laminas\EventManager\EventManager`
 ```
+
 > ### Automatic instantiation
 > 
 > The translator can create an event manager instance independently. If no custom
-  event manager is set for the translator, the `getEventManager()` method
-  returns this instance.
+> event manager is set for the translator, the `getEventManager()` method
+> returns this instance.
 
 #### Default Value
 
