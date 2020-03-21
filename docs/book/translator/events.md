@@ -35,7 +35,8 @@ $translator->enableEventManager();
 $translator->getEventManager()->attach(
     Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION,
     static function (Laminas\EventManager\EventInterface $event) {
-        var_dump($event->getName()); // 'missingTranslation'
+        var_dump($event->getName());
+        // 'missingTranslation' (Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION)
         var_dump($event->getParams());
         // ['message' => 'car', 'locale' => 'de_DE', 'text_domain' => 'default']
     }
