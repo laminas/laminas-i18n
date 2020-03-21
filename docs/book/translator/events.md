@@ -118,22 +118,37 @@ $translator->getEventManager()->attach(
 );
 ```
 
-## Event Target and Parameters
+### Event Target and Parameters
 
-As target of the events the current instance of
+In the previous code example the variable `$event` contains an instance of 
+`Laminas\EventManager\Event` which implements `Laminas\EventManager\EventInterface`.
+
+As target of the event the current instance of
 `Laminas\I18n\Translator\Translator` is set.
+
+```php
+$target = $event->getTarget(); // instance of Laminas\I18n\Translator\Translator
+```
 
 For the event `Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION`
 the following parameters are set:
 
-* `message`
-* `locale`
-* `text_domain`
+* `message` (string)
+* `locale` (string)
+* `text_domain` (string)
+
+```php
+$params = $event->getParams(); // ['message' => '…', 'locale' => '…', 'text_domain' => '…']
+```
 
 For the event `Laminas\I18n\Translator\Translator::EVENT_NO_MESSAGES_LOADED`:
 
-* `locale`
-* `text_domain`
+* `locale` (string)
+* `text_domain` (string)
+
+```php
+$params = $event->getParams(); // ['locale' => '…', 'text_domain' => '…']
+```
 
 ## Example
 
