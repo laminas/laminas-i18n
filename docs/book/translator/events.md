@@ -84,7 +84,7 @@ The default value of this option is `false`.
 ### Get Event Manager
 
 ```php
-$eventManager = $translator->getEventManager(); // instance of `Laminas\EventManager\EventManager`
+$eventManager = $translator->getEventManager(); // instance of Laminas\EventManager\EventManager
 ```
 
 > ### Automatic instantiation
