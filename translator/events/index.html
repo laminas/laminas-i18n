@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provide translations for your application, and filter and validate internationalized values.">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/alnum/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/translator/events/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Alnum - laminas-i18n - Laminas Docs</title>
+    <title>Events - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -163,25 +163,25 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+        <a href="../caching/" class="subnavigation__link">Caching</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Events</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/events/" class="subnavigation__link">Events</a>
+        <a href="../factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -256,49 +256,49 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../introduction/" class="subnavigation__link">Introduction</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Alnum</a>
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-int/" class="subnavigation__link">IsInt</a>
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
@@ -491,11 +491,15 @@
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#using-whitespace" class="toc__link nav-link">Using Whitespace</a>
+                        <a href="#using-event-manager" class="toc__link nav-link">Using Event Manager</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#using-different-languages" class="toc__link nav-link">Using different Languages</a>
+                        <a href="#attach-event-listener" class="toc__link nav-link">Attach Event Listener</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#example" class="toc__link nav-link">Example</a>
                     </li>
                 
             </ul>
@@ -518,19 +522,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Validators</li>
+                            <li class="breadcrumb-item">Translator</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Alnum</li>
+                <li class="breadcrumb-item active" aria-current="page">Events</li>
             
         
     </ol>
@@ -543,49 +540,157 @@
 
     
     
-        <h2 class="chapter__headline">Validators</h2>
+        <h2 class="chapter__headline">Translator</h2>
     
 
-    <h1 id="alnum">Alnum</h1>
-<p><code>Laminas\I18n\Validator\Alnum</code> allows you to validate if a given value
-<strong>contains only alphabetical characters and digits</strong>.</p>
+    <h1 id="events">Events</h1>
+<p>The translator of laminas-i18n triggers two events during the processing of
+translations:</p>
+<ul>
+<li><code>Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION</code></li>
+<li><code>Laminas\I18n\Translator\Translator::EVENT_NO_MESSAGES_LOADED</code></li>
+</ul>
+<p>The typical usage for these events is to log missing translations and track when
+the loading of messages fails.</p>
+<blockquote>
+<h3>Installation requirements</h3>
+<p>The event support of laminas-i18n depends on the
+<a href="https://docs.laminas.dev/laminas-eventmanager/">laminas-eventmanager</a>
+component, so be sure to have it installed before getting started:</p>
+<pre class="codehilite"><code class="language-bash">
+$ composer require laminas/laminas-eventmanager
+</code></pre>
+</blockquote>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum();
+<pre class=codehilite><code class=language-php>// Set locale
+Locale::setDefault('de_DE');
 
-if ($validator-&gt;isValid('Abcd12')) {
-    // Value contains only allowed chars
-}</code></pre>
-<h2 id="using-whitespace">Using Whitespace</h2>
-<p>By default, whitespace is not accepted as it is not part of the alphabet.
-However, if you want to validate complete sentences or phrases, you may need to
-allow whitespace; this can be done via the <code>allowWhiteSpace</code> option, either at
-instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.  </p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
+// Create translator
+$translator = new Laminas\I18n\Translator\Translator();
 
-if ($validator-&gt;isValid('Abcd and 12')) {
-    // Value contains only allowed chars
-}</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum();
-$validator-&gt;setAllowWhiteSpace(true);
+// Enable event manager
+$translator-&gt;enableEventManager();
 
-if ($validator-&gt;isValid('Abcd and 12')) {
-    // Value contains only allowed chars
-}</code></pre></div></div></div>
+// Attach listener
+$translator-&gt;getEventManager()-&gt;attach(
+    Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION,
+    static function (Laminas\EventManager\EventInterface $event) {
+        var_dump($event-&gt;getName());
+        // 'missingTranslation' (Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION)
+        var_dump($event-&gt;getParams());
+        // ['message' =&gt; 'car', 'locale' =&gt; 'de_DE', 'text_domain' =&gt; 'default']
+    }
+);
 
-<h3>Get Current Value</h3>
-<p>To get the current value of this option, use the <code>getAllowWhiteSpace()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
+// Trigger related events
+echo $translator-&gt;translate('car');</code></pre>
+<h2 id="using-event-manager">Using Event Manager</h2>
+<h3>Enable Event Manager</h3>
+<p>To enable the event manager, call the <code>enableEventManager()</code> method.</p>
+<pre class=codehilite><code class=language-php>$translator-&gt;enableEventManager();</code></pre>
+<p>The event manager can also be <a href="../factory/#enable-eventmanager">enabled per factory</a>.</p>
+<h3>Disable Event Manager</h3>
+<p>To disable the event manager, call the <code>disableEventManager()</code> method.</p>
+<pre class=codehilite><code class=language-php>$translator-&gt;disableEventManager();</code></pre>
+<h3>Check Availability of Event Manager</h3>
+<p>To check the availability of the event manager, call the <code>isEventManagerEnabled()</code>
+method.</p>
+<pre class=codehilite><code class=language-php>$translator-&gt;enableEventManager();
 
-$result = $validator-&gt;getAllowWhiteSpace(); // true</code></pre>
-<h3>Default Value</h3>
-<p>The default value of this option is <code>false</code> that means whitespace characters are
-not allowed.</p>
-<h2 id="using-different-languages">Using different Languages</h2>
-<p>Several languages supported by PHP's internationalization extension (<code>ext/intl</code>)
-use alphabets where characters are formed from multiple bytes, including
-<em>Korean</em>, <em>Japanese</em>, and <em>Chinese</em>. Such languages therefore are unsupported
-with regards to the <code>Alnum</code> validator.</p>
-<p>When using the <code>Alnum</code> validator with these languages, the input will be
-validated using the English alphabet.</p>
+$result = $translator-&gt;isEventManagerEnabled(); // true</code></pre>
+<h4>Default Value</h4>
+<p>The default value of this option is <code>false</code>.</p>
+<h3>Get Event Manager</h3>
+<pre class=codehilite><code class=language-php>$eventManager = $translator-&gt;getEventManager(); // instance of Laminas\EventManager\EventManager</code></pre>
+<blockquote>
+<h3>Automatic instantiation</h3>
+<p>The translator can create an event manager instance independently. If no custom
+event manager is set for the translator, the <code>getEventManager()</code> method
+returns this instance.</p>
+</blockquote>
+<h4>Default Value</h4>
+<p>The default value of this option is an instance of
+<code>Laminas\EventManager\EventManager</code> class.</p>
+<h3>Set Custom Event Manager</h3>
+<pre class=codehilite><code class=language-php>$eventManager = Laminas\EventManager\EventManager();
+$translator-&gt;setEventManager($eventManager);</code></pre>
+<h2 id="attach-event-listener">Attach Event Listener</h2>
+<p>A listener is attached to the event manager.</p>
+<pre class=codehilite><code class=language-php>$translator-&gt;getEventManager()-&gt;attach(
+    Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION,
+    static function (Laminas\EventManager\EventInterface $event) {
+        // …
+    }
+);</code></pre>
+<h3>Event Target and Parameters</h3>
+<p>In the previous code example the variable <code>$event</code> contains an instance of 
+<code>Laminas\EventManager\Event</code> which implements <code>Laminas\EventManager\EventInterface</code>.</p>
+<p>As target of the event the current instance of
+<code>Laminas\I18n\Translator\Translator</code> is set.</p>
+<pre class=codehilite><code class=language-php>$target = $event-&gt;getTarget(); // instance of Laminas\I18n\Translator\Translator</code></pre>
+<p>For the event <code>Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION</code>
+the following parameters are set:</p>
+<ul>
+<li><code>message</code> (string)</li>
+<li><code>locale</code> (string)</li>
+<li><code>text_domain</code> (string)</li>
+</ul>
+<pre class=codehilite><code class=language-php>$params = $event-&gt;getParams(); // ['message' =&gt; '…', 'locale' =&gt; '…', 'text_domain' =&gt; '…']</code></pre>
+<p>For the event <code>Laminas\I18n\Translator\Translator::EVENT_NO_MESSAGES_LOADED</code>:</p>
+<ul>
+<li><code>locale</code> (string)</li>
+<li><code>text_domain</code> (string)</li>
+</ul>
+<pre class=codehilite><code class=language-php>$params = $event-&gt;getParams(); // ['locale' =&gt; '…', 'text_domain' =&gt; '…']</code></pre>
+<h2 id="example">Example</h2>
+<blockquote>
+<h3>Installation requirements</h3>
+<p>The following examples depends on the
+<a href="https://docs.laminas.dev/laminas-log/">laminas-log</a>
+component, so be sure to have it installed before getting started:</p>
+<pre class="codehilite"><code class="language-bash">
+$ composer require laminas/laminas-log
+</code></pre>
+</blockquote>
+<p>The following example does not add any translations to demonstrate the logging.</p>
+<pre class=codehilite><code class=language-php>// Set locale
+Locale::setDefault('de_DE');
+
+// Create file logger
+$writer = new Laminas\Log\Writer\Stream(__DIR__ . '/translator.log');
+$logger = new Laminas\Log\Logger();
+$logger-&gt;addWriter($writer);
+
+// Create translator
+$translator = new Laminas\I18n\Translator\Translator();
+
+// Omit adding translations for demonstration
+// $translator-&gt;addTranslationFile(…);
+
+// Enable event manager
+$translator-&gt;enableEventManager();
+
+// Attach listeners
+$translator-&gt;getEventManager()-&gt;attach(
+    Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION,
+    static function (Laminas\EventManager\EventInterface $event) use ($logger) {
+        $logger-&gt;error('Missing translation', $event-&gt;getParams());
+    }
+);
+$translator-&gt;getEventManager()-&gt;attach(
+    Laminas\I18n\Translator\Translator::EVENT_NO_MESSAGES_LOADED,
+    static function (Laminas\EventManager\EventInterface $event) use ($logger) {
+        $logger-&gt;error('No messages loaded', $event-&gt;getParams());
+    }
+);
+
+// Trigger event for no messages loaded and missing translation
+echo $translator-&gt;translate('car'); // 'car'</code></pre>
+<p>This creates two entries in the log file:</p>
+<pre class=codehilite><code class=language-text>2020-03-20T21:00:30+00:00 ERR (3): No messages loaded {&quot;locale&quot;:&quot;de_DE&quot;,&quot;text_domain&quot;:&quot;default&quot;}
+2020-03-20T21:00:30+00:00 ERR (3): Missing translation {&quot;message&quot;:&quot;car&quot;,&quot;locale&quot;:&quot;de_DE&quot;,&quot;text_domain&quot;:&quot;default&quot;}</code></pre>
+<p>The concept of logging, creating logger with writer and to write messages can be
+found in <a href="https://docs.laminas.dev/laminas-log/">documentation of laminas-log</a>.</p>
 
 
 
@@ -596,7 +701,7 @@ validated using the English alphabet.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../introduction/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../caching/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -605,7 +710,7 @@ validated using the English alphabet.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../alpha/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../factory/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -619,7 +724,7 @@ validated using the English alphabet.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/validators/alnum.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-i18n/edit/master/docs/book/translator/events.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -688,25 +793,25 @@ validated using the English alphabet.</p>
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+        <a href="../caching/" class="subnavigation__link">Caching</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Events</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/events/" class="subnavigation__link">Events</a>
+        <a href="../factory/" class="subnavigation__link">Factory</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+        <a href="../format-examples/" class="subnavigation__link">Format Examples</a>
     </li>
 
                                     
@@ -781,49 +886,49 @@ validated using the English alphabet.</p>
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../introduction/" class="subnavigation__link">Introduction</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Alnum</a>
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../is-int/" class="subnavigation__link">IsInt</a>
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
