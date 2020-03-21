@@ -176,7 +176,8 @@ $logger->addWriter($writer);
 // Create translator
 $translator = new Laminas\I18n\Translator\Translator();
 
-// Omit translations for demonstration
+// Omit adding translations for demonstration
+// $translator->addTranslationFile(…);
 
 // Enable event manager
 $translator->enableEventManager();
