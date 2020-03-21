@@ -181,7 +181,7 @@ $translator->getEventManager()->attach(
 );
 
 // Trigger event for no messages loaded and missing translation
-echo $translator->translate('car'); 
+echo $translator->translate('car'); // 'car'
 ```
 
 This creates two entries in the log file:
