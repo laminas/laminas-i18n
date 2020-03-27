@@ -554,6 +554,28 @@ to have it installed before getting started:</p>
 $ composer require laminas/laminas-view
 </code></pre>
 </blockquote>
+<hr />
+<blockquote>
+<h3>IDE auto-completion in templates</h3>
+<p>The <code>Laminas\I18n\View\HelperTrait</code> trait can be used to provide
+auto-completion for modern IDEs. It defines the aliases of the view helpers in
+a DocBlock as <code>@method</code> tags.</p>
+<h4>Usage</h4>
+<p>In order to allow auto-completion in templates, <code>$this</code> variable should be
+type-hinted via a DocBlock at the top of a template. It is recommended that
+always the <code>Laminas\View\Renderer\PhpRenderer</code> is added as the first type, so
+that the IDE can auto-suggest the default view helpers from <code>laminas-view</code>.
+The <code>HelperTrait</code> from <code>laminas-i18n</code> can be chained with a pipe symbol
+(a.k.a. vertical bar) <code>|</code>:</p>
+<pre class="codehilite"><code class="language-php">
+/**
+ * @var Laminas\View\Renderer\PhpRenderer|Laminas\I18n\View\HelperTrait $this
+ */
+</code></pre>
+<p>The <code>HelperTrait</code> traits can be chained as many as needed, depending on which
+view helpers from the different Laminas component are used and where the 
+auto-completion is to be made.</p>
+</blockquote>
 <h2 id="abstract-translator-helper">Abstract Translator Helper</h2>
 <p>The <code>AbstractTranslatorHelper</code> view helper is used as a base abstract class for
 any helpers that need to translate content. It provides an implementation for
