@@ -79,6 +79,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-i18n": "self.version"
+        "zendframework/zend-i18n": "^2.10.1"
     }
 }
