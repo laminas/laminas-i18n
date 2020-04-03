@@ -550,9 +550,8 @@ internationalization.</p>
 <p>The view-helper support of laminas-i18n depends on the
 <a href="https://docs.laminas.dev/laminas-view/">laminas-view</a> component, so be sure
 to have it installed before getting started:</p>
-<pre class="codehilite"><code class="language-bash">
-$ composer require laminas/laminas-view
-</code></pre>
+<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-view</code></pre>
+
 </blockquote>
 <hr />
 <blockquote>
@@ -567,11 +566,10 @@ always the <code>Laminas\View\Renderer\PhpRenderer</code> is added as the first 
 that the IDE can auto-suggest the default view helpers from <code>laminas-view</code>.
 The <code>HelperTrait</code> from <code>laminas-i18n</code> can be chained with a pipe symbol
 (a.k.a. vertical bar) <code>|</code>:</p>
-<pre class="codehilite"><code class="language-php">
-/**
+<pre class="highlight"><code class="language-php">/**
  * @var Laminas\View\Renderer\PhpRenderer|Laminas\I18n\View\HelperTrait $this
- */
-</code></pre>
+ */</code></pre>
+
 <p>The <code>HelperTrait</code> traits can be chained as many as needed, depending on which
 view helpers from the different Laminas component are used and where the 
 auto-completion is to be made.</p>
@@ -583,28 +581,35 @@ the <code>Laminas\I18n\Translator\TranslatorAwareInterface</code>, allowing tran
 injection as well as text domain injection.</p>
 <h3>Public Methods</h3>
 <h4>setTranslator()</h4>
-<pre class=codehilite><code class=language-php>setTranslator(Translator $translator, string $textDomain = null) : void</code></pre>
+<pre class="highlight"><code class="language-php">setTranslator(Translator $translator, string $textDomain = null) : void</code></pre>
+
 <p>Sets the <code>Laminas\I18n\Translator\Translator</code> instance to use in the helper. The
 <code>$textDomain</code> argument is optional, and provided as a convenienct to allow
 setting both the translator and text domain simultaneously.</p>
 <h4>getTranslator()</h4>
-<pre class=codehilite><code class=language-php>getTranslator() : Translator</code></pre>
+<pre class="highlight"><code class="language-php">getTranslator() : Translator</code></pre>
+
 <p>Returns the <code>Laminas\I18n\Translator\Translator</code> instance used by the helper.</p>
 <h4>hasTranslator()</h4>
-<pre class=codehilite><code class=language-php>hasTranslator() : bool</code></pre>
+<pre class="highlight"><code class="language-php">hasTranslator() : bool</code></pre>
+
 <p>Returns true if the helper composes a <code>Laminas\I18n\Translator\Translator</code>
 instance.</p>
 <h4>setTranslatorEnabled()</h4>
-<pre class=codehilite><code class=language-php>setTranslatorEnabled(bool $enabled) : void</code></pre>
+<pre class="highlight"><code class="language-php">setTranslatorEnabled(bool $enabled) : void</code></pre>
+
 <p>Sets whether or not translations are enabled.</p>
 <h4>isTranslatorEnabled()</h4>
-<pre class=codehilite><code class=language-php>isTranslatorEnabled() : bool</code></pre>
+<pre class="highlight"><code class="language-php">isTranslatorEnabled() : bool</code></pre>
+
 <p>Returns true if translations are enabled.</p>
 <h4>setTranslatorTextDomain()</h4>
-<pre class=codehilite><code class=language-php>setTranslatorTextDomain(string $textDomain) : void</code></pre>
+<pre class="highlight"><code class="language-php">setTranslatorTextDomain(string $textDomain) : void</code></pre>
+
 <p>Sets the default translation text domain to use with the helper.</p>
 <h4>getTranslatorTextDomain()</h4>
-<pre class=codehilite><code class=language-php>getTranslatorTextDomain() : string</code></pre>
+<pre class="highlight"><code class="language-php">getTranslatorTextDomain() : string</code></pre>
+
 <p>Returns the current text domain used by the helper.</p>
 
 

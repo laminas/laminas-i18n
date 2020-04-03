@@ -551,10 +551,11 @@ nothing but return all messages verbatim.</p>
   file per locale.</li>
 </ul>
 <p>To add a single file to the translator, use the <code>addTranslationFile()</code> method:</p>
-<pre class=codehilite><code class=language-php>use Laminas\I18n\Translator\Translator;
+<pre class="highlight"><code class="language-php">use Laminas\I18n\Translator\Translator;
 
 $translator = new Translator();
 $translator-&gt;addTranslationFile($type, $filename, $textDomain, $locale);</code></pre>
+
 <p>where the arguments are:</p>
 <ul>
 <li><code>$type</code>: the name of the format loader to use; see the next section for
@@ -568,10 +569,11 @@ $translator-&gt;addTranslationFile($type, $filename, $textDomain, $locale);</cod
 <p>When storing one locale per file, you should specify those files via a pattern.
 This allows you to add new translations to the file system, without touching
 your code. Patterns are added with the <code>addTranslationFilePattern()</code> method:</p>
-<pre class=codehilite><code class=language-php>use Laminas\I18n\Translator\Translator;
+<pre class="highlight"><code class="language-php">use Laminas\I18n\Translator\Translator;
 
 $translator = new Translator();
 $translator-&gt;addTranslationFilePattern($type, $baseDir, $pattern, $textDomain);</code></pre>
+
 <p>where the arguments are roughly the same as for <code>addTranslationFile()</code>, with a
 few differences:</p>
 <ul>
@@ -607,7 +609,8 @@ pass it to the <code>setFallbackLocale()</code> method.</p>
 <h2 id="translating-messages">Translating messages</h2>
 <p>Translating messages is accomplished by calling the <code>translate()</code> method of the
 translator:</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;translate($message, $textDomain, $locale);</code></pre>
+<pre class="highlight"><code class="language-php">$translator-&gt;translate($message, $textDomain, $locale);</code></pre>
+
 <p>The message is the message identifier to translate. If it does not exist in the
 loader, or is empty, the original message ID will be returned. The text domain
 parameter is the one you specified when adding translations. If omitted, the
@@ -618,7 +621,8 @@ the translator.</p>
 works similarly to <code>translate()</code>, but instead of a single message, it takes a
 singular value, a plural value, and an additional integer number on which the
 returned plural form is based:</p>
-<pre class=codehilite><code class=language-php>$translator-&gt;translatePlural($singular, $plural, $number, $textDomain, $locale);</code></pre>
+<pre class="highlight"><code class="language-php">$translator-&gt;translatePlural($singular, $plural, $number, $textDomain, $locale);</code></pre>
+
 <p>Plural translations are only available if the underlying format supports the
 translation of plural messages and plural rule definitions.</p>
 

@@ -558,12 +558,14 @@ here are some links with up-to-date plural rules for tons of languages:</p>
 <h3>Define plural Rules</h3>
 <p>As an example, you could add the following code in your
 <code>Module</code> class:</p>
-<pre class=codehilite><code class=language-php>// Get the ViewHelperPlugin Manager from the ServiceManager, so we can fetch the
+<pre class="highlight"><code class="language-php">// Get the ViewHelperPlugin Manager from the ServiceManager, so we can fetch the
 // Plural helper and add the plural rule for the application's language:
 $viewHelperManager = $serviceManager-&gt;get('ViewHelperManager');
 $pluralHelper      = $viewHelperManager-&gt;get('Plural');</code></pre>
+
 <h4>Rule for French</h4>
-<pre class=codehilite><code class=language-php>$pluralHelper-&gt;setPluralRule('nplurals=2; plural=(n==0 || n==1 ? 0 : 1)');</code></pre>
+<pre class="highlight"><code class="language-php">$pluralHelper-&gt;setPluralRule('nplurals=2; plural=(n==0 || n==1 ? 0 : 1)');</code></pre>
+
 <p>The string reads as follows:</p>
 <ol>
 <li>First, we specify how many plural forms we have. For French, only two (singular/plural).</li>
@@ -573,15 +575,17 @@ $pluralHelper      = $viewHelperManager-&gt;get('Plural');</code></pre>
 <h4>Rule for English</h4>
 <p>As noted earlier, English considers "1" as singular and "0/other" as plural.
 Here is how that would be declared:</p>
-<pre class=codehilite><code class=language-php>$pluralHelper-&gt;setPluralRule('nplurals=2; plural=(n==1 ? 0 : 1)');</code></pre>
+<pre class="highlight"><code class="language-php">$pluralHelper-&gt;setPluralRule('nplurals=2; plural=(n==1 ? 0 : 1)');</code></pre>
+
 <h2 id="basic-usage">Basic Usage</h2>
 <p>Now that we have defined the rule, we can use it in our view scripts.</p>
 <h3>French</h3>
-<pre class=codehilite><code class=language-php>echo $this-&gt;plural(['voiture', 'voitures'], 0); // 'voiture'
+<pre class="highlight"><code class="language-php">echo $this-&gt;plural(['voiture', 'voitures'], 0); // 'voiture'
 echo $this-&gt;plural(['voiture', 'voitures'], 1); // 'voiture'
 echo $this-&gt;plural(['voiture', 'voitures'], 2); // 'voitures'</code></pre>
+
 <h3>English</h3>
-<pre class=codehilite><code class=language-php>echo $this-&gt;plural(['car', 'cars'], 0); // 'cars'
+<pre class="highlight"><code class="language-php">echo $this-&gt;plural(['car', 'cars'], 0); // 'cars'
 echo $this-&gt;plural(['car', 'cars'], 1); // 'car'</code></pre>
 
 

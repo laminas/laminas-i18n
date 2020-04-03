@@ -558,9 +558,10 @@ termed ZIP codes.</p>
 formats. To select the correct format there are two ways. You can either use a
 fully qualified locale, or you can set your own format manually.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
 
 var_dump($validator-&gt;isValid(1010)); // true</code></pre>
+
 <p>By default, if no country code is provided, <code>PostCode</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
 extract the region code.</p>
@@ -573,22 +574,34 @@ instance, the locale <code>de</code> is a locale but could not be used with
 <code>Laminas\I18n\Validator\PostCode</code> as it does not include the region; <code>de_AT</code>,
 however, would be a valid locale, as it specifies the region code (<code>AT</code>, for
 Austria).</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
 
-var_dump($validator-&gt;isValid(1010)); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
+var_dump($validator-&gt;isValid(1010)); // true</code></pre>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
 $validator-&gt;setLocale('de_AT');
 
-$validator-&gt;isValid(1010); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('de_AT');
+$validator-&gt;isValid(1010); // true</code></pre>
+
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">Locale::setDefault('de_AT');
 
 $validator = new Laminas\I18n\Validator\PostCode();
 
-var_dump($validator-&gt;isValid(1010)); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid(1010)); // true</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
 
 echo $validator-&gt;getLocale(); // 'de_AT'</code></pre>
+
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>PostCode</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
@@ -597,13 +610,20 @@ the region code.</p>
 <p>Postal code formats are regular expression strings. When the international
 postal code format, which is used by setting the locale, does not fit your
 needs, then you can also manually set a format by calling <code>setFormat()</code>.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
 
-var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
+var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre>
+
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
 $validator-&gt;setFormat('AT-\d{4}');
 
-var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre>
 
+</div>
+</div>
 <h3>Conventions for self defined Formats</h3>
 <p>When using self defined formats, you should omit the regex delimiters and
 anchors (<code>'/^'</code> and  <code>'$/'</code>). They are attached automatically.</p>
@@ -612,9 +632,10 @@ strict way. This means that they have to be written standalone without
 additional characters when they are not covered by the format.</p>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
 
 echo $validator-&gt;getFormat(); // 'AT-\d{4}'</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code>.</p>
 <h2 id="using-callback-service">Using Callback Service</h2>
@@ -624,7 +645,8 @@ class.</p>
 <p>Internally, the additional validation is done by
 <a href="https://docs.laminas.dev/laminas-validator/validators/callback/">laminas-validator's <code>Callback</code></a>
 class.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-5><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-5-0_php-panel role=tab id=tab-group-5-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-5-1_php-panel role=tab id=tab-group-5-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-5-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-5-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode([
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode([
     'service' =&gt; static function ($value) {
         // Allow only certain districts in town
         if (in_array($value, range(1010, 1423), false)) {
@@ -637,7 +659,11 @@ class.</p>
 ]);
 
 var_dump($validator-&gt;isValid(1010)); // true
-var_dump($validator-&gt;isValid(1600)); // false</code></pre></div><div id=tab-group-5-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-5-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PostCode();
+var_dump($validator-&gt;isValid(1600)); // false</code></pre>
+
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
 $validator-&gt;setService(static function ($value) {
    // Allow only certain districts in town
    if (in_array($value, range(1010, 1423), false)) {
@@ -649,8 +675,10 @@ $validator-&gt;setService(static function ($value) {
 $validator-&gt;setLocale('de_AT');
 
 var_dump($validator-&gt;isValid(1010)); // true
-var_dump($validator-&gt;isValid(1600)); // false</code></pre></div></div></div>
+var_dump($validator-&gt;isValid(1600)); // false</code></pre>
 
+</div>
+</div>
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code>.</p>
 

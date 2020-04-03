@@ -568,57 +568,81 @@ valid date, time or datetime</strong>.<br />
 Internally, PHP's <code>IntlDateFormatter</code> tries to create a date time for the given
 value.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 
 var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true
 var_dump($validator-&gt;isValid('20190229 10:00 pm')); // false
 var_dump($validator-&gt;isValid('20200229 10:00 pm')); // true</code></pre>
+
 <p>By default, if no locale is provided, <code>DateTime</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code> and the default timezone provided
 by PHP's <code>date_default_timezone_get</code>.</p>
 <p>(The above example assumes that the environment locale is set to <code>en_EN</code> and
 the timezone is set to <code>Europe/London</code>.)</p>
 <h2 id="set-locale">Set Locale</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'de']);
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'de']);
 
-var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setLocale('de');
 
-var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'en_US']);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'en_US']);
 
 echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
+
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>DateTime</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>
 <h2 id="define-custom-pattern">Define Custom Pattern</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
 
-var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre>
+
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setPattern('yyyy-MM-DD');
 
-var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre>
 
+</div>
+</div>
 <p>Possible patterns are documented at
 <a href="http://userguide.icu-project.org/formatparse/datetime">http://userguide.icu-project.org/formatparse/datetime</a>.</p>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getPattern()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
 
 echo $validator-&gt;getPattern(); // 'yyyy-MM-DD'</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code>.</p>
 <h2 id="using-date-type">Using Date Type</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-5><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-5-0_php-panel role=tab id=tab-group-5-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-5-1_php-panel role=tab id=tab-group-5-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-5-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-5-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
 
-var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre></div><div id=tab-group-5-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-5-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre>
+
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setDateType(IntlDateFormatter::MEDIUM);
 
-var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre>
 
+</div>
+</div>
 <p>Possible values for the date type option are the following
 <a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
 <ul>
@@ -630,20 +654,28 @@ var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre></div></di
 </ul>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getDateType()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
 
 echo $validator-&gt;getDateType(); // 'MMM d, y' (IntlDateFormatter::MEDIUM)</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
 <h2 id="using-time-type">Using Time Type</h2>
 <p>Sets time type to use (none, short, medium, long, full).</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-7><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-7-0_php-panel role=tab id=tab-group-7-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-7-1_php-panel role=tab id=tab-group-7-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-7-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-7-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-7-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
+<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
 
-var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre></div><div id=tab-group-7-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-7-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre>
+
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setTimeType(IntlDateFormatter::MEDIUM);
 
-var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre>
 
+</div>
+</div>
 <p>Possible values for the date type option are the following
 <a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
 <ul>
@@ -655,28 +687,36 @@ var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre></div></div>
 </ul>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getTimeType()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
 
 echo $validator-&gt;getTimeType(); // 'h:mm:ss a' (IntlDateFormatter::MEDIUM)</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
 <h2 id="using-calendar">Using Calendar</h2>
 <p>To demonstrate the calendar option, additional settings are needed.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-9><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-9-0_php-panel role=tab id=tab-group-9-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-9-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-9-1_php-panel role=tab id=tab-group-9-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-9-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-9-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-9-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime([
+<div class="tabbed-set" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime([
     'calendar'  =&gt; IntlDateFormatter::TRADITIONAL,
     'date_type' =&gt; IntlDateFormatter::MEDIUM,
     'locale'    =&gt; 'de_DE@calendar=buddhist',
     'timezone'  =&gt; 'Europe/Berlin',
 ]);
 
-var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre></div><div id=tab-group-9-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-9-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre>
+
+</div>
+<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setCalendar(IntlDateFormatter::TRADITIONAL);
 $validator-&gt;setDateType(IntlDateFormatter::MEDIUM);
 $validator-&gt;setLocale('de_DE@calendar=buddhist');
 $validator-&gt;setTimezone('Europe/Berlin');
 
-var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre>
 
+</div>
+</div>
 <p>Possible values for the calendar option are the following
 <a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
 <ul>
@@ -685,24 +725,33 @@ var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre></div></d
 </ul>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getCalendar()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['calendar' =&gt; IntlDateFormatter::TRADITIONAL]);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['calendar' =&gt; IntlDateFormatter::TRADITIONAL]);
 
 echo $validator-&gt;getCalendar(); // '0' (IntlDateFormatter::TRADITIONAL)</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>IntlDateFormatter::GREGORIAN</code>.</p>
 <h2 id="using-timezone">Using Timezone</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-11><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-11-0_php-panel role=tab id=tab-group-11-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-11-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-11-1_php-panel role=tab id=tab-group-11-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-11-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-11-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-11-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
+<div class="tabbed-set" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
 
-var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre></div><div id=tab-group-11-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-11-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime();
+var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre>
+
+</div>
+<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setTimezone('Europe/London');
 
-var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getTimezone()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
 
 echo $validator-&gt;getTimezone(); // 'Europe/London'</code></pre>
+
 <h3>Default Value</h3>
 <p>By default, if no timezone is provided, <code>DateTime</code> will use the system timezone
 provided by PHP's <code>date_default_timezone_get()</code>.</p>

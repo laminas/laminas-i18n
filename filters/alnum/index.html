@@ -548,48 +548,69 @@
 digits</strong> in the unicode "letter" and "number" categories, respectively. All 
 other characters are suppressed.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum();
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum();
 
-echo $filter-&gt;filter('This is (my) content: 123'); // &quot;Thisismycontent123&quot;</code></pre>
+echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent123"</code></pre>
+
 <p>By default, if no locale is provided, <code>Alnum</code> will use the system locale
 provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <h2 id="using-whitespace">Using Whitespace</h2>
 <p>To allow whitespace characters (<code>\s</code>) on filtering set the option to <code>true</code>;
 otherwise they are suppressed.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum(true);
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum(true);
 
-echo $filter-&gt;filter('This is (my) content: 123'); // &quot;This is my content 123&quot;</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum();
+echo $filter-&gt;filter('This is (my) content: 123'); // "This is my content 123"</code></pre>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum();
 $filter-&gt;setAllowWhiteSpace(true);
 
-echo $filter-&gt;filter('This is (my) content: 123'); // &quot;This is my content 123&quot;</code></pre></div></div></div>
+echo $filter-&gt;filter('This is (my) content: 123'); // "This is my content 123"</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getAllowWhiteSpace()</code> method.</p>
-<pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum(true);
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum(true);
 
 $result = $filter-&gt;getAllowWhiteSpace(); // true</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code> that means whitespace characters are
 suppressed.</p>
 <h2 id="using-locale">Using Locale</h2>
 <p>The locale string used in identifying the characters to filter (locale name, 
 e.g. <code>en_US</code>).</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-2_php-panel role=tab id=tab-group-3-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum(null, 'en_US');
+<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum(null, 'en_US');
 
-echo $filter-&gt;filter('This is (my) content: 123'); // &quot;Thisismycontent123&quot;</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum();
+echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent123"</code></pre>
+
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum();
 $filter-&gt;setLocale('en_US');
 
-echo $filter-&gt;filter('This is (my) content: 123'); // &quot;Thisismycontent123&quot;</code></pre></div><div id=tab-group-3-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('en_US');
+echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent123"</code></pre>
+
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Locale Class Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">Locale::setDefault('en_US');
 
 $filter = new Laminas\I18n\Filter\Alnum();
 
-echo $filter-&gt;filter('This is (my) content: 123'); // &quot;Thisismycontent123&quot;</code></pre></div></div></div>
+echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent123"</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
-<pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum(null, 'en_US');
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum(null, 'en_US');
 
 echo $filter-&gt;getLocale(); // 'en_US'</code></pre>
+
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>Alnum</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>

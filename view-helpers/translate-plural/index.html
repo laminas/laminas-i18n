@@ -563,29 +563,39 @@ automatically for you.</p>
 <li><code>$plural</code>: The message to use for plural values.</li>
 <li><code>$number</code>: The number to evaluate in order to determine which number to use.</li>
 </ul>
-<pre class=codehilite><code class=language-php>echo $this-&gt;translatePlural('car', 'cars', 1); // 'Auto'
+<pre class="highlight"><code class="language-php">echo $this-&gt;translatePlural('car', 'cars', 1); // 'Auto'
 echo $this-&gt;translatePlural('car', 'cars', 4); // 'Autos'</code></pre>
+
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
 <h2 id="using-text-domain">Using Text Domain</h2>
 <p>The text domain defines the domain of the translation.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Invoke Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>echo $this-&gt;translatePlural('monitor', 'monitors', 1, 'customDomain'); // 'Bildschirm'</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$this-&gt;plugin('currencyFormat')-&gt;setTranslatorTextDomain('customDomain');
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Invoke Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">echo $this-&gt;translatePlural('monitor', 'monitors', 1, 'customDomain'); // 'Bildschirm'</code></pre>
 
-echo $this-&gt;translatePlural('monitor', 'monitors', 1); // 'Bildschirm'</code></pre></div></div></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setTranslatorTextDomain('customDomain');
 
+echo $this-&gt;translatePlural('monitor', 'monitors', 1); // 'Bildschirm'</code></pre>
+
+</div>
+</div>
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
 <h3>Get current Value</h3>
 <p>To get the current value of this option, use the <code>getTranslatorTextDomain()</code>
 method.</p>
-<pre class=codehilite><code class=language-php>$this-&gt;plugin('translatePlural')-&gt;setTranslatorTextDomain('customDomain');
+<pre class="highlight"><code class="language-php">$this-&gt;plugin('translatePlural')-&gt;setTranslatorTextDomain('customDomain');
 
 echo $this-&gt;plugin('translatePlural')-&gt;getTranslatorTextDomain(); // 'customDomain'</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>default</code> like defined in
 <code>Laminas\I18n\Translator\TranslatorInterface</code>.</p>
 <h2 id="using-locale">Using Locale</h2>
 <p>The locale to which the message should be translated.</p>
-<pre class=codehilite><code class=language-php>echo $this-&gt;translatePlural('car', 'cars', 1, 'default', 'de_DE'); // 'Auto'
+<pre class="highlight"><code class="language-php">echo $this-&gt;translatePlural('car', 'cars', 1, 'default', 'de_DE'); // 'Auto'
 echo $this-&gt;translatePlural('car', 'cars', 4, 'default', 'de_DE'); // 'Autos'</code></pre>
+
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>TranslatePlural</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code>.</p>

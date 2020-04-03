@@ -558,49 +558,69 @@
 <p><code>Laminas\I18n\Validator\PhoneNumber</code> allows you to determine if a given value
 <strong>is a valid phone number</strong>. Phone numbers are specific to country codes.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
 
 var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
+
 <p>By default, if no country code is provided, <code>PhoneNumber</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
 extract the country code.</p>
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
 <h2 id="using-country">Using Country</h2>
 <p>The ISO 3611 country code can be set for validations.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'DE']);
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'DE']);
 
-var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
+var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
 $validator-&gt;setCountry('DE');
 
-var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('de_DE');
+var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
+
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">Locale::setDefault('de_DE');
 
 $validator = new Laminas\I18n\Validator\PhoneNumber();
 
-var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre></div></div></div>
+var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getCountry()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'US']);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'US']);
 
 echo $validator-&gt;getCountry(); // 'US'</code></pre>
+
 <h3>Default Value</h3>
 <p>By default, if no country is provided, <code>PhoneNumber</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
 the region code.</p>
 <h2 id="using-allowed-phone-number-patterns">Using Allowed Phone Number Patterns</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-3><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-3-0_php-panel role=tab id=tab-group-3-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-3-1_php-panel role=tab id=tab-group-3-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-3-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-3-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-3-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber([
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber([
     'allowed_types' =&gt; ['emergency'],
     'country'       =&gt; 'US',
 ]);
 
 var_dump($validator-&gt;isValid(911)); // true
-var_dump($validator-&gt;isValid(999)); // false</code></pre></div><div id=tab-group-3-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-3-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
+var_dump($validator-&gt;isValid(999)); // false</code></pre>
+
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
 $validator-&gt;allowedTypes(['emergency']);
 $validator-&gt;setCountry('US');
 
 var_dump($validator-&gt;isValid(911)); // true
-var_dump($validator-&gt;isValid(999)); // false</code></pre></div></div></div>
+var_dump($validator-&gt;isValid(999)); // false</code></pre>
 
+</div>
+</div>
 <p>Possible values for allowed patterns are:</p>
 <ul>
 <li><code>emergency</code></li>
@@ -628,9 +648,10 @@ of your project folder.</p>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>allowedTypes()</code> method with
 the value <code>null</code>.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['allowed_types' =&gt; ['emergency']]);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['allowed_types' =&gt; ['emergency']]);
 
 var_dump($validator-&gt;allowedTypes()); // ['emergency']</code></pre>
+
 <h3>Default Value</h3>
 <p>The following phone number patterns are allowed per default:</p>
 <ul>
@@ -646,7 +667,8 @@ var_dump($validator-&gt;allowedTypes()); // ['emergency']</code></pre>
 <p>By default, the phone numbers are validated against strict number patterns. To
 allow validation with all <em>possible</em> phone numbers, the <code>allow_possible</code> option
 can be used.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-5><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-5-0_php-panel role=tab id=tab-group-5-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-5-1_php-panel role=tab id=tab-group-5-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-5-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-5-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-5-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber([
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber([
     'allow_possible' =&gt; true,
     'allowed_types'  =&gt; ['emergency'],
     'country'        =&gt; 'US',
@@ -654,28 +676,35 @@ can be used.</p>
 
 var_dump($validator-&gt;isValid(911)); // true
 var_dump($validator-&gt;isValid(999)); // true
-var_dump($validator-&gt;isValid(9999)); // false</code></pre></div><div id=tab-group-5-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-5-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber();
+var_dump($validator-&gt;isValid(9999)); // false</code></pre>
+
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
 $validator-&gt;allowPossible(true);
 $validator-&gt;allowedTypes(['emergency']);
 $validator-&gt;setCountry('US');
 
 var_dump($validator-&gt;isValid(911)); // true
 var_dump($validator-&gt;isValid(999)); // true
-var_dump($validator-&gt;isValid(9999)); // false</code></pre></div></div></div>
+var_dump($validator-&gt;isValid(9999)); // false</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>allowPossible()</code> method with
 the value <code>null</code>.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber(['allow_possible' =&gt; true]);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['allow_possible' =&gt; true]);
 
 var_dump($validator-&gt;allowPossible()); // true</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code>.</p>
 <h2 id="specify-country-code-on-validation">Specify Country Code on Validation</h2>
 <p>The country code can be specified with the <code>context</code> parameter on the <code>isValid</code>
 method. This allows to validate phone numbers for different country codes with
 the same validator instance without the usage of the <code>setCountry()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\PhoneNumber([
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber([
     'country' =&gt; 'country-code', // Defines a placeholder
 ]);
 

@@ -538,14 +538,15 @@
     <h1 id="format-examples">Format Examples</h1>
 <h2 id="php">PHP</h2>
 <p>For example <code>languages/de_DE.php</code>:</p>
-<pre class=codehilite><code class=language-php>return [
+<pre class="highlight"><code class="language-php">return [
     // Message =&gt; Translation
     'car'   =&gt; 'Auto',
     'train' =&gt; 'Zug',
 ];</code></pre>
+
 <h3>Plural</h3>
 <p>For example <code>languages/en_GB.php</code>:</p>
-<pre class=codehilite><code class=language-php>return [
+<pre class="highlight"><code class="language-php">return [
     // Rule for English
     '' =&gt; [
         'plural_forms' =&gt; 'nplurals=2; plural=(n==1 ? 0 : 1)',
@@ -554,8 +555,9 @@
     'car'   =&gt; 'car',
     'train' =&gt; 'train',
 ];</code></pre>
+
 <p>For example <code>languages/fr_FR.php</code>:</p>
-<pre class=codehilite><code class=language-php>return [
+<pre class="highlight"><code class="language-php">return [
     // Rule for French
     '' =&gt; [
         'plural_forms' =&gt; 'nplurals=2; plural=(n==0 || n==1 ? 0 : 1)',
@@ -564,46 +566,50 @@
     'car'   =&gt; 'voiture',
     'train' =&gt; 'train',
 ];</code></pre>
+
 <h2 id="ini">INI</h2>
 <h3>Normal Syntax</h3>
 <p>For example <code>languages/de_DE.ini</code>:</p>
-<pre class=codehilite><code class=language-ini>; Message
-identifier1.message = &quot;car&quot;
+<pre class="highlight"><code class="language-ini">; Message
+identifier1.message = "car"
 ; Translation
-identifier1.translation = &quot;Auto&quot;
+identifier1.translation = "Auto"
 
-identifier2.message = &quot;train&quot;
-identifier2.translation = &quot;Zug&quot;</code></pre>
+identifier2.message = "train"
+identifier2.translation = "Zug"</code></pre>
+
 <h3>Simple Syntax</h3>
 <p>For example <code>languages/de_DE.ini</code>:</p>
-<pre class=codehilite><code class=language-ini>; Message
-identifier1[] = &quot;car&quot;
+<pre class="highlight"><code class="language-ini">; Message
+identifier1[] = "car"
 ; Translation
-identifier1[] = &quot;Auto&quot;
+identifier1[] = "Auto"
 
-identifier2[] = &quot;train&quot;
-identifier2[] = &quot;Zug&quot;</code></pre>
+identifier2[] = "train"
+identifier2[] = "Zug"</code></pre>
+
 <h3>Plural</h3>
 <p>For example <code>languages/en_GB.ini</code>:</p>
-<pre class=codehilite><code class=language-ini>[plural]
+<pre class="highlight"><code class="language-ini">[plural]
 plural_forms = 'nplurals=2; plural=(n==1 ? 0 : 1)'
 
 [translation]
-identifier1.message = &quot;car&quot;
-identifier1.translation = &quot;car&quot;
+identifier1.message = "car"
+identifier1.translation = "car"
 
-identifier2.message = &quot;train&quot;
-identifier2.translation = &quot;train&quot;</code></pre>
+identifier2.message = "train"
+identifier2.translation = "train"</code></pre>
+
 <p>For example <code>languages/fr_FR.ini</code>:</p>
-<pre class=codehilite><code class=language-ini>[plural]
+<pre class="highlight"><code class="language-ini">[plural]
 plural_forms = 'nplurals=2; plural=(n==0 || n==1 ? 0 : 1)'
 
 [translation]
-identifier1.message = &quot;car&quot;
-identifier1.translation = &quot;voiture&quot;
+identifier1.message = "car"
+identifier1.translation = "voiture"
 
-identifier2.message = &quot;train&quot;
-identifier2.translation = &quot;train&quot;</code></pre>
+identifier2.message = "train"
+identifier2.translation = "train"</code></pre>
 
 
 

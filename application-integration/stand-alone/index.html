@@ -549,65 +549,76 @@ also be used stand-alone.</p>
 <h2 id="translator">Translator</h2>
 <h3>Setup</h3>
 <p>Create a file for the translation messages. For example <code>languages/de_DE.php</code>:</p>
-<pre class=codehilite><code class=language-php>return [
+<pre class="highlight"><code class="language-php">return [
     'car'   =&gt; 'Auto',
     'train' =&gt; 'Zug',
 ];</code></pre>
+
 <p>Create the translator instance and add the translation file.</p>
-<pre class=codehilite><code class=language-php>$translator = new Laminas\I18n\Translator\Translator();
+<pre class="highlight"><code class="language-php">$translator = new Laminas\I18n\Translator\Translator();
 $translator-&gt;addTranslationFile(
     Laminas\I18n\Translator\Loader\PhpArray::class,
     __DIR__ . '/languages/de_DE.php',
     'default',
     'de_DE'
 );</code></pre>
+
 <h3>Translate Messages</h3>
-<pre class=codehilite><code class=language-php>$translator-&gt;setLocale('de_DE');
+<pre class="highlight"><code class="language-php">$translator-&gt;setLocale('de_DE');
 
 echo $translator-&gt;translate('car');   // Auto
 echo $translator-&gt;translate('train'); // Zug</code></pre>
+
 <h2 id="filters">Filters</h2>
 <p>Each filter can be used directly.</p>
-<pre class=codehilite><code class=language-php>$filter = new Laminas\I18n\Filter\Alnum();
+<pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum();
 
-echo $filter-&gt;filter('This is (my) content: 123'); // &quot;Thisismycontent123&quot;</code></pre>
+echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent123"</code></pre>
+
 <h3>Using Filter Plugin Manager</h3>
 <p>Register all standard filters of laminas-i18n in the filter-plugin-manager:</p>
-<pre class=codehilite><code class=language-php>$filterManager = new Laminas\Filter\FilterPluginManager(
+<pre class="highlight"><code class="language-php">$filterManager = new Laminas\Filter\FilterPluginManager(
     new Laminas\ServiceManager\ServiceManager()
 );
 $filterManager-&gt;configure(
     (new Laminas\I18n\ConfigProvider())-&gt;getFilterConfig()
 );</code></pre>
+
 <p>Get a filter:</p>
-<pre class=codehilite><code class=language-php>/** @var Laminas\I18n\Filter\Alnum $filter */
+<pre class="highlight"><code class="language-php">/** @var Laminas\I18n\Filter\Alnum $filter */
 $filter = $filterManager-&gt;get(Laminas\I18n\Filter\Alnum::class);</code></pre>
+
 <h2 id="validators">Validators</h2>
 <p>Each validator can be used directly.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum();
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum();
 
 $result = $validator-&gt;isValid('Abcd12')); // true</code></pre>
+
 <h3>Using Validator Plugin Manager</h3>
 <p>Register all standard validators of laminas-i18n in the validator-plugin-manager:</p>
-<pre class=codehilite><code class=language-php>$validatorManager = new Laminas\Validator\ValidatorPluginManager(
+<pre class="highlight"><code class="language-php">$validatorManager = new Laminas\Validator\ValidatorPluginManager(
     new Laminas\ServiceManager\ServiceManager()
 );
 $validatorManager-&gt;configure(
     (new Laminas\I18n\ConfigProvider())-&gt;getValidatorConfig()
 );</code></pre>
+
 <p>Get a validator:</p>
-<pre class=codehilite><code class=language-php>/** @var Laminas\I18n\Validator\Alnum $validator */
+<pre class="highlight"><code class="language-php">/** @var Laminas\I18n\Validator\Alnum $validator */
 $validator = $validatorManager-&gt;get(Laminas\I18n\Validator\Alnum::class);</code></pre>
+
 <h2 id="view-helpers">View Helpers</h2>
 <h3>Setup laminas-view</h3>
 <p>Create the renderer:</p>
-<pre class=codehilite><code class=language-php>$renderer = new Laminas\View\Renderer\PhpRenderer();</code></pre>
+<pre class="highlight"><code class="language-php">$renderer = new Laminas\View\Renderer\PhpRenderer();</code></pre>
+
 <p>Register all standard view-helpers of laminas-i18n in the helper-plugin-manager:</p>
-<pre class=codehilite><code class=language-php>$renderer-&gt;getHelperPluginManager()-&gt;configure(
+<pre class="highlight"><code class="language-php">$renderer-&gt;getHelperPluginManager()-&gt;configure(
     (new Laminas\I18n\ConfigProvider())-&gt;getViewHelperConfig()
 );</code></pre>
+
 <h3>Using Helper</h3>
-<pre class=codehilite><code class=language-php>echo $renderer-&gt;currencyFormat(1234.56, 'USD', null, 'en_US'); // &quot;$1,234.56&quot;</code></pre>
+<pre class="highlight"><code class="language-php">echo $renderer-&gt;currencyFormat(1234.56, 'USD', null, 'en_US'); // "$1,234.56"</code></pre>
 
 
 

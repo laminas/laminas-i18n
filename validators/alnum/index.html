@@ -550,32 +550,41 @@
 <p><code>Laminas\I18n\Validator\Alnum</code> allows you to validate if a given value
 <strong>contains only alphabetical characters and digits</strong>.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum();
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum();
 
 if ($validator-&gt;isValid('Abcd12')) {
     // Value contains only allowed chars
 }</code></pre>
+
 <h2 id="using-whitespace">Using Whitespace</h2>
 <p>By default, whitespace is not accepted as it is not part of the alphabet.
 However, if you want to validate complete sentences or phrases, you may need to
 allow whitespace; this can be done via the <code>allowWhiteSpace</code> option, either at
 instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.  </p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
 
 if ($validator-&gt;isValid('Abcd and 12')) {
     // Value contains only allowed chars
-}</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum();
+}</code></pre>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum();
 $validator-&gt;setAllowWhiteSpace(true);
 
 if ($validator-&gt;isValid('Abcd and 12')) {
     // Value contains only allowed chars
-}</code></pre></div></div></div>
+}</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getAllowWhiteSpace()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
 
 $result = $validator-&gt;getAllowWhiteSpace(); // true</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code> that means whitespace characters are
 not allowed.</p>

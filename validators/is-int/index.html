@@ -558,56 +558,81 @@ validity of an integer value. In such cases, it doesn't simply strip the
 separator, but instead validates that the correct separator as defined by used
 locale.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt();
 
 $validator-&gt;isValid(1234);    // returns true
 $validator-&gt;isValid(1234.5);  // returns false
 $validator-&gt;isValid('1,234'); // returns true</code></pre>
+
 <p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
 provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
 <p>Using a notation not specific to the locale results in a <code>false</code> evaulation.</p>
 <h2 id="using-locale">Using Locale</h2>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-1-0_php-panel role=tab id=tab-group-1-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-1_php-panel role=tab id=tab-group-1-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-1_php-panel aria-selected=false>Setter Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-1-2_php-panel role=tab id=tab-group-1-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-1-2_php-panel aria-selected=false>Locale Class Usage</a></li></ul><div class=tab-content><div id=tab-group-1-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-1-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
 
-$validator-&gt;isValid(1234); // true</code></pre></div><div id=tab-group-1-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+$validator-&gt;isValid(1234); // true</code></pre>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt();
 $validator-&gt;setLocale('en_US');
 
-$validator-&gt;isValid(1234); // true</code></pre></div><div id=tab-group-1-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-1-2_php-tab><pre class=codehilite><code class=language-php>Locale::setDefault('en_US');
+$validator-&gt;isValid(1234); // true</code></pre>
+
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">Locale::setDefault('en_US');
 
 $validator = new Laminas\I18n\Validator\IsInt();
 
-$validator-&gt;isValid(1234); // true</code></pre></div></div></div>
+$validator-&gt;isValid(1234); // true</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
 
 echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
+
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>
 <h2 id="strict-validation">Strict Validation</h2>
 <p>By default, the value's data type is not enforced.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Default (Without Strict)</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt();
 
 $validator-&gt;isValid(1234);   // true
 $validator-&gt;isValid('1234'); // true</code></pre>
+
+</div>
+</div>
 <p>To enforced a strict validation set the <code>strict</code> option to <code>true</code>.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-4><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-4-0_php-panel role=tab id=tab-group-4-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-4-0_php-panel aria-selected=true>Constructor Usage</a></li><li class=nav-item><a class="nav-link " href=#tab-group-4-1_php-panel role=tab id=tab-group-4-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-4-1_php-panel aria-selected=false>Setter Usage</a></li></ul><div class=tab-content><div id=tab-group-4-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-4-0_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Constructor Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
 
 $validator-&gt;isValid(1234);   // true
-$validator-&gt;isValid('1234'); // false</code></pre></div><div id=tab-group-4-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-4-1_php-tab><pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt();
+$validator-&gt;isValid('1234'); // false</code></pre>
+
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt();
 $validator-&gt;setStrict(true)
 
 $validator-&gt;isValid(1234);   // true
-$validator-&gt;isValid('1234'); // false</code></pre></div></div></div>
+$validator-&gt;isValid('1234'); // false</code></pre>
 
+</div>
+</div>
 <h3>Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getStrict()</code> method.</p>
-<pre class=codehilite><code class=language-php>$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
 
 echo $validator-&gt;getStrict(); // true</code></pre>
+
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code>.</p>
 
