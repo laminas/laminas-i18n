@@ -21,25 +21,27 @@ locale provided by PHP's `Locale` class and the `getDefault()` method.
 This option sets the style of the formatting; one of the 
 [`NumberFormatter` format style constants](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle).
 
-```php fct_label="Constructor Usage"
-// Example 1
-echo $this->numberFormat(0.8, NumberFormatter::PERCENT); // '80%'
+=== "Constructor Usage"
+    ```php
+    // Example 1
+    echo $this->numberFormat(0.8, NumberFormatter::PERCENT); // '80%'
+    
+    // Example 2
+    echo $this->numberFormat(0.00123456789, NumberFormatter::SCIENTIFIC); // '1,23456789E-3'
+    ```
 
-// Example 2
-echo $this->numberFormat(0.00123456789, NumberFormatter::SCIENTIFIC); // '1,23456789E-3'
-```
-
-```php fct_label="Setter Usage"
-// Example 1
-$this->plugin('numberFormat')->setFormatStyle(NumberFormatter::PERCENT);
-
-echo $this->numberFormat(0.8); // '80%'
-
-// Example 2
-$this->plugin('numberFormat')->setFormatStyle(NumberFormatter::SCIENTIFIC);
-
-echo $this->numberFormat(0.00123456789); // '1,23456789E-3'
-```
+=== "Setter Usage"
+    ```php
+    // Example 1
+    $this->plugin('numberFormat')->setFormatStyle(NumberFormatter::PERCENT);
+    
+    echo $this->numberFormat(0.8); // '80%'
+    
+    // Example 2
+    $this->plugin('numberFormat')->setFormatStyle(NumberFormatter::SCIENTIFIC);
+    
+    echo $this->numberFormat(0.00123456789); // '1,23456789E-3'
+    ```
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 
@@ -62,15 +64,17 @@ The default value of this option is `NumberFormatter::DEFAULT_STYLE`.
 The format type speficied the [`NumberFormatter` formatting type](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types)
 to use.
 
-```php fct_label="Constructor Usage"
-echo $this->numberFormat(1234567.89, null, NumberFormatter::TYPE_INT32); // '1.234.567'
-```
+=== "Constructor Usage"
+    ```php
+    echo $this->numberFormat(1234567.89, null, NumberFormatter::TYPE_INT32); // '1.234.567'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('numberFormat')->setFormatType(NumberFormatter::TYPE_INT32);
-
-echo $this->numberFormat(1234567.89); // '1.234.567'
-```
+=== "Setter Usage"
+    ```php
+    $this->plugin('numberFormat')->setFormatType(NumberFormatter::TYPE_INT32);
+    
+    echo $this->numberFormat(1234567.89); // '1.234.567'
+    ```
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 
@@ -90,21 +94,24 @@ The default value of this option is `NumberFormatter::TYPE_DEFAULT`.
 
 ## Using Locale
 
-```php fct_label="Invoke Usage"
-echo $this->numberFormat(1000, null, null, 'en_US'); // '1,000'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->numberFormat(1000, null, null, 'en_US'); // '1,000'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setLocale('en_US');
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setLocale('en_US');
+    
+    echo $this->numberFormat(1000); // '1,000'
+    ```
 
-echo $this->numberFormat(1000); // '1,000'
-```
-
-```php fct_label="Locale Class Usage"
-Locale::setDefault('en_US');
-
-echo $this->numberFormat(1000); // '1,000'
-```
+=== "Locale Class Usage"
+    ```php
+    Locale::setDefault('en_US');
+    
+    echo $this->numberFormat(1000); // '1,000'
+    ```
 
 ### Get current Value
 
@@ -125,15 +132,17 @@ locale provided by PHP's `Locale::getDefault()`.
 
 Sets the number of digits beyond the decimal point to display.
 
-```php fct_label="Invoke Usage"
-echo $this->numberFormat(1234, null, null, null, 5); // '1,234.00000'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->numberFormat(1234, null, null, null, 5); // '1,234.00000'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setDecimals(5);
-
-echo $this->numberFormat(1234); // '1,234.00000'
-```
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setDecimals(5);
+    
+    echo $this->numberFormat(1234); // '1,234.00000'
+    ```
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 
@@ -158,26 +167,28 @@ This option sets the text attributes of the formatting, like prefix and suffix
 for positive and negative numbers. See
 [`NumberFormatter` text attribute constants](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute).
 
-```php fct_label="Invoke Usage"
-echo $this->numberFormat(
-    -1000,
-    null, // Format style
-    null, // Format type
-    null, // Locale
-    null, // Decimals
-    [
+=== "Invoke Usage"
+    ```php
+    echo $this->numberFormat(
+        -1000,
+        null, // Format style
+        null, // Format type
+        null, // Locale
+        null, // Decimals
+        [
+            NumberFormatter::NEGATIVE_PREFIX => '(minus) ',
+        ]
+    ); // '(minus) 1,000'
+    ```
+
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setTextAttributes([
         NumberFormatter::NEGATIVE_PREFIX => '(minus) ',
-    ]
-); // '(minus) 1,000'
-```
-
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setTextAttributes([
-    NumberFormatter::NEGATIVE_PREFIX => '(minus) ',
-]);
-
-echo $this->numberFormat(-1000); // '(minus) 1,000'
-```
+    ]);
+    
+    echo $this->numberFormat(-1000); // '(minus) 1,000'
+    ```
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 

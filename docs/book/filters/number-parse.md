@@ -22,26 +22,29 @@ provided by PHP's `Locale` class and the `getDefault()` method.
 The locale string used in identifying the characters to filter (locale name, 
 e.g. `en_US` or `de_DE`).
 
-```php fct_label="Constructor Usage"
-$filter = new Laminas\I18n\Filter\NumberParse('de_DE');
+=== "Constructor Usage"
+    ```php
+    $filter = new Laminas\I18n\Filter\NumberParse('de_DE');
+    
+    echo $filter->filter('1.234.567,891'); // 1234567.8912346
+    ```
 
-echo $filter->filter('1.234.567,891'); // 1234567.8912346
-```
+=== "Setter Usage"
+    ```php
+    $filter = new Laminas\I18n\Filter\NumberParse();
+    $filter->setLocale('de_DE');
+    
+    echo $filter->filter('1.234.567,891'); // 1234567.8912346
+    ```
 
-```php fct_label="Setter Usage"
-$filter = new Laminas\I18n\Filter\NumberParse();
-$filter->setLocale('de_DE');
-
-echo $filter->filter('1.234.567,891'); // 1234567.8912346
-```
-
-```php fct_label="Locale Class Usage"
-Locale::setDefault('de_DE');
-
-$filter = new Laminas\I18n\Filter\NumberParse();
-
-echo $filter->filter('1.234.567,891'); // 1234567.8912346
-```
+=== "Locale Class Usage"
+    ```php
+    Locale::setDefault('de_DE');
+    
+    $filter = new Laminas\I18n\Filter\NumberParse();
+    
+    echo $filter->filter('1.234.567,891'); // 1234567.8912346
+    ```
 
 > ### Notice
 >
@@ -68,31 +71,33 @@ provided by PHP's `Locale::getDefault()`.
 This option sets the style of the parsing; one of the 
 [`NumberFormatter` format style constants](http://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle).
 
-```php fct_label="Constructor Usage"
-// Example 1
-$filter = new Laminas\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
+=== "Constructor Usage"
+    ```php
+    // Example 1
+    $filter = new Laminas\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
+    
+    echo $filter->filter('80%'); // 0.80
+    
+    // Example 2
+    $filter = new Laminas\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
+    
+    echo $filter->filter('1,23456789E-3'); // 0.00123456789
+    ```
 
-echo $filter->filter('80%'); // 0.80
-
-// Example 2
-$filter = new Laminas\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
-
-echo $filter->filter('1,23456789E-3'); // 0.00123456789
-```
-
-```php fct_label="Setter Usage"
-// Example 1
-$filter = new Laminas\I18n\Filter\NumberParse('en_US');
-$filter->setStyle(NumberFormatter::PERCENT);
-
-echo $filter->filter('80%'); // 0.80
-
-// Example 2
-$filter = new Laminas\I18n\Filter\NumberParse('fr_FR');
-$filter->setStyle(NumberFormatter::SCIENTIFIC);
-
-echo $filter->filter('1,23456789E-3'); // 0.00123456789
-```
+=== "Setter Usage"
+    ```php
+    // Example 1
+    $filter = new Laminas\I18n\Filter\NumberParse('en_US');
+    $filter->setStyle(NumberFormatter::PERCENT);
+    
+    echo $filter->filter('80%'); // 0.80
+    
+    // Example 2
+    $filter = new Laminas\I18n\Filter\NumberParse('fr_FR');
+    $filter->setStyle(NumberFormatter::SCIENTIFIC);
+    
+    echo $filter->filter('1,23456789E-3'); // 0.00123456789
+    ```
 
 > ### Notice
 >
@@ -118,23 +123,25 @@ The default value of this option is `NumberFormatter::DEFAULT_STYLE`.
 The type speficied the [`NumberFormatter` parsing type](http://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types)
 to use.
 
-```php fct_label="Constructor Usage"
-$filter = new Laminas\I18n\Filter\NumberParse(
-    'de_DE',
-    NumberFormatter::DEFAULT_STYLE,
-    NumberFormatter::DECIMAL
-);
+=== "Constructor Usage"
+    ```php
+    $filter = new Laminas\I18n\Filter\NumberParse(
+        'de_DE',
+        NumberFormatter::DEFAULT_STYLE,
+        NumberFormatter::DECIMAL
+    );
+    
+    echo $filter->filter('1.234.567,891'); // 1234567
+    ```
 
-echo $filter->filter('1.234.567,891'); // 1234567
-```
-
-```php fct_label="Setter Usage"
-$filter = new Laminas\I18n\Filter\NumberParse();
-$filter->setLocale('de_DE');
-$filter->setType(NumberFormatter::DECIMAL);
-
-echo $filter->filter('1.234.567,891'); // 1234567
-```
+=== "Setter Usage"
+    ```php
+    $filter = new Laminas\I18n\Filter\NumberParse();
+    $filter->setLocale('de_DE');
+    $filter->setType(NumberFormatter::DECIMAL);
+    
+    echo $filter->filter('1.234.567,891'); // 1234567
+    ```
 
 ### Get Current Value
 
