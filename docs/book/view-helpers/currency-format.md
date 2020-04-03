@@ -18,15 +18,17 @@ locale provided by PHP's `Locale` class and the `getDefault()` method.
 
 ## Using Currency Code
 
-```php fct_label="Invoke Usage"
-echo $this->currencyFormat(1234.56, 'EUR'); // '1.234,56 €'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->currencyFormat(1234.56, 'EUR'); // '1.234,56 €'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setCurrencyCode('EUR');
-
-echo $this->currencyFormat(1234.56); // '1.234,56 €'
-```
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setCurrencyCode('EUR');
+    
+    echo $this->currencyFormat(1234.56); // '1.234,56 €'
+    ```
 
 (The above example assumes that the environment locale is set to `de`.)
 
@@ -46,15 +48,17 @@ The default value of this option is `null`.
 
 ## Show or hide Decimals
 
-```php fct_label="Invoke Usage"
-echo $this->currencyFormat(1234.56, 'EUR', false); // '1.234 €'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->currencyFormat(1234.56, 'EUR', false); // '1.234 €'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setShouldShowDecimals(false);
-
-echo $this->currencyFormat(1234.56); // '1.234 €'
-```
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setShouldShowDecimals(false);
+    
+    echo $this->currencyFormat(1234.56); // '1.234 €'
+    ```
 
 (The above example assumes that the environment locale is set to `de`.)
 
@@ -74,15 +78,17 @@ The default value of this option is `null` that means the decimals are showing.
 
 ## Using Locale
 
-```php fct_label="Invoke Usage"
-echo $this->currencyFormat(1234.56, 'EUR', null, 'de'); // '1.234,56 €'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->currencyFormat(1234.56, 'EUR', null, 'de'); // '1.234,56 €'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setLocale('de');
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setLocale('de');
 
-echo $this->currencyFormat(1234.56, 'EUR'); // '1.234,56 €'
-```
+    echo $this->currencyFormat(1234.56, 'EUR'); // '1.234,56 €'
+    ```
 
 ### Get current Value
 
@@ -101,15 +107,17 @@ locale provided by PHP's `Locale::getDefault()`.
 
 ## Define custom Pattern
 
-```php fct_label="Invoke Usage"
-echo $this->currencyFormat(1234.56, 'EUR', null, 'de', '#0.# kg'); // '12345678,90 kg'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->currencyFormat(1234.56, 'EUR', null, 'de', '#0.# kg'); // '12345678,90 kg'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyformat')->setCurrencyPattern('#0.# kg');
-
-echo $this->currencyFormat(1234.56, 'EUR'); // '12345678,90 kg'
-```
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyformat')->setCurrencyPattern('#0.# kg');
+    
+    echo $this->currencyFormat(1234.56, 'EUR'); // '12345678,90 kg'
+    ```
 
 (The above example assumes that the environment locale is set to `de`.)
 

@@ -35,15 +35,17 @@ echo $this->translatePlural('car', 'cars', 4); // 'Autos'
 
 The text domain defines the domain of the translation.
 
-```php fct_label="Invoke Usage"
-echo $this->translatePlural('monitor', 'monitors', 1, 'customDomain'); // 'Bildschirm'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->translatePlural('monitor', 'monitors', 1, 'customDomain'); // 'Bildschirm'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setTranslatorTextDomain('customDomain');
-
-echo $this->translatePlural('monitor', 'monitors', 1); // 'Bildschirm'
-```
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setTranslatorTextDomain('customDomain');
+    
+    echo $this->translatePlural('monitor', 'monitors', 1); // 'Bildschirm'
+    ```
 
 (The above example assumes that the environment locale is set to `de_DE`.)
 

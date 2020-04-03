@@ -32,26 +32,29 @@ instance, the locale `de` is a locale but could not be used with
 however, would be a valid locale, as it specifies the region code (`AT`, for
 Austria).
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\PostCode(['locale' => 'de_AT']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PostCode(['locale' => 'de_AT']);
+    
+    var_dump($validator->isValid(1010)); // true
+    ```
 
-var_dump($validator->isValid(1010)); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PostCode();
+    $validator->setLocale('de_AT');
+    
+    $validator->isValid(1010); // true
+    ```
 
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\PostCode();
-$validator->setLocale('de_AT');
-
-$validator->isValid(1010); // true
-```
-
-```php fct_label="Locale Class Usage"
-Locale::setDefault('de_AT');
-
-$validator = new Laminas\I18n\Validator\PostCode();
-
-var_dump($validator->isValid(1010)); // true
-```
+=== "Locale Class Usage"
+    ```php
+    Locale::setDefault('de_AT');
+    
+    $validator = new Laminas\I18n\Validator\PostCode();
+    
+    var_dump($validator->isValid(1010)); // true
+    ```
 
 ### Get Current Value
 
@@ -75,18 +78,20 @@ Postal code formats are regular expression strings. When the international
 postal code format, which is used by setting the locale, does not fit your
 needs, then you can also manually set a format by calling `setFormat()`.
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\PostCode(['format' => 'AT-\d{4}']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PostCode(['format' => 'AT-\d{4}']);
+    
+    var_dump($validator->isValid('AT-1010')); // true
+    ```
 
-var_dump($validator->isValid('AT-1010')); // true
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\PostCode();
-$validator->setFormat('AT-\d{4}');
-
-var_dump($validator->isValid('AT-1010')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PostCode();
+    $validator->setFormat('AT-\d{4}');
+    
+    var_dump($validator->isValid('AT-1010')); // true
+    ```
 
 ### Conventions for self defined Formats
 
@@ -121,38 +126,40 @@ Internally, the additional validation is done by
 [laminas-validator's `Callback`](https://docs.laminas.dev/laminas-validator/validators/callback/)
 class.
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\PostCode([
-    'service' => static function ($value) {
-        // Allow only certain districts in town
-        if (in_array($value, range(1010, 1423), false)) {
-            return true;
-        }
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PostCode([
+        'service' => static function ($value) {
+            // Allow only certain districts in town
+            if (in_array($value, range(1010, 1423), false)) {
+                return true;
+            }
+    
+            return false;
+        },
+        'locale'  => 'de_AT',
+    ]);
+    
+    var_dump($validator->isValid(1010)); // true
+    var_dump($validator->isValid(1600)); // false
+    ```
 
-        return false;
-    },
-    'locale'  => 'de_AT',
-]);
-
-var_dump($validator->isValid(1010)); // true
-var_dump($validator->isValid(1600)); // false
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\PostCode();
-$validator->setService(static function ($value) {
-   // Allow only certain districts in town
-   if (in_array($value, range(1010, 1423), false)) {
-       return true;
-   }
-
-   return false;
-});
-$validator->setLocale('de_AT');
-
-var_dump($validator->isValid(1010)); // true
-var_dump($validator->isValid(1600)); // false
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PostCode();
+    $validator->setService(static function ($value) {
+       // Allow only certain districts in town
+       if (in_array($value, range(1010, 1423), false)) {
+           return true;
+       }
+    
+       return false;
+    });
+    $validator->setLocale('de_AT');
+    
+    var_dump($validator->isValid(1010)); // true
+    var_dump($validator->isValid(1600)); // false
+    ```
 
 ### Default Value
 

@@ -22,15 +22,17 @@ echo $this->translate('Some translated text.'); // Etwas übersetzter Text
 
 The text domain defines the domain of the translation.
 
-```php fct_label="Invoke Usage"
-echo $this->translate('monitor', 'customDomain'); // 'Monitor'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->translate('monitor', 'customDomain'); // 'Monitor'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('currencyFormat')->setTranslatorTextDomain('customDomain');
-
-echo $this->translate('monitor'); // 'Monitor'
-```
+=== "Setter Usage"
+    ```php
+    $this->plugin('currencyFormat')->setTranslatorTextDomain('customDomain');
+    
+    echo $this->translate('monitor'); // 'Monitor'
+    ```
 
 (The above example assumes that the environment locale is set to `de_DE`.)
 
