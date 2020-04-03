@@ -32,26 +32,29 @@ Using a notation not specific to the locale results in a `false` evaulation.
 
 ## Using Locale
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\IsInt(['locale' => 'en_US']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\IsInt(['locale' => 'en_US']);
+    
+    $validator->isValid(1234); // true
+    ```
 
-$validator->isValid(1234); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\IsInt();
+    $validator->setLocale('en_US');
+    
+    $validator->isValid(1234); // true
+    ```
 
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\IsInt();
-$validator->setLocale('en_US');
-
-$validator->isValid(1234); // true
-```
-
-```php fct_label="Locale Class Usage"
-Locale::setDefault('en_US');
-
-$validator = new Laminas\I18n\Validator\IsInt();
-
-$validator->isValid(1234); // true
-```
+=== "Locale Class Usage"
+    ```php
+    Locale::setDefault('en_US');
+    
+    $validator = new Laminas\I18n\Validator\IsInt();
+    
+    $validator->isValid(1234); // true
+    ```
 
 ### Get Current Value
 
@@ -72,29 +75,32 @@ provided by PHP's `Locale::getDefault()`.
 
 By default, the value's data type is not enforced.
 
-```php fct_label="Default (Without Strict)"
-$validator = new Laminas\I18n\Validator\IsInt();
-
-$validator->isValid(1234);   // true
-$validator->isValid('1234'); // true
-```
+=== "Default (Without Strict)"
+    ```php
+    $validator = new Laminas\I18n\Validator\IsInt();
+    
+    $validator->isValid(1234);   // true
+    $validator->isValid('1234'); // true
+    ```
 
 To enforced a strict validation set the `strict` option to `true`.
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\IsInt(['strict' => true]);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\IsInt(['strict' => true]);
+    
+    $validator->isValid(1234);   // true
+    $validator->isValid('1234'); // false
+    ```
 
-$validator->isValid(1234);   // true
-$validator->isValid('1234'); // false
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\IsInt();
-$validator->setStrict(true)
-
-$validator->isValid(1234);   // true
-$validator->isValid('1234'); // false
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\IsInt();
+    $validator->setStrict(true)
+    
+    $validator->isValid(1234);   // true
+    $validator->isValid('1234'); // false
+    ```
 
 ### Get Current Value
 

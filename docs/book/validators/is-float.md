@@ -30,26 +30,29 @@ Using a notation not specific to the locale results in a `false` evaluation.
 
 ## Using Locale
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\IsFloat(['locale' => 'en_US']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\IsFloat(['locale' => 'en_US']);
+    
+    $validator->isValid(1234.5); // true
+    ```
 
-$validator->isValid(1234.5); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\IsFloat();
+    $validator->setLocale('en_US');
+    
+    $validator->isValid(1234.5); // true
+    ```
 
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\IsFloat();
-$validator->setLocale('en_US');
-
-$validator->isValid(1234.5); // true
-```
-
-```php fct_label="Locale Class Usage"
-Locale::setDefault('en_US');
-
-$validator = new Laminas\I18n\Validator\IsFloat();
-
-$validator->isValid(1234.5); // true
-```
+=== "Locale Class Usage"
+    ```php
+    Locale::setDefault('en_US');
+    
+    $validator = new Laminas\I18n\Validator\IsFloat();
+    
+    $validator->isValid(1234.5); // true
+    ```
 
 ### Get Current Value
 

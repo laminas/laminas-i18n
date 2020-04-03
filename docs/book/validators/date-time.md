@@ -24,18 +24,20 @@ the timezone is set to `Europe/London`.)
 
 ## Set Locale
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\DateTime(['locale' => 'de']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime(['locale' => 'de']);
+    
+    var_dump($validator->isValid('29.02.2020')); // true
+    ```
 
-var_dump($validator->isValid('29.02.2020')); // true
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\DateTime();
-$validator->setLocale('de');
-
-var_dump($validator->isValid('29.02.2020')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime();
+    $validator->setLocale('de');
+    
+    var_dump($validator->isValid('29.02.2020')); // true
+    ```
 
 ### Get Current Value
 
@@ -54,18 +56,20 @@ provided by PHP's `Locale::getDefault()`.
 
 ## Define Custom Pattern
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\DateTime(['pattern' => 'yyyy-MM-DD']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime(['pattern' => 'yyyy-MM-DD']);
+    
+    var_dump($validator->isValid('2019-02-28')); // true
+    ```
 
-var_dump($validator->isValid('2019-02-28')); // true
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\DateTime();
-$validator->setPattern('yyyy-MM-DD');
-
-var_dump($validator->isValid('2019-02-28')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime();
+    $validator->setPattern('yyyy-MM-DD');
+    
+    var_dump($validator->isValid('2019-02-28')); // true
+    ```
 
 Possible patterns are documented at
 [http://userguide.icu-project.org/formatparse/datetime](http://userguide.icu-project.org/formatparse/datetime).
@@ -86,18 +90,20 @@ The default value of this option is `null`.
 
 ## Using Date Type
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\DateTime(['date_type' => IntlDateFormatter::MEDIUM]);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime(['date_type' => IntlDateFormatter::MEDIUM]);
+    
+    var_dump($validator->isValid('Feb 28, 2020')); // true
+    ```
 
-var_dump($validator->isValid('Feb 28, 2020')); // true
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\DateTime();
-$validator->setDateType(IntlDateFormatter::MEDIUM);
-
-var_dump($validator->isValid('Feb 28, 2020')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime();
+    $validator->setDateType(IntlDateFormatter::MEDIUM);
+    
+    var_dump($validator->isValid('Feb 28, 2020')); // true
+    ```
 
 Possible values for the date type option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
@@ -126,18 +132,20 @@ The default value of this option is `IntlDateFormatter::NONE`.
 
 Sets time type to use (none, short, medium, long, full).
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\DateTime(['time_type' => IntlDateFormatter::MEDIUM]);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime(['time_type' => IntlDateFormatter::MEDIUM]);
+    
+    var_dump($validator->isValid('8:05:40 pm')); // true
+    ```
 
-var_dump($validator->isValid('8:05:40 pm')); // true
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\DateTime();
-$validator->setTimeType(IntlDateFormatter::MEDIUM);
-
-var_dump($validator->isValid('8:05:40 pm')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime();
+    $validator->setTimeType(IntlDateFormatter::MEDIUM);
+    
+    var_dump($validator->isValid('8:05:40 pm')); // true
+    ```
 
 Possible values for the date type option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
@@ -166,26 +174,28 @@ The default value of this option is `IntlDateFormatter::NONE`.
 
 To demonstrate the calendar option, additional settings are needed.
 
-```php fct_label="Constructor Usage" 
-$validator = new Laminas\I18n\Validator\DateTime([
-    'calendar'  => IntlDateFormatter::TRADITIONAL,
-    'date_type' => IntlDateFormatter::MEDIUM,
-    'locale'    => 'de_DE@calendar=buddhist',
-    'timezone'  => 'Europe/Berlin',
-]);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime([
+        'calendar'  => IntlDateFormatter::TRADITIONAL,
+        'date_type' => IntlDateFormatter::MEDIUM,
+        'locale'    => 'de_DE@calendar=buddhist',
+        'timezone'  => 'Europe/Berlin',
+    ]);
+    
+    var_dump($validator->isValid('28.02.2562 BE')); // true
+    ```
 
-var_dump($validator->isValid('28.02.2562 BE')); // true
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\DateTime();
-$validator->setCalendar(IntlDateFormatter::TRADITIONAL);
-$validator->setDateType(IntlDateFormatter::MEDIUM);
-$validator->setLocale('de_DE@calendar=buddhist');
-$validator->setTimezone('Europe/Berlin');
-
-var_dump($validator->isValid('28.02.2562 BE')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime();
+    $validator->setCalendar(IntlDateFormatter::TRADITIONAL);
+    $validator->setDateType(IntlDateFormatter::MEDIUM);
+    $validator->setLocale('de_DE@calendar=buddhist');
+    $validator->setTimezone('Europe/Berlin');
+    
+    var_dump($validator->isValid('28.02.2562 BE')); // true
+    ```
 
 Possible values for the calendar option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
@@ -209,18 +219,20 @@ The default value of this option is `IntlDateFormatter::GREGORIAN`.
 
 ## Using Timezone
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\DateTime(['timezone' => 'Europe/London']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime(['timezone' => 'Europe/London']);
+    
+    var_dump($validator->isValid('20190228 10:00 pm')); // true
+    ```
 
-var_dump($validator->isValid('20190228 10:00 pm')); // true
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\DateTime();
-$validator->setTimezone('Europe/London');
-
-var_dump($validator->isValid('20190228 10:00 pm')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\DateTime();
+    $validator->setTimezone('Europe/London');
+    
+    var_dump($validator->isValid('20190228 10:00 pm')); // true
+    ```
 
 ### Get Current Value
 

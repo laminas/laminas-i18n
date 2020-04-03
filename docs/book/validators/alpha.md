@@ -22,22 +22,24 @@ However, if you want to validate complete sentences or phrases, you may need to
 allow whitespace; this can be done via the `allowWhiteSpace` option, either at
 instantiation or afterwards via the `setAllowWhiteSpace()` method.
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' => true]);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' => true]);
+    
+    if ($validator->isValid('Abcd and efg')) {
+        // Value contains only allowed chars
+    }
+    ```
 
-if ($validator->isValid('Abcd and efg')) {
-    // Value contains only allowed chars
-}
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\Alpha();
-$validator->setAllowWhiteSpace(true);
-
-if ($validator->isValid('Abcd and efg')) {
-    // Value contains only allowed chars
-}
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\Alpha();
+    $validator->setAllowWhiteSpace(true);
+    
+    if ($validator->isValid('Abcd and efg')) {
+        // Value contains only allowed chars
+    }
+    ```
 
 ### Get Current Value
 

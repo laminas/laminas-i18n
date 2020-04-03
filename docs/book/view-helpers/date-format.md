@@ -133,22 +133,25 @@ The default value of this option is `IntlDateFormatter::NONE`.
 
 ## Using Locale
 
-```php fct_label="Invoke Usage"
-echo $this->dateFormat(new DateTime(), null, null, 'de_DE');
-// 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
-```
+=== "Invoke Usage"
+    ```php
+    echo $this->dateFormat(new DateTime(), null, null, 'de_DE');
+    // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
+    ```
 
-```php fct_label="Setter Usage"
-$this->plugin('dateFormat')->setLocale('de_DE');
+=== "Setter Usage"
+    ```php
+    $this->plugin('dateFormat')->setLocale('de_DE');
+    
+    echo $this->dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
+    ```
 
-echo $this->dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
-```
-
-```php fct_label="Locale Class Usage"
-Locale::setDefault('de_DE');
-
-echo $this->dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
-```
+=== "Locale Class Usage"
+    ```php
+    Locale::setDefault('de_DE');
+    
+    echo $this->dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
+    ```
 
 ### Get current Value
 

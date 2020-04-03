@@ -21,26 +21,29 @@ extract the country code.
 
 The ISO 3611 country code can be set for validations.
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\PhoneNumber(['country' => 'DE']);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PhoneNumber(['country' => 'DE']);
+    
+    var_dump($validator->isValid('+4930123456')); // true
+    ```
 
-var_dump($validator->isValid('+4930123456')); // true
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PhoneNumber();
+    $validator->setCountry('DE');
+    
+    var_dump($validator->isValid('+4930123456')); // true
+    ```
 
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\PhoneNumber();
-$validator->setCountry('DE');
-
-var_dump($validator->isValid('+4930123456')); // true
-```
-
-```php fct_label="Locale Class Usage"
-Locale::setDefault('de_DE');
-
-$validator = new Laminas\I18n\Validator\PhoneNumber();
-
-var_dump($validator->isValid('+4930123456')); // true
-```
+=== "Locale Class Usage"
+    ```php
+    Locale::setDefault('de_DE');
+    
+    $validator = new Laminas\I18n\Validator\PhoneNumber();
+    
+    var_dump($validator->isValid('+4930123456')); // true
+    ```
 
 ### Get Current Value
 
@@ -60,24 +63,26 @@ the region code.
 
 ## Using Allowed Phone Number Patterns
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\PhoneNumber([
-    'allowed_types' => ['emergency'],
-    'country'       => 'US',
-]);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PhoneNumber([
+        'allowed_types' => ['emergency'],
+        'country'       => 'US',
+    ]);
+    
+    var_dump($validator->isValid(911)); // true
+    var_dump($validator->isValid(999)); // false
+    ```
 
-var_dump($validator->isValid(911)); // true
-var_dump($validator->isValid(999)); // false
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\PhoneNumber();
-$validator->allowedTypes(['emergency']);
-$validator->setCountry('US');
-
-var_dump($validator->isValid(911)); // true
-var_dump($validator->isValid(999)); // false
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PhoneNumber();
+    $validator->allowedTypes(['emergency']);
+    $validator->setCountry('US');
+    
+    var_dump($validator->isValid(911)); // true
+    var_dump($validator->isValid(999)); // false
+    ```
 
 Possible values for allowed patterns are:
 
@@ -132,28 +137,30 @@ By default, the phone numbers are validated against strict number patterns. To
 allow validation with all _possible_ phone numbers, the `allow_possible` option
 can be used.
 
-```php fct_label="Constructor Usage"
-$validator = new Laminas\I18n\Validator\PhoneNumber([
-    'allow_possible' => true,
-    'allowed_types'  => ['emergency'],
-    'country'        => 'US',
-]);
+=== "Constructor Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PhoneNumber([
+        'allow_possible' => true,
+        'allowed_types'  => ['emergency'],
+        'country'        => 'US',
+    ]);
+    
+    var_dump($validator->isValid(911)); // true
+    var_dump($validator->isValid(999)); // true
+    var_dump($validator->isValid(9999)); // false
+    ```
 
-var_dump($validator->isValid(911)); // true
-var_dump($validator->isValid(999)); // true
-var_dump($validator->isValid(9999)); // false
-```
-
-```php fct_label="Setter Usage"
-$validator = new Laminas\I18n\Validator\PhoneNumber();
-$validator->allowPossible(true);
-$validator->allowedTypes(['emergency']);
-$validator->setCountry('US');
-
-var_dump($validator->isValid(911)); // true
-var_dump($validator->isValid(999)); // true
-var_dump($validator->isValid(9999)); // false
-```
+=== "Setter Usage"
+    ```php
+    $validator = new Laminas\I18n\Validator\PhoneNumber();
+    $validator->allowPossible(true);
+    $validator->allowedTypes(['emergency']);
+    $validator->setCountry('US');
+    
+    var_dump($validator->isValid(911)); // true
+    var_dump($validator->isValid(999)); // true
+    var_dump($validator->isValid(9999)); // false
+    ```
 
 ### Get Current Value
 
