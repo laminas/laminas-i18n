@@ -3,6 +3,7 @@ site_dir: docs/html
 nav:
     - Home: index.md
     - Introduction: introduction.md
+    - Installation: installation.md
     - Translation: translation.md
     - Translator:
         - Caching: translator/caching.md
@@ -46,3 +47,6 @@ site_description: 'Provide translations for your application, and filter and val
 repo_url: 'https://github.com/laminas/laminas-i18n'
 extra:
     project: Components
+    installation:
+        config_provider_class: 'Laminas\I18n\ConfigProvider'
+        module_class: 'Laminas\I18n\Module'
