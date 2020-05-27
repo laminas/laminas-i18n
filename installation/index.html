@@ -527,9 +527,9 @@
         
         <li class="toc__entry">
             <a href="#installation-for-mezzio-and-laminas-mvc-application" class="toc__link nav-link">
-                Installation for
-                mezzio
-                and
+                Installation for A
+                Mezzio
+                or
                 laminas-mvc
                 Application
             </a>
@@ -546,9 +546,9 @@
 
 
 <h2 id="installation-for-mezzio-and-laminas-mvc-application">
-    Installation for
-    mezzio
-    and
+    Installation for A
+    Mezzio
+    or
     laminas-mvc
     Application
 </h2>
@@ -557,7 +557,7 @@
 <p>
     The <a href="https://docs.laminas.dev/laminas-component-installer/">laminas-component-installer</a>
     is the recommended installation method when using in
-    a mezzio-based
+    a Mezzio-based
     or
     a laminas-mvc-based application.
     It will automatically inject
@@ -594,7 +594,7 @@
 </p>
 <ul>
     
-    <li>For a mezzio application, choose <code>config/config.php</code>.</li>
+    <li>For a Mezzio application, choose <code>config/config.php</code>.</li>
     
     
     <li>For a laminas-mvc application, choose either <code>modules.config.php</code> or <code>application.config.php</code>.</li>
@@ -605,7 +605,7 @@
     can be remembered.
 </p>
 
-<h3>Installation and manual Configuration</h3>
+<details><summary>Installation and Manual Configuration</summary>
 <p>
     If the installer is not used, the manual configuration is needed to add the
     component to the application.
@@ -616,7 +616,7 @@
 <pre><code class="language-bash">$ composer require laminas/laminas-i18n</code></pre>
 
 
-    <h4>Configuration for a mezzio-based Application</h4>
+    <h4>Manual configuration for a Mezzio-based application</h4>
     <p>
         Add the configuration provider of laminas-i18n to the configuration file,
         e.g. <code>config/config.php</code>:
@@ -634,7 +634,7 @@ $aggregator = new Laminas\ConfigAggregator\ConfigAggregator([
 
 
 
-    <h4>Configuration for a laminas-mvc-based Application</h4>
+    <h4>Manual configuration for a laminas-mvc-based Application</h4>
     <p>
         Add laminas-i18n as component at the top of the configuration file for
         modules, e.g. <code>config/modules.config.php</code>:
@@ -650,6 +650,7 @@ return [
 ];
 </code></pre>
 
+</details>
 
 
 
