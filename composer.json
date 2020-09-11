@@ -19,10 +19,6 @@
         "sort-packages": true
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "2.10.x-dev",
-            "dev-develop": "2.11.x-dev"
-        },
         "laminas": {
             "component": "Laminas\\I18n",
             "config-provider": "Laminas\\I18n\\ConfigProvider"
