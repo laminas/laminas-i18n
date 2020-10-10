@@ -31,7 +31,7 @@ class DateTimeTest extends TestCase
      */
     protected $timezone;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -46,7 +46,7 @@ class DateTimeTest extends TestCase
         ]);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('intl')) {
             Locale::setDefault($this->locale);

@@ -18,7 +18,7 @@ class PhpArrayTest extends TestCase
     protected $originalLocale;
     protected $originalIncludePath;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -33,7 +33,7 @@ class PhpArrayTest extends TestCase
         set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('intl')) {
             Locale::setDefault($this->originalLocale);

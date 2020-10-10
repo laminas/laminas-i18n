@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class NumberParseTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');

@@ -18,7 +18,7 @@ class PhpMemoryArrayTest extends TestCase
     protected $originalLocale;
     protected $originalIncludePath;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -30,7 +30,7 @@ class PhpMemoryArrayTest extends TestCase
         $this->testFilesDir = realpath(__DIR__ . '/../_files/phpmemoryarray');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('intl')) {
             Locale::setDefault($this->originalLocale);

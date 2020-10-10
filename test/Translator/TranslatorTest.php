@@ -34,7 +34,7 @@ class TranslatorTest extends TestCase
      */
     protected $testFilesDir;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -48,7 +48,7 @@ class TranslatorTest extends TestCase
         $this->testFilesDir = __DIR__ . '/_files';
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('intl')) {
             Locale::setDefault($this->originalLocale);

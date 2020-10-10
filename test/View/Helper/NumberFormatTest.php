@@ -32,7 +32,7 @@ class NumberFormatTest extends TestCase
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -47,7 +47,7 @@ class NumberFormatTest extends TestCase
      *
      * @return void
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }
