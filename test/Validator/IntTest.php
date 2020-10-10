@@ -27,7 +27,7 @@ class IntTest extends TestCase
      */
     protected $locale;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (PHP_VERSION_ID >= 70000) {
             $this->markTestSkipped('Cannot test Int validator under PHP 7; reserved keyword');

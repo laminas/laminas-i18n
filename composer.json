@@ -25,7 +25,7 @@
         }
     },
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.3 || ~8.0.0",
         "ext-intl": "*",
         "laminas/laminas-stdlib": "^2.7 || ^3.0",
         "laminas/laminas-zendframework-bridge": "^1.0"
@@ -39,7 +39,7 @@
         "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
         "laminas/laminas-validator": "^2.6",
         "laminas/laminas-view": "^2.6.3",
-        "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16"
+        "phpunit/phpunit": "^9.3"
     },
     "conflict": {
         "phpspec/prophecy": "<1.9.0"

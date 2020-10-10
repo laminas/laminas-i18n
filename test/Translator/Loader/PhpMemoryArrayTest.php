@@ -18,7 +18,7 @@ class PhpMemoryArrayTest extends TestCase
     protected $originalLocale;
     protected $originalIncludePath;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');

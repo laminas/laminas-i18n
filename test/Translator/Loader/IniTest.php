@@ -17,7 +17,7 @@ class IniTest extends TestCase
     protected $originalLocale;
     protected $originalIncludePath;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
 

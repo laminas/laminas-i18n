@@ -21,7 +21,7 @@ class AlphaTest extends TestCase
      */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');

@@ -28,7 +28,7 @@ class IsIntTest extends TestCase
      */
     protected $locale;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');

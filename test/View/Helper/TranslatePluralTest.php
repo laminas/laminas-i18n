@@ -29,7 +29,7 @@ class TranslatePluralTest extends TestCase
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->helper = new TranslatePluralHelper();
     }

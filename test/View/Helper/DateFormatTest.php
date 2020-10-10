@@ -34,7 +34,7 @@ class DateFormatTest extends TestCase
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! interface_exists('Laminas\View\Helper\HelperInterface')) {
             $this->markTestSkipped(
