@@ -9,10 +9,11 @@
 namespace LaminasTest\I18n\Translator;
 
 use Laminas\I18n\Translator\Translator;
+use Laminas\I18n\Translator\TranslatorAwareTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @requires PHP 5.4
+ * @requires PHP 7.3
  */
 class TranslatorAwareTraitTest extends TestCase
 {
@@ -20,29 +21,29 @@ class TranslatorAwareTraitTest extends TestCase
     {
         $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
-        $this->assertAttributeEquals(null, 'translator', $object);
+        $this->assertNull($object->getTranslator());
 
         $translator = new Translator;
 
         $object->setTranslator($translator);
 
-        $this->assertAttributeEquals($translator, 'translator', $object);
+        $this->assertSame($translator, $object->getTranslator());
     }
 
     public function testSetTranslatorAndTextDomain()
     {
         $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
-        $this->assertAttributeEquals(null, 'translator', $object);
-        $this->assertAttributeEquals('default', 'translatorTextDomain', $object);
+        $this->assertNull($object->getTranslator());
+        $this->assertSame('default', $object->getTranslatorTextDomain());
 
         $translator = new Translator;
         $textDomain = 'domain';
 
         $object->setTranslator($translator, $textDomain);
 
-        $this->assertAttributeEquals($translator, 'translator', $object);
-        $this->assertAttributeEquals($textDomain, 'translatorTextDomain', $object);
+        $this->assertSame($translator, $object->getTranslator());
+        $this->assertSame('domain', $object->getTranslatorTextDomain());
     }
 
     public function testGetTranslator()
@@ -75,17 +76,17 @@ class TranslatorAwareTraitTest extends TestCase
     {
         $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
-        $this->assertAttributeEquals(true, 'translatorEnabled', $object);
+        $this->assertTrue($object->isTranslatorEnabled());
 
         $enabled = false;
 
         $object->setTranslatorEnabled($enabled);
 
-        $this->assertAttributeEquals($enabled, 'translatorEnabled', $object);
+        $this->assertFalse($object->isTranslatorEnabled());
 
         $object->setTranslatorEnabled();
 
-        $this->assertAttributeEquals(true, 'translatorEnabled', $object);
+        $this->assertTrue($object->isTranslatorEnabled());
     }
 
     public function testIsTranslatorEnabled()
@@ -103,13 +104,13 @@ class TranslatorAwareTraitTest extends TestCase
     {
         $object = $this->getObjectForTrait('\Laminas\I18n\Translator\TranslatorAwareTrait');
 
-        $this->assertAttributeEquals('default', 'translatorTextDomain', $object);
+        $this->assertSame('default', $object->getTranslatorTextDomain());
 
         $textDomain = 'domain';
 
         $object->setTranslatorTextDomain($textDomain);
 
-        $this->assertAttributeEquals($textDomain, 'translatorTextDomain', $object);
+        $this->assertSame('domain', $object->getTranslatorTextDomain());
     }
 
     public function testGetTranslatorTextDomain()

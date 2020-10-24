@@ -21,7 +21,7 @@ class AlphaTest extends TestCase
      */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -105,10 +105,7 @@ class AlphaTest extends TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals(
-            $validator->getOption('messageTemplates'),
-            'messageTemplates',
-            $validator
-        );
+
+        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 }
