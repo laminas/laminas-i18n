@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.11.0 - TBD
+## 2.11.0 - 2020-10-24
 
 ### Added
 
 - [#40](https://github.com/laminas/laminas-i18n/pull/40) Add PHP 8.0 support
 
-### Changed
 
-- Nothing.
+-----
 
-### Deprecated
+### Release Notes for [2.11.0](https://github.com/laminas/laminas-i18n/milestone/2)
 
-- Nothing.
+next feature release (minor)
 
-### Removed
+### 2.11.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Fixed
+#### Enhancement,hacktoberfest-accepted
 
-- Nothing.
+ - [40: Adds PHP 8.0 support and drops PHP support for versions &lt; 7.3](https://github.com/laminas/laminas-i18n/pull/40) thanks to @henrikthesing
 
 ## 2.10.3 - 2020-03-29
 
