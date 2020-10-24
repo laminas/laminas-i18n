@@ -48,7 +48,7 @@ class TranslatorTest extends TestCase
         $this->testFilesDir = __DIR__ . '/_files';
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('intl')) {
             Locale::setDefault($this->originalLocale);

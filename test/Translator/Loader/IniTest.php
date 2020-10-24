@@ -25,7 +25,7 @@ class IniTest extends TestCase
         set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         set_include_path($this->originalIncludePath);
     }

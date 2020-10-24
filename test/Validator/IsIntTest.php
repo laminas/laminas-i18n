@@ -38,7 +38,7 @@ class IsIntTest extends TestCase
         $this->validator = new IsIntValidator();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('intl')) {
             Locale::setDefault($this->locale);
@@ -126,11 +126,8 @@ class IsIntTest extends TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals(
-            $validator->getOption('messageTemplates'),
-            'messageTemplates',
-            $validator
-        );
+
+        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
     public function testGetStrict()

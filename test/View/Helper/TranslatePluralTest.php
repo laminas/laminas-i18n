@@ -40,7 +40,7 @@ class TranslatePluralTest extends TestCase
      *
      * @return void
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->helper);
     }

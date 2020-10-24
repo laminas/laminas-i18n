@@ -157,7 +157,7 @@ class PostCodeTest extends TestCase
     {
         $this->assertFalse($this->validator->isValid('hello'));
         $message = $this->validator->getMessages();
-        $this->assertContains('not appear to be a postal code', $message['postcodeNoMatch']);
+        $this->assertStringContainsString('not appear to be a postal code', $message['postcodeNoMatch']);
     }
 
      /**
@@ -197,17 +197,13 @@ class PostCodeTest extends TestCase
         $this->assertEquals($params->serviceFalse, 'hello');
 
         $message = $this->validator->getMessages();
-        $this->assertContains('not appear to be a postal code', $message['postcodeService']);
+        $this->assertStringContainsString('not appear to be a postal code', $message['postcodeService']);
     }
 
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals(
-            $validator->getOption('messageTemplates'),
-            'messageTemplates',
-            $validator
-        );
+        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
     /**

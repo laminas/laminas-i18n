@@ -36,7 +36,7 @@
         "laminas/laminas-config": "^2.6",
         "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
         "laminas/laminas-filter": "^2.6.1",
-        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+        "laminas/laminas-servicemanager": "^3.2.1",
         "laminas/laminas-validator": "^2.6",
         "laminas/laminas-view": "^2.6.3",
         "phpunit/phpunit": "^9.3"

@@ -144,10 +144,7 @@ class AlnumTest extends TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals(
-            $validator->getOption('messageTemplates'),
-            'messageTemplates',
-            $validator
-        );
+
+        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 }

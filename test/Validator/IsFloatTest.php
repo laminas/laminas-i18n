@@ -38,7 +38,7 @@ class IsFloatTest extends TestCase
         $this->validator = new IsFloatValidator(['locale' => 'en']);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (extension_loaded('intl')) {
             Locale::setDefault($this->locale);
@@ -218,7 +218,8 @@ class IsFloatTest extends TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
+
+        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
     /**
@@ -230,6 +231,6 @@ class IsFloatTest extends TestCase
         $this->assertFalse($this->validator->isValid('2.000.000,00'));
 
         $message = $this->validator->getMessages();
-        $this->assertContains('does not appear to be a float', $message['notFloat']);
+        $this->assertStringContainsString('does not appear to be a float', $message['notFloat']);
     }
 }

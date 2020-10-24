@@ -22,7 +22,7 @@ class ModuleTest extends TestCase
     public function testConfigReturnsExpectedKeys()
     {
         $config = $this->module->getConfig();
-        $this->assertInternalType('array', $config);
+        $this->assertIsArray($config);
         $this->assertArrayHasKey('filters', $config);
         $this->assertArrayHasKey('service_manager', $config);
         $this->assertArrayHasKey('validators', $config);
