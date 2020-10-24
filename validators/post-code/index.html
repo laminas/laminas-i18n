@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -575,7 +575,6 @@ fully qualified locale, or you can set your own format manually.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
 
 var_dump($validator-&gt;isValid(1010)); // true</code></pre>
-
 <p>By default, if no country code is provided, <code>PostCode</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
 extract the region code.</p>
@@ -592,14 +591,12 @@ Austria).</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
 
 var_dump($validator-&gt;isValid(1010)); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
 $validator-&gt;setLocale('de_AT');
 
 $validator-&gt;isValid(1010); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('de_AT');
@@ -607,7 +604,6 @@ $validator-&gt;isValid(1010); // true</code></pre>
 $validator = new Laminas\I18n\Validator\PostCode();
 
 var_dump($validator-&gt;isValid(1010)); // true</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -615,7 +611,6 @@ var_dump($validator-&gt;isValid(1010)); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['locale' =&gt; 'de_AT']);
 
 echo $validator-&gt;getLocale(); // 'de_AT'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>PostCode</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
@@ -628,14 +623,12 @@ needs, then you can also manually set a format by calling <code>setFormat()</cod
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
 
 var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
 $validator-&gt;setFormat('AT-\d{4}');
 
 var_dump($validator-&gt;isValid('AT-1010')); // true</code></pre>
-
 </div>
 </div>
 <h3>Conventions for self defined Formats</h3>
@@ -649,7 +642,6 @@ additional characters when they are not covered by the format.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode(['format' =&gt; 'AT-\d{4}']);
 
 echo $validator-&gt;getFormat(); // 'AT-\d{4}'</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code>.</p>
 <h2 id="using-callback-service">Using Callback Service</h2>
@@ -674,7 +666,6 @@ class.</p>
 
 var_dump($validator-&gt;isValid(1010)); // true
 var_dump($validator-&gt;isValid(1600)); // false</code></pre>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PostCode();
@@ -690,7 +681,6 @@ $validator-&gt;setLocale('de_AT');
 
 var_dump($validator-&gt;isValid(1010)); // true
 var_dump($validator-&gt;isValid(1600)); // false</code></pre>
-
 </div>
 </div>
 <h3>Default Value</h3>

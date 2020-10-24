@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -576,13 +576,10 @@ internationalization extension (<code>ext/intl</code>).</p>
 </ul>
 <p>Example with a <code>DateTime</code> instance:</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(new DateTime()); // '20190222 09:07 PM'</code></pre>
-
 <p>Example with an <code>IntlCalendar</code> instance:</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(IntlCalendar::createInstance()); // '20190222 09:07 PM'</code></pre>
-
 <p>Example with an Unix timestamp:</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(1550870660); // '20190222 04:24 PM'</code></pre>
-
 <p>Example with the format of <code>localtime()</code>:</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat([
     'tm_sec'  =&gt; 0,   // seconds, 0 to 59
@@ -592,7 +589,6 @@ internationalization extension (<code>ext/intl</code>).</p>
     'tm_mon'  =&gt; 4,   // month of the year, 0 (Jan) to 11 (Dec)
     'tm_year' =&gt; 119, // years since 1900
 ]); // '20190505 12:30 PM'</code></pre>
-
 <p>By default, if no locale is provided, <code>DateFormat</code> will use the system
 locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
@@ -603,26 +599,22 @@ locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</c
     IntlDateFormatter::MEDIUM, // Date
     IntlDateFormatter::MEDIUM  // Time
 ); // 'Feb 22, 2019, 9:07:38 PM'</code></pre>
-
 <p>Format only a date:</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(
     new DateTime(),
     IntlDateFormatter::LONG, // Date
     IntlDateFormatter::NONE  // Time
 ); // 'Feb 22, 2019'</code></pre>
-
 <p>Format only a time:</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(
     new DateTime(),
     IntlDateFormatter::NONE, // Date
     IntlDateFormatter::SHORT // Time
 ); // '9:07 PM'</code></pre>
-
 <p>(The above examples assumes that the environment locale is set to <code>en_US</code>.)</p>
 <h2 id="using-date-type">Using Date Type</h2>
 <p>Sets date type to use (none, short, medium, long, full).</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(new DateTime(), IntlDateFormatter::MEDIUM); // 'Feb 22, 2019'</code></pre>
-
 <p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
 <p>Possible values for the date type option are the following
 <a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
@@ -639,7 +631,6 @@ locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</c
 <p>Sets time type to use (none, short, medium, long, full).</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(new DateTime(), IntlDateFormatter::NONE, IntlDateFormatter::MEDIUM);
 // '9:41:58 PM'</code></pre>
-
 <p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
 <p>Possible values for the date type option are the following
 <a href="https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants">constants of PHP's <code>IntlDateFormatter</code> class</a>:</p>
@@ -656,19 +647,16 @@ locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</c
 <div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;dateFormat(new DateTime(), null, null, 'de_DE');
 // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('dateFormat')-&gt;setLocale('de_DE');
 
 echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre>
-
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('de_DE');
 
 echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'</code></pre>
-
 </div>
 </div>
 <h3>Get current Value</h3>
@@ -676,7 +664,6 @@ echo $this-&gt;dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:1
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('dateFormat')-&gt;setLocale('en_US');
 
 echo $this-&gt;plugin('dateFormat')-&gt;getLocale(); // 'en_US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>DateFormat</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code>.</p>
@@ -688,13 +675,11 @@ timezone when formatting, use the <code>setTimezone()</code> method.</p>
 
 echo $this-&gt;dateFormat(new DateTime(), null, null, 'en_US');
 // 'Friday, February 22, 2019 at 4:20:21 PM Eastern Standard Time'</code></pre>
-
 <h3>Get current Value</h3>
 <p>To get the current value of this option, use the <code>getTimezone()</code> method.</p>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('dateFormat')-&gt;setTimezone('America/New_York');
 
 echo $this-&gt;plugin('dateFormat')-&gt;getTimezone(); // 'America/New_York'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no timezone is provided, <code>DateFormat</code> will use the system
 timezone provided by PHP's <code>date_default_timezone_get()</code>.</p>

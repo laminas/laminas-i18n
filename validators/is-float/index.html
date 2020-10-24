@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -571,7 +571,6 @@ is limited to the locale you set.</p>
 $validator-&gt;isValid(1234.5);    // true
 $validator-&gt;isValid('10a01');   // false
 $validator-&gt;isValid('1,234.5'); // true</code></pre>
-
 <p>By default, if no locale is provided, <code>IsFloat</code> will use the system locale
 provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
@@ -581,14 +580,12 @@ provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> me
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsFloat(['locale' =&gt; 'en_US']);
 
 $validator-&gt;isValid(1234.5); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsFloat();
 $validator-&gt;setLocale('en_US');
 
 $validator-&gt;isValid(1234.5); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('en_US');
@@ -596,7 +593,6 @@ $validator-&gt;isValid(1234.5); // true</code></pre>
 $validator = new Laminas\I18n\Validator\IsFloat();
 
 $validator-&gt;isValid(1234.5); // true</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -604,7 +600,6 @@ $validator-&gt;isValid(1234.5); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsFloat(['locale' =&gt; 'en_US']);
 
 echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>IsFloat</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>

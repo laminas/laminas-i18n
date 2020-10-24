@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -572,20 +572,17 @@ localized currency values</strong>. It acts as a wrapper for the
 internationalization extension (<code>ext/intl</code>).</p>
 <h2 id="basic-usage">Basic Usage</h2>
 <pre class="highlight"><code class="language-php">echo $this-&gt;currencyFormat(1234.56, 'USD'); // '$1,234.56'</code></pre>
-
 <p>By default, if no locale is provided, <code>CurrencyFormat</code> will use the system
 locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
 <h2 id="using-currency-code">Using Currency Code</h2>
 <div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;currencyFormat(1234.56, 'EUR'); // '1.234,56 €'</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setCurrencyCode('EUR');
 
 echo $this-&gt;currencyFormat(1234.56); // '1.234,56 €'</code></pre>
-
 </div>
 </div>
 <p>(The above example assumes that the environment locale is set to <code>de</code>.)</p>
@@ -594,19 +591,16 @@ echo $this-&gt;currencyFormat(1234.56); // '1.234,56 €'</code></pre>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setCurrencyCode('USD');
 
 echo $this-&gt;plugin('currencyFormat')-&gt;getCurrencyCode(); // 'USD'</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code>.</p>
 <h2 id="show-or-hide-decimals">Show or hide Decimals</h2>
 <div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;currencyFormat(1234.56, 'EUR', false); // '1.234 €'</code></pre>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setShouldShowDecimals(false);
 
 echo $this-&gt;currencyFormat(1234.56); // '1.234 €'</code></pre>
-
 </div>
 </div>
 <p>(The above example assumes that the environment locale is set to <code>de</code>.)</p>
@@ -615,19 +609,16 @@ echo $this-&gt;currencyFormat(1234.56); // '1.234 €'</code></pre>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setShouldShowDecimals(true);
 
 echo $this-&gt;plugin('currencyFormat')-&gt;shouldShowDecimals(); // true</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code> that means the decimals are showing.</p>
 <h2 id="using-locale">Using Locale</h2>
 <div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;currencyFormat(1234.56, 'EUR', null, 'de'); // '1.234,56 €'</code></pre>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setLocale('de');
 
 echo $this-&gt;currencyFormat(1234.56, 'EUR'); // '1.234,56 €'</code></pre>
-
 </div>
 </div>
 <h3>Get current Value</h3>
@@ -635,20 +626,17 @@ echo $this-&gt;currencyFormat(1234.56, 'EUR'); // '1.234,56 €'</code></pre>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setLocale('de');
 
 echo $this-&gt;plugin('currencyFormat')-&gt;getLocale(); // 'de'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>CurrencyFormat</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code>.</p>
 <h2 id="define-custom-pattern">Define custom Pattern</h2>
 <div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;currencyFormat(1234.56, 'EUR', null, 'de', '#0.# kg'); // '12345678,90 kg'</code></pre>
-
 </div>
 <input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyformat')-&gt;setCurrencyPattern('#0.# kg');
 
 echo $this-&gt;currencyFormat(1234.56, 'EUR'); // '12345678,90 kg'</code></pre>
-
 </div>
 </div>
 <p>(The above example assumes that the environment locale is set to <code>de</code>.)</p>
@@ -661,7 +649,6 @@ for more information.</p>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setCurrencyPattern('#0.# kg');
 
 echo $this-&gt;plugin('currencyFormat')-&gt;getCurrencyPattern(); // '#0.# kg'</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code>.</p>
 <h2 id="multiple-executions">Multiple Executions</h2>

@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -567,7 +567,6 @@ guarantees an optimized loading procedure.</p>
 <a href="https://docs.laminas.dev/laminas-cache/">laminas-cache</a> component, so be sure
 to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-cache</code></pre>
-
 </blockquote>
 <h2 id="enable-caching">Enable Caching</h2>
 <p>To enable caching, pass a <code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code>
@@ -582,18 +581,15 @@ $cache      = Laminas\Cache\StorageFactory::factory([
     ],
 ]);
 $translator-&gt;setCache($cache);</code></pre>
-
 <p>The explanation of creating a cache and and using different adapters for caching
 can be found in <a href="https://docs.laminas.dev/laminas-cache/">documentation of laminas-cache</a>.</p>
 <h2 id="disable-caching">Disable Caching</h2>
 <p>To disable the cache, pass a <code>null</code> value to the <code>setCache()</code> method.</p>
 <pre class="highlight"><code class="language-php">$translator-&gt;setCache(null);</code></pre>
-
 <h2 id="clear-cache">Clear Cache</h2>
 <p>To clear the cache for a specific text domain and locale, use the <code>clearCache</code>
 method.</p>
 <pre class="highlight"><code class="language-php">$translator-&gt;clearCache('default', 'en_US');</code></pre>
-
 <h2 id="get-cache-identifier">Get Cache Identifier</h2>
 <p>To get the cache identifier for a specific text domain and locale, use the
 <code>getCacheId</code>  method:</p>

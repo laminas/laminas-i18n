@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -575,7 +575,6 @@
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
 
 var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
-
 <p>By default, if no country code is provided, <code>PhoneNumber</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to
 extract the country code.</p>
@@ -586,14 +585,12 @@ extract the country code.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'DE']);
 
 var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
 $validator-&gt;setCountry('DE');
 
 var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('de_DE');
@@ -601,7 +598,6 @@ var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
 $validator = new Laminas\I18n\Validator\PhoneNumber();
 
 var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -609,7 +605,6 @@ var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'US']);
 
 echo $validator-&gt;getCountry(); // 'US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no country is provided, <code>PhoneNumber</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
@@ -623,7 +618,6 @@ the region code.</p>
 
 var_dump($validator-&gt;isValid(911)); // true
 var_dump($validator-&gt;isValid(999)); // false</code></pre>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
@@ -632,7 +626,6 @@ $validator-&gt;setCountry('US');
 
 var_dump($validator-&gt;isValid(911)); // true
 var_dump($validator-&gt;isValid(999)); // false</code></pre>
-
 </div>
 </div>
 <p>Possible values for allowed patterns are:</p>
@@ -665,7 +658,6 @@ the value <code>null</code>.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['allowed_types' =&gt; ['emergency']]);
 
 var_dump($validator-&gt;allowedTypes()); // ['emergency']</code></pre>
-
 <h3>Default Value</h3>
 <p>The following phone number patterns are allowed per default:</p>
 <ul>
@@ -691,7 +683,6 @@ can be used.</p>
 var_dump($validator-&gt;isValid(911)); // true
 var_dump($validator-&gt;isValid(999)); // true
 var_dump($validator-&gt;isValid(9999)); // false</code></pre>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber();
@@ -702,7 +693,6 @@ $validator-&gt;setCountry('US');
 var_dump($validator-&gt;isValid(911)); // true
 var_dump($validator-&gt;isValid(999)); // true
 var_dump($validator-&gt;isValid(9999)); // false</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -711,7 +701,6 @@ the value <code>null</code>.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['allow_possible' =&gt; true]);
 
 var_dump($validator-&gt;allowPossible()); // true</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code>.</p>
 <h2 id="specify-country-code-on-validation">Specify Country Code on Validation</h2>

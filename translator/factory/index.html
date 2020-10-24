@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -574,7 +574,6 @@
 <pre class="highlight"><code class="language-php">$translator = Laminas\I18n\Translator\Translator::factory([
     'locale' =&gt; 'de_DE',
 ]);</code></pre>
-
 <h2 id="setting-fallback-locale">Setting Fallback Locale</h2>
 <pre class="highlight"><code class="language-php">$translator = Laminas\I18n\Translator\Translator::factory([
     'locale' =&gt; [
@@ -582,7 +581,6 @@
         'en_GB', // Fallback locale
     ],
 ]);</code></pre>
-
 <h2 id="setting-translation-file-patterns">Setting Translation File Patterns</h2>
 <pre class="highlight"><code class="language-php">$translator = Laminas\I18n\Translator\Translator::factory([
     'translation_file_patterns' =&gt; [
@@ -599,7 +597,6 @@
         ],
     ],
 ]);</code></pre>
-
 <p>Each file pattern option array must contain <code>type</code>, <code>base_dir</code> and <code>pattern</code>.
 The option for <code>text_domain</code> is optional. The default value for <code>text_domain</code> is
 <code>default</code>.</p>
@@ -623,7 +620,6 @@ The option for <code>text_domain</code> is optional. The default value for <code
         ],
     ],
 ]);</code></pre>
-
 <p>Each file option array must contain <code>type</code> and <code>filename</code>. The options for
 <code>locale</code> and the <code>text_domain</code> are optional. The default value for <code>locale</code> is
 <code>null</code> and for <code>text_domain</code> it is <code>default</code>.</p>
@@ -639,7 +635,6 @@ The option for <code>text_domain</code> is optional. The default value for <code
         ],
     ],
 ]);</code></pre>
-
 <p>Each remote option array must contain <code>type</code>. The option for <code>text_domain</code> is 
 optional. The default value for <code>text_domain</code> is <code>default</code>.</p>
 <h3>Adding Translations</h3>
@@ -659,7 +654,6 @@ optional. The default value for <code>text_domain</code> is <code>default</code>
         ],
     ])
 );</code></pre>
-
 <h2 id="setting-cache">Setting Cache</h2>
 <h3>Using a Cache Instance</h3>
 <pre class="highlight"><code class="language-php">$cache      = Laminas\Cache\StorageFactory::factory([
@@ -673,7 +667,6 @@ optional. The default value for <code>text_domain</code> is <code>default</code>
 $translator = Laminas\I18n\Translator\Translator::factory([
     'cache' =&gt; $cache,
 ]);</code></pre>
-
 <h3>Using Cache Configuration</h3>
 <pre class="highlight"><code class="language-php">$translator = Laminas\I18n\Translator\Translator::factory([
     'cache' =&gt; [
@@ -685,7 +678,6 @@ $translator = Laminas\I18n\Translator\Translator::factory([
         ],
     ],
 ]);</code></pre>
-
 <h2 id="enable-eventmanager">Enable EventManager</h2>
 <pre class="highlight"><code class="language-php">$translator = Laminas\I18n\Translator\Translator::factory([
     'event_manager_enabled' =&gt; true,

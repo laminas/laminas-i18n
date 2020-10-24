@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -572,7 +572,6 @@ locale-specific number and/or percentage strings</strong>. It acts as a wrapper 
 internationalization extension (<code>ext/intl</code>).</p>
 <h2 id="basic-usage">Basic Usage</h2>
 <pre class="highlight"><code class="language-php">echo $this-&gt;numberFormat(1000); // '1,000'</code></pre>
-
 <p>By default, if no locale is provided, <code>NumberFormat</code> will use the system
 locale provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>en_US</code>.)</p>
@@ -585,7 +584,6 @@ echo $this-&gt;numberFormat(0.8, NumberFormatter::PERCENT); // '80%'
 
 // Example 2
 echo $this-&gt;numberFormat(0.00123456789, NumberFormatter::SCIENTIFIC); // '1,23456789E-3'</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">// Example 1
@@ -597,7 +595,6 @@ echo $this-&gt;numberFormat(0.8); // '80%'
 $this-&gt;plugin('numberFormat')-&gt;setFormatStyle(NumberFormatter::SCIENTIFIC);
 
 echo $this-&gt;numberFormat(0.00123456789); // '1,23456789E-3'</code></pre>
-
 </div>
 </div>
 <p>(The above examples assumes that the environment locale is set to <code>en_US</code>.)</p>
@@ -606,7 +603,6 @@ echo $this-&gt;numberFormat(0.00123456789); // '1,23456789E-3'</code></pre>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('numberFormat')-&gt;setFormatStyle(NumberFormatter::PERCENT);
 
 echo $this-&gt;plugin('numberFormat')-&gt;getFormatStyle(); // 3 (NumberFormatter::DEFAULT_STYLE)</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>NumberFormatter::DEFAULT_STYLE</code>.</p>
 <h2 id="using-format-type">Using Format Type</h2>
@@ -614,13 +610,11 @@ echo $this-&gt;plugin('numberFormat')-&gt;getFormatStyle(); // 3 (NumberFormatte
 to use.</p>
 <div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Constructor Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;numberFormat(1234567.89, null, NumberFormatter::TYPE_INT32); // '1.234.567'</code></pre>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('numberFormat')-&gt;setFormatType(NumberFormatter::TYPE_INT32);
 
 echo $this-&gt;numberFormat(1234567.89); // '1.234.567'</code></pre>
-
 </div>
 </div>
 <p>(The above examples assumes that the environment locale is set to <code>en_US</code>.)</p>
@@ -629,25 +623,21 @@ echo $this-&gt;numberFormat(1234567.89); // '1.234.567'</code></pre>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('numberFormat')-&gt;setFormatType(NumberFormatter::DECIMAL);
 
 echo $this-&gt;plugin('numberFormat')-&gt;getFormatType(); // 1 (NumberFormatter::DECIMAL)</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>NumberFormatter::TYPE_DEFAULT</code>.</p>
 <h2 id="using-locale">Using Locale</h2>
 <div class="tabbed-set" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;numberFormat(1000, null, null, 'en_US'); // '1,000'</code></pre>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setLocale('en_US');
 
 echo $this-&gt;numberFormat(1000); // '1,000'</code></pre>
-
 </div>
 <input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('en_US');
 
 echo $this-&gt;numberFormat(1000); // '1,000'</code></pre>
-
 </div>
 </div>
 <h3>Get current Value</h3>
@@ -655,7 +645,6 @@ echo $this-&gt;numberFormat(1000); // '1,000'</code></pre>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('numberFormat')-&gt;setLocale('en_US');
 
 echo $this-&gt;plugin('numberFormat')-&gt;getLocale(); // 'en_US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>NumberFormat</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code>.</p>
@@ -663,13 +652,11 @@ locale provided by PHP's <code>Locale::getDefault()</code>.</p>
 <p>Sets the number of digits beyond the decimal point to display.</p>
 <div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;numberFormat(1234, null, null, null, 5); // '1,234.00000'</code></pre>
-
 </div>
 <input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setDecimals(5);
 
 echo $this-&gt;numberFormat(1234); // '1,234.00000'</code></pre>
-
 </div>
 </div>
 <p>(The above examples assumes that the environment locale is set to <code>en_US</code>.)</p>
@@ -678,7 +665,6 @@ echo $this-&gt;numberFormat(1234); // '1,234.00000'</code></pre>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('numberFormat')-&gt;setDecimals(5);
 
 echo $this-&gt;plugin('numberFormat')-&gt;getDecimals(); // 5</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code> that means the attributes for minimum
 and maximum fraction digits will not be set on the <code>NumberFormatter</code>.</p>
@@ -697,7 +683,6 @@ for positive and negative numbers. See
         NumberFormatter::NEGATIVE_PREFIX =&gt; '(minus) ',
     ]
 ); // '(minus) 1,000'</code></pre>
-
 </div>
 <input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setTextAttributes([
@@ -705,7 +690,6 @@ for positive and negative numbers. See
 ]);
 
 echo $this-&gt;numberFormat(-1000); // '(minus) 1,000'</code></pre>
-
 </div>
 </div>
 <p>(The above examples assumes that the environment locale is set to <code>en_US</code>.)</p>
@@ -717,7 +701,6 @@ echo $this-&gt;numberFormat(-1000); // '(minus) 1,000'</code></pre>
 ]);
 
 var_dump($this-&gt;plugin('numberFormat')-&gt;getTextAttributes()); // ['(plus) ', '(minus) ']</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is an empty <code>array</code>;</p>
 

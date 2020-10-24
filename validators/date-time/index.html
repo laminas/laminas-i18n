@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -587,7 +587,6 @@ value.</p>
 var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true
 var_dump($validator-&gt;isValid('20190229 10:00 pm')); // false
 var_dump($validator-&gt;isValid('20200229 10:00 pm')); // true</code></pre>
-
 <p>By default, if no locale is provided, <code>DateTime</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code> and the default timezone provided
 by PHP's <code>date_default_timezone_get</code>.</p>
@@ -598,14 +597,12 @@ the timezone is set to <code>Europe/London</code>.)</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'de']);
 
 var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setLocale('de');
 
 var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -613,7 +610,6 @@ var_dump($validator-&gt;isValid('29.02.2020')); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['locale' =&gt; 'en_US']);
 
 echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>DateTime</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>
@@ -622,14 +618,12 @@ provided by PHP's <code>Locale::getDefault()</code>.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
 
 var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setPattern('yyyy-MM-DD');
 
 var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre>
-
 </div>
 </div>
 <p>Possible patterns are documented at
@@ -639,7 +633,6 @@ var_dump($validator-&gt;isValid('2019-02-28')); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['pattern' =&gt; 'yyyy-MM-DD']);
 
 echo $validator-&gt;getPattern(); // 'yyyy-MM-DD'</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>null</code>.</p>
 <h2 id="using-date-type">Using Date Type</h2>
@@ -647,14 +640,12 @@ echo $validator-&gt;getPattern(); // 'yyyy-MM-DD'</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
 
 var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setDateType(IntlDateFormatter::MEDIUM);
 
 var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre>
-
 </div>
 </div>
 <p>Possible values for the date type option are the following
@@ -671,7 +662,6 @@ var_dump($validator-&gt;isValid('Feb 28, 2020')); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['date_type' =&gt; IntlDateFormatter::MEDIUM]);
 
 echo $validator-&gt;getDateType(); // 'MMM d, y' (IntlDateFormatter::MEDIUM)</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
 <h2 id="using-time-type">Using Time Type</h2>
@@ -680,14 +670,12 @@ echo $validator-&gt;getDateType(); // 'MMM d, y' (IntlDateFormatter::MEDIUM)</co
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
 
 var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre>
-
 </div>
 <input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setTimeType(IntlDateFormatter::MEDIUM);
 
 var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre>
-
 </div>
 </div>
 <p>Possible values for the date type option are the following
@@ -704,7 +692,6 @@ var_dump($validator-&gt;isValid('8:05:40 pm')); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['time_type' =&gt; IntlDateFormatter::MEDIUM]);
 
 echo $validator-&gt;getTimeType(); // 'h:mm:ss a' (IntlDateFormatter::MEDIUM)</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>IntlDateFormatter::NONE</code>.</p>
 <h2 id="using-calendar">Using Calendar</h2>
@@ -718,7 +705,6 @@ echo $validator-&gt;getTimeType(); // 'h:mm:ss a' (IntlDateFormatter::MEDIUM)</c
 ]);
 
 var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre>
-
 </div>
 <input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
@@ -728,7 +714,6 @@ $validator-&gt;setLocale('de_DE@calendar=buddhist');
 $validator-&gt;setTimezone('Europe/Berlin');
 
 var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre>
-
 </div>
 </div>
 <p>Possible values for the calendar option are the following
@@ -742,7 +727,6 @@ var_dump($validator-&gt;isValid('28.02.2562 BE')); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['calendar' =&gt; IntlDateFormatter::TRADITIONAL]);
 
 echo $validator-&gt;getCalendar(); // '0' (IntlDateFormatter::TRADITIONAL)</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>IntlDateFormatter::GREGORIAN</code>.</p>
 <h2 id="using-timezone">Using Timezone</h2>
@@ -750,14 +734,12 @@ echo $validator-&gt;getCalendar(); // '0' (IntlDateFormatter::TRADITIONAL)</code
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
 
 var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre>
-
 </div>
 <input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime();
 $validator-&gt;setTimezone('Europe/London');
 
 var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -765,7 +747,6 @@ var_dump($validator-&gt;isValid('20190228 10:00 pm')); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\DateTime(['timezone' =&gt; 'Europe/London']);
 
 echo $validator-&gt;getTimezone(); // 'Europe/London'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no timezone is provided, <code>DateTime</code> will use the system timezone
 provided by PHP's <code>date_default_timezone_get()</code>.</p>

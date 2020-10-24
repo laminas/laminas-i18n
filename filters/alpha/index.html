@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -564,7 +564,6 @@ unicode "letter" category. All other characters are suppressed.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alpha();
 
 echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent"</code></pre>
-
 <p>By default, if no locale is provided, <code>Alpha</code> will use the system locale
 provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <h2 id="using-whitespace">Using Whitespace</h2>
@@ -574,14 +573,12 @@ otherwise they are suppressed.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alpha(true);
 
 echo $filter-&gt;filter('This is (my) content: 123'); // "This is my content"</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alpha();
 $filter-&gt;setAllowWhiteSpace(true);
 
 echo $filter-&gt;filter('This is (my) content: 123'); // "This is my content"</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -589,7 +586,6 @@ echo $filter-&gt;filter('This is (my) content: 123'); // "This is my content"</c
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alpha(true);
 
 $result = $filter-&gt;getAllowWhiteSpace(); // true</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code> that means whitespace characters are
 suppressed.</p>
@@ -600,14 +596,12 @@ e.g. <code>en_US</code>).</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alpha(null, 'en_US');
 
 echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent"</code></pre>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alpha();
 $filter-&gt;setLocale('en_US');
 
 echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent"</code></pre>
-
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('en_US');
@@ -615,7 +609,6 @@ echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent"</code
 $filter = new Laminas\I18n\Filter\Alpha();
 
 echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent"</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -623,7 +616,6 @@ echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent"</code
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alpha(null, 'en_US');
 
 echo $filter-&gt;getLocale(); // 'en_US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>Alpha</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>

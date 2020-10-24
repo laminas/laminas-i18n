@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -577,7 +577,6 @@ locale.</p>
 $validator-&gt;isValid(1234);    // returns true
 $validator-&gt;isValid(1234.5);  // returns false
 $validator-&gt;isValid('1,234'); // returns true</code></pre>
-
 <p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
 provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>en</code>.)</p>
@@ -587,14 +586,12 @@ provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> me
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
 
 $validator-&gt;isValid(1234); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt();
 $validator-&gt;setLocale('en_US');
 
 $validator-&gt;isValid(1234); // true</code></pre>
-
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('en_US');
@@ -602,7 +599,6 @@ $validator-&gt;isValid(1234); // true</code></pre>
 $validator = new Laminas\I18n\Validator\IsInt();
 
 $validator-&gt;isValid(1234); // true</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -610,7 +606,6 @@ $validator-&gt;isValid(1234); // true</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt(['locale' =&gt; 'en_US']);
 
 echo $validator-&gt;getLocale(); // 'en_US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>IsInt</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>
@@ -621,7 +616,6 @@ provided by PHP's <code>Locale::getDefault()</code>.</p>
 
 $validator-&gt;isValid(1234);   // true
 $validator-&gt;isValid('1234'); // true</code></pre>
-
 </div>
 </div>
 <p>To enforced a strict validation set the <code>strict</code> option to <code>true</code>.</p>
@@ -630,7 +624,6 @@ $validator-&gt;isValid('1234'); // true</code></pre>
 
 $validator-&gt;isValid(1234);   // true
 $validator-&gt;isValid('1234'); // false</code></pre>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt();
@@ -638,7 +631,6 @@ $validator-&gt;setStrict(true)
 
 $validator-&gt;isValid(1234);   // true
 $validator-&gt;isValid('1234'); // false</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -646,7 +638,6 @@ $validator-&gt;isValid('1234'); // false</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt(['strict' =&gt; true]);
 
 echo $validator-&gt;getStrict(); // true</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code>.</p>
 

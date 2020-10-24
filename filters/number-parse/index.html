@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -569,7 +569,6 @@ internationalization extension (<code>ext/intl</code>).</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();
 
 echo $filter-&gt;filter('1.234.567,891'); // 1234567.8912346</code></pre>
-
 <p>By default, if no locale is provided, <code>NumberParse</code> will use the system locale
 provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
@@ -580,14 +579,12 @@ e.g. <code>en_US</code> or <code>de_DE</code>).</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse('de_DE');
 
 echo $filter-&gt;filter('1.234.567,891'); // 1234567.8912346</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();
 $filter-&gt;setLocale('de_DE');
 
 echo $filter-&gt;filter('1.234.567,891'); // 1234567.8912346</code></pre>
-
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Locale Class Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">Locale::setDefault('de_DE');
@@ -595,7 +592,6 @@ echo $filter-&gt;filter('1.234.567,891'); // 1234567.8912346</code></pre>
 $filter = new Laminas\I18n\Filter\NumberParse();
 
 echo $filter-&gt;filter('1.234.567,891'); // 1234567.8912346</code></pre>
-
 </div>
 </div>
 <blockquote>
@@ -608,7 +604,6 @@ Create a new instance of the filter to change the locale.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse('en_US');
 
 echo $filter-&gt;getLocale(); // 'en_US'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>NumberParse</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code>.</p>
@@ -625,7 +620,6 @@ echo $filter-&gt;filter('80%'); // 0.80
 $filter = new Laminas\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
 
 echo $filter-&gt;filter('1,23456789E-3'); // 0.00123456789</code></pre>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">// Example 1
@@ -639,7 +633,6 @@ $filter = new Laminas\I18n\Filter\NumberParse('fr_FR');
 $filter-&gt;setStyle(NumberFormatter::SCIENTIFIC);
 
 echo $filter-&gt;filter('1,23456789E-3'); // 0.00123456789</code></pre>
-
 </div>
 </div>
 <blockquote>
@@ -652,7 +645,6 @@ Create a new instance of the filter to change the style.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();
 
 echo $filter-&gt;getStyle(); // 1 (NumberFormatter::DEFAULT_STYLE)</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>NumberFormatter::DEFAULT_STYLE</code>.</p>
 <h2 id="using-type">Using Type</h2>
@@ -666,7 +658,6 @@ to use.</p>
 );
 
 echo $filter-&gt;filter('1.234.567,891'); // 1234567</code></pre>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();
@@ -674,7 +665,6 @@ $filter-&gt;setLocale('de_DE');
 $filter-&gt;setType(NumberFormatter::DECIMAL);
 
 echo $filter-&gt;filter('1.234.567,891'); // 1234567</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -682,14 +672,12 @@ echo $filter-&gt;filter('1.234.567,891'); // 1234567</code></pre>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();
 
 echo $filter-&gt;getType(); // 3 (NumberFormatter::TYPE_DOUBLE)</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>NumberFormatter::TYPE_DOUBLE</code>.</p>
 <h2 id="using-custom-numberformatter">Using Custom NumberFormatter</h2>
 <pre class="highlight"><code class="language-php">$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT); 
 $filter    = new Laminas\I18n\Filter\NumberParse();
 $filter-&gt;setFormatter($formatter);</code></pre>
-
 <blockquote>
 <h3>Notice</h3>
 <p>If a custom formatter is set, the locale and/or the style changes will
@@ -701,7 +689,6 @@ the style.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();
 
 $formatter = $filter-&gt;getFormatter(); // instance of `NumberFormatter`</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is an instance of PHP's <code>NumberFormatter</code> class.
 Created with the current values for locale and style of the filter.</p>

@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -567,19 +567,16 @@ wrapper for the <a href="../../translation/"><code>Laminas\I18n\Translator\Trans
 automatically for you.</p>
 <h2 id="basic-usage">Basic Usage</h2>
 <pre class="highlight"><code class="language-php">echo $this-&gt;translate('Some translated text.'); // Etwas übersetzter Text</code></pre>
-
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
 <h2 id="using-text-domain">Using Text Domain</h2>
 <p>The text domain defines the domain of the translation.</p>
 <div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Invoke Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">echo $this-&gt;translate('monitor', 'customDomain'); // 'Monitor'</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('currencyFormat')-&gt;setTranslatorTextDomain('customDomain');
 
 echo $this-&gt;translate('monitor'); // 'Monitor'</code></pre>
-
 </div>
 </div>
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
@@ -589,14 +586,12 @@ method.</p>
 <pre class="highlight"><code class="language-php">$this-&gt;plugin('translatePlural')-&gt;setTranslatorTextDomain('customDomain');
 
 echo $this-&gt;plugin('translatePlural')-&gt;getTranslatorTextDomain(); // 'customDomain'</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>default</code> like defined in
 <code>Laminas\I18n\Translator\TranslatorInterface</code>.</p>
 <h2 id="using-locale">Using Locale</h2>
 <p>The locale to which the message should be translated.</p>
 <pre class="highlight"><code class="language-php">echo $this-&gt;translate('car', 'default', 'de_DE'); // 'Auto'</code></pre>
-
 <h3>Default Value</h3>
 <p>By default, if no locale is provided, <code>TranslatePlural</code> will use the system
 locale provided by PHP's <code>Locale::getDefault()</code>.</p>

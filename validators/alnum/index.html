@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -569,7 +569,6 @@
 if ($validator-&gt;isValid('Abcd12')) {
     // Value contains only allowed chars
 }</code></pre>
-
 <h2 id="using-whitespace">Using Whitespace</h2>
 <p>By default, whitespace is not accepted as it is not part of the alphabet.
 However, if you want to validate complete sentences or phrases, you may need to
@@ -581,7 +580,6 @@ instantiation or afterwards via the <code>setAllowWhiteSpace()</code> method.  <
 if ($validator-&gt;isValid('Abcd and 12')) {
     // Value contains only allowed chars
 }</code></pre>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Setter Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum();
@@ -590,7 +588,6 @@ $validator-&gt;setAllowWhiteSpace(true);
 if ($validator-&gt;isValid('Abcd and 12')) {
     // Value contains only allowed chars
 }</code></pre>
-
 </div>
 </div>
 <h3>Get Current Value</h3>
@@ -598,7 +595,6 @@ if ($validator-&gt;isValid('Abcd and 12')) {
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' =&gt; true]);
 
 $result = $validator-&gt;getAllowWhiteSpace(); // true</code></pre>
-
 <h3>Default Value</h3>
 <p>The default value of this option is <code>false</code> that means whitespace characters are
 not allowed.</p>

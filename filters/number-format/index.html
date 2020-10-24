@@ -469,7 +469,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -558,7 +558,6 @@ internationalization extension (<code>ext/intl</code>).</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberFormat();
 
 echo $filter-&gt;filter(1234567.8912346); // "1.234.567,891"</code></pre>
-
 <p>By default, if no locale is provided, <code>NumberParse</code> will use the system locale
 provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> method.</p>
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
@@ -567,12 +566,10 @@ provided by PHP's <code>Locale</code> class and the <code>getDefault()</code> me
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberFormat('en_US', NumberFormatter::PERCENT);
 
 echo $filter-&gt;filter(0.80); // "80%"</code></pre>
-
 <p>Format a number in a scientific format:</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberFormat('fr_FR', NumberFormatter::SCIENTIFIC);
 
 echo $filter-&gt;filter(0.00123456789); // "1,23456789E-3"</code></pre>
-
 <h2 id="inherited-options-and-methods">Inherited Options and Methods</h2>
 <p>The <code>NumberFormat</code> filter extends the <code>NumberParse</code> filter and supports the same
 options and methods for locale, style, type and formatter. The descriptions with
