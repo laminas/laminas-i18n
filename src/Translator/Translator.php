@@ -440,6 +440,10 @@ class Translator implements TranslatorInterface
             $this->loadMessages($textDomain, $locale);
         }
 
+        if (is_array($message)) {
+            $message = array_values($message)[0];
+        }
+
         if (isset($this->messages[$textDomain][$locale][$message])) {
             return $this->messages[$textDomain][$locale][$message];
         }
