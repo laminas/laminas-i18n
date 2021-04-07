@@ -561,7 +561,7 @@
 <p>All filters, validators, view-helpers and the translator of laminas-i18n can
 also be used stand-alone.</p>
 <h2 id="translator">Translator</h2>
-<h3>Setup</h3>
+<h3 id="setup">Setup</h3>
 <p>Create a file for the translation messages. For example <code>languages/de_DE.php</code>:</p>
 <pre class="highlight"><code class="language-php">return [
     'car'   =&gt; 'Auto',
@@ -575,7 +575,7 @@ $translator-&gt;addTranslationFile(
     'default',
     'de_DE'
 );</code></pre>
-<h3>Translate Messages</h3>
+<h3 id="translate-messages">Translate Messages</h3>
 <pre class="highlight"><code class="language-php">$translator-&gt;setLocale('de_DE');
 
 echo $translator-&gt;translate('car');   // Auto
@@ -585,7 +585,7 @@ echo $translator-&gt;translate('train'); // Zug</code></pre>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\Alnum();
 
 echo $filter-&gt;filter('This is (my) content: 123'); // "Thisismycontent123"</code></pre>
-<h3>Using Filter Plugin Manager</h3>
+<h3 id="using-filter-plugin-manager">Using Filter Plugin Manager</h3>
 <p>Register all standard filters of laminas-i18n in the filter-plugin-manager:</p>
 <pre class="highlight"><code class="language-php">$filterManager = new Laminas\Filter\FilterPluginManager(
     new Laminas\ServiceManager\ServiceManager()
@@ -601,7 +601,7 @@ $filter = $filterManager-&gt;get(Laminas\I18n\Filter\Alnum::class);</code></pre>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\Alnum();
 
 $result = $validator-&gt;isValid('Abcd12')); // true</code></pre>
-<h3>Using Validator Plugin Manager</h3>
+<h3 id="using-validator-plugin-manager">Using Validator Plugin Manager</h3>
 <p>Register all standard validators of laminas-i18n in the validator-plugin-manager:</p>
 <pre class="highlight"><code class="language-php">$validatorManager = new Laminas\Validator\ValidatorPluginManager(
     new Laminas\ServiceManager\ServiceManager()
@@ -613,14 +613,14 @@ $validatorManager-&gt;configure(
 <pre class="highlight"><code class="language-php">/** @var Laminas\I18n\Validator\Alnum $validator */
 $validator = $validatorManager-&gt;get(Laminas\I18n\Validator\Alnum::class);</code></pre>
 <h2 id="view-helpers">View Helpers</h2>
-<h3>Setup laminas-view</h3>
+<h3 id="setup-laminas-view">Setup laminas-view</h3>
 <p>Create the renderer:</p>
 <pre class="highlight"><code class="language-php">$renderer = new Laminas\View\Renderer\PhpRenderer();</code></pre>
 <p>Register all standard view-helpers of laminas-i18n in the helper-plugin-manager:</p>
 <pre class="highlight"><code class="language-php">$renderer-&gt;getHelperPluginManager()-&gt;configure(
     (new Laminas\I18n\ConfigProvider())-&gt;getViewHelperConfig()
 );</code></pre>
-<h3>Using Helper</h3>
+<h3 id="using-helper">Using Helper</h3>
 <pre class="highlight"><code class="language-php">echo $renderer-&gt;currencyFormat(1234.56, 'USD', null, 'en_US'); // "$1,234.56"</code></pre>
 
 
@@ -1003,6 +1003,20 @@ $validator = $validatorManager-&gt;get(Laminas\I18n\Validator\Alnum::class);</co
         </ul>
     </div>
 
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">Related Components</h4>
+        <ul class="subnavigation__list">
+            
+                <li class="subnavigation__list-item">
+                    
+                        <a href="https://docs.laminas.dev/laminas-i18n-resources/" class="subnavigation__link">Translation Resources</a>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
                 
             </div>
         </div>
@@ -1075,7 +1089,7 @@ $validator = $validatorManager-&gt;get(Laminas\I18n\Validator\Alnum::class);</co
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-i18n/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

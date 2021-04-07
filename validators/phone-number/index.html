@@ -581,6 +581,7 @@ extract the country code.</p>
 <p>(The above example assumes that the environment locale is set to <code>de_DE</code>.)</p>
 <h2 id="using-country">Using Country</h2>
 <p>The ISO 3611 country code can be set for validations.</p>
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 <div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Constructor Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'DE']);
 
@@ -600,16 +601,19 @@ $validator = new Laminas\I18n\Validator\PhoneNumber();
 var_dump($validator-&gt;isValid('+4930123456')); // true</code></pre>
 </div>
 </div>
-<h3>Get Current Value</h3>
+<!-- markdownlint-restore -->
+
+<h3 id="get-current-value">Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getCountry()</code> method.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['country' =&gt; 'US']);
 
 echo $validator-&gt;getCountry(); // 'US'</code></pre>
-<h3>Default Value</h3>
+<h3 id="default-value">Default Value</h3>
 <p>By default, if no country is provided, <code>PhoneNumber</code> will use the system locale
 provided by PHP's <code>Locale::getDefault()</code> and <code>Locale::getRegion()</code> to extract
 the region code.</p>
 <h2 id="using-allowed-phone-number-patterns">Using Allowed Phone Number Patterns</h2>
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 <div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Constructor Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber([
     'allowed_types' =&gt; ['emergency'],
@@ -628,6 +632,8 @@ var_dump($validator-&gt;isValid(911)); // true
 var_dump($validator-&gt;isValid(999)); // false</code></pre>
 </div>
 </div>
+<!-- markdownlint-restore -->
+
 <p>Possible values for allowed patterns are:</p>
 <ul>
 <li><code>emergency</code></li>
@@ -645,20 +651,20 @@ var_dump($validator-&gt;isValid(999)); // false</code></pre>
 <li><code>voip</code></li>
 </ul>
 <blockquote>
-<h3>All allowed patterns</h3>
+<h3 id="all-allowed-patterns">All allowed patterns</h3>
 <p>The complete list of allowed patterns is not available for each country code.
 Please check the file for your country code with the supported types in the
 <a href="https://github.com/laminas/laminas-i18n/tree/master/src/Validator/PhoneNumber">laminas-i18n repository on GitHub</a>
 or in the <code>vendor/laminas/laminas-i18n/src/Validator/PhoneNumber</code> directory
 of your project folder.</p>
 </blockquote>
-<h3>Get Current Value</h3>
+<h3 id="get-current-value_1">Get Current Value</h3>
 <p>To get the current value of this option, use the <code>allowedTypes()</code> method with
 the value <code>null</code>.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['allowed_types' =&gt; ['emergency']]);
 
 var_dump($validator-&gt;allowedTypes()); // ['emergency']</code></pre>
-<h3>Default Value</h3>
+<h3 id="default-value_1">Default Value</h3>
 <p>The following phone number patterns are allowed per default:</p>
 <ul>
 <li><code>fixed</code></li>
@@ -673,6 +679,7 @@ var_dump($validator-&gt;allowedTypes()); // ['emergency']</code></pre>
 <p>By default, the phone numbers are validated against strict number patterns. To
 allow validation with all <em>possible</em> phone numbers, the <code>allow_possible</code> option
 can be used.</p>
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 <div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Constructor Usage</label><div class="tabbed-content">
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber([
     'allow_possible' =&gt; true,
@@ -695,13 +702,15 @@ var_dump($validator-&gt;isValid(999)); // true
 var_dump($validator-&gt;isValid(9999)); // false</code></pre>
 </div>
 </div>
-<h3>Get Current Value</h3>
+<!-- markdownlint-restore -->
+
+<h3 id="get-current-value_2">Get Current Value</h3>
 <p>To get the current value of this option, use the <code>allowPossible()</code> method with
 the value <code>null</code>.</p>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\PhoneNumber(['allow_possible' =&gt; true]);
 
 var_dump($validator-&gt;allowPossible()); // true</code></pre>
-<h3>Default Value</h3>
+<h3 id="default-value_2">Default Value</h3>
 <p>The default value of this option is <code>false</code>.</p>
 <h2 id="specify-country-code-on-validation">Specify Country Code on Validation</h2>
 <p>The country code can be specified with the <code>context</code> parameter on the <code>isValid</code>
@@ -1095,6 +1104,20 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
         </ul>
     </div>
 
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">Related Components</h4>
+        <ul class="subnavigation__list">
+            
+                <li class="subnavigation__list-item">
+                    
+                        <a href="https://docs.laminas.dev/laminas-i18n-resources/" class="subnavigation__link">Translation Resources</a>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
                 
             </div>
         </div>
@@ -1167,7 +1190,7 @@ var_dump($validator-&gt;isValid('+37067811268', ['country-code' =&gt; 'US'])); /
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-i18n/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>
