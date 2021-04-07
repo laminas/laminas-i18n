@@ -17,14 +17,15 @@ extract the country code.
 
 (The above example assumes that the environment locale is set to `de_DE`.)
 
-## Using Country 
+## Using Country
 
 The ISO 3611 country code can be set for validations.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\PhoneNumber(['country' => 'DE']);
-    
+
     var_dump($validator->isValid('+4930123456')); // true
     ```
 
@@ -32,18 +33,19 @@ The ISO 3611 country code can be set for validations.
     ```php
     $validator = new Laminas\I18n\Validator\PhoneNumber();
     $validator->setCountry('DE');
-    
+
     var_dump($validator->isValid('+4930123456')); // true
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('de_DE');
-    
+
     $validator = new Laminas\I18n\Validator\PhoneNumber();
-    
+
     var_dump($validator->isValid('+4930123456')); // true
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 
@@ -63,13 +65,14 @@ the region code.
 
 ## Using Allowed Phone Number Patterns
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\PhoneNumber([
         'allowed_types' => ['emergency'],
         'country'       => 'US',
     ]);
-    
+
     var_dump($validator->isValid(911)); // true
     var_dump($validator->isValid(999)); // false
     ```
@@ -79,10 +82,11 @@ the region code.
     $validator = new Laminas\I18n\Validator\PhoneNumber();
     $validator->allowedTypes(['emergency']);
     $validator->setCountry('US');
-    
+
     var_dump($validator->isValid(911)); // true
     var_dump($validator->isValid(999)); // false
     ```
+<!-- markdownlint-restore -->
 
 Possible values for allowed patterns are:
 
@@ -123,13 +127,13 @@ var_dump($validator->allowedTypes()); // ['emergency']
 
 The following phone number patterns are allowed per default:
 
-* `fixed`
-* `general`
-* `mobile`
-* `personal`
-* `tollfree`
-* `uan`
-* `voip`
+- `fixed`
+- `general`
+- `mobile`
+- `personal`
+- `tollfree`
+- `uan`
+- `voip`
 
 ## Strict Validation
 
@@ -137,6 +141,7 @@ By default, the phone numbers are validated against strict number patterns. To
 allow validation with all _possible_ phone numbers, the `allow_possible` option
 can be used.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\PhoneNumber([
@@ -144,7 +149,7 @@ can be used.
         'allowed_types'  => ['emergency'],
         'country'        => 'US',
     ]);
-    
+
     var_dump($validator->isValid(911)); // true
     var_dump($validator->isValid(999)); // true
     var_dump($validator->isValid(9999)); // false
@@ -156,11 +161,12 @@ can be used.
     $validator->allowPossible(true);
     $validator->allowedTypes(['emergency']);
     $validator->setCountry('US');
-    
+
     var_dump($validator->isValid(911)); // true
     var_dump($validator->isValid(999)); // true
     var_dump($validator->isValid(9999)); // false
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 

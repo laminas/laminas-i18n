@@ -20,7 +20,7 @@ instead starting in 2.4.0.
 
 ### IsInt
 
-In PHP 7, `int` is a reserved keyword, which required renaming the 
+In PHP 7, `int` is a reserved keyword, which required renaming the
 `Laminas\I18n\Validator\Int` validator. If you were using the
 `Laminas\I18n\Validator\Int` validator directly previously, you will now
 receive an `E_USER_DEPRECATED` notice on instantiation. Please update your code

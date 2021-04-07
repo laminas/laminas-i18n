@@ -4,6 +4,7 @@ In production, it makes sense to cache your translations. This not only saves
 you from loading and parsing the individual formats each time, but also
 guarantees an optimized loading procedure.
 
+<!-- markdownlint-disable-next-line MD001 -->
 > ### Installation requirements
 >
 > The cache support of laminas-i18n depends on the

@@ -18,14 +18,15 @@ locale provided by PHP's `Locale` class and the `getDefault()` method.
 
 ## Using Format Style
 
-This option sets the style of the formatting; one of the 
+This option sets the style of the formatting; one of the
 [`NumberFormatter` format style constants](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle).
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     // Example 1
     echo $this->numberFormat(0.8, NumberFormatter::PERCENT); // '80%'
-    
+
     // Example 2
     echo $this->numberFormat(0.00123456789, NumberFormatter::SCIENTIFIC); // '1,23456789E-3'
     ```
@@ -34,14 +35,15 @@ This option sets the style of the formatting; one of the
     ```php
     // Example 1
     $this->plugin('numberFormat')->setFormatStyle(NumberFormatter::PERCENT);
-    
+
     echo $this->numberFormat(0.8); // '80%'
-    
+
     // Example 2
     $this->plugin('numberFormat')->setFormatStyle(NumberFormatter::SCIENTIFIC);
-    
+
     echo $this->numberFormat(0.00123456789); // '1,23456789E-3'
     ```
+<!-- markdownlint-restore -->
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 
@@ -64,6 +66,7 @@ The default value of this option is `NumberFormatter::DEFAULT_STYLE`.
 The format type speficied the [`NumberFormatter` formatting type](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types)
 to use.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     echo $this->numberFormat(1234567.89, null, NumberFormatter::TYPE_INT32); // '1.234.567'
@@ -72,9 +75,10 @@ to use.
 === "Setter Usage"
     ```php
     $this->plugin('numberFormat')->setFormatType(NumberFormatter::TYPE_INT32);
-    
+
     echo $this->numberFormat(1234567.89); // '1.234.567'
     ```
+<!-- markdownlint-restore -->
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 
@@ -94,6 +98,7 @@ The default value of this option is `NumberFormatter::TYPE_DEFAULT`.
 
 ## Using Locale
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Invoke Usage"
     ```php
     echo $this->numberFormat(1000, null, null, 'en_US'); // '1,000'
@@ -102,16 +107,17 @@ The default value of this option is `NumberFormatter::TYPE_DEFAULT`.
 === "Setter Usage"
     ```php
     $this->plugin('currencyFormat')->setLocale('en_US');
-    
+
     echo $this->numberFormat(1000); // '1,000'
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('en_US');
-    
+
     echo $this->numberFormat(1000); // '1,000'
     ```
+<!-- markdownlint-restore -->
 
 ### Get current Value
 
@@ -132,6 +138,7 @@ locale provided by PHP's `Locale::getDefault()`.
 
 Sets the number of digits beyond the decimal point to display.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Invoke Usage"
     ```php
     echo $this->numberFormat(1234, null, null, null, 5); // '1,234.00000'
@@ -140,9 +147,10 @@ Sets the number of digits beyond the decimal point to display.
 === "Setter Usage"
     ```php
     $this->plugin('currencyFormat')->setDecimals(5);
-    
+
     echo $this->numberFormat(1234); // '1,234.00000'
     ```
+<!-- markdownlint-restore -->
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 
@@ -163,10 +171,11 @@ and maximum fraction digits will not be set on the `NumberFormatter`.
 
 ## Using Text Attributes
 
-This option sets the text attributes of the formatting, like prefix and suffix 
+This option sets the text attributes of the formatting, like prefix and suffix
 for positive and negative numbers. See
 [`NumberFormatter` text attribute constants](https://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute).
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Invoke Usage"
     ```php
     echo $this->numberFormat(
@@ -186,9 +195,10 @@ for positive and negative numbers. See
     $this->plugin('currencyFormat')->setTextAttributes([
         NumberFormatter::NEGATIVE_PREFIX => '(minus) ',
     ]);
-    
+
     echo $this->numberFormat(-1000); // '(minus) 1,000'
     ```
+<!-- markdownlint-restore -->
 
 (The above examples assumes that the environment locale is set to `en_US`.)
 

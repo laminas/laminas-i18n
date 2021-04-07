@@ -30,10 +30,11 @@ Using a notation not specific to the locale results in a `false` evaluation.
 
 ## Using Locale
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\IsFloat(['locale' => 'en_US']);
-    
+
     $validator->isValid(1234.5); // true
     ```
 
@@ -41,18 +42,19 @@ Using a notation not specific to the locale results in a `false` evaluation.
     ```php
     $validator = new Laminas\I18n\Validator\IsFloat();
     $validator->setLocale('en_US');
-    
+
     $validator->isValid(1234.5); // true
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('en_US');
-    
+
     $validator = new Laminas\I18n\Validator\IsFloat();
-    
+
     $validator->isValid(1234.5); // true
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 

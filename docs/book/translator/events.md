@@ -9,6 +9,7 @@ translations:
 The typical usage for these events is to log missing translations and track when
 the loading of messages fails.
 
+<!-- markdownlint-disable-next-line MD001 -->
 > ### Installation requirements
 >
 > The event support of laminas-i18n depends on the
@@ -88,7 +89,7 @@ $eventManager = $translator->getEventManager(); // instance of Laminas\EventMana
 ```
 
 > ### Automatic instantiation
-> 
+>
 > The translator can create an event manager instance independently. If no custom
 > event manager is set for the translator, the `getEventManager()` method
 > returns this instance.
@@ -120,7 +121,7 @@ $translator->getEventManager()->attach(
 
 ### Event Target and Parameters
 
-In the previous code example the variable `$event` contains an instance of 
+In the previous code example the variable `$event` contains an instance of
 `Laminas\EventManager\Event` which implements `Laminas\EventManager\EventInterface`.
 
 As target of the event the current instance of

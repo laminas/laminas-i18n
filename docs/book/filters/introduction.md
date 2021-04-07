@@ -2,10 +2,10 @@
 
 laminas-i18n ships with a set of internationalization-related filters.
 
-* [Alnum](alnum.md)
-* [Alpha](alpha.md)
-* [NumberFormat](number-format.md)
-* [NumberParse](number-parse.md)
+- [Alnum](alnum.md)
+- [Alpha](alpha.md)
+- [NumberFormat](number-format.md)
+- [NumberParse](number-parse.md)
 
 These filters are based on Laminas component for filtering and
 normalizing data and files:
@@ -14,6 +14,7 @@ normalizing data and files:
 The concept and the basic usage of the filters can be found in the
 [documentation of laminas-filter](https://docs.laminas.dev/laminas-filter/).
 
+<!-- markdownlint-disable-next-line MD001 -->
 > ### Installation requirements
 >
 > The filtering support of laminas-i18n depends on the
