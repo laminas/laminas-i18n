@@ -22,6 +22,7 @@ echo $this->translate('Some translated text.'); // Etwas übersetzter Text
 
 The text domain defines the domain of the translation.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Invoke Usage"
     ```php
     echo $this->translate('monitor', 'customDomain'); // 'Monitor'
@@ -30,9 +31,10 @@ The text domain defines the domain of the translation.
 === "Setter Usage"
     ```php
     $this->plugin('currencyFormat')->setTranslatorTextDomain('customDomain');
-    
+
     echo $this->translate('monitor'); // 'Monitor'
     ```
+<!-- markdownlint-restore -->
 
 (The above example assumes that the environment locale is set to `de_DE`.)
 

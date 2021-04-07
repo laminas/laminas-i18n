@@ -18,12 +18,13 @@ if ($validator->isValid('Abcd12')) {
 By default, whitespace is not accepted as it is not part of the alphabet.
 However, if you want to validate complete sentences or phrases, you may need to
 allow whitespace; this can be done via the `allowWhiteSpace` option, either at
-instantiation or afterwards via the `setAllowWhiteSpace()` method.  
+instantiation or afterwards via the `setAllowWhiteSpace()` method.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\Alnum(['allowWhiteSpace' => true]);
-    
+
     if ($validator->isValid('Abcd and 12')) {
         // Value contains only allowed chars
     }
@@ -33,11 +34,12 @@ instantiation or afterwards via the `setAllowWhiteSpace()` method.
     ```php
     $validator = new Laminas\I18n\Validator\Alnum();
     $validator->setAllowWhiteSpace(true);
-    
+
     if ($validator->isValid('Abcd and 12')) {
         // Value contains only allowed chars
     }
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 
