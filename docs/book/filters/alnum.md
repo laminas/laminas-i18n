@@ -1,7 +1,7 @@
 # Alnum
 
-The `Alnum` filter can be used to **return only alphabetic characters and 
-digits** in the unicode "letter" and "number" categories, respectively. All 
+The `Alnum` filter can be used to **return only alphabetic characters and
+digits** in the unicode "letter" and "number" categories, respectively. All
 other characters are suppressed.
 
 ## Basic Usage
@@ -20,10 +20,11 @@ provided by PHP's `Locale` class and the `getDefault()` method.
 To allow whitespace characters (`\s`) on filtering set the option to `true`;
 otherwise they are suppressed.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $filter = new Laminas\I18n\Filter\Alnum(true);
-    
+
     echo $filter->filter('This is (my) content: 123'); // "This is my content 123"
     ```
 
@@ -31,9 +32,10 @@ otherwise they are suppressed.
     ```php
     $filter = new Laminas\I18n\Filter\Alnum();
     $filter->setAllowWhiteSpace(true);
-    
+
     echo $filter->filter('This is (my) content: 123'); // "This is my content 123"
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 
@@ -52,13 +54,14 @@ suppressed.
 
 ## Using Locale
 
-The locale string used in identifying the characters to filter (locale name, 
+The locale string used in identifying the characters to filter (locale name,
 e.g. `en_US`).
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $filter = new Laminas\I18n\Filter\Alnum(null, 'en_US');
-    
+
     echo $filter->filter('This is (my) content: 123'); // "Thisismycontent123"
     ```
 
@@ -66,18 +69,19 @@ e.g. `en_US`).
     ```php
     $filter = new Laminas\I18n\Filter\Alnum();
     $filter->setLocale('en_US');
-    
+
     echo $filter->filter('This is (my) content: 123'); // "Thisismycontent123"
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('en_US');
-    
+
     $filter = new Laminas\I18n\Filter\Alnum();
-    
+
     echo $filter->filter('This is (my) content: 123'); // "Thisismycontent123"
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 

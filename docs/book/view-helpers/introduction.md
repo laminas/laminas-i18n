@@ -3,17 +3,18 @@
 laminas-i18n ships with a set of laminas-view helper classes related to
 internationalization.
 
-* [CurrencyFormat](currency-format.md)
-* [DateFormat](date-format.md)
-* [NumberFormat](number-format.md)
-* [Plural](plural.md)
-* [Translate](translate.md)
-* [TranslatePlural](translate-plural.md)
+- [CurrencyFormat](currency-format.md)
+- [DateFormat](date-format.md)
+- [NumberFormat](number-format.md)
+- [Plural](plural.md)
+- [Translate](translate.md)
+- [TranslatePlural](translate-plural.md)
 
 These helpers are based on Laminas component for the view layer:
 [laminas-view](https://docs.laminas.dev/laminas-view/) and their
 [helpers](https://docs.laminas.dev/laminas-view/helpers/intro/).
 
+<!-- markdownlint-disable-next-line MD001 -->
 > ### Installation Requirements
 >
 > The view-helper support of laminas-i18n depends on the
@@ -48,7 +49,7 @@ These helpers are based on Laminas component for the view layer:
 > ```
 >
 > The `HelperTrait` traits can be chained as many as needed, depending on which
-> view helpers from the different Laminas component are used and where the 
+> view helpers from the different Laminas component are used and where the
 > auto-completion is to be made.
 
 ## Abstract Translator Helper

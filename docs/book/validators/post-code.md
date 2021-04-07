@@ -32,10 +32,11 @@ instance, the locale `de` is a locale but could not be used with
 however, would be a valid locale, as it specifies the region code (`AT`, for
 Austria).
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\PostCode(['locale' => 'de_AT']);
-    
+
     var_dump($validator->isValid(1010)); // true
     ```
 
@@ -43,18 +44,19 @@ Austria).
     ```php
     $validator = new Laminas\I18n\Validator\PostCode();
     $validator->setLocale('de_AT');
-    
+
     $validator->isValid(1010); // true
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('de_AT');
-    
+
     $validator = new Laminas\I18n\Validator\PostCode();
-    
+
     var_dump($validator->isValid(1010)); // true
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 
@@ -78,10 +80,11 @@ Postal code formats are regular expression strings. When the international
 postal code format, which is used by setting the locale, does not fit your
 needs, then you can also manually set a format by calling `setFormat()`.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\PostCode(['format' => 'AT-\d{4}']);
-    
+
     var_dump($validator->isValid('AT-1010')); // true
     ```
 
@@ -89,9 +92,10 @@ needs, then you can also manually set a format by calling `setFormat()`.
     ```php
     $validator = new Laminas\I18n\Validator\PostCode();
     $validator->setFormat('AT-\d{4}');
-    
+
     var_dump($validator->isValid('AT-1010')); // true
     ```
+<!-- markdownlint-restore -->
 
 ### Conventions for self defined Formats
 
@@ -126,6 +130,7 @@ Internally, the additional validation is done by
 [laminas-validator's `Callback`](https://docs.laminas.dev/laminas-validator/validators/callback/)
 class.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\PostCode([
@@ -134,12 +139,12 @@ class.
             if (in_array($value, range(1010, 1423), false)) {
                 return true;
             }
-    
+
             return false;
         },
-        'locale'  => 'de_AT',
+        'locale' => 'de_AT',
     ]);
-    
+
     var_dump($validator->isValid(1010)); // true
     var_dump($validator->isValid(1600)); // false
     ```
@@ -148,18 +153,19 @@ class.
     ```php
     $validator = new Laminas\I18n\Validator\PostCode();
     $validator->setService(static function ($value) {
-       // Allow only certain districts in town
-       if (in_array($value, range(1010, 1423), false)) {
-           return true;
-       }
-    
-       return false;
+        // Allow only certain districts in town
+        if (in_array($value, range(1010, 1423), false)) {
+            return true;
+        }
+
+        return false;
     });
     $validator->setLocale('de_AT');
-    
+
     var_dump($validator->isValid(1010)); // true
     var_dump($validator->isValid(1600)); // false
     ```
+<!-- markdownlint-restore -->
 
 ### Default Value
 

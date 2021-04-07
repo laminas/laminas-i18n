@@ -1,6 +1,6 @@
 # NumberParse
 
-The `NumberParse` filter can be used to **parse a number from a string**. It 
+The `NumberParse` filter can be used to **parse a number from a string**. It
 acts as a wrapper for the `NumberFormatter` class within PHP's
 internationalization extension (`ext/intl`).
 
@@ -19,13 +19,14 @@ provided by PHP's `Locale` class and the `getDefault()` method.
 
 ## Using Locale
 
-The locale string used in identifying the characters to filter (locale name, 
+The locale string used in identifying the characters to filter (locale name,
 e.g. `en_US` or `de_DE`).
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $filter = new Laminas\I18n\Filter\NumberParse('de_DE');
-    
+
     echo $filter->filter('1.234.567,891'); // 1234567.8912346
     ```
 
@@ -33,18 +34,19 @@ e.g. `en_US` or `de_DE`).
     ```php
     $filter = new Laminas\I18n\Filter\NumberParse();
     $filter->setLocale('de_DE');
-    
+
     echo $filter->filter('1.234.567,891'); // 1234567.8912346
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('de_DE');
-    
+
     $filter = new Laminas\I18n\Filter\NumberParse();
-    
+
     echo $filter->filter('1.234.567,891'); // 1234567.8912346
     ```
+<!-- markdownlint-restore -->
 
 > ### Notice
 >
@@ -68,19 +70,20 @@ provided by PHP's `Locale::getDefault()`.
 
 ## Using Style
 
-This option sets the style of the parsing; one of the 
+This option sets the style of the parsing; one of the
 [`NumberFormatter` format style constants](http://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle).
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     // Example 1
     $filter = new Laminas\I18n\Filter\NumberParse('en_US', NumberFormatter::PERCENT);
-    
+
     echo $filter->filter('80%'); // 0.80
-    
+
     // Example 2
     $filter = new Laminas\I18n\Filter\NumberParse('fr_FR', NumberFormatter::SCIENTIFIC);
-    
+
     echo $filter->filter('1,23456789E-3'); // 0.00123456789
     ```
 
@@ -89,19 +92,20 @@ This option sets the style of the parsing; one of the
     // Example 1
     $filter = new Laminas\I18n\Filter\NumberParse('en_US');
     $filter->setStyle(NumberFormatter::PERCENT);
-    
+
     echo $filter->filter('80%'); // 0.80
-    
+
     // Example 2
     $filter = new Laminas\I18n\Filter\NumberParse('fr_FR');
     $filter->setStyle(NumberFormatter::SCIENTIFIC);
-    
+
     echo $filter->filter('1,23456789E-3'); // 0.00123456789
     ```
+<!-- markdownlint-restore -->
 
 > ### Notice
 >
-> After the first filtering, the style changes will have no effect anymore. 
+> After the first filtering, the style changes will have no effect anymore.
 > Create a new instance of the filter to change the style.
 
 ### Get Current Value
@@ -123,6 +127,7 @@ The default value of this option is `NumberFormatter::DEFAULT_STYLE`.
 The type speficied the [`NumberFormatter` parsing type](http://www.php.net/manual/class.numberformatter.php#intl.numberformatter-constants.types)
 to use.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $filter = new Laminas\I18n\Filter\NumberParse(
@@ -130,7 +135,7 @@ to use.
         NumberFormatter::DEFAULT_STYLE,
         NumberFormatter::DECIMAL
     );
-    
+
     echo $filter->filter('1.234.567,891'); // 1234567
     ```
 
@@ -139,9 +144,10 @@ to use.
     $filter = new Laminas\I18n\Filter\NumberParse();
     $filter->setLocale('de_DE');
     $filter->setType(NumberFormatter::DECIMAL);
-    
+
     echo $filter->filter('1.234.567,891'); // 1234567
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 
@@ -160,7 +166,7 @@ The default value of this option is `NumberFormatter::TYPE_DOUBLE`.
 ## Using Custom NumberFormatter
 
 ```php
-$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT); 
+$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
 $filter    = new Laminas\I18n\Filter\NumberParse();
 $filter->setFormatter($formatter);
 ```
