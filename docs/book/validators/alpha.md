@@ -22,10 +22,11 @@ However, if you want to validate complete sentences or phrases, you may need to
 allow whitespace; this can be done via the `allowWhiteSpace` option, either at
 instantiation or afterwards via the `setAllowWhiteSpace()` method.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\Alpha(['allowWhiteSpace' => true]);
-    
+
     if ($validator->isValid('Abcd and efg')) {
         // Value contains only allowed chars
     }
@@ -35,11 +36,12 @@ instantiation or afterwards via the `setAllowWhiteSpace()` method.
     ```php
     $validator = new Laminas\I18n\Validator\Alpha();
     $validator->setAllowWhiteSpace(true);
-    
+
     if ($validator->isValid('Abcd and efg')) {
         // Value contains only allowed chars
     }
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 

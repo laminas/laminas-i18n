@@ -1,7 +1,6 @@
 # laminas-i18n
 
-[![Build Status](https://travis-ci.com/laminas/laminas-i18n.svg?branch=master)](https://travis-ci.com/laminas/laminas-i18n)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-i18n/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-i18n?branch=master)
+[![Build Status](https://github.com/laminas/laminas-i18n/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-i18n/actions?query=workflow%3A"Continuous+Integration")
 
 `Laminas\I18n` comes with a complete translation suite which supports all major
 formats and includes popular features like plural translations and text domains.

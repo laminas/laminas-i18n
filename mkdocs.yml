@@ -50,3 +50,7 @@ extra:
     installation:
         config_provider_class: 'Laminas\I18n\ConfigProvider'
         module_class: 'Laminas\I18n\Module'
+    related_documentations:
+        headline: Related Components
+        links:
+            - 'Translation Resources': https://docs.laminas.dev/laminas-i18n-resources/

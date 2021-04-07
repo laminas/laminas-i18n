@@ -1,7 +1,7 @@
 # DateTime
 
-`Laminas\I18n\Validator\DateTime` allows you to determine if a given value **is a 
-valid date, time or datetime**.  
+`Laminas\I18n\Validator\DateTime` allows you to determine if a given value **is a
+valid date, time or datetime**.
 Internally, PHP's `IntlDateFormatter` tries to create a date time for the given
 value.
 
@@ -24,10 +24,11 @@ the timezone is set to `Europe/London`.)
 
 ## Set Locale
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\DateTime(['locale' => 'de']);
-    
+
     var_dump($validator->isValid('29.02.2020')); // true
     ```
 
@@ -35,9 +36,10 @@ the timezone is set to `Europe/London`.)
     ```php
     $validator = new Laminas\I18n\Validator\DateTime();
     $validator->setLocale('de');
-    
+
     var_dump($validator->isValid('29.02.2020')); // true
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 
@@ -56,10 +58,11 @@ provided by PHP's `Locale::getDefault()`.
 
 ## Define Custom Pattern
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\DateTime(['pattern' => 'yyyy-MM-DD']);
-    
+
     var_dump($validator->isValid('2019-02-28')); // true
     ```
 
@@ -67,9 +70,10 @@ provided by PHP's `Locale::getDefault()`.
     ```php
     $validator = new Laminas\I18n\Validator\DateTime();
     $validator->setPattern('yyyy-MM-DD');
-    
+
     var_dump($validator->isValid('2019-02-28')); // true
     ```
+<!-- markdownlint-restore -->
 
 Possible patterns are documented at
 [http://userguide.icu-project.org/formatparse/datetime](http://userguide.icu-project.org/formatparse/datetime).
@@ -90,10 +94,11 @@ The default value of this option is `null`.
 
 ## Using Date Type
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\DateTime(['date_type' => IntlDateFormatter::MEDIUM]);
-    
+
     var_dump($validator->isValid('Feb 28, 2020')); // true
     ```
 
@@ -101,18 +106,19 @@ The default value of this option is `null`.
     ```php
     $validator = new Laminas\I18n\Validator\DateTime();
     $validator->setDateType(IntlDateFormatter::MEDIUM);
-    
+
     var_dump($validator->isValid('Feb 28, 2020')); // true
     ```
+<!-- markdownlint-restore -->
 
 Possible values for the date type option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
-* `IntlDateFormatter::NONE` - Do not include this element
-* `IntlDateFormatter::FULL` - Fullstyle (Tuesday, April 12, 1952 AD)
-* `IntlDateFormatter::LONG` - Long style (January 12, 1952)
-* `IntlDateFormatter::MEDIUM` - Medium style (Jan 12, 1952)
-* `IntlDateFormatter::SHORT` - Short style (12/13/52)
+- `IntlDateFormatter::NONE` - Do not include this element
+- `IntlDateFormatter::FULL` - Fullstyle (Tuesday, April 12, 1952 AD)
+- `IntlDateFormatter::LONG` - Long style (January 12, 1952)
+- `IntlDateFormatter::MEDIUM` - Medium style (Jan 12, 1952)
+- `IntlDateFormatter::SHORT` - Short style (12/13/52)
 
 ### Get Current Value
 
@@ -132,10 +138,11 @@ The default value of this option is `IntlDateFormatter::NONE`.
 
 Sets time type to use (none, short, medium, long, full).
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\DateTime(['time_type' => IntlDateFormatter::MEDIUM]);
-    
+
     var_dump($validator->isValid('8:05:40 pm')); // true
     ```
 
@@ -143,18 +150,19 @@ Sets time type to use (none, short, medium, long, full).
     ```php
     $validator = new Laminas\I18n\Validator\DateTime();
     $validator->setTimeType(IntlDateFormatter::MEDIUM);
-    
+
     var_dump($validator->isValid('8:05:40 pm')); // true
     ```
+<!-- markdownlint-restore -->
 
 Possible values for the date type option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
-* `IntlDateFormatter::NONE` - Do not include this element
-* `IntlDateFormatter::FULL` - Fullstyle (3:30:42pm PST)
-* `IntlDateFormatter::LONG` - Long style (3:30:32pm)
-* `IntlDateFormatter::MEDIUM` - Medium style (3:30:32pm)
-* `IntlDateFormatter::SHORT` - Short style (3:30pm)
+- `IntlDateFormatter::NONE` - Do not include this element
+- `IntlDateFormatter::FULL` - Fullstyle (3:30:42pm PST)
+- `IntlDateFormatter::LONG` - Long style (3:30:32pm)
+- `IntlDateFormatter::MEDIUM` - Medium style (3:30:32pm)
+- `IntlDateFormatter::SHORT` - Short style (3:30pm)
 
 ### Get Current Value
 
@@ -174,6 +182,7 @@ The default value of this option is `IntlDateFormatter::NONE`.
 
 To demonstrate the calendar option, additional settings are needed.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\DateTime([
@@ -182,7 +191,7 @@ To demonstrate the calendar option, additional settings are needed.
         'locale'    => 'de_DE@calendar=buddhist',
         'timezone'  => 'Europe/Berlin',
     ]);
-    
+
     var_dump($validator->isValid('28.02.2562 BE')); // true
     ```
 
@@ -193,15 +202,16 @@ To demonstrate the calendar option, additional settings are needed.
     $validator->setDateType(IntlDateFormatter::MEDIUM);
     $validator->setLocale('de_DE@calendar=buddhist');
     $validator->setTimezone('Europe/Berlin');
-    
+
     var_dump($validator->isValid('28.02.2562 BE')); // true
     ```
+<!-- markdownlint-restore -->
 
 Possible values for the calendar option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
-* `IntlDateFormatter::TRADITIONAL` - Non-Gregorian Calendar
-* `IntlDateFormatter::GREGORIAN` - Gregorian Calendar
+- `IntlDateFormatter::TRADITIONAL` - Non-Gregorian Calendar
+- `IntlDateFormatter::GREGORIAN` - Gregorian Calendar
 
 ### Get Current Value
 
@@ -219,10 +229,11 @@ The default value of this option is `IntlDateFormatter::GREGORIAN`.
 
 ## Using Timezone
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\DateTime(['timezone' => 'Europe/London']);
-    
+
     var_dump($validator->isValid('20190228 10:00 pm')); // true
     ```
 
@@ -230,9 +241,10 @@ The default value of this option is `IntlDateFormatter::GREGORIAN`.
     ```php
     $validator = new Laminas\I18n\Validator\DateTime();
     $validator->setTimezone('Europe/London');
-    
+
     var_dump($validator->isValid('20190228 10:00 pm')); // true
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 

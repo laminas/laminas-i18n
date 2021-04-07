@@ -32,10 +32,11 @@ Using a notation not specific to the locale results in a `false` evaulation.
 
 ## Using Locale
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\IsInt(['locale' => 'en_US']);
-    
+
     $validator->isValid(1234); // true
     ```
 
@@ -43,18 +44,19 @@ Using a notation not specific to the locale results in a `false` evaulation.
     ```php
     $validator = new Laminas\I18n\Validator\IsInt();
     $validator->setLocale('en_US');
-    
+
     $validator->isValid(1234); // true
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('en_US');
-    
+
     $validator = new Laminas\I18n\Validator\IsInt();
-    
+
     $validator->isValid(1234); // true
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 
@@ -75,20 +77,23 @@ provided by PHP's `Locale::getDefault()`.
 
 By default, the value's data type is not enforced.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Default (Without Strict)"
     ```php
     $validator = new Laminas\I18n\Validator\IsInt();
-    
+
     $validator->isValid(1234);   // true
     $validator->isValid('1234'); // true
     ```
+<!-- markdownlint-restore -->
 
 To enforced a strict validation set the `strict` option to `true`.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Constructor Usage"
     ```php
     $validator = new Laminas\I18n\Validator\IsInt(['strict' => true]);
-    
+
     $validator->isValid(1234);   // true
     $validator->isValid('1234'); // false
     ```
@@ -97,10 +102,11 @@ To enforced a strict validation set the `strict` option to `true`.
     ```php
     $validator = new Laminas\I18n\Validator\IsInt();
     $validator->setStrict(true)
-    
+
     $validator->isValid(1234);   // true
     $validator->isValid('1234'); // false
     ```
+<!-- markdownlint-restore -->
 
 ### Get Current Value
 

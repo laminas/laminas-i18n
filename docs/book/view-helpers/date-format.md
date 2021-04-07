@@ -9,10 +9,10 @@ internationalization extension (`ext/intl`).
 
 The value for the date must be:
 
-* an object which implements the [`DateTimeInterface`](https://www.php.net/DateTimeInterface),
-* an [`IntlCalendar`](https://www.php.net/IntlCalendar) object,
-* an integer representing a Unix timestamp value
-* or an array in the format returned by [`localtime()` function](https://www.php.net/localtime)
+- an object which implements the [`DateTimeInterface`](https://www.php.net/DateTimeInterface),
+- an [`IntlCalendar`](https://www.php.net/IntlCalendar) object,
+- an integer representing a Unix timestamp value
+- or an array in the format returned by [`localtime()` function](https://www.php.net/localtime)
 
 Example with a `DateTime` instance:
 
@@ -97,11 +97,11 @@ echo $this->dateFormat(new DateTime(), IntlDateFormatter::MEDIUM); // 'Feb 22, 2
 Possible values for the date type option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
-* `IntlDateFormatter::NONE` - Do not include this element
-* `IntlDateFormatter::FULL` - Fullstyle (Tuesday, April 12, 1952 AD)
-* `IntlDateFormatter::LONG` - Long style (January 12, 1952)
-* `IntlDateFormatter::MEDIUM` - Medium style (Jan 12, 1952)
-* `IntlDateFormatter::SHORT` - Short style (12/13/52)
+- `IntlDateFormatter::NONE` - Do not include this element
+- `IntlDateFormatter::FULL` - Fullstyle (Tuesday, April 12, 1952 AD)
+- `IntlDateFormatter::LONG` - Long style (January 12, 1952)
+- `IntlDateFormatter::MEDIUM` - Medium style (Jan 12, 1952)
+- `IntlDateFormatter::SHORT` - Short style (12/13/52)
 
 ### Default Value
 
@@ -121,11 +121,11 @@ echo $this->dateFormat(new DateTime(), IntlDateFormatter::NONE, IntlDateFormatte
 Possible values for the date type option are the following
 [constants of PHP's `IntlDateFormatter` class](https://www.php.net/manual/class.intldateformatter.php#intl.intldateformatter-constants):
 
-* `IntlDateFormatter::NONE` - Do not include this element
-* `IntlDateFormatter::FULL` - Fullstyle (3:30:42pm PST)
-* `IntlDateFormatter::LONG` - Long style (3:30:32pm)
-* `IntlDateFormatter::MEDIUM` - Medium style (3:30:32pm)
-* `IntlDateFormatter::SHORT` - Short style (3:30pm)
+- `IntlDateFormatter::NONE` - Do not include this element
+- `IntlDateFormatter::FULL` - Fullstyle (3:30:42pm PST)
+- `IntlDateFormatter::LONG` - Long style (3:30:32pm)
+- `IntlDateFormatter::MEDIUM` - Medium style (3:30:32pm)
+- `IntlDateFormatter::SHORT` - Short style (3:30pm)
 
 ### Default Value
 
@@ -133,6 +133,7 @@ The default value of this option is `IntlDateFormatter::NONE`.
 
 ## Using Locale
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Invoke Usage"
     ```php
     echo $this->dateFormat(new DateTime(), null, null, 'de_DE');
@@ -142,16 +143,17 @@ The default value of this option is `IntlDateFormatter::NONE`.
 === "Setter Usage"
     ```php
     $this->plugin('dateFormat')->setLocale('de_DE');
-    
+
     echo $this->dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
     ```
 
 === "Locale Class Usage"
     ```php
     Locale::setDefault('de_DE');
-    
+
     echo $this->dateFormat(new DateTime()); // 'Freitag, 22. Februar 2019 um 21:16:37 GMT'
     ```
+<!-- markdownlint-restore -->
 
 ### Get current Value
 

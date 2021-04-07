@@ -35,6 +35,7 @@ echo $this->translatePlural('car', 'cars', 4); // 'Autos'
 
 The text domain defines the domain of the translation.
 
+<!-- markdownlint-disable MD038 MD009 MD046 -->
 === "Invoke Usage"
     ```php
     echo $this->translatePlural('monitor', 'monitors', 1, 'customDomain'); // 'Bildschirm'
@@ -43,9 +44,10 @@ The text domain defines the domain of the translation.
 === "Setter Usage"
     ```php
     $this->plugin('currencyFormat')->setTranslatorTextDomain('customDomain');
-    
+
     echo $this->translatePlural('monitor', 'monitors', 1); // 'Bildschirm'
     ```
+<!-- markdownlint-restore -->
 
 (The above example assumes that the environment locale is set to `de_DE`.)
 

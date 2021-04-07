@@ -87,7 +87,7 @@ $translator = Laminas\I18n\Translator\Translator::factory([
 ]);
 ```
 
-Each remote option array must contain `type`. The option for `text_domain` is 
+Each remote option array must contain `type`. The option for `text_domain` is
 optional. The default value for `text_domain` is `default`.
 
 ### Adding Translations

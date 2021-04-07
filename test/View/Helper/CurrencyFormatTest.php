@@ -50,17 +50,17 @@ class CurrencyFormatTest extends TestCase
             ['en_US', 'RUR',       true, 1234567.891234567890000,  null,                       'RUR1,234,567.89'],
             ['en_US', 'USD',       true, 1234567.891234567890000,  null,                       '$1,234,567.89'],
             ['de_DE', 'EUR',       false, 1234567.891234567890000, null,                       '1.234.568 €'],
-            ['de_DE', 'RUB',       false, 1234567.891234567890000, null,                       '1.234.567 RUB'],
+            ['de_DE', 'RUB',       false, 1234567.891234567890000, null,                       '1.234.568 RUB'],
             //array('ru_RU', 'EUR',     false,             1234567.891234567890000,  null, '1 234 568 €'),
             //array('ru_RU', 'RUR',     false,             1234567.891234567890000,  null, '1 234 567 р.'),
             //array('en_US', 'EUR',     false,             1234567.891234567890000,  null, '€1,234,568'),
             //array('en_US', 'EUR',     false,             1234567.891234567890000,  null, '€1,234,568'),
             ['en_US', 'USD',       false, 1234567.891234567890000, null,                       '$1,234,568'],
             /* @see http://bugs.icu-project.org/trac/ticket/10997 */
-            ['en_US', 'EUR',       false, 1234567.891234567890000, null,                       '€1,234,567'],
-            ['de_DE', 'USD',       false, 1234567.891234567890000, null,                       '1.234.567 $'],
-            ['en_US', 'PLN',       false, 1234567.891234567890000, null,                       'PLN 1,234,567'],
-            ['de_DE', 'PLN',       false, 1234567.891234567890000, null,                       '1.234.567 PLN'],
+            ['en_US', 'EUR',       false, 1234567.891234567890000, null,                       '€1,234,568'],
+            ['de_DE', 'USD',       false, 1234567.891234567890000, null,                       '1.234.568 $'],
+            ['en_US', 'PLN',       false, 1234567.891234567890000, null,                       'PLN 1,234,568'],
+            ['de_DE', 'PLN',       false, 1234567.891234567890000, null,                       '1.234.568 PLN'],
         ];
     }
 
