@@ -115,8 +115,12 @@ $translator->getPluginManager()->setService(
 
 ### Using a Cache Instance
 
+The following example is based on the use of the
+[laminas-cache](https://docs.laminas.dev/laminas-cache/) component.
+
 ```php
-$cache      = Laminas\Cache\StorageFactory::factory([
+$translator   = new Laminas\I18n\Translator\Translator();
+$cacheStorage = Laminas\Cache\StorageFactory::factory([
     'adapter' => [
         'name'    => Laminas\Cache\Storage\Adapter\Filesystem::class,
         'options' => [
@@ -124,23 +128,9 @@ $cache      = Laminas\Cache\StorageFactory::factory([
         ],
     ],
 ]);
+$cache        = new Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator(cacheStorage);
 $translator = Laminas\I18n\Translator\Translator::factory([
     'cache' => $cache,
-]);
-```
-
-### Using Cache Configuration
-
-```php
-$translator = Laminas\I18n\Translator\Translator::factory([
-    'cache' => [
-        'adapter' => [
-        'name'    => Laminas\Cache\Storage\Adapter\Filesystem::class,
-            'options' => [
-                'cache_dir' => __DIR__ . '/cache',
-            ],
-        ],
-    ],
 ]);
 ```
 

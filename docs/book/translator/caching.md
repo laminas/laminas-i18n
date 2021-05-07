@@ -4,27 +4,17 @@ In production, it makes sense to cache your translations. This not only saves
 you from loading and parsing the individual formats each time, but also
 guarantees an optimized loading procedure.
 
-> MISSING: **Installation Requirements**
-> The cache support of laminas-i18n depends on the [laminas-cache](https://docs.laminas.dev/laminas-cache/) component, so be sure to have it installed before getting started:
->
-> ```bash
-> $ composer require laminas/laminas-cache
-> ```
->
-> Version 3 of laminas-cache removed support for factories required by this component, so if your application requires laminas-cache version 3 or later, you will also need to install `laminas-cache-storage-deprecated-factory`
->
-> ```bash
-> $ composer require laminas/laminas-cache-storage-deprecated-factory
-> ```
-
 ## Enable Caching
 
-To enable caching, pass a `Laminas\Cache\Storage\Adapter` to the `setCache()`
+To enable caching, pass a `Psr\SimpleCache\CacheInterface` to the `setCache()`
 method.
+
+The following example is based on the use of the
+[laminas-cache](https://docs.laminas.dev/laminas-cache/) component.
 
 ```php
 $translator = new Laminas\I18n\Translator\Translator();
-$cache      = Laminas\Cache\StorageFactory::factory([
+$cacheStorage = Laminas\Cache\StorageFactory::factory([
     'adapter' => [
         'name'    => Laminas\Cache\Storage\Adapter\Filesystem::class,
         'options' => [
@@ -32,6 +22,7 @@ $cache      = Laminas\Cache\StorageFactory::factory([
         ],
     ],
 ]);
+$cache        = new Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator(cacheStorage);
 $translator->setCache($cache);
 ```
 
