@@ -8,6 +8,8 @@
 
 namespace Laminas\I18n\Translator;
 
+use Laminas\Cache;
+use Laminas\Cache\Storage\StorageInterface as CacheStorage;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerInterface;
@@ -80,7 +82,7 @@ class Translator implements TranslatorInterface
     /**
      * Translation cache.
      *
-     * @var CacheInterface|null
+     * @var CacheStorage|CacheInterface|null
      */
     protected $cache;
 
@@ -216,15 +218,11 @@ class Translator implements TranslatorInterface
 
         // cache
         if (isset($options['cache'])) {
-            if (! ($options['cache'] instanceof CacheInterface)) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    '%s expects a %s instance; received "%s"',
-                    __METHOD__,
-                    CacheInterface::class,
-                    (is_object($options) ? get_class($options) : gettype($options))
-                ));
+            if ($options['cache'] instanceof CacheStorage || $options['cache'] instanceof CacheInterface) {
+                $translator->setCache($options['cache']);
+            } else {
+                $translator->setCache(Cache\StorageFactory::factory($options['cache']));
             }
-            $translator->setCache($options['cache']);
         }
 
         // event manager enabled
@@ -295,11 +293,20 @@ class Translator implements TranslatorInterface
     /**
      * Sets a cache
      *
-     * @param  CacheInterface|null $cache
+     * @param  CacheInterface|CacheStorage|null $cache
      * @return $this
      */
-    public function setCache(CacheInterface $cache = null)
+    public function setCache($cache = null)
     {
+        if (! ($cache instanceof CacheStorage || $cache instanceof CacheInterface)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an instance of %s or %s; received "%s"',
+                __METHOD__,
+                CacheStorage::class,
+                CacheInterface::class,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
         $this->cache = $cache;
 
         return $this;
@@ -308,7 +315,7 @@ class Translator implements TranslatorInterface
     /**
      * Returns the set cache
      *
-     * @return CacheInterface|null The set cache
+     * @return CacheInterface|CacheStorage|null The set cache
      */
     public function getCache()
     {
@@ -586,7 +593,10 @@ class Translator implements TranslatorInterface
         if (null === ($cache = $this->getCache())) {
             return false;
         }
-        return $cache->delete($this->getCacheId($textDomain, $locale));
+
+        $cacheId = $this->getCacheId($textDomain, $locale);
+
+        return $cache instanceof CacheStorage ? $cache->removeItem($cacheId) : $cache->delete($cacheId);
     }
 
     /**
@@ -607,7 +617,9 @@ class Translator implements TranslatorInterface
         if (null !== ($cache = $this->getCache())) {
             $cacheId = $this->getCacheId($textDomain, $locale);
 
-            if (null !== ($result = $cache->get($cacheId))) {
+            $result = $cache instanceof CacheStorage ? $cache->getItem($cacheId) : $cache->get($cacheId);
+
+            if (null !== $result) {
                 $this->messages[$textDomain][$locale] = $result;
 
                 return;
@@ -644,7 +656,11 @@ class Translator implements TranslatorInterface
         }
 
         if ($messagesLoaded && $cache !== null) {
-            $cache->set($cacheId, $this->messages[$textDomain][$locale]);
+            if ($cache instanceof CacheStorage) {
+                $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
+            } else {
+                $cache->set($cacheId, $this->messages[$textDomain][$locale]);
+            }
         }
     }
 

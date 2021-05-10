@@ -134,6 +134,26 @@ class TranslatorTest extends TestCase
 
     public function testFactoryCreatesTranslatorWithCache()
     {
+        $translator = Translator::factory([
+            'locale' => 'de_DE',
+            'patterns' => [
+                [
+                    'type' => 'phparray',
+                    'base_dir' => $this->testFilesDir . '/testarray',
+                    'pattern' => 'translation-%s.php'
+                ]
+            ],
+            'cache' => [
+                'adapter' => 'memory'
+            ]
+        ]);
+
+        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf('Laminas\Cache\Storage\StorageInterface', $translator->getCache());
+    }
+
+    public function testFactoryCreatesTranslatorWithPsrCache()
+    {
         $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
 
         $translator = Translator::factory([
@@ -182,6 +202,19 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsLoadedFromCache()
     {
+        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $this->translator->setCache($cache);
+
+        $cache->addItem(
+            $this->translator->getCacheId('default', 'en_EN'),
+            new TextDomain(['foo' => 'bar'])
+        );
+
+        $this->assertEquals('bar', $this->translator->translate('foo'));
+    }
+
+    public function testTranslationsLoadedFromPsrCache()
+    {
         $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
         $this->translator->setCache($cache);
 
@@ -194,6 +227,26 @@ class TranslatorTest extends TestCase
     }
 
     public function testTranslationsAreStoredInCache()
+    {
+        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $this->translator->setCache($cache);
+
+        $loader = new TestLoader();
+        $loader->textDomain = new TextDomain(['foo' => 'bar']);
+        $config = new Config(['services' => ['test' => $loader]]);
+        $plugins = $this->translator->getPluginManager();
+        $config->configureServiceManager($plugins);
+        $this->translator->setPluginManager($plugins);
+        $this->translator->addTranslationFile('test', null);
+
+        $this->assertEquals('bar', $this->translator->translate('foo'));
+
+        $item = $cache->getItem($this->translator->getCacheId('default', 'en_EN'));
+        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $item);
+        $this->assertEquals('bar', $item['foo']);
+    }
+
+    public function testTranslationsAreStoredInPsrCache()
     {
         $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
         $this->translator->setCache($cache);
@@ -214,6 +267,26 @@ class TranslatorTest extends TestCase
     }
 
     public function testTranslationsAreClearedFromCache()
+    {
+        $textDomain = 'default';
+        $locale     = 'en_EN';
+
+        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $this->translator->setCache($cache);
+
+        $cache->addItem(
+            $this->translator->getCacheId($textDomain, $locale),
+            new TextDomain(['foo' => 'bar'])
+        );
+
+        $this->assertTrue($this->translator->clearCache($textDomain, $locale));
+
+        $item = $cache->getItem($this->translator->getCacheId($textDomain, $locale), $success);
+        $this->assertNull($item);
+        $this->assertFalse($success);
+    }
+
+    public function testTranslationsAreClearedFromPsrCache()
     {
         $textDomain = 'default';
         $locale     = 'en_EN';

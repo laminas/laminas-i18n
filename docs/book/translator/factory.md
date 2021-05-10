@@ -134,6 +134,27 @@ $translator = Laminas\I18n\Translator\Translator::factory([
 ]);
 ```
 
+> PSR-16 compliance has been introduced in 2.13.0. Before this version,
+> the `cache` option expected an instance of `Laminas\Cache\Storage\Adapter` to be passed.
+> This is deprecated and will be removed in 3.0.0.
+
+### Using Cache Configuration
+
+> Using cache configuration is deprecated and will be removed in 3.0.0.
+
+```php
+$translator = Laminas\I18n\Translator\Translator::factory([
+    'cache' => [
+        'adapter' => [
+        'name'    => Laminas\Cache\Storage\Adapter\Filesystem::class,
+            'options' => [
+                'cache_dir' => __DIR__ . '/cache',
+            ],
+        ],
+    ],
+]);
+```
+
 ## Enable EventManager
 
 ```php
