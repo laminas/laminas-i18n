@@ -1,34 +1,23 @@
 {
     "name": "laminas/laminas-i18n",
     "description": "Provide translations for your application, and filter and validate internationalized values",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "i18n"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-i18n/",
-        "issues": "https://github.com/laminas/laminas-i18n/issues",
-        "source": "https://github.com/laminas/laminas-i18n",
-        "rss": "https://github.com/laminas/laminas-i18n/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laminas": {
-            "component": "Laminas\\I18n",
-            "config-provider": "Laminas\\I18n\\ConfigProvider"
-        }
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ~8.0.0",
         "ext-intl": "*",
         "laminas/laminas-stdlib": "^2.7 || ^3.0",
         "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "replace": {
+        "zendframework/zend-i18n": "^2.10.1"
+    },
+    "conflict": {
+        "phpspec/prophecy": "<1.9.0"
     },
     "require-dev": {
         "laminas/laminas-cache": "^2.6.1",
@@ -41,9 +30,6 @@
         "laminas/laminas-view": "^2.6.3",
         "phpunit/phpunit": "^9.3"
     },
-    "conflict": {
-        "phpspec/prophecy": "<1.9.0"
-    },
     "suggest": {
         "laminas/laminas-cache": "Laminas\\Cache component",
         "laminas/laminas-config": "Laminas\\Config component",
@@ -53,6 +39,15 @@
         "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
         "laminas/laminas-validator": "You should install this package to use the provided validators",
         "laminas/laminas-view": "You should install this package to use the provided view helpers"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laminas": {
+            "component": "Laminas\\I18n",
+            "config-provider": "Laminas\\I18n\\ConfigProvider"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -74,7 +69,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-i18n": "^2.10.1"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-i18n/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-i18n",
+        "docs": "https://docs.laminas.dev/laminas-i18n/",
+        "rss": "https://github.com/laminas/laminas-i18n/releases.atom"
     }
 }
