@@ -178,6 +178,11 @@ class IsFloatTest extends TestCase
         return $trueArray;
     }
 
+    public function testStringValueReturnsTrue()
+    {
+        $this->assertTrue($this->validator->isValid('1'));
+    }
+
     /**
      * Ensures that getMessages() returns expected default value
      *

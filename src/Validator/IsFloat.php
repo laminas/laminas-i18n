@@ -237,10 +237,10 @@ class IsFloat extends AbstractValidator
         $groupSize = $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) ?: 3;
         $lastStringGroup = $this->wrapper->substr($value, -$groupSize);
 
-        if ((preg_match($lnumSearch, $unGroupedValue)
+        if (false !== $lastStringGroup && false === $this->wrapper->strpos($lastStringGroup, $groupSeparator)
+            && (preg_match($lnumSearch, $unGroupedValue)
             || preg_match($dnumSearch, $unGroupedValue)
             || preg_match($expDnumSearch, $unGroupedValue))
-            && false === $this->wrapper->strpos($lastStringGroup, $groupSeparator)
         ) {
             return true;
         }
