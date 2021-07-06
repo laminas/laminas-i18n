@@ -165,7 +165,7 @@ class IsFloatTest extends TestCase
         $testingArray  = [
             'ar'    => ['10.1', '66notflot.6'],
             'ru'    => ['10.1', '66notflot.6', '2,000.00', '2 00'],
-            'en'    => ['10,1', '66notflot.6', '2.000,00', '2 000', '2,00'],
+            'en'    => ['10,1', '66notflot.6', '2.000,00', '2 000', '2,00', '1'],
             'fr-CH' => ['66notflot.6', '2,000.00', "2'00"]
         ];
 
@@ -176,11 +176,6 @@ class IsFloatTest extends TestCase
             }
         }
         return $trueArray;
-    }
-
-    public function testStringValueReturnsFalse()
-    {
-        $this->assertFalse($this->validator->isValid('1'));
     }
 
     /**
