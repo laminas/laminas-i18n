@@ -178,9 +178,9 @@ class IsFloatTest extends TestCase
         return $trueArray;
     }
 
-    public function testStringValueReturnsTrue()
+    public function testStringValueReturnsFalse()
     {
-        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertFalse($this->validator->isValid('1'));
     }
 
     /**
