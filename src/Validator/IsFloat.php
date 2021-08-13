@@ -235,7 +235,9 @@ class IsFloat extends AbstractValidator
         // No strrpos() in wrappers yet. ICU 4.x doesn't have grouping size for
         // everything. ICU 52 has 3 for ALL locales.
         $groupSize = $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) ?: 3;
-        $lastStringGroup = $this->wrapper->substr($value, -$groupSize);
+        $lastStringGroup = $this->wrapper->strlen($value) > $groupSize ?
+            $this->wrapper->substr($value, -$groupSize) :
+            $value;
 
         if ((preg_match($lnumSearch, $unGroupedValue)
             || preg_match($dnumSearch, $unGroupedValue)
