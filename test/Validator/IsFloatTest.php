@@ -73,7 +73,7 @@ class IsFloatTest extends TestCase
         $trueArray       = [];
         $testingLocales  = ['ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru'];
         $testingExamples = [1000, -2000, +398.00, 0.04, -0.5, .6, -.70, 8E10, -9.3456E-2, 10.23E6,
-            123.1234567890987654321];
+            123.1234567890987654321, 1, 13, -3];
 
         //Loop locales and examples for a more thorough set of "true" test data
         foreach ($testingLocales as $locale) {
