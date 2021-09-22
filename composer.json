@@ -27,6 +27,7 @@
     "require": {
         "php": "^7.3 || ~8.0.0",
         "ext-intl": "*",
+        "laminas/laminas-servicemanager": "^3.2.1",
         "laminas/laminas-stdlib": "^2.7 || ^3.0",
         "laminas/laminas-zendframework-bridge": "^1.0"
     },
@@ -36,7 +37,6 @@
         "laminas/laminas-config": "^2.6",
         "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
         "laminas/laminas-filter": "^2.6.1",
-        "laminas/laminas-servicemanager": "^3.2.1",
         "laminas/laminas-validator": "^2.6",
         "laminas/laminas-view": "^2.6.3",
         "phpunit/phpunit": "^9.3"
