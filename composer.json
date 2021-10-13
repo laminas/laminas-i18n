@@ -45,12 +45,12 @@
         "phpspec/prophecy": "<1.9.0"
     },
     "suggest": {
-        "laminas/laminas-cache": "Laminas\\Cache component",
-        "laminas/laminas-config": "Laminas\\Config component",
+        "laminas/laminas-cache": "You should install this package to cache the translations",
+        "laminas/laminas-config": "You should install this package to use the INI translation format",
         "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
         "laminas/laminas-filter": "You should install this package to use the provided filters",
-        "laminas/laminas-i18n-resources": "Translation resources",
-        "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
+        "laminas/laminas-i18n-resources": "This package provides validator and captcha translations",
+        "laminas/laminas-servicemanager": "You should install this package to use the translator",
         "laminas/laminas-validator": "You should install this package to use the provided validators",
         "laminas/laminas-view": "You should install this package to use the provided view helpers"
     },
