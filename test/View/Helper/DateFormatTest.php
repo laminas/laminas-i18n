@@ -171,24 +171,24 @@ class DateFormatTest extends TestCase
             [
                 'de_DE',
                 'Europe/Berlin',
-                null,
-                null,
+                IntlDateFormatter::FULL,
+                IntlDateFormatter::FULL,
                 'MMMM',
                 $date,
             ],
             [
                 'de_DE',
                 'Europe/Berlin',
-                null,
-                null,
+                IntlDateFormatter::FULL,
+                IntlDateFormatter::FULL,
                 'MMMM.Y',
                 $date,
             ],
             [
                 'de_DE',
                 'Europe/Berlin',
-                null,
-                null,
+                IntlDateFormatter::FULL,
+                IntlDateFormatter::FULL,
                 'dd/Y',
                 $date,
             ],
@@ -265,8 +265,14 @@ class DateFormatTest extends TestCase
 
         $helper = new DateFormatHelper();
         $helper->setTimezone('Europe/Berlin');
-        $this->assertEquals('03/2012', $helper->__invoke($date, null, null, 'it_IT', 'dd/Y'));
-        $this->assertEquals('03-2012', $helper->__invoke($date, null, null, 'it_IT', 'dd-Y'));
+        $this->assertEquals(
+            '03/2012',
+            $helper->__invoke($date, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd/Y')
+        );
+        $this->assertEquals(
+            '03-2012',
+            $helper->__invoke($date, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd-Y')
+        );
     }
 
     public function assertMbStringEquals($expected, $test, $message = '')
@@ -302,6 +308,9 @@ class DateFormatTest extends TestCase
 
         $helper = new DateFormatHelper();
         $helper->setTimezone('Europe/Berlin');
-        $this->assertEquals('01-07-2013', $helper->__invoke($calendar, null, null, 'it_IT', 'dd-MM-Y'));
+        $this->assertEquals(
+            '01-07-2013',
+            $helper->__invoke($calendar, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd-MM-Y')
+        );
     }
 }
