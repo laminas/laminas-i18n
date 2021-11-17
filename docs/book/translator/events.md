@@ -9,12 +9,8 @@ translations:
 The typical usage for these events is to log missing translations and track when
 the loading of messages fails.
 
-<!-- markdownlint-disable-next-line MD001 -->
-> ### Installation requirements
->
-> The event support of laminas-i18n depends on the
-> [laminas-eventmanager](https://docs.laminas.dev/laminas-eventmanager/)
-> component, so be sure to have it installed before getting started:
+> MISSING: **Installation Requirements**
+> The event support of laminas-i18n depends on the [laminas-eventmanager](https://docs.laminas.dev/laminas-eventmanager/) component, so be sure to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-eventmanager
@@ -88,11 +84,8 @@ The default value of this option is `false`.
 $eventManager = $translator->getEventManager(); // instance of Laminas\EventManager\EventManager
 ```
 
-> ### Automatic instantiation
->
-> The translator can create an event manager instance independently. If no custom
-> event manager is set for the translator, the `getEventManager()` method
-> returns this instance.
+INFO: **Automatic Instantiation**
+The translator can create an event manager instance independently. If no custom event manager is set for the translator, the `getEventManager()` method returns this instance.
 
 #### Default Value
 
@@ -153,11 +146,8 @@ $params = $event->getParams(); // ['locale' => '…', 'text_domain' => '…']
 
 ## Example
 
-> ### Installation requirements
->
-> The following examples depends on the
-> [laminas-log](https://docs.laminas.dev/laminas-log/)
-> component, so be sure to have it installed before getting started:
+> MISSING: **Installation Requirements**
+> The following examples depends on the [laminas-log](https://docs.laminas.dev/laminas-log/) component, so be sure to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-log

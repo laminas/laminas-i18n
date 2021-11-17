@@ -48,10 +48,8 @@ e.g. `en_US` or `de_DE`).
     ```
 <!-- markdownlint-restore -->
 
-> ### Notice
->
-> After the first filtering, the locale changes will have no effect anymore.
-> Create a new instance of the filter to change the locale.
+NOTE: After the first filtering, the locale changes will have no effect anymore.
+Create a new instance of the filter to change the locale.
 
 ### Get Current Value
 
@@ -103,10 +101,8 @@ This option sets the style of the parsing; one of the
     ```
 <!-- markdownlint-restore -->
 
-> ### Notice
->
-> After the first filtering, the style changes will have no effect anymore.
-> Create a new instance of the filter to change the style.
+NOTE: After the first filtering, the style changes will have no effect anymore.
+Create a new instance of the filter to change the style.
 
 ### Get Current Value
 
@@ -171,11 +167,7 @@ $filter    = new Laminas\I18n\Filter\NumberParse();
 $filter->setFormatter($formatter);
 ```
 
-> ### Notice
->
-> If a custom formatter is set, the locale and/or the style changes will
-> have no effect anymore. Set a new number formatter to change the locale and/or
-> the style.
+NOTE: If a custom formatter is set, the locale and/or the style changes will have no effect anymore. Set a new number formatter to change the locale and/or the style.
 
 ### Get Current Value
 

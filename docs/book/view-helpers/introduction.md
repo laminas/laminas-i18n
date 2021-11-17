@@ -14,12 +14,8 @@ These helpers are based on Laminas component for the view layer:
 [laminas-view](https://docs.laminas.dev/laminas-view/) and their
 [helpers](https://docs.laminas.dev/laminas-view/helpers/intro/).
 
-<!-- markdownlint-disable-next-line MD001 -->
-> ### Installation Requirements
->
-> The view-helper support of laminas-i18n depends on the
-> [laminas-view](https://docs.laminas.dev/laminas-view/) component, so be sure
-> to have it installed before getting started:
+> MISSING: **Installation Requirements**
+> The view-helper support of laminas-i18n depends on the [laminas-view](https://docs.laminas.dev/laminas-view/) component, so be sure to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-view
@@ -27,20 +23,15 @@ These helpers are based on Laminas component for the view layer:
 
 ---
 
-> ### IDE auto-completion in templates
+<!-- markdownlint-disable MD001 -->
+> TIP: **IDE Auto-Completion in Templates**
+> The `Laminas\I18n\View\HelperTrait` trait can be used to provide auto-completion for modern IDEs. It defines the aliases of the view helpers in a DocBlock as `@method` tags.
 >
-> The `Laminas\I18n\View\HelperTrait` trait can be used to provide
-> auto-completion for modern IDEs. It defines the aliases of the view helpers in
-> a DocBlock as `@method` tags.
+> ### Usage
 >
-> #### Usage
->
-> In order to allow auto-completion in templates, `$this` variable should be
-> type-hinted via a DocBlock at the top of a template. It is recommended that
-> always the `Laminas\View\Renderer\PhpRenderer` is added as the first type, so
-> that the IDE can auto-suggest the default view helpers from `laminas-view`.
-> The `HelperTrait` from `laminas-i18n` can be chained with a pipe symbol
-> (a.k.a. vertical bar) `|`:
+> In order to allow auto-completion in templates, `$this` variable should be type-hinted via a DocBlock at the top of a template.
+> It is recommended that> always the `Laminas\View\Renderer\PhpRenderer` is added as the first type, so that the IDE can auto-suggest the default view helpers from `laminas-view`.
+> The `HelperTrait` from `laminas-i18n` can be chained with a pipe symbol (a.k.a. vertical bar) `|`:
 >
 > ```php
 > /**
@@ -48,9 +39,8 @@ These helpers are based on Laminas component for the view layer:
 >  */
 > ```
 >
-> The `HelperTrait` traits can be chained as many as needed, depending on which
-> view helpers from the different Laminas component are used and where the
-> auto-completion is to be made.
+> The `HelperTrait` traits can be chained as many as needed, depending on which view helpers from the different Laminas component are used and where the auto-completion is to be made.
+<!-- markdownlint-restore -->
 
 ## Abstract Translator Helper
 

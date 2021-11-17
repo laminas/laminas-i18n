@@ -8,11 +8,8 @@ and "1 voiture") and the plural form otherwise ("3 voitures").
 Therefore we often need to handle plural cases even without translation
 (mono-lingual application). The `Plural` helper was created for this.
 
-<!-- markdownlint-disable-next-line MD001-->
-> ### Plural Helper does not translate
->
-> If you need to handle both plural cases *and* translations, you must use the
-> [`TranslatePlural` helper](translate-plural.md); `Plural` does not translate.
+WARNING: **Plural Helper Does Not Translate**
+If you need to handle both plural cases *and* translations, you must use the [`TranslatePlural` helper](translate-plural.md); `Plural` does not translate.
 
 Internally, the `Plural` helper uses the `Laminas\I18n\Translator\Plural\Rule` class to handle rules.
 
