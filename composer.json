@@ -27,8 +27,7 @@
     "require": {
         "php": "^7.3 || ~8.0.0 || ~8.1.0",
         "ext-intl": "*",
-        "laminas/laminas-stdlib": "^2.7 || ^3.0",
-        "laminas/laminas-zendframework-bridge": "^1.0"
+        "laminas/laminas-stdlib": "^2.7 || ^3.0"
     },
     "require-dev": {
         "laminas/laminas-cache": "^3.1.2",
