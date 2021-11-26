@@ -561,14 +561,12 @@
 <p>In production, it makes sense to cache your translations. This not only saves
 you from loading and parsing the individual formats each time, but also
 guarantees an optimized loading procedure.</p>
-<!-- markdownlint-disable-next-line MD001 -->
-<blockquote>
-<h3 id="installation-requirements">Installation requirements</h3>
-<p>The cache support of laminas-i18n depends on the
-<a href="https://docs.laminas.dev/laminas-cache/">laminas-cache</a> component, so be sure
-to have it installed before getting started:</p>
+<div class="admonition missing">
+<p class="admonition-title">Installation Requirements</p>
+<p>
+The cache support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-cache/">laminas-cache</a> component, so be sure to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-cache</code></pre>
-</blockquote>
+</div>
 <h2 id="enable-caching">Enable Caching</h2>
 <p>To enable caching, pass a <code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code>
 method.</p>

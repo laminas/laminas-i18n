@@ -566,14 +566,12 @@ translations:</p>
 </ul>
 <p>The typical usage for these events is to log missing translations and track when
 the loading of messages fails.</p>
-<!-- markdownlint-disable-next-line MD001 -->
-<blockquote>
-<h3 id="installation-requirements">Installation requirements</h3>
-<p>The event support of laminas-i18n depends on the
-<a href="https://docs.laminas.dev/laminas-eventmanager/">laminas-eventmanager</a>
-component, so be sure to have it installed before getting started:</p>
+<div class="admonition missing">
+<p class="admonition-title">Installation Requirements</p>
+<p>
+The event support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-eventmanager/">laminas-eventmanager</a> component, so be sure to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-eventmanager</code></pre>
-</blockquote>
+</div>
 <h2 id="basic-usage">Basic Usage</h2>
 <pre class="highlight"><code class="language-php">// Set locale
 Locale::setDefault('de_DE');
@@ -615,12 +613,11 @@ $result = $translator-&gt;isEventManagerEnabled(); // true</code></pre>
 <p>The default value of this option is <code>false</code>.</p>
 <h3 id="get-event-manager">Get Event Manager</h3>
 <pre class="highlight"><code class="language-php">$eventManager = $translator-&gt;getEventManager(); // instance of Laminas\EventManager\EventManager</code></pre>
-<blockquote>
-<h3 id="automatic-instantiation">Automatic instantiation</h3>
-<p>The translator can create an event manager instance independently. If no custom
-event manager is set for the translator, the <code>getEventManager()</code> method
-returns this instance.</p>
-</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Automatic Instantiation</p>
+<p>
+The translator can create an event manager instance independently. If no custom event manager is set for the translator, the <code>getEventManager()</code> method returns this instance.</p>
+</div>
 <h4 id="default-value_1">Default Value</h4>
 <p>The default value of this option is an instance of
 <code>Laminas\EventManager\EventManager</code> class.</p>
@@ -656,13 +653,12 @@ the following parameters are set:</p>
 </ul>
 <pre class="highlight"><code class="language-php">$params = $event-&gt;getParams(); // ['locale' =&gt; '…', 'text_domain' =&gt; '…']</code></pre>
 <h2 id="example">Example</h2>
-<blockquote>
-<h3 id="installation-requirements_1">Installation requirements</h3>
-<p>The following examples depends on the
-<a href="https://docs.laminas.dev/laminas-log/">laminas-log</a>
-component, so be sure to have it installed before getting started:</p>
+<div class="admonition missing">
+<p class="admonition-title">Installation Requirements</p>
+<p>
+The following examples depends on the <a href="https://docs.laminas.dev/laminas-log/">laminas-log</a> component, so be sure to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-log</code></pre>
-</blockquote>
+</div>
 <p>The following example does not add any translations to demonstrate the logging.</p>
 <pre class="highlight"><code class="language-php">// Set locale
 Locale::setDefault('de_DE');

@@ -597,11 +597,11 @@ echo $filter-&gt;filter('1.234.567,891'); // 1234567.8912346</code></pre>
 </div>
 <!-- markdownlint-restore -->
 
-<blockquote>
-<h3 id="notice">Notice</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>After the first filtering, the locale changes will have no effect anymore.
 Create a new instance of the filter to change the locale.</p>
-</blockquote>
+</div>
 <h3 id="get-current-value">Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getLocale()</code> method.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse('en_US');
@@ -641,11 +641,11 @@ echo $filter-&gt;filter('1,23456789E-3'); // 0.00123456789</code></pre>
 </div>
 <!-- markdownlint-restore -->
 
-<blockquote>
-<h3 id="notice_1">Notice</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>After the first filtering, the style changes will have no effect anymore.
 Create a new instance of the filter to change the style.</p>
-</blockquote>
+</div>
 <h3 id="get-current-value_1">Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getStyle()</code> method.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();
@@ -687,12 +687,10 @@ echo $filter-&gt;getType(); // 3 (NumberFormatter::TYPE_DOUBLE)</code></pre>
 <pre class="highlight"><code class="language-php">$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
 $filter    = new Laminas\I18n\Filter\NumberParse();
 $filter-&gt;setFormatter($formatter);</code></pre>
-<blockquote>
-<h3 id="notice_2">Notice</h3>
-<p>If a custom formatter is set, the locale and/or the style changes will
-have no effect anymore. Set a new number formatter to change the locale and/or
-the style.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If a custom formatter is set, the locale and/or the style changes will have no effect anymore. Set a new number formatter to change the locale and/or the style.</p>
+</div>
 <h3 id="get-current-value_3">Get Current Value</h3>
 <p>To get the current value of this option, use the <code>getFormatter()</code> method.</p>
 <pre class="highlight"><code class="language-php">$filter = new Laminas\I18n\Filter\NumberParse();

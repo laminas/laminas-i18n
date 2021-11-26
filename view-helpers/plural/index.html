@@ -556,12 +556,11 @@ On the other hand, French uses the singular form for both 0 and 1 ("0 voiture"
 and "1 voiture") and the plural form otherwise ("3 voitures").</p>
 <p>Therefore we often need to handle plural cases even without translation
 (mono-lingual application). The <code>Plural</code> helper was created for this.</p>
-<!-- markdownlint-disable-next-line MD001-->
-<blockquote>
-<h3 id="plural-helper-does-not-translate">Plural Helper does not translate</h3>
-<p>If you need to handle both plural cases <em>and</em> translations, you must use the
-<a href="../translate-plural/"><code>TranslatePlural</code> helper</a>; <code>Plural</code> does not translate.</p>
-</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Plural Helper Does Not Translate</p>
+<p>
+If you need to handle both plural cases <em>and</em> translations, you must use the <a href="../translate-plural/"><code>TranslatePlural</code> helper</a>; <code>Plural</code> does not translate.</p>
+</div>
 <p>Internally, the <code>Plural</code> helper uses the <code>Laminas\I18n\Translator\Plural\Rule</code> class to handle rules.</p>
 <h2 id="setup">Setup</h2>
 <p>Defining plural rules is left to the developer. To help you with this process,

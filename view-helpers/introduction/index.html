@@ -559,34 +559,29 @@ internationalization.</p>
 <p>These helpers are based on Laminas component for the view layer:
 <a href="https://docs.laminas.dev/laminas-view/">laminas-view</a> and their
 <a href="https://docs.laminas.dev/laminas-view/helpers/intro/">helpers</a>.</p>
-<!-- markdownlint-disable-next-line MD001 -->
-<blockquote>
-<h3 id="installation-requirements">Installation Requirements</h3>
-<p>The view-helper support of laminas-i18n depends on the
-<a href="https://docs.laminas.dev/laminas-view/">laminas-view</a> component, so be sure
-to have it installed before getting started:</p>
+<div class="admonition missing">
+<p class="admonition-title">Installation Requirements</p>
+<p>
+The view-helper support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-view/">laminas-view</a> component, so be sure to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-view</code></pre>
-</blockquote>
+</div>
 <hr />
-<blockquote>
-<h3 id="ide-auto-completion-in-templates">IDE auto-completion in templates</h3>
-<p>The <code>Laminas\I18n\View\HelperTrait</code> trait can be used to provide
-auto-completion for modern IDEs. It defines the aliases of the view helpers in
-a DocBlock as <code>@method</code> tags.</p>
-<h4 id="usage">Usage</h4>
-<p>In order to allow auto-completion in templates, <code>$this</code> variable should be
-type-hinted via a DocBlock at the top of a template. It is recommended that
-always the <code>Laminas\View\Renderer\PhpRenderer</code> is added as the first type, so
-that the IDE can auto-suggest the default view helpers from <code>laminas-view</code>.
-The <code>HelperTrait</code> from <code>laminas-i18n</code> can be chained with a pipe symbol
-(a.k.a. vertical bar) <code>|</code>:</p>
+<!-- markdownlint-disable MD001 -->
+<div class="admonition tip">
+<p class="admonition-title">IDE Auto-Completion in Templates</p>
+<p>
+The <code>Laminas\I18n\View\HelperTrait</code> trait can be used to provide auto-completion for modern IDEs. It defines the aliases of the view helpers in a DocBlock as <code>@method</code> tags.</p>
+<h3 id="usage">Usage</h3>
+<p>In order to allow auto-completion in templates, <code>$this</code> variable should be type-hinted via a DocBlock at the top of a template.
+It is recommended that&gt; always the <code>Laminas\View\Renderer\PhpRenderer</code> is added as the first type, so that the IDE can auto-suggest the default view helpers from <code>laminas-view</code>.
+The <code>HelperTrait</code> from <code>laminas-i18n</code> can be chained with a pipe symbol (a.k.a. vertical bar) <code>|</code>:</p>
 <pre class="highlight"><code class="language-php">/**
  * @var Laminas\View\Renderer\PhpRenderer|Laminas\I18n\View\HelperTrait $this
  */</code></pre>
-<p>The <code>HelperTrait</code> traits can be chained as many as needed, depending on which
-view helpers from the different Laminas component are used and where the
-auto-completion is to be made.</p>
-</blockquote>
+<p>The <code>HelperTrait</code> traits can be chained as many as needed, depending on which view helpers from the different Laminas component are used and where the auto-completion is to be made.</p>
+</div>
+<!-- markdownlint-restore -->
+
 <h2 id="abstract-translator-helper">Abstract Translator Helper</h2>
 <p>The <code>AbstractTranslatorHelper</code> view helper is used as a base abstract class for
 any helpers that need to translate content. It provides an implementation for

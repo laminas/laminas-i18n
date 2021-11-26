@@ -556,12 +556,12 @@ default locale, where it relies on the PHP's intl extension.</p>
 <p>The translator itself is initialized without any parameters, as any
 configuration to it is optional. A translator without any translations will do
 nothing but return all messages verbatim.</p>
-<!-- markdownlint-disable-next-line MD001 -->
-<blockquote>
-<h3 id="installation-requirements">Installation Requirements</h3>
-<p>The translation support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-servicemanager/">laminas-servicemanager</a> component, so be sure to have it installed before getting started:</p>
+<div class="admonition missing">
+<p class="admonition-title">Installation Requirements</p>
+<p>
+The translation support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-servicemanager/">laminas-servicemanager</a> component, so be sure to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-servicemanager</code></pre>
-</blockquote>
+</div>
 <h2 id="adding-translations">Adding translations</h2>
 <p>Two options exist for adding translations to the translator:</p>
 <ul>
@@ -616,11 +616,12 @@ few differences:</p>
 <code>Laminas\I18n\Translator\Loader\FileLoaderInterface</code> or
 <code>Laminas\I18n\Translator\Loader\RemoteLoaderInterface</code>, and registering your loader
 with the <code>Translator</code> instance's composed plugin manager.</p>
-<blockquote>
-<h3 id="installation-requirements_1">Installation Requirements</h3>
-<p>The support of the INI translation format depends on the <a href="https://docs.laminas.dev/laminas-config/">laminas-config</a> component, so be sure to have it installed before getting started:</p>
+<div class="admonition missing">
+<p class="admonition-title">Installation Requirements</p>
+<p>
+The support of the INI translation format depends on the <a href="https://docs.laminas.dev/laminas-config/">laminas-config</a> component, so be sure to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-config</code></pre>
-</blockquote>
+</div>
 <h2 id="setting-a-locale">Setting a locale</h2>
 <p>By default, the translator will get the locale to use from ext/intl's <code>Locale</code>
 class. If you want to set an alternative locale explicitly, you can do so by

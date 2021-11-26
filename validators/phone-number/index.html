@@ -650,14 +650,12 @@ var_dump($validator-&gt;isValid(999)); // false</code></pre>
 <li><code>voicemail</code></li>
 <li><code>voip</code></li>
 </ul>
-<blockquote>
-<h3 id="all-allowed-patterns">All allowed patterns</h3>
-<p>The complete list of allowed patterns is not available for each country code.
-Please check the file for your country code with the supported types in the
-<a href="https://github.com/laminas/laminas-i18n/tree/master/src/Validator/PhoneNumber">laminas-i18n repository on GitHub</a>
-or in the <code>vendor/laminas/laminas-i18n/src/Validator/PhoneNumber</code> directory
-of your project folder.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">All Allowed Patterns</p>
+<p>
+The complete list of allowed patterns is not available for each country code.
+Please check the file for your country code with the supported types in the <a href="https://github.com/laminas/laminas-i18n/tree/master/src/Validator/PhoneNumber">laminas-i18n repository on GitHub</a> or in the <code>vendor/laminas/laminas-i18n/src/Validator/PhoneNumber</code> directory of your project folder.</p>
+</div>
 <h3 id="get-current-value_1">Get Current Value</h3>
 <p>To get the current value of this option, use the <code>allowedTypes()</code> method with
 the value <code>null</code>.</p>
