@@ -4,12 +4,8 @@ In production, it makes sense to cache your translations. This not only saves
 you from loading and parsing the individual formats each time, but also
 guarantees an optimized loading procedure.
 
-<!-- markdownlint-disable-next-line MD001 -->
-> ### Installation requirements
->
-> The cache support of laminas-i18n depends on the
-> [laminas-cache](https://docs.laminas.dev/laminas-cache/) component, so be sure
-> to have it installed before getting started:
+> MISSING: **Installation Requirements**
+> The cache support of laminas-i18n depends on the [laminas-cache](https://docs.laminas.dev/laminas-cache/) component, so be sure to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-cache

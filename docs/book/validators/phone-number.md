@@ -104,13 +104,9 @@ Possible values for allowed patterns are:
 - `voicemail`
 - `voip`
 
-> ### All allowed patterns
->
-> The complete list of allowed patterns is not available for each country code.
-> Please check the file for your country code with the supported types in the
-> [laminas-i18n repository on GitHub](https://github.com/laminas/laminas-i18n/tree/master/src/Validator/PhoneNumber)
-> or in the `vendor/laminas/laminas-i18n/src/Validator/PhoneNumber` directory
-> of your project folder.
+NOTE: **All Allowed Patterns**
+The complete list of allowed patterns is not available for each country code.
+Please check the file for your country code with the supported types in the [laminas-i18n repository on GitHub](https://github.com/laminas/laminas-i18n/tree/master/src/Validator/PhoneNumber) or in the `vendor/laminas/laminas-i18n/src/Validator/PhoneNumber` directory of your project folder.
 
 ### Get Current Value
 

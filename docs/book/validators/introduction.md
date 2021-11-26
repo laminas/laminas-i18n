@@ -16,12 +16,8 @@ and files: [laminas-validator](https://docs.laminas.dev/laminas-validator/).
 The documentation of laminas-validator also describes the
 [translate of the validation messages](https://docs.laminas.dev/laminas-validator/intro/#translating-messages).
 
-<!-- markdownlint-disable-next-line MD001-->
-> ### Installation requirements
->
-> The validation support of laminas-i18n depends on the
-> [laminas-validator](https://docs.laminas.dev/laminas-validator/) component, so
-> be sure to have it installed before getting started:
+> MISSING: **Installation Requirements**
+> The validation support of laminas-i18n depends on the [laminas-validator](https://docs.laminas.dev/laminas-validator/) component, so be sure to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-validator
