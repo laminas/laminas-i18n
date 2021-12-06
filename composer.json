@@ -43,7 +43,8 @@
         "phpunit/phpunit": "^9.3"
     },
     "conflict": {
-        "phpspec/prophecy": "<1.9.0"
+        "phpspec/prophecy": "<1.9.0",
+        "zendframework/zend-i18n": "*"
     },
     "suggest": {
         "laminas/laminas-cache": "You should install this package to cache the translations",
@@ -74,8 +75,5 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
-    },
-    "replace": {
-        "zendframework/zend-i18n": "^2.10.1"
     }
 }
