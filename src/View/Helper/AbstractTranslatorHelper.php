@@ -4,9 +4,9 @@ namespace Laminas\I18n\View\Helper;
 
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorInterface as Translator;
-use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHtmlElement;
 
-abstract class AbstractTranslatorHelper extends AbstractHelper implements
+abstract class AbstractTranslatorHelper extends AbstractHtmlElement implements
     TranslatorAwareInterface
 {
     /**
