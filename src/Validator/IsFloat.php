@@ -14,6 +14,15 @@ use Locale;
 use NumberFormatter;
 use Traversable;
 
+use function intl_is_failure;
+use function is_bool;
+use function is_float;
+use function is_int;
+use function is_scalar;
+use function preg_match;
+use function preg_quote;
+use function str_replace;
+
 class IsFloat extends AbstractValidator
 {
     const INVALID   = 'floatInvalid';

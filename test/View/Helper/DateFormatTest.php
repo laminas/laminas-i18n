@@ -11,6 +11,10 @@ use Laminas\I18n\View\Helper\DateFormat as DateFormatHelper;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
+use function date_default_timezone_set;
+use function interface_exists;
+use function str_replace;
+
 /**
  * Test class for Laminas\View\Helper\Currency
  *

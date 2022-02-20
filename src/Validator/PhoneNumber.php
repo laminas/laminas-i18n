@@ -9,6 +9,16 @@ use Laminas\Validator\AbstractValidator;
 use Locale;
 use Traversable;
 
+use function array_key_exists;
+use function file_exists;
+use function in_array;
+use function is_scalar;
+use function preg_match;
+use function strlen;
+use function strpos;
+use function strtoupper;
+use function substr;
+
 class PhoneNumber extends AbstractValidator
 {
     const NO_MATCH    = 'phoneNumberNoMatch';

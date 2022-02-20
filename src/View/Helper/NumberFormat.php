@@ -8,6 +8,11 @@ use Laminas\View\Helper\AbstractHelper;
 use Locale;
 use NumberFormatter;
 
+use function is_array;
+use function is_int;
+use function md5;
+use function serialize;
+
 /**
  * View helper for formatting dates.
  */

@@ -12,6 +12,10 @@ use Laminas\Validator\Exception as ValidatorException;
 use Locale;
 use Traversable;
 
+use function date_default_timezone_get;
+use function intl_is_failure;
+use function is_string;
+
 class DateTime extends AbstractValidator
 {
     const INVALID          = 'datetimeInvalid';

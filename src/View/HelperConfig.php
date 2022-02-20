@@ -8,6 +8,8 @@ use Laminas\ServiceManager\ConfigInterface;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\ServiceManager\ServiceManager;
 
+use function method_exists;
+
 /**
  * Service manager configuration for i18n view helpers.
  *
@@ -38,12 +40,14 @@ class HelperConfig implements ConfigInterface
         'TranslatePlural' => Helper\TranslatePlural::class,
 
         // Legacy Zend Framework aliases
+        // @codingStandardsIgnoreStart
         \Zend\I18n\View\Helper\CurrencyFormat::class => Helper\CurrencyFormat::class,
         \Zend\I18n\View\Helper\DateFormat::class => Helper\DateFormat::class,
         \Zend\I18n\View\Helper\NumberFormat::class => Helper\NumberFormat::class,
         \Zend\I18n\View\Helper\Plural::class => Helper\Plural::class,
         \Zend\I18n\View\Helper\Translate::class => Helper\Translate::class,
         \Zend\I18n\View\Helper\TranslatePlural::class => Helper\TranslatePlural::class,
+        // @codingStandardsIgnoreEnd
 
         // v2 normalized FQCNs
         'zendi18nviewhelpercurrencyformat' => Helper\CurrencyFormat::class,

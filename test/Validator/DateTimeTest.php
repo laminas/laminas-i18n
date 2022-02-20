@@ -5,17 +5,23 @@ declare(strict_types=1);
 namespace LaminasTest\I18n\Validator;
 
 use DateTime;
+use DateTimeZone;
 use IntlDateFormatter;
 use Laminas\I18n\Validator\DateTime as DateTimeValidator;
 use LaminasTest\I18n\TestCase;
 use Locale;
+
+use function array_merge;
+use function date_default_timezone_get;
+use function date_default_timezone_set;
+use function sprintf;
 
 class DateTimeTest extends TestCase
 {
     private DateTimeValidator $validator;
 
     /**
-     * @var \DateTimeZone
+     * @var DateTimeZone
      */
     protected $timezone;
 

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Laminas\I18n\Translator\Loader;
 
+use function is_file;
+use function is_readable;
+use function stream_resolve_include_path;
+
 /**
  * Abstract file loader implementation; provides facilities around resolving
  * files via the include_path.

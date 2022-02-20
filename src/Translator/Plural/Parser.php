@@ -6,6 +6,10 @@ namespace Laminas\I18n\Translator\Plural;
 
 use Laminas\I18n\Exception;
 
+use function ctype_digit;
+use function max;
+use function sprintf;
+
 /**
  * Plural rule parser.
  *

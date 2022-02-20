@@ -12,6 +12,14 @@ use Locale;
 use NumberFormatter;
 use Traversable;
 
+use function array_key_exists;
+use function intl_is_failure;
+use function is_bool;
+use function is_float;
+use function is_int;
+use function is_string;
+use function strtr;
+
 class IsInt extends AbstractValidator
 {
     const INVALID = 'intInvalid';

@@ -6,6 +6,10 @@ namespace Laminas\I18n\Filter;
 
 use Laminas\Stdlib\ErrorHandler;
 
+use function is_float;
+use function is_int;
+use function is_scalar;
+
 class NumberFormat extends NumberParse
 {
     /**

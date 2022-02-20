@@ -8,6 +8,9 @@ use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\View\Helper\AbstractHelper;
 
+use function is_array;
+use function sprintf;
+
 /**
  * Helper for rendering text based on a count number (like the I18n plural translation helper, but when translation
  * is not needed).

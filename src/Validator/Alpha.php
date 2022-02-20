@@ -6,6 +6,8 @@ namespace Laminas\I18n\Validator;
 
 use Laminas\I18n\Filter\Alpha as AlphaFilter;
 
+use function is_string;
+
 class Alpha extends Alnum
 {
     const INVALID      = 'alphaInvalid';

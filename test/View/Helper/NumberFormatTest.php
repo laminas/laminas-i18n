@@ -9,6 +9,8 @@ use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
 
+use function str_replace;
+
 /**
  * Test class for Laminas\View\Helper\Currency
  *

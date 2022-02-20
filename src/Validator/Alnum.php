@@ -7,6 +7,12 @@ namespace Laminas\I18n\Validator;
 use Laminas\I18n\Filter\Alnum as AlnumFilter;
 use Laminas\Validator\AbstractValidator;
 
+use function is_array;
+use function is_float;
+use function is_int;
+use function is_scalar;
+use function is_string;
+
 class Alnum extends AbstractValidator
 {
     const INVALID      = 'alnumInvalid';

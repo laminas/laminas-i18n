@@ -10,6 +10,11 @@ use IntlDateFormatter;
 use Laminas\View\Helper\AbstractHelper;
 use Locale;
 
+use function date_default_timezone_get;
+use function md5;
+
+use const PHP_VERSION_ID;
+
 /**
  * View helper for formatting dates.
  */

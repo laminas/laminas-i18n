@@ -11,6 +11,13 @@ use Laminas\Validator\Exception;
 use Locale;
 use Traversable;
 
+use function array_key_exists;
+use function is_callable;
+use function is_int;
+use function is_string;
+use function preg_match;
+use function strlen;
+
 class PostCode extends AbstractValidator
 {
     const INVALID        = 'postcodeInvalid';

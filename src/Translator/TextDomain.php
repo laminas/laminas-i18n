@@ -8,6 +8,8 @@ use ArrayObject;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 
+use function array_replace;
+
 /**
  * Text domain.
  */

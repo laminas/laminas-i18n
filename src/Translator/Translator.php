@@ -17,6 +17,17 @@ use Laminas\Stdlib\ArrayUtils;
 use Locale;
 use Traversable;
 
+use function array_shift;
+use function get_class;
+use function gettype;
+use function is_array;
+use function is_file;
+use function is_object;
+use function is_string;
+use function md5;
+use function rtrim;
+use function sprintf;
+
 /**
  * Translator.
  */

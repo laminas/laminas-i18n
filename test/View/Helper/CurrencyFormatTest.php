@@ -8,6 +8,8 @@ use Laminas\I18n\View\Helper\CurrencyFormat as CurrencyFormatHelper;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
+use function str_replace;
+
 /**
  * @group      Laminas_View
  * @group      Laminas_View_Helper

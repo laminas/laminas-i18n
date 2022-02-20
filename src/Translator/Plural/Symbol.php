@@ -7,6 +7,8 @@ namespace Laminas\I18n\Translator\Plural;
 use Closure;
 use Laminas\I18n\Exception;
 
+use function sprintf;
+
 /**
  * Parser symbol.
  *

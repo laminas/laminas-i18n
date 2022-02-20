@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Filter;
 use Laminas\I18n\Filter\NumberFormat as NumberFormatFilter;
 use LaminasTest\I18n\TestCase;
 use NumberFormatter;
+use stdClass;
 
 class NumberFormatTest extends TestCase
 {
@@ -117,7 +118,7 @@ class NumberFormatTest extends TestCase
     {
         return [
             [null],
-            [new \stdClass()],
+            [new stdClass()],
             [[
                 '1.234.567,891',
                 '1.567,891'

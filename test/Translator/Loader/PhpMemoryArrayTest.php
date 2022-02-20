@@ -8,6 +8,8 @@ use Laminas\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
+use function realpath;
+
 class PhpMemoryArrayTest extends TestCase
 {
     protected $testFilesDir;

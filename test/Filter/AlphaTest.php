@@ -7,6 +7,11 @@ namespace LaminasTest\I18n\Filter;
 use Laminas\I18n\Filter\Alpha as AlphaFilter;
 use LaminasTest\I18n\TestCase;
 use Locale;
+use stdClass;
+
+use function array_keys;
+use function array_values;
+use function preg_match;
 
 /**
  * @group      Laminas_Filter
@@ -177,7 +182,7 @@ class AlphaTest extends TestCase
     {
         return [
             [null],
-            [new \stdClass()]
+            [new stdClass()]
         ];
     }
 

@@ -9,6 +9,12 @@ use Laminas\Stdlib\ErrorHandler;
 use NumberFormatter;
 use Traversable;
 
+use function intl_get_error_message;
+use function is_array;
+use function is_float;
+use function is_int;
+use function iterator_to_array;
+
 class NumberParse extends AbstractLocale
 {
     protected $options = [

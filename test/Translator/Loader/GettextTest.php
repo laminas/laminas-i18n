@@ -8,6 +8,12 @@ use Laminas\I18n\Translator\Loader\Gettext as GettextLoader;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
+use function get_include_path;
+use function realpath;
+use function set_include_path;
+
+use const PATH_SEPARATOR;
+
 class GettextTest extends TestCase
 {
     protected $testFilesDir;

@@ -9,6 +9,11 @@ use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
 
+use function sprintf;
+
+use const INTL_ICU_DATA_VERSION;
+use const INTL_ICU_VERSION;
+
 /**
  * @group      Laminas_Validator
  */

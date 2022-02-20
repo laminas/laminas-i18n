@@ -7,6 +7,12 @@ namespace LaminasTest\I18n\Translator\Loader;
 use Laminas\I18n\Translator\Loader\Ini as IniLoader;
 use LaminasTest\I18n\TestCase;
 
+use function get_include_path;
+use function realpath;
+use function set_include_path;
+
+use const PATH_SEPARATOR;
+
 class IniTest extends TestCase
 {
     protected $testFilesDir;

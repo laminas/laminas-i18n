@@ -8,6 +8,7 @@ use Laminas\I18n\Validator\PhoneNumber;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
+use function is_array;
 use function sprintf;
 
 class PhoneNumberTest extends TestCase

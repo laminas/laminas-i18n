@@ -9,6 +9,15 @@ use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
 
+use function array_shift;
+use function count;
+use function gettype;
+use function is_array;
+use function is_file;
+use function is_readable;
+use function sprintf;
+use function stream_resolve_include_path;
+
 /**
  * PHP INI format loader.
  */

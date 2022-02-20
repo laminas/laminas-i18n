@@ -8,6 +8,11 @@ use Laminas\Stdlib\StringUtils;
 use Locale;
 use Traversable;
 
+use function in_array;
+use function is_array;
+use function is_scalar;
+use function preg_replace;
+
 class Alnum extends AbstractLocale
 {
     /**

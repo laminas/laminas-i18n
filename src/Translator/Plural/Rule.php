@@ -6,6 +6,11 @@ namespace Laminas\I18n\Translator\Plural;
 
 use Laminas\I18n\Exception;
 
+use function abs;
+use function floor;
+use function preg_match;
+use function sprintf;
+
 /**
  * Plural rule evaluator.
  */

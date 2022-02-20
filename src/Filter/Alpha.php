@@ -7,6 +7,11 @@ namespace Laminas\I18n\Filter;
 use Laminas\Stdlib\StringUtils;
 use Locale;
 
+use function in_array;
+use function is_array;
+use function is_scalar;
+use function preg_replace;
+
 class Alpha extends Alnum
 {
     /**

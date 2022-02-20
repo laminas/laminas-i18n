@@ -9,6 +9,8 @@ use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 
+use function is_array;
+
 class LoaderPluginManagerFactory implements FactoryInterface
 {
     /**

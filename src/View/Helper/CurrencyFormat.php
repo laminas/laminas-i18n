@@ -8,6 +8,11 @@ use Laminas\View\Helper\AbstractHelper;
 use Locale;
 use NumberFormatter;
 
+use function md5;
+use function preg_quote;
+use function preg_replace;
+use function sprintf;
+
 /**
  * View helper for formatting currency.
  */
