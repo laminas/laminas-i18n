@@ -25,10 +25,5 @@
 
     <php>
         <ini name="date.timezone" value="UTC"/>
-        <!-- OB_ENABLED should be enabled for some tests to check if all
-            functionality works as expected. Such tests include those for
-            Laminas\Soap and Laminas\Session, which require that headers not be sent
-            in order to work. -->
-        <const name="TESTS_LAMINAS_OB_ENABLED" value="false"/>
     </php>
 </phpunit>
