@@ -3,16 +3,16 @@
 namespace LaminasTest\I18n\Translator\Loader;
 
 use Laminas\I18n\Translator\Loader\Ini as IniLoader;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 class IniTest extends TestCase
 {
     protected $testFilesDir;
-    protected $originalLocale;
     protected $originalIncludePath;
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
 
         $this->originalIncludePath = get_include_path();
@@ -22,6 +22,7 @@ class IniTest extends TestCase
     protected function tearDown(): void
     {
         set_include_path($this->originalIncludePath);
+        parent::tearDown();
     }
 
     public function testLoaderFailsToLoadMissingFile()

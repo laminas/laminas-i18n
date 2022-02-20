@@ -3,8 +3,8 @@
 namespace LaminasTest\I18n\Filter;
 
 use Laminas\I18n\Filter\Alpha as AlphaFilter;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @group      Laminas_Filter
@@ -46,10 +46,7 @@ class AlphaTest extends TestCase
      */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->filter = new AlphaFilter();
 
         $this->locale               = Locale::getDefault();

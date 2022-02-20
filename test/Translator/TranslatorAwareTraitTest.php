@@ -4,7 +4,7 @@ namespace LaminasTest\I18n\Translator;
 
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 /**
  * @requires PHP 7.3

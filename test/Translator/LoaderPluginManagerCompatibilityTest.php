@@ -7,7 +7,7 @@ use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\ServiceManager\Test\CommonPluginManagerTrait;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 class LoaderPluginManagerCompatibilityTest extends TestCase
 {

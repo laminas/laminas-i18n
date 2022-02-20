@@ -3,22 +3,17 @@
 namespace LaminasTest\I18n\Translator\Loader;
 
 use Laminas\I18n\Translator\Loader\Gettext as GettextLoader;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 class GettextTest extends TestCase
 {
     protected $testFilesDir;
-    protected $originalLocale;
     protected $originalIncludePath;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->originalLocale = Locale::getDefault();
+        parent::setUp();
         Locale::setDefault('en_EN');
 
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
@@ -29,10 +24,8 @@ class GettextTest extends TestCase
 
     protected function tearDown(): void
     {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->originalLocale);
-            set_include_path($this->originalIncludePath);
-        }
+        set_include_path($this->originalIncludePath);
+        parent::tearDown();
     }
 
     public function testLoaderFailsToLoadMissingFile()

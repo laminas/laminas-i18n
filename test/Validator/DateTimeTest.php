@@ -5,20 +5,12 @@ namespace LaminasTest\I18n\Validator;
 use DateTime;
 use IntlDateFormatter;
 use Laminas\I18n\Validator\DateTime as DateTimeValidator;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 class DateTimeTest extends TestCase
 {
-    /**
-     * @var DateTimeValidator
-     */
-    protected $validator;
-
-    /**
-     * @var Locale
-     */
-    protected $locale;
+    private DateTimeValidator $validator;
 
     /**
      * @var \DateTimeZone
@@ -27,11 +19,7 @@ class DateTimeTest extends TestCase
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->locale = Locale::getDefault();
+        parent::setUp();
         $this->timezone = date_default_timezone_get();
 
         $this->validator = new DateTimeValidator([
@@ -42,9 +30,7 @@ class DateTimeTest extends TestCase
 
     protected function tearDown(): void
     {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->locale);
-        }
+        parent::tearDown();
         date_default_timezone_set($this->timezone);
     }
 
@@ -76,10 +62,6 @@ class DateTimeTest extends TestCase
 
     public function basicProvider()
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $trueArray      = [];
         $testingDate    = new DateTime();
         $testingLocales = ['en', 'de', 'zh-TW', 'ja', 'ar', 'ru', 'si', 'ml-IN', 'hi'];

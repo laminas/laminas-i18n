@@ -3,7 +3,7 @@
 namespace LaminasTest\I18n\View\Helper;
 
 use Laminas\I18n\View\Helper\Plural as PluralHelper;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 /**
  * @group      Laminas_View
@@ -16,17 +16,9 @@ class PluralTest extends TestCase
      */
     public $helper;
 
-    /**
-     * Sets up the fixture
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->helper = new PluralHelper();
     }
 

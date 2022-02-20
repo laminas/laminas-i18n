@@ -7,46 +7,21 @@ use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator;
 use Laminas\ServiceManager\Config;
+use LaminasTest\I18n\TestCase;
 use LaminasTest\I18n\Translator\TestAsset\Loader as TestLoader;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 class TranslatorTest extends TestCase
 {
-    /**
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     * @var string
-     */
-    protected $originalLocale;
-
-    /**
-     * @var string
-     */
-    protected $testFilesDir;
+    protected Translator $translator;
+    protected string $testFilesDir;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->originalLocale = Locale::getDefault();
-        $this->translator     = new Translator();
-
+        parent::setUp();
+        $this->translator = new Translator();
         Locale::setDefault('en_EN');
-
         $this->testFilesDir = __DIR__ . '/_files';
-    }
-
-    protected function tearDown(): void
-    {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->originalLocale);
-        }
     }
 
     public function testFactoryCreatesTranslator()

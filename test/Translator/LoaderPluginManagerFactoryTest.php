@@ -8,10 +8,13 @@ use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\LoaderPluginManagerFactory;
 use Laminas\ServiceManager\ServiceLocatorInterface;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class LoaderPluginManagerFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testFactoryReturnsUnconfiguredPluginManagerWhenNoOptionsPresent()
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();

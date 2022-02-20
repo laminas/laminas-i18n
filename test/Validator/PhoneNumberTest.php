@@ -3,8 +3,10 @@
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\PhoneNumber;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
+
+use function sprintf;
 
 class PhoneNumberTest extends TestCase
 {
@@ -3046,43 +3048,60 @@ class PhoneNumberTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->validator = new PhoneNumber();
+    }
+
+    public function testThatTheCountryCanBeRetrievedWhenNoOptionsAreGivenToTheConstructor(): void
+    {
+        $expect = Locale::getRegion(Locale::getDefault());
+        self::assertEquals(
+            $expect,
+            (new PhoneNumber())->getCountry()
+        );
     }
 
     /**
      * @dataProvider constructDataProvider
      *
-     * @param array  $args
-     * @param array  $options
-     * @param string $locale
+     * @param array<string, string> $constructorOptions
      */
-    public function testConstruct(array $args, array $options, $locale = null)
+    public function testConstruct(array $constructorOptions, string $expectedCountry, ?string $locale = null): void
     {
-        if ($locale) {
+        if ($locale !== null) {
             Locale::setDefault($locale);
         }
 
-        $validator = new PhoneNumber($args);
+        $validator = new PhoneNumber($constructorOptions);
 
-        $this->assertSame($options['country'], $validator->getCountry());
+        $this->assertSame(
+            $expectedCountry,
+            $validator->getCountry(),
+            sprintf(
+                'Expected the country option to be "%s" but "%s" was received',
+                $expectedCountry,
+                $validator->getCountry()
+            )
+        );
     }
 
-    public function constructDataProvider()
+    /** @return array<array-key, array{0: array<string, string>, 1: string, 2: string|null}> */
+    public function constructDataProvider(): array
     {
         return [
             [
                 [],
-                ['country' => Locale::getRegion(Locale::getDefault())],
+                Locale::getRegion(Locale::getDefault()),
                 null
             ],
             [
                 [],
-                ['country' => 'CN'],
+                'CN',
                 'zh_CN'
             ],
             [
                 ['country' => 'CN'],
-                ['country' => 'CN'],
+                'CN',
                 null
             ],
         ];

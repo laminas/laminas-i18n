@@ -6,8 +6,8 @@ use DateTime;
 use IntlDateFormatter;
 use IntlGregorianCalendar;
 use Laminas\I18n\View\Helper\DateFormat as DateFormatHelper;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for Laminas\View\Helper\Currency
@@ -30,6 +30,7 @@ class DateFormatTest extends TestCase
      */
     protected function setUp(): void
     {
+        parent::setUp();
         if (! interface_exists('Laminas\View\Helper\HelperInterface')) {
             $this->markTestSkipped(
                 'Skipping tests that utilize laminas-view until that component is '
@@ -37,30 +38,11 @@ class DateFormatTest extends TestCase
             );
         }
 
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $this->helper = new DateFormatHelper();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
-        unset($this->helper);
     }
 
     public function dateTestsDataProvider()
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return [
@@ -153,10 +135,6 @@ class DateFormatTest extends TestCase
 
     public function dateTestsDataProviderWithPattern()
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return [

@@ -3,18 +3,11 @@
 namespace LaminasTest\I18n\Filter;
 
 use Laminas\I18n\Filter\NumberFormat as NumberFormatFilter;
+use LaminasTest\I18n\TestCase;
 use NumberFormatter;
-use PHPUnit\Framework\TestCase;
 
 class NumberFormatTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-    }
-
     public function testConstructWithOptions()
     {
         $filter = new NumberFormatFilter([
@@ -65,10 +58,6 @@ class NumberFormatTest extends TestCase
 
     public function numberToFormattedProvider()
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         return [
             [
                 'en_US',
@@ -96,10 +85,6 @@ class NumberFormatTest extends TestCase
 
     public function formattedToNumberProvider()
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         return [
             [
                 'en_US',

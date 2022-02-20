@@ -3,33 +3,21 @@
 namespace LaminasTest\I18n\Translator\Loader;
 
 use Laminas\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 class PhpMemoryArrayTest extends TestCase
 {
     protected $testFilesDir;
-    protected $originalLocale;
-    protected $originalIncludePath;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->originalLocale = Locale::getDefault();
+        parent::setUp();
         Locale::setDefault('en_US');
 
         $this->testFilesDir = realpath(__DIR__ . '/../_files/phpmemoryarray');
     }
 
-    protected function tearDown(): void
-    {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->originalLocale);
-        }
-    }
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new PhpMemoryArrayLoader('foo');

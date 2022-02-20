@@ -3,11 +3,8 @@
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\Alnum as AlnumValidator;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
-/**
- * @group      Laminas_Validator
- */
 class AlnumTest extends TestCase
 {
     /**
@@ -22,10 +19,7 @@ class AlnumTest extends TestCase
      */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->validator = new AlnumValidator();
     }
 

@@ -4,7 +4,8 @@ namespace LaminasTest\I18n\View\Helper;
 
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\View\Helper\Translate as TranslateHelper;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @group      Laminas_View
@@ -12,31 +13,17 @@ use PHPUnit\Framework\TestCase;
  */
 class TranslateTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var TranslateHelper
      */
     public $helper;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
+        parent::setUp();
         $this->helper = new TranslateHelper();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
-        unset($this->helper);
     }
 
     public function testInvokingWithoutTranslatorWillRaiseException()

@@ -3,7 +3,7 @@
 namespace LaminasTest\I18n\Translator\Plural;
 
 use Laminas\I18n\Translator\Plural\Rule;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 class RuleTest extends TestCase
 {

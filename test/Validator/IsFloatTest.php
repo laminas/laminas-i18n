@@ -3,9 +3,9 @@
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\IsFloat as IsFloatValidator;
+use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @group      Laminas_Validator
@@ -17,27 +17,12 @@ class IsFloatTest extends TestCase
      */
     protected $validator;
 
-    /**
-     * @var string
-     */
-    protected $locale;
-
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->locale    = Locale::getDefault();
+        parent::setUp();
         $this->validator = new IsFloatValidator(['locale' => 'en']);
     }
 
-    protected function tearDown(): void
-    {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->locale);
-        }
-    }
 
     /**
      * Test float and integer type variables. Includes decimal and scientific notation NumberFormatter-formatted

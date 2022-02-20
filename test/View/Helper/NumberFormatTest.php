@@ -3,9 +3,9 @@
 namespace LaminasTest\I18n\View\Helper;
 
 use Laminas\I18n\View\Helper\NumberFormat as NumberFormatHelper;
+use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for Laminas\View\Helper\Currency
@@ -20,38 +20,14 @@ class NumberFormatTest extends TestCase
      */
     public $helper;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->helper = new NumberFormatHelper();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
-        unset($this->helper);
     }
 
     public function currencyTestsDataProvider()
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         return [
             [
                 'de_DE',

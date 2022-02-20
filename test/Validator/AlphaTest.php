@@ -3,7 +3,7 @@
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\Alpha as AlphaValidator;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 /**
  * @group      Laminas_Validator
@@ -17,10 +17,7 @@ class AlphaTest extends TestCase
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->validator = new AlphaValidator();
     }
 

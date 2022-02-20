@@ -6,10 +6,13 @@ use Interop\Container\ContainerInterface;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorServiceFactory;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class TranslatorServiceFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testCreateServiceWithNoTranslatorKeyDefined()
     {
         $pluginManagerMock = $this->prophesize(LoaderPluginManager::class)->reveal();

@@ -3,8 +3,8 @@
 namespace LaminasTest\I18n\View\Helper;
 
 use Laminas\I18n\View\Helper\CurrencyFormat as CurrencyFormatHelper;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @group      Laminas_View
@@ -25,10 +25,7 @@ class CurrencyFormatTest extends TestCase
      */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->helper = new CurrencyFormatHelper();
     }
 

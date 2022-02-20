@@ -4,7 +4,7 @@ namespace LaminasTest\I18n\Translator;
 
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 class TextDomainTest extends TestCase
 {

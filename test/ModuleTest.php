@@ -4,12 +4,15 @@ namespace LaminasTest\I18n;
 
 use Interop\Container\ContainerInterface;
 use Laminas\I18n\Module;
-use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ModuleTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected function setUp(): void
     {
+        parent::setUp();
         $this->module = new Module();
     }
 

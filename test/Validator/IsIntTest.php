@@ -4,8 +4,8 @@ namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\IsInt as IsIntValidator;
 use Laminas\Validator\Exception;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @group      Laminas_Validator
@@ -17,26 +17,10 @@ class IsIntTest extends TestCase
      */
     protected $validator;
 
-    /**
-     * @var string
-     */
-    protected $locale;
-
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->locale    = Locale::getDefault();
+        parent::setUp();
         $this->validator = new IsIntValidator();
-    }
-
-    protected function tearDown(): void
-    {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->locale);
-        }
     }
 
     public function intDataProvider()

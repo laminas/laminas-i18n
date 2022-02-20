@@ -3,18 +3,11 @@
 namespace LaminasTest\I18n\Filter;
 
 use Laminas\I18n\Filter\NumberParse as NumberParseFilter;
+use LaminasTest\I18n\TestCase;
 use NumberFormatter;
-use PHPUnit\Framework\TestCase;
 
 class NumberParseTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-    }
-
     public function testConstructWithOptions()
     {
         $filter = new NumberParseFilter([
