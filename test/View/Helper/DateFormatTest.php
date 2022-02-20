@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\View\Helper;
 
 use DateTime;
@@ -262,7 +264,7 @@ class DateFormatTest extends TestCase
 
     public function getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern = null)
     {
-        return new IntlDateFormatter($locale, $dateType, $timeType, $timezone, null, $pattern);
+        return new IntlDateFormatter($locale, $dateType, $timeType, $timezone, null, $pattern ?? '');
     }
 
     public function testDifferentTimezone()

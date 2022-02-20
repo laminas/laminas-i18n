@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Translator\Loader;
 
 use Laminas\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;

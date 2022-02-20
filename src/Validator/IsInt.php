@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Validator;
 
 use IntlException;
@@ -153,7 +155,7 @@ class IsInt extends AbstractValidator
         }
 
         try {
-            $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
+            $parsedInt = $format->parse((string) $value, NumberFormatter::TYPE_INT64);
             if (intl_is_failure($format->getErrorCode())) {
                 $this->error(self::NOT_INT);
                 return false;
@@ -166,7 +168,7 @@ class IsInt extends AbstractValidator
         $decimalSep  = $format->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
         $groupingSep = $format->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
 
-        $valueFiltered = strtr($value, [
+        $valueFiltered = strtr((string) $value, [
             $groupingSep => '',
             $decimalSep => '.',
         ]);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Filter;
 
 use Laminas\I18n\Filter\NumberFormat as NumberFormatFilter;

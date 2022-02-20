@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Validator;
 
 use IntlDateFormatter;
@@ -306,7 +308,7 @@ class DateTime extends AbstractValidator
                 $this->getTimeType(),
                 $this->timezone,
                 $this->calendar,
-                $this->pattern
+                $this->pattern ?? ''
             );
 
             $this->formatter->setLenient(false);

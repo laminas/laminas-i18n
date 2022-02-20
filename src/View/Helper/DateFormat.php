@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\View\Helper;
 
 use DateTimeInterface;
@@ -65,7 +67,7 @@ class DateFormat extends AbstractHelper
                 $timeType,
                 $timezone,
                 IntlDateFormatter::GREGORIAN,
-                $pattern
+                $pattern ?? ''
             );
         }
 

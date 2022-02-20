@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Validator;
 
 use Laminas\Stdlib\ArrayUtils;
@@ -379,7 +381,7 @@ class PostCode extends AbstractValidator
             }
         }
 
-        if (! preg_match($format, $value)) {
+        if (! preg_match($format, (string) $value)) {
             $this->error(self::NO_MATCH);
             return false;
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Translator;
 
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
