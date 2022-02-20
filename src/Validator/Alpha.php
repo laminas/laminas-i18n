@@ -10,9 +10,9 @@ use function is_string;
 
 class Alpha extends Alnum
 {
-    const INVALID      = 'alphaInvalid';
-    const NOT_ALPHA    = 'notAlpha';
-    const STRING_EMPTY = 'alphaStringEmpty';
+    public const INVALID      = 'alphaInvalid';
+    public const NOT_ALPHA    = 'notAlpha';
+    public const STRING_EMPTY = 'alphaStringEmpty';
 
     /**
      * Alphabetic filter used for validation

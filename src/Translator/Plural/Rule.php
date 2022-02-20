@@ -140,6 +140,7 @@ class Rule
                        ? 1 : 0;
 
             case '==':
+                // @codingStandardsIgnoreStart
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
                        == $this->evaluateAstPart($ast['arguments'][1], $number)
                        ? 1 : 0;
@@ -148,6 +149,7 @@ class Rule
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
                        != $this->evaluateAstPart($ast['arguments'][1], $number)
                        ? 1 : 0;
+                // @codingStandardsIgnoreEnd
 
             case '&&':
                 return $this->evaluateAstPart($ast['arguments'][0], $number)

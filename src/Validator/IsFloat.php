@@ -25,8 +25,8 @@ use function str_replace;
 
 class IsFloat extends AbstractValidator
 {
-    const INVALID   = 'floatInvalid';
-    const NOT_FLOAT = 'notFloat';
+    public const INVALID   = 'floatInvalid';
+    public const NOT_FLOAT = 'notFloat';
 
     /**
      * Validation failure message template definitions

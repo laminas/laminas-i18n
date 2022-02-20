@@ -16,7 +16,7 @@ class LoaderPluginManagerFactory implements FactoryInterface
     /**
      * laminas-servicemanager v2 options passed to factory.
      *
-     * @param array
+     * @var array
      */
     protected $creationOptions = [];
 

@@ -9,7 +9,8 @@ use LaminasTest\I18n\TestCase;
 
 class RuleTest extends TestCase
 {
-    public static function parseRuleProvider()
+    /** @return array<string, array{0: string, 1: int}> */
+    public function parseRuleProvider(): array
     {
         return [
             // Basic calculations
@@ -55,7 +56,7 @@ class RuleTest extends TestCase
     /**
      * @dataProvider parseRuleProvider
      */
-    public function testParseRules($rule, $expectedValue)
+    public function testParseRules(string $rule, int $expectedValue): void
     {
         $this->assertEquals(
             $expectedValue,
@@ -63,7 +64,8 @@ class RuleTest extends TestCase
         );
     }
 
-    public static function completeRuleProvider()
+    /** @return array<array-key, array{0: string, 1: string}> */
+    public function completeRuleProvider(): array
     {
         // Taken from original gettext tests
         return [
@@ -136,7 +138,7 @@ class RuleTest extends TestCase
     /**
      * @dataProvider completeRuleProvider
      */
-    public function testCompleteRules($rule, $expectedValues)
+    public function testCompleteRules(string $rule, string $expectedValues): void
     {
         $rule = Rule::fromString('nplurals=9; plural=' . $rule);
 
@@ -145,7 +147,7 @@ class RuleTest extends TestCase
         }
     }
 
-    public function testGetNumPlurals()
+    public function testGetNumPlurals(): void
     {
         $rule = Rule::fromString('nplurals=9; plural=n');
         $this->assertEquals(9, $rule->getNumPlurals());

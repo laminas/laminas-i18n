@@ -11,16 +11,9 @@ use NumberFormatter;
 
 use function str_replace;
 
-/**
- * Test class for Laminas\View\Helper\Currency
- *
- * @group      Laminas_View
- * @group      Laminas_View_Helper
- */
 class NumberFormatTest extends TestCase
 {
-    /** @var NumberFormatHelper */
-    public $helper;
+    private NumberFormatHelper $helper;
 
     protected function setUp(): void
     {
@@ -28,7 +21,8 @@ class NumberFormatTest extends TestCase
         $this->helper = new NumberFormatHelper();
     }
 
-    public function currencyTestsDataProvider()
+    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: int|null, 4: array, 5: float, 6: string}> */
+    public function currencyTestsDataProvider(): array
     {
         return [
             [
@@ -146,9 +140,17 @@ class NumberFormatTest extends TestCase
 
     /**
      * @dataProvider currencyTestsDataProvider
+     * @param array<int, string> $textAttributes
      */
-    public function testBasic($locale, $formatStyle, $formatType, $decimals, $textAttributes, $number, $expected)
-    {
+    public function testBasic(
+        string $locale,
+        int $formatStyle,
+        int $formatType,
+        ?int $decimals,
+        array $textAttributes,
+        float $number,
+        string $expected
+    ) {
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $number,
             $formatStyle,
@@ -161,16 +163,17 @@ class NumberFormatTest extends TestCase
 
     /**
      * @dataProvider currencyTestsDataProvider
+     * @param array<int, string> $textAttributes
      */
     public function testSettersProvideDefaults(
-        $locale,
-        $formatStyle,
-        $formatType,
-        $decimals,
-        $textAttributes,
-        $number,
-        $expected
-    ) {
+        string $locale,
+        int $formatStyle,
+        int $formatType,
+        ?int $decimals,
+        array $textAttributes,
+        float $number,
+        string $expected
+    ): void {
         $this->helper
              ->setLocale($locale)
              ->setFormatStyle($formatStyle)
@@ -181,12 +184,12 @@ class NumberFormatTest extends TestCase
         $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
 
-    public function testDefaultLocale()
+    public function testDefaultLocale(): void
     {
         $this->assertEquals(Locale::getDefault(), $this->helper->getLocale());
     }
 
-    public function assertMbStringEquals($expected, $test, $message = '')
+    public function assertMbStringEquals(string $expected, string $test, string $message = ''): void
     {
         $expected = str_replace(["\xC2\xA0", ' '], '', $expected);
         $test     = str_replace(["\xC2\xA0", ' '], '', $test);

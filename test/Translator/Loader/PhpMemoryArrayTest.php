@@ -14,7 +14,7 @@ use function realpath;
 
 class PhpMemoryArrayTest extends TestCase
 {
-    protected $testFilesDir;
+    private string $testFilesDir;
 
     protected function setUp(): void
     {
@@ -24,7 +24,7 @@ class PhpMemoryArrayTest extends TestCase
         $this->testFilesDir = realpath(__DIR__ . '/../_files/phpmemoryarray');
     }
 
-    public function testLoaderFailsToLoadNonArray()
+    public function testLoaderFailsToLoadNonArray(): void
     {
         $loader = new PhpMemoryArrayLoader('foo');
         $this->expectException(InvalidArgumentException::class);
@@ -32,7 +32,7 @@ class PhpMemoryArrayTest extends TestCase
         $loader->load('en_US', 'default');
     }
 
-    public function testLoaderFailsToLoadMissingTextDomain()
+    public function testLoaderFailsToLoadMissingTextDomain(): void
     {
         $loader = new PhpMemoryArrayLoader([]);
         $this->expectException(InvalidArgumentException::class);
@@ -40,7 +40,7 @@ class PhpMemoryArrayTest extends TestCase
         $loader->load('en_US', 'default');
     }
 
-    public function testLoaderFailsToLoadNonArrayLocale()
+    public function testLoaderFailsToLoadNonArrayLocale(): void
     {
         $loader = new PhpMemoryArrayLoader(['default' => []]);
         $this->expectException(InvalidArgumentException::class);
@@ -48,14 +48,14 @@ class PhpMemoryArrayTest extends TestCase
         $loader->load('en_US', 'default');
     }
 
-    public function testLoaderLoadsEmptyArray()
+    public function testLoaderLoadsEmptyArray(): void
     {
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_empty.php');
         $textDomain = $loader->load('en_US', 'default');
         $this->assertInstanceOf(TextDomain::class, $textDomain);
     }
 
-    public function testLoaderReturnsValidTextDomain()
+    public function testLoaderReturnsValidTextDomain(): void
     {
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
@@ -64,7 +64,7 @@ class PhpMemoryArrayTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsPluralRules()
+    public function testLoaderLoadsPluralRules(): void
     {
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');

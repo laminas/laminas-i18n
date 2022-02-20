@@ -9,13 +9,9 @@ use Laminas\Validator\Exception;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
-/**
- * @group      Laminas_Validator
- */
 class IsIntTest extends TestCase
 {
-    /** @var Int */
-    protected $validator;
+    private IsIntValidator $validator;
 
     protected function setUp(): void
     {
@@ -23,7 +19,8 @@ class IsIntTest extends TestCase
         $this->validator = new IsIntValidator();
     }
 
-    public function intDataProvider()
+    /** @return array<array-key, array{0: mixed, 1: bool}> */
+    public function intDataProvider(): array
     {
         return [
             [1.00,         true],
@@ -43,9 +40,9 @@ class IsIntTest extends TestCase
      * Ensures that the validator follows expected behavior
      *
      * @dataProvider intDataProvider()
-     * @return void
+     * @param mixed $intVal
      */
-    public function testBasic($intVal, $expected)
+    public function testBasic($intVal, bool $expected): void
     {
         $this->validator->setLocale('en');
         $this->assertEquals($expected, $this->validator->isValid($intVal));
@@ -53,10 +50,8 @@ class IsIntTest extends TestCase
 
     /**
      * Ensures that getMessages() returns expected default value
-     *
-     * @return void
      */
-    public function testGetMessages()
+    public function testGetMessages(): void
     {
         $this->assertEquals([], $this->validator->getMessages());
     }
@@ -64,7 +59,7 @@ class IsIntTest extends TestCase
     /**
      * Ensures that set/getLocale() works
      */
-    public function testSettingLocales()
+    public function testSettingLocales(): void
     {
         $this->validator->setLocale('de');
         $this->assertEquals('de', $this->validator->getLocale());
@@ -72,28 +67,19 @@ class IsIntTest extends TestCase
         $this->assertEquals(true, $this->validator->isValid('10.000'));
     }
 
-    /**
-     * @Laminas-4352
-     */
-    public function testNonStringValidation()
+    public function testNonStringValidation(): void
     {
         $this->assertFalse($this->validator->isValid([1 => 1]));
     }
 
-    /**
-     * @Laminas-7489
-     */
-    public function testUsingApplicationLocale()
+    public function testUsingApplicationLocale(): void
     {
         Locale::setDefault('de');
         $valid = new IsIntValidator();
         $this->assertTrue($valid->isValid('10.000'));
     }
 
-    /**
-     * @Laminas-7703
-     */
-    public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale()
+    public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale(): void
     {
         Locale::setDefault('de');
         $valid = new IsIntValidator();
@@ -101,14 +87,14 @@ class IsIntTest extends TestCase
         $this->assertFalse($valid->isValid('1,200'));
     }
 
-    public function testEqualsMessageTemplates()
+    public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 
         $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
-    public function testGetStrict()
+    public function testGetStrict(): void
     {
         $this->assertFalse(
             $this->validator->getStrict()
@@ -121,9 +107,9 @@ class IsIntTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array-key, array{0: mixed}>
      */
-    public function setStrictInvalidParameterDataProvider()
+    public function setStrictInvalidParameterDataProvider(): array
     {
         return [
             [null],
@@ -140,16 +126,16 @@ class IsIntTest extends TestCase
      * @dataProvider setStrictInvalidParameterDataProvider
      * @param mixed $strict
      */
-    public function testSetStrictThrowsInvalidArgumentException($strict)
+    public function testSetStrictThrowsInvalidArgumentException($strict): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->validator->setStrict($strict);
     }
 
     /**
-     * @return array
+     * @return array<array-key, array{0: mixed, 1: bool}>
      */
-    public function strictIntDataProvider()
+    public function strictIntDataProvider(): array
     {
         return [
             [1,            true],
@@ -170,10 +156,8 @@ class IsIntTest extends TestCase
     /**
      * @dataProvider strictIntDataProvider
      * @param mixed $intVal
-     * @param bool $expected
-     * @return void
      */
-    public function testStrictComparison($intVal, $expected)
+    public function testStrictComparison($intVal, bool $expected): void
     {
         $this->validator->setLocale('en');
         $this->validator->setStrict(true);

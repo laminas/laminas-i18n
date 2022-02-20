@@ -17,6 +17,7 @@ use function iterator_to_array;
 
 class NumberParse extends AbstractLocale
 {
+    /** @var array<string, int|string|null> */
     protected $options = [
         'locale' => null,
         'style'  => NumberFormatter::DEFAULT_STYLE,

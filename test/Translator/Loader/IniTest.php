@@ -17,14 +17,13 @@ use const PATH_SEPARATOR;
 
 class IniTest extends TestCase
 {
-    protected $testFilesDir;
-    protected $originalIncludePath;
+    private string $testFilesDir;
+    private string $originalIncludePath;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->testFilesDir = realpath(__DIR__ . '/../_files');
-
+        $this->testFilesDir        = realpath(__DIR__ . '/../_files');
         $this->originalIncludePath = get_include_path();
         set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
     }
@@ -35,7 +34,7 @@ class IniTest extends TestCase
         parent::tearDown();
     }
 
-    public function testLoaderFailsToLoadMissingFile()
+    public function testLoaderFailsToLoadMissingFile(): void
     {
         $loader = new IniLoader();
         $this->expectException(InvalidArgumentException::class);
@@ -43,14 +42,14 @@ class IniTest extends TestCase
         $loader->load('en_EN', 'missing');
     }
 
-    public function testLoaderLoadsEmptyFile()
+    public function testLoaderLoadsEmptyFile(): void
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.ini');
         $this->assertInstanceOf(TextDomain::class, $textDomain);
     }
 
-    public function testLoaderFailsToLoadNonArray()
+    public function testLoaderFailsToLoadNonArray(): void
     {
         $loader = new IniLoader();
         $this->expectException(InvalidArgumentException::class);
@@ -58,7 +57,7 @@ class IniTest extends TestCase
         $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
     }
 
-    public function testLoaderFailsToLoadBadSyntax()
+    public function testLoaderFailsToLoadBadSyntax(): void
     {
         $loader = new IniLoader();
         $this->expectException(InvalidArgumentException::class);
@@ -66,7 +65,7 @@ class IniTest extends TestCase
         $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
     }
 
-    public function testLoaderReturnsValidTextDomain()
+    public function testLoaderReturnsValidTextDomain(): void
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
@@ -75,7 +74,7 @@ class IniTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderReturnsValidTextDomainWithFileWithoutPlural()
+    public function testLoaderReturnsValidTextDomainWithFileWithoutPlural(): void
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_without_plural.ini');
@@ -84,7 +83,7 @@ class IniTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderReturnsValidTextDomainWithSimpleSyntax()
+    public function testLoaderReturnsValidTextDomainWithSimpleSyntax(): void
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_simple_syntax.ini');
@@ -93,7 +92,7 @@ class IniTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsPluralRules()
+    public function testLoaderLoadsPluralRules(): void
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
@@ -104,7 +103,7 @@ class IniTest extends TestCase
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
 
-    public function testLoaderLoadsFromIncludePath()
+    public function testLoaderLoadsFromIncludePath(): void
     {
         $loader = new IniLoader();
         $loader->setUseIncludePath(true);
@@ -114,7 +113,7 @@ class IniTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsFromPhar()
+    public function testLoaderLoadsFromPhar(): void
     {
         $loader = new IniLoader();
         $loader->setUseIncludePath(true);

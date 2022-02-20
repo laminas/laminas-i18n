@@ -15,22 +15,22 @@ class LoaderPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 
-    protected function getPluginManager()
+    protected function getPluginManager(): LoaderPluginManager
     {
         return new LoaderPluginManager(new ServiceManager());
     }
 
-    protected function getV2InvalidPluginException()
+    protected function getV2InvalidPluginException(): string
     {
         return RuntimeException::class;
     }
 
-    protected function getInstanceOf()
+    protected function getInstanceOf(): string
     {
         return FilterInterface::class;
     }
 
-    public function testInstanceOfMatches()
+    public function testInstanceOfMatches(): void
     {
         $this->markTestSkipped('Test skipped as LoaderPluginManager allows multiple instance types');
     }

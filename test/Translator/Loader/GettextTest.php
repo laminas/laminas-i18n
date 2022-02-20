@@ -18,8 +18,8 @@ use const PATH_SEPARATOR;
 
 class GettextTest extends TestCase
 {
-    protected $testFilesDir;
-    protected $originalIncludePath;
+    private string $testFilesDir;
+    private string $originalIncludePath;
 
     protected function setUp(): void
     {
@@ -38,7 +38,7 @@ class GettextTest extends TestCase
         parent::tearDown();
     }
 
-    public function testLoaderFailsToLoadMissingFile()
+    public function testLoaderFailsToLoadMissingFile(): void
     {
         $loader = new GettextLoader();
         $this->expectException(InvalidArgumentException::class);
@@ -46,7 +46,7 @@ class GettextTest extends TestCase
         $loader->load('en_EN', 'missing');
     }
 
-    public function testLoaderFailsToLoadBadFile()
+    public function testLoaderFailsToLoadBadFile(): void
     {
         $loader = new GettextLoader();
         $this->expectException(InvalidArgumentException::class);
@@ -54,21 +54,21 @@ class GettextTest extends TestCase
         $loader->load('en_EN', $this->testFilesDir . '/failed.mo');
     }
 
-    public function testLoaderLoadsEmptyFile()
+    public function testLoaderLoadsEmptyFile(): void
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.mo');
         $this->assertInstanceOf(TextDomain::class, $domain);
     }
 
-    public function testLoaderLoadsBigEndianFile()
+    public function testLoaderLoadsBigEndianFile(): void
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_bigendian.mo');
         $this->assertInstanceOf(TextDomain::class, $domain);
     }
 
-    public function testLoaderReturnsValidTextDomain()
+    public function testLoaderReturnsValidTextDomain(): void
     {
         $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
@@ -77,7 +77,7 @@ class GettextTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsPluralRules()
+    public function testLoaderLoadsPluralRules(): void
     {
         $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
@@ -88,7 +88,7 @@ class GettextTest extends TestCase
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
 
-    public function testLoaderLoadsFromIncludePath()
+    public function testLoaderLoadsFromIncludePath(): void
     {
         $loader = new GettextLoader();
         $loader->setUseIncludePath(true);
@@ -98,7 +98,7 @@ class GettextTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsFromPhar()
+    public function testLoaderLoadsFromPhar(): void
     {
         $loader = new GettextLoader();
         $loader->setUseIncludePath(true);
@@ -108,11 +108,7 @@ class GettextTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    /**
-     * @group 6762
-     * @group 6765
-     */
-    public function testLoaderLoadsPlural()
+    public function testLoaderLoadsPlural(): void
     {
         $loader = new GettextLoader();
 

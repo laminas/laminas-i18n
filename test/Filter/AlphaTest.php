@@ -13,17 +13,9 @@ use function array_keys;
 use function array_values;
 use function preg_match;
 
-/**
- * @group      Laminas_Filter
- */
 class AlphaTest extends TestCase
 {
-    /**
-     * AlphaFilter object
-     *
-     * @var AlphaFilter
-     */
-    protected $filter;
+    private AlphaFilter $filter;
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
@@ -33,18 +25,9 @@ class AlphaTest extends TestCase
     protected static $unicodeEnabled;
 
     /**
-     * Locale in browser.
-     *
-     * @var string
-     */
-    protected $locale;
-
-    /**
      * The Alphabet means english alphabet.
-     *
-     * @var bool
      */
-    protected static $meansEnglishAlphabet;
+    protected static bool $meansEnglishAlphabet;
 
     /**
      * Creates a new AlnumFilter object for each test method
@@ -52,20 +35,16 @@ class AlphaTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->filter = new AlphaFilter();
-
-        $this->locale               = Locale::getDefault();
-        $language                   = Locale::getPrimaryLanguage($this->locale);
+        $this->filter               = new AlphaFilter();
+        $language                   = Locale::getPrimaryLanguage(Locale::getDefault());
         self::$meansEnglishAlphabet = $language === 'ja';
         self::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a');
     }
 
     /**
      * Ensures that the filter follows expected behavior
-     *
-     * @return void
      */
-    public function testBasic()
+    public function testBasic(): void
     {
         if (! self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
@@ -114,10 +93,8 @@ class AlphaTest extends TestCase
 
     /**
      * Ensures that the filter follows expected behavior
-     *
-     * @return void
      */
-    public function testAllowWhiteSpace()
+    public function testAllowWhiteSpace(): void
     {
         $this->filter->setAllowWhiteSpace(true);
 
@@ -160,7 +137,7 @@ class AlphaTest extends TestCase
         }
     }
 
-    public function testFilterSupportArray()
+    public function testFilterSupportArray(): void
     {
         $filter = new AlphaFilter();
 
@@ -176,7 +153,8 @@ class AlphaTest extends TestCase
         $this->assertEquals(array_values($values), $actual);
     }
 
-    public function returnUnfilteredDataProvider()
+    /** @return array<array-key, array{0: mixed}> */
+    public function returnUnfilteredDataProvider(): array
     {
         return [
             [null],
@@ -186,9 +164,9 @@ class AlphaTest extends TestCase
 
     /**
      * @dataProvider returnUnfilteredDataProvider
-     * @return void
+     * @param mixed $input
      */
-    public function testReturnUnfiltered($input)
+    public function testReturnUnfiltered($input): void
     {
         $filter = new AlphaFilter();
 

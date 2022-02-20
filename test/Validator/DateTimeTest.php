@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LaminasTest\I18n\Validator;
 
 use DateTime;
-use DateTimeZone;
 use IntlDateFormatter;
 use Laminas\I18n\Validator\DateTime as DateTimeValidator;
 use LaminasTest\I18n\TestCase;
@@ -19,9 +18,7 @@ use function sprintf;
 class DateTimeTest extends TestCase
 {
     private DateTimeValidator $validator;
-
-    /** @var DateTimeZone */
-    protected $timezone;
+    private string $timezone;
 
     protected function setUp(): void
     {
@@ -44,11 +41,11 @@ class DateTimeTest extends TestCase
      * Ensures that the validator follows expected behavior
      *
      * @dataProvider basicProvider name of method that provides parameters
-     * @param string  $value    that will be tested
-     * @param boolean $expected expected result of assertion
-     * @param array   $options  fed into the validator before validation
+     * @param string               $value    that will be tested
+     * @param boolean              $expected expected result of assertion
+     * @param array<string, mixed> $options  fed into the validator before validation
      */
-    public function testBasic($value, $expected, $options = [])
+    public function testBasic(string $value, bool $expected, array $options = []): void
     {
         $this->validator->setOptions($options);
 
@@ -66,7 +63,8 @@ class DateTimeTest extends TestCase
         );
     }
 
-    public function basicProvider()
+    /** @return array<array-key, array{0: string, 1: boolean, 2: array<string, mixed>}> */
+    public function basicProvider(): array
     {
         $trueArray      = [];
         $testingDate    = new DateTime();

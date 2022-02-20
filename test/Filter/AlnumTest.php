@@ -13,38 +13,19 @@ use function array_keys;
 use function array_values;
 use function preg_match;
 
-/**
- * @group      Laminas_Filter
- */
 class AlnumTest extends TestCase
 {
-    /**
-     * AlnumFilter object
-     *
-     * @var AlnumFilter
-     */
-    protected $filter;
+    private AlnumFilter $filter;
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @var mixed
-     **/
-    protected static $unicodeEnabled;
-
-    /**
-     * Locale in browser.
-     *
-     * @var string object
      */
-    protected $locale;
+    protected static bool $unicodeEnabled;
 
     /**
      * The Alphabet means english alphabet.
-     *
-     * @var bool
      */
-    protected static $meansEnglishAlphabet;
+    protected static bool $meansEnglishAlphabet;
 
     /**
      * Creates a new AlnumFilter object for each test method
@@ -52,20 +33,16 @@ class AlnumTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->filter = new AlnumFilter();
-
-        $this->locale                 = Locale::getDefault();
-        $language                     = Locale::getPrimaryLanguage($this->locale);
+        $this->filter                 = new AlnumFilter();
+        $language                     = Locale::getPrimaryLanguage(Locale::getDefault());
         static::$meansEnglishAlphabet = $language === 'ja';
         static::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a');
     }
 
     /**
      * Ensures that the filter follows expected behavior
-     *
-     * @return void
      */
-    public function testBasic()
+    public function testBasic(): void
     {
         if (! static::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
@@ -112,10 +89,8 @@ class AlnumTest extends TestCase
 
     /**
      * Ensures that the allowWhiteSpace option works as expected
-     *
-     * @return void
      */
-    public function testAllowWhiteSpace()
+    public function testAllowWhiteSpace(): void
     {
         $this->filter->setAllowWhiteSpace(true);
 
@@ -155,7 +130,7 @@ class AlnumTest extends TestCase
         }
     }
 
-    public function testFilterSupportArray()
+    public function testFilterSupportArray(): void
     {
         $filter = new AlnumFilter();
 
@@ -172,7 +147,8 @@ class AlnumTest extends TestCase
         $this->assertEquals(array_values($values), $actual);
     }
 
-    public function returnUnfilteredDataProvider()
+    /** @return array<array-key, array{0: mixed}> */
+    public function returnUnfilteredDataProvider(): array
     {
         return [
             [null],
@@ -182,9 +158,9 @@ class AlnumTest extends TestCase
 
     /**
      * @dataProvider returnUnfilteredDataProvider
-     * @return void
+     * @param mixed $input
      */
-    public function testReturnUnfiltered($input)
+    public function testReturnUnfiltered($input): void
     {
         $filter = new AlnumFilter();
 

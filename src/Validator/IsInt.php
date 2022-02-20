@@ -22,9 +22,9 @@ use function strtr;
 
 class IsInt extends AbstractValidator
 {
-    const INVALID        = 'intInvalid';
-    const NOT_INT        = 'notInt';
-    const NOT_INT_STRICT = 'notIntStrict';
+    public const INVALID        = 'intInvalid';
+    public const NOT_INT        = 'notInt';
+    public const NOT_INT_STRICT = 'notIntStrict';
 
     /**
      * Validation failure message template definitions
@@ -56,7 +56,6 @@ class IsInt extends AbstractValidator
      * Constructor for the integer validator
      *
      * @param  array|Traversable $options
-     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = [])
     {

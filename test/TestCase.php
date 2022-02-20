@@ -7,6 +7,7 @@ namespace LaminasTest\I18n;
 use Locale;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
+// phpcs:ignore WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix
 abstract class TestCase extends PHPUnitTestCase
 {
     private string $defaultLocale;

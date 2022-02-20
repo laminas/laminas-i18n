@@ -14,13 +14,9 @@ use function sprintf;
 use const INTL_ICU_DATA_VERSION;
 use const INTL_ICU_VERSION;
 
-/**
- * @group      Laminas_Validator
- */
 class IsFloatTest extends TestCase
 {
-    /** @var IsFloatValidator */
-    protected $validator;
+    private IsFloatValidator $validator;
 
     protected function setUp(): void
     {
@@ -32,13 +28,12 @@ class IsFloatTest extends TestCase
      * Test float and integer type variables. Includes decimal and scientific notation NumberFormatter-formatted
      * versions. Should return true for all locales.
      *
-     * @param string  $value    that will be tested
+     * @param mixed   $value    that will be tested
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
      * @dataProvider floatAndIntegerProvider
-     * @return void
      */
-    public function testFloatAndIntegers($value, $expected, $locale, $type)
+    public function testFloatAndIntegers($value, bool $expected, string $locale, string $type): void
     {
         $this->validator->setLocale($locale);
 
@@ -51,7 +46,8 @@ class IsFloatTest extends TestCase
         );
     }
 
-    public function floatAndIntegerProvider()
+    /** @return array<array-key, array{0: mixed, 1: bool, 2: string, 3: string}> */
+    public function floatAndIntegerProvider(): array
     {
         $trueArray       = [];
         $testingLocales  = ['ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru'];
@@ -106,9 +102,8 @@ class IsFloatTest extends TestCase
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
      * @dataProvider lookAlikeProvider
-     * @return void
      */
-    public function testlookAlikes($value, $expected, $locale)
+    public function testlookAlikes(string $value, bool $expected, string $locale): void
     {
         $this->validator->setLocale($locale);
 
@@ -119,7 +114,8 @@ class IsFloatTest extends TestCase
         );
     }
 
-    public function lookAlikeProvider()
+    /** @return array<array-key, array{0: string, 1: bool, 2: string}> */
+    public function lookAlikeProvider(): array
     {
         $trueArray    = [];
         $testingArray = [
@@ -143,9 +139,8 @@ class IsFloatTest extends TestCase
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
      * @dataProvider validationFailureProvider
-     * @return void
      */
-    public function testValidationFailures($value, $expected, $locale)
+    public function testValidationFailures(string $value, bool $expected, string $locale): void
     {
         $this->validator->setLocale($locale);
 
@@ -156,7 +151,8 @@ class IsFloatTest extends TestCase
         );
     }
 
-    public function validationFailureProvider()
+    /** @return array<array-key, array{0: string, 1: bool, 2: string}> */
+    public function validationFailureProvider(): array
     {
         $trueArray    = [];
         $testingArray = [
@@ -177,10 +173,8 @@ class IsFloatTest extends TestCase
 
     /**
      * Ensures that getMessages() returns expected default value
-     *
-     * @return void
      */
-    public function testGetMessages()
+    public function testGetMessages(): void
     {
         $this->assertEquals([], $this->validator->getMessages());
     }
@@ -188,42 +182,32 @@ class IsFloatTest extends TestCase
     /**
      * Ensures that set/getLocale() works
      */
-    public function testSettingLocales()
+    public function testSettingLocales(): void
     {
         $this->validator->setLocale('de');
         $this->assertEquals('de', $this->validator->getLocale());
     }
 
-    /**
-     * @Laminas-4352
-     */
-    public function testNonStringValidation()
+    public function testNonStringValidation(): void
     {
         $this->assertFalse($this->validator->isValid([1 => 1]));
     }
 
-    /**
-     * @Laminas-7489
-     */
-    public function testUsingApplicationLocale()
+    public function testUsingApplicationLocale(): void
     {
         Locale::setDefault('de');
         $valid = new IsFloatValidator();
         $this->assertEquals('de', $valid->getLocale());
     }
 
-    public function testEqualsMessageTemplates()
+    public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 
         $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
-    /**
-     * @group 6647
-     * @group 6648
-     */
-    public function testNotFloat()
+    public function testNotFloat(): void
     {
         $this->assertFalse($this->validator->isValid('2.000.000,00'));
 

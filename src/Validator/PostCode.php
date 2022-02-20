@@ -20,10 +20,10 @@ use function strlen;
 
 class PostCode extends AbstractValidator
 {
-    const INVALID        = 'postcodeInvalid';
-    const NO_MATCH       = 'postcodeNoMatch';
-    const SERVICE        = 'postcodeService';
-    const SERVICEFAILURE = 'postcodeServiceFailure';
+    public const INVALID        = 'postcodeInvalid';
+    public const NO_MATCH       = 'postcodeNoMatch';
+    public const SERVICE        = 'postcodeService';
+    public const SERVICEFAILURE = 'postcodeServiceFailure';
 
     /**
      * Validation failure message template definitions
@@ -233,7 +233,6 @@ class PostCode extends AbstractValidator
      * Accepts a string locale and/or "format".
      *
      * @param  array|Traversable $options
-     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = [])
     {

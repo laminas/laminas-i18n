@@ -36,12 +36,12 @@ class Translator implements TranslatorInterface
     /**
      * Event fired when the translation for a message is missing.
      */
-    const EVENT_MISSING_TRANSLATION = 'missingTranslation';
+    public const EVENT_MISSING_TRANSLATION = 'missingTranslation';
 
     /**
      * Event fired when no messages were loaded for a locale/text-domain combination.
      */
-    const EVENT_NO_MESSAGES_LOADED = 'noMessagesLoaded';
+    public const EVENT_NO_MESSAGES_LOADED = 'noMessagesLoaded';
 
     /**
      * Messages loaded by the translator.
@@ -650,7 +650,7 @@ class Translator implements TranslatorInterface
      * @param  string $textDomain
      * @param  string $locale
      * @return bool
-     * @throws Exception\RuntimeException When specified loader is not a remote loader
+     * @throws Exception\RuntimeException When specified loader is not a remote loader.
      */
     protected function loadMessagesFromRemote($textDomain, $locale)
     {
@@ -683,7 +683,7 @@ class Translator implements TranslatorInterface
      * @param  string $textDomain
      * @param  string $locale
      * @return bool
-     * @throws Exception\RuntimeException When specified loader is not a file loader
+     * @throws Exception\RuntimeException When specified loader is not a file loader.
      */
     protected function loadMessagesFromPatterns($textDomain, $locale)
     {
@@ -720,7 +720,7 @@ class Translator implements TranslatorInterface
      * @param  string $textDomain
      * @param  string $locale
      * @return bool
-     * @throws Exception\RuntimeException When specified loader is not a file loader
+     * @throws Exception\RuntimeException When specified loader is not a file loader.
      */
     protected function loadMessagesFromFiles($textDomain, $locale)
     {

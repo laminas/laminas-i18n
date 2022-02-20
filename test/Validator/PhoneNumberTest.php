@@ -11,12 +11,13 @@ use Locale;
 use function is_array;
 use function sprintf;
 
+/** @psalm-type PhonePatterns = array<string, array<string, string>> */
 class PhoneNumberTest extends TestCase
 {
     /** @var PhoneNumber */
     protected $validator;
 
-    /** @var array */
+    /** @var array<string, array{code: numeric-string, patterns: PhonePatterns}> */
     protected $phone = [
         'AC' => [
             'code'     => '247',
@@ -3105,7 +3106,8 @@ class PhoneNumberTest extends TestCase
         ];
     }
 
-    public function numbersDataProvider()
+    /** @return array<array-key, array{country: string, code: numeric-string, patterns: PhonePatterns}> */
+    public function numbersDataProvider(): array
     {
         $data = [];
         foreach ($this->phone as $country => $parameters) {
@@ -3123,11 +3125,9 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     * @param string $country
-     * @param string $code
-     * @param array $patterns
+     * @param PhonePatterns $patterns
      */
-    public function testExampleNumbers($country, $code, $patterns)
+    public function testExampleNumbers(string $country, string $code, array $patterns): void
     {
         $this->validator->setCountry($country);
         foreach ($patterns['example'] as $type => $values) {
@@ -3156,11 +3156,9 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     * @param string $country
-     * @param string $code
-     * @param array $patterns
+     * @param PhonePatterns $patterns
      */
-    public function testExampleNumbersAgainstPossible($country, $code, $patterns)
+    public function testExampleNumbersAgainstPossible(string $country, string $code, array $patterns): void
     {
         $this->validator->allowPossible(true);
         $this->validator->setCountry($country);
@@ -3188,14 +3186,14 @@ class PhoneNumberTest extends TestCase
         }
     }
 
-    public function testAllowPossibleSetterGetter()
+    public function testAllowPossibleSetterGetter(): void
     {
         $this->assertFalse($this->validator->allowPossible());
         $this->validator->allowPossible(true);
         $this->assertTrue($this->validator->allowPossible());
     }
 
-    public function testCountryIsCaseInsensitive()
+    public function testCountryIsCaseInsensitive(): void
     {
         $this->validator->setCountry('lt');
         $this->assertTrue($this->validator->isValid('+37067811268'));
@@ -3205,11 +3203,9 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     * @param string $country
-     * @param string $code
-     * @param array $patterns
+     * @param PhonePatterns $patterns
      */
-    public function testInvalidTypes($country, $code, $patterns)
+    public function testInvalidTypes(string $country, string $code, array $patterns): void
     {
         $this->validator->setCountry($country);
         if (! isset($patterns['invalid'])) {
@@ -3236,7 +3232,7 @@ class PhoneNumberTest extends TestCase
         }
     }
 
-    public function testCanSpecifyCountryWithContext()
+    public function testCanSpecifyCountryWithContext(): void
     {
         Locale::setDefault('ZW');
         $validator = new PhoneNumber([

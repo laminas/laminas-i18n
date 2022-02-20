@@ -224,7 +224,7 @@ class Parser
      */
     protected function getSymbol($id)
     {
-        if (! isset($this->symbolTable[$id])) {
+        if (! isset($this->symbolTable[$id])) { // phpcs:ignore
             // Unknown symbol exception
         }
 
@@ -325,7 +325,7 @@ class Parser
                 if ($this->string[$this->currentPos] === $result) {
                     $this->currentPos++;
                     $id = $result . $result;
-                } else {
+                } else { // phpcs:ignore
                     // Yield error
                 }
                 break;

@@ -23,10 +23,8 @@ class AlnumTest extends TestCase
 
     /**
      * Ensures that the validator follows expected behavior for basic input values
-     *
-     * @return void
      */
-    public function testExpectedResultsWithBasicInputValues()
+    public function testExpectedResultsWithBasicInputValues(): void
     {
         $valuesExpected = [
             'abc123'  => true,
@@ -46,20 +44,16 @@ class AlnumTest extends TestCase
 
     /**
      * Ensures that getMessages() returns expected initial value
-     *
-     * @return void
      */
-    public function testMessagesEmptyInitially()
+    public function testMessagesEmptyInitially(): void
     {
         $this->assertEquals([], $this->validator->getMessages());
     }
 
     /**
      * Ensures that the allowWhiteSpace option works as expected
-     *
-     * @return void
      */
-    public function testOptionToAllowWhiteSpaceWithBasicInputValues()
+    public function testOptionToAllowWhiteSpaceWithBasicInputValues(): void
     {
         $this->validator->setAllowWhiteSpace(true);
 
@@ -84,10 +78,7 @@ class AlnumTest extends TestCase
         }
     }
 
-    /**
-     * @return void
-     */
-    public function testEmptyStringValueResultsInProperValidationFailureMessages()
+    public function testEmptyStringValueResultsInProperValidationFailureMessages(): void
     {
         $this->assertFalse($this->validator->isValid(''));
 
@@ -98,10 +89,7 @@ class AlnumTest extends TestCase
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
 
-    /**
-     * @return void
-     */
-    public function testInvalidValueResultsInProperValidationFailureMessages()
+    public function testInvalidValueResultsInProperValidationFailureMessages(): void
     {
         $this->assertFalse($this->validator->isValid('#'));
         $messages      = $this->validator->getMessages();
@@ -111,23 +99,17 @@ class AlnumTest extends TestCase
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
 
-    /**
-     * @Laminas-4352
-     */
-    public function testNonStringValidation()
+    public function testNonStringValidation(): void
     {
         $this->assertFalse($this->validator->isValid([1 => 1]));
     }
 
-    /**
-     * @Laminas-7475
-     */
-    public function testIntegerValidation()
+    public function testIntegerValidation(): void
     {
         $this->assertTrue($this->validator->isValid(1));
     }
 
-    public function testEqualsMessageTemplates()
+    public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 

@@ -17,7 +17,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
-    public function testFactoryReturnsUnconfiguredPluginManagerWhenNoOptionsPresent()
+    public function testFactoryReturnsUnconfiguredPluginManagerWhenNoOptionsPresent(): void
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();
 
@@ -27,7 +27,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertFalse($loaders->has('test'));
     }
 
-    public function testCreateServiceReturnsUnconfiguredPluginManagerWhenNoOptionsPresent()
+    public function testCreateServiceReturnsUnconfiguredPluginManagerWhenNoOptionsPresent(): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
@@ -38,7 +38,8 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertFalse($loaders->has('test'));
     }
 
-    public function provideLoader()
+    /** @return array<array-key, array{0: string}> */
+    public function provideLoader(): array
     {
         return [
             ['gettext'],
@@ -53,7 +54,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
     /**
      * @dataProvider provideLoader
      */
-    public function testFactoryCanConfigurePluginManagerViaOptions($loader)
+    public function testFactoryCanConfigurePluginManagerViaOptions(string $loader): void
     {
         $container = $this->createMock(ContainerInterface::class);
 
@@ -70,7 +71,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
     /**
      * @dataProvider provideLoader
      */
-    public function testCreateServiceCanConfigurePluginManagerViaOptions($loader)
+    public function testCreateServiceCanConfigurePluginManagerViaOptions(string $loader): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
@@ -86,7 +87,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertTrue($loaders->has('test'));
     }
 
-    public function testConfiguresTranslatorServicesWhenFound()
+    public function testConfiguresTranslatorServicesWhenFound(): void
     {
         $translator = $this->prophesize(FileLoaderInterface::class)->reveal();
         $config     = [
@@ -119,7 +120,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertSame($translator, $translators->get('test-too'));
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenServiceListenerPresent()
+    public function testDoesNotConfigureTranslatorServicesWhenServiceListenerPresent(): void
     {
         $translator = $this->prophesize(FileLoaderInterface::class)->reveal();
         $config     = [
@@ -150,7 +151,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertFalse($translators->has('test-too'));
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent()
+    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent(): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
@@ -165,7 +166,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceDoesNotContainTranslatorsConfig()
+    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceDoesNotContainTranslatorsConfig(): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);

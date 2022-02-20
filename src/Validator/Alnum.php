@@ -15,9 +15,9 @@ use function is_string;
 
 class Alnum extends AbstractValidator
 {
-    const INVALID      = 'alnumInvalid';
-    const NOT_ALNUM    = 'notAlnum';
-    const STRING_EMPTY = 'alnumStringEmpty';
+    public const INVALID      = 'alnumInvalid';
+    public const NOT_ALNUM    = 'notAlnum';
+    public const STRING_EMPTY = 'alnumStringEmpty';
 
     /**
      * Alphanumeric filter used for validation
@@ -108,7 +108,7 @@ class Alnum extends AbstractValidator
 
         static::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
 
-        if ($value != static::$filter->filter($value)) {
+        if ($value != static::$filter->filter($value)) { // phpcs:ignore
             $this->error(self::NOT_ALNUM);
             return false;
         }

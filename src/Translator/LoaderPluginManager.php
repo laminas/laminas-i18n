@@ -59,6 +59,7 @@ use function sprintf;
  */
 class LoaderPluginManager extends AbstractPluginManager
 {
+    /** @var array<string, class-string> */
     protected $aliases = [
         'gettext'  => Loader\Gettext::class,
         'getText'  => Loader\Gettext::class,
@@ -79,6 +80,7 @@ class LoaderPluginManager extends AbstractPluginManager
         'zendi18ntranslatorloaderphparray' => Loader\PhpArray::class,
     ];
 
+    /** @var array<string, class-string> */
     protected $factories = [
         Loader\Gettext::class  => InvokableFactory::class,
         Loader\Ini::class      => InvokableFactory::class,
@@ -99,7 +101,7 @@ class LoaderPluginManager extends AbstractPluginManager
      *
      * @param  mixed $plugin
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws Exception\RuntimeException If invalid.
      */
     public function validate($plugin)
     {

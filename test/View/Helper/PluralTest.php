@@ -14,7 +14,7 @@ use LaminasTest\I18n\TestCase;
 class PluralTest extends TestCase
 {
     /** @var PluralHelper */
-    public $helper;
+    private $helper;
 
     protected function setUp(): void
     {
@@ -23,13 +23,13 @@ class PluralTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array-key, array{0: string, 1: list<string>, 2: int, 3:string}>,
      */
-    public function pluralsTestProvider()
+    public function pluralsTestProvider(): array
     {
         return [
-            ['nplurals=1; plural=0', 'かさ', 0, 'かさ'],
-            ['nplurals=1; plural=0', 'かさ', 10, 'かさ'],
+            ['nplurals=1; plural=0', ['かさ'], 0, 'かさ'],
+            ['nplurals=1; plural=0', ['かさ'], 10, 'かさ'],
             ['nplurals=2; plural=(n==1 ? 0 : 1)', ['umbrella', 'umbrellas'], 0, 'umbrellas'],
             ['nplurals=2; plural=(n==1 ? 0 : 1)', ['umbrella', 'umbrellas'], 1, 'umbrella'],
             ['nplurals=2; plural=(n==1 ? 0 : 1)', ['umbrella', 'umbrellas'], 2, 'umbrellas'],
@@ -41,8 +41,9 @@ class PluralTest extends TestCase
 
     /**
      * @dataProvider pluralsTestProvider
+     * @param list<string> $strings
      */
-    public function testGetCorrectPlurals($pluralRule, $strings, $number, $expected)
+    public function testGetCorrectPlurals(string $pluralRule, array $strings, int $number, string $expected): void
     {
         $this->helper->setPluralRule($pluralRule);
         $result = $this->helper->__invoke($strings, $number);

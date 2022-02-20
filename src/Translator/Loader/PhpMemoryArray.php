@@ -20,6 +20,7 @@ class PhpMemoryArray implements RemoteLoaderInterface
     /** @var array */
     protected $messages;
 
+    /** @param array $messages */
     public function __construct($messages)
     {
         $this->messages = $messages;

@@ -17,8 +17,8 @@ use Locale;
 
 class TranslatorTest extends TestCase
 {
-    protected Translator $translator;
-    protected string $testFilesDir;
+    private Translator $translator;
+    private string $testFilesDir;
 
     protected function setUp(): void
     {
@@ -28,7 +28,7 @@ class TranslatorTest extends TestCase
         $this->testFilesDir = __DIR__ . '/_files';
     }
 
-    public function testFactoryCreatesTranslator()
+    public function testFactoryCreatesTranslator(): void
     {
         $translator = Translator::factory([
             'locale'   => 'de_DE',
@@ -51,7 +51,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('de_DE', $translator->getLocale());
     }
 
-    public function testTranslationFromSeveralTranslationFiles()
+    public function testTranslationFromSeveralTranslationFiles(): void
     {
         $translator = Translator::factory([
             'locale'                    => 'de_DE',
@@ -73,15 +73,33 @@ class TranslatorTest extends TestCase
         $this->assertInstanceOf(Translator::class, $translator);
 
         //Test translations
-        $this->assertEquals('Nachricht 1', $translator->translate('Message 1')); //translation-de_DE.php
-        $this->assertEquals('Nachricht 9', $translator->translate('Message 9')); //translation-more-de_DE.php
-        $this->assertEquals('Nachricht 10 - 0', $translator->translatePlural('Message 10', 'Message 10', 1)); //translation-de_DE.php
-        $this->assertEquals('Nachricht 10 - 1', $translator->translatePlural('Message 10', 'Message 10', 2)); //translation-de_DE.php
-        $this->assertEquals('Nachricht 11 - 0', $translator->translatePlural('Message 11', 'Message 11', 1)); //translation-more-de_DE.php
-        $this->assertEquals('Nachricht 11 - 1', $translator->translatePlural('Message 11', 'Message 11', 2)); //translation-more-de_DE.php
+        $this->assertEquals(
+            'Nachricht 1',
+            $translator->translate('Message 1')
+        ); //translation-de_DE.php
+        $this->assertEquals(
+            'Nachricht 9',
+            $translator->translate('Message 9')
+        ); //translation-more-de_DE.php
+        $this->assertEquals(
+            'Nachricht 10 - 0',
+            $translator->translatePlural('Message 10', 'Message 10', 1)
+        ); //translation-de_DE.php
+        $this->assertEquals(
+            'Nachricht 10 - 1',
+            $translator->translatePlural('Message 10', 'Message 10', 2)
+        ); //translation-de_DE.php
+        $this->assertEquals(
+            'Nachricht 11 - 0',
+            $translator->translatePlural('Message 11', 'Message 11', 1)
+        ); //translation-more-de_DE.php
+        $this->assertEquals(
+            'Nachricht 11 - 1',
+            $translator->translatePlural('Message 11', 'Message 11', 2)
+        ); //translation-more-de_DE.php
     }
 
-    public function testTranslationFromDifferentSourceTypes()
+    public function testTranslationFromDifferentSourceTypes(): void
     {
         $translator = Translator::factory([
             'locale'                    => 'de_DE',
@@ -104,7 +122,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Nachricht 9', $translator->translate('Message 9')); //translation-more-de_DE.php
     }
 
-    public function testFactoryCreatesTranslatorWithCache()
+    public function testFactoryCreatesTranslatorWithCache(): void
     {
         $translator = Translator::factory([
             'locale'   => 'de_DE',
@@ -124,18 +142,18 @@ class TranslatorTest extends TestCase
         $this->assertInstanceOf(StorageInterface::class, $translator->getCache());
     }
 
-    public function testDefaultLocale()
+    public function testDefaultLocale(): void
     {
         $this->assertEquals('en_EN', $this->translator->getLocale());
     }
 
-    public function testForcedLocale()
+    public function testForcedLocale(): void
     {
         $this->translator->setLocale('de_DE');
         $this->assertEquals('de_DE', $this->translator->getLocale());
     }
 
-    public function testTranslate()
+    public function testTranslate(): void
     {
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
@@ -152,7 +170,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('bar', $this->translator->translate('foo'));
     }
 
-    public function testTranslationsLoadedFromCache()
+    public function testTranslationsLoadedFromCache(): void
     {
         $cache = CacheFactory::factory(['adapter' => 'memory']);
         $this->translator->setCache($cache);
@@ -165,7 +183,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('bar', $this->translator->translate('foo'));
     }
 
-    public function testTranslationsAreStoredInCache()
+    public function testTranslationsAreStoredInCache(): void
     {
         $cache = CacheFactory::factory(['adapter' => 'memory']);
         $this->translator->setCache($cache);
@@ -185,7 +203,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('bar', $item['foo']);
     }
 
-    public function testTranslationsAreClearedFromCache()
+    public function testTranslationsAreClearedFromCache(): void
     {
         $textDomain = 'default';
         $locale     = 'en_EN';
@@ -205,12 +223,12 @@ class TranslatorTest extends TestCase
         $this->assertFalse($success);
     }
 
-    public function testClearCacheReturnsFalseIfNoCacheIsPresent()
+    public function testClearCacheReturnsFalseIfNoCacheIsPresent(): void
     {
         $this->assertFalse($this->translator->clearCache('default', 'en_EN'));
     }
 
-    public function testTranslatePlurals()
+    public function testTranslatePlurals(): void
     {
         $this->translator->setLocale('en_EN');
         $this->translator->addTranslationFile(
@@ -229,7 +247,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 5 (en) Plural 2', $pl2);
     }
 
-    public function testTranslatePluralsNonExistantLocale()
+    public function testTranslatePluralsNonExistentLocale(): void
     {
         $this->translator->addTranslationFilePattern(
             'phparray',
@@ -248,7 +266,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 5 Plural', $pl2);
     }
 
-    public function testTranslatePluralsNonExistantTranslation()
+    public function testTranslatePluralsNonExistentTranslation(): void
     {
         $this->translator->addTranslationFilePattern(
             'phparray',
@@ -267,7 +285,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 12 Plural', $pl2);
     }
 
-    public function testTranslateNoPlurals()
+    public function testTranslateNoPlurals(): void
     {
         // Some languages such as Japanese and Chinese does not have plural forms
         $this->translator->setLocale('ja_JP');
@@ -287,7 +305,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 9 (ja)', $pl2);
     }
 
-    public function testTranslateNonExistantLocale()
+    public function testTranslateNonExistentLocale(): void
     {
         $this->translator->addTranslationFilePattern(
             'phparray',
@@ -308,7 +326,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 9', $this->translator->translate('Message 9'));
     }
 
-    public function testTranslateNonExistantTranslation()
+    public function testTranslateNonExistentTranslation(): void
     {
         $this->translator->addTranslationFilePattern(
             'phparray',
@@ -323,7 +341,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 13', $this->translator->translate('Message 13'));
     }
 
-    public function testEnableDisableEventManger()
+    public function testEnableDisableEventManger(): void
     {
         $this->assertFalse($this->translator->isEventManagerEnabled(), 'Default value');
 
@@ -334,7 +352,7 @@ class TranslatorTest extends TestCase
         $this->assertFalse($this->translator->isEventManagerEnabled());
     }
 
-    public function testEnableEventMangerViaFactory()
+    public function testEnableEventMangerViaFactory(): void
     {
         $translator = Translator::factory([
             'event_manager_enabled' => true,
@@ -345,7 +363,7 @@ class TranslatorTest extends TestCase
         $this->assertFalse($translator->isEventManagerEnabled());
     }
 
-    public function testMissingTranslationEvent()
+    public function testMissingTranslationEvent(): void
     {
         $actualEvent = null;
 
@@ -378,7 +396,7 @@ class TranslatorTest extends TestCase
         $this->assertNull($actualEvent);
     }
 
-    public function testListenerOnMissingTranslationEventCanReturnString()
+    public function testListenerOnMissingTranslationEventCanReturnString(): void
     {
         $trigger     = null;
         $doNotTriger = null;
@@ -416,7 +434,7 @@ class TranslatorTest extends TestCase
         $this->assertNull($doNotTrigger);
     }
 
-    public function testNoMessagesLoadedEvent()
+    public function testNoMessagesLoadedEvent(): void
     {
         $actualEvent = null;
 
@@ -445,7 +463,7 @@ class TranslatorTest extends TestCase
         $this->assertNull($actualEvent);
     }
 
-    public function testListenerOnNoMessagesLoadedEventCanReturnTextDomainObject()
+    public function testListenerOnNoMessagesLoadedEventCanReturnTextDomainObject(): void
     {
         $trigger      = null;
         $doNotTrigger = null;
@@ -487,7 +505,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('BOOYAH', $result);
     }
 
-    public function testGetAllMessagesLoadedInTranslator()
+    public function testGetAllMessagesLoadedInTranslator(): void
     {
         $this->translator->setLocale('en_EN');
         $this->translator->addTranslationFile(
@@ -503,7 +521,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 1 (en)', $allMessages['Message 1']);
     }
 
-    public function testGetAllMessagesReturnsNullWhenGivenTextDomainIsNotFound()
+    public function testGetAllMessagesReturnsNullWhenGivenTextDomainIsNotFound(): void
     {
         $this->translator->setLocale('en_EN');
         $this->translator->addTranslationFile(
@@ -517,7 +535,7 @@ class TranslatorTest extends TestCase
         $this->assertNull($allMessages);
     }
 
-    public function testGetAllMessagesReturnsNullWhenGivenLocaleNotExist()
+    public function testGetAllMessagesReturnsNullWhenGivenLocaleNotExist(): void
     {
         $this->translator->setLocale('en_EN');
         $this->translator->addTranslationFile(
@@ -531,10 +549,7 @@ class TranslatorTest extends TestCase
         $this->assertNull($allMessages);
     }
 
-    /**
-     * @group 33
-     */
-    public function testNullMessageArgumentShouldReturnAnEmptyString()
+    public function testNullMessageArgumentShouldReturnAnEmptyString(): void
     {
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);

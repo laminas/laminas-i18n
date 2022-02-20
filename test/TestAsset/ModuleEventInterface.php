@@ -11,5 +11,9 @@ namespace LaminasTest\I18n\TestAsset;
  */
 interface ModuleEventInterface
 {
+    /**
+     * @param string $name
+     * @param mixed $default
+     */
     public function getParam($name, $default = null);
 }

@@ -11,7 +11,7 @@ use stdClass;
 
 class NumberFormatTest extends TestCase
 {
-    public function testConstructWithOptions()
+    public function testConstructWithOptions(): void
     {
         $filter = new NumberFormatFilter([
             'locale' => 'en_US',
@@ -22,7 +22,7 @@ class NumberFormatTest extends TestCase
         $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
 
-    public function testConstructWithParameters()
+    public function testConstructWithParameters(): void
     {
         $filter = new NumberFormatFilter('en_US', NumberFormatter::DECIMAL);
 
@@ -30,35 +30,8 @@ class NumberFormatTest extends TestCase
         $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
 
-    /**
-     * @param $locale
-     * @param $style
-     * @param $type
-     * @param $value
-     * @param $expected
-     * @dataProvider numberToFormattedProvider
-     */
-    public function testNumberToFormatted($locale, $style, $type, $value, $expected)
-    {
-        $filter = new NumberFormatFilter($locale, $style, $type);
-        $this->assertEquals($expected, $filter->filter($value));
-    }
-
-    /**
-     * @param $locale
-     * @param $style
-     * @param $type
-     * @param $value
-     * @param $expected
-     * @dataProvider formattedToNumberProvider
-     */
-    public function testFormattedToNumber($locale, $style, $type, $value, $expected)
-    {
-        $filter = new NumberFormatFilter($locale, $style, $type);
-        $this->assertEquals($expected, $filter->filter($value));
-    }
-
-    public function numberToFormattedProvider()
+    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: float, 4: string}> */
+    public function numberToFormattedProvider(): array
     {
         return [
             [
@@ -85,6 +58,16 @@ class NumberFormatTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider numberToFormattedProvider
+     */
+    public function testNumberToFormatted(string $locale, int $style, int $type, float $value, string $expected): void
+    {
+        $filter = new NumberFormatFilter($locale, $style, $type);
+        $this->assertEquals($expected, $filter->filter($value));
+    }
+
+    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: string, 4: float}> */
     public function formattedToNumberProvider()
     {
         return [
@@ -112,7 +95,17 @@ class NumberFormatTest extends TestCase
         ];
     }
 
-    public function returnUnfilteredDataProvider()
+    /**
+     * @dataProvider formattedToNumberProvider
+     */
+    public function testFormattedToNumber(string $locale, int $style, int $type, string $value, float $expected): void
+    {
+        $filter = new NumberFormatFilter($locale, $style, $type);
+        $this->assertEquals($expected, $filter->filter($value));
+    }
+
+    /** @return array<array-key, array{0: mixed}> */
+    public function returnUnfilteredDataProvider(): array
     {
         return [
             [null],
@@ -128,9 +121,9 @@ class NumberFormatTest extends TestCase
 
     /**
      * @dataProvider returnUnfilteredDataProvider
-     * @return void
+     * @param mixed $input
      */
-    public function testReturnUnfiltered($input)
+    public function testReturnUnfiltered($input): void
     {
         $filter = new NumberFormatFilter('de_AT', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);
 

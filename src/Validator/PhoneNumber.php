@@ -21,9 +21,9 @@ use function substr;
 
 class PhoneNumber extends AbstractValidator
 {
-    const NO_MATCH    = 'phoneNumberNoMatch';
-    const UNSUPPORTED = 'phoneNumberUnsupported';
-    const INVALID     = 'phoneNumberInvalid';
+    public const NO_MATCH    = 'phoneNumberNoMatch';
+    public const UNSUPPORTED = 'phoneNumberUnsupported';
+    public const INVALID     = 'phoneNumberInvalid';
 
     /**
      * Validation failure message template definitions

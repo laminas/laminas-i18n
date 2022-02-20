@@ -6,7 +6,6 @@ namespace Laminas\I18n\Validator;
 
 use IntlDateFormatter;
 use IntlException;
-use Laminas\I18n\Exception as I18nException;
 use Laminas\Validator\AbstractValidator;
 use Laminas\Validator\Exception as ValidatorException;
 use Locale;
@@ -18,13 +17,13 @@ use function is_string;
 
 class DateTime extends AbstractValidator
 {
-    const INVALID          = 'datetimeInvalid';
-    const INVALID_DATETIME = 'datetimeInvalidDateTime';
+    public const INVALID          = 'datetimeInvalid';
+    public const INVALID_DATETIME = 'datetimeInvalidDateTime';
 
     /**
      * Validation failure message template definitions
      *
-     * @var string[]
+     * @var array<string, string>
      */
     protected $messageTemplates = [
         self::INVALID          => 'Invalid type given. String expected',
@@ -72,7 +71,6 @@ class DateTime extends AbstractValidator
      * Constructor for the Date validator
      *
      * @param array|Traversable $options
-     * @throws I18nException\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = [])
     {

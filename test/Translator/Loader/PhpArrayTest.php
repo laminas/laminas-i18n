@@ -18,16 +18,15 @@ use const PATH_SEPARATOR;
 
 class PhpArrayTest extends TestCase
 {
-    protected $testFilesDir;
-    protected $originalIncludePath;
+    private string $testFilesDir;
+    private string $originalIncludePath;
 
     protected function setUp(): void
     {
         parent::setUp();
         Locale::setDefault('en_EN');
 
-        $this->testFilesDir = realpath(__DIR__ . '/../_files');
-
+        $this->testFilesDir        = realpath(__DIR__ . '/../_files');
         $this->originalIncludePath = get_include_path();
         set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
     }
@@ -38,7 +37,7 @@ class PhpArrayTest extends TestCase
         parent::tearDown();
     }
 
-    public function testLoaderFailsToLoadMissingFile()
+    public function testLoaderFailsToLoadMissingFile(): void
     {
         $loader = new PhpArrayLoader();
         $this->expectException(InvalidArgumentException::class);
@@ -46,7 +45,7 @@ class PhpArrayTest extends TestCase
         $loader->load('en_EN', 'missing');
     }
 
-    public function testLoaderFailsToLoadNonArray()
+    public function testLoaderFailsToLoadNonArray(): void
     {
         $loader = new PhpArrayLoader();
         $this->expectException(InvalidArgumentException::class);
@@ -54,14 +53,14 @@ class PhpArrayTest extends TestCase
         $loader->load('en_EN', $this->testFilesDir . '/failed.php');
     }
 
-    public function testLoaderLoadsEmptyArray()
+    public function testLoaderLoadsEmptyArray(): void
     {
         $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.php');
         $this->assertInstanceOf(TextDomain::class, $textDomain);
     }
 
-    public function testLoaderReturnsValidTextDomain()
+    public function testLoaderReturnsValidTextDomain(): void
     {
         $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.php');
@@ -70,7 +69,7 @@ class PhpArrayTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsPluralRules()
+    public function testLoaderLoadsPluralRules(): void
     {
         $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.php');
@@ -81,7 +80,7 @@ class PhpArrayTest extends TestCase
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
 
-    public function testLoaderLoadsFromIncludePath()
+    public function testLoaderLoadsFromIncludePath(): void
     {
         $loader = new PhpArrayLoader();
         $loader->setUseIncludePath(true);
@@ -91,7 +90,7 @@ class PhpArrayTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsFromPhar()
+    public function testLoaderLoadsFromPhar(): void
     {
         $loader = new PhpArrayLoader();
         $loader->setUseIncludePath(true);
