@@ -24,7 +24,7 @@ class TranslatorServiceFactoryTest extends TestCase
         $serviceLocator->get('TranslatorPluginManager')->willReturn($pluginManagerMock)->shouldBeCalledTimes(1);
         $serviceLocator->get('config')->willReturn([])->shouldBeCalledTimes(1);
 
-        $factory = new TranslatorServiceFactory();
+        $factory    = new TranslatorServiceFactory();
         $translator = $factory($serviceLocator->reveal(), Translator::class);
         $this->assertInstanceOf(Translator::class, $translator);
         $this->assertSame($pluginManagerMock, $translator->getPluginManager());
@@ -36,7 +36,7 @@ class TranslatorServiceFactoryTest extends TestCase
         $serviceLocator->has('TranslatorPluginManager')->willReturn(false)->shouldBeCalledTimes(1);
         $serviceLocator->get('config')->willReturn([])->shouldBeCalledTimes(1);
 
-        $factory = new TranslatorServiceFactory();
+        $factory    = new TranslatorServiceFactory();
         $translator = $factory($serviceLocator->reveal(), Translator::class);
         $this->assertInstanceOf(Translator::class, $translator);
     }

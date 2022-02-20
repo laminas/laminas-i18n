@@ -17,6 +17,7 @@ class Loader implements FileLoaderInterface
      * load(): defined by LoaderInterface.
      *
      * @see    LoaderInterface::load()
+     *
      * @param  string $filename
      * @param  string $locale
      * @return TextDomain|null

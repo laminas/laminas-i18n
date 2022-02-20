@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator\Loader;
 
+use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\Gettext as GettextLoader;
+use Laminas\I18n\Translator\TextDomain;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
@@ -39,7 +41,7 @@ class GettextTest extends TestCase
     public function testLoaderFailsToLoadMissingFile()
     {
         $loader = new GettextLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Could not find or open file');
         $loader->load('en_EN', 'missing');
     }
@@ -47,7 +49,7 @@ class GettextTest extends TestCase
     public function testLoaderFailsToLoadBadFile()
     {
         $loader = new GettextLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('is not a valid gettext file');
         $loader->load('en_EN', $this->testFilesDir . '/failed.mo');
     }
@@ -56,19 +58,19 @@ class GettextTest extends TestCase
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.mo');
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $domain);
+        $this->assertInstanceOf(TextDomain::class, $domain);
     }
 
     public function testLoaderLoadsBigEndianFile()
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_bigendian.mo');
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $domain);
+        $this->assertInstanceOf(TextDomain::class, $domain);
     }
 
     public function testLoaderReturnsValidTextDomain()
     {
-        $loader = new GettextLoader();
+        $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);

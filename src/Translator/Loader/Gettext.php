@@ -43,6 +43,7 @@ class Gettext extends AbstractFileLoader
      * load(): defined by FileLoaderInterface.
      *
      * @see    FileLoaderInterface::load()
+     *
      * @param  string $locale
      * @param  string $filename
      * @return TextDomain
@@ -62,7 +63,7 @@ class Gettext extends AbstractFileLoader
 
         ErrorHandler::start();
         $this->file = fopen($resolvedFile, 'rb');
-        $error = ErrorHandler::stop();
+        $error      = ErrorHandler::stop();
         if (false === $this->file) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not open file %s for reading',
@@ -86,7 +87,7 @@ class Gettext extends AbstractFileLoader
         }
 
         // Verify major revision (only 0 and 1 supported)
-        $majorRevision = ($this->readInteger() >> 16);
+        $majorRevision = $this->readInteger() >> 16;
 
         if ($majorRevision !== 0 && $majorRevision !== 1) {
             fclose($this->file);

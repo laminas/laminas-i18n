@@ -20,9 +20,7 @@ class DateTimeTest extends TestCase
 {
     private DateTimeValidator $validator;
 
-    /**
-     * @var DateTimeZone
-     */
+    /** @var DateTimeZone */
     protected $timezone;
 
     protected function setUp(): void
@@ -31,8 +29,8 @@ class DateTimeTest extends TestCase
         $this->timezone = date_default_timezone_get();
 
         $this->validator = new DateTimeValidator([
-            'locale' => 'en',
-            'timezone' => 'Europe/Amsterdam'
+            'locale'   => 'en',
+            'timezone' => 'Europe/Amsterdam',
         ]);
     }
 
@@ -57,7 +55,7 @@ class DateTimeTest extends TestCase
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            sprintf('Failed expecting %s being %s', $value, ($expected ? 'true' : 'false'))
+            sprintf('Failed expecting %s being %s', $value, $expected ? 'true' : 'false')
                 . sprintf(
                     ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
                     $this->validator->getLocale(),
@@ -78,7 +76,7 @@ class DateTimeTest extends TestCase
             IntlDateFormatter::LONG,
             IntlDateFormatter::MEDIUM,
             IntlDateFormatter::SHORT,
-            IntlDateFormatter::NONE
+            IntlDateFormatter::NONE,
         ];
 
         //Loop locales and formats for a more thorough set of "true" test data
@@ -89,7 +87,7 @@ class DateTimeTest extends TestCase
                         $trueArray[] = [
                             IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
                             true,
-                            ['locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat]
+                            ['locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat],
                         ];
                     }
                 }
@@ -101,11 +99,11 @@ class DateTimeTest extends TestCase
                 'May 38, 2013',
                 false,
                 [
-                    'locale' => 'en',
+                    'locale'   => 'en',
                     'dateType' => IntlDateFormatter::FULL,
-                    'timeType' => IntlDateFormatter::NONE
-                ]
-            ]
+                    'timeType' => IntlDateFormatter::NONE,
+                ],
+            ],
         ];
 
         return array_merge($trueArray, $falseArray);

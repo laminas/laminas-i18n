@@ -15,7 +15,7 @@ class NumberFormatTest extends TestCase
     {
         $filter = new NumberFormatFilter([
             'locale' => 'en_US',
-            'style'  => NumberFormatter::DECIMAL
+            'style'  => NumberFormatter::DECIMAL,
         ]);
 
         $this->assertEquals('en_US', $filter->getLocale());
@@ -29,7 +29,6 @@ class NumberFormatTest extends TestCase
         $this->assertEquals('en_US', $filter->getLocale());
         $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
-
 
     /**
      * @param $locale
@@ -67,21 +66,21 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::DEFAULT_STYLE,
                 NumberFormatter::TYPE_DOUBLE,
                 1234567.8912346,
-                '1,234,567.891'
+                '1,234,567.891',
             ],
             [
                 'de_DE',
                 NumberFormatter::DEFAULT_STYLE,
                 NumberFormatter::TYPE_DOUBLE,
                 1234567.8912346,
-                '1.234.567,891'
+                '1.234.567,891',
             ],
             [
                 'ru_RU',
                 NumberFormatter::DEFAULT_STYLE,
                 NumberFormatter::TYPE_DOUBLE,
                 1234567.8912346,
-                '1 234 567,891'
+                '1 234 567,891',
             ],
         ];
     }
@@ -113,16 +112,17 @@ class NumberFormatTest extends TestCase
         ];
     }
 
-
     public function returnUnfilteredDataProvider()
     {
         return [
             [null],
             [new stdClass()],
-            [[
-                '1.234.567,891',
-                '1.567,891'
-            ]]
+            [
+                [
+                    '1.234.567,891',
+                    '1.567,891',
+                ],
+            ],
         ];
     }
 

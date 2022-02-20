@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator\Loader;
 
+use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\Ini as IniLoader;
+use Laminas\I18n\Translator\TextDomain;
 use LaminasTest\I18n\TestCase;
 
 use function get_include_path;
@@ -36,22 +38,22 @@ class IniTest extends TestCase
     public function testLoaderFailsToLoadMissingFile()
     {
         $loader = new IniLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Could not find or open file');
         $loader->load('en_EN', 'missing');
     }
 
     public function testLoaderLoadsEmptyFile()
     {
-        $loader = new IniLoader();
+        $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.ini');
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $textDomain);
+        $this->assertInstanceOf(TextDomain::class, $textDomain);
     }
 
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new IniLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
     }
@@ -59,14 +61,14 @@ class IniTest extends TestCase
     public function testLoaderFailsToLoadBadSyntax()
     {
         $loader = new IniLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
     }
 
     public function testLoaderReturnsValidTextDomain()
     {
-        $loader = new IniLoader();
+        $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
@@ -75,7 +77,7 @@ class IniTest extends TestCase
 
     public function testLoaderReturnsValidTextDomainWithFileWithoutPlural()
     {
-        $loader = new IniLoader();
+        $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_without_plural.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
@@ -84,7 +86,7 @@ class IniTest extends TestCase
 
     public function testLoaderReturnsValidTextDomainWithSimpleSyntax()
     {
-        $loader = new IniLoader();
+        $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_simple_syntax.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\View\Helper;
 
+use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\View\Helper\Translate as TranslateHelper;
 use LaminasTest\I18n\TestCase;
@@ -17,9 +18,7 @@ class TranslateTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var TranslateHelper
-     */
+    /** @var TranslateHelper */
     public $helper;
 
     protected function setUp(): void
@@ -30,7 +29,7 @@ class TranslateTest extends TestCase
 
     public function testInvokingWithoutTranslatorWillRaiseException()
     {
-        $this->expectException('Laminas\I18n\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->helper->__invoke('message');
     }
 

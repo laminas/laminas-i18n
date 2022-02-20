@@ -16,6 +16,7 @@ class NumberFormat extends NumberParse
      * Defined by Laminas\Filter\FilterInterface
      *
      * @see    \Laminas\Filter\FilterInterface::filter()
+     *
      * @param  mixed $value
      * @return mixed
      */

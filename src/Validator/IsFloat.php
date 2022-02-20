@@ -131,10 +131,10 @@ class IsFloat extends AbstractValidator
 
         if (StringUtils::hasPcreUnicodeSupport()) {
             $exponentialSymbols = '[Ee' . $formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL) . ']+';
-            $search = '/' . $exponentialSymbols . '/u';
+            $search             = '/' . $exponentialSymbols . '/u';
         } else {
             $exponentialSymbols = '[Ee]';
-            $search = '/' . $exponentialSymbols . '/';
+            $search             = '/' . $exponentialSymbols . '/';
         }
 
         if (! preg_match($search, $value)) {
@@ -172,7 +172,7 @@ class IsFloat extends AbstractValidator
         }
 
         //If we have Unicode support, we can use the real graphemes, otherwise, just the ASCII characters
-        $decimal     = '['. preg_quote($decSeparator, '/') . ']';
+        $decimal     = '[' . preg_quote($decSeparator, '/') . ']';
         $prefix      = '[+-]';
         $exp         = $exponentialSymbols;
         $numberRange = '0-9';
@@ -180,31 +180,33 @@ class IsFloat extends AbstractValidator
         $suffix      = '';
 
         if (StringUtils::hasPcreUnicodeSupport()) {
-            $prefix = '['
-                .  preg_quote(
+            $prefix      = '['
+                . preg_quote(
                     $formatter->getTextAttribute(NumberFormatter::POSITIVE_PREFIX)
-                    .  $formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX)
-                    .  $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
-                    .  $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
+                    . $formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX)
+                    . $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
+                    . $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
                     '/'
                 )
                 . ']{0,3}';
-            $suffix = ($formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX))
+            $suffix      = $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)
                 ? '['
-                    .  preg_quote(
+                    . preg_quote(
                         $formatter->getTextAttribute(NumberFormatter::POSITIVE_SUFFIX)
-                        .  $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)
-                        .  $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
-                        .  $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
+                        . $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)
+                        . $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
+                        . $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
                         '/'
                     )
                     . ']{0,3}'
                 : '';
             $numberRange = '\p{N}';
-            $useUnicode = 'u';
+            $useUnicode  = 'u';
         }
 
         /**
+         * @see https://www.php.net/float
+         *
          * @desc Match against the formal definition of a float. The
          *       exponential number check is modified for RTL non-Latin number
          *       systems (Arabic-Indic numbering). I'm also switching out the period
@@ -212,7 +214,6 @@ class IsFloat extends AbstractValidator
          *       the integer and decimal notations so add that.  This also checks
          *       that a grouping sperator is not in the last GROUPING_SIZE graphemes
          *       of the string - i.e. 10,6 is not valid for en-US.
-         * @see https://www.php.net/float
          */
 
         $lnum    = '[' . $numberRange . ']+';
@@ -223,20 +224,21 @@ class IsFloat extends AbstractValidator
 
         // LEFT-TO-RIGHT MARK (U+200E) is messing up everything for the handful
         // of locales that have it
-        $lnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $lnum . $suffix . '$/' . $useUnicode);
-        $dnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $dnum . $suffix . '$/' . $useUnicode);
+        $lnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' . $prefix . $lnum . $suffix . '$/' . $useUnicode);
+        $dnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' . $prefix . $dnum . $suffix . '$/' . $useUnicode);
         $expDnumSearch  = str_replace("\xE2\x80\x8E", '', '/^' . $expDnum . '$/' . $useUnicode);
         $value          = str_replace("\xE2\x80\x8E", '', $value);
         $unGroupedValue = str_replace($groupSeparator, '', $value);
 
         // No strrpos() in wrappers yet. ICU 4.x doesn't have grouping size for
         // everything. ICU 52 has 3 for ALL locales.
-        $groupSize = $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) ?: 3;
+        $groupSize       = $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) ?: 3;
         $lastStringGroup = $this->wrapper->strlen($value) > $groupSize ?
             $this->wrapper->substr($value, -$groupSize) :
             $value;
 
-        if ((preg_match($lnumSearch, $unGroupedValue)
+        if (
+            (preg_match($lnumSearch, $unGroupedValue)
             || preg_match($dnumSearch, $unGroupedValue)
             || preg_match($expDnumSearch, $unGroupedValue))
             && false === $this->wrapper->strpos($lastStringGroup, $groupSeparator)

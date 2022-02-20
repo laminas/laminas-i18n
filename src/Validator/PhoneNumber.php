@@ -40,6 +40,7 @@ class PhoneNumber extends AbstractValidator
      * Phone Number Patterns
      *
      * @link http://code.google.com/p/libphonenumber/source/browse/trunk/resources/PhoneNumberMetadata.xml
+     *
      * @var array
      */
     protected static $phone = [];
@@ -113,7 +114,7 @@ class PhoneNumber extends AbstractValidator
      * @param  string[]|null $types
      * @return $this|string[]
      */
-    public function allowedTypes(array $types = null)
+    public function allowedTypes(?array $types = null)
     {
         if (null !== $types) {
             $this->allowedTypes = $types;

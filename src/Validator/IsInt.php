@@ -22,8 +22,8 @@ use function strtr;
 
 class IsInt extends AbstractValidator
 {
-    const INVALID = 'intInvalid';
-    const NOT_INT = 'notInt';
+    const INVALID        = 'intInvalid';
+    const NOT_INT        = 'notInt';
     const NOT_INT_STRICT = 'notIntStrict';
 
     /**
@@ -178,7 +178,7 @@ class IsInt extends AbstractValidator
 
         $valueFiltered = strtr((string) $value, [
             $groupingSep => '',
-            $decimalSep => '.',
+            $decimalSep  => '.',
         ]);
 
         if ((string) $parsedInt !== $valueFiltered) {

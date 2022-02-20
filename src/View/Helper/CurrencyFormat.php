@@ -129,7 +129,7 @@ class CurrencyFormat extends AbstractHelper
             $this->correctionNeeded = false;
         } else {
             $this->formatters[$formatterId]->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
-            $defaultCurrencyCode = $this->formatters[$formatterId]->getTextAttribute(NumberFormatter::CURRENCY_CODE);
+            $defaultCurrencyCode    = $this->formatters[$formatterId]->getTextAttribute(NumberFormatter::CURRENCY_CODE);
             $this->correctionNeeded = $defaultCurrencyCode !== $currencyCode;
         }
 
@@ -241,7 +241,6 @@ class CurrencyFormat extends AbstractHelper
 
     /**
      * @param string          $formattedNumber
-     * @param NumberFormatter $formatter
      * @param string          $locale
      * @param string          $currencyCode
      * @return string

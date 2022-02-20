@@ -55,12 +55,14 @@ class LoaderPluginManagerFactoryTest extends TestCase
      */
     public function testFactoryCanConfigurePluginManagerViaOptions($loader)
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
 
         $factory = new LoaderPluginManagerFactory();
-        $loaders = $factory($container, 'TranslatorPluginManager', ['aliases' => [
-            'test' => $loader,
-        ]]);
+        $loaders = $factory($container, 'TranslatorPluginManager', [
+            'aliases' => [
+                'test' => $loader,
+            ],
+        ]);
         $this->assertInstanceOf(LoaderPluginManager::class, $loaders);
         $this->assertTrue($loaders->has('test'));
     }
@@ -74,9 +76,11 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->willImplement(ContainerInterface::class);
 
         $factory = new LoaderPluginManagerFactory();
-        $factory->setCreationOptions(['aliases' => [
-            'test' => $loader,
-        ]]);
+        $factory->setCreationOptions([
+            'aliases' => [
+                'test' => $loader,
+            ],
+        ]);
         $loaders = $factory->createService($container->reveal());
         $this->assertInstanceOf(LoaderPluginManager::class, $loaders);
         $this->assertTrue($loaders->has('test'));
@@ -85,9 +89,9 @@ class LoaderPluginManagerFactoryTest extends TestCase
     public function testConfiguresTranslatorServicesWhenFound()
     {
         $translator = $this->prophesize(FileLoaderInterface::class)->reveal();
-        $config = [
+        $config     = [
             'translator_plugins' => [
-                'aliases' => [
+                'aliases'   => [
                     'test' => PhpArray::class,
                 ],
                 'factories' => [
@@ -105,7 +109,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->willReturn(true);
         $container->get('config')->willReturn($config);
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);
@@ -118,9 +122,9 @@ class LoaderPluginManagerFactoryTest extends TestCase
     public function testDoesNotConfigureTranslatorServicesWhenServiceListenerPresent()
     {
         $translator = $this->prophesize(FileLoaderInterface::class)->reveal();
-        $config = [
+        $config     = [
             'translator_plugins' => [
-                'aliases' => [
+                'aliases'   => [
                     'test' => PhpArray::class,
                 ],
                 'factories' => [
@@ -138,7 +142,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->shouldNotBeCalled();
         $container->get('config')->shouldNotBeCalled();
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);
@@ -155,7 +159,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->willReturn(false);
         $container->get('config')->shouldNotBeCalled();
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);
@@ -170,7 +174,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->willReturn(true);
         $container->get('config')->willReturn(['foo' => 'bar']);
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);

@@ -19,9 +19,7 @@ use function str_replace;
  */
 class NumberFormatTest extends TestCase
 {
-    /**
-     * @var NumberFormatHelper
-     */
+    /** @var NumberFormatHelper */
     public $helper;
 
     protected function setUp(): void
@@ -40,7 +38,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '1.234.567,891'
+                '1.234.567,891',
             ],
             [
                 'de_DE',
@@ -58,7 +56,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '123.456.789 %'
+                '123.456.789 %',
             ],
             [
                 'de_DE',
@@ -67,7 +65,7 @@ class NumberFormatTest extends TestCase
                 1,
                 [],
                 1234567.891234567890000,
-                '123.456.789,1 %'
+                '123.456.789,1 %',
             ],
             [
                 'de_DE',
@@ -76,7 +74,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234560000,
-                '1,23456789123456E6'
+                '1,23456789123456E6',
             ],
             [
                 'ru_RU',
@@ -85,7 +83,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '1 234 567,891'
+                '1 234 567,891',
             ],
             [
                 'ru_RU',
@@ -94,7 +92,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '123 456 789 %'
+                '123 456 789 %',
             ],
             [
                 'ru_RU',
@@ -103,7 +101,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234560000,
-                '1,23456789123456E6'
+                '1,23456789123456E6',
             ],
             [
                 'en_US',
@@ -112,7 +110,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '1,234,567.891'
+                '1,234,567.891',
             ],
             [
                 'en_US',
@@ -121,7 +119,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '123,456,789%'
+                '123,456,789%',
             ],
             [
                 'en_US',
@@ -130,7 +128,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234560000,
-                '1.23456789123456E6'
+                '1.23456789123456E6',
             ],
             [
                 'en_US',
@@ -138,10 +136,10 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [
-                    NumberFormatter::NEGATIVE_PREFIX => 'MINUS'
+                    NumberFormatter::NEGATIVE_PREFIX => 'MINUS',
                 ],
                 -1234567.891234567890000,
-                'MINUS123,456,789%'
+                'MINUS123,456,789%',
             ],
         ];
     }

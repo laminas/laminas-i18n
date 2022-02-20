@@ -9,15 +9,11 @@ use LaminasTest\I18n\TestCase;
 
 class AlnumTest extends TestCase
 {
-    /**
-     * @var AlnumValidator
-     */
+    /** @var AlnumValidator */
     protected $validator;
 
     /**
      * Creates a new Alnum object for each test method
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -41,7 +37,7 @@ class AlnumTest extends TestCase
             ''        => false,
             ' '       => false,
             "\n"      => false,
-            'foobar1' => true
+            'foobar1' => true,
         ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->validator->isValid($input));
@@ -77,8 +73,8 @@ class AlnumTest extends TestCase
             ' '       => true,
             "\n"      => true,
             " \t "    => true,
-            'foobar1' => true
-            ];
+            'foobar1' => true,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
                 $result,
@@ -95,9 +91,9 @@ class AlnumTest extends TestCase
     {
         $this->assertFalse($this->validator->isValid(''));
 
-        $messages = $this->validator->getMessages();
+        $messages      = $this->validator->getMessages();
         $arrayExpected = [
-            AlnumValidator::STRING_EMPTY => 'The input is an empty string'
+            AlnumValidator::STRING_EMPTY => 'The input is an empty string',
         ];
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
@@ -108,9 +104,9 @@ class AlnumTest extends TestCase
     public function testInvalidValueResultsInProperValidationFailureMessages()
     {
         $this->assertFalse($this->validator->isValid('#'));
-        $messages = $this->validator->getMessages();
+        $messages      = $this->validator->getMessages();
         $arrayExpected = [
-            AlnumValidator::NOT_ALNUM => 'The input contains characters which are non alphabetic and no digits'
+            AlnumValidator::NOT_ALNUM => 'The input contains characters which are non alphabetic and no digits',
         ];
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }

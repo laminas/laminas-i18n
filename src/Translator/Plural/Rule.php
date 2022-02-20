@@ -62,7 +62,7 @@ class Rule
 
         if ($result < 0 || $result >= $this->numPlurals) {
             throw new Exception\RangeException(
-                sprintf('Calculated result %s is between 0 and %d', $result, ($this->numPlurals - 1))
+                sprintf('Calculated result %s is between 0 and %d', $result, $this->numPlurals - 1)
             );
         }
 
@@ -217,7 +217,6 @@ class Rule
      * Theoretically we could just use the given Symbol, but that one is not
      * so easy to serialize and also takes up more memory.
      *
-     * @param  Symbol $symbol
      * @return array
      */
     protected static function createAst(Symbol $symbol)

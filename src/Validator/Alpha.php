@@ -29,7 +29,7 @@ class Alpha extends Alnum
     protected $messageTemplates = [
         self::INVALID      => 'Invalid type given. String expected',
         self::NOT_ALPHA    => 'The input contains non alphabetic characters',
-        self::STRING_EMPTY => 'The input is an empty string'
+        self::STRING_EMPTY => 'The input is an empty string',
     ];
 
     /**
@@ -38,7 +38,7 @@ class Alpha extends Alnum
      * @var array
      */
     protected $options = [
-        'allowWhiteSpace' => false,  // Whether to allow white space characters; off by default
+        'allowWhiteSpace' => false, // Whether to allow white space characters; off by default
     ];
 
     /**

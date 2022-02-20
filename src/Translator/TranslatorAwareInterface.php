@@ -13,7 +13,7 @@ interface TranslatorAwareInterface
      * @param  string|null              $textDomain Default is null, which skips setTranslatorTextDomain
      * @return $this
      */
-    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null);
+    public function setTranslator(?TranslatorInterface $translator = null, $textDomain = null);
 
     /**
      * Returns translator used in object

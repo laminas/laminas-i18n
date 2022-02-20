@@ -19,9 +19,7 @@ use const INTL_ICU_VERSION;
  */
 class IsFloatTest extends TestCase
 {
-    /**
-     * @var IsFloatValidator
-     */
+    /** @var IsFloatValidator */
     protected $validator;
 
     protected function setUp(): void
@@ -29,7 +27,6 @@ class IsFloatTest extends TestCase
         parent::setUp();
         $this->validator = new IsFloatValidator(['locale' => 'en']);
     }
-
 
     /**
      * Test float and integer type variables. Includes decimal and scientific notation NumberFormatter-formatted
@@ -48,9 +45,9 @@ class IsFloatTest extends TestCase
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
-            sprintf(' (locale:%s, type:%s)', $locale, $type) . ', ICU Version:' . INTL_ICU_VERSION . '-' .
-            INTL_ICU_DATA_VERSION
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false')
+            . sprintf(' (locale:%s, type:%s)', $locale, $type) . ', ICU Version:' . INTL_ICU_VERSION . '-'
+            . INTL_ICU_DATA_VERSION
         );
     }
 
@@ -58,8 +55,22 @@ class IsFloatTest extends TestCase
     {
         $trueArray       = [];
         $testingLocales  = ['ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru'];
-        $testingExamples = [1000, -2000, +398.00, 0.04, -0.5, .6, -.70, 8E10, -9.3456E-2, 10.23E6,
-            123.1234567890987654321, 1, 13, -3];
+        $testingExamples = [
+            1000,
+            -2000,
+            +398.00,
+            0.04,
+            -0.5,
+            .6,
+            -.70,
+            8E10,
+            -9.3456E-2,
+            10.23E6,
+            123.1234567890987654321,
+            1,
+            13,
+            -3,
+        ];
 
         //Loop locales and examples for a more thorough set of "true" test data
         foreach ($testingLocales as $locale) {
@@ -71,7 +82,7 @@ class IsFloatTest extends TestCase
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
-                    'decimal'
+                    'decimal',
                 ];
                 //Scientific Notation Formatted
                 $trueArray[] = [
@@ -79,7 +90,7 @@ class IsFloatTest extends TestCase
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
-                    'scientific'
+                    'scientific',
                 ];
             }
         }
@@ -110,10 +121,10 @@ class IsFloatTest extends TestCase
 
     public function lookAlikeProvider()
     {
-        $trueArray     = [];
-        $testingArray  = [
+        $trueArray    = [];
+        $testingArray = [
             'ar' => "\xD9\xA1'\xD9\xA1\xD9\xA1\xD9\xA1,\xD9\xA2\xD9\xA3",
-            'ru' => '2 000,00'
+            'ru' => '2 000,00',
         ];
 
         //Loop locales and examples for a more thorough set of "true" test data
@@ -147,12 +158,12 @@ class IsFloatTest extends TestCase
 
     public function validationFailureProvider()
     {
-        $trueArray     = [];
-        $testingArray  = [
+        $trueArray    = [];
+        $testingArray = [
             'ar'    => ['10.1', '66notflot.6'],
             'ru'    => ['10.1', '66notflot.6', '2,000.00', '2 00'],
             'en'    => ['10,1', '66notflot.6', '2.000,00', '2 000', '2,00'],
-            'fr-CH' => ['66notflot.6', '2,000.00', "2'00"]
+            'fr-CH' => ['66notflot.6', '2,000.00', "2'00"],
         ];
 
         //Loop locales and examples for a more thorough set of "true" test data

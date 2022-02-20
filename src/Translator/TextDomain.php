@@ -32,7 +32,6 @@ class TextDomain extends ArrayObject
     /**
      * Set the plural rule
      *
-     * @param  PluralRule $rule
      * @return $this
      */
     public function setPluralRule(PluralRule $rule)
@@ -63,7 +62,7 @@ class TextDomain extends ArrayObject
      */
     public function hasPluralRule()
     {
-        return ($this->pluralRule !== null);
+        return $this->pluralRule !== null;
     }
 
     /**
@@ -87,7 +86,6 @@ class TextDomain extends ArrayObject
      * merge. We are only validating the number of plural forms though, as the
      * same rule could be made up with different expression.
      *
-     * @param  TextDomain $textDomain
      * @return $this
      * @throws Exception\RuntimeException
      */

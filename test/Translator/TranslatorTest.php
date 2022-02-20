@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
+use Laminas\Cache\Storage\StorageInterface;
 use Laminas\Cache\StorageFactory as CacheFactory;
+use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator;
@@ -29,46 +31,46 @@ class TranslatorTest extends TestCase
     public function testFactoryCreatesTranslator()
     {
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'   => 'de_DE',
             'patterns' => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-%s.php'
-                ]
+                    'pattern'  => 'translation-%s.php',
+                ],
             ],
-            'files' => [
+            'files'    => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'filename' => $this->testFilesDir . '/translation_en.php',
-                ]
-            ]
+                ],
+            ],
         ]);
 
-        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf(Translator::class, $translator);
         $this->assertEquals('de_DE', $translator->getLocale());
     }
 
     public function testTranslationFromSeveralTranslationFiles()
     {
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-%s.php'
+                    'pattern'  => 'translation-%s.php',
                 ],
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-more-%s.php'
-                ]
-            ]
+                    'pattern'  => 'translation-more-%s.php',
+                ],
+            ],
         ]);
 
         //Test translator instance
-        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf(Translator::class, $translator);
 
         //Test translations
         $this->assertEquals('Nachricht 1', $translator->translate('Message 1')); //translation-de_DE.php
@@ -82,20 +84,20 @@ class TranslatorTest extends TestCase
     public function testTranslationFromDifferentSourceTypes()
     {
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
                     'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern'  => 'translation-de_DE.php'
+                    'pattern'  => 'translation-de_DE.php',
                 ],
             ],
-            'translation_files' => [
+            'translation_files'         => [
                 [
                     'type'     => 'phparray',
-                    'filename' => $this->testFilesDir . '/testarray/translation-more-de_DE.php'
-                ]
-            ]
+                    'filename' => $this->testFilesDir . '/testarray/translation-more-de_DE.php',
+                ],
+            ],
         ]);
 
         $this->assertEquals('Nachricht 1', $translator->translate('Message 1')); //translation-de_DE.php
@@ -105,21 +107,21 @@ class TranslatorTest extends TestCase
     public function testFactoryCreatesTranslatorWithCache()
     {
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'   => 'de_DE',
             'patterns' => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-%s.php'
-                ]
+                    'pattern'  => 'translation-%s.php',
+                ],
             ],
-            'cache' => [
-                'adapter' => 'memory'
-            ]
+            'cache'    => [
+                'adapter' => 'memory',
+            ],
         ]);
 
-        $this->assertInstanceOf('Laminas\I18n\Translator\Translator', $translator);
-        $this->assertInstanceOf('Laminas\Cache\Storage\StorageInterface', $translator->getCache());
+        $this->assertInstanceOf(Translator::class, $translator);
+        $this->assertInstanceOf(StorageInterface::class, $translator->getCache());
     }
 
     public function testDefaultLocale()
@@ -135,14 +137,14 @@ class TranslatorTest extends TestCase
 
     public function testTranslate()
     {
-        $loader = new TestLoader();
+        $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config = new Config([
+        $config             = new Config([
             'services' => [
-                'test' => $loader
-            ]
+                'test' => $loader,
+            ],
         ]);
-        $pm = $this->translator->getPluginManager();
+        $pm                 = $this->translator->getPluginManager();
         $config->configureServiceManager($pm);
         $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);
@@ -168,10 +170,10 @@ class TranslatorTest extends TestCase
         $cache = CacheFactory::factory(['adapter' => 'memory']);
         $this->translator->setCache($cache);
 
-        $loader = new TestLoader();
+        $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config = new Config(['services' => ['test' => $loader]]);
-        $plugins = $this->translator->getPluginManager();
+        $config             = new Config(['services' => ['test' => $loader]]);
+        $plugins            = $this->translator->getPluginManager();
         $config->configureServiceManager($plugins);
         $this->translator->setPluginManager($plugins);
         $this->translator->addTranslationFile('test', null);
@@ -179,7 +181,7 @@ class TranslatorTest extends TestCase
         $this->assertEquals('bar', $this->translator->translate('foo'));
 
         $item = $cache->getItem($this->translator->getCacheId('default', 'en_EN'));
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $item);
+        $this->assertInstanceOf(TextDomain::class, $item);
         $this->assertEquals('bar', $item['foo']);
     }
 
@@ -335,7 +337,7 @@ class TranslatorTest extends TestCase
     public function testEnableEventMangerViaFactory()
     {
         $translator = Translator::factory([
-            'event_manager_enabled' => true
+            'event_manager_enabled' => true,
         ]);
         $this->assertTrue($translator->isEventManagerEnabled());
 
@@ -359,7 +361,7 @@ class TranslatorTest extends TestCase
 
         $this->translator->translate('foo', 'bar', 'baz');
 
-        $this->assertInstanceOf('Laminas\EventManager\Event', $actualEvent);
+        $this->assertInstanceOf(Event::class, $actualEvent);
         $this->assertEquals(
             [
                 'message'     => 'foo',
@@ -427,7 +429,7 @@ class TranslatorTest extends TestCase
 
         $this->translator->translate('foo', 'bar', 'baz');
 
-        $this->assertInstanceOf('Laminas\EventManager\Event', $actualEvent);
+        $this->assertInstanceOf(Event::class, $actualEvent);
         $this->assertEquals(
             [
                 'locale'      => 'baz',
@@ -534,12 +536,14 @@ class TranslatorTest extends TestCase
      */
     public function testNullMessageArgumentShouldReturnAnEmptyString()
     {
-        $loader = new TestLoader();
+        $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config = new Config(['services' => [
-            'test' => $loader
-        ]]);
-        $pm = $this->translator->getPluginManager();
+        $config             = new Config([
+            'services' => [
+                'test' => $loader,
+            ],
+        ]);
+        $pm                 = $this->translator->getPluginManager();
         $config->configureServiceManager($pm);
         $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);

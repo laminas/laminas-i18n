@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
+use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
 use LaminasTest\I18n\TestCase;
@@ -18,7 +19,7 @@ class TextDomainTest extends TestCase
 
     public function testArrayAccess()
     {
-        $domain = new TextDomain();
+        $domain        = new TextDomain();
         $domain['foo'] = 'bar';
         $this->assertEquals('bar', $domain['foo']);
     }
@@ -51,7 +52,7 @@ class TextDomainTest extends TestCase
 
     public function testMergingIncompatibleTextDomains()
     {
-        $this->expectException('Laminas\I18n\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('is not compatible');
 
         $domainA = new TextDomain();

@@ -69,13 +69,13 @@ class LoaderPluginManager extends AbstractPluginManager
         'PhpArray' => Loader\PhpArray::class,
 
         // Legacy Zend Framework aliases
-        Gettext::class => Loader\Gettext::class,
-        Ini::class => Loader\Ini::class,
+        Gettext::class  => Loader\Gettext::class,
+        Ini::class      => Loader\Ini::class,
         PhpArray::class => Loader\PhpArray::class,
 
         // v2 normalized FQCNs
-        'zendi18ntranslatorloadergettext' => Loader\Gettext::class,
-        'zendi18ntranslatorloaderini' => Loader\Ini::class,
+        'zendi18ntranslatorloadergettext'  => Loader\Gettext::class,
+        'zendi18ntranslatorloaderini'      => Loader\Ini::class,
         'zendi18ntranslatorloaderphparray' => Loader\PhpArray::class,
     ];
 
@@ -88,7 +88,7 @@ class LoaderPluginManager extends AbstractPluginManager
         // resolved alias is used as the requested name passed to the factory.
         'laminasi18ntranslatorloadergettext'  => InvokableFactory::class,
         'laminasi18ntranslatorloaderini'      => InvokableFactory::class,
-        'laminasi18ntranslatorloaderphparray' => InvokableFactory::class
+        'laminasi18ntranslatorloaderphparray' => InvokableFactory::class,
     ];
 
     /**
@@ -111,7 +111,7 @@ class LoaderPluginManager extends AbstractPluginManager
         throw new InvalidServiceException(sprintf(
             'Plugin of type %s is invalid; must implement %s\Loader\FileLoaderInterface '
             . 'or %s\Loader\RemoteLoaderInterface',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+            is_object($plugin) ? get_class($plugin) : gettype($plugin),
             __NAMESPACE__,
             __NAMESPACE__
         ));
@@ -133,7 +133,7 @@ class LoaderPluginManager extends AbstractPluginManager
             throw new Exception\RuntimeException(sprintf(
                 'Plugin of type %s is invalid; must implement %s\Loader\FileLoaderInterface '
                 . 'or %s\Loader\RemoteLoaderInterface',
-                (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+                is_object($plugin) ? get_class($plugin) : gettype($plugin),
                 __NAMESPACE__,
                 __NAMESPACE__
             ));

@@ -14,7 +14,7 @@ class NumberParseTest extends TestCase
     {
         $filter = new NumberParseFilter([
             'locale' => 'en_US',
-            'style'  => NumberFormatter::DECIMAL
+            'style'  => NumberFormatter::DECIMAL,
         ]);
 
         $this->assertEquals('en_US', $filter->getLocale());

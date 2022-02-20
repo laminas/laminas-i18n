@@ -48,7 +48,6 @@ class Parser
 
     /**
      * Create a new plural parser.
-     *
      */
     public function __construct()
     {
@@ -204,13 +203,13 @@ class Parser
     protected function registerSymbol($id, $leftBindingPower = 0)
     {
         if (isset($this->symbolTable[$id])) {
-            $symbol = $this->symbolTable[$id];
+            $symbol                   = $this->symbolTable[$id];
             $symbol->leftBindingPower = max(
                 $symbol->leftBindingPower,
                 $leftBindingPower
             );
         } else {
-            $symbol = new Symbol($this, $id, $leftBindingPower);
+            $symbol                 = new Symbol($this, $id, $leftBindingPower);
             $this->symbolTable[$id] = $symbol;
         }
 
@@ -369,7 +368,7 @@ class Parser
                 ));
         }
 
-        $token = $this->getSymbol($id);
+        $token        = $this->getSymbol($id);
         $token->value = $value;
 
         return $token;

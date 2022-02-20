@@ -17,9 +17,7 @@ use function sprintf;
  */
 class PhpMemoryArray implements RemoteLoaderInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $messages;
 
     public function __construct($messages)

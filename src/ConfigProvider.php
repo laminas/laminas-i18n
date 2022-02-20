@@ -31,7 +31,7 @@ class ConfigProvider
     public function getDependencyConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'TranslatorPluginManager' => Translator\LoaderPluginManager::class,
 
                 // Legacy Zend Framework aliases
@@ -55,7 +55,7 @@ class ConfigProvider
     public function getFilterConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'alnum'        => Filter\Alnum::class,
                 'Alnum'        => Filter\Alnum::class,
                 'alpha'        => Filter\Alpha::class,
@@ -92,7 +92,7 @@ class ConfigProvider
     public function getValidatorConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'alnum'       => Validator\Alnum::class,
                 'Alnum'       => Validator\Alnum::class,
                 'alpha'       => Validator\Alpha::class,
@@ -150,7 +150,7 @@ class ConfigProvider
     public function getViewHelperConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'currencyformat'  => View\Helper\CurrencyFormat::class,
                 'currencyFormat'  => View\Helper\CurrencyFormat::class,
                 'CurrencyFormat'  => View\Helper\CurrencyFormat::class,

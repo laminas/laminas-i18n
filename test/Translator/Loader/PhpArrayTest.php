@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator\Loader;
 
+use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\PhpArray as PhpArrayLoader;
+use Laminas\I18n\Translator\TextDomain;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
@@ -39,7 +41,7 @@ class PhpArrayTest extends TestCase
     public function testLoaderFailsToLoadMissingFile()
     {
         $loader = new PhpArrayLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Could not find or open file');
         $loader->load('en_EN', 'missing');
     }
@@ -47,21 +49,21 @@ class PhpArrayTest extends TestCase
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new PhpArrayLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected an array, but received');
         $loader->load('en_EN', $this->testFilesDir . '/failed.php');
     }
 
     public function testLoaderLoadsEmptyArray()
     {
-        $loader = new PhpArrayLoader();
+        $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.php');
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $textDomain);
+        $this->assertInstanceOf(TextDomain::class, $textDomain);
     }
 
     public function testLoaderReturnsValidTextDomain()
     {
-        $loader = new PhpArrayLoader();
+        $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.php');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);

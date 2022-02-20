@@ -19,22 +19,23 @@ class HelperConfig implements ConfigInterface
 {
     /**
      * Common aliases for helpers
+     *
      * @var array
      */
     protected $aliases = [
-        'currencyformat' => Helper\CurrencyFormat::class,
-        'currencyFormat' => Helper\CurrencyFormat::class,
-        'CurrencyFormat' => Helper\CurrencyFormat::class,
-        'dateformat' => Helper\DateFormat::class,
-        'dateFormat' => Helper\DateFormat::class,
-        'DateFormat' => Helper\DateFormat::class,
-        'numberformat' => Helper\NumberFormat::class,
-        'numberFormat' => Helper\NumberFormat::class,
-        'NumberFormat' => Helper\NumberFormat::class,
-        'plural' => Helper\Plural::class,
-        'Plural' => Helper\Plural::class,
-        'translate' => Helper\Translate::class,
-        'Translate' => Helper\Translate::class,
+        'currencyformat'  => Helper\CurrencyFormat::class,
+        'currencyFormat'  => Helper\CurrencyFormat::class,
+        'CurrencyFormat'  => Helper\CurrencyFormat::class,
+        'dateformat'      => Helper\DateFormat::class,
+        'dateFormat'      => Helper\DateFormat::class,
+        'DateFormat'      => Helper\DateFormat::class,
+        'numberformat'    => Helper\NumberFormat::class,
+        'numberFormat'    => Helper\NumberFormat::class,
+        'NumberFormat'    => Helper\NumberFormat::class,
+        'plural'          => Helper\Plural::class,
+        'Plural'          => Helper\Plural::class,
+        'translate'       => Helper\Translate::class,
+        'Translate'       => Helper\Translate::class,
         'translateplural' => Helper\TranslatePlural::class,
         'translatePlural' => Helper\TranslatePlural::class,
         'TranslatePlural' => Helper\TranslatePlural::class,
@@ -50,33 +51,34 @@ class HelperConfig implements ConfigInterface
         // @codingStandardsIgnoreEnd
 
         // v2 normalized FQCNs
-        'zendi18nviewhelpercurrencyformat' => Helper\CurrencyFormat::class,
-        'zendi18nviewhelperdateformat' => Helper\DateFormat::class,
-        'zendi18nviewhelpernumberformat' => Helper\NumberFormat::class,
-        'zendi18nviewhelperplural' => Helper\Plural::class,
-        'zendi18nviewhelpertranslate' => Helper\Translate::class,
+        'zendi18nviewhelpercurrencyformat'  => Helper\CurrencyFormat::class,
+        'zendi18nviewhelperdateformat'      => Helper\DateFormat::class,
+        'zendi18nviewhelpernumberformat'    => Helper\NumberFormat::class,
+        'zendi18nviewhelperplural'          => Helper\Plural::class,
+        'zendi18nviewhelpertranslate'       => Helper\Translate::class,
         'zendi18nviewhelpertranslateplural' => Helper\TranslatePlural::class,
     ];
 
     /**
      * Factories for included helpers.
+     *
      * @var array
      */
     protected $factories = [
-        Helper\CurrencyFormat::class => InvokableFactory::class,
-        Helper\DateFormat::class => InvokableFactory::class,
-        Helper\NumberFormat::class => InvokableFactory::class,
-        Helper\Plural::class => InvokableFactory::class,
-        Helper\Translate::class => InvokableFactory::class,
+        Helper\CurrencyFormat::class  => InvokableFactory::class,
+        Helper\DateFormat::class      => InvokableFactory::class,
+        Helper\NumberFormat::class    => InvokableFactory::class,
+        Helper\Plural::class          => InvokableFactory::class,
+        Helper\Translate::class       => InvokableFactory::class,
         Helper\TranslatePlural::class => InvokableFactory::class,
         // Legacy (v2) due to alias resolution; canonical form of resolved
         // alias is used to look up the factory, while the non-normalized
         // resolved alias is used as the requested name passed to the factory.
-        'laminasi18nviewhelpercurrencyformat' => InvokableFactory::class,
-        'laminasi18nviewhelperdateformat' => InvokableFactory::class,
-        'laminasi18nviewhelpernumberformat' => InvokableFactory::class,
-        'laminasi18nviewhelperplural' => InvokableFactory::class,
-        'laminasi18nviewhelpertranslate' => InvokableFactory::class,
+        'laminasi18nviewhelpercurrencyformat'  => InvokableFactory::class,
+        'laminasi18nviewhelperdateformat'      => InvokableFactory::class,
+        'laminasi18nviewhelpernumberformat'    => InvokableFactory::class,
+        'laminasi18nviewhelperplural'          => InvokableFactory::class,
+        'laminasi18nviewhelpertranslate'       => InvokableFactory::class,
         'laminasi18nviewhelpertranslateplural' => InvokableFactory::class,
     ];
 
@@ -84,7 +86,6 @@ class HelperConfig implements ConfigInterface
      * Configure the provided service manager instance with the configuration
      * in this class.
      *
-     * @param  ServiceManager $serviceManager
      * @return ServiceManager
      */
     public function configureServiceManager(ServiceManager $serviceManager)
@@ -114,7 +115,7 @@ class HelperConfig implements ConfigInterface
     public function toArray()
     {
         return [
-            'aliases' => $this->aliases,
+            'aliases'   => $this->aliases,
             'factories' => $this->factories,
         ];
     }

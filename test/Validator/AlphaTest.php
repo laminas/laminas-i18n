@@ -12,9 +12,7 @@ use LaminasTest\I18n\TestCase;
  */
 class AlphaTest extends TestCase
 {
-    /**
-     * @var AlphaValidator
-     */
+    /** @var AlphaValidator */
     protected $validator;
 
     protected function setUp(): void
@@ -39,8 +37,8 @@ class AlphaTest extends TestCase
             'aBcDeF'  => true,
             ''        => false,
             ' '       => false,
-            "\n"      => false
-            ];
+            "\n"      => false,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->validator->isValid($input));
         }
@@ -76,7 +74,7 @@ class AlphaTest extends TestCase
             ' '       => true,
             "\n"      => true,
             " \t "    => true,
-            "a\tb c"  => true
+            "a\tb c"  => true,
         ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\PostCode as PostCodeValidator;
+use Laminas\Validator\Exception\InvalidArgumentException;
 use LaminasTest\I18n\TestCase;
 
 /**
@@ -12,15 +13,11 @@ use LaminasTest\I18n\TestCase;
  */
 class PostCodeTest extends TestCase
 {
-    /**
-     * @var  PostCode
-     */
+    /** @var  PostCode */
     protected $validator;
 
     /**
      * Creates a new Laminas\PostCode object for each test method
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -97,7 +94,7 @@ class PostCodeTest extends TestCase
      */
     public function testSettingLocalesWithoutRegion()
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Locale must contain a region');
         $this->validator->setLocale('de')->isValid('1000');
     }
@@ -107,7 +104,7 @@ class PostCodeTest extends TestCase
      */
     public function testSettingLocalesWithoutPostalCodes()
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A postcode-format string has to be given for validation');
         $this->validator->setLocale('gez_ER')->isValid('1000');
     }
@@ -131,14 +128,14 @@ class PostCodeTest extends TestCase
 
     public function testSetGetFormatThrowsExceptionOnNullFormat()
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A postcode-format string has to be given');
         $this->validator->setLocale(null)->setFormat(null)->isValid('1000');
     }
 
     public function testSetGetFormatThrowsExceptionOnEmptyFormat()
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A postcode-format string has to be given');
         $this->validator->setLocale(null)->setFormat('')->isValid('1000');
     }
@@ -154,18 +151,18 @@ class PostCodeTest extends TestCase
     }
 
      /**
-     * Test service class with invalid validation
-     *
-     * @group Laminas-44
-     */
+      * Test service class with invalid validation
+      *
+      * @group Laminas-44
+      */
     public function testServiceClass()
     {
-        $params = (object)[
-            'serviceTrue'   => null,
-            'serviceFalse'  => null,
+        $params = (object) [
+            'serviceTrue'  => null,
+            'serviceFalse' => null,
         ];
 
-        $serviceTrue  = static function ($value) use ($params) {
+        $serviceTrue = static function ($value) use ($params) {
             $params->serviceTrue = $value;
             return true;
         };
@@ -177,12 +174,10 @@ class PostCodeTest extends TestCase
 
         $this->assertEquals(null, $this->validator->getService());
 
-
         $this->validator->setService($serviceTrue);
         $this->assertEquals($this->validator->getService(), $serviceTrue);
         $this->assertTrue($this->validator->isValid('2292'));
         $this->assertEquals($params->serviceTrue, '2292');
-
 
         $this->validator->setService($serviceFalse);
         $this->assertEquals($this->validator->getService(), $serviceFalse);

@@ -13,14 +13,10 @@ use function sprintf;
 
 class PhoneNumberTest extends TestCase
 {
-    /**
-     * @var PhoneNumber
-     */
+    /** @var PhoneNumber */
     protected $validator;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $phone = [
         'AC' => [
             'code'     => '247',
@@ -933,19 +929,19 @@ class PhoneNumberTest extends TestCase
                     'fixed'     => '123456789',
                     'mobile'    => ['612345678', '700123456', '734567890'],
                     'tollfree'  => '801234567',
-                    'premium'   => ['3123123456', '891123456', '897123456',],
-                    'shared'    => ['810123456', '820123456',],
+                    'premium'   => ['3123123456', '891123456', '897123456'],
+                    'shared'    => ['810123456', '820123456'],
                     'voip'      => '912345678',
-                    'emergency' => ['15', '17', '18', '112',],
+                    'emergency' => ['15', '17', '18', '112'],
                 ],
                 'invalid' => [
-                    'fixed'     => ['0123456789', '1234567890', '12345678',],
-                    'mobile'    => ['0612345678', '6123456780', '123456789', '6123456789',],
-                    'tollfree'  => ['0801234567', '8012345670', '101234567', '811234567', '8012345678',],
-                    'premium'   => ['31231234560', '03123123456', '2123123456', '894123456',],
-                    'shared'    => ['812123456', '822123456', '830123456', '881123456', '891123456',],
-                    'voip'      => ['123456789', '812345678', '9123456789',],
-                    'emergency' => ['14', '16', '19', '20', '111', '113',],
+                    'fixed'     => ['0123456789', '1234567890', '12345678'],
+                    'mobile'    => ['0612345678', '6123456780', '123456789', '6123456789'],
+                    'tollfree'  => ['0801234567', '8012345670', '101234567', '811234567', '8012345678'],
+                    'premium'   => ['31231234560', '03123123456', '2123123456', '894123456'],
+                    'shared'    => ['812123456', '822123456', '830123456', '881123456', '891123456'],
+                    'voip'      => ['123456789', '812345678', '9123456789'],
+                    'emergency' => ['14', '16', '19', '20', '111', '113'],
                 ],
             ],
         ],
@@ -1044,11 +1040,11 @@ class PhoneNumberTest extends TestCase
             'code'     => '350',
             'patterns' => [
                 'example' => [
-                    'fixed'     => '20012345',
-                    'mobile'    => '57123456',
-                    'tollfree'  => '80123456',
-                    'premium'   => '88123456',
-                    'shared'    => '87123456',
+                    'fixed'    => '20012345',
+                    'mobile'   => '57123456',
+                    'tollfree' => '80123456',
+                    'premium'  => '88123456',
+                    'shared'   => '87123456',
                     // wrong: 'shortcode' => '116123',
                     'emergency' => '112',
                 ],
@@ -2976,7 +2972,7 @@ class PhoneNumberTest extends TestCase
             ],
         ],
         'XK' => [
-            'code' => '383',
+            'code'     => '383',
             'patterns' => [
                 'example' => [
                     'fixed'     => '38550001',
@@ -2985,7 +2981,7 @@ class PhoneNumberTest extends TestCase
                     'premium'   => '90012345',
                     'uan'       => '700123456',
                     'shortcode' => '18923',
-                    'emergency' => ['112', '192','193', '194'],
+                    'emergency' => ['112', '192', '193', '194'],
                 ],
             ],
         ],
@@ -3066,7 +3062,6 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider constructDataProvider
-     *
      * @param array<string, string> $constructorOptions
      */
     public function testConstruct(array $constructorOptions, string $expectedCountry, ?string $locale = null): void
@@ -3095,17 +3090,17 @@ class PhoneNumberTest extends TestCase
             [
                 [],
                 Locale::getRegion(Locale::getDefault()),
-                null
+                null,
             ],
             [
                 [],
                 'CN',
-                'zh_CN'
+                'zh_CN',
             ],
             [
                 ['country' => 'CN'],
                 'CN',
-                null
+                null,
             ],
         ];
     }
@@ -3128,7 +3123,6 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     *
      * @param string $country
      * @param string $code
      * @param array $patterns
@@ -3162,7 +3156,6 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     *
      * @param string $country
      * @param string $code
      * @param array $patterns
@@ -3212,7 +3205,6 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     *
      * @param string $country
      * @param string $code
      * @param array $patterns

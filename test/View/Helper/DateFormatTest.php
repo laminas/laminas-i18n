@@ -8,6 +8,7 @@ use DateTime;
 use IntlDateFormatter;
 use IntlGregorianCalendar;
 use Laminas\I18n\View\Helper\DateFormat as DateFormatHelper;
+use Laminas\View\Helper\HelperInterface;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
@@ -23,21 +24,17 @@ use function str_replace;
  */
 class DateFormatTest extends TestCase
 {
-    /**
-     * @var DateFormatHelper
-     */
+    /** @var DateFormatHelper */
     public $helper;
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
         parent::setUp();
-        if (! interface_exists('Laminas\View\Helper\HelperInterface')) {
+        if (! interface_exists(HelperInterface::class)) {
             $this->markTestSkipped(
                 'Skipping tests that utilize laminas-view until that component is '
                 . 'forwards-compatible with laminas-stdlib and laminas-servicemanager v3'

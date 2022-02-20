@@ -48,16 +48,14 @@ class AlnumTest extends TestCase
 
     /**
      * Creates a new AlnumFilter object for each test method
-     *
-     * @return void
      */
     protected function setUp(): void
     {
         parent::setUp();
         $this->filter = new AlnumFilter();
 
-        $this->locale               = Locale::getDefault();
-        $language                   = Locale::getPrimaryLanguage($this->locale);
+        $this->locale                 = Locale::getDefault();
+        $language                     = Locale::getPrimaryLanguage($this->locale);
         static::$meansEnglishAlphabet = $language === 'ja';
         static::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a');
     }
@@ -76,7 +74,7 @@ class AlnumTest extends TestCase
                 'abc 123' => 'abc123',
                 'abcxyz'  => 'abcxyz',
                 'AZ@#4.3' => 'AZ43',
-                ''        => ''
+                ''        => '',
             ];
         } elseif (static::$meansEnglishAlphabet) {
             // The Alphabet means english alphabet.
@@ -89,20 +87,20 @@ class AlnumTest extends TestCase
              * The third  contains various multibyte or singebyte characters.
              */
             $valuesExpected = [
-                'aＡBｂ3４5６'  => 'aB35',
-                'z７ Ｙ8　x９'  => 'z8x',
+                'aＡBｂ3４5６'    => 'aB35',
+                'z７ Ｙ8　x９'    => 'z8x',
                 '，s1.2r３#:q,' => 's12rq',
             ];
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = [
-                'abc123'        => 'abc123',
-                'abc 123'       => 'abc123',
-                'abcxyz'        => 'abcxyz',
-                'če2t3ně'       => 'če2t3ně',
-                'grz5e4gżółka'  => 'grz5e4gżółka',
-                'Be3l5gië'      => 'Be3l5gië',
-                ''              => ''
+                'abc123'       => 'abc123',
+                'abc 123'      => 'abc123',
+                'abcxyz'       => 'abcxyz',
+                'če2t3ně'      => 'če2t3ně',
+                'grz5e4gżółka' => 'grz5e4gżółka',
+                'Be3l5gië'     => 'Be3l5gië',
+                ''             => '',
             ];
         }
 
@@ -130,13 +128,13 @@ class AlnumTest extends TestCase
                 'AZ@#4.3' => 'AZ43',
                 ''        => '',
                 "\n"      => "\n",
-                " \t "    => " \t "
+                " \t "    => " \t ",
             ];
         } elseif (static::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = [
                 'a B ４5' => 'a B 5',
-                'z3　x'   => 'z3x'
+                'z3　x'   => 'z3x',
             ];
         } else {
             //The Alphabet means each language's alphabet.
@@ -166,7 +164,7 @@ class AlnumTest extends TestCase
             'abc 123' => 'abc123',
             'abcxyz'  => 'abcxyz',
             'AZ@#4.3' => 'AZ43',
-            ''        => ''
+            ''        => '',
         ];
 
         $actual = $filter->filter(array_keys($values));
@@ -178,7 +176,7 @@ class AlnumTest extends TestCase
     {
         return [
             [null],
-            [new stdClass()]
+            [new stdClass()],
         ];
     }
 

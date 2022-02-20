@@ -43,7 +43,7 @@ class Alnum extends AbstractValidator
      * @var array
      */
     protected $options = [
-        'allowWhiteSpace' => false,  // Whether to allow white space characters; off by default
+        'allowWhiteSpace' => false, // Whether to allow white space characters; off by default
     ];
 
     /**

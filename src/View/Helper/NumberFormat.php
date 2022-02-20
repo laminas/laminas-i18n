@@ -77,7 +77,7 @@ class NumberFormat extends AbstractHelper
         $formatType = null,
         $locale = null,
         $decimals = null,
-        array $textAttributes = null
+        ?array $textAttributes = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();

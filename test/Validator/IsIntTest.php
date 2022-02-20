@@ -14,9 +14,7 @@ use Locale;
  */
 class IsIntTest extends TestCase
 {
-    /**
-     * @var Int
-     */
+    /** @var Int */
     protected $validator;
 
     protected function setUp(): void

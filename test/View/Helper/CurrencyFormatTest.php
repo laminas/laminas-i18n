@@ -16,16 +16,12 @@ use function str_replace;
  */
 class CurrencyFormatTest extends TestCase
 {
-    /**
-     * @var CurrencyFormatHelper
-     */
+    /** @var CurrencyFormatHelper */
     public $helper;
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -114,7 +110,7 @@ class CurrencyFormatTest extends TestCase
     public function assertMbStringEquals($expected, $test, $message = '')
     {
         $expected = str_replace(["\xC2\xA0", ' '], '', $expected);
-        $test = str_replace(["\xC2\xA0", ' '], '', $test);
+        $test     = str_replace(["\xC2\xA0", ' '], '', $test);
         $this->assertEquals($expected, $test, $message);
     }
 }
