@@ -80,12 +80,6 @@ class DateTime extends AbstractValidator
      */
     public function __construct($options = [])
     {
-        if (! extension_loaded('intl')) {
-            throw new I18nException\ExtensionNotLoadedException(
-                sprintf('%s component requires the intl PHP extension', __NAMESPACE__)
-            );
-        }
-
         // Delaying initialization until we know ext/intl is available
         $this->dateType = IntlDateFormatter::NONE;
         $this->timeType = IntlDateFormatter::NONE;

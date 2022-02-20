@@ -3,7 +3,6 @@
 namespace Laminas\I18n\Validator;
 
 use IntlException;
-use Laminas\I18n\Exception as I18nException;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Validator\AbstractValidator;
 use Laminas\Validator\Exception;
@@ -51,13 +50,6 @@ class IsInt extends AbstractValidator
      */
     public function __construct($options = [])
     {
-        if (! extension_loaded('intl')) {
-            throw new I18nException\ExtensionNotLoadedException(sprintf(
-                '%s component requires the intl PHP extension',
-                __NAMESPACE__
-            ));
-        }
-
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }

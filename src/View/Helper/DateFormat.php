@@ -5,7 +5,6 @@ namespace Laminas\I18n\View\Helper;
 use DateTimeInterface;
 use IntlCalendar;
 use IntlDateFormatter;
-use Laminas\I18n\Exception;
 use Laminas\View\Helper\AbstractHelper;
 use Locale;
 
@@ -34,19 +33,6 @@ class DateFormat extends AbstractHelper
      * @var array
      */
     protected $formatters = [];
-
-    /**
-     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
-     */
-    public function __construct()
-    {
-        if (! extension_loaded('intl')) {
-            throw new Exception\ExtensionNotLoadedException(sprintf(
-                '%s component requires the intl PHP extension',
-                __NAMESPACE__
-            ));
-        }
-    }
 
     /**
      * Format a date

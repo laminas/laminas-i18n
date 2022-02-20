@@ -3,7 +3,6 @@
 namespace Laminas\I18n\Validator;
 
 use IntlException;
-use Laminas\I18n\Exception as I18nException;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Stdlib\StringUtils;
 use Laminas\Stdlib\StringWrapper\StringWrapperInterface;
@@ -46,16 +45,9 @@ class IsFloat extends AbstractValidator
      * Constructor for the integer validator
      *
      * @param array|Traversable $options
-     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = [])
     {
-        if (! extension_loaded('intl')) {
-            throw new I18nException\ExtensionNotLoadedException(
-                sprintf('%s component requires the intl PHP extension', __NAMESPACE__)
-            );
-        }
-
         $this->wrapper = StringUtils::getWrapper();
 
         if ($options instanceof Traversable) {
