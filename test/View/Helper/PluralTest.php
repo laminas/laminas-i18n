@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\View\Helper;
 
 use Laminas\I18n\View\Helper\Plural as PluralHelper;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
 /**
  * @group      Laminas_View
@@ -11,38 +13,26 @@ use PHPUnit\Framework\TestCase;
  */
 class PluralTest extends TestCase
 {
-    /**
-     * @var PluralHelper
-     */
-    public $helper;
+    /** @var PluralHelper */
+    private $helper;
 
-    /**
-     * Sets up the fixture
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->helper = new PluralHelper();
     }
 
     /**
-     * @return array
+     * @return array<array-key, array{0: string, 1: list<string>, 2:int, 3:string}>
      */
-    public function pluralsTestProvider()
+    public function pluralsTestProvider(): array
     {
         return [
-            ['nplurals=1; plural=0', 'かさ', 0, 'かさ'],
-            ['nplurals=1; plural=0', 'かさ', 10, 'かさ'],
-
+            ['nplurals=1; plural=0', ['かさ'], 0, 'かさ'],
+            ['nplurals=1; plural=0', ['かさ'], 10, 'かさ'],
             ['nplurals=2; plural=(n==1 ? 0 : 1)', ['umbrella', 'umbrellas'], 0, 'umbrellas'],
             ['nplurals=2; plural=(n==1 ? 0 : 1)', ['umbrella', 'umbrellas'], 1, 'umbrella'],
             ['nplurals=2; plural=(n==1 ? 0 : 1)', ['umbrella', 'umbrellas'], 2, 'umbrellas'],
-
             ['nplurals=2; plural=(n==0 || n==1 ? 0 : 1)', ['parapluie', 'parapluies'], 0, 'parapluie'],
             ['nplurals=2; plural=(n==0 || n==1 ? 0 : 1)', ['parapluie', 'parapluies'], 1, 'parapluie'],
             ['nplurals=2; plural=(n==0 || n==1 ? 0 : 1)', ['parapluie', 'parapluies'], 2, 'parapluies'],
@@ -51,8 +41,9 @@ class PluralTest extends TestCase
 
     /**
      * @dataProvider pluralsTestProvider
+     * @param list<string> $strings
      */
-    public function testGetCorrectPlurals($pluralRule, $strings, $number, $expected)
+    public function testGetCorrectPlurals(string $pluralRule, array $strings, int $number, string $expected): void
     {
         $this->helper->setPluralRule($pluralRule);
         $result = $this->helper->__invoke($strings, $number);

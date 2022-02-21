@@ -29,12 +29,14 @@ class ConfigProvider
     public function getDependencyConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'TranslatorPluginManager' => Translator\LoaderPluginManager::class,
 
                 // Legacy Zend Framework aliases
+                // @codingStandardsIgnoreStart
                 \Zend\I18n\Translator\TranslatorInterface::class => Translator\TranslatorInterface::class,
                 \Zend\I18n\Translator\LoaderPluginManager::class => Translator\LoaderPluginManager::class,
+                // @codingStandardsIgnoreEnd
             ],
             'factories' => [
                 Translator\TranslatorInterface::class => Translator\TranslatorServiceFactory::class,
@@ -51,7 +53,7 @@ class ConfigProvider
     public function getFilterConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'alnum'        => Filter\Alnum::class,
                 'Alnum'        => Filter\Alnum::class,
                 'alpha'        => Filter\Alpha::class,
@@ -64,10 +66,12 @@ class ConfigProvider
                 'NumberParse'  => Filter\NumberParse::class,
 
                 // Legacy Zend Framework aliases
+                // @codingStandardsIgnoreStart
                 \Zend\I18n\Filter\Alnum::class => Filter\Alnum::class,
                 \Zend\I18n\Filter\Alpha::class => Filter\Alpha::class,
                 \Zend\I18n\Filter\NumberFormat::class => Filter\NumberFormat::class,
                 \Zend\I18n\Filter\NumberParse::class => Filter\NumberParse::class,
+                // @codingStandardsIgnoreEnd
             ],
             'factories' => [
                 Filter\Alnum::class        => InvokableFactory::class,
@@ -86,7 +90,7 @@ class ConfigProvider
     public function getValidatorConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'alnum'       => Validator\Alnum::class,
                 'Alnum'       => Validator\Alnum::class,
                 'alpha'       => Validator\Alpha::class,
@@ -112,6 +116,7 @@ class ConfigProvider
                 'PostCode'    => Validator\PostCode::class,
 
                 // Legacy Zend Framework aliases
+                // @codingStandardsIgnoreStart
                 \Zend\I18n\Validator\Alnum::class => Validator\Alnum::class,
                 \Zend\I18n\Validator\Alpha::class => Validator\Alpha::class,
                 \Zend\I18n\Validator\DateTime::class => Validator\DateTime::class,
@@ -119,6 +124,7 @@ class ConfigProvider
                 \Zend\I18n\Validator\IsInt::class => Validator\IsInt::class,
                 \Zend\I18n\Validator\PhoneNumber::class => Validator\PhoneNumber::class,
                 \Zend\I18n\Validator\PostCode::class => Validator\PostCode::class,
+                // @codingStandardsIgnoreEnd
             ],
             'factories' => [
                 Validator\Alnum::class       => InvokableFactory::class,
@@ -142,7 +148,7 @@ class ConfigProvider
     public function getViewHelperConfig()
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 'currencyformat'  => View\Helper\CurrencyFormat::class,
                 'currencyFormat'  => View\Helper\CurrencyFormat::class,
                 'CurrencyFormat'  => View\Helper\CurrencyFormat::class,
@@ -161,12 +167,14 @@ class ConfigProvider
                 'TranslatePlural' => View\Helper\TranslatePlural::class,
 
                 // Legacy Zend Framework aliases
+                // @codingStandardsIgnoreStart
                 \Zend\I18n\View\Helper\CurrencyFormat::class => View\Helper\CurrencyFormat::class,
                 \Zend\I18n\View\Helper\DateFormat::class => View\Helper\DateFormat::class,
                 \Zend\I18n\View\Helper\NumberFormat::class => View\Helper\NumberFormat::class,
                 \Zend\I18n\View\Helper\Plural::class => View\Helper\Plural::class,
                 \Zend\I18n\View\Helper\Translate::class => View\Helper\Translate::class,
                 \Zend\I18n\View\Helper\TranslatePlural::class => View\Helper\TranslatePlural::class,
+                // @codingStandardsIgnoreEnd
             ],
             'factories' => [
                 View\Helper\CurrencyFormat::class  => InvokableFactory::class,

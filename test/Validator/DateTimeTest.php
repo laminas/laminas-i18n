@@ -1,50 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Validator;
 
 use DateTime;
 use IntlDateFormatter;
 use Laminas\I18n\Validator\DateTime as DateTimeValidator;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
+
+use function array_merge;
+use function date_default_timezone_get;
+use function date_default_timezone_set;
+use function sprintf;
 
 class DateTimeTest extends TestCase
 {
-    /**
-     * @var DateTimeValidator
-     */
-    protected $validator;
-
-    /**
-     * @var Locale
-     */
-    protected $locale;
-
-    /**
-     * @var \DateTimeZone
-     */
-    protected $timezone;
+    private DateTimeValidator $validator;
+    private string $timezone;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->locale = Locale::getDefault();
+        parent::setUp();
         $this->timezone = date_default_timezone_get();
 
         $this->validator = new DateTimeValidator([
-            'locale' => 'en',
-            'timezone' => 'Europe/Amsterdam'
+            'locale'   => 'en',
+            'timezone' => 'Europe/Amsterdam',
         ]);
     }
 
     protected function tearDown(): void
     {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->locale);
-        }
+        parent::tearDown();
         date_default_timezone_set($this->timezone);
     }
 
@@ -52,18 +41,18 @@ class DateTimeTest extends TestCase
      * Ensures that the validator follows expected behavior
      *
      * @dataProvider basicProvider name of method that provides parameters
-     * @param string  $value    that will be tested
-     * @param boolean $expected expected result of assertion
-     * @param array   $options  fed into the validator before validation
+     * @param string               $value    that will be tested
+     * @param boolean              $expected expected result of assertion
+     * @param array<string, mixed> $options  fed into the validator before validation
      */
-    public function testBasic($value, $expected, $options = [])
+    public function testBasic(string $value, bool $expected, array $options = []): void
     {
         $this->validator->setOptions($options);
 
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            sprintf('Failed expecting %s being %s', $value, ($expected ? 'true' : 'false'))
+            sprintf('Failed expecting %s being %s', $value, $expected ? 'true' : 'false')
                 . sprintf(
                     ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
                     $this->validator->getLocale(),
@@ -74,12 +63,9 @@ class DateTimeTest extends TestCase
         );
     }
 
-    public function basicProvider()
+    /** @return array<array-key, array{0: string, 1: boolean, 2: array<string, mixed>}> */
+    public function basicProvider(): array
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $trueArray      = [];
         $testingDate    = new DateTime();
         $testingLocales = ['en', 'de', 'zh-TW', 'ja', 'ar', 'ru', 'si', 'ml-IN', 'hi'];
@@ -88,7 +74,7 @@ class DateTimeTest extends TestCase
             IntlDateFormatter::LONG,
             IntlDateFormatter::MEDIUM,
             IntlDateFormatter::SHORT,
-            IntlDateFormatter::NONE
+            IntlDateFormatter::NONE,
         ];
 
         //Loop locales and formats for a more thorough set of "true" test data
@@ -99,7 +85,7 @@ class DateTimeTest extends TestCase
                         $trueArray[] = [
                             IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
                             true,
-                            ['locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat]
+                            ['locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat],
                         ];
                     }
                 }
@@ -111,11 +97,11 @@ class DateTimeTest extends TestCase
                 'May 38, 2013',
                 false,
                 [
-                    'locale' => 'en',
+                    'locale'   => 'en',
                     'dateType' => IntlDateFormatter::FULL,
-                    'timeType' => IntlDateFormatter::NONE
-                ]
-            ]
+                    'timeType' => IntlDateFormatter::NONE,
+                ],
+            ],
         ];
 
         return array_merge($trueArray, $falseArray);
@@ -175,6 +161,18 @@ class DateTimeTest extends TestCase
 
         // set after
         $this->assertEquals('yyyyMMdd hh:mm a', $this->validator->getPattern());
+    }
+
+    public function testSettingThePatternToNullIsAcceptable(): void
+    {
+        $this->validator->setPattern(null);
+        self::assertTrue($this->validator->isValid('20200101 12:34 am'));
+    }
+
+    public function testSettingThePatternToAnEmptyStringIsAcceptable(): void
+    {
+        $this->validator->setPattern('');
+        self::assertTrue($this->validator->isValid('20200101 12:34 am'));
     }
 
     /**

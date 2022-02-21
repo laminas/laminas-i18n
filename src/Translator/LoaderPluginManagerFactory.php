@@ -7,26 +7,27 @@ use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 
+use function is_array;
+
 class LoaderPluginManagerFactory implements FactoryInterface
 {
     /**
      * laminas-servicemanager v2 options passed to factory.
      *
-     * @param array
+     * @var array
      */
     protected $creationOptions = [];
 
     /**
      * Create and return a LoaderPluginManager.
      *
-     * @param ContainerInterface $container
      * @param string $name
      * @param null|array $options
      * @return LoaderPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
-        $options = $options ?: [];
+        $options       = $options ?: [];
         $pluginManager = new LoaderPluginManager($container, $options);
 
         // If this is in a laminas-mvc application, the ServiceListener will inject
@@ -56,7 +57,6 @@ class LoaderPluginManagerFactory implements FactoryInterface
     /**
      * laminas-servicemanager v2 factory to return LoaderPluginManager
      *
-     * @param ServiceLocatorInterface $container
      * @return LoaderPluginManager
      */
     public function createService(ServiceLocatorInterface $container)

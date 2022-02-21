@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\TestAsset;
 
 /**
@@ -9,5 +11,9 @@ namespace LaminasTest\I18n\TestAsset;
  */
 interface ModuleEventInterface
 {
+    /**
+     * @param string $name
+     * @param mixed $default
+     */
     public function getParam($name, $default = null);
 }

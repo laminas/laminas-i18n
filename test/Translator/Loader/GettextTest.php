@@ -1,24 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Translator\Loader;
 
+use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\Gettext as GettextLoader;
+use Laminas\I18n\Translator\TextDomain;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
+
+use function get_include_path;
+use function realpath;
+use function set_include_path;
+
+use const PATH_SEPARATOR;
 
 class GettextTest extends TestCase
 {
-    protected $testFilesDir;
-    protected $originalLocale;
-    protected $originalIncludePath;
+    private string $testFilesDir;
+    private string $originalIncludePath;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->originalLocale = Locale::getDefault();
+        parent::setUp();
         Locale::setDefault('en_EN');
 
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
@@ -29,52 +34,50 @@ class GettextTest extends TestCase
 
     protected function tearDown(): void
     {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->originalLocale);
-            set_include_path($this->originalIncludePath);
-        }
+        set_include_path($this->originalIncludePath);
+        parent::tearDown();
     }
 
-    public function testLoaderFailsToLoadMissingFile()
+    public function testLoaderFailsToLoadMissingFile(): void
     {
         $loader = new GettextLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Could not find or open file');
         $loader->load('en_EN', 'missing');
     }
 
-    public function testLoaderFailsToLoadBadFile()
+    public function testLoaderFailsToLoadBadFile(): void
     {
         $loader = new GettextLoader();
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('is not a valid gettext file');
         $loader->load('en_EN', $this->testFilesDir . '/failed.mo');
     }
 
-    public function testLoaderLoadsEmptyFile()
+    public function testLoaderLoadsEmptyFile(): void
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.mo');
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $domain);
+        $this->assertInstanceOf(TextDomain::class, $domain);
     }
 
-    public function testLoaderLoadsBigEndianFile()
+    public function testLoaderLoadsBigEndianFile(): void
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_bigendian.mo');
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $domain);
+        $this->assertInstanceOf(TextDomain::class, $domain);
     }
 
-    public function testLoaderReturnsValidTextDomain()
+    public function testLoaderReturnsValidTextDomain(): void
     {
-        $loader = new GettextLoader();
+        $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsPluralRules()
+    public function testLoaderLoadsPluralRules(): void
     {
         $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
@@ -85,7 +88,7 @@ class GettextTest extends TestCase
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
 
-    public function testLoaderLoadsFromIncludePath()
+    public function testLoaderLoadsFromIncludePath(): void
     {
         $loader = new GettextLoader();
         $loader->setUseIncludePath(true);
@@ -95,7 +98,7 @@ class GettextTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsFromPhar()
+    public function testLoaderLoadsFromPhar(): void
     {
         $loader = new GettextLoader();
         $loader->setUseIncludePath(true);
@@ -105,11 +108,7 @@ class GettextTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    /**
-     * @group 6762
-     * @group 6765
-     */
-    public function testLoaderLoadsPlural()
+    public function testLoaderLoadsPlural(): void
     {
         $loader = new GettextLoader();
 

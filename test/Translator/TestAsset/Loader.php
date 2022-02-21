@@ -1,20 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Translator\TestAsset;
 
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
+use Laminas\I18n\Translator\TextDomain;
 
 /**
  * Test loader.
  */
 class Loader implements FileLoaderInterface
 {
-    public $textDomain;
+    public TextDomain $textDomain;
 
     /**
      * load(): defined by LoaderInterface.
      *
      * @see    LoaderInterface::load()
+     *
      * @param  string $filename
      * @param  string $locale
      * @return TextDomain|null

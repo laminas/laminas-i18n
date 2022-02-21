@@ -1,32 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Filter;
 
 use Laminas\I18n\Filter\NumberParse as NumberParseFilter;
+use LaminasTest\I18n\TestCase;
 use NumberFormatter;
-use PHPUnit\Framework\TestCase;
 
 class NumberParseTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-    }
-
-    public function testConstructWithOptions()
+    public function testConstructWithOptions(): void
     {
         $filter = new NumberParseFilter([
             'locale' => 'en_US',
-            'style'  => NumberFormatter::DECIMAL
+            'style'  => NumberFormatter::DECIMAL,
         ]);
 
         $this->assertEquals('en_US', $filter->getLocale());
         $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
 
-    public function testConstructWithParameters()
+    public function testConstructWithParameters(): void
     {
         $filter = new NumberParseFilter('en_US', NumberFormatter::DECIMAL);
 
@@ -35,20 +30,16 @@ class NumberParseTest extends TestCase
     }
 
     /**
-     * @param $locale
-     * @param $style
-     * @param $type
-     * @param $value
-     * @param $expected
      * @dataProvider formattedToNumberProvider
      */
-    public function testFormattedToNumber($locale, $style, $type, $value, $expected)
+    public function testFormattedToNumber(string $locale, int $style, int $type, string $value, float $expected): void
     {
         $filter = new NumberParseFilter($locale, $style, $type);
         $this->assertSame($expected, $filter->filter($value));
     }
 
-    public static function formattedToNumberProvider()
+    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: string, 4:float}> */
+    public static function formattedToNumberProvider(): array
     {
         return [
             [

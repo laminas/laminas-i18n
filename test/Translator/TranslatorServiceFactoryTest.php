@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Translator;
 
 use Interop\Container\ContainerInterface;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorServiceFactory;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class TranslatorServiceFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testCreateServiceWithNoTranslatorKeyDefined()
     {
         $pluginManagerMock = $this->prophesize(LoaderPluginManager::class)->reveal();
@@ -19,7 +24,7 @@ class TranslatorServiceFactoryTest extends TestCase
         $serviceLocator->get('TranslatorPluginManager')->willReturn($pluginManagerMock)->shouldBeCalledTimes(1);
         $serviceLocator->get('config')->willReturn([])->shouldBeCalledTimes(1);
 
-        $factory = new TranslatorServiceFactory();
+        $factory    = new TranslatorServiceFactory();
         $translator = $factory($serviceLocator->reveal(), Translator::class);
         $this->assertInstanceOf(Translator::class, $translator);
         $this->assertSame($pluginManagerMock, $translator->getPluginManager());
@@ -31,7 +36,7 @@ class TranslatorServiceFactoryTest extends TestCase
         $serviceLocator->has('TranslatorPluginManager')->willReturn(false)->shouldBeCalledTimes(1);
         $serviceLocator->get('config')->willReturn([])->shouldBeCalledTimes(1);
 
-        $factory = new TranslatorServiceFactory();
+        $factory    = new TranslatorServiceFactory();
         $translator = $factory($serviceLocator->reveal(), Translator::class);
         $this->assertInstanceOf(Translator::class, $translator);
     }

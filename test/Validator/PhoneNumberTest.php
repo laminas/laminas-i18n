@@ -1,22 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\PhoneNumber;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
+
+use function is_array;
+use function sprintf;
 
 class PhoneNumberTest extends TestCase
 {
-    /**
-     * @var PhoneNumber
-     */
-    protected $validator;
+    private PhoneNumber $validator;
 
-    /**
-     * @var array
-     */
-    protected $phone = [
+    /** @var array<string, array> */
+    private $phone = [
         'AC' => [
             'code'     => '247',
             'patterns' => [
@@ -928,19 +928,19 @@ class PhoneNumberTest extends TestCase
                     'fixed'     => '123456789',
                     'mobile'    => ['612345678', '700123456', '734567890'],
                     'tollfree'  => '801234567',
-                    'premium'   => ['3123123456', '891123456', '897123456',],
-                    'shared'    => ['810123456', '820123456',],
+                    'premium'   => ['3123123456', '891123456', '897123456'],
+                    'shared'    => ['810123456', '820123456'],
                     'voip'      => '912345678',
-                    'emergency' => ['15', '17', '18', '112',],
+                    'emergency' => ['15', '17', '18', '112'],
                 ],
                 'invalid' => [
-                    'fixed'     => ['0123456789', '1234567890', '12345678',],
-                    'mobile'    => ['0612345678', '6123456780', '123456789', '6123456789',],
-                    'tollfree'  => ['0801234567', '8012345670', '101234567', '811234567', '8012345678',],
-                    'premium'   => ['31231234560', '03123123456', '2123123456', '894123456',],
-                    'shared'    => ['812123456', '822123456', '830123456', '881123456', '891123456',],
-                    'voip'      => ['123456789', '812345678', '9123456789',],
-                    'emergency' => ['14', '16', '19', '20', '111', '113',],
+                    'fixed'     => ['0123456789', '1234567890', '12345678'],
+                    'mobile'    => ['0612345678', '6123456780', '123456789', '6123456789'],
+                    'tollfree'  => ['0801234567', '8012345670', '101234567', '811234567', '8012345678'],
+                    'premium'   => ['31231234560', '03123123456', '2123123456', '894123456'],
+                    'shared'    => ['812123456', '822123456', '830123456', '881123456', '891123456'],
+                    'voip'      => ['123456789', '812345678', '9123456789'],
+                    'emergency' => ['14', '16', '19', '20', '111', '113'],
                 ],
             ],
         ],
@@ -1039,11 +1039,11 @@ class PhoneNumberTest extends TestCase
             'code'     => '350',
             'patterns' => [
                 'example' => [
-                    'fixed'     => '20012345',
-                    'mobile'    => '57123456',
-                    'tollfree'  => '80123456',
-                    'premium'   => '88123456',
-                    'shared'    => '87123456',
+                    'fixed'    => '20012345',
+                    'mobile'   => '57123456',
+                    'tollfree' => '80123456',
+                    'premium'  => '88123456',
+                    'shared'   => '87123456',
                     // wrong: 'shortcode' => '116123',
                     'emergency' => '112',
                 ],
@@ -2971,7 +2971,7 @@ class PhoneNumberTest extends TestCase
             ],
         ],
         'XK' => [
-            'code' => '383',
+            'code'     => '383',
             'patterns' => [
                 'example' => [
                     'fixed'     => '38550001',
@@ -2980,7 +2980,7 @@ class PhoneNumberTest extends TestCase
                     'premium'   => '90012345',
                     'uan'       => '700123456',
                     'shortcode' => '18923',
-                    'emergency' => ['112', '192','193', '194'],
+                    'emergency' => ['112', '192', '193', '194'],
                 ],
             ],
         ],
@@ -3046,56 +3046,75 @@ class PhoneNumberTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->validator = new PhoneNumber();
+    }
+
+    public function testThatTheCountryCanBeRetrievedWhenNoOptionsAreGivenToTheConstructor(): void
+    {
+        $expect = Locale::getRegion(Locale::getDefault());
+        self::assertEquals(
+            $expect,
+            (new PhoneNumber())->getCountry()
+        );
     }
 
     /**
      * @dataProvider constructDataProvider
-     *
-     * @param array  $args
-     * @param array  $options
-     * @param string $locale
+     * @param array<string, string> $constructorOptions
      */
-    public function testConstruct(array $args, array $options, $locale = null)
+    public function testConstruct(array $constructorOptions, string $expectedCountry, ?string $locale = null): void
     {
-        if ($locale) {
+        if ($locale !== null) {
             Locale::setDefault($locale);
         }
 
-        $validator = new PhoneNumber($args);
+        $validator = new PhoneNumber($constructorOptions);
 
-        $this->assertSame($options['country'], $validator->getCountry());
+        $this->assertSame(
+            $expectedCountry,
+            $validator->getCountry(),
+            sprintf(
+                'Expected the country option to be "%s" but "%s" was received',
+                $expectedCountry,
+                $validator->getCountry()
+            )
+        );
     }
 
-    public function constructDataProvider()
+    /** @return array<array-key, array{0: array<string, string>, 1: string, 2: string|null}> */
+    public function constructDataProvider(): array
     {
         return [
             [
                 [],
-                ['country' => Locale::getRegion(Locale::getDefault())],
-                null
+                Locale::getRegion(Locale::getDefault()),
+                null,
             ],
             [
                 [],
-                ['country' => 'CN'],
-                'zh_CN'
+                'CN',
+                'zh_CN',
             ],
             [
                 ['country' => 'CN'],
-                ['country' => 'CN'],
-                null
+                'CN',
+                null,
             ],
         ];
     }
 
-    public function numbersDataProvider()
+    /** @return list<array{country:string, code:string, patterns:array<string, mixed>}> */
+    public function numbersDataProvider(): array
     {
         $data = [];
         foreach ($this->phone as $country => $parameters) {
+            /** @psalm-var array<string, mixed> $patterns */
+            $patterns   = $parameters['patterns'] ?? [];
             $countryRow = [
                 'country'  => $country,
-                'code'     => $parameters['code'],
-                'patterns' => $parameters['patterns'],
+                'code'     => (string) $parameters['code'],
+                'patterns' => $patterns,
             ];
 
             $data[] = $countryRow;
@@ -3106,15 +3125,14 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     *
-     * @param string $country
-     * @param string $code
-     * @param array $patterns
+     * @param array<string, mixed> $patterns
      */
-    public function testExampleNumbers($country, $code, $patterns)
+    public function testExampleNumbers(string $country, string $code, array $patterns): void
     {
+        /** @psalm-var array<string, string|string[]> $patterns */
+        $patterns = $patterns['example'] ?? [];
         $this->validator->setCountry($country);
-        foreach ($patterns['example'] as $type => $values) {
+        foreach ($patterns as $type => $values) {
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
@@ -3140,16 +3158,15 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     *
-     * @param string $country
-     * @param string $code
-     * @param array $patterns
+     * @param array<string, mixed> $patterns
      */
-    public function testExampleNumbersAgainstPossible($country, $code, $patterns)
+    public function testExampleNumbersAgainstPossible(string $country, string $code, array $patterns): void
     {
         $this->validator->allowPossible(true);
         $this->validator->setCountry($country);
-        foreach ($patterns['example'] as $type => $values) {
+        /** @psalm-var array<string, string|string[]> $patterns */
+        $patterns = $patterns['example'] ?? [];
+        foreach ($patterns as $type => $values) {
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
@@ -3173,14 +3190,14 @@ class PhoneNumberTest extends TestCase
         }
     }
 
-    public function testAllowPossibleSetterGetter()
+    public function testAllowPossibleSetterGetter(): void
     {
         $this->assertFalse($this->validator->allowPossible());
         $this->validator->allowPossible(true);
         $this->assertTrue($this->validator->allowPossible());
     }
 
-    public function testCountryIsCaseInsensitive()
+    public function testCountryIsCaseInsensitive(): void
     {
         $this->validator->setCountry('lt');
         $this->assertTrue($this->validator->isValid('+37067811268'));
@@ -3190,19 +3207,19 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     *
-     * @param string $country
-     * @param string $code
-     * @param array $patterns
+     * @param array<string, mixed> $patterns
      */
-    public function testInvalidTypes($country, $code, $patterns)
+    public function testInvalidTypes(string $country, string $code, array $patterns): void
     {
         $this->validator->setCountry($country);
         if (! isset($patterns['invalid'])) {
-            $this->addToAssertionCount(1);
             return;
         }
-        foreach ($patterns['invalid'] as $type => $values) {
+
+        /** @psalm-var array<string, string|string[]> $patterns */
+        $patterns = $patterns['invalid'] ?? [];
+
+        foreach ($patterns as $type => $values) {
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
@@ -3222,7 +3239,7 @@ class PhoneNumberTest extends TestCase
         }
     }
 
-    public function testCanSpecifyCountryWithContext()
+    public function testCanSpecifyCountryWithContext(): void
     {
         Locale::setDefault('ZW');
         $validator = new PhoneNumber([

@@ -4,6 +4,10 @@ namespace Laminas\I18n\Translator\Plural;
 
 use Laminas\I18n\Exception;
 
+use function ctype_digit;
+use function max;
+use function sprintf;
+
 /**
  * Plural rule parser.
  *
@@ -42,7 +46,6 @@ class Parser
 
     /**
      * Create a new plural parser.
-     *
      */
     public function __construct()
     {
@@ -198,13 +201,13 @@ class Parser
     protected function registerSymbol($id, $leftBindingPower = 0)
     {
         if (isset($this->symbolTable[$id])) {
-            $symbol = $this->symbolTable[$id];
+            $symbol                   = $this->symbolTable[$id];
             $symbol->leftBindingPower = max(
                 $symbol->leftBindingPower,
                 $leftBindingPower
             );
         } else {
-            $symbol = new Symbol($this, $id, $leftBindingPower);
+            $symbol                 = new Symbol($this, $id, $leftBindingPower);
             $this->symbolTable[$id] = $symbol;
         }
 
@@ -219,7 +222,7 @@ class Parser
      */
     protected function getSymbol($id)
     {
-        if (! isset($this->symbolTable[$id])) {
+        if (! isset($this->symbolTable[$id])) { // phpcs:ignore
             // Unknown symbol exception
         }
 
@@ -320,7 +323,7 @@ class Parser
                 if ($this->string[$this->currentPos] === $result) {
                     $this->currentPos++;
                     $id = $result . $result;
-                } else {
+                } else { // phpcs:ignore
                     // Yield error
                 }
                 break;
@@ -363,7 +366,7 @@ class Parser
                 ));
         }
 
-        $token = $this->getSymbol($id);
+        $token        = $this->getSymbol($id);
         $token->value = $value;
 
         return $token;

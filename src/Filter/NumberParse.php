@@ -7,17 +7,22 @@ use Laminas\Stdlib\ErrorHandler;
 use NumberFormatter;
 use Traversable;
 
+use function intl_get_error_message;
+use function is_array;
+use function is_float;
+use function is_int;
+use function iterator_to_array;
+
 class NumberParse extends AbstractLocale
 {
+    /** @var array<string, int|string|null> */
     protected $options = [
         'locale' => null,
         'style'  => NumberFormatter::DEFAULT_STYLE,
-        'type'   => NumberFormatter::TYPE_DOUBLE
+        'type'   => NumberFormatter::TYPE_DOUBLE,
     ];
 
-    /**
-     * @var NumberFormatter
-     */
+    /** @var NumberFormatter */
     protected $formatter;
 
     /**
@@ -53,7 +58,7 @@ class NumberParse extends AbstractLocale
     public function setLocale($locale = null)
     {
         $this->options['locale'] = $locale;
-        $this->formatter = null;
+        $this->formatter         = null;
         return $this;
     }
 
@@ -64,7 +69,7 @@ class NumberParse extends AbstractLocale
     public function setStyle($style)
     {
         $this->options['style'] = (int) $style;
-        $this->formatter = null;
+        $this->formatter        = null;
         return $this;
     }
 
@@ -95,7 +100,6 @@ class NumberParse extends AbstractLocale
     }
 
     /**
-     * @param  NumberFormatter $formatter
      * @return $this
      */
     public function setFormatter(NumberFormatter $formatter)
@@ -128,12 +132,14 @@ class NumberParse extends AbstractLocale
      * Defined by Laminas\Filter\FilterInterface
      *
      * @see    \Laminas\Filter\FilterInterface::filter()
+     *
      * @param  mixed $value
      * @return mixed
      */
     public function filter($value)
     {
-        if (! is_int($value)
+        if (
+            ! is_int($value)
             && ! is_float($value)
         ) {
             ErrorHandler::start();

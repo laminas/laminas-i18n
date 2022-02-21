@@ -3,6 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="./vendor/autoload.php"
+    convertDeprecationsToExceptions="true"
     colors="true">
     <coverage includeUncoveredFiles="true">
         <include>
@@ -24,10 +25,5 @@
 
     <php>
         <ini name="date.timezone" value="UTC"/>
-        <!-- OB_ENABLED should be enabled for some tests to check if all
-            functionality works as expected. Such tests include those for
-            Laminas\Soap and Laminas\Session, which require that headers not be sent
-            in order to work. -->
-        <const name="TESTS_LAMINAS_OB_ENABLED" value="false"/>
     </php>
 </phpunit>

@@ -4,29 +4,22 @@ namespace Laminas\I18n\Translator;
 
 trait TranslatorAwareTrait
 {
-    /**
-     * @var TranslatorInterface|null
-     */
+    /** @var TranslatorInterface|null */
     protected $translator;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $translatorEnabled = true;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $translatorTextDomain = 'default';
 
     /**
      * Sets translator to use in helper
      *
-     * @param TranslatorInterface|null $translator
      * @param string|null              $textDomain
      * @return $this
      */
-    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
+    public function setTranslator(?TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
 
@@ -54,7 +47,7 @@ trait TranslatorAwareTrait
      */
     public function hasTranslator()
     {
-        return (null !== $this->translator);
+        return null !== $this->translator;
     }
 
     /**

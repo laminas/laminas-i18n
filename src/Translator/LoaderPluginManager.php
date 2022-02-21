@@ -6,6 +6,14 @@ use Laminas\I18n\Exception;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Zend\I18n\Translator\Loader\Gettext;
+use Zend\I18n\Translator\Loader\Ini;
+use Zend\I18n\Translator\Loader\PhpArray;
+
+use function get_class;
+use function gettype;
+use function is_object;
+use function sprintf;
 
 /**
  * Plugin manager implementation for translation loaders.
@@ -49,6 +57,7 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
  */
 class LoaderPluginManager extends AbstractPluginManager
 {
+    /** @var array<string, class-string> */
     protected $aliases = [
         'gettext'  => Loader\Gettext::class,
         'getText'  => Loader\Gettext::class,
@@ -59,16 +68,17 @@ class LoaderPluginManager extends AbstractPluginManager
         'PhpArray' => Loader\PhpArray::class,
 
         // Legacy Zend Framework aliases
-        \Zend\I18n\Translator\Loader\Gettext::class => Loader\Gettext::class,
-        \Zend\I18n\Translator\Loader\Ini::class => Loader\Ini::class,
-        \Zend\I18n\Translator\Loader\PhpArray::class => Loader\PhpArray::class,
+        Gettext::class  => Loader\Gettext::class,
+        Ini::class      => Loader\Ini::class,
+        PhpArray::class => Loader\PhpArray::class,
 
         // v2 normalized FQCNs
-        'zendi18ntranslatorloadergettext' => Loader\Gettext::class,
-        'zendi18ntranslatorloaderini' => Loader\Ini::class,
+        'zendi18ntranslatorloadergettext'  => Loader\Gettext::class,
+        'zendi18ntranslatorloaderini'      => Loader\Ini::class,
         'zendi18ntranslatorloaderphparray' => Loader\PhpArray::class,
     ];
 
+    /** @var array<string, class-string> */
     protected $factories = [
         Loader\Gettext::class  => InvokableFactory::class,
         Loader\Ini::class      => InvokableFactory::class,
@@ -78,7 +88,7 @@ class LoaderPluginManager extends AbstractPluginManager
         // resolved alias is used as the requested name passed to the factory.
         'laminasi18ntranslatorloadergettext'  => InvokableFactory::class,
         'laminasi18ntranslatorloaderini'      => InvokableFactory::class,
-        'laminasi18ntranslatorloaderphparray' => InvokableFactory::class
+        'laminasi18ntranslatorloaderphparray' => InvokableFactory::class,
     ];
 
     /**
@@ -89,7 +99,7 @@ class LoaderPluginManager extends AbstractPluginManager
      *
      * @param  mixed $plugin
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws Exception\RuntimeException If invalid.
      */
     public function validate($plugin)
     {
@@ -101,7 +111,7 @@ class LoaderPluginManager extends AbstractPluginManager
         throw new InvalidServiceException(sprintf(
             'Plugin of type %s is invalid; must implement %s\Loader\FileLoaderInterface '
             . 'or %s\Loader\RemoteLoaderInterface',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+            is_object($plugin) ? get_class($plugin) : gettype($plugin),
             __NAMESPACE__,
             __NAMESPACE__
         ));
@@ -123,7 +133,7 @@ class LoaderPluginManager extends AbstractPluginManager
             throw new Exception\RuntimeException(sprintf(
                 'Plugin of type %s is invalid; must implement %s\Loader\FileLoaderInterface '
                 . 'or %s\Loader\RemoteLoaderInterface',
-                (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+                is_object($plugin) ? get_class($plugin) : gettype($plugin),
                 __NAMESPACE__,
                 __NAMESPACE__
             ));

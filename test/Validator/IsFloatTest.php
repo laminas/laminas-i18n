@@ -1,73 +1,72 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\IsFloat as IsFloatValidator;
+use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
-use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Validator
- */
+use function sprintf;
+
+use const INTL_ICU_DATA_VERSION;
+use const INTL_ICU_VERSION;
+
 class IsFloatTest extends TestCase
 {
-    /**
-     * @var IsFloatValidator
-     */
-    protected $validator;
-
-    /**
-     * @var string
-     */
-    protected $locale;
+    private IsFloatValidator $validator;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->locale    = Locale::getDefault();
+        parent::setUp();
         $this->validator = new IsFloatValidator(['locale' => 'en']);
-    }
-
-    protected function tearDown(): void
-    {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->locale);
-        }
     }
 
     /**
      * Test float and integer type variables. Includes decimal and scientific notation NumberFormatter-formatted
      * versions. Should return true for all locales.
      *
-     * @param string  $value    that will be tested
+     * @param mixed   $value    that will be tested
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
      * @dataProvider floatAndIntegerProvider
-     * @return void
      */
-    public function testFloatAndIntegers($value, $expected, $locale, $type)
+    public function testFloatAndIntegers($value, bool $expected, string $locale, string $type): void
     {
         $this->validator->setLocale($locale);
 
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
-            sprintf(' (locale:%s, type:%s)', $locale, $type) . ', ICU Version:' . INTL_ICU_VERSION . '-' .
-            INTL_ICU_DATA_VERSION
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false')
+            . sprintf(' (locale:%s, type:%s)', $locale, $type) . ', ICU Version:' . INTL_ICU_VERSION . '-'
+            . INTL_ICU_DATA_VERSION
         );
     }
 
-    public function floatAndIntegerProvider()
+    /** @return array<array-key, array{0: mixed, 1: bool, 2: string, 3: string}> */
+    public function floatAndIntegerProvider(): array
     {
         $trueArray       = [];
         $testingLocales  = ['ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru'];
-        $testingExamples = [1000, -2000, +398.00, 0.04, -0.5, .6, -.70, 8E10, -9.3456E-2, 10.23E6,
-            123.1234567890987654321, 1, 13, -3];
+        $testingExamples = [
+            1000,
+            -2000,
+            +398.00,
+            0.04,
+            -0.5,
+            .6,
+            -.70,
+            8E10,
+            -9.3456E-2,
+            10.23E6,
+            123.1234567890987654321,
+            1,
+            13,
+            -3,
+        ];
 
         //Loop locales and examples for a more thorough set of "true" test data
         foreach ($testingLocales as $locale) {
@@ -79,7 +78,7 @@ class IsFloatTest extends TestCase
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
-                    'decimal'
+                    'decimal',
                 ];
                 //Scientific Notation Formatted
                 $trueArray[] = [
@@ -87,7 +86,7 @@ class IsFloatTest extends TestCase
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
-                    'scientific'
+                    'scientific',
                 ];
             }
         }
@@ -103,9 +102,8 @@ class IsFloatTest extends TestCase
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
      * @dataProvider lookAlikeProvider
-     * @return void
      */
-    public function testlookAlikes($value, $expected, $locale)
+    public function testlookAlikes(string $value, bool $expected, string $locale): void
     {
         $this->validator->setLocale($locale);
 
@@ -116,12 +114,13 @@ class IsFloatTest extends TestCase
         );
     }
 
-    public function lookAlikeProvider()
+    /** @return array<array-key, array{0: string, 1: bool, 2: string}> */
+    public function lookAlikeProvider(): array
     {
-        $trueArray     = [];
-        $testingArray  = [
+        $trueArray    = [];
+        $testingArray = [
             'ar' => "\xD9\xA1'\xD9\xA1\xD9\xA1\xD9\xA1,\xD9\xA2\xD9\xA3",
-            'ru' => '2 000,00'
+            'ru' => '2 000,00',
         ];
 
         //Loop locales and examples for a more thorough set of "true" test data
@@ -140,9 +139,8 @@ class IsFloatTest extends TestCase
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
      * @dataProvider validationFailureProvider
-     * @return void
      */
-    public function testValidationFailures($value, $expected, $locale)
+    public function testValidationFailures(string $value, bool $expected, string $locale): void
     {
         $this->validator->setLocale($locale);
 
@@ -153,14 +151,15 @@ class IsFloatTest extends TestCase
         );
     }
 
-    public function validationFailureProvider()
+    /** @return array<array-key, array{0: string, 1: bool, 2: string}> */
+    public function validationFailureProvider(): array
     {
-        $trueArray     = [];
-        $testingArray  = [
+        $trueArray    = [];
+        $testingArray = [
             'ar'    => ['10.1', '66notflot.6'],
             'ru'    => ['10.1', '66notflot.6', '2,000.00', '2 00'],
             'en'    => ['10,1', '66notflot.6', '2.000,00', '2 000', '2,00'],
-            'fr-CH' => ['66notflot.6', '2,000.00', "2'00"]
+            'fr-CH' => ['66notflot.6', '2,000.00', "2'00"],
         ];
 
         //Loop locales and examples for a more thorough set of "true" test data
@@ -174,10 +173,8 @@ class IsFloatTest extends TestCase
 
     /**
      * Ensures that getMessages() returns expected default value
-     *
-     * @return void
      */
-    public function testGetMessages()
+    public function testGetMessages(): void
     {
         $this->assertEquals([], $this->validator->getMessages());
     }
@@ -185,42 +182,32 @@ class IsFloatTest extends TestCase
     /**
      * Ensures that set/getLocale() works
      */
-    public function testSettingLocales()
+    public function testSettingLocales(): void
     {
         $this->validator->setLocale('de');
         $this->assertEquals('de', $this->validator->getLocale());
     }
 
-    /**
-     * @Laminas-4352
-     */
-    public function testNonStringValidation()
+    public function testNonStringValidation(): void
     {
         $this->assertFalse($this->validator->isValid([1 => 1]));
     }
 
-    /**
-     * @Laminas-7489
-     */
-    public function testUsingApplicationLocale()
+    public function testUsingApplicationLocale(): void
     {
         Locale::setDefault('de');
         $valid = new IsFloatValidator();
         $this->assertEquals('de', $valid->getLocale());
     }
 
-    public function testEqualsMessageTemplates()
+    public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 
         $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
-    /**
-     * @group 6647
-     * @group 6648
-     */
-    public function testNotFloat()
+    public function testNotFloat(): void
     {
         $this->assertFalse($this->validator->isValid('2.000.000,00'));
 

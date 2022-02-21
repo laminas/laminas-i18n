@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Translator;
 
 use Interop\Container\ContainerInterface;
@@ -8,11 +10,14 @@ use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\LoaderPluginManagerFactory;
 use Laminas\ServiceManager\ServiceLocatorInterface;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class LoaderPluginManagerFactoryTest extends TestCase
 {
-    public function testFactoryReturnsUnconfiguredPluginManagerWhenNoOptionsPresent()
+    use ProphecyTrait;
+
+    public function testFactoryReturnsUnconfiguredPluginManagerWhenNoOptionsPresent(): void
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();
 
@@ -22,7 +27,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertFalse($loaders->has('test'));
     }
 
-    public function testCreateServiceReturnsUnconfiguredPluginManagerWhenNoOptionsPresent()
+    public function testCreateServiceReturnsUnconfiguredPluginManagerWhenNoOptionsPresent(): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
@@ -33,7 +38,8 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertFalse($loaders->has('test'));
     }
 
-    public function provideLoader()
+    /** @return array<array-key, array{0: string}> */
+    public function provideLoader(): array
     {
         return [
             ['gettext'],
@@ -48,14 +54,16 @@ class LoaderPluginManagerFactoryTest extends TestCase
     /**
      * @dataProvider provideLoader
      */
-    public function testFactoryCanConfigurePluginManagerViaOptions($loader)
+    public function testFactoryCanConfigurePluginManagerViaOptions(string $loader): void
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
 
         $factory = new LoaderPluginManagerFactory();
-        $loaders = $factory($container, 'TranslatorPluginManager', ['aliases' => [
-            'test' => $loader,
-        ]]);
+        $loaders = $factory($container, 'TranslatorPluginManager', [
+            'aliases' => [
+                'test' => $loader,
+            ],
+        ]);
         $this->assertInstanceOf(LoaderPluginManager::class, $loaders);
         $this->assertTrue($loaders->has('test'));
     }
@@ -63,26 +71,28 @@ class LoaderPluginManagerFactoryTest extends TestCase
     /**
      * @dataProvider provideLoader
      */
-    public function testCreateServiceCanConfigurePluginManagerViaOptions($loader)
+    public function testCreateServiceCanConfigurePluginManagerViaOptions(string $loader): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
 
         $factory = new LoaderPluginManagerFactory();
-        $factory->setCreationOptions(['aliases' => [
-            'test' => $loader,
-        ]]);
+        $factory->setCreationOptions([
+            'aliases' => [
+                'test' => $loader,
+            ],
+        ]);
         $loaders = $factory->createService($container->reveal());
         $this->assertInstanceOf(LoaderPluginManager::class, $loaders);
         $this->assertTrue($loaders->has('test'));
     }
 
-    public function testConfiguresTranslatorServicesWhenFound()
+    public function testConfiguresTranslatorServicesWhenFound(): void
     {
         $translator = $this->prophesize(FileLoaderInterface::class)->reveal();
-        $config = [
+        $config     = [
             'translator_plugins' => [
-                'aliases' => [
+                'aliases'   => [
                     'test' => PhpArray::class,
                 ],
                 'factories' => [
@@ -100,7 +110,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->willReturn(true);
         $container->get('config')->willReturn($config);
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);
@@ -110,12 +120,12 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertSame($translator, $translators->get('test-too'));
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenServiceListenerPresent()
+    public function testDoesNotConfigureTranslatorServicesWhenServiceListenerPresent(): void
     {
         $translator = $this->prophesize(FileLoaderInterface::class)->reveal();
-        $config = [
+        $config     = [
             'translator_plugins' => [
-                'aliases' => [
+                'aliases'   => [
                     'test' => PhpArray::class,
                 ],
                 'factories' => [
@@ -133,7 +143,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->shouldNotBeCalled();
         $container->get('config')->shouldNotBeCalled();
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);
@@ -141,7 +151,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $this->assertFalse($translators->has('test-too'));
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent()
+    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent(): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
@@ -150,13 +160,13 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->willReturn(false);
         $container->get('config')->shouldNotBeCalled();
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceDoesNotContainTranslatorsConfig()
+    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceDoesNotContainTranslatorsConfig(): void
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
@@ -165,7 +175,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         $container->has('config')->willReturn(true);
         $container->get('config')->willReturn(['foo' => 'bar']);
 
-        $factory = new LoaderPluginManagerFactory();
+        $factory     = new LoaderPluginManagerFactory();
         $translators = $factory($container->reveal(), 'TranslatorPluginManager');
 
         $this->assertInstanceOf(LoaderPluginManager::class, $translators);

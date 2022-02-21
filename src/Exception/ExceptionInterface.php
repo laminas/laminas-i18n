@@ -2,6 +2,8 @@
 
 namespace Laminas\I18n\Exception;
 
-interface ExceptionInterface
+use Throwable;
+
+interface ExceptionInterface extends Throwable
 {
 }

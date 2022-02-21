@@ -6,6 +6,9 @@ use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\View\Helper\AbstractHelper;
 
+use function is_array;
+use function sprintf;
+
 /**
  * Helper for rendering text based on a count number (like the I18n plural translation helper, but when translation
  * is not needed).
@@ -26,19 +29,6 @@ class Plural extends AbstractHelper
      * @var PluralRule
      */
     protected $rule;
-
-    /**
-     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
-     */
-    public function __construct()
-    {
-        if (! extension_loaded('intl')) {
-            throw new Exception\ExtensionNotLoadedException(sprintf(
-                '%s component requires the intl PHP extension',
-                __NAMESPACE__
-            ));
-        }
-    }
 
     /**
      * Given an array of strings, a number and, if wanted, an optional locale (the default one is used

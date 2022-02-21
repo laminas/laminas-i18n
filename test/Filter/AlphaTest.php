@@ -1,22 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Filter;
 
 use Laminas\I18n\Filter\Alpha as AlphaFilter;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
+use stdClass;
 
-/**
- * @group      Laminas_Filter
- */
+use function array_keys;
+use function array_values;
+use function preg_match;
+
 class AlphaTest extends TestCase
 {
-    /**
-     * AlphaFilter object
-     *
-     * @var AlphaFilter
-     */
-    protected $filter;
+    private AlphaFilter $filter;
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
@@ -26,52 +25,34 @@ class AlphaTest extends TestCase
     protected static $unicodeEnabled;
 
     /**
-     * Locale in browser.
-     *
-     * @var string
-     */
-    protected $locale;
-
-    /**
      * The Alphabet means english alphabet.
-     *
-     * @var bool
      */
-    protected static $meansEnglishAlphabet;
+    protected static bool $meansEnglishAlphabet;
 
     /**
      * Creates a new AlnumFilter object for each test method
-     *
-     * @return void
      */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->filter = new AlphaFilter();
-
-        $this->locale               = Locale::getDefault();
-        $language                   = Locale::getPrimaryLanguage($this->locale);
+        parent::setUp();
+        $this->filter               = new AlphaFilter();
+        $language                   = Locale::getPrimaryLanguage(Locale::getDefault());
         self::$meansEnglishAlphabet = $language === 'ja';
         self::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a');
     }
 
     /**
      * Ensures that the filter follows expected behavior
-     *
-     * @return void
      */
-    public function testBasic()
+    public function testBasic(): void
     {
         if (! self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = [
-                'abc123'        => 'abc',
-                'abc 123'       => 'abc',
-                'abcxyz'        => 'abcxyz',
-                ''              => ''
+                'abc123'  => 'abc',
+                'abc 123' => 'abc',
+                'abcxyz'  => 'abcxyz',
+                ''        => '',
             ];
         } elseif (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
@@ -86,21 +67,21 @@ class AlphaTest extends TestCase
             $valuesExpected = [
                 'aＡBｂc'       => 'aBc',
                 'z Ｙ　x'       => 'zx',
-                'Ｗ1v３Ｕ4t'    => 'vt',
+                'Ｗ1v３Ｕ4t'     => 'vt',
                 '，sй.rλ:qν＿p' => 'srqp',
-                'onml'          => 'onml'
+                'onml'        => 'onml',
             ];
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = [
-                'abc123'        => 'abc',
-                'abc 123'       => 'abc',
-                'abcxyz'        => 'abcxyz',
-                'četně'         => 'četně',
-                'لعربية'        => 'لعربية',
-                'grzegżółka'    => 'grzegżółka',
-                'België'        => 'België',
-                ''              => ''
+                'abc123'     => 'abc',
+                'abc 123'    => 'abc',
+                'abcxyz'     => 'abcxyz',
+                'četně'      => 'četně',
+                'لعربية'     => 'لعربية',
+                'grzegżółka' => 'grzegżółka',
+                'België'     => 'België',
+                ''           => '',
             ];
         }
 
@@ -112,44 +93,42 @@ class AlphaTest extends TestCase
 
     /**
      * Ensures that the filter follows expected behavior
-     *
-     * @return void
      */
-    public function testAllowWhiteSpace()
+    public function testAllowWhiteSpace(): void
     {
         $this->filter->setAllowWhiteSpace(true);
 
         if (! self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = [
-                'abc123'   => 'abc',
-                'abc 123'  => 'abc ',
-                'abcxyz'   => 'abcxyz',
-                ''         => '',
-                "\n"       => "\n",
-                " \t "     => " \t "
+                'abc123'  => 'abc',
+                'abc 123' => 'abc ',
+                'abcxyz'  => 'abcxyz',
+                ''        => '',
+                "\n"      => "\n",
+                " \t "    => " \t ",
             ];
         }
         if (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = [
-                'a B'    => 'a B',
-                'zＹ　x' => 'zx'
+                'a B'  => 'a B',
+                'zＹ　x' => 'zx',
             ];
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = [
-                'abc123'        => 'abc',
-                'abc 123'       => 'abc ',
-                'abcxyz'        => 'abcxyz',
-                'četně'         => 'četně',
-                'لعربية'        => 'لعربية',
-                'grzegżółka'    => 'grzegżółka',
-                'België'        => 'België',
-                ''              => '',
-                "\n"            => "\n",
-                " \t "          => " \t "
-                ];
+                'abc123'     => 'abc',
+                'abc 123'    => 'abc ',
+                'abcxyz'     => 'abcxyz',
+                'četně'      => 'četně',
+                'لعربية'     => 'لعربية',
+                'grzegżółka' => 'grzegżółka',
+                'België'     => 'België',
+                ''           => '',
+                "\n"         => "\n",
+                " \t "       => " \t ",
+            ];
         }
 
         foreach ($valuesExpected as $input => $expected) {
@@ -158,15 +137,15 @@ class AlphaTest extends TestCase
         }
     }
 
-    public function testFilterSupportArray()
+    public function testFilterSupportArray(): void
     {
         $filter = new AlphaFilter();
 
         $values = [
-            'abc123'        => 'abc',
-            'abc 123'       => 'abc',
-            'abcxyz'        => 'abcxyz',
-            ''              => ''
+            'abc123'  => 'abc',
+            'abc 123' => 'abc',
+            'abcxyz'  => 'abcxyz',
+            ''        => '',
         ];
 
         $actual = $filter->filter(array_keys($values));
@@ -174,19 +153,20 @@ class AlphaTest extends TestCase
         $this->assertEquals(array_values($values), $actual);
     }
 
-    public function returnUnfilteredDataProvider()
+    /** @return array<array-key, array{0: mixed}> */
+    public function returnUnfilteredDataProvider(): array
     {
         return [
             [null],
-            [new \stdClass()]
+            [new stdClass()],
         ];
     }
 
     /**
      * @dataProvider returnUnfilteredDataProvider
-     * @return void
+     * @param mixed $input
      */
-    public function testReturnUnfiltered($input)
+    public function testReturnUnfiltered($input): void
     {
         $filter = new AlphaFilter();
 

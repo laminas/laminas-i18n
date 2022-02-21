@@ -1,57 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\View\Helper;
 
 use Laminas\I18n\View\Helper\NumberFormat as NumberFormatHelper;
+use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
-use PHPUnit\Framework\TestCase;
 
-/**
- * Test class for Laminas\View\Helper\Currency
- *
- * @group      Laminas_View
- * @group      Laminas_View_Helper
- */
+use function str_replace;
+
 class NumberFormatTest extends TestCase
 {
-    /**
-     * @var NumberFormatHelper
-     */
-    public $helper;
+    private NumberFormatHelper $helper;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->helper = new NumberFormatHelper();
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
+    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: int|null, 4: array<int, string>, 5: float, 6: string}> */
+    public function currencyTestsDataProvider(): array
     {
-        unset($this->helper);
-    }
-
-    public function currencyTestsDataProvider()
-    {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         return [
             [
                 'de_DE',
@@ -60,7 +32,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '1.234.567,891'
+                '1.234.567,891',
             ],
             [
                 'de_DE',
@@ -78,7 +50,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '123.456.789 %'
+                '123.456.789 %',
             ],
             [
                 'de_DE',
@@ -87,7 +59,7 @@ class NumberFormatTest extends TestCase
                 1,
                 [],
                 1234567.891234567890000,
-                '123.456.789,1 %'
+                '123.456.789,1 %',
             ],
             [
                 'de_DE',
@@ -96,7 +68,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234560000,
-                '1,23456789123456E6'
+                '1,23456789123456E6',
             ],
             [
                 'ru_RU',
@@ -105,7 +77,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '1 234 567,891'
+                '1 234 567,891',
             ],
             [
                 'ru_RU',
@@ -114,7 +86,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '123 456 789 %'
+                '123 456 789 %',
             ],
             [
                 'ru_RU',
@@ -123,7 +95,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234560000,
-                '1,23456789123456E6'
+                '1,23456789123456E6',
             ],
             [
                 'en_US',
@@ -132,7 +104,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '1,234,567.891'
+                '1,234,567.891',
             ],
             [
                 'en_US',
@@ -141,7 +113,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234567890000,
-                '123,456,789%'
+                '123,456,789%',
             ],
             [
                 'en_US',
@@ -150,7 +122,7 @@ class NumberFormatTest extends TestCase
                 null,
                 [],
                 1234567.891234560000,
-                '1.23456789123456E6'
+                '1.23456789123456E6',
             ],
             [
                 'en_US',
@@ -158,19 +130,27 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [
-                    NumberFormatter::NEGATIVE_PREFIX => 'MINUS'
+                    NumberFormatter::NEGATIVE_PREFIX => 'MINUS',
                 ],
                 -1234567.891234567890000,
-                'MINUS123,456,789%'
+                'MINUS123,456,789%',
             ],
         ];
     }
 
     /**
      * @dataProvider currencyTestsDataProvider
+     * @param array<int, string> $textAttributes
      */
-    public function testBasic($locale, $formatStyle, $formatType, $decimals, $textAttributes, $number, $expected)
-    {
+    public function testBasic(
+        string $locale,
+        int $formatStyle,
+        int $formatType,
+        ?int $decimals,
+        array $textAttributes,
+        float $number,
+        string $expected
+    ) {
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $number,
             $formatStyle,
@@ -183,16 +163,17 @@ class NumberFormatTest extends TestCase
 
     /**
      * @dataProvider currencyTestsDataProvider
+     * @param array<int, string> $textAttributes
      */
     public function testSettersProvideDefaults(
-        $locale,
-        $formatStyle,
-        $formatType,
-        $decimals,
-        $textAttributes,
-        $number,
-        $expected
-    ) {
+        string $locale,
+        int $formatStyle,
+        int $formatType,
+        ?int $decimals,
+        array $textAttributes,
+        float $number,
+        string $expected
+    ): void {
         $this->helper
              ->setLocale($locale)
              ->setFormatStyle($formatStyle)
@@ -203,12 +184,12 @@ class NumberFormatTest extends TestCase
         $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
 
-    public function testDefaultLocale()
+    public function testDefaultLocale(): void
     {
         $this->assertEquals(Locale::getDefault(), $this->helper->getLocale());
     }
 
-    public function assertMbStringEquals($expected, $test, $message = '')
+    public function assertMbStringEquals(string $expected, string $test, string $message = ''): void
     {
         $expected = str_replace(["\xC2\xA0", ' '], '', $expected);
         $test     = str_replace(["\xC2\xA0", ' '], '', $test);

@@ -5,6 +5,8 @@ namespace Laminas\I18n\Translator\Plural;
 use Closure;
 use Laminas\I18n\Exception;
 
+use function sprintf;
+
 /**
  * Parser symbol.
  *
@@ -81,21 +83,19 @@ class Symbol
     /**
      * Create a new symbol.
      *
-     * @param  Parser  $parser
      * @param  string  $id
      * @param  int $leftBindingPower
      */
     public function __construct(Parser $parser, $id, $leftBindingPower)
     {
-        $this->parser               = $parser;
-        $this->id                   = $id;
-        $this->leftBindingPower     = $leftBindingPower;
+        $this->parser           = $parser;
+        $this->id               = $id;
+        $this->leftBindingPower = $leftBindingPower;
     }
 
     /**
      * Set the null denotation getter.
      *
-     * @param  Closure $getter
      * @return $this
      */
     public function setNullDenotationGetter(Closure $getter)
@@ -107,7 +107,6 @@ class Symbol
     /**
      * Set the left denotation getter.
      *
-     * @param  Closure $getter
      * @return $this
      */
     public function setLeftDenotationGetter(Closure $getter)

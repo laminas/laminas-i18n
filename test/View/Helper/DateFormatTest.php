@@ -1,66 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\View\Helper;
 
 use DateTime;
+use DateTimeInterface;
 use IntlDateFormatter;
 use IntlGregorianCalendar;
 use Laminas\I18n\View\Helper\DateFormat as DateFormatHelper;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
 
-/**
- * Test class for Laminas\View\Helper\Currency
- *
- * @group      Laminas_View
- * @group      Laminas_View_Helper
- */
+use function date_default_timezone_set;
+use function str_replace;
+
 class DateFormatTest extends TestCase
 {
-    /**
-     * @var DateFormatHelper
-     */
-    public $helper;
+    private DateFormatHelper $helper;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
-        if (! interface_exists('Laminas\View\Helper\HelperInterface')) {
-            $this->markTestSkipped(
-                'Skipping tests that utilize laminas-view until that component is '
-                . 'forwards-compatible with laminas-stdlib and laminas-servicemanager v3'
-            );
-        }
-
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->helper = new DateFormatHelper();
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
+    /** @return array<array-key, array{0:string,1:string,2:int,3:int,4:DateTime}> */
+    public function dateTestsDataProvider(): array
     {
-        unset($this->helper);
-    }
-
-    public function dateTestsDataProvider()
-    {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return [
@@ -151,12 +118,9 @@ class DateFormatTest extends TestCase
         ];
     }
 
-    public function dateTestsDataProviderWithPattern()
+    /** @return array<array-key, array{0:string,1:string,2:int,3:int,4:string, 5:DateTime}> */
+    public function dateTestsDataProviderWithPattern(): array
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return [
@@ -198,8 +162,13 @@ class DateFormatTest extends TestCase
     /**
      * @dataProvider dateTestsDataProvider
      */
-    public function testBasic($locale, $timezone, $timeType, $dateType, $date)
-    {
+    public function testBasic(
+        string $locale,
+        string $timezone,
+        int $timeType,
+        int $dateType,
+        DateTimeInterface $date
+    ): void {
         $this->helper
              ->setTimezone($timezone);
 
@@ -218,8 +187,13 @@ class DateFormatTest extends TestCase
     /**
      * @dataProvider dateTestsDataProvider
      */
-    public function testSettersProvideDefaults($locale, $timezone, $timeType, $dateType, $date)
-    {
+    public function testSettersProvideDefaults(
+        string $locale,
+        string $timezone,
+        int $timeType,
+        int $dateType,
+        DateTimeInterface $date
+    ): void {
         $this->helper
             ->setTimezone($timezone)
             ->setLocale($locale);
@@ -237,8 +211,14 @@ class DateFormatTest extends TestCase
     /**
      * @dataProvider dateTestsDataProviderWithPattern
      */
-    public function testUseCustomPattern($locale, $timezone, $timeType, $dateType, $pattern, $date)
-    {
+    public function testUseCustomPattern(
+        string $locale,
+        string $timezone,
+        int $timeType,
+        int $dateType,
+        string $pattern,
+        DateTimeInterface $date
+    ): void {
         $this->helper
              ->setTimezone($timezone);
 
@@ -254,12 +234,12 @@ class DateFormatTest extends TestCase
         ));
     }
 
-    public function testDefaultLocale()
+    public function testDefaultLocale(): void
     {
         $this->assertEquals(Locale::getDefault(), $this->helper->getLocale());
     }
 
-    public function testBugTwoPatternOnSameHelperInstance()
+    public function testBugTwoPatternOnSameHelperInstance(): void
     {
         $date = new DateTime('2012-07-02T22:44:03Z');
 
@@ -275,19 +255,24 @@ class DateFormatTest extends TestCase
         );
     }
 
-    public function assertMbStringEquals($expected, $test, $message = '')
+    public function assertMbStringEquals(string $expected, string $test, string $message = ''): void
     {
         $expected = str_replace(["\xC2\xA0", ' '], '', $expected);
         $test     = str_replace(["\xC2\xA0", ' '], '', $test);
         $this->assertEquals($expected, $test, $message);
     }
 
-    public function getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern = null)
-    {
-        return new IntlDateFormatter($locale, $dateType, $timeType, $timezone, null, $pattern);
+    public function getIntlDateFormatter(
+        string $locale,
+        int $dateType,
+        int $timeType,
+        string $timezone,
+        ?string $pattern = null
+    ): IntlDateFormatter {
+        return new IntlDateFormatter($locale, $dateType, $timeType, $timezone, null, $pattern ?? '');
     }
 
-    public function testDifferentTimezone()
+    public function testDifferentTimezone(): void
     {
         $helper = $this->helper;
 
@@ -302,7 +287,7 @@ class DateFormatTest extends TestCase
         self::assertSame('Jan 1, 2018', $helper($date, IntlDateFormatter::MEDIUM));
     }
 
-    public function testIntlCalendarIsHandledAsWell()
+    public function testIntlCalendarIsHandledAsWell(): void
     {
         $calendar = new IntlGregorianCalendar(2013, 6, 1);
 

@@ -1,46 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Validator;
 
+use Generator;
 use Laminas\I18n\Validator\PostCode as PostCodeValidator;
-use PHPUnit\Framework\TestCase;
+use Laminas\Validator\Exception\InvalidArgumentException;
+use LaminasTest\I18n\TestCase;
 
-/**
- * @group      Laminas_Validator
- */
 class PostCodeTest extends TestCase
 {
-    /**
-     * @var  PostCode
-     */
-    protected $validator;
+    private PostCodeValidator $validator;
 
-    /**
-     * Creates a new Laminas\PostCode object for each test method
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->validator = new PostCodeValidator(['locale' => 'de_AT']);
     }
 
     /**
      * @dataProvider UKPostCodesDataProvider
-     * @group #7250
-     * @group #7264
      */
-    public function testUKBasic($postCode, $expected)
+    public function testUKBasic(string $postCode, bool $expected): void
     {
-        $uk_validator = new PostCodeValidator(['locale' => 'en_GB']);
-        $this->assertSame($expected, $uk_validator->isValid($postCode));
+        $ukValidator = new PostCodeValidator(['locale' => 'en_GB']);
+        $this->assertSame($expected, $ukValidator->isValid($postCode));
     }
 
-    public function UKPostCodesDataProvider()
+    /** @return array<array-key, array{0: string, 1: bool}> */
+    public function UKPostCodesDataProvider(): array
     {
         return [
             ['CA3 5JQ', true],
@@ -55,7 +44,8 @@ class PostCodeTest extends TestCase
         ];
     }
 
-    public function postCodesDataProvider()
+    /** @return array<array-key, array{0: mixed, 1: bool}> */
+    public function postCodesDataProvider(): array
     {
         return [
             ['2292',    true],
@@ -76,19 +66,17 @@ class PostCodeTest extends TestCase
      * Ensures that the validator follows expected behavior
      *
      * @dataProvider postCodesDataProvider
-     * @return void
+     * @param mixed $postCode
      */
-    public function testBasic($postCode, $expected)
+    public function testBasic($postCode, bool $expected): void
     {
         $this->assertEquals($expected, $this->validator->isValid($postCode));
     }
 
     /**
      * Ensures that getMessages() returns expected default value
-     *
-     * @return void
      */
-    public function testGetMessages()
+    public function testGetMessages(): void
     {
         $this->assertEquals([], $this->validator->getMessages());
     }
@@ -96,9 +84,9 @@ class PostCodeTest extends TestCase
     /**
      * Ensures that a region is available
      */
-    public function testSettingLocalesWithoutRegion()
+    public function testSettingLocalesWithoutRegion(): void
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Locale must contain a region');
         $this->validator->setLocale('de')->isValid('1000');
     }
@@ -106,9 +94,9 @@ class PostCodeTest extends TestCase
     /**
      * Ensures that the region contains postal codes
      */
-    public function testSettingLocalesWithoutPostalCodes()
+    public function testSettingLocalesWithoutPostalCodes(): void
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A postcode-format string has to be given for validation');
         $this->validator->setLocale('gez_ER')->isValid('1000');
     }
@@ -116,7 +104,7 @@ class PostCodeTest extends TestCase
     /**
      * Ensures locales can be retrieved
      */
-    public function testGettingLocale()
+    public function testGettingLocale(): void
     {
         $this->assertEquals('de_AT', $this->validator->getLocale());
     }
@@ -124,30 +112,27 @@ class PostCodeTest extends TestCase
     /**
      * Ensures format can be set and retrieved
      */
-    public function testSetGetFormat()
+    public function testSetGetFormat(): void
     {
         $this->validator->setFormat('\d{1}');
         $this->assertEquals('\d{1}', $this->validator->getFormat());
     }
 
-    public function testSetGetFormatThrowsExceptionOnNullFormat()
+    public function testSetGetFormatThrowsExceptionOnNullFormat(): void
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A postcode-format string has to be given');
         $this->validator->setLocale(null)->setFormat(null)->isValid('1000');
     }
 
-    public function testSetGetFormatThrowsExceptionOnEmptyFormat()
+    public function testSetGetFormatThrowsExceptionOnEmptyFormat(): void
     {
-        $this->expectException('Laminas\Validator\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('A postcode-format string has to be given');
         $this->validator->setLocale(null)->setFormat('')->isValid('1000');
     }
 
-    /**
-     * @group Laminas-9212
-     */
-    public function testErrorMessageText()
+    public function testErrorMessageText(): void
     {
         $this->assertFalse($this->validator->isValid('hello'));
         $message = $this->validator->getMessages();
@@ -155,18 +140,16 @@ class PostCodeTest extends TestCase
     }
 
      /**
-     * Test service class with invalid validation
-     *
-     * @group Laminas-44
-     */
-    public function testServiceClass()
+      * Test service class with invalid validation
+      */
+    public function testServiceClass(): void
     {
-        $params = (object)[
-            'serviceTrue'   => null,
-            'serviceFalse'  => null,
+        $params = (object) [
+            'serviceTrue'  => null,
+            'serviceFalse' => null,
         ];
 
-        $serviceTrue  = static function ($value) use ($params) {
+        $serviceTrue = static function ($value) use ($params) {
             $params->serviceTrue = $value;
             return true;
         };
@@ -178,12 +161,10 @@ class PostCodeTest extends TestCase
 
         $this->assertEquals(null, $this->validator->getService());
 
-
         $this->validator->setService($serviceTrue);
         $this->assertEquals($this->validator->getService(), $serviceTrue);
         $this->assertTrue($this->validator->isValid('2292'));
         $this->assertEquals($params->serviceTrue, '2292');
-
 
         $this->validator->setService($serviceFalse);
         $this->assertEquals($this->validator->getService(), $serviceFalse);
@@ -194,7 +175,7 @@ class PostCodeTest extends TestCase
         $this->assertStringContainsString('not appear to be a postal code', $message['postcodeService']);
     }
 
-    public function testEqualsMessageTemplates()
+    public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
         $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
@@ -204,7 +185,7 @@ class PostCodeTest extends TestCase
      * Post codes are provided by French government official post code database
      * https://www.data.gouv.fr/fr/datasets/base-officielle-des-codes-postaux/
      */
-    public function testFrPostCodes()
+    public function testFrPostCodes(): void
     {
         $validator = $this->validator;
         $validator->setLocale('fr_FR');
@@ -221,7 +202,7 @@ class PostCodeTest extends TestCase
      * Post codes are provided by Norway Mail database
      * http://www.bring.no/hele-bring/produkter-og-tjenester/brev-og-postreklame/andre-tjenester/postnummertabeller
      */
-    public function testNoPostCodes()
+    public function testNoPostCodes(): void
     {
         $validator = $this->validator;
         $validator->setLocale('en_NO');
@@ -237,7 +218,7 @@ class PostCodeTest extends TestCase
      * To prevent BC break LV- prefix is optional
      * https://en.wikipedia.org/wiki/Postal_codes_in_Latvia
      */
-    public function testLvPostCodes()
+    public function testLvPostCodes(): void
     {
         $validator = $this->validator;
         $validator->setLocale('en_LV');
@@ -248,7 +229,8 @@ class PostCodeTest extends TestCase
         $this->assertFalse($validator->isValid('LV-ABCD'));
     }
 
-    public function liPostCode()
+    /** @return Generator<string, array{0: int}> */
+    public function liPostCode(): Generator
     {
         yield 'Nendeln' => [9485];
         yield 'Schaanwald' => [9486];
@@ -268,9 +250,8 @@ class PostCodeTest extends TestCase
 
     /**
      * @dataProvider liPostCode
-     * @param int $postCode
      */
-    public function testLiPostCodes($postCode)
+    public function testLiPostCodes(int $postCode): void
     {
         $validator = $this->validator;
         $validator->setLocale('de_LI');

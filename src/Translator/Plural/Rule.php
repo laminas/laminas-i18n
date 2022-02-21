@@ -4,6 +4,11 @@ namespace Laminas\I18n\Translator\Plural;
 
 use Laminas\I18n\Exception;
 
+use function abs;
+use function floor;
+use function preg_match;
+use function sprintf;
+
 /**
  * Plural rule evaluator.
  */
@@ -55,7 +60,7 @@ class Rule
 
         if ($result < 0 || $result >= $this->numPlurals) {
             throw new Exception\RangeException(
-                sprintf('Calculated result %s is between 0 and %d', $result, ($this->numPlurals - 1))
+                sprintf('Calculated result %s is between 0 and %d', $result, $this->numPlurals - 1)
             );
         }
 
@@ -133,6 +138,7 @@ class Rule
                        ? 1 : 0;
 
             case '==':
+                // @codingStandardsIgnoreStart
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
                        == $this->evaluateAstPart($ast['arguments'][1], $number)
                        ? 1 : 0;
@@ -141,6 +147,7 @@ class Rule
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
                        != $this->evaluateAstPart($ast['arguments'][1], $number)
                        ? 1 : 0;
+                // @codingStandardsIgnoreEnd
 
             case '&&':
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
@@ -210,7 +217,6 @@ class Rule
      * Theoretically we could just use the given Symbol, but that one is not
      * so easy to serialize and also takes up more memory.
      *
-     * @param  Symbol $symbol
      * @return array
      */
     protected static function createAst(Symbol $symbol)

@@ -5,11 +5,17 @@ namespace Laminas\I18n\Validator;
 use Laminas\I18n\Filter\Alnum as AlnumFilter;
 use Laminas\Validator\AbstractValidator;
 
+use function is_array;
+use function is_float;
+use function is_int;
+use function is_scalar;
+use function is_string;
+
 class Alnum extends AbstractValidator
 {
-    const INVALID      = 'alnumInvalid';
-    const NOT_ALNUM    = 'notAlnum';
-    const STRING_EMPTY = 'alnumStringEmpty';
+    public const INVALID      = 'alnumInvalid';
+    public const NOT_ALNUM    = 'notAlnum';
+    public const STRING_EMPTY = 'alnumStringEmpty';
 
     /**
      * Alphanumeric filter used for validation
@@ -35,7 +41,7 @@ class Alnum extends AbstractValidator
      * @var array
      */
     protected $options = [
-        'allowWhiteSpace' => false,  // Whether to allow white space characters; off by default
+        'allowWhiteSpace' => false, // Whether to allow white space characters; off by default
     ];
 
     /**
@@ -100,7 +106,7 @@ class Alnum extends AbstractValidator
 
         static::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
 
-        if ($value != static::$filter->filter($value)) {
+        if ($value != static::$filter->filter($value)) { // phpcs:ignore
             $this->error(self::NOT_ALNUM);
             return false;
         }

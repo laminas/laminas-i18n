@@ -6,16 +6,19 @@ use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
 
+use function gettype;
+use function is_array;
+use function sprintf;
+
 /**
  * PHP Memory array loader.
  */
 class PhpMemoryArray implements RemoteLoaderInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $messages;
 
+    /** @param array $messages */
     public function __construct($messages)
     {
         $this->messages = $messages;

@@ -1,35 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Validator;
 
 use Laminas\I18n\Validator\Alpha as AlphaValidator;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
 
-/**
- * @group      Laminas_Validator
- */
 class AlphaTest extends TestCase
 {
-    /**
-     * @var AlphaValidator
-     */
+    /** @var AlphaValidator */
     protected $validator;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
+        parent::setUp();
         $this->validator = new AlphaValidator();
     }
 
     /**
      * Ensures that the validator follows expected behavior
-     *
-     * @return void
      */
-    public function testBasic()
+    public function testBasic(): void
     {
         $valuesExpected = [
             'abc123'  => false,
@@ -40,8 +32,8 @@ class AlphaTest extends TestCase
             'aBcDeF'  => true,
             ''        => false,
             ' '       => false,
-            "\n"      => false
-            ];
+            "\n"      => false,
+        ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->validator->isValid($input));
         }
@@ -49,20 +41,16 @@ class AlphaTest extends TestCase
 
     /**
      * Ensures that getMessages() returns expected default value
-     *
-     * @return void
      */
-    public function testGetMessages()
+    public function testGetMessages(): void
     {
         $this->assertEquals([], $this->validator->getMessages());
     }
 
     /**
      * Ensures that the allowWhiteSpace option works as expected
-     *
-     * @return void
      */
-    public function testAllowWhiteSpace()
+    public function testAllowWhiteSpace(): void
     {
         $this->validator->setAllowWhiteSpace(true);
 
@@ -77,7 +65,7 @@ class AlphaTest extends TestCase
             ' '       => true,
             "\n"      => true,
             " \t "    => true,
-            "a\tb c"  => true
+            "a\tb c"  => true,
         ];
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
@@ -88,15 +76,12 @@ class AlphaTest extends TestCase
         }
     }
 
-    /**
-     * @Laminas-4352
-     */
-    public function testNonStringValidation()
+    public function testNonStringValidation(): void
     {
         $this->assertFalse($this->validator->isValid([1 => 1]));
     }
 
-    public function testEqualsMessageTemplates()
+    public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 

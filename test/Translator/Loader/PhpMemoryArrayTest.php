@@ -1,76 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\Translator\Loader;
 
+use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;
+use Laminas\I18n\Translator\TextDomain;
+use LaminasTest\I18n\TestCase;
 use Locale;
-use PHPUnit\Framework\TestCase;
+
+use function realpath;
 
 class PhpMemoryArrayTest extends TestCase
 {
-    protected $testFilesDir;
-    protected $originalLocale;
-    protected $originalIncludePath;
+    private string $testFilesDir;
 
     protected function setUp(): void
     {
-        if (! extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->originalLocale = Locale::getDefault();
+        parent::setUp();
         Locale::setDefault('en_US');
 
         $this->testFilesDir = realpath(__DIR__ . '/../_files/phpmemoryarray');
     }
 
-    protected function tearDown(): void
-    {
-        if (extension_loaded('intl')) {
-            Locale::setDefault($this->originalLocale);
-        }
-    }
-    public function testLoaderFailsToLoadNonArray()
+    public function testLoaderFailsToLoadNonArray(): void
     {
         $loader = new PhpMemoryArrayLoader('foo');
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected an array, but received');
         $loader->load('en_US', 'default');
     }
 
-    public function testLoaderFailsToLoadMissingTextDomain()
+    public function testLoaderFailsToLoadMissingTextDomain(): void
     {
         $loader = new PhpMemoryArrayLoader([]);
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected textdomain "default" to be an array, but it is not set');
         $loader->load('en_US', 'default');
     }
 
-    public function testLoaderFailsToLoadNonArrayLocale()
+    public function testLoaderFailsToLoadNonArrayLocale(): void
     {
         $loader = new PhpMemoryArrayLoader(['default' => []]);
-        $this->expectException('Laminas\I18n\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected locale "en_US" to be an array, but it is not set');
         $loader->load('en_US', 'default');
     }
 
-    public function testLoaderLoadsEmptyArray()
+    public function testLoaderLoadsEmptyArray(): void
     {
-        $loader = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_empty.php');
+        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_empty.php');
         $textDomain = $loader->load('en_US', 'default');
-        $this->assertInstanceOf('Laminas\I18n\Translator\TextDomain', $textDomain);
+        $this->assertInstanceOf(TextDomain::class, $textDomain);
     }
 
-    public function testLoaderReturnsValidTextDomain()
+    public function testLoaderReturnsValidTextDomain(): void
     {
-        $loader = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
+        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
-    public function testLoaderLoadsPluralRules()
+    public function testLoaderLoadsPluralRules(): void
     {
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');

@@ -15,6 +15,17 @@ use Laminas\Stdlib\ArrayUtils;
 use Locale;
 use Traversable;
 
+use function array_shift;
+use function get_class;
+use function gettype;
+use function is_array;
+use function is_file;
+use function is_object;
+use function is_string;
+use function md5;
+use function rtrim;
+use function sprintf;
+
 /**
  * Translator.
  */
@@ -23,12 +34,12 @@ class Translator implements TranslatorInterface
     /**
      * Event fired when the translation for a message is missing.
      */
-    const EVENT_MISSING_TRANSLATION = 'missingTranslation';
+    public const EVENT_MISSING_TRANSLATION = 'missingTranslation';
 
     /**
      * Event fired when no messages were loaded for a locale/text-domain combination.
      */
-    const EVENT_NO_MESSAGES_LOADED = 'noMessagesLoaded';
+    public const EVENT_NO_MESSAGES_LOADED = 'noMessagesLoaded';
 
     /**
      * Messages loaded by the translator.
@@ -115,7 +126,7 @@ class Translator implements TranslatorInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable object; received "%s"',
                 __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
+                is_object($options) ? get_class($options) : gettype($options)
             ));
         }
 
@@ -152,7 +163,7 @@ class Translator implements TranslatorInterface
                     $pattern['type'],
                     $pattern['base_dir'],
                     $pattern['pattern'],
-                    isset($pattern['text_domain']) ? $pattern['text_domain'] : 'default'
+                    $pattern['text_domain'] ?? 'default'
                 );
             }
         }
@@ -178,8 +189,8 @@ class Translator implements TranslatorInterface
                 $translator->addTranslationFile(
                     $file['type'],
                     $file['filename'],
-                    isset($file['text_domain']) ? $file['text_domain'] : 'default',
-                    isset($file['locale']) ? $file['locale'] : null
+                    $file['text_domain'] ?? 'default',
+                    $file['locale'] ?? null
                 );
             }
         }
@@ -204,7 +215,7 @@ class Translator implements TranslatorInterface
 
                 $translator->addRemoteTranslations(
                     $remote['type'],
-                    isset($remote['text_domain']) ? $remote['text_domain'] : 'default'
+                    $remote['text_domain'] ?? 'default'
                 );
             }
         }
@@ -243,17 +254,10 @@ class Translator implements TranslatorInterface
      * Get the default locale.
      *
      * @return string
-     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present and no locale set
      */
     public function getLocale()
     {
         if ($this->locale === null) {
-            if (! extension_loaded('intl')) {
-                throw new Exception\ExtensionNotLoadedException(sprintf(
-                    '%s component requires the intl PHP extension',
-                    __NAMESPACE__
-                ));
-            }
             $this->locale = Locale::getDefault();
         }
 
@@ -286,10 +290,9 @@ class Translator implements TranslatorInterface
     /**
      * Sets a cache
      *
-     * @param  CacheStorage|null $cache
      * @return $this
      */
-    public function setCache(CacheStorage $cache = null)
+    public function setCache(?CacheStorage $cache = null)
     {
         $this->cache = $cache;
 
@@ -309,7 +312,6 @@ class Translator implements TranslatorInterface
     /**
      * Set the plugin manager for translation loaders
      *
-     * @param  LoaderPluginManager $pluginManager
      * @return $this
      */
     public function setPluginManager(LoaderPluginManager $pluginManager)
@@ -329,7 +331,7 @@ class Translator implements TranslatorInterface
     public function getPluginManager()
     {
         if (! $this->pluginManager instanceof LoaderPluginManager) {
-            $this->setPluginManager(new LoaderPluginManager(new ServiceManager));
+            $this->setPluginManager(new LoaderPluginManager(new ServiceManager()));
         }
 
         return $this->pluginManager;
@@ -345,14 +347,15 @@ class Translator implements TranslatorInterface
      */
     public function translate($message, $textDomain = 'default', $locale = null)
     {
-        $locale      = ($locale ?: $this->getLocale());
+        $locale      = $locale ?: $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if ($translation !== null && $translation !== '') {
             return $translation;
         }
 
-        if (null !== ($fallbackLocale = $this->getFallbackLocale())
+        if (
+            null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
             return $this->translate($message, $textDomain, $fallbackLocale);
@@ -386,7 +389,7 @@ class Translator implements TranslatorInterface
             $translation = [$translation];
         }
 
-        $index = ($number === 1) ? 0 : 1; // en_EN Plural rule
+        $index = $number === 1 ? 0 : 1; // en_EN Plural rule
         if ($this->messages[$textDomain][$locale] instanceof TextDomain) {
             $index = $this->messages[$textDomain][$locale]
                 ->getPluralRule()
@@ -397,7 +400,8 @@ class Translator implements TranslatorInterface
             return $translation[$index];
         }
 
-        if (null !== ($fallbackLocale = $this->getFallbackLocale())
+        if (
+            null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
             return $this->translatePlural(
@@ -437,7 +441,6 @@ class Translator implements TranslatorInterface
         if (isset($this->messages[$textDomain][$locale][$message])) {
             return $this->messages[$textDomain][$locale][$message];
         }
-
 
         /**
          * issue https://github.com/zendframework/zend-i18n/issues/53
@@ -500,7 +503,7 @@ class Translator implements TranslatorInterface
         }
 
         $this->files[$textDomain][$locale][] = [
-            'type' => $type,
+            'type'     => $type,
             'filename' => $filename,
         ];
 
@@ -614,7 +617,7 @@ class Translator implements TranslatorInterface
             $discoveredTextDomain = null;
             if ($this->isEventManagerEnabled()) {
                 $until = static function ($r) {
-                    return ($r instanceof TextDomain);
+                    return $r instanceof TextDomain;
                 };
 
                 $event = new Event(self::EVENT_NO_MESSAGES_LOADED, $this, [
@@ -631,7 +634,7 @@ class Translator implements TranslatorInterface
             }
 
             $this->messages[$textDomain][$locale] = $discoveredTextDomain;
-            $messagesLoaded = true;
+            $messagesLoaded                       = true;
         }
 
         if ($messagesLoaded && $cache !== null) {
@@ -645,7 +648,7 @@ class Translator implements TranslatorInterface
      * @param  string $textDomain
      * @param  string $locale
      * @return bool
-     * @throws Exception\RuntimeException When specified loader is not a remote loader
+     * @throws Exception\RuntimeException When specified loader is not a remote loader.
      */
     protected function loadMessagesFromRemote($textDomain, $locale)
     {
@@ -678,7 +681,7 @@ class Translator implements TranslatorInterface
      * @param  string $textDomain
      * @param  string $locale
      * @return bool
-     * @throws Exception\RuntimeException When specified loader is not a file loader
+     * @throws Exception\RuntimeException When specified loader is not a file loader.
      */
     protected function loadMessagesFromPatterns($textDomain, $locale)
     {
@@ -715,7 +718,7 @@ class Translator implements TranslatorInterface
      * @param  string $textDomain
      * @param  string $locale
      * @return bool
-     * @throws Exception\RuntimeException When specified loader is not a file loader
+     * @throws Exception\RuntimeException When specified loader is not a file loader.
      */
     protected function loadMessagesFromFiles($textDomain, $locale)
     {
@@ -783,14 +786,13 @@ class Translator implements TranslatorInterface
     /**
      * Set the event manager instance used by this translator.
      *
-     * @param  EventManagerInterface $events
      * @return $this
      */
     public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers([
-            __CLASS__,
-            get_class($this),
+            self::class,
+            static::class,
             'translator',
         ]);
         $this->events = $events;

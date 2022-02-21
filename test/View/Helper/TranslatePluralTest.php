@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\I18n\View\Helper;
 
+use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\View\Helper\TranslatePlural as TranslatePluralHelper;
-use PHPUnit\Framework\TestCase;
+use LaminasTest\I18n\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @group      Laminas_View
@@ -12,36 +16,20 @@ use PHPUnit\Framework\TestCase;
  */
 class TranslatePluralTest extends TestCase
 {
-    /**
-     * @var TranslatePluralHelper
-     */
+    use ProphecyTrait;
+
+    /** @var TranslatePluralHelper */
     public $helper;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
+        parent::setUp();
         $this->helper = new TranslatePluralHelper();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
-        unset($this->helper);
     }
 
     public function testInvokingWithoutTranslatorWillRaiseException()
     {
-        $this->expectException('Laminas\I18n\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->helper->__invoke('singular', 'plural', 1);
     }
 
