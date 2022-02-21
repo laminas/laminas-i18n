@@ -163,6 +163,18 @@ class DateTimeTest extends TestCase
         $this->assertEquals('yyyyMMdd hh:mm a', $this->validator->getPattern());
     }
 
+    public function testSettingThePatternToNullIsAcceptable(): void
+    {
+        $this->validator->setPattern(null);
+        self::assertTrue($this->validator->isValid('20200101 12:34 am'));
+    }
+
+    public function testSettingThePatternToAnEmptyStringIsAcceptable(): void
+    {
+        $this->validator->setPattern('');
+        self::assertTrue($this->validator->isValid('20200101 12:34 am'));
+    }
+
     /**
      * Ensures that setting the pattern results in pattern used (by the validation process)
      */
