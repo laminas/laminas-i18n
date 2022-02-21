@@ -23,7 +23,7 @@ class PluralTest extends TestCase
     }
 
     /**
-     * @return array<array-key, array{0: string, 1: list<string>, 2: int, 3:string}>,
+     * @return array<array-key, array{0: string, 1: list<string>, 2:int, 3:string}>
      */
     public function pluralsTestProvider(): array
     {

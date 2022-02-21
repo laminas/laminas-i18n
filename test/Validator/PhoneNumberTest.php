@@ -11,14 +11,12 @@ use Locale;
 use function is_array;
 use function sprintf;
 
-/** @psalm-type PhonePatterns = array<string, array<string, string>> */
 class PhoneNumberTest extends TestCase
 {
-    /** @var PhoneNumber */
-    protected $validator;
+    private PhoneNumber $validator;
 
-    /** @var array<string, array{code: numeric-string, patterns: PhonePatterns}> */
-    protected $phone = [
+    /** @var array<string, array> */
+    private $phone = [
         'AC' => [
             'code'     => '247',
             'patterns' => [
@@ -3106,15 +3104,17 @@ class PhoneNumberTest extends TestCase
         ];
     }
 
-    /** @return array<array-key, array{country: string, code: numeric-string, patterns: PhonePatterns}> */
+    /** @return list<array{country:string, code:string, patterns:array<string, mixed>}> */
     public function numbersDataProvider(): array
     {
         $data = [];
         foreach ($this->phone as $country => $parameters) {
+            /** @psalm-var array<string, mixed> $patterns */
+            $patterns = $parameters['patterns'] ?? [];
             $countryRow = [
                 'country'  => $country,
-                'code'     => $parameters['code'],
-                'patterns' => $parameters['patterns'],
+                'code'     => (string) $parameters['code'],
+                'patterns' => $patterns,
             ];
 
             $data[] = $countryRow;
@@ -3125,12 +3125,14 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     * @param PhonePatterns $patterns
+     * @param array<string, mixed> $patterns
      */
     public function testExampleNumbers(string $country, string $code, array $patterns): void
     {
+        /** @psalm-var array<string, string|string[]> $patterns */
+        $patterns = $patterns['example'] ?? [];
         $this->validator->setCountry($country);
-        foreach ($patterns['example'] as $type => $values) {
+        foreach ($patterns as $type => $values) {
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
@@ -3156,13 +3158,15 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     * @param PhonePatterns $patterns
+     * @param array<string, mixed> $patterns
      */
     public function testExampleNumbersAgainstPossible(string $country, string $code, array $patterns): void
     {
         $this->validator->allowPossible(true);
         $this->validator->setCountry($country);
-        foreach ($patterns['example'] as $type => $values) {
+        /** @psalm-var array<string, string|string[]> $patterns */
+        $patterns = $patterns['example'] ?? [];
+        foreach ($patterns as $type => $values) {
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
@@ -3203,16 +3207,19 @@ class PhoneNumberTest extends TestCase
 
     /**
      * @dataProvider numbersDataProvider
-     * @param PhonePatterns $patterns
+     * @param array<string, mixed> $patterns
      */
     public function testInvalidTypes(string $country, string $code, array $patterns): void
     {
         $this->validator->setCountry($country);
         if (! isset($patterns['invalid'])) {
-            $this->addToAssertionCount(1);
             return;
         }
-        foreach ($patterns['invalid'] as $type => $values) {
+
+        /** @psalm-var array<string, string|string[]> $patterns */
+        $patterns = $patterns['invalid'] ?? [];
+
+        foreach ($patterns as $type => $values) {
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
