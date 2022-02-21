@@ -90,6 +90,8 @@ class Alnum extends AbstractLocale
             $pattern = '/[^\p{L}\p{N}' . $whiteSpace . ']/u';
         }
 
+        $value = is_scalar($value) ? (string) $value : $value;
+
         return preg_replace($pattern, '', $value);
     }
 }
