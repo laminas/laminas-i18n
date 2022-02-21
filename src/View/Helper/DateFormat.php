@@ -11,8 +11,6 @@ use Locale;
 use function date_default_timezone_get;
 use function md5;
 
-use const PHP_VERSION_ID;
-
 /**
  * View helper for formatting dates.
  */
@@ -35,7 +33,7 @@ class DateFormat extends AbstractHelper
     /**
      * Formatter instances
      *
-     * @var array
+     * @var array<string, IntlDateFormatter>
      */
     protected $formatters = [];
 
@@ -61,7 +59,7 @@ class DateFormat extends AbstractHelper
         }
 
         $timezone    = $this->getTimezone();
-        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale . "\0" . $pattern . "\0" . $timezone);
+        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale . "\0" . (string) $pattern . "\0" . $timezone);
 
         if (! isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new IntlDateFormatter(
@@ -111,13 +109,9 @@ class DateFormat extends AbstractHelper
      */
     public function setTimezone($timezone)
     {
-        $this->timezone = (string) $timezone;
-
-        // The method setTimeZoneId is deprecated as of PHP 5.5.0
-        $setTimeZoneMethodName = PHP_VERSION_ID < 50500 ? 'setTimeZoneId' : 'setTimeZone';
-
+        $this->timezone = $timezone;
         foreach ($this->formatters as $formatter) {
-            $formatter->$setTimeZoneMethodName($this->timezone);
+            $formatter->setTimeZone($this->timezone);
         }
 
         return $this;

@@ -739,25 +739,8 @@
       <code>$locale</code>
       <code>$timezone</code>
     </MissingConstructor>
-    <MixedAssignment occurrences="1">
-      <code>$formatter</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>string</code>
-    </MixedInferredReturnType>
-    <MixedMethodCall occurrences="2">
-      <code>$setTimeZoneMethodName</code>
-      <code>format</code>
-    </MixedMethodCall>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;formatters[$formatterId]-&gt;format($date)</code>
-    </MixedReturnStatement>
-    <PossiblyNullOperand occurrences="1">
-      <code>$pattern</code>
-    </PossiblyNullOperand>
-    <RedundantCastGivenDocblockType occurrences="2">
+    <RedundantCastGivenDocblockType occurrences="1">
       <code>(string) $locale</code>
-      <code>(string) $timezone</code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/View/Helper/NumberFormat.php">
@@ -1120,22 +1103,6 @@
       <code>$intVal</code>
       <code>$strict</code>
     </MixedArgument>
-  </file>
-  <file src="test/Validator/PhoneNumberTest.php">
-    <DocblockTypeContradiction occurrences="3">
-      <code>is_array($values)</code>
-      <code>is_array($values)</code>
-      <code>is_array($values)</code>
-    </DocblockTypeContradiction>
-    <InternalMethod occurrences="1">
-      <code>addToAssertionCount</code>
-    </InternalMethod>
-    <PropertyTypeCoercion occurrences="1"/>
-    <RedundantConditionGivenDocblockType occurrences="3">
-      <code>[$values]</code>
-      <code>[$values]</code>
-      <code>[$values]</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="test/Validator/PostCodeTest.php">
     <MissingClosureParamType occurrences="2">
