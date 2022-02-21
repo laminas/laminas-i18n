@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Laminas\I18n\Translator\Plural;
 
 use Laminas\I18n\Exception;

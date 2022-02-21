@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Laminas\I18n\Translator\Loader;
 
 use Laminas\Config\Reader\Ini as IniReader;

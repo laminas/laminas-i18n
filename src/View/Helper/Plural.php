@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Laminas\I18n\View\Helper;
 
 use Laminas\I18n\Exception;

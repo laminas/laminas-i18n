@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Laminas\I18n\Validator;
 
 use Laminas\I18n\Filter\Alnum as AlnumFilter;
