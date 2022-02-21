@@ -3110,7 +3110,7 @@ class PhoneNumberTest extends TestCase
         $data = [];
         foreach ($this->phone as $country => $parameters) {
             /** @psalm-var array<string, mixed> $patterns */
-            $patterns = $parameters['patterns'] ?? [];
+            $patterns   = $parameters['patterns'] ?? [];
             $countryRow = [
                 'country'  => $country,
                 'code'     => (string) $parameters['code'],
