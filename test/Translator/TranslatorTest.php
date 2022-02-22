@@ -414,9 +414,7 @@ class TranslatorTest extends TestCase
         $events->attach(
             Translator::EVENT_MISSING_TRANSLATION,
             // @codingStandardsIgnoreStart Generic.WhiteSpace.ScopeIndent.IncorrectExact
-            static function (EventInterface $event) {
-                return 'EVENT TRIGGERED';
-            }
+            static fn(EventInterface $event) => 'EVENT TRIGGERED'
             // @codingStandardsIgnoreEnd
         );
         $events->attach(
@@ -484,9 +482,7 @@ class TranslatorTest extends TestCase
         $events->attach(
             Translator::EVENT_NO_MESSAGES_LOADED,
             // @codingStandardsIgnoreStart Generic.WhiteSpace.ScopeIndent.IncorrectExact
-            static function (EventInterface $event) use ($textDomain) {
-                return $textDomain;
-            }
+            static fn(EventInterface $event) => $textDomain
             // @codingStandardsIgnoreEnd
         );
         $events->attach(

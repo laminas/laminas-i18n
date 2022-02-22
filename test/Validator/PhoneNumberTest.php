@@ -16,7 +16,7 @@ class PhoneNumberTest extends TestCase
     private PhoneNumber $validator;
 
     /** @var array<string, array> */
-    private $phone = [
+    private array $phone = [
         'AC' => [
             'code'     => '247',
             'patterns' => [

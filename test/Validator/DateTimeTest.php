@@ -10,7 +10,6 @@ use Laminas\I18n\Validator\DateTime as DateTimeValidator;
 use LaminasTest\I18n\TestCase;
 use Locale;
 
-use function array_merge;
 use function date_default_timezone_get;
 use function date_default_timezone_set;
 use function sprintf;
@@ -104,7 +103,7 @@ class DateTimeTest extends TestCase
             ],
         ];
 
-        return array_merge($trueArray, $falseArray);
+        return [...$trueArray, ...$falseArray];
     }
 
     /**
