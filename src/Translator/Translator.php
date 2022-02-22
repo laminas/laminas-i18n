@@ -460,9 +460,7 @@ class Translator implements TranslatorInterface
         }
 
         if ($this->isEventManagerEnabled()) {
-            $until = static function ($r) {
-                return is_string($r);
-            };
+            $until = static fn($r): bool => is_string($r);
 
             $event = new Event(self::EVENT_MISSING_TRANSLATION, $this, [
                 'message'     => $message,
@@ -616,9 +614,7 @@ class Translator implements TranslatorInterface
         if (! $messagesLoaded) {
             $discoveredTextDomain = null;
             if ($this->isEventManagerEnabled()) {
-                $until = static function ($r) {
-                    return $r instanceof TextDomain;
-                };
+                $until = static fn($r): bool => $r instanceof TextDomain;
 
                 $event = new Event(self::EVENT_NO_MESSAGES_LOADED, $this, [
                     'locale'      => $locale,

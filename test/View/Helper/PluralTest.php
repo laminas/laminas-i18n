@@ -13,8 +13,7 @@ use LaminasTest\I18n\TestCase;
  */
 class PluralTest extends TestCase
 {
-    /** @var PluralHelper */
-    private $helper;
+    private PluralHelper $helper;
 
     protected function setUp(): void
     {

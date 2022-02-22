@@ -102,16 +102,12 @@ class Parser
         // Literals
         $this->registerSymbol('n')->setNullDenotationGetter(
             // @codingStandardsIgnoreStart Generic.WhiteSpace.ScopeIndent.IncorrectExact
-            static function (Symbol $self) {
-                return $self;
-            }
+            static fn(Symbol $self) => $self
             // @codingStandardsIgnoreEnd
         );
         $this->registerSymbol('number')->setNullDenotationGetter(
             // @codingStandardsIgnoreStart Generic.WhiteSpace.ScopeIndent.IncorrectExact
-            static function (Symbol $self) {
-                return $self;
-            }
+            static fn(Symbol $self) => $self
             // @codingStandardsIgnoreEnd
         );
 
