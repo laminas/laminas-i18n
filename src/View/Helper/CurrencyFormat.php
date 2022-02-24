@@ -2,7 +2,6 @@
 
 namespace Laminas\I18n\View\Helper;
 
-use Laminas\View\Helper\AbstractHelper;
 use Locale;
 use NumberFormatter;
 
@@ -13,6 +12,7 @@ use function sprintf;
 
 /**
  * View helper for formatting currency.
+ * @psalm-suppress DeprecatedClass
  */
 class CurrencyFormat extends AbstractHelper
 {

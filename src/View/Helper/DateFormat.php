@@ -5,7 +5,6 @@ namespace Laminas\I18n\View\Helper;
 use DateTimeInterface;
 use IntlCalendar;
 use IntlDateFormatter;
-use Laminas\View\Helper\AbstractHelper;
 use Locale;
 
 use function date_default_timezone_get;
@@ -13,6 +12,7 @@ use function md5;
 
 /**
  * View helper for formatting dates.
+ * @psalm-suppress DeprecatedClass
  */
 class DateFormat extends AbstractHelper
 {
