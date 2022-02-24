@@ -12,6 +12,7 @@ use function serialize;
 
 /**
  * View helper for formatting dates.
+ *
  * @psalm-suppress DeprecatedClass
  */
 class NumberFormat extends AbstractHelper

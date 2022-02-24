@@ -12,6 +12,7 @@ use function sprintf;
 
 /**
  * View helper for formatting currency.
+ *
  * @psalm-suppress DeprecatedClass
  */
 class CurrencyFormat extends AbstractHelper

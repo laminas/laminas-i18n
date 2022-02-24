@@ -19,6 +19,7 @@ use function sprintf;
  * However, you can find most of the up-to-date plural rules for most languages in those links:
  *      - http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
  *      - https://developer.mozilla.org/en-US/docs/Localization_and_Plurals
+ *
  * @psalm-suppress DeprecatedClass
  */
 class Plural extends AbstractHelper

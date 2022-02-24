@@ -8,9 +8,10 @@ use Laminas\View\Helper\HelperInterface;
 use Laminas\View\Renderer\RendererInterface;
 
 /**
+ * @internal
  * @deprecated since >= 2.15 If it is necessary to access the renderer from within the plugin, you should inject it
  *             as a constructor dependency
- * @internal
+ *
  * @psalm-internal \Laminas\I18n\View
  * @psalm-suppress DeprecatedProperty
  */

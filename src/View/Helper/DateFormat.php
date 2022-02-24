@@ -12,6 +12,7 @@ use function md5;
 
 /**
  * View helper for formatting dates.
+ *
  * @psalm-suppress DeprecatedClass
  */
 class DateFormat extends AbstractHelper
