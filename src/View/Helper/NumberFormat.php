@@ -3,6 +3,7 @@
 namespace Laminas\I18n\View\Helper;
 
 use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\DeprecatedAbstractHelperHierarchyTrait;
 use Locale;
 use NumberFormatter;
 
@@ -16,6 +17,8 @@ use function serialize;
  */
 class NumberFormat extends AbstractHelper
 {
+    use DeprecatedAbstractHelperHierarchyTrait;
+
     /**
      * number of decimals to use.
      *
