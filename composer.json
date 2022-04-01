@@ -53,6 +53,7 @@
         "vimeo/psalm": "^4.21"
     },
     "conflict": {
+        "laminas/laminas-view": "<2.20.0",
         "phpspec/prophecy": "<1.9.0",
         "zendframework/zend-i18n": "*"
     },
