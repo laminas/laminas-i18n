@@ -21,7 +21,8 @@
             "php": "7.4.99"
         },
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "extra": {
@@ -45,13 +46,14 @@
         "laminas/laminas-filter": "^2.10.0",
         "laminas/laminas-servicemanager": "^3.7.0",
         "laminas/laminas-validator": "^2.14.0",
-        "laminas/laminas-view": "^2.12.0",
+        "laminas/laminas-view": "^2.20.0",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.3",
         "psalm/plugin-phpunit": "^0.16.1",
         "vimeo/psalm": "^4.21"
     },
     "conflict": {
+        "laminas/laminas-view": "<2.20.0",
         "phpspec/prophecy": "<1.9.0",
         "zendframework/zend-i18n": "*"
     },

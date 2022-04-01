@@ -5,6 +5,7 @@ namespace Laminas\I18n\View\Helper;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\DeprecatedAbstractHelperHierarchyTrait;
 
 use function is_array;
 use function sprintf;
@@ -23,6 +24,8 @@ use function sprintf;
  */
 class Plural extends AbstractHelper
 {
+    use DeprecatedAbstractHelperHierarchyTrait;
+
     /**
      * Plural rule to use
      *

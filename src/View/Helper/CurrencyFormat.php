@@ -3,6 +3,7 @@
 namespace Laminas\I18n\View\Helper;
 
 use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\DeprecatedAbstractHelperHierarchyTrait;
 use Locale;
 use NumberFormatter;
 
@@ -16,6 +17,8 @@ use function sprintf;
  */
 class CurrencyFormat extends AbstractHelper
 {
+    use DeprecatedAbstractHelperHierarchyTrait;
+
     /**
      * The 3-letter ISO 4217 currency code indicating the currency to use
      *

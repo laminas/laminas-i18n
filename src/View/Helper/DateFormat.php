@@ -6,6 +6,7 @@ use DateTimeInterface;
 use IntlCalendar;
 use IntlDateFormatter;
 use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\DeprecatedAbstractHelperHierarchyTrait;
 use Locale;
 
 use function date_default_timezone_get;
@@ -16,6 +17,8 @@ use function md5;
  */
 class DateFormat extends AbstractHelper
 {
+    use DeprecatedAbstractHelperHierarchyTrait;
+
     /**
      * Locale to use instead of the default
      *
