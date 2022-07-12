@@ -6,9 +6,6 @@ use Laminas\I18n\Exception;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use Zend\I18n\Translator\Loader\Gettext;
-use Zend\I18n\Translator\Loader\Ini;
-use Zend\I18n\Translator\Loader\PhpArray;
 
 use function get_class;
 use function gettype;
@@ -68,9 +65,9 @@ class LoaderPluginManager extends AbstractPluginManager
         'PhpArray' => Loader\PhpArray::class,
 
         // Legacy Zend Framework aliases
-        Gettext::class  => Loader\Gettext::class,
-        Ini::class      => Loader\Ini::class,
-        PhpArray::class => Loader\PhpArray::class,
+        'Zend\I18n\Translator\Loader\Gettext'  => Loader\Gettext::class,
+        'Zend\I18n\Translator\Loader\Ini'      => Loader\Ini::class,
+        'Zend\I18n\Translator\Loader\PhpArray' => Loader\PhpArray::class,
 
         // v2 normalized FQCNs
         'zendi18ntranslatorloadergettext'  => Loader\Gettext::class,
