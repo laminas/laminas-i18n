@@ -33,6 +33,9 @@ class TranslatorServiceFactory implements FactoryInterface
     /**
      * laminas-servicemanager v2 factory for creating Translator instance.
      *
+     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
+     *             This method will be removed in version 3.0
+     *
      * Proxies to `__invoke()`.
      *
      * @return Translator

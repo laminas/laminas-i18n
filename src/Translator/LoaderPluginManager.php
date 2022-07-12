@@ -124,6 +124,9 @@ class LoaderPluginManager extends AbstractPluginManager
      *
      * Proxies to `validate()`.
      *
+     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
+     *             This method will be removed in version 3.0
+     *
      * @param mixed $plugin
      * @throws Exception\RuntimeException
      * @psalm-assert InstanceType $plugin
