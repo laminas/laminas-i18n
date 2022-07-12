@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.21.0@d8bec4c7aaee111a532daec32fb09de5687053d1">
+<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
   <file src="src/ConfigProvider.php">
     <MixedArrayOffset occurrences="4"/>
     <UndefinedClass occurrences="19">
@@ -209,8 +209,6 @@
     <MissingReturnType occurrences="1">
       <code>validatePlugin</code>
     </MissingReturnType>
-    <MixedArrayOffset occurrences="1"/>
-    <MixedPropertyTypeCoercion occurrences="1"/>
     <NonInvariantDocblockPropertyType occurrences="2">
       <code>$aliases</code>
       <code>$factories</code>
@@ -218,16 +216,15 @@
     <ParamNameMismatch occurrences="1">
       <code>$plugin</code>
     </ParamNameMismatch>
-    <UndefinedClass occurrences="3">
-      <code>Gettext</code>
-      <code>Ini</code>
-      <code>PhpArray</code>
-    </UndefinedClass>
   </file>
   <file src="src/Translator/LoaderPluginManagerFactory.php">
     <DeprecatedInterface occurrences="1">
       <code>LoaderPluginManagerFactory</code>
     </DeprecatedInterface>
+    <DeprecatedProperty occurrences="2">
+      <code>$this-&gt;creationOptions</code>
+      <code>$this-&gt;creationOptions</code>
+    </DeprecatedProperty>
     <MixedArgument occurrences="1">
       <code>$config['translator_plugins']</code>
     </MixedArgument>
@@ -402,10 +399,6 @@
       <code>$r</code>
       <code>$r</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>static function ($r) {</code>
-      <code>static function ($r) {</code>
-    </MissingClosureReturnType>
     <MissingConstructor occurrences="2">
       <code>$events</code>
       <code>$pluginManager</code>
@@ -520,41 +513,15 @@
     </MixedAssignment>
   </file>
   <file src="src/Validator/Alnum.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_string($value) &amp;&amp; ! is_int($value) &amp;&amp; ! is_float($value)</code>
-      <code>null === static::$filter</code>
-    </DocblockTypeContradiction>
     <InvalidScalarArgument occurrences="1">
       <code>$value</code>
     </InvalidScalarArgument>
-    <MixedArgument occurrences="1">
-      <code>$this-&gt;options['allowWhiteSpace']</code>
-    </MixedArgument>
-    <MixedInferredReturnType occurrences="1">
-      <code>bool</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;options['allowWhiteSpace']</code>
-    </MixedReturnStatement>
-    <MoreSpecificImplementedParamType occurrences="1">
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
     <RedundantCastGivenDocblockType occurrences="2">
       <code>(bool) $allowWhiteSpace</code>
       <code>(bool) $allowWhiteSpace</code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Validator/Alpha.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>is_string($value)</code>
-      <code>null === static::$filter</code>
-    </DocblockTypeContradiction>
-    <MixedArgument occurrences="1">
-      <code>$this-&gt;options['allowWhiteSpace']</code>
-    </MixedArgument>
-    <MoreSpecificImplementedParamType occurrences="1">
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
     <NonInvariantDocblockPropertyType occurrences="1">
       <code>$filter</code>
     </NonInvariantDocblockPropertyType>
@@ -583,23 +550,15 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Validator/IsFloat.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_scalar($value)</code>
-      <code>is_bool($value)</code>
-    </DocblockTypeContradiction>
     <MixedArgument occurrences="1">
       <code>$options['locale']</code>
     </MixedArgument>
-    <MoreSpecificImplementedParamType occurrences="1">
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
     <PossiblyFalseArgument occurrences="1">
       <code>$lastStringGroup</code>
     </PossiblyFalseArgument>
   </file>
   <file src="src/Validator/IsInt.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_string($value) &amp;&amp; ! is_int($value) &amp;&amp; ! is_float($value)</code>
+    <DocblockTypeContradiction occurrences="1">
       <code>is_bool($strict)</code>
     </DocblockTypeContradiction>
     <InvalidArrayOffset occurrences="1"/>
@@ -607,9 +566,6 @@
       <code>$options['locale']</code>
       <code>$options['strict']</code>
     </MixedArgument>
-    <MoreSpecificImplementedParamType occurrences="1">
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
     <PossiblyNullArgument occurrences="1">
       <code>$locale</code>
     </PossiblyNullArgument>
@@ -648,9 +604,6 @@
     <MixedReturnStatement occurrences="1">
       <code>static::$phone[$code]</code>
     </MixedReturnStatement>
-    <MoreSpecificImplementedParamType occurrences="1">
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
     <RedundantCastGivenDocblockType occurrences="1">
       <code>(bool) $possible</code>
     </RedundantCastGivenDocblockType>
@@ -660,9 +613,6 @@
       <code>getService</code>
       <code>setService</code>
     </DeprecatedMethod>
-    <DocblockTypeContradiction occurrences="1">
-      <code>! is_string($value) &amp;&amp; ! is_int($value)</code>
-    </DocblockTypeContradiction>
     <InvalidScalarArgument occurrences="2">
       <code>$value</code>
       <code>$value</code>
@@ -684,9 +634,6 @@
       <code>$format</code>
       <code>$format</code>
     </MixedOperand>
-    <MoreSpecificImplementedParamType occurrences="1">
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
   </file>
   <file src="src/View/Helper/AbstractTranslatorHelper.php">
     <RedundantCastGivenDocblockType occurrences="1">
@@ -924,10 +871,6 @@
       <code>$container</code>
       <code>$container</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>static function ($container) use ($translator) {</code>
-      <code>static function ($container) use ($translator) {</code>
-    </MissingClosureReturnType>
     <UnusedClosureParam occurrences="2">
       <code>$container</code>
       <code>$container</code>
@@ -1049,19 +992,6 @@
       <code>$doNotTrigger</code>
     </UnusedVariable>
   </file>
-  <file src="test/Validator/AlnumTest.php">
-    <InvalidArgument occurrences="1">
-      <code>[1 =&gt; 1]</code>
-    </InvalidArgument>
-  </file>
-  <file src="test/Validator/AlphaTest.php">
-    <InvalidArgument occurrences="1">
-      <code>[1 =&gt; 1]</code>
-    </InvalidArgument>
-    <InvalidCast occurrences="1">
-      <code>[1 =&gt; 1]</code>
-    </InvalidCast>
-  </file>
   <file src="test/Validator/DateTimeTest.php">
     <MissingReturnType occurrences="7">
       <code>testApplicationOptionLocale</code>
@@ -1083,24 +1013,12 @@
     </UndefinedMethod>
   </file>
   <file src="test/Validator/IsFloatTest.php">
-    <InvalidArgument occurrences="1">
-      <code>[1 =&gt; 1]</code>
-    </InvalidArgument>
-    <MixedArgument occurrences="2">
-      <code>$message['notFloat']</code>
-      <code>$value</code>
-    </MixedArgument>
     <MixedOperand occurrences="1">
       <code>$value</code>
     </MixedOperand>
   </file>
   <file src="test/Validator/IsIntTest.php">
-    <InvalidArgument occurrences="1">
-      <code>[1 =&gt; 1]</code>
-    </InvalidArgument>
-    <MixedArgument occurrences="3">
-      <code>$intVal</code>
-      <code>$intVal</code>
+    <MixedArgument occurrences="1">
       <code>$strict</code>
     </MixedArgument>
   </file>
@@ -1113,11 +1031,6 @@
       <code>static function ($value) use ($params) {</code>
       <code>static function ($value) use ($params) {</code>
     </MissingClosureReturnType>
-    <MixedArgument occurrences="3">
-      <code>$message['postcodeNoMatch']</code>
-      <code>$message['postcodeService']</code>
-      <code>$postCode</code>
-    </MixedArgument>
   </file>
   <file src="test/View/Helper/CurrencyFormatTest.php">
     <PossiblyNullArgument occurrences="1">
