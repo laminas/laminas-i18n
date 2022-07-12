@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n;
 
-use Interop\Container\ContainerInterface;
 use Laminas\I18n\Module;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Psr\Container\ContainerInterface;
 
 class ModuleTest extends TestCase
 {
