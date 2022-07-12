@@ -2,10 +2,10 @@
 
 namespace Laminas\I18n\Translator;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Psr\Container\ContainerInterface;
 
 use function is_array;
 
@@ -13,6 +13,9 @@ class LoaderPluginManagerFactory implements FactoryInterface
 {
     /**
      * laminas-servicemanager v2 options passed to factory.
+     *
+     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
+     *             This property will be removed in version 3.0
      *
      * @var array
      */
@@ -57,6 +60,9 @@ class LoaderPluginManagerFactory implements FactoryInterface
     /**
      * laminas-servicemanager v2 factory to return LoaderPluginManager
      *
+     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
+     *             This method will be removed in version 3.0
+     *
      * @return LoaderPluginManager
      */
     public function createService(ServiceLocatorInterface $container)
@@ -66,6 +72,9 @@ class LoaderPluginManagerFactory implements FactoryInterface
 
     /**
      * v2 support for instance creation options.
+     *
+     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
+     *             This method will be removed in version 3.0
      *
      * @param array $options
      * @return void

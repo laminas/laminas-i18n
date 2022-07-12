@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
-use Interop\Container\ContainerInterface;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorServiceFactory;
 use LaminasTest\I18n\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Psr\Container\ContainerInterface;
 
 class TranslatorServiceFactoryTest extends TestCase
 {

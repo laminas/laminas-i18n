@@ -6,6 +6,7 @@ use Laminas\I18n\Filter\Alnum as AlnumFilter;
 use Laminas\Validator\AbstractValidator;
 
 use function is_array;
+use function is_bool;
 use function is_float;
 use function is_int;
 use function is_scalar;
@@ -20,7 +21,7 @@ class Alnum extends AbstractValidator
     /**
      * Alphanumeric filter used for validation
      *
-     * @var AlnumFilter
+     * @var AlnumFilter|null
      */
     protected static $filter;
 
@@ -38,7 +39,7 @@ class Alnum extends AbstractValidator
     /**
      * Options for this validator
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $options = [
         'allowWhiteSpace' => false, // Whether to allow white space characters; off by default
@@ -47,7 +48,7 @@ class Alnum extends AbstractValidator
     /**
      * Sets default option values for this instance
      *
-     * @param array|bool $allowWhiteSpace
+     * @param array{allowWhiteSpace: bool}|bool $allowWhiteSpace
      */
     public function __construct($allowWhiteSpace = false)
     {
@@ -66,7 +67,7 @@ class Alnum extends AbstractValidator
      */
     public function getAllowWhiteSpace()
     {
-        return $this->options['allowWhiteSpace'];
+        return is_bool($this->options['allowWhiteSpace']) && $this->options['allowWhiteSpace'];
     }
 
     /**
@@ -84,7 +85,7 @@ class Alnum extends AbstractValidator
     /**
      * Returns true if and only if $value contains only alphabetic and digit characters
      *
-     * @param  int|float|string $value
+     * @param mixed $value
      * @return bool
      */
     public function isValid($value)
@@ -104,7 +105,7 @@ class Alnum extends AbstractValidator
             static::$filter = new AlnumFilter();
         }
 
-        static::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
+        static::$filter->setAllowWhiteSpace($this->getAllowWhiteSpace());
 
         if ($value != static::$filter->filter($value)) { // phpcs:ignore
             $this->error(self::NOT_ALNUM);

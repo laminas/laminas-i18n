@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
-use Interop\Container\ContainerInterface;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\LoaderPluginManager;
@@ -12,6 +11,7 @@ use Laminas\I18n\Translator\LoaderPluginManagerFactory;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use LaminasTest\I18n\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Psr\Container\ContainerInterface;
 
 class LoaderPluginManagerFactoryTest extends TestCase
 {

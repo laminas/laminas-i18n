@@ -80,7 +80,7 @@ class PhoneNumber extends AbstractValidator
      * - allowed_types | array | array of allowed types
      * - allow_possible | boolean | allow possible matches aka non-strict
      *
-     * @param array|Traversable $options
+     * @param iterable<string, mixed> $options
      */
     public function __construct($options = [])
     {
@@ -190,8 +190,8 @@ class PhoneNumber extends AbstractValidator
     /**
      * Returns true if and only if $value matches phone number format
      *
-     * @param  string|null $value
-     * @param  array|null  $context
+     * @param mixed $value
+     * @param array|null $context
      * @return bool
      */
     public function isValid($value = null, $context = null)
@@ -225,19 +225,19 @@ class PhoneNumber extends AbstractValidator
          *   2) International double-O prefix
          *   3) Bare country prefix
          */
-        if (0 === strpos($value, '+' . $countryPattern['code'])) {
-            $valueNoCountry = substr($value, $codeLength + 1);
-        } elseif (0 === strpos($value, '00' . $countryPattern['code'])) {
-            $valueNoCountry = substr($value, $codeLength + 2);
-        } elseif (0 === strpos($value, $countryPattern['code'])) {
-            $valueNoCountry = substr($value, $codeLength);
+        if (0 === strpos((string) $value, '+' . $countryPattern['code'])) {
+            $valueNoCountry = substr((string) $value, $codeLength + 1);
+        } elseif (0 === strpos((string) $value, '00' . $countryPattern['code'])) {
+            $valueNoCountry = substr((string) $value, $codeLength + 2);
+        } elseif (0 === strpos((string) $value, $countryPattern['code'])) {
+            $valueNoCountry = substr((string) $value, $codeLength);
         }
 
         // check against allowed types strict match:
         foreach ($countryPattern['patterns']['national'] as $type => $pattern) {
             if (in_array($type, $this->allowedTypes, true)) {
                 // check pattern:
-                if (preg_match($pattern, $value)) {
+                if (preg_match($pattern, (string) $value)) {
                     return true;
                 }
 
@@ -253,7 +253,7 @@ class PhoneNumber extends AbstractValidator
             foreach ($countryPattern['patterns']['possible'] as $type => $pattern) {
                 if (in_array($type, $this->allowedTypes, true)) {
                     // check pattern:
-                    if (preg_match($pattern, $value)) {
+                    if (preg_match($pattern, (string) $value)) {
                         return true;
                     }
 
