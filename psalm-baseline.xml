@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
-  <file src="src/ConfigProvider.php">
-    <MixedArrayOffset occurrences="4"/>
-    <UndefinedClass occurrences="19">
-      <code>\Zend\I18n\Filter\Alnum</code>
-      <code>\Zend\I18n\Filter\Alpha</code>
-      <code>\Zend\I18n\Filter\NumberFormat</code>
-      <code>\Zend\I18n\Filter\NumberParse</code>
-      <code>\Zend\I18n\Translator\LoaderPluginManager</code>
-      <code>\Zend\I18n\Translator\TranslatorInterface</code>
-      <code>\Zend\I18n\Validator\Alnum</code>
-      <code>\Zend\I18n\Validator\Alpha</code>
-      <code>\Zend\I18n\Validator\DateTime</code>
-      <code>\Zend\I18n\Validator\IsFloat</code>
-      <code>\Zend\I18n\Validator\IsInt</code>
-      <code>\Zend\I18n\Validator\PhoneNumber</code>
-      <code>\Zend\I18n\Validator\PostCode</code>
-      <code>\Zend\I18n\View\Helper\CurrencyFormat</code>
-      <code>\Zend\I18n\View\Helper\DateFormat</code>
-      <code>\Zend\I18n\View\Helper\NumberFormat</code>
-      <code>\Zend\I18n\View\Helper\Plural</code>
-      <code>\Zend\I18n\View\Helper\Translate</code>
-      <code>\Zend\I18n\View\Helper\TranslatePlural</code>
-    </UndefinedClass>
-  </file>
   <file src="src/Filter/AbstractLocale.php">
     <MixedInferredReturnType occurrences="1">
       <code>string</code>
