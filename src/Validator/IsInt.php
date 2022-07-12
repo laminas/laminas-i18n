@@ -53,7 +53,7 @@ class IsInt extends AbstractValidator
     /**
      * Constructor for the integer validator
      *
-     * @param  array|Traversable $options
+     * @param iterable<string, mixed> $options
      */
     public function __construct($options = [])
     {
@@ -127,7 +127,7 @@ class IsInt extends AbstractValidator
     /**
      * Returns true if and only if $value is a valid integer
      *
-     * @param  string|int|float $value
+     * @param mixed $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */

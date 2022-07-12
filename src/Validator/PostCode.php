@@ -230,7 +230,7 @@ class PostCode extends AbstractValidator
      *
      * Accepts a string locale and/or "format".
      *
-     * @param  array|Traversable $options
+     * @param iterable<string, mixed> $options
      */
     public function __construct($options = [])
     {
@@ -328,7 +328,7 @@ class PostCode extends AbstractValidator
     /**
      * Returns true if and only if $value is a valid postalcode
      *
-     * @param  string|int $value
+     * @param mixed $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */

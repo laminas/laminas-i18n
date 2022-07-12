@@ -15,7 +15,7 @@ class Alpha extends Alnum
     /**
      * Alphabetic filter used for validation
      *
-     * @var AlphaFilter
+     * @var AlphaFilter|null
      */
     protected static $filter;
 
@@ -33,7 +33,7 @@ class Alpha extends Alnum
     /**
      * Options for this validator
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $options = [
         'allowWhiteSpace' => false, // Whether to allow white space characters; off by default
@@ -42,7 +42,7 @@ class Alpha extends Alnum
     /**
      * Returns true if and only if $value contains only alphabetic characters
      *
-     * @param  string $value
+     * @param mixed $value
      * @return bool
      */
     public function isValid($value)
@@ -63,8 +63,7 @@ class Alpha extends Alnum
             static::$filter = new AlphaFilter();
         }
 
-        //static::$filter->setAllowWhiteSpace($this->allowWhiteSpace);
-        static::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
+        static::$filter->setAllowWhiteSpace($this->getAllowWhiteSpace());
 
         if ($value !== static::$filter->filter($value)) {
             $this->error(self::NOT_ALPHA);

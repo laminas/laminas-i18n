@@ -7,7 +7,6 @@ use IntlException;
 use Laminas\Validator\AbstractValidator;
 use Laminas\Validator\Exception as ValidatorException;
 use Locale;
-use Traversable;
 
 use function date_default_timezone_get;
 use function intl_is_failure;
@@ -68,7 +67,7 @@ class DateTime extends AbstractValidator
     /**
      * Constructor for the Date validator
      *
-     * @param array|Traversable $options
+     * @param iterable<string, mixed> $options
      */
     public function __construct($options = [])
     {

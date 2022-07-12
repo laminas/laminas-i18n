@@ -53,7 +53,7 @@ class IsFloat extends AbstractValidator
     /**
      * Constructor for the integer validator
      *
-     * @param array|Traversable $options
+     * @param iterable<string, mixed> $options
      */
     public function __construct($options = [])
     {
@@ -99,7 +99,7 @@ class IsFloat extends AbstractValidator
      * Returns true if and only if $value is a floating-point value. Uses the formal definition of a float as described
      * in the PHP manual: {@link https://www.php.net/float}
      *
-     * @param  float|int|string $value
+     * @param mixed $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */
