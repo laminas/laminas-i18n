@@ -1422,16 +1422,16 @@
         },
         {
             "name": "laminas/laminas-filter",
-            "version": "2.16.0",
+            "version": "2.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-filter.git",
-                "reference": "f5a3736cb49f06a3ba8941803bf84559bed4c3fa"
+                "reference": "7c78483f22e118fbc98be41dc24b39e8c17cdcae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/f5a3736cb49f06a3ba8941803bf84559bed4c3fa",
-                "reference": "f5a3736cb49f06a3ba8941803bf84559bed4c3fa",
+                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/7c78483f22e118fbc98be41dc24b39e8c17cdcae",
+                "reference": "7c78483f22e118fbc98be41dc24b39e8c17cdcae",
                 "shasum": ""
             },
             "require": {
@@ -1450,14 +1450,13 @@
                 "pear/archive_tar": "^1.4.14",
                 "phpspec/prophecy-phpunit": "^2.0.1",
                 "phpunit/phpunit": "^9.5.10",
-                "psalm/plugin-phpunit": "^0.15.2",
+                "psalm/plugin-phpunit": "^0.17.0",
                 "psr/http-factory": "^1.0.1",
-                "vimeo/psalm": "^4.13.1"
+                "vimeo/psalm": "^4.24.0"
             },
             "suggest": {
                 "laminas/laminas-crypt": "Laminas\\Crypt component, for encryption filters",
                 "laminas/laminas-i18n": "Laminas\\I18n component for filters depending on i18n functionality",
-                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component, for using the filter chain functionality",
                 "laminas/laminas-uri": "Laminas\\Uri component, for the UriNormalize filter",
                 "psr/http-factory-implementation": "psr/http-factory-implementation, for creating file upload instances when consuming PSR-7 in file upload filters"
             },
@@ -1497,7 +1496,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-07-12T14:35:14+00:00"
+            "time": "2022-07-17T11:58:06+00:00"
         },
         {
             "name": "laminas/laminas-json",
