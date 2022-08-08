@@ -17,7 +17,7 @@ use function strtoupper;
 final class CountryCode
 {
     /** @param non-empty-string $code */
-    private function __construct(public readonly string $code)
+    private function __construct(private string $code)
     {
     }
 
