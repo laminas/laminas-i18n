@@ -9,7 +9,6 @@ use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
-use function get_class;
 use function gettype;
 use function is_object;
 use function sprintf;
@@ -113,7 +112,7 @@ class LoaderPluginManager extends AbstractPluginManager
 
         throw new InvalidServiceException(sprintf(
             'Plugin of type %s is invalid; must implement %s or %s',
-            is_object($plugin) ? get_class($plugin) : gettype($plugin),
+            is_object($plugin) ? $plugin::class : gettype($plugin),
             FileLoaderInterface::class,
             RemoteLoaderInterface::class
         ));
@@ -138,7 +137,7 @@ class LoaderPluginManager extends AbstractPluginManager
         } catch (InvalidServiceException $e) {
             throw new Exception\RuntimeException(sprintf(
                 'Plugin of type %s is invalid; must implement %s or %s',
-                is_object($plugin) ? get_class($plugin) : gettype($plugin),
+                is_object($plugin) ? $plugin::class : gettype($plugin),
                 FileLoaderInterface::class,
                 RemoteLoaderInterface::class
             ));
