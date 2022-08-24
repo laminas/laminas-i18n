@@ -41,7 +41,7 @@
         "laminas/laminas-cache": "^3.1.2",
         "laminas/laminas-cache-storage-adapter-memory": "^2.0.0",
         "laminas/laminas-cache-storage-deprecated-factory": "^1.0.0",
-        "laminas/laminas-coding-standard": "~2.3.0",
+        "laminas/laminas-coding-standard": "~2.4.0",
         "laminas/laminas-config": "^3.4.0",
         "laminas/laminas-eventmanager": "^3.5.0",
         "laminas/laminas-filter": "^2.16.0",
