@@ -16,14 +16,14 @@ class TextDomain extends ArrayObject
     /**
      * Plural rule.
      *
-     * @var PluralRule
+     * @var PluralRule|null
      */
     protected $pluralRule;
 
     /**
      * Default plural rule shared between instances.
      *
-     * @var PluralRule
+     * @var PluralRule|null
      */
     protected static $defaultPluralRule;
 

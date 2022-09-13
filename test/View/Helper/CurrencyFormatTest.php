@@ -58,7 +58,7 @@ class CurrencyFormatTest extends TestCase
         ?string $currencyPattern,
         string $expected
     ): void {
-        $this->assertMbStringEquals(
+        self::assertMbStringEquals(
             $expected,
             $this->helper->__invoke(
                 $number,
@@ -87,7 +87,7 @@ class CurrencyFormatTest extends TestCase
             ->setCurrencyCode($currencyCode)
             ->setCurrencyPattern($currencyPattern);
 
-        $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
+        self::assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
 
     public function testViewHelperExecutedSequentially(): void
@@ -95,20 +95,20 @@ class CurrencyFormatTest extends TestCase
         $helper = $this->helper;
         $helper->setShouldShowDecimals(true);
 
-        $this->assertEquals('1.234,43 €', $helper(1234.4321, 'EUR', null, 'de_DE'));
-        $this->assertEquals('1.234 €', $helper(1234.4321, 'EUR', false, 'de_DE'));
-        $this->assertEquals('1.234,43 €', $helper(1234.4321, 'EUR', null, 'de_DE'));
+        self::assertEquals('1.234,43 €', $helper(1234.4321, 'EUR', null, 'de_DE'));
+        self::assertEquals('1.234 €', $helper(1234.4321, 'EUR', false, 'de_DE'));
+        self::assertEquals('1.234,43 €', $helper(1234.4321, 'EUR', null, 'de_DE'));
     }
 
     public function testDefaultLocale(): void
     {
-        $this->assertMbStringEquals(Locale::getDefault(), $this->helper->getLocale());
+        self::assertMbStringEquals(Locale::getDefault(), $this->helper->getLocale());
     }
 
-    public function assertMbStringEquals(string $expected, string $test, string $message = ''): void
+    public static function assertMbStringEquals(string $expected, string $test, string $message = ''): void
     {
         $expected = str_replace(["\xC2\xA0", ' '], '', $expected);
         $test     = str_replace(["\xC2\xA0", ' '], '', $test);
-        $this->assertEquals($expected, $test, $message);
+        self::assertEquals($expected, $test, $message);
     }
 }

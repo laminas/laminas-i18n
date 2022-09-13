@@ -8,16 +8,9 @@ use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\View\Helper\TranslatePlural as TranslatePluralHelper;
 use LaminasTest\I18n\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 
-/**
- * @group      Laminas_View
- * @group      Laminas_View_Helper
- */
 class TranslatePluralTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var TranslatePluralHelper */
     public $helper;
 
@@ -27,30 +20,31 @@ class TranslatePluralTest extends TestCase
         $this->helper = new TranslatePluralHelper();
     }
 
-    public function testInvokingWithoutTranslatorWillRaiseException()
+    public function testInvokingWithoutTranslatorWillRaiseException(): void
     {
         $this->expectException(RuntimeException::class);
         $this->helper->__invoke('singular', 'plural', 1);
     }
 
-    public function testDefaultInvokeArguments()
+    public function testDefaultInvokeArguments(): void
     {
         $singularInput = 'singular';
         $pluralInput   = 'plural';
         $numberInput   = 1;
         $expected      = 'translated';
 
-        $translatorMock = $this->prophesize(Translator::class);
-        $translatorMock->translatePlural($singularInput, $pluralInput, $numberInput, 'default', null)
-            ->willReturn($expected)
-            ->shouldBeCalledTimes(1);
+        $translatorMock = $this->createMock(Translator::class);
+        $translatorMock->expects(self::once())
+            ->method('translatePlural')
+            ->with($singularInput, $pluralInput, $numberInput, 'default', null)
+            ->willReturn($expected);
 
-        $this->helper->setTranslator($translatorMock->reveal());
+        $this->helper->setTranslator($translatorMock);
 
-        $this->assertEquals($expected, $this->helper->__invoke($singularInput, $pluralInput, $numberInput));
+        self::assertEquals($expected, $this->helper->__invoke($singularInput, $pluralInput, $numberInput));
     }
 
-    public function testCustomInvokeArguments()
+    public function testCustomInvokeArguments(): void
     {
         $singularInput = 'singular';
         $pluralInput   = 'plural';
@@ -59,14 +53,15 @@ class TranslatePluralTest extends TestCase
         $textDomain    = 'textDomain';
         $locale        = 'en_US';
 
-        $translatorMock = $this->prophesize(Translator::class);
-        $translatorMock->translatePlural($singularInput, $pluralInput, $numberInput, $textDomain, $locale)
-            ->willReturn($expected)
-            ->shouldBeCalledTimes(1);
+        $translatorMock = $this->createMock(Translator::class);
+        $translatorMock->expects(self::once())
+            ->method('translatePlural')
+            ->with($singularInput, $pluralInput, $numberInput, $textDomain, $locale)
+            ->willReturn($expected);
 
-        $this->helper->setTranslator($translatorMock->reveal());
+        $this->helper->setTranslator($translatorMock);
 
-        $this->assertEquals($expected, $this->helper->__invoke(
+        self::assertEquals($expected, $this->helper->__invoke(
             $singularInput,
             $pluralInput,
             $numberInput,

@@ -37,7 +37,7 @@ class IsFloatTest extends TestCase
     {
         $this->validator->setLocale($locale);
 
-        $this->assertEquals(
+        self::assertEquals(
             $expected,
             $this->validator->isValid($value),
             'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false')
@@ -103,11 +103,11 @@ class IsFloatTest extends TestCase
      * @param string  $locale   locale for validation
      * @dataProvider lookAlikeProvider
      */
-    public function testlookAlikes(string $value, bool $expected, string $locale): void
+    public function testLookALikes(string $value, bool $expected, string $locale): void
     {
         $this->validator->setLocale($locale);
 
-        $this->assertEquals(
+        self::assertEquals(
             $expected,
             $this->validator->isValid($value),
             'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(' (locale:%s)', $locale)
@@ -144,7 +144,7 @@ class IsFloatTest extends TestCase
     {
         $this->validator->setLocale($locale);
 
-        $this->assertEquals(
+        self::assertEquals(
             $expected,
             $this->validator->isValid($value),
             'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(' (locale:%s)', $locale)
@@ -176,7 +176,7 @@ class IsFloatTest extends TestCase
      */
     public function testGetMessages(): void
     {
-        $this->assertEquals([], $this->validator->getMessages());
+        self::assertEquals([], $this->validator->getMessages());
     }
 
     /**
@@ -185,33 +185,33 @@ class IsFloatTest extends TestCase
     public function testSettingLocales(): void
     {
         $this->validator->setLocale('de');
-        $this->assertEquals('de', $this->validator->getLocale());
+        self::assertEquals('de', $this->validator->getLocale());
     }
 
     public function testNonStringValidation(): void
     {
-        $this->assertFalse($this->validator->isValid([1 => 1]));
+        self::assertFalse($this->validator->isValid([1 => 1]));
     }
 
     public function testUsingApplicationLocale(): void
     {
         Locale::setDefault('de');
         $valid = new IsFloatValidator();
-        $this->assertEquals('de', $valid->getLocale());
+        self::assertEquals('de', $valid->getLocale());
     }
 
     public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 
-        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
+        self::assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
     public function testNotFloat(): void
     {
-        $this->assertFalse($this->validator->isValid('2.000.000,00'));
+        self::assertFalse($this->validator->isValid('2.000.000,00'));
 
         $message = $this->validator->getMessages();
-        $this->assertStringContainsString('does not appear to be a float', $message['notFloat']);
+        self::assertStringContainsString('does not appear to be a float', $message['notFloat']);
     }
 }

@@ -150,8 +150,8 @@ class NumberFormatTest extends TestCase
         array $textAttributes,
         float $number,
         string $expected
-    ) {
-        $this->assertMbStringEquals($expected, $this->helper->__invoke(
+    ): void {
+        self::assertMbStringEquals($expected, $this->helper->__invoke(
             $number,
             $formatStyle,
             $formatType,
@@ -181,18 +181,18 @@ class NumberFormatTest extends TestCase
              ->setFormatType($formatType)
              ->setTextAttributes($textAttributes);
 
-        $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
+        self::assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
 
     public function testDefaultLocale(): void
     {
-        $this->assertEquals(Locale::getDefault(), $this->helper->getLocale());
+        self::assertEquals(Locale::getDefault(), $this->helper->getLocale());
     }
 
-    public function assertMbStringEquals(string $expected, string $test, string $message = ''): void
+    public static function assertMbStringEquals(string $expected, string $test, string $message = ''): void
     {
         $expected = str_replace(["\xC2\xA0", ' '], '', $expected);
         $test     = str_replace(["\xC2\xA0", ' '], '', $test);
-        $this->assertEquals($expected, $test, $message);
+        self::assertEquals($expected, $test, $message);
     }
 }

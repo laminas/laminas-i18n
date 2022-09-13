@@ -48,16 +48,16 @@ class DateTimeTest extends TestCase
     {
         $this->validator->setOptions($options);
 
-        $this->assertEquals(
+        self::assertEquals(
             $expected,
             $this->validator->isValid($value),
             sprintf('Failed expecting %s being %s', $value, $expected ? 'true' : 'false')
                 . sprintf(
                     ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
-                    $this->validator->getLocale(),
-                    $this->validator->getDateType(),
-                    $this->validator->getTimeType(),
-                    $this->validator->getPattern()
+                    (string) $this->validator->getLocale(),
+                    (string) $this->validator->getDateType(),
+                    (string) $this->validator->getTimeType(),
+                    (string) $this->validator->getPattern()
                 )
         );
     }
@@ -108,58 +108,56 @@ class DateTimeTest extends TestCase
 
     /**
      * Ensures that getMessages() returns expected default value
-     *
-     * @return void
      */
-    public function testGetMessages()
+    public function testGetMessages(): void
     {
-        $this->assertEquals([], $this->validator->getMessages());
+        self::assertEquals([], $this->validator->getMessages());
     }
 
     /**
      * Ensures that set/getLocale() works
      */
-    public function testOptionLocale()
+    public function testOptionLocale(): void
     {
         $this->validator->setLocale('de');
-        $this->assertEquals('de', $this->validator->getLocale());
+        self::assertEquals('de', $this->validator->getLocale());
     }
 
-    public function testApplicationOptionLocale()
+    public function testApplicationOptionLocale(): void
     {
         Locale::setDefault('nl');
         $valid = new DateTimeValidator();
-        $this->assertEquals(Locale::getDefault(), $valid->getLocale());
+        self::assertEquals(Locale::getDefault(), $valid->getLocale());
     }
 
     /**
      * Ensures that set/getTimezone() works
      */
-    public function testOptionTimezone()
+    public function testOptionTimezone(): void
     {
         $this->validator->setLocale('Europe/Berlin');
-        $this->assertEquals('Europe/Berlin', $this->validator->getLocale());
+        self::assertEquals('Europe/Berlin', $this->validator->getLocale());
     }
 
-    public function testApplicationOptionTimezone()
+    public function testApplicationOptionTimezone(): void
     {
         date_default_timezone_set('Europe/Berlin');
         $valid = new DateTimeValidator();
-        $this->assertEquals(date_default_timezone_get(), $valid->getTimezone());
+        self::assertEquals(date_default_timezone_get(), $valid->getTimezone());
     }
 
     /**
      * Ensures that an omitted pattern results in a calculated pattern by IntlDateFormatter
      */
-    public function testOptionPatternOmitted()
+    public function testOptionPatternOmitted(): void
     {
         // null before validation
-        $this->assertNull($this->validator->getPattern());
+        self::assertNull($this->validator->getPattern());
 
         $this->validator->isValid('does not matter');
 
         // set after
-        $this->assertEquals('yyyyMMdd hh:mm a', $this->validator->getPattern());
+        self::assertEquals('yyyyMMdd hh:mm a', $this->validator->getPattern());
     }
 
     public function testSettingThePatternToNullIsAcceptable(): void
@@ -177,15 +175,15 @@ class DateTimeTest extends TestCase
     /**
      * Ensures that setting the pattern results in pattern used (by the validation process)
      */
-    public function testOptionPattern()
+    public function testOptionPattern(): void
     {
         $this->validator->setOptions(['pattern' => 'hh:mm']);
 
-        $this->assertTrue($this->validator->isValid('02:00'));
-        $this->assertEquals('hh:mm', $this->validator->getPattern());
+        self::assertTrue($this->validator->isValid('02:00'));
+        self::assertEquals('hh:mm', $this->validator->getPattern());
     }
 
-    public function testMultipleIsValidCalls()
+    public function testMultipleIsValidCalls(): void
     {
         $validValue = IntlDateFormatter::create('en', IntlDateFormatter::FULL, IntlDateFormatter::FULL)
             ->format(new DateTime());
@@ -194,10 +192,10 @@ class DateTimeTest extends TestCase
             ->setDateType(IntlDateFormatter::FULL)
             ->setTimeType(IntlDateFormatter::FULL);
 
-        $this->assertTrue($this->validator->isValid($validValue));
-        $this->assertFalse($this->validator->isValid('12/31/2015'));
-        $this->assertFalse($this->validator->isValid('23:59:59'));
-        $this->assertFalse($this->validator->isValid('does not matter'));
-        $this->assertTrue($this->validator->isValid($validValue));
+        self::assertTrue($this->validator->isValid($validValue));
+        self::assertFalse($this->validator->isValid('12/31/2015'));
+        self::assertFalse($this->validator->isValid('23:59:59'));
+        self::assertFalse($this->validator->isValid('does not matter'));
+        self::assertTrue($this->validator->isValid($validValue));
     }
 }

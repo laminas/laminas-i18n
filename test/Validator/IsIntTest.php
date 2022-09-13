@@ -45,7 +45,7 @@ class IsIntTest extends TestCase
     public function testBasic($intVal, bool $expected): void
     {
         $this->validator->setLocale('en');
-        $this->assertEquals($expected, $this->validator->isValid($intVal));
+        self::assertEquals($expected, $this->validator->isValid($intVal));
     }
 
     /**
@@ -53,7 +53,7 @@ class IsIntTest extends TestCase
      */
     public function testGetMessages(): void
     {
-        $this->assertEquals([], $this->validator->getMessages());
+        self::assertEquals([], $this->validator->getMessages());
     }
 
     /**
@@ -62,46 +62,46 @@ class IsIntTest extends TestCase
     public function testSettingLocales(): void
     {
         $this->validator->setLocale('de');
-        $this->assertEquals('de', $this->validator->getLocale());
-        $this->assertEquals(false, $this->validator->isValid('10 000'));
-        $this->assertEquals(true, $this->validator->isValid('10.000'));
+        self::assertEquals('de', $this->validator->getLocale());
+        self::assertEquals(false, $this->validator->isValid('10 000'));
+        self::assertEquals(true, $this->validator->isValid('10.000'));
     }
 
     public function testNonStringValidation(): void
     {
-        $this->assertFalse($this->validator->isValid([1 => 1]));
+        self::assertFalse($this->validator->isValid([1 => 1]));
     }
 
     public function testUsingApplicationLocale(): void
     {
         Locale::setDefault('de');
         $valid = new IsIntValidator();
-        $this->assertTrue($valid->isValid('10.000'));
+        self::assertTrue($valid->isValid('10.000'));
     }
 
     public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale(): void
     {
         Locale::setDefault('de');
         $valid = new IsIntValidator();
-        $this->assertTrue($valid->isValid(1200));
-        $this->assertFalse($valid->isValid('1,200'));
+        self::assertTrue($valid->isValid(1200));
+        self::assertFalse($valid->isValid('1,200'));
     }
 
     public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 
-        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
+        self::assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
     public function testGetStrict(): void
     {
-        $this->assertFalse(
+        self::assertFalse(
             $this->validator->getStrict()
         );
 
         $this->validator->setStrict(true);
-        $this->assertTrue(
+        self::assertTrue(
             $this->validator->getStrict()
         );
     }
@@ -129,6 +129,7 @@ class IsIntTest extends TestCase
     public function testSetStrictThrowsInvalidArgumentException($strict): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
+        /** @psalm-suppress MixedArgument */
         $this->validator->setStrict($strict);
     }
 
@@ -162,6 +163,6 @@ class IsIntTest extends TestCase
         $this->validator->setLocale('en');
         $this->validator->setStrict(true);
 
-        $this->assertSame($expected, $this->validator->isValid($intVal));
+        self::assertSame($expected, $this->validator->isValid($intVal));
     }
 }

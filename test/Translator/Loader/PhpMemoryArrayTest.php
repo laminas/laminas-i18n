@@ -52,7 +52,7 @@ class PhpMemoryArrayTest extends TestCase
     {
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_empty.php');
         $textDomain = $loader->load('en_US', 'default');
-        $this->assertInstanceOf(TextDomain::class, $textDomain);
+        self::assertInstanceOf(TextDomain::class, $textDomain);
     }
 
     public function testLoaderReturnsValidTextDomain(): void
@@ -60,8 +60,8 @@ class PhpMemoryArrayTest extends TestCase
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
 
-        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
+        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
     public function testLoaderLoadsPluralRules(): void
@@ -69,9 +69,9 @@ class PhpMemoryArrayTest extends TestCase
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
 
-        $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
-        $this->assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
-        $this->assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
-        $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
+        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
+        self::assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
+        self::assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
+        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
 }

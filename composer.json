@@ -47,7 +47,6 @@
         "laminas/laminas-filter": "^2.16.0",
         "laminas/laminas-validator": "^2.17.0",
         "laminas/laminas-view": "^2.21.0",
-        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5.21",
         "psalm/plugin-phpunit": "^0.17.0",
         "vimeo/psalm": "^4.24.0"

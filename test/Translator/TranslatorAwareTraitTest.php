@@ -5,120 +5,109 @@ declare(strict_types=1);
 namespace LaminasTest\I18n\Translator;
 
 use Laminas\I18n\Translator\Translator;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
 use LaminasTest\I18n\TestCase;
+use LaminasTest\I18n\Translator\TestAsset\TranslatorAwareObject;
 
-/**
- * @requires PHP 7.3
- */
 class TranslatorAwareTraitTest extends TestCase
 {
-    public function testSetTranslator()
-    {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
+    private TranslatorAwareObject $object;
 
-        $this->assertNull($object->getTranslator());
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->object = new TranslatorAwareObject();
+    }
+
+    public function testSetTranslator(): void
+    {
+        self::assertNull($this->object->getTranslator());
 
         $translator = new Translator();
 
-        $object->setTranslator($translator);
+        $this->object->setTranslator($translator);
 
-        $this->assertSame($translator, $object->getTranslator());
+        self::assertSame($translator, $this->object->getTranslator());
     }
 
-    public function testSetTranslatorAndTextDomain()
+    public function testSetTranslatorAndTextDomain(): void
     {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
-
-        $this->assertNull($object->getTranslator());
-        $this->assertSame('default', $object->getTranslatorTextDomain());
+        self::assertNull($this->object->getTranslator());
+        self::assertSame('default', $this->object->getTranslatorTextDomain());
 
         $translator = new Translator();
         $textDomain = 'domain';
 
-        $object->setTranslator($translator, $textDomain);
+        $this->object->setTranslator($translator, $textDomain);
 
-        $this->assertSame($translator, $object->getTranslator());
-        $this->assertSame('domain', $object->getTranslatorTextDomain());
+        self::assertSame($translator, $this->object->getTranslator());
+        self::assertSame('domain', $this->object->getTranslatorTextDomain());
     }
 
-    public function testGetTranslator()
+    public function testGetTranslator(): void
     {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
-
-        $this->assertNull($object->getTranslator());
+        self::assertNull($this->object->getTranslator());
 
         $translator = new Translator();
 
-        $object->setTranslator($translator);
+        $this->object->setTranslator($translator);
 
-        $this->assertEquals($translator, $object->getTranslator());
+        self::assertEquals($translator, $this->object->getTranslator());
     }
 
-    public function testHasTranslator()
+    public function testHasTranslator(): void
     {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
-
-        $this->assertFalse($object->hasTranslator());
+        self::assertFalse($this->object->hasTranslator());
 
         $translator = new Translator();
 
-        $object->setTranslator($translator);
+        $this->object->setTranslator($translator);
 
-        $this->assertTrue($object->hasTranslator());
+        self::assertTrue($this->object->hasTranslator());
     }
 
-    public function testSetTranslatorEnabled()
+    public function testSetTranslatorEnabled(): void
     {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
-
-        $this->assertTrue($object->isTranslatorEnabled());
+        self::assertTrue($this->object->isTranslatorEnabled());
 
         $enabled = false;
 
-        $object->setTranslatorEnabled($enabled);
+        $this->object->setTranslatorEnabled($enabled);
 
-        $this->assertFalse($object->isTranslatorEnabled());
+        self::assertFalse($this->object->isTranslatorEnabled());
 
-        $object->setTranslatorEnabled();
+        $this->object->setTranslatorEnabled();
 
-        $this->assertTrue($object->isTranslatorEnabled());
+        self::assertTrue($this->object->isTranslatorEnabled());
     }
 
-    public function testIsTranslatorEnabled()
+    public function testIsTranslatorEnabled(): void
     {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
+        self::assertTrue($this->object->isTranslatorEnabled());
 
-        $this->assertTrue($object->isTranslatorEnabled());
+        $this->object->setTranslatorEnabled(false);
 
-        $object->setTranslatorEnabled(false);
-
-        $this->assertFalse($object->isTranslatorEnabled());
+        self::assertFalse($this->object->isTranslatorEnabled());
     }
 
-    public function testSetTranslatorTextDomain()
+    public function testSetTranslatorTextDomain(): void
     {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
-
-        $this->assertSame('default', $object->getTranslatorTextDomain());
+        self::assertSame('default', $this->object->getTranslatorTextDomain());
 
         $textDomain = 'domain';
 
-        $object->setTranslatorTextDomain($textDomain);
+        $this->object->setTranslatorTextDomain($textDomain);
 
-        $this->assertSame('domain', $object->getTranslatorTextDomain());
+        self::assertSame('domain', $this->object->getTranslatorTextDomain());
     }
 
-    public function testGetTranslatorTextDomain()
+    public function testGetTranslatorTextDomain(): void
     {
-        $object = $this->getObjectForTrait(TranslatorAwareTrait::class);
-
-        $this->assertEquals('default', $object->getTranslatorTextDomain());
+        self::assertEquals('default', $this->object->getTranslatorTextDomain());
 
         $textDomain = 'domain';
 
-        $object->setTranslatorTextDomain($textDomain);
+        $this->object->setTranslatorTextDomain($textDomain);
 
-        $this->assertEquals($textDomain, $object->getTranslatorTextDomain());
+        self::assertEquals($textDomain, $this->object->getTranslatorTextDomain());
     }
 }

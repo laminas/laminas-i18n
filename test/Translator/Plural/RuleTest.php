@@ -58,7 +58,7 @@ class RuleTest extends TestCase
      */
     public function testParseRules(string $rule, int $expectedValue): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             $expectedValue,
             Rule::fromString('nplurals=9; plural=' . $rule)->evaluate(0)
         );
@@ -143,13 +143,13 @@ class RuleTest extends TestCase
         $rule = Rule::fromString('nplurals=9; plural=' . $rule);
 
         for ($i = 0; $i < 200; $i++) {
-            $this->assertEquals((int) $expectedValues[$i], $rule->evaluate($i));
+            self::assertEquals((int) $expectedValues[$i], $rule->evaluate($i));
         }
     }
 
     public function testGetNumPlurals(): void
     {
         $rule = Rule::fromString('nplurals=9; plural=n');
-        $this->assertEquals(9, $rule->getNumPlurals());
+        self::assertEquals(9, $rule->getNumPlurals());
     }
 }

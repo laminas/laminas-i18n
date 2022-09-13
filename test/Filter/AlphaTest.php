@@ -19,10 +19,8 @@ class AlphaTest extends TestCase
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @var mixed
      **/
-    protected static $unicodeEnabled;
+    protected static bool $unicodeEnabled;
 
     /**
      * The Alphabet means english alphabet.
@@ -87,7 +85,7 @@ class AlphaTest extends TestCase
 
         foreach ($valuesExpected as $input => $expected) {
             $actual = $this->filter->filter($input);
-            $this->assertEquals($expected, $actual);
+            self::assertEquals($expected, $actual);
         }
     }
 
@@ -133,7 +131,7 @@ class AlphaTest extends TestCase
 
         foreach ($valuesExpected as $input => $expected) {
             $actual = $this->filter->filter($input);
-            $this->assertEquals($expected, $actual);
+            self::assertEquals($expected, $actual);
         }
     }
 
@@ -150,7 +148,7 @@ class AlphaTest extends TestCase
 
         $actual = $filter->filter(array_keys($values));
 
-        $this->assertEquals(array_values($values), $actual);
+        self::assertEquals(array_values($values), $actual);
     }
 
     /** @return array<array-key, array{0: mixed}> */
@@ -170,6 +168,6 @@ class AlphaTest extends TestCase
     {
         $filter = new AlphaFilter();
 
-        $this->assertEquals($input, $filter->filter($input));
+        self::assertEquals($input, $filter->filter($input));
     }
 }

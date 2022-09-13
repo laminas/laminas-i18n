@@ -38,7 +38,7 @@ class AlnumTest extends TestCase
             'foobar1' => true,
         ];
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $this->validator->isValid($input));
+            self::assertEquals($result, $this->validator->isValid($input));
         }
     }
 
@@ -47,7 +47,7 @@ class AlnumTest extends TestCase
      */
     public function testMessagesEmptyInitially(): void
     {
-        $this->assertEquals([], $this->validator->getMessages());
+        self::assertEquals([], $this->validator->getMessages());
     }
 
     /**
@@ -70,7 +70,7 @@ class AlnumTest extends TestCase
             'foobar1' => true,
         ];
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals(
+            self::assertEquals(
                 $result,
                 $this->validator->isValid($input),
                 "Expected '$input' to be considered " . ($result ? '' : 'in') . 'valid'
@@ -80,39 +80,39 @@ class AlnumTest extends TestCase
 
     public function testEmptyStringValueResultsInProperValidationFailureMessages(): void
     {
-        $this->assertFalse($this->validator->isValid(''));
+        self::assertFalse($this->validator->isValid(''));
 
         $messages      = $this->validator->getMessages();
         $arrayExpected = [
             AlnumValidator::STRING_EMPTY => 'The input is an empty string',
         ];
-        $this->assertThat($messages, $this->identicalTo($arrayExpected));
+        self::assertThat($messages, self::identicalTo($arrayExpected));
     }
 
     public function testInvalidValueResultsInProperValidationFailureMessages(): void
     {
-        $this->assertFalse($this->validator->isValid('#'));
+        self::assertFalse($this->validator->isValid('#'));
         $messages      = $this->validator->getMessages();
         $arrayExpected = [
             AlnumValidator::NOT_ALNUM => 'The input contains characters which are non alphabetic and no digits',
         ];
-        $this->assertThat($messages, $this->identicalTo($arrayExpected));
+        self::assertThat($messages, self::identicalTo($arrayExpected));
     }
 
     public function testNonStringValidation(): void
     {
-        $this->assertFalse($this->validator->isValid([1 => 1]));
+        self::assertFalse($this->validator->isValid([1 => 1]));
     }
 
     public function testIntegerValidation(): void
     {
-        $this->assertTrue($this->validator->isValid(1));
+        self::assertTrue($this->validator->isValid(1));
     }
 
     public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 
-        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
+        self::assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 }
