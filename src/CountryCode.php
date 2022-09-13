@@ -89,7 +89,7 @@ final class CountryCode
      * @throws InvalidArgumentException When a non-empty string is provided that cannot be recognized,
      *                                  an exception will be thrown.
      */
-    public static function detect(string|self|null $countryCodeOrLocale): self
+    public static function detect(string|self|null $countryCodeOrLocale = null): self
     {
         if ($countryCodeOrLocale instanceof self) {
             return $countryCodeOrLocale;

@@ -9,6 +9,7 @@ use Laminas\I18n\Exception\InvalidArgumentException;
 use Locale;
 use PHPUnit\Framework\TestCase;
 
+/** @covers \Laminas\I18n\CountryCode */
 final class CountryCodeTest extends TestCase
 {
     private string $preserveLocale;
@@ -134,11 +135,16 @@ final class CountryCodeTest extends TestCase
         self::assertSame($input, CountryCode::detect($input));
     }
 
-    public function testDetectWillUseDefaultLocaleForEmptyInput(): void
+    public function testDetectWillUseDefaultLocaleWhenGivenZeroArguments(): void
     {
         Locale::setDefault('en_GB');
-        $code = CountryCode::detect(null);
+        $code = CountryCode::detect();
         self::assertEquals('GB', $code->toString());
+    }
+
+    public function testDetectWillUseDefaultLocaleWhenGivenAnEmptyString(): void
+    {
+        Locale::setDefault('en_GB');
         $code = CountryCode::detect('');
         self::assertEquals('GB', $code->toString());
     }
