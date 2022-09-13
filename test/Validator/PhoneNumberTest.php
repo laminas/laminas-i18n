@@ -3071,7 +3071,7 @@ class PhoneNumberTest extends TestCase
 
         $validator = new PhoneNumber($constructorOptions);
 
-        $this->assertSame(
+        self::assertSame(
             $expectedCountry,
             $validator->getCountry(),
             sprintf(
@@ -3136,22 +3136,22 @@ class PhoneNumberTest extends TestCase
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
-                $this->assertTrue($this->validator->isValid($value));
+                self::assertTrue($this->validator->isValid($value));
 
                 // check with country code:
                 $countryCodePrefixed = $code . $value;
-                $this->assertTrue($this->validator->isValid($countryCodePrefixed));
+                self::assertTrue($this->validator->isValid($countryCodePrefixed));
 
                 // check fully qualified E.123/E.164 international variants
                 $fullyQualifiedDoubleO = '00' . $code . $value;
-                $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO));
+                self::assertTrue($this->validator->isValid($fullyQualifiedDoubleO));
 
                 $fullyQualifiedPlus = '+' . $code . $value;
-                $this->assertTrue($this->validator->isValid($fullyQualifiedPlus));
+                self::assertTrue($this->validator->isValid($fullyQualifiedPlus));
 
                 // check ^ and $ in regexp
-                $this->assertFalse($this->validator->isValid($value . '='));
-                $this->assertFalse($this->validator->isValid('=' . $value));
+                self::assertFalse($this->validator->isValid($value . '='));
+                self::assertFalse($this->validator->isValid('=' . $value));
             }
         }
     }
@@ -3170,39 +3170,39 @@ class PhoneNumberTest extends TestCase
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
-                $this->assertTrue($this->validator->isValid($value));
+                self::assertTrue($this->validator->isValid($value));
 
                 // check with country code:
                 $countryCodePrefixed = $code . $value;
-                $this->assertTrue($this->validator->isValid($countryCodePrefixed));
+                self::assertTrue($this->validator->isValid($countryCodePrefixed));
 
                 // check fully qualified E.123/E.164 international variants
                 $fullyQualifiedDoubleO = '00' . $code . $value;
-                $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO), $fullyQualifiedDoubleO);
+                self::assertTrue($this->validator->isValid($fullyQualifiedDoubleO), $fullyQualifiedDoubleO);
 
                 $fullyQualifiedPlus = '+' . $code . $value;
-                $this->assertTrue($this->validator->isValid($fullyQualifiedPlus), $fullyQualifiedPlus);
+                self::assertTrue($this->validator->isValid($fullyQualifiedPlus), $fullyQualifiedPlus);
 
                 // check ^ and $ in regexp
-                $this->assertFalse($this->validator->isValid($value . '='));
-                $this->assertFalse($this->validator->isValid('=' . $value));
+                self::assertFalse($this->validator->isValid($value . '='));
+                self::assertFalse($this->validator->isValid('=' . $value));
             }
         }
     }
 
     public function testAllowPossibleSetterGetter(): void
     {
-        $this->assertFalse($this->validator->allowPossible());
+        self::assertFalse($this->validator->allowPossible());
         $this->validator->allowPossible(true);
-        $this->assertTrue($this->validator->allowPossible());
+        self::assertTrue($this->validator->allowPossible());
     }
 
     public function testCountryIsCaseInsensitive(): void
     {
         $this->validator->setCountry('lt');
-        $this->assertTrue($this->validator->isValid('+37067811268'));
+        self::assertTrue($this->validator->isValid('+37067811268'));
         $this->validator->setCountry('LT');
-        $this->assertTrue($this->validator->isValid('+37067811268'));
+        self::assertTrue($this->validator->isValid('+37067811268'));
     }
 
     /**
@@ -3223,18 +3223,18 @@ class PhoneNumberTest extends TestCase
             $values = is_array($values) ? $values : [$values];
             foreach ($values as $value) {
                 $this->validator->allowedTypes([$type]);
-                $this->assertFalse($this->validator->isValid($value));
+                self::assertFalse($this->validator->isValid($value));
 
                 // check with country code:
                 $countryCodePrefixed = $code . $value;
-                $this->assertFalse($this->validator->isValid($countryCodePrefixed));
+                self::assertFalse($this->validator->isValid($countryCodePrefixed));
 
                 // check fully qualified E.123/E.164 international variants
                 $fullyQualifiedDoubleO = '00' . $code . $value;
-                $this->assertFalse($this->validator->isValid($fullyQualifiedDoubleO));
+                self::assertFalse($this->validator->isValid($fullyQualifiedDoubleO));
 
                 $fullyQualifiedPlus = '+' . $code . $value;
-                $this->assertFalse($this->validator->isValid($fullyQualifiedPlus));
+                self::assertFalse($this->validator->isValid($fullyQualifiedPlus));
             }
         }
     }
@@ -3246,6 +3246,6 @@ class PhoneNumberTest extends TestCase
             'country' => 'country-code',
         ]);
 
-        $this->assertTrue($validator->isValid('+37067811268', ['country-code' => 'LT']));
+        self::assertTrue($validator->isValid('+37067811268', ['country-code' => 'LT']));
     }
 }

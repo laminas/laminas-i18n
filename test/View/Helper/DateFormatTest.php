@@ -169,13 +169,12 @@ class DateFormatTest extends TestCase
         int $dateType,
         DateTimeInterface $date
     ): void {
-        $this->helper
-             ->setTimezone($timezone);
+        $this->helper->setTimezone($timezone);
 
         $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone)
                          ->format($date->getTimestamp());
 
-        $this->assertMbStringEquals($expected, $this->helper->__invoke(
+        self::assertMbStringEquals($expected, $this->helper->__invoke(
             $date,
             $dateType,
             $timeType,
@@ -201,7 +200,7 @@ class DateFormatTest extends TestCase
         $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone)
                          ->format($date->getTimestamp());
 
-        $this->assertMbStringEquals($expected, $this->helper->__invoke(
+        self::assertMbStringEquals($expected, $this->helper->__invoke(
             $date,
             $dateType,
             $timeType
@@ -225,7 +224,7 @@ class DateFormatTest extends TestCase
         $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern)
                          ->format($date->getTimestamp());
 
-        $this->assertMbStringEquals($expected, $this->helper->__invoke(
+        self::assertMbStringEquals($expected, $this->helper->__invoke(
             $date,
             $dateType,
             $timeType,
@@ -236,7 +235,7 @@ class DateFormatTest extends TestCase
 
     public function testDefaultLocale(): void
     {
-        $this->assertEquals(Locale::getDefault(), $this->helper->getLocale());
+        self::assertEquals(Locale::getDefault(), $this->helper->getLocale());
     }
 
     public function testBugTwoPatternOnSameHelperInstance(): void
@@ -245,21 +244,21 @@ class DateFormatTest extends TestCase
 
         $helper = new DateFormatHelper();
         $helper->setTimezone('Europe/Berlin');
-        $this->assertEquals(
+        self::assertEquals(
             '03/2012',
             $helper->__invoke($date, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd/Y')
         );
-        $this->assertEquals(
+        self::assertEquals(
             '03-2012',
             $helper->__invoke($date, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd-Y')
         );
     }
 
-    public function assertMbStringEquals(string $expected, string $test, string $message = ''): void
+    public static function assertMbStringEquals(string $expected, string $test, string $message = ''): void
     {
         $expected = str_replace(["\xC2\xA0", ' '], '', $expected);
         $test     = str_replace(["\xC2\xA0", ' '], '', $test);
-        $this->assertEquals($expected, $test, $message);
+        self::assertEquals($expected, $test, $message);
     }
 
     public function getIntlDateFormatter(
@@ -293,7 +292,7 @@ class DateFormatTest extends TestCase
 
         $helper = new DateFormatHelper();
         $helper->setTimezone('Europe/Berlin');
-        $this->assertEquals(
+        self::assertEquals(
             '01-07-2013',
             $helper->__invoke($calendar, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd-MM-Y')
         );

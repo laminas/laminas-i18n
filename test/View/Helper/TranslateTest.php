@@ -8,18 +8,10 @@ use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\View\Helper\Translate as TranslateHelper;
 use LaminasTest\I18n\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 
-/**
- * @group      Laminas_View
- * @group      Laminas_View_Helper
- */
 class TranslateTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var TranslateHelper */
-    public $helper;
+    public TranslateHelper $helper;
 
     protected function setUp(): void
     {
@@ -27,41 +19,43 @@ class TranslateTest extends TestCase
         $this->helper = new TranslateHelper();
     }
 
-    public function testInvokingWithoutTranslatorWillRaiseException()
+    public function testInvokingWithoutTranslatorWillRaiseException(): void
     {
         $this->expectException(RuntimeException::class);
         $this->helper->__invoke('message');
     }
 
-    public function testDefaultInvokeArguments()
+    public function testDefaultInvokeArguments(): void
     {
         $input    = 'input';
         $expected = 'translated';
 
-        $translatorMock = $this->prophesize(Translator::class);
-        $translatorMock->translate($input, 'default', null)
-            ->willReturn($expected)
-            ->shouldBeCalledTimes(1);
+        $translatorMock = $this->createMock(Translator::class);
+        $translatorMock->expects(self::once())
+            ->method('translate')
+            ->with($input, 'default', null)
+            ->willReturn($expected);
 
-        $this->helper->setTranslator($translatorMock->reveal());
+        $this->helper->setTranslator($translatorMock);
 
-        $this->assertEquals($expected, $this->helper->__invoke($input));
+        self::assertEquals($expected, $this->helper->__invoke($input));
     }
 
-    public function testCustomInvokeArguments()
+    public function testCustomInvokeArguments(): void
     {
         $input      = 'input';
         $expected   = 'translated';
         $textDomain = 'textDomain';
         $locale     = 'en_US';
 
-        $translatorMock = $this->prophesize(Translator::class);
-        $translatorMock->translate($input, $textDomain, $locale)
-            ->willReturn($expected)
-            ->shouldBeCalledTimes(1);
+        $translatorMock = $this->createMock(Translator::class);
+        $translatorMock->expects(self::once())
+            ->method('translate')
+            ->with($input, $textDomain, $locale)
+            ->willReturn($expected);
 
-        $this->helper->setTranslator($translatorMock->reveal());
+        $this->helper->setTranslator($translatorMock);
 
-        $this->assertEquals($expected, $this->helper->__invoke($input, $textDomain, $locale));
+        self::assertEquals($expected, $this->helper->__invoke($input, $textDomain, $locale));
     }
 }

@@ -7,12 +7,9 @@ namespace LaminasTest\I18n\Translator\TestAsset;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
 
-/**
- * Test loader.
- */
 class Loader implements FileLoaderInterface
 {
-    public TextDomain $textDomain;
+    public ?TextDomain $textDomain = null;
 
     /**
      * load(): defined by LoaderInterface.

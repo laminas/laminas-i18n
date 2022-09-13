@@ -58,14 +58,14 @@ class GettextTest extends TestCase
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.mo');
-        $this->assertInstanceOf(TextDomain::class, $domain);
+        self::assertInstanceOf(TextDomain::class, $domain);
     }
 
     public function testLoaderLoadsBigEndianFile(): void
     {
         $loader = new GettextLoader();
         $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_bigendian.mo');
-        $this->assertInstanceOf(TextDomain::class, $domain);
+        self::assertInstanceOf(TextDomain::class, $domain);
     }
 
     public function testLoaderReturnsValidTextDomain(): void
@@ -73,8 +73,8 @@ class GettextTest extends TestCase
         $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
 
-        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
+        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
     public function testLoaderLoadsPluralRules(): void
@@ -82,10 +82,10 @@ class GettextTest extends TestCase
         $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
 
-        $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
-        $this->assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
-        $this->assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
-        $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
+        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
+        self::assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
+        self::assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
+        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
 
     public function testLoaderLoadsFromIncludePath(): void
@@ -94,8 +94,8 @@ class GettextTest extends TestCase
         $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'translation_en.mo');
 
-        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
+        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
     public function testLoaderLoadsFromPhar(): void
@@ -104,8 +104,8 @@ class GettextTest extends TestCase
         $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.mo');
 
-        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
+        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
     public function testLoaderLoadsPlural(): void
@@ -116,7 +116,7 @@ class GettextTest extends TestCase
 
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'Message A (en) Plural 0',
                 'Message A (en) Plural 1',
@@ -125,7 +125,7 @@ class GettextTest extends TestCase
             $textDomain['Message A']
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'Message B (en) Plural 0',
                 'Message B (en) Plural 1',

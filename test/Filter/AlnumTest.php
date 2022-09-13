@@ -33,10 +33,10 @@ class AlnumTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->filter                 = new AlnumFilter();
-        $language                     = Locale::getPrimaryLanguage(Locale::getDefault());
-        static::$meansEnglishAlphabet = $language === 'ja';
-        static::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a');
+        $this->filter               = new AlnumFilter();
+        $language                   = Locale::getPrimaryLanguage(Locale::getDefault());
+        self::$meansEnglishAlphabet = $language === 'ja';
+        self::$unicodeEnabled       = (bool) @preg_match('/\pL/u', 'a');
     }
 
     /**
@@ -44,7 +44,7 @@ class AlnumTest extends TestCase
      */
     public function testBasic(): void
     {
-        if (! static::$unicodeEnabled) {
+        if (! self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = [
                 'abc123'  => 'abc123',
@@ -53,7 +53,7 @@ class AlnumTest extends TestCase
                 'AZ@#4.3' => 'AZ43',
                 ''        => '',
             ];
-        } elseif (static::$meansEnglishAlphabet) {
+        } elseif (self::$meansEnglishAlphabet) {
             // The Alphabet means english alphabet.
 
             /**
@@ -83,7 +83,7 @@ class AlnumTest extends TestCase
 
         foreach ($valuesExpected as $input => $expected) {
             $actual = $this->filter->filter($input);
-            $this->assertEquals($expected, $actual);
+            self::assertEquals($expected, $actual);
         }
     }
 
@@ -94,7 +94,7 @@ class AlnumTest extends TestCase
     {
         $this->filter->setAllowWhiteSpace(true);
 
-        if (! static::$unicodeEnabled) {
+        if (! self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = [
                 'abc123'  => 'abc123',
@@ -105,7 +105,7 @@ class AlnumTest extends TestCase
                 "\n"      => "\n",
                 " \t "    => " \t ",
             ];
-        } elseif (static::$meansEnglishAlphabet) {
+        } elseif (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = [
                 'a B ４5' => 'a B 5',
@@ -126,7 +126,7 @@ class AlnumTest extends TestCase
 
         foreach ($valuesExpected as $input => $expected) {
             $actual = $this->filter->filter($input);
-            $this->assertEquals($expected, $actual);
+            self::assertEquals($expected, $actual);
         }
     }
 
@@ -144,7 +144,7 @@ class AlnumTest extends TestCase
 
         $actual = $filter->filter(array_keys($values));
 
-        $this->assertEquals(array_values($values), $actual);
+        self::assertEquals(array_values($values), $actual);
     }
 
     /** @return array<array-key, array{0: mixed}> */
@@ -164,6 +164,6 @@ class AlnumTest extends TestCase
     {
         $filter = new AlnumFilter();
 
-        $this->assertEquals($input, $filter->filter($input));
+        self::assertEquals($input, $filter->filter($input));
     }
 }

@@ -17,16 +17,16 @@ class NumberParseTest extends TestCase
             'style'  => NumberFormatter::DECIMAL,
         ]);
 
-        $this->assertEquals('en_US', $filter->getLocale());
-        $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
+        self::assertEquals('en_US', $filter->getLocale());
+        self::assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
 
     public function testConstructWithParameters(): void
     {
         $filter = new NumberParseFilter('en_US', NumberFormatter::DECIMAL);
 
-        $this->assertEquals('en_US', $filter->getLocale());
-        $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
+        self::assertEquals('en_US', $filter->getLocale());
+        self::assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
 
     /**
@@ -35,7 +35,7 @@ class NumberParseTest extends TestCase
     public function testFormattedToNumber(string $locale, int $style, int $type, string $value, float $expected): void
     {
         $filter = new NumberParseFilter($locale, $style, $type);
-        $this->assertSame($expected, $filter->filter($value));
+        self::assertSame($expected, $filter->filter($value));
     }
 
     /** @return array<array-key, array{0: string, 1: int, 2: int, 3: string, 4:float}> */

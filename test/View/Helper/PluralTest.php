@@ -7,10 +7,6 @@ namespace LaminasTest\I18n\View\Helper;
 use Laminas\I18n\View\Helper\Plural as PluralHelper;
 use LaminasTest\I18n\TestCase;
 
-/**
- * @group      Laminas_View
- * @group      Laminas_View_Helper
- */
 class PluralTest extends TestCase
 {
     private PluralHelper $helper;
@@ -46,6 +42,6 @@ class PluralTest extends TestCase
     {
         $this->helper->setPluralRule($pluralRule);
         $result = $this->helper->__invoke($strings, $number);
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 }

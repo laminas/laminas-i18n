@@ -18,16 +18,16 @@ class NumberFormatTest extends TestCase
             'style'  => NumberFormatter::DECIMAL,
         ]);
 
-        $this->assertEquals('en_US', $filter->getLocale());
-        $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
+        self::assertEquals('en_US', $filter->getLocale());
+        self::assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
 
     public function testConstructWithParameters(): void
     {
         $filter = new NumberFormatFilter('en_US', NumberFormatter::DECIMAL);
 
-        $this->assertEquals('en_US', $filter->getLocale());
-        $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
+        self::assertEquals('en_US', $filter->getLocale());
+        self::assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
     }
 
     /** @return array<array-key, array{0: string, 1: int, 2: int, 3: float, 4: string}> */
@@ -64,11 +64,11 @@ class NumberFormatTest extends TestCase
     public function testNumberToFormatted(string $locale, int $style, int $type, float $value, string $expected): void
     {
         $filter = new NumberFormatFilter($locale, $style, $type);
-        $this->assertEquals($expected, $filter->filter($value));
+        self::assertEquals($expected, $filter->filter($value));
     }
 
     /** @return array<array-key, array{0: string, 1: int, 2: int, 3: string, 4: float}> */
-    public function formattedToNumberProvider()
+    public function formattedToNumberProvider(): array
     {
         return [
             [
@@ -101,7 +101,7 @@ class NumberFormatTest extends TestCase
     public function testFormattedToNumber(string $locale, int $style, int $type, string $value, float $expected): void
     {
         $filter = new NumberFormatFilter($locale, $style, $type);
-        $this->assertEquals($expected, $filter->filter($value));
+        self::assertEquals($expected, $filter->filter($value));
     }
 
     /** @return array<array-key, array{0: mixed}> */
@@ -127,6 +127,6 @@ class NumberFormatTest extends TestCase
     {
         $filter = new NumberFormatFilter('de_AT', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);
 
-        $this->assertEquals($input, $filter->filter($input));
+        self::assertEquals($input, $filter->filter($input));
     }
 }

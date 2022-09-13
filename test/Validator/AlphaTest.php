@@ -35,7 +35,7 @@ class AlphaTest extends TestCase
             "\n"      => false,
         ];
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $this->validator->isValid($input));
+            self::assertEquals($result, $this->validator->isValid($input));
         }
     }
 
@@ -44,7 +44,7 @@ class AlphaTest extends TestCase
      */
     public function testGetMessages(): void
     {
-        $this->assertEquals([], $this->validator->getMessages());
+        self::assertEquals([], $this->validator->getMessages());
     }
 
     /**
@@ -68,7 +68,7 @@ class AlphaTest extends TestCase
             "a\tb c"  => true,
         ];
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals(
+            self::assertEquals(
                 $result,
                 $this->validator->isValid($input),
                 "Expected '$input' to be considered " . ($result ? '' : 'in') . 'valid'
@@ -78,13 +78,13 @@ class AlphaTest extends TestCase
 
     public function testNonStringValidation(): void
     {
-        $this->assertFalse($this->validator->isValid([1 => 1]));
+        self::assertFalse($this->validator->isValid([1 => 1]));
     }
 
     public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
 
-        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
+        self::assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 }

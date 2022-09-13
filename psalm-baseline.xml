@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
+<files psalm-version="4.27.0@faf106e717c37b8c81721845dba9de3d8deed8ff">
   <file src="src/Filter/AbstractLocale.php">
     <MixedInferredReturnType occurrences="1">
       <code>string</code>
@@ -340,13 +340,6 @@
     </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Translator/TextDomain.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>$this-&gt;pluralRule === null</code>
-      <code>static::$defaultPluralRule === null</code>
-    </DocblockTypeContradiction>
-    <MissingConstructor occurrences="1">
-      <code>$pluralRule</code>
-    </MissingConstructor>
     <PossiblyNullArgument occurrences="1">
       <code>$textDomain-&gt;getPluralRule()</code>
     </PossiblyNullArgument>
@@ -354,9 +347,6 @@
       <code>getNumPlurals</code>
       <code>getNumPlurals</code>
     </PossiblyNullReference>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>$this-&gt;pluralRule !== null</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Translator/Translator.php">
     <DocblockTypeContradiction occurrences="3">
@@ -760,23 +750,6 @@
       <code>$input</code>
     </MixedArgument>
   </file>
-  <file src="test/ModuleTest.php">
-    <MissingReturnType occurrences="2">
-      <code>testConfigReturnsExpectedKeys</code>
-      <code>testInitRegistersPluginManagerSpecificationWithServiceListener</code>
-    </MissingReturnType>
-    <MixedMethodCall occurrences="2">
-      <code>getConfig</code>
-      <code>init</code>
-    </MixedMethodCall>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;module</code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch occurrences="2">
-      <code>$this-&gt;module</code>
-      <code>$this-&gt;module</code>
-    </UndefinedThisPropertyFetch>
-  </file>
   <file src="test/TestAsset/ModuleEventInterface.php">
     <MissingReturnType occurrences="1">
       <code>getParam</code>
@@ -843,39 +816,18 @@
     </UnresolvableInclude>
   </file>
   <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
-    <MissingClosureParamType occurrences="2">
-      <code>$container</code>
-      <code>$container</code>
-    </MissingClosureParamType>
-    <UnusedClosureParam occurrences="2">
+    <UnusedClosureParam occurrences="1">
       <code>$container</code>
       <code>$container</code>
     </UnusedClosureParam>
-    <UnusedVariable occurrences="1">
-      <code>$config</code>
-    </UnusedVariable>
   </file>
   <file src="test/Translator/TestAsset/Loader.php">
-    <MissingConstructor occurrences="1">
-      <code>$textDomain</code>
-    </MissingConstructor>
     <ParamNameMismatch occurrences="2">
       <code>$filename</code>
       <code>$locale</code>
     </ParamNameMismatch>
   </file>
   <file src="test/Translator/TextDomainTest.php">
-    <MissingReturnType occurrences="9">
-      <code>testArrayAccess</code>
-      <code>testInstantiation</code>
-      <code>testMerging</code>
-      <code>testMergingIncompatibleTextDomains</code>
-      <code>testMergingTextDomainWithPluralRuleIntoTextDomainWithoutPluralRule</code>
-      <code>testMergingTextDomainWithoutPluralRuleIntoTextDomainWithPluralRule</code>
-      <code>testMergingTextDomainsWithPluralRules</code>
-      <code>testPluralRuleDefault</code>
-      <code>testPluralRuleSetter</code>
-    </MissingReturnType>
     <PossiblyNullReference occurrences="7">
       <code>evaluate</code>
       <code>evaluate</code>
@@ -885,64 +837,6 @@
       <code>getNumPlurals</code>
       <code>getNumPlurals</code>
     </PossiblyNullReference>
-  </file>
-  <file src="test/Translator/TranslatorAwareTraitTest.php">
-    <InvalidScalarArgument occurrences="8">
-      <code>TranslatorAwareTrait::class</code>
-      <code>TranslatorAwareTrait::class</code>
-      <code>TranslatorAwareTrait::class</code>
-      <code>TranslatorAwareTrait::class</code>
-      <code>TranslatorAwareTrait::class</code>
-      <code>TranslatorAwareTrait::class</code>
-      <code>TranslatorAwareTrait::class</code>
-      <code>TranslatorAwareTrait::class</code>
-    </InvalidScalarArgument>
-    <MissingReturnType occurrences="8">
-      <code>testGetTranslator</code>
-      <code>testGetTranslatorTextDomain</code>
-      <code>testHasTranslator</code>
-      <code>testIsTranslatorEnabled</code>
-      <code>testSetTranslator</code>
-      <code>testSetTranslatorAndTextDomain</code>
-      <code>testSetTranslatorEnabled</code>
-      <code>testSetTranslatorTextDomain</code>
-    </MissingReturnType>
-    <MixedMethodCall occurrences="28">
-      <code>getTranslator</code>
-      <code>getTranslator</code>
-      <code>getTranslator</code>
-      <code>getTranslator</code>
-      <code>getTranslator</code>
-      <code>getTranslator</code>
-      <code>getTranslatorTextDomain</code>
-      <code>getTranslatorTextDomain</code>
-      <code>getTranslatorTextDomain</code>
-      <code>getTranslatorTextDomain</code>
-      <code>getTranslatorTextDomain</code>
-      <code>getTranslatorTextDomain</code>
-      <code>hasTranslator</code>
-      <code>hasTranslator</code>
-      <code>isTranslatorEnabled</code>
-      <code>isTranslatorEnabled</code>
-      <code>isTranslatorEnabled</code>
-      <code>isTranslatorEnabled</code>
-      <code>isTranslatorEnabled</code>
-      <code>setTranslator</code>
-      <code>setTranslator</code>
-      <code>setTranslator</code>
-      <code>setTranslator</code>
-      <code>setTranslatorEnabled</code>
-      <code>setTranslatorEnabled</code>
-      <code>setTranslatorEnabled</code>
-      <code>setTranslatorTextDomain</code>
-      <code>setTranslatorTextDomain</code>
-    </MixedMethodCall>
-  </file>
-  <file src="test/Translator/TranslatorServiceFactoryTest.php">
-    <MissingReturnType occurrences="2">
-      <code>testCreateServiceWithNoTranslatorKeyDefined</code>
-      <code>testCreateServiceWithNoTranslatorPluginManagerDefined</code>
-    </MissingReturnType>
   </file>
   <file src="test/Translator/TranslatorTest.php">
     <NullArgument occurrences="4">
@@ -955,35 +849,8 @@
       <code>assertNull</code>
       <code>assertNull</code>
     </RedundantCondition>
-    <UnusedClosureParam occurrences="6">
-      <code>$event</code>
-      <code>$event</code>
-      <code>$event</code>
-      <code>$event</code>
-      <code>$event</code>
-      <code>$event</code>
-    </UnusedClosureParam>
-    <UnusedVariable occurrences="2">
-      <code>$doNotTriger</code>
-      <code>$doNotTrigger</code>
-    </UnusedVariable>
   </file>
   <file src="test/Validator/DateTimeTest.php">
-    <MissingReturnType occurrences="7">
-      <code>testApplicationOptionLocale</code>
-      <code>testApplicationOptionTimezone</code>
-      <code>testMultipleIsValidCalls</code>
-      <code>testOptionLocale</code>
-      <code>testOptionPattern</code>
-      <code>testOptionPatternOmitted</code>
-      <code>testOptionTimezone</code>
-    </MissingReturnType>
-    <PossiblyNullArgument occurrences="4">
-      <code>$this-&gt;validator-&gt;getDateType()</code>
-      <code>$this-&gt;validator-&gt;getLocale()</code>
-      <code>$this-&gt;validator-&gt;getPattern()</code>
-      <code>$this-&gt;validator-&gt;getTimeType()</code>
-    </PossiblyNullArgument>
     <UndefinedMethod occurrences="1">
       <code>testBasic</code>
     </UndefinedMethod>
@@ -992,21 +859,6 @@
     <MixedOperand occurrences="1">
       <code>$value</code>
     </MixedOperand>
-  </file>
-  <file src="test/Validator/IsIntTest.php">
-    <MixedArgument occurrences="1">
-      <code>$strict</code>
-    </MixedArgument>
-  </file>
-  <file src="test/Validator/PostCodeTest.php">
-    <MissingClosureParamType occurrences="2">
-      <code>$value</code>
-      <code>$value</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>static function ($value) use ($params) {</code>
-      <code>static function ($value) use ($params) {</code>
-    </MissingClosureReturnType>
   </file>
   <file src="test/View/Helper/CurrencyFormatTest.php">
     <PossiblyNullArgument occurrences="1">
@@ -1019,25 +871,8 @@
     </TooManyArguments>
   </file>
   <file src="test/View/Helper/NumberFormatTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testBasic</code>
-    </MissingReturnType>
     <PossiblyNullArgument occurrences="1">
       <code>$decimals</code>
     </PossiblyNullArgument>
-  </file>
-  <file src="test/View/Helper/TranslatePluralTest.php">
-    <MissingReturnType occurrences="3">
-      <code>testCustomInvokeArguments</code>
-      <code>testDefaultInvokeArguments</code>
-      <code>testInvokingWithoutTranslatorWillRaiseException</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/View/Helper/TranslateTest.php">
-    <MissingReturnType occurrences="3">
-      <code>testCustomInvokeArguments</code>
-      <code>testDefaultInvokeArguments</code>
-      <code>testInvokingWithoutTranslatorWillRaiseException</code>
-    </MissingReturnType>
   </file>
 </files>

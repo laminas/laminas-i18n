@@ -25,7 +25,7 @@ class PostCodeTest extends TestCase
     public function testUKBasic(string $postCode, bool $expected): void
     {
         $ukValidator = new PostCodeValidator(['locale' => 'en_GB']);
-        $this->assertSame($expected, $ukValidator->isValid($postCode));
+        self::assertSame($expected, $ukValidator->isValid($postCode));
     }
 
     /** @return array<array-key, array{0: string, 1: bool}> */
@@ -70,7 +70,7 @@ class PostCodeTest extends TestCase
      */
     public function testBasic($postCode, bool $expected): void
     {
-        $this->assertEquals($expected, $this->validator->isValid($postCode));
+        self::assertEquals($expected, $this->validator->isValid($postCode));
     }
 
     /**
@@ -78,7 +78,7 @@ class PostCodeTest extends TestCase
      */
     public function testGetMessages(): void
     {
-        $this->assertEquals([], $this->validator->getMessages());
+        self::assertEquals([], $this->validator->getMessages());
     }
 
     /**
@@ -106,7 +106,7 @@ class PostCodeTest extends TestCase
      */
     public function testGettingLocale(): void
     {
-        $this->assertEquals('de_AT', $this->validator->getLocale());
+        self::assertEquals('de_AT', $this->validator->getLocale());
     }
 
     /**
@@ -115,7 +115,7 @@ class PostCodeTest extends TestCase
     public function testSetGetFormat(): void
     {
         $this->validator->setFormat('\d{1}');
-        $this->assertEquals('\d{1}', $this->validator->getFormat());
+        self::assertEquals('\d{1}', $this->validator->getFormat());
     }
 
     public function testSetGetFormatThrowsExceptionOnNullFormat(): void
@@ -134,9 +134,9 @@ class PostCodeTest extends TestCase
 
     public function testErrorMessageText(): void
     {
-        $this->assertFalse($this->validator->isValid('hello'));
+        self::assertFalse($this->validator->isValid('hello'));
         $message = $this->validator->getMessages();
-        $this->assertStringContainsString('not appear to be a postal code', $message['postcodeNoMatch']);
+        self::assertStringContainsString('not appear to be a postal code', $message['postcodeNoMatch']);
     }
 
      /**
@@ -149,36 +149,36 @@ class PostCodeTest extends TestCase
             'serviceFalse' => null,
         ];
 
-        $serviceTrue = static function ($value) use ($params) {
+        $serviceTrue = static function (string $value) use ($params): bool {
             $params->serviceTrue = $value;
             return true;
         };
 
-        $serviceFalse = static function ($value) use ($params) {
+        $serviceFalse = static function (string $value) use ($params): bool {
             $params->serviceFalse = $value;
             return false;
         };
 
-        $this->assertEquals(null, $this->validator->getService());
+        self::assertEquals(null, $this->validator->getService());
 
         $this->validator->setService($serviceTrue);
-        $this->assertEquals($this->validator->getService(), $serviceTrue);
-        $this->assertTrue($this->validator->isValid('2292'));
-        $this->assertEquals($params->serviceTrue, '2292');
+        self::assertEquals($this->validator->getService(), $serviceTrue);
+        self::assertTrue($this->validator->isValid('2292'));
+        self::assertEquals($params->serviceTrue, '2292');
 
         $this->validator->setService($serviceFalse);
-        $this->assertEquals($this->validator->getService(), $serviceFalse);
-        $this->assertFalse($this->validator->isValid('hello'));
-        $this->assertEquals($params->serviceFalse, 'hello');
+        self::assertEquals($this->validator->getService(), $serviceFalse);
+        self::assertFalse($this->validator->isValid('hello'));
+        self::assertEquals($params->serviceFalse, 'hello');
 
         $message = $this->validator->getMessages();
-        $this->assertStringContainsString('not appear to be a postal code', $message['postcodeService']);
+        self::assertStringContainsString('not appear to be a postal code', $message['postcodeService']);
     }
 
     public function testEqualsMessageTemplates(): void
     {
         $validator = $this->validator;
-        $this->assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
+        self::assertSame($validator->getOption('messageTemplates'), $validator->getMessageTemplates());
     }
 
     /**
@@ -190,12 +190,12 @@ class PostCodeTest extends TestCase
         $validator = $this->validator;
         $validator->setLocale('fr_FR');
 
-        $this->assertTrue($validator->isValid('13100')); // AIX EN PROVENCE
-        $this->assertTrue($validator->isValid('97439')); // STE ROSE
-        $this->assertTrue($validator->isValid('98790')); // MAHETIKA
-        $this->assertFalse($validator->isValid('00000')); // Post codes starting with 00 don't exist
-        $this->assertFalse($validator->isValid('96000')); // Post codes starting with 96 don't exist
-        $this->assertFalse($validator->isValid('99000')); // Post codes starting with 99 don't exist
+        self::assertTrue($validator->isValid('13100')); // AIX EN PROVENCE
+        self::assertTrue($validator->isValid('97439')); // STE ROSE
+        self::assertTrue($validator->isValid('98790')); // MAHETIKA
+        self::assertFalse($validator->isValid('00000')); // Post codes starting with 00 don't exist
+        self::assertFalse($validator->isValid('96000')); // Post codes starting with 96 don't exist
+        self::assertFalse($validator->isValid('99000')); // Post codes starting with 99 don't exist
     }
 
     /**
@@ -207,9 +207,9 @@ class PostCodeTest extends TestCase
         $validator = $this->validator;
         $validator->setLocale('en_NO');
 
-        $this->assertTrue($validator->isValid('0301')); // OSLO
-        $this->assertTrue($validator->isValid('9910')); // BJØRNEVATN
-        $this->assertFalse($validator->isValid('0000')); // Postal code 0000
+        self::assertTrue($validator->isValid('0301')); // OSLO
+        self::assertTrue($validator->isValid('9910')); // BJØRNEVATN
+        self::assertFalse($validator->isValid('0000')); // Postal code 0000
     }
 
     /**
@@ -223,10 +223,10 @@ class PostCodeTest extends TestCase
         $validator = $this->validator;
         $validator->setLocale('en_LV');
 
-        $this->assertTrue($validator->isValid('LV-0000'));
-        $this->assertTrue($validator->isValid('0000'));
-        $this->assertFalse($validator->isValid('ABCD'));
-        $this->assertFalse($validator->isValid('LV-ABCD'));
+        self::assertTrue($validator->isValid('LV-0000'));
+        self::assertTrue($validator->isValid('0000'));
+        self::assertFalse($validator->isValid('ABCD'));
+        self::assertFalse($validator->isValid('LV-ABCD'));
     }
 
     /** @return Generator<string, array{0: int}> */
@@ -256,6 +256,6 @@ class PostCodeTest extends TestCase
         $validator = $this->validator;
         $validator->setLocale('de_LI');
 
-        $this->assertTrue($validator->isValid($postCode));
+        self::assertTrue($validator->isValid($postCode));
     }
 }
