@@ -49,7 +49,7 @@ final class CountryCodeDataList
 
         return sprintf(
             '<datalist %s>%s</datalist>',
-            (string) $attributes,
+            $attributes->__toString(),
             implode(PHP_EOL, $list)
         );
     }
