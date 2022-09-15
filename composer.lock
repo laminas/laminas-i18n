@@ -949,22 +949,22 @@
         },
         {
             "name": "laminas/laminas-cache",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-cache.git",
-                "reference": "f3745657cf54e162cb39f8348967ff25bf10eb77"
+                "reference": "3eda7c84a2803ee88ac67b23bb50dbf46871b307"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-cache/zipball/f3745657cf54e162cb39f8348967ff25bf10eb77",
-                "reference": "f3745657cf54e162cb39f8348967ff25bf10eb77",
+                "url": "https://api.github.com/repos/laminas/laminas-cache/zipball/3eda7c84a2803ee88ac67b23bb50dbf46871b307",
+                "reference": "3eda7c84a2803ee88ac67b23bb50dbf46871b307",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-cache-storage-implementation": "1.0",
                 "laminas/laminas-eventmanager": "^3.4",
-                "laminas/laminas-servicemanager": "^3.11",
+                "laminas/laminas-servicemanager": "^3.11.1",
                 "laminas/laminas-stdlib": "^3.6",
                 "php": "~7.4.0 || ~8.0.0 || ~8.1.0",
                 "psr/cache": "^1.0",
@@ -986,12 +986,12 @@
                 "laminas/laminas-cache-storage-adapter-memory": "^2.0",
                 "laminas/laminas-cache-storage-adapter-test": "^2.3",
                 "laminas/laminas-cli": "^1.0",
-                "laminas/laminas-coding-standard": "~2.2.0",
+                "laminas/laminas-coding-standard": "~2.4.0",
                 "laminas/laminas-config-aggregator": "^1.5",
                 "laminas/laminas-feed": "^2.14",
-                "laminas/laminas-serializer": "^2.6",
+                "laminas/laminas-serializer": "^2.6.1",
                 "phpbench/phpbench": "^1.0",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^9.5.23",
                 "psalm/plugin-phpunit": "^0.17.0",
                 "vimeo/psalm": "^4.24"
             },
@@ -1045,7 +1045,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-08-11T21:03:06+00:00"
+            "time": "2022-09-14T17:57:53+00:00"
         },
         {
             "name": "laminas/laminas-cache-storage-adapter-memory",
@@ -3086,16 +3086,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "4.0.6",
+            "version": "4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "55f4261989e546dc112258c7a75935a81a7ce382"
+                "reference": "fa0f136dd2334583309d32b62544682ee972b51a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/55f4261989e546dc112258c7a75935a81a7ce382",
-                "reference": "55f4261989e546dc112258c7a75935a81a7ce382",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/fa0f136dd2334583309d32b62544682ee972b51a",
+                "reference": "fa0f136dd2334583309d32b62544682ee972b51a",
                 "shasum": ""
             },
             "require": {
@@ -3148,7 +3148,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
-                "source": "https://github.com/sebastianbergmann/comparator/tree/4.0.6"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/4.0.8"
             },
             "funding": [
                 {
@@ -3156,7 +3156,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T15:49:45+00:00"
+            "time": "2022-09-14T12:41:17+00:00"
         },
         {
             "name": "sebastian/complexity",
@@ -3346,16 +3346,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "65e8b7db476c5dd267e65eea9cab77584d3cfff9"
+                "reference": "ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/65e8b7db476c5dd267e65eea9cab77584d3cfff9",
-                "reference": "65e8b7db476c5dd267e65eea9cab77584d3cfff9",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d",
+                "reference": "ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d",
                 "shasum": ""
             },
             "require": {
@@ -3411,7 +3411,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/4.0.4"
+                "source": "https://github.com/sebastianbergmann/exporter/tree/4.0.5"
             },
             "funding": [
                 {
@@ -3419,7 +3419,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-11T14:18:36+00:00"
+            "time": "2022-09-14T06:03:37+00:00"
         },
         {
             "name": "sebastian/global-state",
