@@ -47,9 +47,9 @@
         "laminas/laminas-filter": "^2.23.0",
         "laminas/laminas-validator": "^2.26.0",
         "laminas/laminas-view": "^2.24.0",
-        "phpunit/phpunit": "^9.5.25",
+        "phpunit/phpunit": "^9.5.26",
         "psalm/plugin-phpunit": "^0.17.0",
-        "vimeo/psalm": "^4.28"
+        "vimeo/psalm": "^4.29.0"
     },
     "conflict": {
         "laminas/laminas-view": "<2.20.0",
