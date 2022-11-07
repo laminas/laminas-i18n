@@ -1428,16 +1428,16 @@
         },
         {
             "name": "laminas/laminas-filter",
-            "version": "2.24.0",
+            "version": "2.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-filter.git",
-                "reference": "3adcc92684dcb372de5257dc22c08150869ef5e4"
+                "reference": "49ead1dc8043ee2036f296d0ce1e132d6d0ccacf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/3adcc92684dcb372de5257dc22c08150869ef5e4",
-                "reference": "3adcc92684dcb372de5257dc22c08150869ef5e4",
+                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/49ead1dc8043ee2036f296d0ce1e132d6d0ccacf",
+                "reference": "49ead1dc8043ee2036f296d0ce1e132d6d0ccacf",
                 "shasum": ""
             },
             "require": {
@@ -1502,7 +1502,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-11-04T22:35:39+00:00"
+            "time": "2022-11-06T15:02:35+00:00"
         },
         {
             "name": "laminas/laminas-json",
@@ -4847,16 +4847,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "4.29.0",
+            "version": "4.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3"
+                "reference": "d0bc6e25d89f649e4f36a534f330f8bb4643dd69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3",
-                "reference": "7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/d0bc6e25d89f649e4f36a534f330f8bb4643dd69",
+                "reference": "d0bc6e25d89f649e4f36a534f330f8bb4643dd69",
                 "shasum": ""
             },
             "require": {
@@ -4949,9 +4949,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vimeo/psalm/issues",
-                "source": "https://github.com/vimeo/psalm/tree/4.29.0"
+                "source": "https://github.com/vimeo/psalm/tree/4.30.0"
             },
-            "time": "2022-10-11T17:09:17+00:00"
+            "time": "2022-11-06T20:37:08+00:00"
         },
         {
             "name": "webimpress/coding-standard",
