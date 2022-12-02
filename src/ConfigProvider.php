@@ -15,7 +15,12 @@ class ConfigProvider
     /**
      * Return general-purpose laminas-i18n configuration.
      *
-     * @return array<string, ServiceManagerConfigurationType>
+     * @return array{
+     *     dependencies: ServiceManagerConfigurationType,
+     *     filters: ServiceManagerConfigurationType,
+     *     validators: ServiceManagerConfigurationType,
+     *     view_helpers: ServiceManagerConfigurationType,
+     * }
      */
     public function __invoke()
     {
