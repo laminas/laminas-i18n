@@ -53,7 +53,7 @@ class DateTime extends AbstractValidator
     /** @var int|null */
     protected $calendar;
 
-    /** @var IntlDateFormatter */
+    /** @var IntlDateFormatter|null */
     protected $formatter;
 
     /**

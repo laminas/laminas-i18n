@@ -5,6 +5,14 @@ namespace Laminas\I18n\Filter;
 use Laminas\Filter\AbstractFilter;
 use Locale;
 
+/**
+ * @psalm-type Options = array{
+ *     locale: string|null,
+ *     ...
+ * }
+ * @template TOptions of Options
+ * @extends AbstractFilter<TOptions>
+ */
 abstract class AbstractLocale extends AbstractFilter
 {
     public function __construct()

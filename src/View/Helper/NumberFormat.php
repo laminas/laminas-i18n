@@ -43,7 +43,7 @@ class NumberFormat extends AbstractHelper
     /**
      * Formatter instances
      *
-     * @var array
+     * @var array<string, NumberFormatter>
      */
     protected $formatters = [];
 

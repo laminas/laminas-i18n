@@ -13,16 +13,25 @@ use function is_float;
 use function is_int;
 use function iterator_to_array;
 
+/**
+ * @psalm-type Options = array{
+ *    locale: string|null,
+ *    style: int,
+ *    type: NumberFormatter::TYPE_*,
+ *    ...
+ * }
+ * @extends AbstractLocale<Options>
+ */
 class NumberParse extends AbstractLocale
 {
-    /** @var array<string, int|string|null> */
+    /** @var Options */
     protected $options = [
         'locale' => null,
         'style'  => NumberFormatter::DEFAULT_STYLE,
         'type'   => NumberFormatter::TYPE_DOUBLE,
     ];
 
-    /** @var NumberFormatter */
+    /** @var NumberFormatter|null */
     protected $formatter;
 
     /**

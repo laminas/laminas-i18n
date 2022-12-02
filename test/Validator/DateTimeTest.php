@@ -81,8 +81,10 @@ class DateTimeTest extends TestCase
             foreach ($testingFormats as $dateFormat) {
                 foreach ($testingFormats as $timeFormat) {
                     if (($timeFormat !== IntlDateFormatter::NONE) || ($dateFormat !== IntlDateFormatter::NONE)) {
+                        $formatter = IntlDateFormatter::create($locale, $dateFormat, $timeFormat);
+                        self::assertNotNull($formatter);
                         $trueArray[] = [
-                            IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
+                            $formatter->format($testingDate),
                             true,
                             ['locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat],
                         ];
@@ -185,8 +187,9 @@ class DateTimeTest extends TestCase
 
     public function testMultipleIsValidCalls(): void
     {
-        $validValue = IntlDateFormatter::create('en', IntlDateFormatter::FULL, IntlDateFormatter::FULL)
-            ->format(new DateTime());
+        $formatter = IntlDateFormatter::create('en', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+        self::assertNotNull($formatter);
+        $validValue = $formatter->format(new DateTime());
         $this->validator
             ->setLocale('en')
             ->setDateType(IntlDateFormatter::FULL)
