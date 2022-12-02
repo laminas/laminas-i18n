@@ -5,10 +5,12 @@ namespace Laminas\I18n\Translator;
 use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
 use function is_array;
 
+/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
 class LoaderPluginManagerFactory implements FactoryInterface
 {
     /**
@@ -25,7 +27,8 @@ class LoaderPluginManagerFactory implements FactoryInterface
      * Create and return a LoaderPluginManager.
      *
      * @param string $name
-     * @param null|array $options
+     * @param array<string, mixed>|null $options
+     * @psalm-param ServiceManagerConfiguration|null $options
      * @return LoaderPluginManager
      */
     public function __invoke(ContainerInterface $container, $name, ?array $options = null)

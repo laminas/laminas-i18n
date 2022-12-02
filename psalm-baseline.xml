@@ -156,9 +156,8 @@
     <MissingReturnType occurrences="1">
       <code>validatePlugin</code>
     </MissingReturnType>
-    <NonInvariantDocblockPropertyType occurrences="2">
+    <NonInvariantDocblockPropertyType occurrences="1">
       <code>$aliases</code>
-      <code>$factories</code>
     </NonInvariantDocblockPropertyType>
     <ParamNameMismatch occurrences="2">
       <code>$plugin</code>
@@ -166,6 +165,9 @@
     </ParamNameMismatch>
   </file>
   <file src="src/Translator/LoaderPluginManagerFactory.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$options</code>
+    </ArgumentTypeCoercion>
     <DeprecatedInterface occurrences="1">
       <code>LoaderPluginManagerFactory</code>
     </DeprecatedInterface>
@@ -176,9 +178,6 @@
     <MixedArgument occurrences="1">
       <code>$config['translator_plugins']</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$options</code>
-    </MixedArgumentTypeCoercion>
     <ParamNameMismatch occurrences="1">
       <code>$container</code>
     </ParamNameMismatch>
@@ -660,6 +659,9 @@
     </MixedReturnStatement>
   </file>
   <file src="src/View/HelperConfig.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;toArray()</code>
+    </ArgumentTypeCoercion>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>array</code>
     </LessSpecificImplementedReturnType>
@@ -667,10 +669,9 @@
       <code>$factory</code>
       <code>$target</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="3">
+    <MixedArgumentTypeCoercion occurrences="2">
       <code>$alias</code>
       <code>$name</code>
-      <code>$this-&gt;toArray()</code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment occurrences="2">
       <code>$factory</code>

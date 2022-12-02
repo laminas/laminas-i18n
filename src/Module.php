@@ -15,7 +15,12 @@ class Module
     /**
      * Return laminas-i18n configuration for laminas-mvc application.
      *
-     * @return array<string, ServiceManagerConfigurationType>
+     * @return array{
+     *     filters: ServiceManagerConfigurationType,
+     *     service_manager: ServiceManagerConfigurationType,
+     *     validators: ServiceManagerConfigurationType,
+     *     view_helpers: ServiceManagerConfigurationType,
+     * }
      */
     public function getConfig()
     {
