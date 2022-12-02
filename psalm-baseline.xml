@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.27.0@faf106e717c37b8c81721845dba9de3d8deed8ff">
+<files psalm-version="5.0.0@4e177bf0c9f03c17d2fbfd83b7cc9c47605274d8">
   <file src="src/Filter/AbstractLocale.php">
+    <InvalidPropertyAssignmentValue occurrences="2">
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+    </InvalidPropertyAssignmentValue>
     <MixedInferredReturnType occurrences="1">
       <code>string</code>
     </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;options['locale']</code>
       <code>$this-&gt;options['locale']</code>
     </MixedReturnStatement>
   </file>
@@ -15,11 +20,7 @@
     <MixedArgumentTypeCoercion occurrences="1">
       <code>$value</code>
     </MixedArgumentTypeCoercion>
-    <MixedInferredReturnType occurrences="1">
-      <code>bool</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="2">
-      <code>$this-&gt;options['allow_white_space']</code>
+    <MixedReturnStatement occurrences="1">
       <code>$value</code>
     </MixedReturnStatement>
     <MoreSpecificImplementedParamType occurrences="1">
@@ -48,40 +49,10 @@
       <code>$value</code>
     </MoreSpecificImplementedParamType>
   </file>
-  <file src="src/Filter/NumberFormat.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>NumberFormat</code>
-    </PropertyNotSetInConstructor>
-  </file>
   <file src="src/Filter/NumberParse.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$this-&gt;formatter === null</code>
-    </DocblockTypeContradiction>
-    <InvalidReturnStatement occurrences="2">
-      <code>$this-&gt;options['style']</code>
-      <code>$this-&gt;options['type']</code>
-    </InvalidReturnStatement>
-    <InvalidReturnType occurrences="2">
-      <code>int</code>
-      <code>int</code>
-    </InvalidReturnType>
     <MixedArgument occurrences="1">
       <code>$value</code>
     </MixedArgument>
-    <NonInvariantDocblockPropertyType occurrences="1">
-      <code>$options</code>
-    </NonInvariantDocblockPropertyType>
-    <NullableReturnStatement occurrences="2">
-      <code>$this-&gt;options['style']</code>
-      <code>$this-&gt;options['type']</code>
-    </NullableReturnStatement>
-    <PossiblyNullPropertyAssignmentValue occurrences="2">
-      <code>null</code>
-      <code>null</code>
-    </PossiblyNullPropertyAssignmentValue>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$formatter</code>
-    </PropertyNotSetInConstructor>
     <RedundantCastGivenDocblockType occurrences="2">
       <code>(int) $style</code>
       <code>(int) $type</code>
@@ -189,7 +160,8 @@
       <code>$aliases</code>
       <code>$factories</code>
     </NonInvariantDocblockPropertyType>
-    <ParamNameMismatch occurrences="1">
+    <ParamNameMismatch occurrences="2">
+      <code>$plugin</code>
       <code>$plugin</code>
     </ParamNameMismatch>
   </file>
@@ -340,6 +312,10 @@
     </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Translator/TextDomain.php">
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$textDomain-&gt;getArrayCopy()</code>
+      <code>$this-&gt;getArrayCopy()</code>
+    </MixedArgumentTypeCoercion>
     <PossiblyNullArgument occurrences="1">
       <code>$textDomain-&gt;getPluralRule()</code>
     </PossiblyNullArgument>
@@ -391,7 +367,7 @@
       <code>array_shift($locales)</code>
       <code>array_shift($locales)</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="20">
+    <MixedArrayAccess occurrences="25">
       <code>$file['filename']</code>
       <code>$file['filename']</code>
       <code>$file['filename']</code>
@@ -408,10 +384,15 @@
       <code>$pattern['type']</code>
       <code>$remote['text_domain']</code>
       <code>$remote['type']</code>
+      <code>$this-&gt;files[$textDomain][$currentLocale]</code>
+      <code>$this-&gt;files[$textDomain][$currentLocale]</code>
       <code>$this-&gt;messages[$textDomain][$locale]</code>
       <code>$this-&gt;messages[$textDomain][$locale]</code>
       <code>$this-&gt;messages[$textDomain][$locale]</code>
       <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale][$message]</code>
+      <code>$this-&gt;messages[$textDomain][$locale][$textDomain . "\x04" . $message]</code>
     </MixedArrayAccess>
     <MixedArrayAssignment occurrences="8">
       <code>$this-&gt;files[$textDomain][$locale]</code>
@@ -479,22 +460,25 @@
     </MixedAssignment>
   </file>
   <file src="src/Validator/Alnum.php">
-    <InvalidScalarArgument occurrences="1">
+    <PossiblyInvalidArgument occurrences="1">
       <code>$value</code>
-    </InvalidScalarArgument>
+    </PossiblyInvalidArgument>
     <RedundantCastGivenDocblockType occurrences="2">
       <code>(bool) $allowWhiteSpace</code>
       <code>(bool) $allowWhiteSpace</code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Validator/Alpha.php">
+    <InvalidClassConstantType occurrences="2">
+      <code>INVALID</code>
+      <code>STRING_EMPTY</code>
+    </InvalidClassConstantType>
     <NonInvariantDocblockPropertyType occurrences="1">
       <code>$filter</code>
     </NonInvariantDocblockPropertyType>
   </file>
   <file src="src/Validator/DateTime.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>$this-&gt;formatter === null</code>
+    <DocblockTypeContradiction occurrences="1">
       <code>is_string($value)</code>
     </DocblockTypeContradiction>
     <InvalidArgument occurrences="1">
@@ -503,17 +487,10 @@
     <MoreSpecificImplementedParamType occurrences="1">
       <code>$value</code>
     </MoreSpecificImplementedParamType>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$formatter</code>
-    </PropertyNotSetInConstructor>
-    <RedundantConditionGivenDocblockType occurrences="6">
-      <code>$this-&gt;formatter</code>
-      <code>$this-&gt;formatter</code>
-      <code>$this-&gt;formatter</code>
-      <code>$this-&gt;formatter</code>
-      <code>$this-&gt;formatter</code>
-      <code>$this-&gt;formatter</code>
-    </RedundantConditionGivenDocblockType>
+    <PossiblyNullArgument occurrences="2">
+      <code>$this-&gt;getDateType()</code>
+      <code>$this-&gt;getTimeType()</code>
+    </PossiblyNullArgument>
   </file>
   <file src="src/Validator/IsFloat.php">
     <MixedArgument occurrences="1">
@@ -579,10 +556,6 @@
       <code>getService</code>
       <code>setService</code>
     </DeprecatedMethod>
-    <InvalidScalarArgument occurrences="2">
-      <code>$value</code>
-      <code>$value</code>
-    </InvalidScalarArgument>
     <MixedArgument occurrences="4">
       <code>$format</code>
       <code>$format</code>
@@ -600,6 +573,10 @@
       <code>$format</code>
       <code>$format</code>
     </MixedOperand>
+    <PossiblyInvalidArgument occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </PossiblyInvalidArgument>
   </file>
   <file src="src/View/Helper/AbstractTranslatorHelper.php">
     <RedundantCastGivenDocblockType occurrences="1">
@@ -615,27 +592,6 @@
       <code>$currencyPattern</code>
       <code>$locale</code>
     </MissingConstructor>
-    <MixedArgument occurrences="2">
-      <code>$formattedNumber</code>
-      <code>$this-&gt;formatters[$formatterId]</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="2">
-      <code>$defaultCurrencyCode</code>
-      <code>$formattedNumber</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>string</code>
-    </MixedInferredReturnType>
-    <MixedMethodCall occurrences="5">
-      <code>formatCurrency</code>
-      <code>getTextAttribute</code>
-      <code>setAttribute</code>
-      <code>setAttribute</code>
-      <code>setPattern</code>
-    </MixedMethodCall>
-    <MixedReturnStatement occurrences="1">
-      <code>$formattedNumber</code>
-    </MixedReturnStatement>
     <RedundantCastGivenDocblockType occurrences="2">
       <code>(bool) $showDecimals</code>
       <code>(string) $locale</code>
@@ -652,6 +608,9 @@
       <code>$locale</code>
       <code>$timezone</code>
     </MissingConstructor>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$date</code>
+    </MixedArgumentTypeCoercion>
     <RedundantCastGivenDocblockType occurrences="1">
       <code>(string) $locale</code>
     </RedundantCastGivenDocblockType>
@@ -674,19 +633,9 @@
     <MixedArgumentTypeCoercion occurrences="1">
       <code>$textAttribute</code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="2">
-      <code>$formatter</code>
+    <MixedAssignment occurrences="1">
       <code>$value</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>string</code>
-    </MixedInferredReturnType>
-    <MixedMethodCall occurrences="1">
-      <code>format</code>
-    </MixedMethodCall>
-    <MixedReturnStatement occurrences="1">
-      <code>$formatter-&gt;format($number, $formatType)</code>
-    </MixedReturnStatement>
     <RedundantCastGivenDocblockType occurrences="3">
       <code>(int) $formatStyle</code>
       <code>(int) $formatType</code>
@@ -723,7 +672,6 @@
       <code>$name</code>
       <code>$this-&gt;toArray()</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayOffset occurrences="1"/>
     <MixedAssignment occurrences="2">
       <code>$factory</code>
       <code>$target</code>
@@ -818,7 +766,6 @@
   <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
     <UnusedClosureParam occurrences="1">
       <code>$container</code>
-      <code>$container</code>
     </UnusedClosureParam>
   </file>
   <file src="test/Translator/TestAsset/Loader.php">
@@ -845,10 +792,6 @@
       <code>null</code>
       <code>null</code>
     </NullArgument>
-    <RedundantCondition occurrences="2">
-      <code>assertNull</code>
-      <code>assertNull</code>
-    </RedundantCondition>
   </file>
   <file src="test/Validator/DateTimeTest.php">
     <UndefinedMethod occurrences="1">
