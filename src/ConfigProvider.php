@@ -21,6 +21,7 @@ class ConfigProvider
      *     filters: ServiceManagerConfigurationType,
      *     validators: ServiceManagerConfigurationType,
      *     view_helpers: ServiceManagerConfigurationType,
+     *     locale: string|null,
      * }
      */
     public function __invoke()
