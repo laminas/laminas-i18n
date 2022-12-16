@@ -5,6 +5,7 @@ capabilities.
 
 - [Alnum](alnum.md)
 - [Alpha](alpha.md)
+- [CountryCode](country-code.md)
 - [DateTime](date-time.md)
 - [IsFloat](is-float.md)
 - [IsInt](is-int.md)

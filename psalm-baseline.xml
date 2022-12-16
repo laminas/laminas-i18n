@@ -58,6 +58,9 @@
       <code>(int) $type</code>
     </RedundantCastGivenDocblockType>
   </file>
+  <file src="src/Geography/DefaultCountryCodeList.php">
+    <InvalidConstantAssignmentValue occurrences="1"/>
+  </file>
   <file src="src/Module.php">
     <UndefinedDocblockClass occurrences="1">
       <code>ModuleManager</code>

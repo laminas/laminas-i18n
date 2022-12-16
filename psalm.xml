@@ -35,4 +35,7 @@
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
+    <stubs>
+        <file name=".psr-container.php.stub"/>
+    </stubs>
 </psalm>

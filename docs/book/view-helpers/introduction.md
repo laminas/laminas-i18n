@@ -3,6 +3,7 @@
 laminas-i18n ships with a set of laminas-view helper classes related to
 internationalization.
 
+- [CountryCodeDataList](country-code-data-list.md)
 - [CurrencyFormat](currency-format.md)
 - [DateFormat](date-format.md)
 - [NumberFormat](number-format.md)

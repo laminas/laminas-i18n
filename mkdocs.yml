@@ -21,6 +21,7 @@ nav:
             - Introduction: validators/introduction.md
             - Alnum: validators/alnum.md
             - Alpha: validators/alpha.md
+            - CountryCode: validators/country-code.md
             - DateTime: validators/date-time.md
             - IsFloat: validators/is-float.md
             - IsInt: validators/is-int.md
@@ -28,6 +29,7 @@ nav:
             - PostCode: validators/post-code.md
     - 'View Helpers':
         - Introduction: view-helpers/introduction.md
+        - CountryCodeDataList: view-helpers/country-code-data-list.md
         - CurrencyFormat: view-helpers/currency-format.md
         - DateFormat: view-helpers/date-format.md
         - NumberFormat: view-helpers/number-format.md
