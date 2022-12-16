@@ -10,6 +10,12 @@ guarantees an optimized loading procedure.
 > ```bash
 > $ composer require laminas/laminas-cache
 > ```
+>
+> Version 3 of laminas-cache removed support for factories required by this component, so if your application requires laminas-cache version 3 or later, you will also need to install `laminas-cache-storage-deprecated-factory`
+>
+> ```bash
+> $ composer require laminas/laminas-cache-storage-deprecated-factory
+> ```
 
 ## Enable Caching
 
@@ -29,7 +35,7 @@ $cache      = Laminas\Cache\StorageFactory::factory([
 $translator->setCache($cache);
 ```
 
-The explanation of creating a cache and and using different adapters for caching
+The explanation of creating a cache and using different adapters for caching
 can be found in [documentation of laminas-cache](https://docs.laminas.dev/laminas-cache/).
 
 ## Disable Caching
