@@ -79,7 +79,9 @@ This can be achieved in 2 ways:
 
 #### 1. A Custom Factory for the Helper
 
-In order to inject the list into the helper, you can setup a factory that replaces the view helpers default factory:
+In order to inject the list into the helper, you can set up a factory that replaces the view helpers default factory.
+
+Create a file for the factory e.g. `module/MyModule/src/Factory/MyCountryDataListFactory.php` with the following contents:
 
 ```php
 namespace MyNameSpace;
@@ -101,7 +103,9 @@ class MyCountryDataListFactory
 }
 ```
 
-You would then configure your application config to register this factory for the helper:
+You would then configure your application config to register this factory for the helper.
+
+For example, in a Laminas MVC module, the file might be `module/MyModule/config/module.config.php`
 
 ```php
 return [
@@ -116,6 +120,8 @@ return [
 #### 2. Override the List Itself in the DI Container
 
 Assuming your customised list is available in the DI container with the alias `MyCountryList`, modify your application configuration so that the list interface is aliased to your own implementation:
+
+Example configuration file path for a Laminas MVC module: `module/MyModule/config/module.config.php`
 
 ```php
 return [
