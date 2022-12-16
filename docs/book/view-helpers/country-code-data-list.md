@@ -105,7 +105,7 @@ class MyCountryDataListFactory
 
 You would then configure your application config to register this factory for the helper.
 
-For example, in a Laminas MVC module, the file might be `module/MyModule/config/module.config.php`
+For example, in a laminas-mvc module, the file might be `module/MyModule/config/module.config.php`
 
 ```php
 return [
@@ -121,12 +121,12 @@ return [
 
 Assuming your customised list is available in the DI container with the alias `MyCountryList`, modify your application configuration so that the list interface is aliased to your own implementation:
 
-Example configuration file path for a Laminas MVC module: `module/MyModule/config/module.config.php`
+Example configuration file path for a laminas-mvc module: `module/MyModule/config/module.config.php`
 
 ```php
 return [
     /**
-     * 'service_manager' is the key used in a Laminas MVC application.
+     * 'service_manager' is the key used in a laminas-mvc application.
      * For a Mezzio application, the key would be 'dependencies' 
      */
     'service_manager' => [
