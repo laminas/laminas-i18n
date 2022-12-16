@@ -1,7 +1,6 @@
 # CountryCode
 
-`Laminas\I18n\Validator\CountryCode` allows you to validate if a given value is
-**known and valid** ISO-3166 alpha 2 country code.
+`Laminas\I18n\Validator\CountryCode` allows you to validate if a given value is **known and valid** two-letter country codes of [ISO-3166 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
 ## Basic Usage
 

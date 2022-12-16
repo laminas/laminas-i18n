@@ -1,6 +1,6 @@
 # CountryCodeDataList
 
-The `CountryCodeDataList` view helper can be used to render an HTML [&lt;datalist&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) element containing a list of ISO-3166 country codes with localised country names.
+The `CountryCodeDataList` view helper can be used to render an HTML [&lt;datalist&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) element containing a list of ISO-3166 country codes with two-letter country codes and localised country names.
 
 ## Basic Usage
 
@@ -65,7 +65,9 @@ Outputs:
 
 ### The `CountryCodeListInterface` Contract
 
-The helper's constructor accepts an object that implements `Laminas\I18n\Geography\CountryCodeListInterface`. This interface has no specific methods other than those it inherits from [`IteratorAggregate`](https://www.php.net/manual/en/class.iteratoraggregate.php) and [`Countable`](https://www.php.net/manual/en/class.countable.php). This object must be an iterable that yields a list of `Laminas\I18n\CountryCode` value objects.
+The helper's constructor accepts an object that implements `Laminas\I18n\Geography\CountryCodeListInterface`.
+This interface has no specific methods other than those it inherits from [`IteratorAggregate`](https://www.php.net/manual/en/class.iteratoraggregate.php) and [`Countable`](https://www.php.net/manual/en/class.countable.php).
+This object must be an iterable that yields a list of `Laminas\I18n\CountryCode` value objects.
 
 The default implementation of this interface, `Laminas\I18n\Geography\DefaultCountryCodeList` provides a list of all known ISO-3166 codes.
 
