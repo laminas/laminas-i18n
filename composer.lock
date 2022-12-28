@@ -1175,40 +1175,39 @@
         },
         {
             "name": "laminas/laminas-cache-storage-deprecated-factory",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-cache-storage-deprecated-factory.git",
-                "reference": "b38ca23107443ce0a59d34d4735e8404545f31fc"
+                "reference": "f35b7b1b7c33f61726b57d694ff0340f8e0e9328"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-cache-storage-deprecated-factory/zipball/b38ca23107443ce0a59d34d4735e8404545f31fc",
-                "reference": "b38ca23107443ce0a59d34d4735e8404545f31fc",
+                "url": "https://api.github.com/repos/laminas/laminas-cache-storage-deprecated-factory/zipball/f35b7b1b7c33f61726b57d694ff0340f8e0e9328",
+                "reference": "f35b7b1b7c33f61726b57d694ff0340f8e0e9328",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-cache": "^3.0",
                 "laminas/laminas-servicemanager": "^3.7",
                 "laminas/laminas-stdlib": "^3.6",
-                "php": "^7.3 || ~8.0.0 || ~8.1.0",
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
                 "webmozart/assert": "^1.10"
             },
             "require-dev": {
-                "laminas/laminas-cache": "3.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-apcu": "2.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-blackhole": "2.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-ext-mongodb": "2.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-filesystem": "2.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-memcached": "2.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-memory": "2.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-redis": "2.0.x@dev",
-                "laminas/laminas-cache-storage-adapter-session": "2.0.x@dev",
-                "laminas/laminas-coding-standard": "^2.3",
-                "laminas/laminas-serializer": "^2.11",
-                "phpunit/phpunit": "^9.5",
-                "psalm/plugin-phpunit": "^0.16.1",
-                "vimeo/psalm": "^4.12"
+                "laminas/laminas-cache-storage-adapter-apcu": "^2.4",
+                "laminas/laminas-cache-storage-adapter-blackhole": "^2.2",
+                "laminas/laminas-cache-storage-adapter-ext-mongodb": "^2.3",
+                "laminas/laminas-cache-storage-adapter-filesystem": "^2.3",
+                "laminas/laminas-cache-storage-adapter-memcached": "^2.4",
+                "laminas/laminas-cache-storage-adapter-memory": "^2.2",
+                "laminas/laminas-cache-storage-adapter-redis": "^2.5",
+                "laminas/laminas-cache-storage-adapter-session": "^2.3",
+                "laminas/laminas-coding-standard": "2.3",
+                "laminas/laminas-serializer": "^2.14",
+                "phpunit/phpunit": "^9.5.27",
+                "psalm/plugin-phpunit": "^0.18.4",
+                "vimeo/psalm": "^5.4"
             },
             "type": "library",
             "autoload": {
@@ -1223,7 +1222,7 @@
             "description": "Temporary storage adapter factory for fluent migration to laminas-cache v3 when working with laminas components which depend on laminas-cache",
             "support": {
                 "issues": "https://github.com/laminas/laminas-cache-storage-deprecated-factory/issues",
-                "source": "https://github.com/laminas/laminas-cache-storage-deprecated-factory/tree/1.0.1"
+                "source": "https://github.com/laminas/laminas-cache-storage-deprecated-factory/tree/1.1.0"
             },
             "funding": [
                 {
@@ -1231,7 +1230,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-02-23T20:40:35+00:00"
+            "time": "2022-12-22T08:25:45+00:00"
         },
         {
             "name": "laminas/laminas-coding-standard",
@@ -4056,16 +4055,16 @@
         },
         {
             "name": "spatie/array-to-xml",
-            "version": "2.17.0",
+            "version": "2.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/array-to-xml.git",
-                "reference": "df0f116f26f6d3f84041e94d46811ee6b64fe7d5"
+                "reference": "5cbec9c6ab17e320c58a259f0cebe88bde4a7c46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/array-to-xml/zipball/df0f116f26f6d3f84041e94d46811ee6b64fe7d5",
-                "reference": "df0f116f26f6d3f84041e94d46811ee6b64fe7d5",
+                "url": "https://api.github.com/repos/spatie/array-to-xml/zipball/5cbec9c6ab17e320c58a259f0cebe88bde4a7c46",
+                "reference": "5cbec9c6ab17e320c58a259f0cebe88bde4a7c46",
                 "shasum": ""
             },
             "require": {
@@ -4104,7 +4103,7 @@
                 "xml"
             ],
             "support": {
-                "source": "https://github.com/spatie/array-to-xml/tree/2.17.0"
+                "source": "https://github.com/spatie/array-to-xml/tree/2.17.1"
             },
             "funding": [
                 {
@@ -4116,7 +4115,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-13T09:08:39+00:00"
+            "time": "2022-12-26T08:22:07+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
