@@ -1712,16 +1712,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.25.2",
+            "version": "2.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "ab40dc844cb5d54739db021a9c819de115a710e9"
+                "reference": "955c34b8fd0d5bdb28f560e64f510f6b49c7e250"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/ab40dc844cb5d54739db021a9c819de115a710e9",
-                "reference": "ab40dc844cb5d54739db021a9c819de115a710e9",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/955c34b8fd0d5bdb28f560e64f510f6b49c7e250",
+                "reference": "955c34b8fd0d5bdb28f560e64f510f6b49c7e250",
                 "shasum": ""
             },
             "require": {
@@ -1744,24 +1744,23 @@
             },
             "require-dev": {
                 "laminas/laminas-authentication": "^2.13",
-                "laminas/laminas-coding-standard": "~2.4.0",
-                "laminas/laminas-console": "^2.8",
-                "laminas/laminas-feed": "^2.19",
-                "laminas/laminas-filter": "^2.25",
-                "laminas/laminas-http": "^2.17",
-                "laminas/laminas-i18n": "^2.19",
+                "laminas/laminas-coding-standard": "~2.5.0",
+                "laminas/laminas-feed": "^2.20",
+                "laminas/laminas-filter": "^2.31",
+                "laminas/laminas-http": "^2.18",
+                "laminas/laminas-i18n": "^2.21",
                 "laminas/laminas-modulemanager": "^2.14",
-                "laminas/laminas-mvc": "^3.5",
-                "laminas/laminas-mvc-i18n": "^1.6",
+                "laminas/laminas-mvc": "^3.6",
+                "laminas/laminas-mvc-i18n": "^1.7",
                 "laminas/laminas-mvc-plugin-flashmessenger": "^1.9",
-                "laminas/laminas-navigation": "^2.16",
-                "laminas/laminas-paginator": "^2.15",
-                "laminas/laminas-permissions-acl": "^2.12",
-                "laminas/laminas-router": "^3.10",
+                "laminas/laminas-navigation": "^2.18.1",
+                "laminas/laminas-paginator": "^2.17",
+                "laminas/laminas-permissions-acl": "^2.13",
+                "laminas/laminas-router": "^3.11.1",
                 "laminas/laminas-uri": "^2.10",
-                "phpunit/phpunit": "^9.5.26",
-                "psalm/plugin-phpunit": "^0.18.3",
-                "vimeo/psalm": "^4.30"
+                "phpunit/phpunit": "^9.5.28",
+                "psalm/plugin-phpunit": "^0.18.4",
+                "vimeo/psalm": "^5.4"
             },
             "suggest": {
                 "laminas/laminas-authentication": "Laminas\\Authentication component",
@@ -1809,7 +1808,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-12-21T11:35:32+00:00"
+            "time": "2023-01-15T08:16:12+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1923,16 +1922,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.15.2",
+            "version": "v4.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
+                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
-                "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/570e980a201d8ed0236b0a62ddf2c9cbb2034039",
+                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039",
                 "shasum": ""
             },
             "require": {
@@ -1973,9 +1972,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.3"
             },
-            "time": "2022-11-12T15:38:23+00:00"
+            "time": "2023-01-16T22:05:37+00:00"
         },
         {
             "name": "phar-io/manifest",
