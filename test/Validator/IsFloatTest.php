@@ -73,17 +73,19 @@ class IsFloatTest extends TestCase
             foreach ($testingExamples as $example) {
                 $trueArray[] = [$example, true, $locale, 'raw'];
                 //Decimal Formatted
+                $numberFormatter = NumberFormatter::create($locale, NumberFormatter::DECIMAL);
+                self::assertInstanceOf(NumberFormatter::class, $numberFormatter);
                 $trueArray[] = [
-                    NumberFormatter::create($locale, NumberFormatter::DECIMAL)
-                        ->format($example, NumberFormatter::TYPE_DOUBLE),
+                    $numberFormatter->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
                     'decimal',
                 ];
                 //Scientific Notation Formatted
+                $numberFormatter = NumberFormatter::create($locale, NumberFormatter::SCIENTIFIC);
+                self::assertInstanceOf(NumberFormatter::class, $numberFormatter);
                 $trueArray[] = [
-                    NumberFormatter::create($locale, NumberFormatter::SCIENTIFIC)
-                        ->format($example, NumberFormatter::TYPE_DOUBLE),
+                    $numberFormatter->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
                     'scientific',
