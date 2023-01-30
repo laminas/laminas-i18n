@@ -9,7 +9,6 @@ use Laminas\I18n\CountryCode;
 use Traversable;
 
 use function array_map;
-use function assert;
 use function count;
 
 final class DefaultCountryCodeList implements CountryCodeListInterface
@@ -293,8 +292,6 @@ final class DefaultCountryCodeList implements CountryCodeListInterface
     {
         return array_map(
             static function (string $code): CountryCode {
-                assert($code !== '');
-
                 return CountryCode::fromString($code);
             },
             self::LIST
