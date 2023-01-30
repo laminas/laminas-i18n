@@ -36,8 +36,9 @@ class NumberParse extends AbstractLocale
 
     /**
      * @param array|Traversable|string|null $localeOrOptions
-     * @param int  $style
-     * @param int  $type
+     * @param int $style
+     * @param int $type
+     * @psalm-param NumberFormatter::TYPE_* $type
      */
     public function __construct(
         $localeOrOptions = null,
@@ -91,7 +92,8 @@ class NumberParse extends AbstractLocale
     }
 
     /**
-     * @param  int $type
+     * @param int $type
+     * @psalm-param NumberFormatter::TYPE_* $type
      * @return $this
      */
     public function setType($type)
@@ -101,7 +103,7 @@ class NumberParse extends AbstractLocale
     }
 
     /**
-     * @return int
+     * @return NumberFormatter::TYPE_*
      */
     public function getType()
     {

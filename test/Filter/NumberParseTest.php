@@ -31,6 +31,7 @@ class NumberParseTest extends TestCase
 
     /**
      * @dataProvider formattedToNumberProvider
+     * @param NumberFormatter::TYPE_* $type
      */
     public function testFormattedToNumber(string $locale, int $style, int $type, string $value, float $expected): void
     {
@@ -38,7 +39,7 @@ class NumberParseTest extends TestCase
         self::assertSame($expected, $filter->filter($value));
     }
 
-    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: string, 4:float}> */
+    /** @return array<array-key, array{0: string, 1: int, 2: NumberFormatter::TYPE_*, 3: string, 4:float}> */
     public static function formattedToNumberProvider(): array
     {
         return [
