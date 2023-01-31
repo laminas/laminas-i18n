@@ -61,7 +61,7 @@ Outputs:
 </datalist>
 ```
 
-In order for the html data list to be used with a form input, you must target the list from the input using [the `list` attribute](). For example:
+In order for the html data list to be used with a form input, you must target the list from the input using [the `list` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list). For example:
 
 ```php
 $formElement = new \Laminas\Form\Element\Text('my-input');
