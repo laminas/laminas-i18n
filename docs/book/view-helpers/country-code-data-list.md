@@ -33,7 +33,7 @@ echo $this->countryCodeDataList('de_DE'); // or just 'DE'
 Outputs:
 
 ```html
-<datalist >
+<datalist>
     <option value="AD" label="Andorra">
     <option value="AE" label="Vereinigte&#x20;Arabische&#x20;Emirate">
     <option value="AF" label="Afghanistan">
@@ -60,6 +60,13 @@ Outputs:
     <!-- etc… -->
 </datalist>
 ```
+
+In order for the html data list to be used with a form input, you must target the list from the input using [the `list` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list).
+For example:
+
+```php
+$formElement = new Laminas\Form\Element\Text('country');
+$formElement->setAttribute('list', 'country-codes');
 
 ## Restricting the List of Available Countries
 
