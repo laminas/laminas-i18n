@@ -1712,16 +1712,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.26.0",
+            "version": "2.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "955c34b8fd0d5bdb28f560e64f510f6b49c7e250"
+                "reference": "b7e66e148ccd55c815b9626ee0cfd358dbb28be4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/955c34b8fd0d5bdb28f560e64f510f6b49c7e250",
-                "reference": "955c34b8fd0d5bdb28f560e64f510f6b49c7e250",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/b7e66e148ccd55c815b9626ee0cfd358dbb28be4",
+                "reference": "b7e66e148ccd55c815b9626ee0cfd358dbb28be4",
                 "shasum": ""
             },
             "require": {
@@ -1808,7 +1808,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-01-15T08:16:12+00:00"
+            "time": "2023-02-09T16:07:15+00:00"
         },
         {
             "name": "myclabs/deep-copy",
