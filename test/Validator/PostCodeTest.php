@@ -8,6 +8,7 @@ use Generator;
 use Laminas\I18n\Validator\PostCode as PostCodeValidator;
 use Laminas\Validator\Exception\InvalidArgumentException;
 use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class PostCodeTest extends TestCase
 {
@@ -19,9 +20,7 @@ class PostCodeTest extends TestCase
         $this->validator = new PostCodeValidator(['locale' => 'de_AT']);
     }
 
-    /**
-     * @dataProvider UKPostCodesDataProvider
-     */
+    #[DataProvider('UKPostCodesDataProvider')]
     public function testUKBasic(string $postCode, bool $expected): void
     {
         $ukValidator = new PostCodeValidator(['locale' => 'en_GB']);
@@ -29,7 +28,7 @@ class PostCodeTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: bool}> */
-    public function UKPostCodesDataProvider(): array
+    public static function UKPostCodesDataProvider(): array
     {
         return [
             ['CA3 5JQ', true],
@@ -45,7 +44,7 @@ class PostCodeTest extends TestCase
     }
 
     /** @return array<array-key, array{0: mixed, 1: bool}> */
-    public function postCodesDataProvider(): array
+    public static function postCodesDataProvider(): array
     {
         return [
             ['2292',    true],
@@ -65,9 +64,9 @@ class PostCodeTest extends TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @dataProvider postCodesDataProvider
      * @param mixed $postCode
      */
+    #[DataProvider('postCodesDataProvider')]
     public function testBasic($postCode, bool $expected): void
     {
         self::assertEquals($expected, $this->validator->isValid($postCode));
@@ -230,7 +229,7 @@ class PostCodeTest extends TestCase
     }
 
     /** @return Generator<string, array{0: int}> */
-    public function liPostCode(): Generator
+    public static function liPostCode(): Generator
     {
         yield 'Nendeln' => [9485];
         yield 'Schaanwald' => [9486];
@@ -248,9 +247,7 @@ class PostCodeTest extends TestCase
         yield 'Planken' => [9498];
     }
 
-    /**
-     * @dataProvider liPostCode
-     */
+    #[DataProvider('liPostCode')]
     public function testLiPostCodes(int $postCode): void
     {
         $validator = $this->validator;

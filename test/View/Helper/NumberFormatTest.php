@@ -8,6 +8,7 @@ use Laminas\I18n\View\Helper\NumberFormat as NumberFormatHelper;
 use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function str_replace;
 
@@ -22,7 +23,7 @@ class NumberFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: int, 2: int, 3: int|null, 4: array<int, string>, 5: float, 6: string}> */
-    public function currencyTestsDataProvider(): array
+    public static function currencyTestsDataProvider(): array
     {
         return [
             [
@@ -139,9 +140,9 @@ class NumberFormatTest extends TestCase
     }
 
     /**
-     * @dataProvider currencyTestsDataProvider
      * @param array<int, string> $textAttributes
      */
+    #[DataProvider('currencyTestsDataProvider')]
     public function testBasic(
         string $locale,
         int $formatStyle,
@@ -162,9 +163,9 @@ class NumberFormatTest extends TestCase
     }
 
     /**
-     * @dataProvider currencyTestsDataProvider
      * @param array<int, string> $textAttributes
      */
+    #[DataProvider('currencyTestsDataProvider')]
     public function testSettersProvideDefaults(
         string $locale,
         int $formatStyle,

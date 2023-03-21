@@ -7,9 +7,11 @@ namespace LaminasTest\I18n;
 use Laminas\I18n\CountryCode;
 use Laminas\I18n\Exception\InvalidArgumentException;
 use Locale;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/** @covers \Laminas\I18n\CountryCode */
+#[CoversClass(CountryCode::class)]
 final class CountryCodeTest extends TestCase
 {
     private string $preserveLocale;
@@ -65,7 +67,7 @@ final class CountryCodeTest extends TestCase
     }
 
     /** @return list<array{0:non-empty-string, 1:non-empty-string}> */
-    public function localeToCountryCodeDataProvider(): array
+    public static function localeToCountryCodeDataProvider(): array
     {
         return [
             ['sl-Latn-IT-nedis', 'IT'],
@@ -79,8 +81,8 @@ final class CountryCodeTest extends TestCase
     /**
      * @param non-empty-string $input
      * @param non-empty-string $expect
-     * @dataProvider localeToCountryCodeDataProvider
      */
+    #[DataProvider('localeToCountryCodeDataProvider')]
     public function testCountryCodesCanBeConstructedFromLocales(string $input, string $expect): void
     {
         $code = CountryCode::fromLocaleString($input);
@@ -95,7 +97,7 @@ final class CountryCodeTest extends TestCase
     }
 
     /** @return list<array{0:non-empty-string, 1:non-empty-string}> */
-    public function detectProvider(): array
+    public static function detectProvider(): array
     {
         return [
             ['sl-Latn-IT-nedis', 'IT'],
@@ -112,8 +114,8 @@ final class CountryCodeTest extends TestCase
     /**
      * @param non-empty-string $input
      * @param non-empty-string $expect
-     * @dataProvider detectProvider
      */
+    #[DataProvider('detectProvider')]
     public function testThatDetectWillCorrectlyIdentifyTheCountryCode(string $input, string $expect): void
     {
         $code = CountryCode::detect($input);

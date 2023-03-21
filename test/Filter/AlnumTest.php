@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Filter;
 use Laminas\I18n\Filter\Alnum as AlnumFilter;
 use LaminasTest\I18n\TestCase;
 use Locale;
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 
 use function array_keys;
@@ -149,7 +150,7 @@ class AlnumTest extends TestCase
     }
 
     /** @return array<array-key, array{0: mixed}> */
-    public function returnUnfilteredDataProvider(): array
+    public static function returnUnfilteredDataProvider(): array
     {
         return [
             [null],
@@ -158,9 +159,9 @@ class AlnumTest extends TestCase
     }
 
     /**
-     * @dataProvider returnUnfilteredDataProvider
      * @param mixed $input
      */
+    #[DataProvider('returnUnfilteredDataProvider')]
     public function testReturnUnfiltered($input): void
     {
         $filter = new AlnumFilter();

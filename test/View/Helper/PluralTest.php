@@ -6,6 +6,7 @@ namespace LaminasTest\I18n\View\Helper;
 
 use Laminas\I18n\View\Helper\Plural as PluralHelper;
 use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class PluralTest extends TestCase
 {
@@ -20,7 +21,7 @@ class PluralTest extends TestCase
     /**
      * @return array<array-key, array{0: string, 1: list<string>, 2:int, 3:string}>
      */
-    public function pluralsTestProvider(): array
+    public static function pluralsTestProvider(): array
     {
         return [
             ['nplurals=1; plural=0', ['かさ'], 0, 'かさ'],
@@ -35,9 +36,9 @@ class PluralTest extends TestCase
     }
 
     /**
-     * @dataProvider pluralsTestProvider
      * @param list<string> $strings
      */
+    #[DataProvider('pluralsTestProvider')]
     public function testGetCorrectPlurals(string $pluralRule, array $strings, int $number, string $expected): void
     {
         $this->helper->setPluralRule($pluralRule);

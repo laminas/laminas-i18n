@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Filter;
 use Laminas\I18n\Filter\NumberFormat as NumberFormatFilter;
 use LaminasTest\I18n\TestCase;
 use NumberFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 
 class NumberFormatTest extends TestCase
@@ -31,7 +32,7 @@ class NumberFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: int, 2: NumberFormatter::TYPE_*, 3: float, 4: string}> */
-    public function numberToFormattedProvider(): array
+    public static function numberToFormattedProvider(): array
     {
         return [
             [
@@ -59,9 +60,9 @@ class NumberFormatTest extends TestCase
     }
 
     /**
-     * @dataProvider numberToFormattedProvider
      * @param NumberFormatter::TYPE_* $type
      */
+    #[DataProvider('numberToFormattedProvider')]
     public function testNumberToFormatted(string $locale, int $style, int $type, float $value, string $expected): void
     {
         $filter = new NumberFormatFilter($locale, $style, $type);
@@ -69,7 +70,7 @@ class NumberFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: int, 2: NumberFormatter::TYPE_*, 3: string, 4: float}> */
-    public function formattedToNumberProvider(): array
+    public static function formattedToNumberProvider(): array
     {
         return [
             [
@@ -97,9 +98,9 @@ class NumberFormatTest extends TestCase
     }
 
     /**
-     * @dataProvider formattedToNumberProvider
      * @param NumberFormatter::TYPE_* $type
      */
+    #[DataProvider('formattedToNumberProvider')]
     public function testFormattedToNumber(string $locale, int $style, int $type, string $value, float $expected): void
     {
         $filter = new NumberFormatFilter($locale, $style, $type);
@@ -107,7 +108,7 @@ class NumberFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: mixed}> */
-    public function returnUnfilteredDataProvider(): array
+    public static function returnUnfilteredDataProvider(): array
     {
         return [
             [null],
@@ -122,9 +123,9 @@ class NumberFormatTest extends TestCase
     }
 
     /**
-     * @dataProvider returnUnfilteredDataProvider
      * @param mixed $input
      */
+    #[DataProvider('returnUnfilteredDataProvider')]
     public function testReturnUnfiltered($input): void
     {
         $filter = new NumberFormatFilter('de_AT', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);

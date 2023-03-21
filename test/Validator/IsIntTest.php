@@ -8,6 +8,7 @@ use Laminas\I18n\Validator\IsInt as IsIntValidator;
 use Laminas\Validator\Exception;
 use LaminasTest\I18n\TestCase;
 use Locale;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class IsIntTest extends TestCase
 {
@@ -20,7 +21,7 @@ class IsIntTest extends TestCase
     }
 
     /** @return array<array-key, array{0: mixed, 1: bool}> */
-    public function intDataProvider(): array
+    public static function intDataProvider(): array
     {
         return [
             [1.00,         true],
@@ -39,9 +40,9 @@ class IsIntTest extends TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @dataProvider intDataProvider()
      * @param mixed $intVal
      */
+    #[DataProvider('intDataProvider')]
     public function testBasic($intVal, bool $expected): void
     {
         $this->validator->setLocale('en');
@@ -109,7 +110,7 @@ class IsIntTest extends TestCase
     /**
      * @return array<array-key, array{0: mixed}>
      */
-    public function setStrictInvalidParameterDataProvider(): array
+    public static function setStrictInvalidParameterDataProvider(): array
     {
         return [
             [null],
@@ -123,9 +124,9 @@ class IsIntTest extends TestCase
     }
 
     /**
-     * @dataProvider setStrictInvalidParameterDataProvider
      * @param mixed $strict
      */
+    #[DataProvider('setStrictInvalidParameterDataProvider')]
     public function testSetStrictThrowsInvalidArgumentException($strict): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
@@ -136,7 +137,7 @@ class IsIntTest extends TestCase
     /**
      * @return array<array-key, array{0: mixed, 1: bool}>
      */
-    public function strictIntDataProvider(): array
+    public static function strictIntDataProvider(): array
     {
         return [
             [1,            true],
@@ -155,9 +156,9 @@ class IsIntTest extends TestCase
     }
 
     /**
-     * @dataProvider strictIntDataProvider
      * @param mixed $intVal
      */
+    #[DataProvider('strictIntDataProvider')]
     public function testStrictComparison($intVal, bool $expected): void
     {
         $this->validator->setLocale('en');

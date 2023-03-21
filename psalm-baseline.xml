@@ -738,15 +738,39 @@
       <code>HelperConfig</code>
     </UnusedClass>
   </file>
+  <file src="test/CountryCodeTest.php">
+    <PossiblyUnusedMethod>
+      <code>detectProvider</code>
+      <code>localeToCountryCodeDataProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Filter/AlnumTest.php">
     <MixedArgument>
       <code>$input</code>
     </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code>returnUnfilteredDataProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Filter/AlphaTest.php">
     <MixedArgument>
       <code>$input</code>
     </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code>returnUnfilteredDataProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Filter/NumberFormatTest.php">
+    <PossiblyUnusedMethod>
+      <code>formattedToNumberProvider</code>
+      <code>numberToFormattedProvider</code>
+      <code>returnUnfilteredDataProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Filter/NumberParseTest.php">
+    <PossiblyUnusedMethod>
+      <code>formattedToNumberProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/TestAsset/ModuleEventInterface.php">
     <MissingReturnType>
@@ -823,9 +847,18 @@
     </UnresolvableInclude>
   </file>
   <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
+    <PossiblyUnusedMethod>
+      <code>provideLoader</code>
+    </PossiblyUnusedMethod>
     <UnusedClosureParam>
       <code>$container</code>
     </UnusedClosureParam>
+  </file>
+  <file src="test/Translator/Plural/RuleTest.php">
+    <PossiblyUnusedMethod>
+      <code>completeRuleProvider</code>
+      <code>parseRuleProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Translator/TestAsset/Loader.php">
     <ParamNameMismatch>
@@ -852,17 +885,63 @@
       <code>null</code>
     </NullArgument>
   </file>
+  <file src="test/Validator/CountryCodeTest.php">
+    <PossiblyUnusedMethod>
+      <code>invalidStringProvider</code>
+      <code>mixedDataProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Validator/DateTimeTest.php">
+    <PossiblyUnusedMethod>
+      <code>basicProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Validator/IsFloatTest.php">
     <MixedOperand>
       <code>$value</code>
     </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code>floatAndIntegerProvider</code>
+      <code>lookAlikeProvider</code>
+      <code>validationFailureProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Validator/IsIntTest.php">
+    <PossiblyUnusedMethod>
+      <code>intDataProvider</code>
+      <code>setStrictInvalidParameterDataProvider</code>
+      <code>strictIntDataProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Validator/PhoneNumberTest.php">
+    <PossiblyUnusedMethod>
+      <code>constructDataProvider</code>
+      <code>numbersDataProvider</code>
+    </PossiblyUnusedMethod>
+    <RedundantCast>
+      <code><![CDATA[(string) $parameters['code']]]></code>
+    </RedundantCast>
+  </file>
+  <file src="test/Validator/PostCodeTest.php">
+    <PossiblyUnusedMethod>
+      <code>UKPostCodesDataProvider</code>
+      <code>liPostCode</code>
+      <code>postCodesDataProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/View/Helper/CurrencyFormatTest.php">
     <PossiblyNullArgument>
       <code>$currencyPattern</code>
     </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code>currencyProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/View/Helper/DateFormatTest.php">
+    <PossiblyUnusedMethod>
+      <code>dateTestsDataProvider</code>
+      <code>dateTestsDataProviderWithPattern</code>
+    </PossiblyUnusedMethod>
     <TooManyArguments>
       <code>new IntlGregorianCalendar(2013, 6, 1)</code>
     </TooManyArguments>
@@ -871,5 +950,13 @@
     <PossiblyNullArgument>
       <code>$decimals</code>
     </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code>currencyTestsDataProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/View/Helper/PluralTest.php">
+    <PossiblyUnusedMethod>
+      <code>pluralsTestProvider</code>
+    </PossiblyUnusedMethod>
   </file>
 </files>
