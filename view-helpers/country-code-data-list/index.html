@@ -13,10 +13,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-i18n">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/filters/introduction/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/view-helpers/country-code-data-list/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Introduction - laminas-i18n - Laminas Docs</title>
+    <title>CountryCodeDataList - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -224,32 +224,32 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-parse/" class="subnavigation__link">NumberParse</a>
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
     </li>
 
                                     
@@ -352,49 +352,49 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CountryCodeDataList</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/country-code-data-list/" class="subnavigation__link">CountryCodeDataList</a>
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     
@@ -515,6 +515,21 @@
 
     
     
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#customising-output" class="toc__link nav-link">Customising Output</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
 
                 
 
@@ -532,12 +547,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Filters</li>
+                            <li class="breadcrumb-item">View Helpers</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
+                <li class="breadcrumb-item active" aria-current="page">CountryCodeDataList</li>
             
         
     </ol>
@@ -550,28 +565,112 @@
 
     
     
-        <h2 class="chapter__headline">Filters</h2>
+        <h2 class="chapter__headline">View Helpers</h2>
     
 
-    <h1 id="introduction">Introduction</h1>
-<p>laminas-i18n ships with a set of internationalization-related filters.</p>
-<ul>
-<li><a href="../alnum/">Alnum</a></li>
-<li><a href="../alpha/">Alpha</a></li>
-<li><a href="../number-format/">NumberFormat</a></li>
-<li><a href="../number-parse/">NumberParse</a></li>
-</ul>
-<p>These filters are based on Laminas component for filtering and
-normalizing data and files:
-<a href="https://docs.laminas.dev/laminas-filter/">laminas-filter</a>.</p>
-<p>The concept and the basic usage of the filters can be found in the
-<a href="https://docs.laminas.dev/laminas-filter/">documentation of laminas-filter</a>.</p>
-<div class="admonition missing">
-<p class="admonition-title">Installation Requirements</p>
-<p>
-The filtering support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-filter/">laminas-filter</a> component, so be sure to have it installed before getting started:</p>
-<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-filter</code></pre>
-</div>
+    <h1 id="countrycodedatalist">CountryCodeDataList</h1>
+<p>The <code>CountryCodeDataList</code> view helper can be used to render an HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist">&lt;datalist&gt;</a> element containing a list of ISO-3166 country codes with two-letter country codes and localised country names.</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<pre class="highlight"><code class="language-php">echo $this-&gt;countryCodeDataList();</code></pre>
+<p>By default, the helper will output a <code>datalist</code> with labels in the systems default locale such as:</p>
+<pre class="highlight"><code class="language-html">&lt;datalist &gt;
+    &lt;option value="AD" label="Andorra"&gt;
+    &lt;option value="AE" label="United&amp;#x20;Arab&amp;#x20;Emirates"&gt;
+    &lt;option value="AF" label="Afghanistan"&gt;
+    &lt;option value="AG" label="Antigua&amp;#x20;&amp;amp;&amp;#x20;Barbuda"&gt;
+    &lt;!-- …more items… --&gt;
+&lt;/datalist&gt;</code></pre>
+<h2 id="customising-output">Customising Output</h2>
+<h3 id="override-the-locale-at-runtime">Override the Locale at Runtime</h3>
+<p>The first, optional argument to the helper is a locale string used to format the country names:</p>
+<pre class="highlight"><code class="language-php">echo $this-&gt;countryCodeDataList('de_DE'); // or just 'DE'</code></pre>
+<p>Outputs:</p>
+<pre class="highlight"><code class="language-html">&lt;datalist&gt;
+    &lt;option value="AD" label="Andorra"&gt;
+    &lt;option value="AE" label="Vereinigte&amp;#x20;Arabische&amp;#x20;Emirate"&gt;
+    &lt;option value="AF" label="Afghanistan"&gt;
+    &lt;option value="AG" label="Antigua&amp;#x20;und&amp;#x20;Barbuda"&gt;
+    &lt;!-- etc… --&gt;
+&lt;/datalist&gt;</code></pre>
+<h3 id="set-html-attributes-on-the-data-list">Set HTML Attributes on the Data List</h3>
+<p>You can provide <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist#attributes">HTML attributes</a> to the second argument of the helper as an associative array.</p>
+<pre class="highlight"><code class="language-php">echo $this-&gt;countryCodeDataList(null, [
+    'id' =&gt; 'country-codes',
+]); // or just 'DE'</code></pre>
+<p>Outputs:</p>
+<pre class="highlight"><code class="language-html">&lt;datalist id="country-codes"&gt;
+    &lt;option value="AD" label="Andorra"&gt;
+    &lt;!-- etc… --&gt;
+&lt;/datalist&gt;</code></pre>
+<p>In order for the html data list to be used with a form input, you must target the list from the input using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list">the <code>list</code> attribute</a>.
+For example:</p>
+<pre class="highlight"><code class="language-php">$formElement = new Laminas\Form\Element\Text('country');
+$formElement-&gt;setAttribute('list', 'country-codes');
+
+## Restricting the List of Available Countries
+
+### The `CountryCodeListInterface` Contract
+
+The helper's constructor accepts an object that implements `Laminas\I18n\Geography\CountryCodeListInterface`.
+This interface has no specific methods other than those it inherits from [`IteratorAggregate`](https://www.php.net/manual/en/class.iteratoraggregate.php) and [`Countable`](https://www.php.net/manual/en/class.countable.php).
+This object must be an iterable that yields a list of `Laminas\I18n\CountryCode` value objects.
+
+The default implementation of this interface, `Laminas\I18n\Geography\DefaultCountryCodeList` provides a list of all known ISO-3166 codes.
+
+### Overriding the List
+
+Once you have an implementation of `CountryCodeListInterface` that provides the list of countries that you require, the list must be made available to the view helper.
+
+This can be achieved in 2 ways:
+
+#### 1. A Custom Factory for the Helper
+
+In order to inject the list into the helper, you can set up a factory that replaces the view helpers default factory.
+
+Create a file for the factory e.g. `module/MyModule/src/Factory/MyCountryDataListFactory.php` with the following contents:
+
+```php
+namespace MyNameSpace;
+
+use Laminas\Escaper\Escaper;
+use Laminas\I18n\View\Helper\CountryCodeDataList;
+use Psr\Container\ContainerInterface;
+
+class MyCountryDataListFactory
+{
+    public function __invoke(ContainerInterface $container): CountryCodeDataList
+    {
+        return new CountryCodeDataList(
+            $container-&gt;get('ContainerIdForMyCountryCodeList'),
+            new Escaper(),
+            'en_US',
+        );
+    }
+}</code></pre>
+<p>You would then configure your application config to register this factory for the helper.</p>
+<p>For example, in a laminas-mvc module, the file might be <code>module/MyModule/config/module.config.php</code></p>
+<pre class="highlight"><code class="language-php">return [
+    'view_helpers' =&gt; [
+        'factories' =&gt; [
+            \Laminas\I18n\View\Helper\CountryCodeDataList::class =&gt; \MyNameSpace\MyCountryDataListFactory::class,
+        ],
+    ],
+];</code></pre>
+<h4 id="2-override-the-list-itself-in-the-di-container">2. Override the List Itself in the DI Container</h4>
+<p>Assuming your customised list is available in the DI container with the alias <code>MyCountryList</code>, modify your application configuration so that the list interface is aliased to your own implementation:</p>
+<p>Example configuration file path for a laminas-mvc module: <code>module/MyModule/config/module.config.php</code></p>
+<pre class="highlight"><code class="language-php">return [
+    /**
+     * 'service_manager' is the key used in a laminas-mvc application.
+     * For a Mezzio application, the key would be 'dependencies' 
+     */
+    'service_manager' =&gt; [
+        'aliases' =&gt; [
+            \Laminas\I18n\Geography\CountryCodeListInterface::class =&gt; 'MyCountryList',
+        ],
+    ],
+];</code></pre>
+<p>In the above scenario, the shipped factory for the view helper will inject your implementation of the country list into the view helper's constructor.</p>
 
 
 
@@ -582,10 +681,10 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../translator/format-examples/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../introduction/">
                     <small class="page-nav__label">Previous</small>
                     <i class="fa fa-chevron-left"></i>
-                    Format Examples
+                    Introduction
                 </a>
             
         </li>
@@ -593,9 +692,9 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../alnum/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../currency-format/">
                     <small class="page-nav__label">Next</small>
-                    Alnum
+                    CurrencyFormat
                     <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -730,32 +829,32 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-parse/" class="subnavigation__link">NumberParse</a>
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
     </li>
 
                                     
@@ -858,49 +957,49 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CountryCodeDataList</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/country-code-data-list/" class="subnavigation__link">CountryCodeDataList</a>
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../plural/" class="subnavigation__link">Plural</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+        <a href="../translate/" class="subnavigation__link">Translate</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
     </li>
 
                                     

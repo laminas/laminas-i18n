@@ -295,6 +295,12 @@
             
                 
     <li class="subnavigation__list-item ">
+        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
         <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
@@ -347,6 +353,12 @@
                                         
     <li class="subnavigation__list-item ">
         <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/country-code-data-list/" class="subnavigation__link">CountryCodeDataList</a>
     </li>
 
                                     
@@ -573,6 +585,8 @@ guarantees an optimized loading procedure.</p>
 <p>
 The cache support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-cache/">laminas-cache</a> component, so be sure to have it installed before getting started:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-cache</code></pre>
+<p>Version 3 of laminas-cache removed support for factories required by this component, so if your application requires laminas-cache version 3 or later, you will also need to install <code>laminas-cache-storage-deprecated-factory</code></p>
+<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-cache-storage-deprecated-factory</code></pre>
 </div>
 <h2 id="enable-caching">Enable Caching</h2>
 <p>To enable caching, pass a <code>Laminas\Cache\Storage\Adapter</code> to the <code>setCache()</code>
@@ -587,7 +601,7 @@ $cache      = Laminas\Cache\StorageFactory::factory([
     ],
 ]);
 $translator-&gt;setCache($cache);</code></pre>
-<p>The explanation of creating a cache and and using different adapters for caching
+<p>The explanation of creating a cache and using different adapters for caching
 can be found in <a href="https://docs.laminas.dev/laminas-cache/">documentation of laminas-cache</a>.</p>
 <h2 id="disable-caching">Disable Caching</h2>
 <p>To disable the cache, pass a <code>null</code> value to the <code>setCache()</code> method.</p>
@@ -829,6 +843,12 @@ method.</p>
             
                 
     <li class="subnavigation__list-item ">
+        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
         <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
@@ -881,6 +901,12 @@ method.</p>
                                         
     <li class="subnavigation__list-item ">
         <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/country-code-data-list/" class="subnavigation__link">CountryCodeDataList</a>
     </li>
 
                                     
@@ -1061,7 +1087,7 @@ method.</p>
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-i18n/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2022 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2023 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

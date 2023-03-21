@@ -13,10 +13,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-i18n">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/filters/introduction/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/validators/country-code/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Introduction - laminas-i18n - Laminas Docs</title>
+    <title>CountryCode - laminas-i18n - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -224,32 +224,32 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-parse/" class="subnavigation__link">NumberParse</a>
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
     </li>
 
                                     
@@ -277,55 +277,55 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CountryCode</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+        <a href="../date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
+        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
@@ -515,6 +515,17 @@
 
     
     
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
 
                 
 
@@ -532,12 +543,19 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Filters</li>
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Validators</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
+                <li class="breadcrumb-item active" aria-current="page">CountryCode</li>
             
         
     </ol>
@@ -550,28 +568,17 @@
 
     
     
-        <h2 class="chapter__headline">Filters</h2>
+        <h2 class="chapter__headline">Validators</h2>
     
 
-    <h1 id="introduction">Introduction</h1>
-<p>laminas-i18n ships with a set of internationalization-related filters.</p>
-<ul>
-<li><a href="../alnum/">Alnum</a></li>
-<li><a href="../alpha/">Alpha</a></li>
-<li><a href="../number-format/">NumberFormat</a></li>
-<li><a href="../number-parse/">NumberParse</a></li>
-</ul>
-<p>These filters are based on Laminas component for filtering and
-normalizing data and files:
-<a href="https://docs.laminas.dev/laminas-filter/">laminas-filter</a>.</p>
-<p>The concept and the basic usage of the filters can be found in the
-<a href="https://docs.laminas.dev/laminas-filter/">documentation of laminas-filter</a>.</p>
-<div class="admonition missing">
-<p class="admonition-title">Installation Requirements</p>
-<p>
-The filtering support of laminas-i18n depends on the <a href="https://docs.laminas.dev/laminas-filter/">laminas-filter</a> component, so be sure to have it installed before getting started:</p>
-<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-filter</code></pre>
-</div>
+    <h1 id="countrycode">CountryCode</h1>
+<p><code>Laminas\I18n\Validator\CountryCode</code> allows you to validate if a given value is <strong>known and valid</strong> two-letter country codes of <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166 alpha-2</a>.</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\CountryCode();
+
+if ($validator-&gt;isValid('FR')) {
+    // Value is a valid country code
+}</code></pre>
 
 
 
@@ -582,10 +589,10 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../translator/format-examples/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../alpha/">
                     <small class="page-nav__label">Previous</small>
                     <i class="fa fa-chevron-left"></i>
-                    Format Examples
+                    Alpha
                 </a>
             
         </li>
@@ -593,9 +600,9 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../alnum/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../date-time/">
                     <small class="page-nav__label">Next</small>
-                    Alnum
+                    DateTime
                     <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -730,32 +737,32 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../number-parse/" class="subnavigation__link">NumberParse</a>
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
     </li>
 
                                     
@@ -783,55 +790,55 @@ The filtering support of laminas-i18n depends on the <a href="https://docs.lamin
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
+        <a href="../alnum/" class="subnavigation__link">Alnum</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
+        <a href="../alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CountryCode</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+        <a href="../date-time/" class="subnavigation__link">DateTime</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
+        <a href="../is-float/" class="subnavigation__link">IsFloat</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
+        <a href="../is-int/" class="subnavigation__link">IsInt</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
+        <a href="../phone-number/" class="subnavigation__link">PhoneNumber</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
+        <a href="../post-code/" class="subnavigation__link">PostCode</a>
     </li>
 
             
