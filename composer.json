@@ -47,13 +47,12 @@
         "laminas/laminas-filter": "^2.31",
         "laminas/laminas-validator": "^2.30.1",
         "laminas/laminas-view": "^2.27",
-        "phpunit/phpunit": "^9.6.5",
+        "phpunit/phpunit": "^10.0.17",
         "psalm/plugin-phpunit": "^0.18.4",
         "vimeo/psalm": "^5.8"
     },
     "conflict": {
         "laminas/laminas-view": "<2.20.0",
-        "phpspec/prophecy": "<1.9.0",
         "zendframework/zend-i18n": "*"
     },
     "suggest": {
