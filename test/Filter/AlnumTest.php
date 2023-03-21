@@ -93,6 +93,7 @@ class AlnumTest extends TestCase
     public function testAllowWhiteSpace(): void
     {
         $this->filter->setAllowWhiteSpace(true);
+        self::assertTrue($this->filter->getAllowWhiteSpace());
 
         if (! self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match

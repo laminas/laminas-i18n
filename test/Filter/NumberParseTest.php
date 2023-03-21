@@ -66,4 +66,16 @@ class NumberParseTest extends TestCase
             ],
         ];
     }
+
+    public function testTheNumberFormatterCanBeManuallyInjected(): void
+    {
+        $formatter = new NumberFormatter('en_US', NumberFormatter::DEFAULT_STYLE);
+        $filter    = new NumberParseFilter();
+
+        self::assertNotSame($formatter, $filter->getFormatter());
+
+        $filter->setFormatter($formatter);
+
+        self::assertSame($formatter, $filter->getFormatter());
+    }
 }
