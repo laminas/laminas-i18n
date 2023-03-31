@@ -527,6 +527,10 @@
                         <a href="#customising-output" class="toc__link nav-link">Customising Output</a>
                     </li>
                 
+                    <li class="toc__entry">
+                        <a href="#restricting-the-list-of-available-countries" class="toc__link nav-link">Restricting the List of Available Countries</a>
+                    </li>
+                
             </ul>
         </div>
     
@@ -605,32 +609,20 @@
 <p>In order for the html data list to be used with a form input, you must target the list from the input using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list">the <code>list</code> attribute</a>.
 For example:</p>
 <pre class="highlight"><code class="language-php">$formElement = new Laminas\Form\Element\Text('country');
-$formElement-&gt;setAttribute('list', 'country-codes');
-
-## Restricting the List of Available Countries
-
-### The `CountryCodeListInterface` Contract
-
-The helper's constructor accepts an object that implements `Laminas\I18n\Geography\CountryCodeListInterface`.
-This interface has no specific methods other than those it inherits from [`IteratorAggregate`](https://www.php.net/manual/en/class.iteratoraggregate.php) and [`Countable`](https://www.php.net/manual/en/class.countable.php).
-This object must be an iterable that yields a list of `Laminas\I18n\CountryCode` value objects.
-
-The default implementation of this interface, `Laminas\I18n\Geography\DefaultCountryCodeList` provides a list of all known ISO-3166 codes.
-
-### Overriding the List
-
-Once you have an implementation of `CountryCodeListInterface` that provides the list of countries that you require, the list must be made available to the view helper.
-
-This can be achieved in 2 ways:
-
-#### 1. A Custom Factory for the Helper
-
-In order to inject the list into the helper, you can set up a factory that replaces the view helpers default factory.
-
-Create a file for the factory e.g. `module/MyModule/src/Factory/MyCountryDataListFactory.php` with the following contents:
-
-```php
-namespace MyNameSpace;
+$formElement-&gt;setAttribute('list', 'country-codes');</code></pre>
+<h2 id="restricting-the-list-of-available-countries">Restricting the List of Available Countries</h2>
+<h3 id="the-countrycodelistinterface-contract">The <code>CountryCodeListInterface</code> Contract</h3>
+<p>The helper's constructor accepts an object that implements <code>Laminas\I18n\Geography\CountryCodeListInterface</code>.
+This interface has no specific methods other than those it inherits from <a href="https://www.php.net/manual/en/class.iteratoraggregate.php"><code>IteratorAggregate</code></a> and <a href="https://www.php.net/manual/en/class.countable.php"><code>Countable</code></a>.
+This object must be an iterable that yields a list of <code>Laminas\I18n\CountryCode</code> value objects.</p>
+<p>The default implementation of this interface, <code>Laminas\I18n\Geography\DefaultCountryCodeList</code> provides a list of all known ISO-3166 codes.</p>
+<h3 id="overriding-the-list">Overriding the List</h3>
+<p>Once you have an implementation of <code>CountryCodeListInterface</code> that provides the list of countries that you require, the list must be made available to the view helper.</p>
+<p>This can be achieved in 2 ways:</p>
+<h4 id="1-a-custom-factory-for-the-helper">1. A Custom Factory for the Helper</h4>
+<p>In order to inject the list into the helper, you can set up a factory that replaces the view helpers default factory.</p>
+<p>Create a file for the factory e.g. <code>module/MyModule/src/Factory/MyCountryDataListFactory.php</code> with the following contents:</p>
+<pre class="highlight"><code class="language-php">namespace MyNameSpace;
 
 use Laminas\Escaper\Escaper;
 use Laminas\I18n\View\Helper\CountryCodeDataList;
