@@ -67,6 +67,7 @@ For example:
 ```php
 $formElement = new Laminas\Form\Element\Text('country');
 $formElement->setAttribute('list', 'country-codes');
+```
 
 ## Restricting the List of Available Countries
 
