@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1fe4dfd5da9c3b8fe2eb6b4f120405cd",
+    "content-hash": "cb0d7ea76c8821064d201c4ac1f65595",
     "packages": [
         {
             "name": "laminas/laminas-servicemanager",
@@ -4872,16 +4872,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "5.10.0",
+            "version": "5.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "a5effd2d2dddd1a7ea7a0f6a051ce63ff979e356"
+                "reference": "c9b192ab8400fdaf04b2b13d110575adc879aa90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/a5effd2d2dddd1a7ea7a0f6a051ce63ff979e356",
-                "reference": "a5effd2d2dddd1a7ea7a0f6a051ce63ff979e356",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/c9b192ab8400fdaf04b2b13d110575adc879aa90",
+                "reference": "c9b192ab8400fdaf04b2b13d110575adc879aa90",
                 "shasum": ""
             },
             "require": {
@@ -4972,9 +4972,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vimeo/psalm/issues",
-                "source": "https://github.com/vimeo/psalm/tree/5.10.0"
+                "source": "https://github.com/vimeo/psalm/tree/5.11.0"
             },
-            "time": "2023-05-02T17:20:34+00:00"
+            "time": "2023-05-04T21:35:44+00:00"
         },
         {
             "name": "webimpress/coding-standard",

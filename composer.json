@@ -49,7 +49,7 @@
         "laminas/laminas-view": "^2.27",
         "phpunit/phpunit": "^10.1.2",
         "psalm/plugin-phpunit": "^0.18.4",
-        "vimeo/psalm": "^5.10"
+        "vimeo/psalm": "^5.11"
     },
     "conflict": {
         "laminas/laminas-view": "<2.20.0",
