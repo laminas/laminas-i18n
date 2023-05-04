@@ -44,7 +44,7 @@ class DateTimeTest extends TestCase
      * @param boolean              $expected expected result of assertion
      * @param array<string, mixed> $options  fed into the validator before validation
      */
-    #[DataProvider('basicProvider name of method that provides parameters')]
+    #[DataProvider('basicProvider')]
     public function testBasic(string $value, bool $expected, array $options = []): void
     {
         $this->validator->setOptions($options);
@@ -64,7 +64,7 @@ class DateTimeTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: boolean, 2: array<string, mixed>}> */
-    public function basicProvider(): array
+    public static function basicProvider(): array
     {
         $trueArray      = [];
         $testingDate    = new DateTime();

@@ -12,6 +12,7 @@ use Locale;
 use NumberFormatter;
 use Traversable;
 
+use function assert;
 use function intl_is_failure;
 use function is_bool;
 use function is_float;
@@ -230,9 +231,10 @@ class IsFloat extends AbstractValidator
 
         // No strrpos() in wrappers yet. ICU 4.x doesn't have grouping size for
         // everything. ICU 52 has 3 for ALL locales.
-        $groupSize       = $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) ?: 3;
+        $groupSize = $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) ?: 3;
+        assert(is_int($groupSize));
         $lastStringGroup = $this->wrapper->strlen($value) > $groupSize ?
-            $this->wrapper->substr($value, -$groupSize) :
+            $this->wrapper->substr($value, 0 - $groupSize) :
             $value;
 
         if (
