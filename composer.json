@@ -38,7 +38,7 @@
         "laminas/laminas-stdlib": "^3.0"
     },
     "require-dev": {
-        "laminas/laminas-cache": "^3.10",
+        "laminas/laminas-cache": "^3.10.1",
         "laminas/laminas-cache-storage-adapter-memory": "^2.2.0",
         "laminas/laminas-cache-storage-deprecated-factory": "^1.1",
         "laminas/laminas-coding-standard": "~2.5.0",
@@ -47,9 +47,9 @@
         "laminas/laminas-filter": "^2.31",
         "laminas/laminas-validator": "^2.30.1",
         "laminas/laminas-view": "^2.27",
-        "phpunit/phpunit": "^10.0.17",
+        "phpunit/phpunit": "^10.1.2",
         "psalm/plugin-phpunit": "^0.18.4",
-        "vimeo/psalm": "^5.8"
+        "vimeo/psalm": "^5.10"
     },
     "conflict": {
         "laminas/laminas-view": "<2.20.0",

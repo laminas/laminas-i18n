@@ -11,22 +11,17 @@
          displayDetailsOnTestsThatTriggerDeprecations="true"
          displayDetailsOnTestsThatTriggerErrors="true"
 >
-    <coverage includeUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
-    </coverage>
     <testsuites>
         <testsuite name="laminas-i18n Test Suite">
             <directory>./test/</directory>
         </testsuite>
     </testsuites>
-    <groups>
-        <exclude>
-            <group>disable</group>
-        </exclude>
-    </groups>
     <php>
         <ini name="date.timezone" value="UTC"/>
     </php>
+    <source>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </source>
 </phpunit>
