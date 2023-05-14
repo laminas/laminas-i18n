@@ -6,7 +6,6 @@ use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\ServiceManager\AbstractPluginManager;
-use Laminas\ServiceManager\ConfigInterface;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
@@ -56,11 +55,10 @@ use function sprintf;
  *
  * @template InstanceType of RemoteLoaderInterface|FileLoaderInterface
  * @extends AbstractPluginManager<InstanceType>
- * @psalm-import-type FactoriesConfigurationType from ConfigInterface
  */
 class LoaderPluginManager extends AbstractPluginManager
 {
-    /** @var array<string, class-string> */
+    /** @inheritDoc */
     protected $aliases = [
         'gettext'  => Loader\Gettext::class,
         'getText'  => Loader\Gettext::class,
@@ -81,7 +79,7 @@ class LoaderPluginManager extends AbstractPluginManager
         'zendi18ntranslatorloaderphparray' => Loader\PhpArray::class,
     ];
 
-    /** @var FactoriesConfigurationType */
+    /** @inheritDoc */
     protected $factories = [
         Loader\Gettext::class  => InvokableFactory::class,
         Loader\Ini::class      => InvokableFactory::class,

@@ -167,9 +167,6 @@
     <MissingReturnType>
       <code>validatePlugin</code>
     </MissingReturnType>
-    <NonInvariantDocblockPropertyType>
-      <code>$aliases</code>
-    </NonInvariantDocblockPropertyType>
     <ParamNameMismatch>
       <code>$plugin</code>
       <code>$plugin</code>
@@ -182,6 +179,9 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->creationOptions]]></code>
     </ArgumentTypeCoercion>
+    <DeprecatedClass>
+      <code><![CDATA[new Config($config['translator_plugins'])]]></code>
+    </DeprecatedClass>
     <DeprecatedInterface>
       <code>LoaderPluginManagerFactory</code>
     </DeprecatedInterface>
@@ -708,6 +708,9 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->toArray()]]></code>
     </ArgumentTypeCoercion>
+    <DeprecatedInterface>
+      <code>HelperConfig</code>
+    </DeprecatedInterface>
     <LessSpecificImplementedReturnType>
       <code>array</code>
     </LessSpecificImplementedReturnType>
@@ -878,6 +881,19 @@
     </PossiblyNullReference>
   </file>
   <file src="test/Translator/TranslatorTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[new Config([
+            'services' => [
+                'test' => $loader,
+            ],
+        ])]]></code>
+      <code><![CDATA[new Config([
+            'services' => [
+                'test' => $loader,
+            ],
+        ])]]></code>
+      <code><![CDATA[new Config(['services' => ['test' => $loader]])]]></code>
+    </DeprecatedClass>
     <NullArgument>
       <code>null</code>
       <code>null</code>
