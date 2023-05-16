@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Filter;
 use Laminas\I18n\Filter\NumberParse as NumberParseFilter;
 use LaminasTest\I18n\TestCase;
 use NumberFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class NumberParseTest extends TestCase
 {
@@ -30,9 +31,9 @@ class NumberParseTest extends TestCase
     }
 
     /**
-     * @dataProvider formattedToNumberProvider
      * @param NumberFormatter::TYPE_* $type
      */
+    #[DataProvider('formattedToNumberProvider')]
     public function testFormattedToNumber(string $locale, int $style, int $type, string $value, float $expected): void
     {
         $filter = new NumberParseFilter($locale, $style, $type);
@@ -65,5 +66,17 @@ class NumberParseTest extends TestCase
                 1234567.891,
             ],
         ];
+    }
+
+    public function testTheNumberFormatterCanBeManuallyInjected(): void
+    {
+        $formatter = new NumberFormatter('en_US', NumberFormatter::DEFAULT_STYLE);
+        $filter    = new NumberParseFilter();
+
+        self::assertNotSame($formatter, $filter->getFormatter());
+
+        $filter->setFormatter($formatter);
+
+        self::assertSame($formatter, $filter->getFormatter());
     }
 }

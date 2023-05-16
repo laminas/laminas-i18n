@@ -8,7 +8,7 @@
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
     <arg name="parallel" value="80"/>
-    <arg value="s" />
+    <arg value="ps" />
 
     <rule ref="LaminasCodingStandard"/>
 

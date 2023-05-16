@@ -6,11 +6,12 @@ namespace LaminasTest\I18n\Translator\Plural;
 
 use Laminas\I18n\Translator\Plural\Rule;
 use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class RuleTest extends TestCase
 {
     /** @return array<string, array{0: string, 1: int}> */
-    public function parseRuleProvider(): array
+    public static function parseRuleProvider(): array
     {
         return [
             // Basic calculations
@@ -53,9 +54,7 @@ class RuleTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider parseRuleProvider
-     */
+    #[DataProvider('parseRuleProvider')]
     public function testParseRules(string $rule, int $expectedValue): void
     {
         self::assertEquals(
@@ -65,7 +64,7 @@ class RuleTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: string}> */
-    public function completeRuleProvider(): array
+    public static function completeRuleProvider(): array
     {
         // Taken from original gettext tests
         return [
@@ -135,9 +134,7 @@ class RuleTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider completeRuleProvider
-     */
+    #[DataProvider('completeRuleProvider')]
     public function testCompleteRules(string $rule, string $expectedValues): void
     {
         $rule = Rule::fromString('nplurals=9; plural=' . $rule);

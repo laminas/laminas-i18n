@@ -8,6 +8,7 @@ use Laminas\I18n\Validator\IsFloat as IsFloatValidator;
 use LaminasTest\I18n\TestCase;
 use Locale;
 use NumberFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function sprintf;
 
@@ -31,8 +32,8 @@ class IsFloatTest extends TestCase
      * @param mixed   $value    that will be tested
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
-     * @dataProvider floatAndIntegerProvider
      */
+    #[DataProvider('floatAndIntegerProvider')]
     public function testFloatAndIntegers($value, bool $expected, string $locale, string $type): void
     {
         $this->validator->setLocale($locale);
@@ -47,7 +48,7 @@ class IsFloatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: mixed, 1: bool, 2: string, 3: string}> */
-    public function floatAndIntegerProvider(): array
+    public static function floatAndIntegerProvider(): array
     {
         $trueArray       = [];
         $testingLocales  = ['ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru'];
@@ -103,8 +104,8 @@ class IsFloatTest extends TestCase
      * @param string  $value    that will be tested
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
-     * @dataProvider lookAlikeProvider
      */
+    #[DataProvider('lookAlikeProvider')]
     public function testLookALikes(string $value, bool $expected, string $locale): void
     {
         $this->validator->setLocale($locale);
@@ -117,7 +118,7 @@ class IsFloatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: bool, 2: string}> */
-    public function lookAlikeProvider(): array
+    public static function lookAlikeProvider(): array
     {
         $trueArray    = [];
         $testingArray = [
@@ -140,8 +141,8 @@ class IsFloatTest extends TestCase
      * @param string  $value    that will be tested
      * @param boolean $expected expected result of assertion
      * @param string  $locale   locale for validation
-     * @dataProvider validationFailureProvider
      */
+    #[DataProvider('validationFailureProvider')]
     public function testValidationFailures(string $value, bool $expected, string $locale): void
     {
         $this->validator->setLocale($locale);
@@ -154,7 +155,7 @@ class IsFloatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: bool, 2: string}> */
-    public function validationFailureProvider(): array
+    public static function validationFailureProvider(): array
     {
         $trueArray    = [];
         $testingArray = [

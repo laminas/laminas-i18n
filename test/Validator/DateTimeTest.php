@@ -9,6 +9,7 @@ use IntlDateFormatter;
 use Laminas\I18n\Validator\DateTime as DateTimeValidator;
 use LaminasTest\I18n\TestCase;
 use Locale;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function date_default_timezone_get;
 use function date_default_timezone_set;
@@ -39,11 +40,11 @@ class DateTimeTest extends TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @dataProvider basicProvider name of method that provides parameters
      * @param string               $value    that will be tested
      * @param boolean              $expected expected result of assertion
      * @param array<string, mixed> $options  fed into the validator before validation
      */
+    #[DataProvider('basicProvider')]
     public function testBasic(string $value, bool $expected, array $options = []): void
     {
         $this->validator->setOptions($options);
@@ -63,7 +64,7 @@ class DateTimeTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: boolean, 2: array<string, mixed>}> */
-    public function basicProvider(): array
+    public static function basicProvider(): array
     {
         $trueArray      = [];
         $testingDate    = new DateTime();

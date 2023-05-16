@@ -15,7 +15,7 @@ class LoaderPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 
-    protected function getPluginManager(): LoaderPluginManager
+    protected static function getPluginManager(): LoaderPluginManager
     {
         return new LoaderPluginManager(new ServiceManager());
     }

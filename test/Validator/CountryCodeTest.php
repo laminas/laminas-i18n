@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Validator;
 use ArrayObject;
 use Laminas\I18n\CountryCode;
 use Laminas\I18n\Validator\CountryCode as CountryCodeValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function sprintf;
@@ -44,7 +45,7 @@ class CountryCodeTest extends TestCase
     }
 
     /** @return list<array{0: string}> */
-    public function invalidStringProvider(): array
+    public static function invalidStringProvider(): array
     {
         return [
             ['Foo'],
@@ -54,7 +55,7 @@ class CountryCodeTest extends TestCase
         ];
     }
 
-    /** @dataProvider invalidStringProvider */
+    #[DataProvider('invalidStringProvider')]
     public function testInvalidStrings(string $value): void
     {
         self::assertFalse(
@@ -75,7 +76,7 @@ class CountryCodeTest extends TestCase
     }
 
     /** @return list<array{0: mixed}> */
-    public function mixedDataProvider(): array
+    public static function mixedDataProvider(): array
     {
         return [
             [null],
@@ -86,7 +87,7 @@ class CountryCodeTest extends TestCase
         ];
     }
 
-    /** @dataProvider mixedDataProvider */
+    #[DataProvider('mixedDataProvider')]
     public function testNonStringsAreNotAcceptable(mixed $value): void
     {
         self::assertFalse(

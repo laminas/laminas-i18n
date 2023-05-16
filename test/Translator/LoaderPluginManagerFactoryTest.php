@@ -10,6 +10,7 @@ use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\LoaderPluginManagerFactory;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
 
 class LoaderPluginManagerFactoryTest extends TestCase
@@ -34,7 +35,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string}> */
-    public function provideLoader(): array
+    public static function provideLoader(): array
     {
         return [
             ['gettext'],
@@ -46,9 +47,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideLoader
-     */
+    #[DataProvider('provideLoader')]
     public function testFactoryCanConfigurePluginManagerViaOptions(string $loader): void
     {
         $container = $this->createMock(ContainerInterface::class);
@@ -63,9 +62,7 @@ class LoaderPluginManagerFactoryTest extends TestCase
         self::assertTrue($loaders->has('test'));
     }
 
-    /**
-     * @dataProvider provideLoader
-     */
+    #[DataProvider('provideLoader')]
     public function testCreateServiceCanConfigurePluginManagerViaOptions(string $loader): void
     {
         $container = $this->createMock(ServiceLocatorInterface::class);

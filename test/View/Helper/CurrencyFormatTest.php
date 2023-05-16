@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\View\Helper;
 use Laminas\I18n\View\Helper\CurrencyFormat as CurrencyFormatHelper;
 use LaminasTest\I18n\TestCase;
 use Locale;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function str_replace;
 
@@ -21,7 +22,7 @@ class CurrencyFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: string, 2: bool, 3: float, 4:string|null, 5: string}> */
-    public function currencyProvider(): array
+    public static function currencyProvider(): array
     {
         return [
             //    locale   currency     show decimals       number      currencyPattern             expected
@@ -47,9 +48,7 @@ class CurrencyFormatTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider currencyProvider
-     */
+    #[DataProvider('currencyProvider')]
     public function testBasic(
         string $locale,
         string $currencyCode,
@@ -70,9 +69,7 @@ class CurrencyFormatTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider currencyProvider
-     */
+    #[DataProvider('currencyProvider')]
     public function testSettersProvideDefaults(
         string $locale,
         string $currencyCode,

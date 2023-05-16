@@ -29,4 +29,14 @@ class DefaultCountryCodeListTest extends TestCase
         $list = DefaultCountryCodeList::create();
         self::assertSameSize($list, $list->toArray());
     }
+
+    public function testTheListIsCountable(): void
+    {
+        $list = DefaultCountryCodeList::create();
+
+        self::assertSame(
+            count($list),
+            $list->count(),
+        );
+    }
 }

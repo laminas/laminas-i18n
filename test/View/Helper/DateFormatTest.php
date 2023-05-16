@@ -11,6 +11,7 @@ use IntlGregorianCalendar;
 use Laminas\I18n\View\Helper\DateFormat as DateFormatHelper;
 use LaminasTest\I18n\TestCase;
 use Locale;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function date_default_timezone_set;
 use function str_replace;
@@ -26,7 +27,7 @@ class DateFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0:string,1:string,2:int,3:int,4:DateTime}> */
-    public function dateTestsDataProvider(): array
+    public static function dateTestsDataProvider(): array
     {
         $date = new DateTime('2012-07-02T22:44:03Z');
 
@@ -119,7 +120,7 @@ class DateFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0:string,1:string,2:int,3:int,4:string, 5:DateTime}> */
-    public function dateTestsDataProviderWithPattern(): array
+    public static function dateTestsDataProviderWithPattern(): array
     {
         $date = new DateTime('2012-07-02T22:44:03Z');
 
@@ -159,9 +160,7 @@ class DateFormatTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dateTestsDataProvider
-     */
+    #[DataProvider('dateTestsDataProvider')]
     public function testBasic(
         string $locale,
         string $timezone,
@@ -183,9 +182,7 @@ class DateFormatTest extends TestCase
         ));
     }
 
-    /**
-     * @dataProvider dateTestsDataProvider
-     */
+    #[DataProvider('dateTestsDataProvider')]
     public function testSettersProvideDefaults(
         string $locale,
         string $timezone,
@@ -207,9 +204,7 @@ class DateFormatTest extends TestCase
         ));
     }
 
-    /**
-     * @dataProvider dateTestsDataProviderWithPattern
-     */
+    #[DataProvider('dateTestsDataProviderWithPattern')]
     public function testUseCustomPattern(
         string $locale,
         string $timezone,

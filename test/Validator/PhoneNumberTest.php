@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Validator;
 use Laminas\I18n\Validator\PhoneNumber;
 use LaminasTest\I18n\TestCase;
 use Locale;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function is_array;
 use function sprintf;
@@ -15,8 +16,7 @@ class PhoneNumberTest extends TestCase
 {
     private PhoneNumber $validator;
 
-    /** @var array<string, array> */
-    private array $phone = [
+    private const PHONE_DATA = [
         'AC' => [
             'code'     => '247',
             'patterns' => [
@@ -3060,9 +3060,9 @@ class PhoneNumberTest extends TestCase
     }
 
     /**
-     * @dataProvider constructDataProvider
      * @param array<string, string> $constructorOptions
      */
+    #[DataProvider('constructDataProvider')]
     public function testConstruct(array $constructorOptions, string $expectedCountry, ?string $locale = null): void
     {
         if ($locale !== null) {
@@ -3083,7 +3083,7 @@ class PhoneNumberTest extends TestCase
     }
 
     /** @return array<array-key, array{0: array<string, string>, 1: string, 2: string|null}> */
-    public function constructDataProvider(): array
+    public static function constructDataProvider(): array
     {
         return [
             [
@@ -3105,10 +3105,10 @@ class PhoneNumberTest extends TestCase
     }
 
     /** @return list<array{country:string, code:string, patterns:array<string, mixed>}> */
-    public function numbersDataProvider(): array
+    public static function numbersDataProvider(): array
     {
         $data = [];
-        foreach ($this->phone as $country => $parameters) {
+        foreach (self::PHONE_DATA as $country => $parameters) {
             /** @psalm-var array<string, mixed> $patterns */
             $patterns   = $parameters['patterns'] ?? [];
             $countryRow = [
@@ -3124,9 +3124,9 @@ class PhoneNumberTest extends TestCase
     }
 
     /**
-     * @dataProvider numbersDataProvider
      * @param array<string, mixed> $patterns
      */
+    #[DataProvider('numbersDataProvider')]
     public function testExampleNumbers(string $country, string $code, array $patterns): void
     {
         /** @psalm-var array<string, string|string[]> $patterns */
@@ -3157,9 +3157,9 @@ class PhoneNumberTest extends TestCase
     }
 
     /**
-     * @dataProvider numbersDataProvider
      * @param array<string, mixed> $patterns
      */
+    #[DataProvider('numbersDataProvider')]
     public function testExampleNumbersAgainstPossible(string $country, string $code, array $patterns): void
     {
         $this->validator->allowPossible(true);
@@ -3206,9 +3206,9 @@ class PhoneNumberTest extends TestCase
     }
 
     /**
-     * @dataProvider numbersDataProvider
      * @param array<string, mixed> $patterns
      */
+    #[DataProvider('numbersDataProvider')]
     public function testInvalidTypes(string $country, string $code, array $patterns): void
     {
         $this->validator->setCountry($country);
