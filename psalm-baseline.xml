@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.11.0@c9b192ab8400fdaf04b2b13d110575adc879aa90">
+<files psalm-version="5.12.0@f90118cdeacd0088e7215e64c0c99ceca819e176">
   <file src="src/Exception/ExtensionNotLoadedException.php">
     <UnusedClass>
       <code>ExtensionNotLoadedException</code>
@@ -556,35 +556,18 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Validator/PhoneNumber.php">
-    <InvalidArgument>
-      <code><![CDATA[$countryPattern['code']]]></code>
-    </InvalidArgument>
-    <InvalidOperand>
-      <code><![CDATA[$countryPattern['code']]]></code>
-      <code><![CDATA[$countryPattern['code']]]></code>
-    </InvalidOperand>
     <MixedArgument>
-      <code>$country</code>
       <code><![CDATA[$options['allow_possible']]]></code>
       <code><![CDATA[$options['allowed_types']]]></code>
       <code><![CDATA[$options['country']]]></code>
-      <code>$pattern</code>
-      <code>$pattern</code>
-      <code>$pattern</code>
-      <code>$pattern</code>
       <code>$valueNoCountry</code>
       <code>$valueNoCountry</code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$country</code>
-      <code>$pattern</code>
-      <code>$pattern</code>
-      <code>$type</code>
-      <code>$type</code>
       <code>static::$phone[$code]</code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>array[]|false</code>
+      <code><![CDATA[array{code: string, patterns: array<string, array<string, string>>}|false]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code>static::$phone[$code]</code>

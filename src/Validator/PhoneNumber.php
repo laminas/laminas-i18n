@@ -11,6 +11,7 @@ use function array_key_exists;
 use function file_exists;
 use function in_array;
 use function is_scalar;
+use function is_string;
 use function preg_match;
 use function strlen;
 use function strpos;
@@ -167,7 +168,7 @@ class PhoneNumber extends AbstractValidator
      * Load Pattern
      *
      * @param  string        $code
-     * @return array[]|false
+     * @return array{code: string, patterns: array<string, array<string, string>>}|false
      */
     protected function loadPattern($code)
     {
@@ -203,18 +204,18 @@ class PhoneNumber extends AbstractValidator
         }
         $this->setValue($value);
 
-        $country = $this->getCountry();
+        $country        = $this->getCountry();
+        $countryPattern = $this->loadPattern(strtoupper($country));
 
-        if (! $countryPattern = $this->loadPattern(strtoupper($country))) {
-            if (isset($context[$country])) {
-                $country = $context[$country];
-            }
+        if (! $countryPattern && isset($context[$country]) && is_string($context[$country])) {
+            $country        = $context[$country];
+            $countryPattern = $this->loadPattern(strtoupper($country));
+        }
 
-            if (! $countryPattern = $this->loadPattern(strtoupper($country))) {
-                $this->error(self::UNSUPPORTED);
+        if (! $countryPattern) {
+            $this->error(self::UNSUPPORTED);
 
-                return false;
-            }
+            return false;
         }
 
         $codeLength = strlen($countryPattern['code']);
