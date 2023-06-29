@@ -8,7 +8,6 @@ use Laminas\View\Helper\AbstractHelper;
 use Laminas\View\Helper\DeprecatedAbstractHelperHierarchyTrait;
 
 use function is_array;
-use function sprintf;
 
 /**
  * Helper for rendering text based on a count number (like the I18n plural translation helper, but when translation
@@ -29,7 +28,7 @@ class Plural extends AbstractHelper
     /**
      * Plural rule to use
      *
-     * @var PluralRule
+     * @var PluralRule|null
      */
     protected $rule;
 
@@ -44,17 +43,16 @@ class Plural extends AbstractHelper
      */
     public function __invoke($strings, $number)
     {
-        if (null === $this->getPluralRule()) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'No plural rule was set'
-            ));
+        $rule = $this->getPluralRule();
+        if ($rule === null) {
+            throw new Exception\InvalidArgumentException('No plural rule was set');
         }
 
         if (! is_array($strings)) {
             $strings = (array) $strings;
         }
 
-        $pluralIndex = $this->getPluralRule()->evaluate($number);
+        $pluralIndex = $rule->evaluate($number);
 
         return $strings[$pluralIndex];
     }
@@ -79,7 +77,7 @@ class Plural extends AbstractHelper
     /**
      * Get the plural rule to use
      *
-     * @return PluralRule
+     * @return PluralRule|null
      */
     public function getPluralRule()
     {
