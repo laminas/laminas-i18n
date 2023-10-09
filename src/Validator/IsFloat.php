@@ -18,6 +18,7 @@ use function is_bool;
 use function is_float;
 use function is_int;
 use function is_scalar;
+use function is_string;
 use function preg_match;
 use function preg_quote;
 use function str_replace;
@@ -236,6 +237,12 @@ class IsFloat extends AbstractValidator
         $lastStringGroup = $this->wrapper->strlen($value) > $groupSize ?
             $this->wrapper->substr($value, 0 - $groupSize) :
             $value;
+
+        assert(is_string($lastStringGroup));
+        assert($lastStringGroup !== '');
+        assert($lnumSearch !== '');
+        assert($dnumSearch !== '');
+        assert($expDnumSearch !== '');
 
         if (
             (preg_match($lnumSearch, $unGroupedValue)

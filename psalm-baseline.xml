@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.13.1@086b94371304750d1c673315321a55d15fc59015">
+<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
   <file src="src/Exception/ExtensionNotLoadedException.php">
     <UnusedClass>
       <code>ExtensionNotLoadedException</code>
@@ -533,9 +533,6 @@
     <MixedArgument>
       <code><![CDATA[$options['locale']]]></code>
     </MixedArgument>
-    <PossiblyFalseArgument>
-      <code>$lastStringGroup</code>
-    </PossiblyFalseArgument>
   </file>
   <file src="src/Validator/IsInt.php">
     <DocblockTypeContradiction>
@@ -560,8 +557,6 @@
       <code><![CDATA[$options['allow_possible']]]></code>
       <code><![CDATA[$options['allowed_types']]]></code>
       <code><![CDATA[$options['country']]]></code>
-      <code>$valueNoCountry</code>
-      <code>$valueNoCountry</code>
     </MixedArgument>
     <MixedAssignment>
       <code>static::$phone[$code]</code>

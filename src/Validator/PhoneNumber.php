@@ -8,6 +8,7 @@ use Locale;
 use Traversable;
 
 use function array_key_exists;
+use function assert;
 use function file_exists;
 use function in_array;
 use function is_scalar;
@@ -226,6 +227,7 @@ class PhoneNumber extends AbstractValidator
          *   2) International double-O prefix
          *   3) Bare country prefix
          */
+        $valueNoCountry = null;
         if (0 === strpos((string) $value, '+' . $countryPattern['code'])) {
             $valueNoCountry = substr((string) $value, $codeLength + 1);
         } elseif (0 === strpos((string) $value, '00' . $countryPattern['code'])) {
@@ -236,6 +238,7 @@ class PhoneNumber extends AbstractValidator
 
         // check against allowed types strict match:
         foreach ($countryPattern['patterns']['national'] as $type => $pattern) {
+            assert($pattern !== '');
             if (in_array($type, $this->allowedTypes, true)) {
                 // check pattern:
                 if (preg_match($pattern, (string) $value)) {
@@ -252,6 +255,7 @@ class PhoneNumber extends AbstractValidator
         // check for possible match:
         if ($this->allowPossible()) {
             foreach ($countryPattern['patterns']['possible'] as $type => $pattern) {
+                assert($pattern !== '');
                 if (in_array($type, $this->allowedTypes, true)) {
                     // check pattern:
                     if (preg_match($pattern, (string) $value)) {
