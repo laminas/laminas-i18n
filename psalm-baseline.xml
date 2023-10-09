@@ -55,9 +55,6 @@
     </MoreSpecificImplementedParamType>
   </file>
   <file src="src/Filter/NumberParse.php">
-    <MixedArgument>
-      <code>$value</code>
-    </MixedArgument>
     <RedundantCastGivenDocblockType>
       <code>(int) $style</code>
       <code>(int) $type</code>
@@ -745,6 +742,7 @@
   <file src="test/Filter/NumberParseTest.php">
     <PossiblyUnusedMethod>
       <code>formattedToNumberProvider</code>
+      <code>formatNonNumberProvider</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/TestAsset/ModuleEventInterface.php">
