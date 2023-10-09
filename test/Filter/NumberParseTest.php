@@ -8,6 +8,7 @@ use Laminas\I18n\Filter\NumberParse as NumberParseFilter;
 use LaminasTest\I18n\TestCase;
 use NumberFormatter;
 use PHPUnit\Framework\Attributes\DataProvider;
+use stdClass;
 
 class NumberParseTest extends TestCase
 {
@@ -64,6 +65,38 @@ class NumberParseTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 '1 234 567,891',
                 1234567.891,
+            ],
+        ];
+    }
+
+    #[DataProvider('formatNonNumberProvider')]
+    public function testFormattedWithNonNumbers(
+        mixed $value,
+        mixed $expected
+    ): void {
+        $filter = new NumberParseFilter('en_US', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);
+        self::assertEquals($expected, $filter->filter($value));
+    }
+
+    /** @return array<array-key, array{0: mixed, 1: mixed}> */
+    public static function formatNonNumberProvider(): array
+    {
+        return [
+            [
+                null,
+                null,
+            ],
+            [
+                [],
+                [],
+            ],
+            [
+                new stdClass(),
+                new stdClass(),
+            ],
+            [
+                false,
+                false,
             ],
         ];
     }

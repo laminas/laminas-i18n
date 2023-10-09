@@ -9,8 +9,10 @@ use Traversable;
 
 use function intl_get_error_message;
 use function is_array;
+use function is_bool;
 use function is_float;
 use function is_int;
+use function is_scalar;
 use function iterator_to_array;
 
 /**
@@ -149,6 +151,10 @@ class NumberParse extends AbstractLocale
      */
     public function filter($value)
     {
+        if (! is_scalar($value) || is_bool($value)) {
+            return $value;
+        }
+
         if (
             ! is_int($value)
             && ! is_float($value)
