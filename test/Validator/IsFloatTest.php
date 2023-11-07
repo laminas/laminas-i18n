@@ -217,4 +217,14 @@ class IsFloatTest extends TestCase
         $message = $this->validator->getMessages();
         self::assertStringContainsString('does not appear to be a float', $message['notFloat']);
     }
+
+    public function testEmptyStringShouldReturnStandardErrorMessage(): void
+    {
+        self::assertFalse($this->validator->isValid(''));
+        $message = $this->validator->getMessages();
+        self::assertStringContainsString(
+            'does not appear to be a float',
+            $message['notFloat']
+        );
+    }
 }
