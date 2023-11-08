@@ -118,6 +118,12 @@ class IsFloat extends AbstractValidator
             return true;
         }
 
+        if ($value === '') {
+            $this->error(self::NOT_FLOAT);
+
+            return false;
+        }
+
         // Need to check if this is scientific formatted string. If not, switch to decimal.
         $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::SCIENTIFIC);
 
