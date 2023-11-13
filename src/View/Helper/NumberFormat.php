@@ -24,49 +24,49 @@ class NumberFormat extends AbstractHelper
      *
      * @var int
      */
-    protected $maxDecimals;
+    protected ?int $maxDecimals = null;
 
     /**
      * The minimum number of decimals to use.
      *
      * @var int
      */
-    protected $minDecimals;
+    protected ?int $minDecimals = null;
 
     /**
      * NumberFormat style to use
      *
      * @var int
      */
-    protected $formatStyle;
+    protected ?int $formatStyle = null;
 
     /**
      * NumberFormat type to use
      *
      * @var int
      */
-    protected $formatType;
+    protected ?int $formatType = null;
 
     /**
      * Formatter instances
      *
      * @var array<string, NumberFormatter>
      */
-    protected $formatters = [];
+    protected array $formatters = [];
 
     /**
      * Text attributes.
      *
      * @var array
      */
-    protected $textAttributes = [];
+    protected array $textAttributes = [];
 
     /**
      * Locale to use instead of the default
      *
      * @var string
      */
-    protected $locale;
+    protected ?string $locale = null;
 
     /**
      * Format a number
@@ -83,10 +83,10 @@ class NumberFormat extends AbstractHelper
      */
     public function __invoke(
         $number,
-        $formatStyle = null,
-        $formatType = null,
-        $locale = null,
-        $maxDecimals = null,
+        ?int $formatStyle = null,
+        ?int $formatType = null,
+        ?string $locale = null,
+        ?int $maxDecimals = null,
         ?array $textAttributes = null,
         ?int $minDecimals = null
     ) {
@@ -144,7 +144,7 @@ class NumberFormat extends AbstractHelper
      * @param  int $formatStyle
      * @return $this
      */
-    public function setFormatStyle($formatStyle)
+    public function setFormatStyle($formatStyle): self
     {
         $this->formatStyle = (int) $formatStyle;
         return $this;
@@ -155,7 +155,7 @@ class NumberFormat extends AbstractHelper
      *
      * @return int
      */
-    public function getFormatStyle()
+    public function getFormatStyle(): int
     {
         if (null === $this->formatStyle) {
             $this->formatStyle = NumberFormatter::DECIMAL;
@@ -170,7 +170,7 @@ class NumberFormat extends AbstractHelper
      * @param  int $formatType
      * @return $this
      */
-    public function setFormatType($formatType)
+    public function setFormatType($formatType): self
     {
         $this->formatType = (int) $formatType;
         return $this;
@@ -181,7 +181,7 @@ class NumberFormat extends AbstractHelper
      *
      * @return int
      */
-    public function getFormatType()
+    public function getFormatType(): int
     {
         if (null === $this->formatType) {
             $this->formatType = NumberFormatter::TYPE_DEFAULT;
@@ -195,10 +195,10 @@ class NumberFormat extends AbstractHelper
      * @param  int $decimals
      * @return $this
      */
-    public function setDecimals($decimals)
+    public function setDecimals($decimals): self
     {
-        $this->minDecimals = $decimals;
-        $this->maxDecimals = $decimals;
+        $this->minDecimals = (int) $decimals;
+        $this->maxDecimals = (int) $decimals;
         return $this;
     }
 
@@ -231,7 +231,7 @@ class NumberFormat extends AbstractHelper
      *
      * @return int
      */
-    public function getDecimals()
+    public function getDecimals(): int
     {
         return $this->maxDecimals;
     }
@@ -262,7 +262,7 @@ class NumberFormat extends AbstractHelper
      * @param  string $locale
      * @return $this
      */
-    public function setLocale($locale)
+    public function setLocale($locale): self
     {
         $this->locale = (string) $locale;
         return $this;
@@ -273,7 +273,7 @@ class NumberFormat extends AbstractHelper
      *
      * @return string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         if ($this->locale === null) {
             $this->locale = Locale::getDefault();
@@ -285,7 +285,7 @@ class NumberFormat extends AbstractHelper
     /**
      * @return array
      */
-    public function getTextAttributes()
+    public function getTextAttributes(): array
     {
         return $this->textAttributes;
     }
@@ -294,7 +294,7 @@ class NumberFormat extends AbstractHelper
      * @param array $textAttributes
      * @return $this
      */
-    public function setTextAttributes(array $textAttributes)
+    public function setTextAttributes(array $textAttributes): self
     {
         $this->textAttributes = $textAttributes;
         return $this;
