@@ -23,7 +23,7 @@ class NumberFormatTest extends TestCase
     }
 
     /** @return array<array-key, array{0: string, 1: int, 2: int, 3: int|null, 4: array<int, string>, 5: float, 6: string}> */
-    public static function currencyTestsDataProvider(): array
+    public static function numberTestsDataProvider(): array
     {
         return [
             [
@@ -32,6 +32,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234567890000,
                 '1.234.567,891',
             ],
@@ -41,6 +42,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 6,
                 [],
+                null,
                 1234567.891234567890000,
                 '1.234.567,891235',
             ],
@@ -50,6 +52,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234567890000,
                 '123.456.789 %',
             ],
@@ -59,6 +62,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 1,
                 [],
+                null,
                 1234567.891234567890000,
                 '123.456.789,1 %',
             ],
@@ -68,6 +72,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234560000,
                 '1,23456789123456E6',
             ],
@@ -77,6 +82,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234567890000,
                 '1 234 567,891',
             ],
@@ -86,6 +92,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234567890000,
                 '123 456 789 %',
             ],
@@ -95,6 +102,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234560000,
                 '1,23456789123456E6',
             ],
@@ -104,6 +112,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234567890000,
                 '1,234,567.891',
             ],
@@ -113,6 +122,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234567890000,
                 '123,456,789%',
             ],
@@ -122,6 +132,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 [],
+                null,
                 1234567.891234560000,
                 '1.23456789123456E6',
             ],
@@ -133,8 +144,29 @@ class NumberFormatTest extends TestCase
                 [
                     NumberFormatter::NEGATIVE_PREFIX => 'MINUS',
                 ],
+                null,
                 -1234567.891234567890000,
                 'MINUS123,456,789%',
+            ],
+            [
+                'de_DE',
+                NumberFormatter::DECIMAL,
+                NumberFormatter::TYPE_DOUBLE,
+                5,
+                [],
+                0,
+                1234567.891234567890000,
+                '1.234.567,89123',
+            ],
+            [
+                'de_DE',
+                NumberFormatter::DECIMAL,
+                NumberFormatter::TYPE_DOUBLE,
+                5,
+                [],
+                0,
+                1234567,
+                '1.234.567',
             ],
         ];
     }
@@ -142,13 +174,14 @@ class NumberFormatTest extends TestCase
     /**
      * @param array<int, string> $textAttributes
      */
-    #[DataProvider('currencyTestsDataProvider')]
+    #[DataProvider('numberTestsDataProvider')]
     public function testBasic(
         string $locale,
         int $formatStyle,
         int $formatType,
         ?int $decimals,
         array $textAttributes,
+        ?int $minDecimals,
         float $number,
         string $expected
     ): void {
@@ -158,29 +191,32 @@ class NumberFormatTest extends TestCase
             $formatType,
             $locale,
             $decimals,
-            $textAttributes
+            $textAttributes,
+            $minDecimals
         ));
     }
 
     /**
      * @param array<int, string> $textAttributes
      */
-    #[DataProvider('currencyTestsDataProvider')]
+    #[DataProvider('numberTestsDataProvider')]
     public function testSettersProvideDefaults(
         string $locale,
         int $formatStyle,
         int $formatType,
         ?int $decimals,
         array $textAttributes,
+        ?int $minDecimals,
         float $number,
         string $expected
     ): void {
         $this->helper
              ->setLocale($locale)
              ->setFormatStyle($formatStyle)
-             ->setDecimals($decimals)
+             ->setMaxDecimals($decimals)
              ->setFormatType($formatType)
-             ->setTextAttributes($textAttributes);
+             ->setTextAttributes($textAttributes)
+             ->setMinDecimals($minDecimals);
 
         self::assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
