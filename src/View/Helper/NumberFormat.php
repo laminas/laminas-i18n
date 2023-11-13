@@ -21,29 +21,21 @@ class NumberFormat extends AbstractHelper
 
     /**
      * The maximum number of decimals to use.
-     *
-     * @var int
      */
     protected ?int $maxDecimals = null;
 
     /**
      * The minimum number of decimals to use.
-     *
-     * @var int
      */
     protected ?int $minDecimals = null;
 
     /**
      * NumberFormat style to use
-     *
-     * @var int
      */
     protected ?int $formatStyle = null;
 
     /**
      * NumberFormat type to use
-     *
-     * @var int
      */
     protected ?int $formatType = null;
 
@@ -56,15 +48,11 @@ class NumberFormat extends AbstractHelper
 
     /**
      * Text attributes.
-     *
-     * @var array
      */
     protected array $textAttributes = [];
 
     /**
      * Locale to use instead of the default
-     *
-     * @var string
      */
     protected ?string $locale = null;
 
@@ -72,12 +60,6 @@ class NumberFormat extends AbstractHelper
      * Format a number
      *
      * @param  int|float   $number
-     * @param  int|null    $formatStyle
-     * @param  int|null    $formatType
-     * @param  string|null $locale
-     * @param  int|null    $maxDecimals
-     * @param  array|null  $textAttributes
-     * @param  int|null     $minDecimals
      *
      * @return string
      */
@@ -114,7 +96,7 @@ class NumberFormat extends AbstractHelper
         }
 
         $formatterId = md5(
-            $formatStyle . "\0" . $locale . "\0" . $minDecimals . "\0" . $maxDecimals . "\0"
+            $formatStyle . "\0" . $locale . "\0" . ($minDecimals ?? '') . "\0" . ($maxDecimals ?? '') . "\0"
             . md5(serialize($textAttributes))
         );
 
@@ -195,13 +177,13 @@ class NumberFormat extends AbstractHelper
     /**
      * Set number (both min & max) of decimals to use instead of the default.
      *
-     * @param  int $decimals
+     * @param  int|null $decimals
      * @return $this
      */
-    public function setDecimals($decimals): self
+    public function setDecimals(?int $decimals): self
     {
-        $this->minDecimals = (int) $decimals;
-        $this->maxDecimals = (int) $decimals;
+        $this->minDecimals = $decimals;
+        $this->maxDecimals = $decimals;
         return $this;
     }
 
