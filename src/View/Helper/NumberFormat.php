@@ -48,6 +48,8 @@ class NumberFormat extends AbstractHelper
 
     /**
      * Text attributes.
+     *
+     * @var array<int, string>
      */
     protected array $textAttributes = [];
 
@@ -59,7 +61,8 @@ class NumberFormat extends AbstractHelper
     /**
      * Format a number
      *
-     * @param  int|float   $number
+     * @param  int|float           $number
+     * @param  array<int, string>  $textAttributes
      */
     public function __invoke(
         $number,
@@ -145,9 +148,9 @@ class NumberFormat extends AbstractHelper
     /**
      * Set format type to use instead of the default
      */
-    public function setFormatType($formatType): self
+    public function setFormatType(?int $formatType): self
     {
-        $this->formatType = (int) $formatType;
+        $this->formatType = $formatType;
         return $this;
     }
 
@@ -235,11 +238,17 @@ class NumberFormat extends AbstractHelper
         return $this->locale;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getTextAttributes(): array
     {
         return $this->textAttributes;
     }
 
+    /**
+     * @param array<int, string> $textAttributes
+     */
     public function setTextAttributes(array $textAttributes): self
     {
         $this->textAttributes = $textAttributes;
