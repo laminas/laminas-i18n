@@ -123,8 +123,11 @@ class NumberFormat extends AbstractHelper
         } else {
             $formatter = new NumberFormatter($locale, $formatStyle);
 
-            if ($maxDecimals !== null) {
+            if ($minDecimals !== null) {
                 $formatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $minDecimals);
+            }
+
+            if ($maxDecimals !== null) {
                 $formatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $maxDecimals);
             }
 
