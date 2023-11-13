@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Laminas\I18n\View\Helper;
 
 use Laminas\View\Helper\AbstractHelper;
@@ -23,58 +21,75 @@ class NumberFormat extends AbstractHelper
 
     /**
      * The maximum number of decimals to use.
+     *
+     * @var int
      */
-    protected ?int $maxDecimals = null;
+    protected $maxDecimals;
 
     /**
      * The minimum number of decimals to use.
+     *
+     * @var int
      */
-    protected ?int $minDecimals = null;
+    protected $minDecimals;
 
     /**
      * NumberFormat style to use
+     *
+     * @var int
      */
-    protected ?int $formatStyle = null;
+    protected $formatStyle;
 
     /**
      * NumberFormat type to use
+     *
+     * @var int
      */
-    protected ?int $formatType = null;
+    protected $formatType;
 
     /**
      * Formatter instances
      *
      * @var array<string, NumberFormatter>
      */
-    protected array $formatters = [];
+    protected $formatters = [];
 
     /**
      * Text attributes.
      *
      * @var array<int, string>
      */
-    protected array $textAttributes = [];
+    protected $textAttributes = [];
 
     /**
      * Locale to use instead of the default
+     *
+     * @var string
      */
-    protected ?string $locale = null;
+    protected $locale;
 
     /**
      * Format a number
      *
-     * @param  int|float           $number
-     * @param  array<int, string>  $textAttributes
+     * @param int|float          $number
+     * @param int|null           $formatStyle
+     * @param int|null           $formatType
+     * @param string|null        $locale
+     * @param int|null           $maxDecimals
+     * @param array<int, string> $textAttributes
+     * @param int|float          $number
+     * @param int|null           $minDecimals
+     * @return string
      */
     public function __invoke(
         $number,
-        ?int $formatStyle = null,
-        ?int $formatType = null,
-        ?string $locale = null,
-        ?int $maxDecimals = null,
+        $formatStyle = null,
+        $formatType = null,
+        $locale = null,
+        $maxDecimals = null,
         ?array $textAttributes = null,
-        ?int $minDecimals = null
-    ): string {
+        $minDecimals = null
+    ) {
         if (null === $locale) {
             $locale = $this->getLocale();
         }
@@ -128,17 +143,22 @@ class NumberFormat extends AbstractHelper
 
     /**
      * Set format style to use instead of the default
+     *
+     * @param  int $formatStyle
+     * @return $this
      */
-    public function setFormatStyle(int $formatStyle): self
+    public function setFormatStyle($formatStyle)
     {
-        $this->formatStyle = $formatStyle;
+        $this->formatStyle = (int) $formatStyle;
         return $this;
     }
 
     /**
      * Get the format style to use
+     *
+     * @return int
      */
-    public function getFormatStyle(): int
+    public function getFormatStyle()
     {
         if (null === $this->formatStyle) {
             $this->formatStyle = NumberFormatter::DECIMAL;
@@ -149,17 +169,22 @@ class NumberFormat extends AbstractHelper
 
     /**
      * Set format type to use instead of the default
+     *
+     * @param  int $formatType
+     * @return $this
      */
-    public function setFormatType(?int $formatType): self
+    public function setFormatType($formatType)
     {
-        $this->formatType = $formatType;
+        $this->formatType = (int) $formatType;
         return $this;
     }
 
     /**
      * Get the format type to use
+     *
+     * @return int
      */
-    public function getFormatType(): int
+    public function getFormatType()
     {
         if (null === $this->formatType) {
             $this->formatType = NumberFormatter::TYPE_DEFAULT;
@@ -168,9 +193,12 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * Set number (both min & max) of decimals to use instead of the default.
+     * Set number of decimals (both min & max) to use instead of the default.
+     *
+     * @param  int $decimals
+     * @return $this
      */
-    public function setDecimals(?int $decimals): self
+    public function setDecimals($decimals)
     {
         $this->minDecimals = $decimals;
         $this->maxDecimals = $decimals;
@@ -179,8 +207,11 @@ class NumberFormat extends AbstractHelper
 
     /**
      * Set the maximum number of decimals to use instead of the default.
+     *
+     * @param int $maxDecimals
+     * @return $this
      */
-    public function setMaxDecimals(?int $maxDecimals): self
+    public function setMaxDecimals($maxDecimals)
     {
         $this->maxDecimals = $maxDecimals;
         return $this;
@@ -188,8 +219,11 @@ class NumberFormat extends AbstractHelper
 
     /**
      * Set the minimum number of decimals to use instead of the default.
+     *
+     * @param int $minDecimals
+     * @return $this
      */
-    public function setMinDecimals(?int $minDecimals): self
+    public function setMinDecimals($minDecimals)
     {
         $this->minDecimals = $minDecimals;
         return $this;
@@ -197,41 +231,52 @@ class NumberFormat extends AbstractHelper
 
     /**
      * Get number of decimals.
+     *
+     * @return int
      */
-    public function getDecimals(): ?int
+    public function getDecimals()
     {
         return $this->maxDecimals;
     }
 
     /**
      * Get the maximum number of decimals.
+     *
+     * @return int
      */
-    public function getMaxDecimals(): ?int
+    public function getMaxDecimals()
     {
         return $this->maxDecimals;
     }
 
     /**
      * Get the minimum number of decimals.
+     *
+     * @return int
      */
-    public function getMinDecimals(): ?int
+    public function getMinDecimals()
     {
         return $this->minDecimals;
     }
 
     /**
      * Set locale to use instead of the default.
+     *
+     * @param  string $locale
+     * @return $this
      */
-    public function setLocale(?string $locale): self
+    public function setLocale($locale)
     {
-        $this->locale = $locale;
+        $this->locale = (string) $locale;
         return $this;
     }
 
     /**
      * Get the locale to use
+     *
+     * @return string
      */
-    public function getLocale(): string
+    public function getLocale()
     {
         if ($this->locale === null) {
             $this->locale = Locale::getDefault();
@@ -243,15 +288,16 @@ class NumberFormat extends AbstractHelper
     /**
      * @return array<int, string>
      */
-    public function getTextAttributes(): array
+    public function getTextAttributes()
     {
         return $this->textAttributes;
     }
 
     /**
      * @param array<int, string> $textAttributes
+     * @return $this
      */
-    public function setTextAttributes(array $textAttributes): self
+    public function setTextAttributes(array $textAttributes)
     {
         $this->textAttributes = $textAttributes;
         return $this;
