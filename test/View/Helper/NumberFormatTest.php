@@ -22,7 +22,7 @@ class NumberFormatTest extends TestCase
         $this->helper = new NumberFormatHelper();
     }
 
-    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: int|null, 4: array<int, string>, 5: float, 6: string}> */
+    /** @return array<array-key, array{0: string, 1: int, 2: int, 3: int|null, 4: array<int, string>, 5: int|null, 6: float, 7: string}> */
     public static function numberTestsDataProvider(): array
     {
         return [
