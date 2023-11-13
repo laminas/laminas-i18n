@@ -144,9 +144,9 @@ class NumberFormat extends AbstractHelper
      * @param  int $formatStyle
      * @return $this
      */
-    public function setFormatStyle($formatStyle): self
+    public function setFormatStyle(int $formatStyle): self
     {
-        $this->formatStyle = (int) $formatStyle;
+        $this->formatStyle = $formatStyle;
         return $this;
     }
 
@@ -229,9 +229,9 @@ class NumberFormat extends AbstractHelper
     /**
      * Get number of decimals.
      *
-     * @return int
+     * @return int|null
      */
-    public function getDecimals(): int
+    public function getDecimals(): ?int
     {
         return $this->maxDecimals;
     }
@@ -239,9 +239,9 @@ class NumberFormat extends AbstractHelper
     /**
      * Get the maximum number of decimals.
      *
-     * @return int
+     * @return int|null
      */
-    public function getMaxDecimals(): int
+    public function getMaxDecimals(): ?int
     {
         return $this->maxDecimals;
     }
@@ -249,9 +249,9 @@ class NumberFormat extends AbstractHelper
     /**
      * Get the minimum number of decimals.
      *
-     * @return int
+     * @return int|null
      */
-    public function getMinDecimals(): int
+    public function getMinDecimals(): ?int
     {
         return $this->minDecimals;
     }
