@@ -212,7 +212,7 @@ class CurrencyFormat extends AbstractHelper
     public function getLocale()
     {
         if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
+            return Locale::getDefault();
         }
 
         return $this->locale;
