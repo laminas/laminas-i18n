@@ -222,6 +222,7 @@ class PostCode extends AbstractValidator
         'WF' => '986\d{2}',
         'YT' => '976\d{2}',
         'VN' => '\d{6}',
+        'VC' => 'VC\d{4}',
     ];
     // @codingStandardsIgnoreEnd
 
