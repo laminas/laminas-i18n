@@ -292,4 +292,16 @@ class DateFormatTest extends TestCase
             $helper->__invoke($calendar, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd-MM-Y')
         );
     }
+
+    public function testNoImplicitLocale(): void
+    {
+        Locale::setDefault('de');
+        self::assertEquals(Locale::getDefault(), $this->helper->getLocale());
+
+        Locale::setDefault('en');
+        self::assertEquals(Locale::getDefault(), $this->helper->getLocale());
+
+        $this->helper->setLocale('es');
+        self::assertEquals('es', $this->helper->getLocale());
+    }
 }

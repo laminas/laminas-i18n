@@ -196,4 +196,16 @@ class NumberFormatTest extends TestCase
         $test     = str_replace(["\xC2\xA0", ' '], '', $test);
         self::assertEquals($expected, $test, $message);
     }
+
+    public function testNoImplicitLocale(): void
+    {
+        Locale::setDefault('de');
+        self::assertEquals(Locale::getDefault(), $this->helper->getLocale());
+
+        Locale::setDefault('en');
+        self::assertEquals(Locale::getDefault(), $this->helper->getLocale());
+
+        $this->helper->setLocale('es');
+        self::assertEquals('es', $this->helper->getLocale());
+    }
 }
