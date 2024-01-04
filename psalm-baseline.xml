@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+<files psalm-version="5.18.0@b113f3ed0259fd6e212d87c3df80eec95a6abf19">
   <file src="src/Exception/ExtensionNotLoadedException.php">
     <UnusedClass>
       <code>ExtensionNotLoadedException</code>
@@ -19,40 +19,21 @@
     </MixedReturnStatement>
   </file>
   <file src="src/Filter/Alnum.php">
-    <DocblockTypeContradiction>
-      <code><![CDATA[! is_scalar($value) && ! is_array($value)]]></code>
-    </DocblockTypeContradiction>
     <MixedArgumentTypeCoercion>
       <code>$value</code>
     </MixedArgumentTypeCoercion>
-    <MixedReturnStatement>
-      <code>$value</code>
-    </MixedReturnStatement>
-    <MoreSpecificImplementedParamType>
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
     <PossiblyInvalidArgument>
       <code>$allowWhiteSpaceOrOptions</code>
       <code>$allowWhiteSpaceOrOptions</code>
     </PossiblyInvalidArgument>
     <RedundantCastGivenDocblockType>
       <code>(bool) $flag</code>
-      <code>(string) $value</code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Filter/Alpha.php">
-    <DocblockTypeContradiction>
-      <code><![CDATA[! is_scalar($value) && ! is_array($value)]]></code>
-    </DocblockTypeContradiction>
-    <MixedArgumentTypeCoercion>
+    <ArgumentTypeCoercion>
       <code>$value</code>
-    </MixedArgumentTypeCoercion>
-    <MixedReturnStatement>
-      <code>$value</code>
-    </MixedReturnStatement>
-    <MoreSpecificImplementedParamType>
-      <code>$value</code>
-    </MoreSpecificImplementedParamType>
+    </ArgumentTypeCoercion>
   </file>
   <file src="src/Filter/NumberParse.php">
     <RedundantCastGivenDocblockType>
@@ -333,10 +314,6 @@
     </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Translator/TextDomain.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$textDomain->getArrayCopy()]]></code>
-      <code><![CDATA[$this->getArrayCopy()]]></code>
-    </MixedArgumentTypeCoercion>
     <PossiblyNullArgument>
       <code><![CDATA[$textDomain->getPluralRule()]]></code>
     </PossiblyNullArgument>
@@ -491,9 +468,6 @@
     </MixedAssignment>
   </file>
   <file src="src/Validator/Alnum.php">
-    <PossiblyInvalidArgument>
-      <code>$value</code>
-    </PossiblyInvalidArgument>
     <RedundantCastGivenDocblockType>
       <code>(bool) $allowWhiteSpace</code>
       <code>(bool) $allowWhiteSpace</code>
@@ -717,17 +691,11 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Filter/AlnumTest.php">
-    <MixedArgument>
-      <code>$input</code>
-    </MixedArgument>
     <PossiblyUnusedMethod>
       <code>returnUnfilteredDataProvider</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Filter/AlphaTest.php">
-    <MixedArgument>
-      <code>$input</code>
-    </MixedArgument>
     <PossiblyUnusedMethod>
       <code>returnUnfilteredDataProvider</code>
     </PossiblyUnusedMethod>
@@ -741,8 +709,8 @@
   </file>
   <file src="test/Filter/NumberParseTest.php">
     <PossiblyUnusedMethod>
-      <code>formattedToNumberProvider</code>
       <code>formatNonNumberProvider</code>
+      <code>formattedToNumberProvider</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/TestAsset/ModuleEventInterface.php">

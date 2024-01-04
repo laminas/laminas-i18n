@@ -18,6 +18,7 @@ use function sprintf;
 class DateTimeTest extends TestCase
 {
     private DateTimeValidator $validator;
+    /** @var non-empty-string */
     private string $timezone;
 
     protected function setUp(): void
