@@ -11,7 +11,7 @@ use function array_replace;
 /**
  * Text domain.
  *
- * @template TKey
+ * @template TKey of array-key
  * @template TValue
  * @extends ArrayObject<TKey, TValue>
  */
@@ -90,7 +90,7 @@ class TextDomain extends ArrayObject
      *
      * @return $this
      * @throws Exception\RuntimeException
-     * @template TNewKey
+     * @template TNewKey of array-key
      * @template TNewValue
      * @param self<TNewKey, TNewValue> $textDomain
      * @psalm-self-out self<TKey|TNewKey, TValue|TNewValue>

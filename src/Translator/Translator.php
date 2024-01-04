@@ -16,10 +16,9 @@ use Locale;
 use Traversable;
 
 use function array_shift;
-use function gettype;
+use function get_debug_type;
 use function is_array;
 use function is_file;
-use function is_object;
 use function is_string;
 use function md5;
 use function rtrim;
@@ -125,7 +124,7 @@ class Translator implements TranslatorInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable object; received "%s"',
                 __METHOD__,
-                is_object($options) ? $options::class : gettype($options)
+                get_debug_type($options),
             ));
         }
 

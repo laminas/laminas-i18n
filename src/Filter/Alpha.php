@@ -17,8 +17,8 @@ class Alpha extends Alnum
      *
      * Returns the string $value, removing all but alphabetic characters
      *
-     * @param  string|array $value
-     * @return string|array
+     * @param mixed $value
+     * @return ($value is scalar|list<scalar> ? string|list<scalar> : mixed)
      */
     public function filter($value)
     {
