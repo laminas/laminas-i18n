@@ -50,7 +50,7 @@ class Gettext extends AbstractFileLoader
     public function load($locale, $filename)
     {
         $resolvedFile = $this->resolveFile($filename);
-        if (! $resolvedFile) {
+        if ($resolvedFile === false) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not find or open file %s for reading',
                 $filename

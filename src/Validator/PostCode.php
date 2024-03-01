@@ -345,7 +345,7 @@ class PostCode extends AbstractValidator
         $service = $this->getService();
         $locale  = $this->getLocale();
         $format  = $this->getFormat();
-        if ((null === $format || '' === $format) && ! empty($locale)) {
+        if (($format === null || $format === '') && $locale !== null) {
             $region = Locale::getRegion($locale);
             if ('' === $region) {
                 throw new Exception\InvalidArgumentException('Locale must contain a region');
@@ -365,7 +365,7 @@ class PostCode extends AbstractValidator
             $format .= '$/';
         }
 
-        if (! empty($service)) {
+        if ($service !== null) {
             if (! is_callable($service)) {
                 throw new Exception\InvalidArgumentException('Invalid callback given');
             }

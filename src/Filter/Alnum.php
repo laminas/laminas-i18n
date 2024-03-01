@@ -74,7 +74,7 @@ class Alnum extends AbstractLocale
      * Returns $value as string with all non-alphanumeric characters removed
      *
      * @param mixed $value
-     * @return ($value is scalar|list<scalar> ? string|list<scalar> : mixed)
+     * @return string|list<string>|mixed
      */
     public function filter($value)
     {
