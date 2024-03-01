@@ -84,6 +84,7 @@ class AlnumTest extends TestCase
 
         foreach ($valuesExpected as $input => $expected) {
             $actual = $this->filter->filter($input);
+            self::assertIsString($actual);
             self::assertEquals($expected, $actual);
         }
     }
@@ -128,6 +129,7 @@ class AlnumTest extends TestCase
 
         foreach ($valuesExpected as $input => $expected) {
             $actual = $this->filter->filter($input);
+            self::assertIsString($actual);
             self::assertEquals($expected, $actual);
         }
     }
@@ -145,6 +147,7 @@ class AlnumTest extends TestCase
         ];
 
         $actual = $filter->filter(array_keys($values));
+        self::assertIsArray($actual);
 
         self::assertEquals(array_values($values), $actual);
     }

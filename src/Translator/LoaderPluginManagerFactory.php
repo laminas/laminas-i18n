@@ -33,7 +33,7 @@ class LoaderPluginManagerFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
-        $options       = $options ?: [];
+        $options       = $options ?? [];
         $pluginManager = new LoaderPluginManager($container, $options);
 
         // If this is in a laminas-mvc application, the ServiceListener will inject
