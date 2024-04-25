@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LaminasTest\I18n\Translator;
 
 use Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator;
-use Laminas\Cache\StorageFactory as CacheFactory;
+use Laminas\Cache\Storage\Adapter\Memory;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\TextDomain;
@@ -124,7 +124,7 @@ class TranslatorTest extends TestCase
 
     public function testFactoryCreatesTranslatorWithCache(): void
     {
-        $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
+        $cache = new SimpleCacheDecorator(new Memory());
 
         $translator = Translator::factory([
             'locale'   => 'de_DE',
@@ -172,7 +172,7 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsLoadedFromCache(): void
     {
-        $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
+        $cache = new SimpleCacheDecorator(new Memory());
         $this->translator->setCache($cache);
 
         $cache->set(
@@ -185,7 +185,7 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsAreStoredInCache(): void
     {
-        $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
+        $cache = new SimpleCacheDecorator(new Memory());
         $this->translator->setCache($cache);
 
         $loader             = new TestLoader();
@@ -208,7 +208,7 @@ class TranslatorTest extends TestCase
         $textDomain = 'default';
         $locale     = 'en_EN';
 
-        $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
+        $cache = new SimpleCacheDecorator(new Memory());
         $this->translator->setCache($cache);
 
         $cache->set(

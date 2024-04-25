@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e9d1dcf1a7ded07aa7cdfc6056e250c",
+    "content-hash": "34e420973a6a579c4fd6fb930fc5f68b",
     "packages": [
         {
             "name": "laminas/laminas-servicemanager",
@@ -1148,65 +1148,6 @@
                 }
             ],
             "time": "2023-10-18T09:43:33+00:00"
-        },
-        {
-            "name": "laminas/laminas-cache-storage-deprecated-factory",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-cache-storage-deprecated-factory.git",
-                "reference": "276ffbb6c01400fb071d8f6167650e6112d2de2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-cache-storage-deprecated-factory/zipball/276ffbb6c01400fb071d8f6167650e6112d2de2f",
-                "reference": "276ffbb6c01400fb071d8f6167650e6112d2de2f",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-cache": "^3.0",
-                "laminas/laminas-servicemanager": "^3.7",
-                "laminas/laminas-stdlib": "^3.6",
-                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
-                "webmozart/assert": "^1.10"
-            },
-            "require-dev": {
-                "laminas/laminas-cache-storage-adapter-apcu": "^2.4",
-                "laminas/laminas-cache-storage-adapter-blackhole": "^2.2",
-                "laminas/laminas-cache-storage-adapter-ext-mongodb": "^2.3",
-                "laminas/laminas-cache-storage-adapter-filesystem": "^2.3",
-                "laminas/laminas-cache-storage-adapter-memcached": "^2.4",
-                "laminas/laminas-cache-storage-adapter-memory": "^2.2",
-                "laminas/laminas-cache-storage-adapter-redis": "^2.5",
-                "laminas/laminas-cache-storage-adapter-session": "^2.3",
-                "laminas/laminas-coding-standard": "2.3",
-                "laminas/laminas-serializer": "^2.14",
-                "phpunit/phpunit": "^9.5.27",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "vimeo/psalm": "^5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Cache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Temporary storage adapter factory for fluent migration to laminas-cache v3 when working with laminas components which depend on laminas-cache",
-            "support": {
-                "issues": "https://github.com/laminas/laminas-cache-storage-deprecated-factory/issues",
-                "source": "https://github.com/laminas/laminas-cache-storage-deprecated-factory/tree/1.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2024-01-08T14:30:59+00:00"
         },
         {
             "name": "laminas/laminas-coding-standard",
