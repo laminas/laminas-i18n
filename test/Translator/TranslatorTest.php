@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
+use Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator;
 use Laminas\Cache\StorageFactory as CacheFactory;
 use Laminas\EventManager\Event;
-use Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator;
 use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator;
@@ -23,7 +23,7 @@ class TranslatorTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->translator     = new Translator();
+        $this->translator = new Translator();
         Locale::setDefault('en_EN');
         $this->testFilesDir = __DIR__ . '/_files';
     }
@@ -31,17 +31,17 @@ class TranslatorTest extends TestCase
     public function testFactoryCreatesTranslator(): void
     {
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'   => 'de_DE',
             'patterns' => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
                     'pattern'  => 'translation-%s.php',
                 ],
             ],
-            'files' => [
+            'files'    => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'filename' => $this->testFilesDir . '/translation_en.php',
                 ],
             ],
@@ -54,15 +54,15 @@ class TranslatorTest extends TestCase
     public function testTranslationFromSeveralTranslationFiles(): void
     {
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
                     'pattern'  => 'translation-%s.php',
                 ],
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
                     'pattern'  => 'translation-more-%s.php',
                 ],
@@ -102,7 +102,7 @@ class TranslatorTest extends TestCase
     public function testTranslationFromDifferentSourceTypes(): void
     {
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
                     'type'     => 'phparray',
@@ -110,7 +110,7 @@ class TranslatorTest extends TestCase
                     'pattern'  => 'translation-de_DE.php',
                 ],
             ],
-            'translation_files' => [
+            'translation_files'         => [
                 [
                     'type'     => 'phparray',
                     'filename' => $this->testFilesDir . '/testarray/translation-more-de_DE.php',
@@ -127,15 +127,15 @@ class TranslatorTest extends TestCase
         $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
 
         $translator = Translator::factory([
-            'locale' => 'de_DE',
+            'locale'   => 'de_DE',
             'patterns' => [
                 [
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
                     'pattern'  => 'translation-%s.php',
                 ],
             ],
-            'cache' => $cache,
+            'cache'    => $cache,
         ]);
 
         self::assertInstanceOf(Translator::class, $translator);
@@ -155,14 +155,14 @@ class TranslatorTest extends TestCase
 
     public function testTranslate(): void
     {
-        $loader = new TestLoader();
+        $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config = new Config([
+        $config             = new Config([
             'services' => [
                 'test' => $loader,
             ],
         ]);
-        $pm = $this->translator->getPluginManager();
+        $pm                 = $this->translator->getPluginManager();
         $config->configureServiceManager($pm);
         $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);
@@ -188,10 +188,10 @@ class TranslatorTest extends TestCase
         $cache = new SimpleCacheDecorator(CacheFactory::factory(['adapter' => 'memory']));
         $this->translator->setCache($cache);
 
-        $loader = new TestLoader();
+        $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config = new Config(['services' => ['test' => $loader]]);
-        $plugins = $this->translator->getPluginManager();
+        $config             = new Config(['services' => ['test' => $loader]]);
+        $plugins            = $this->translator->getPluginManager();
         $config->configureServiceManager($plugins);
         $this->translator->setPluginManager($plugins);
         $this->translator->addTranslationFile('test', null);
@@ -397,7 +397,7 @@ class TranslatorTest extends TestCase
 
     public function testListenerOnMissingTranslationEventCanReturnString(): void
     {
-        $trigger     = null;
+        $trigger      = null;
         $doNotTrigger = null;
 
         $this->translator->enableEventManager();
@@ -534,14 +534,14 @@ class TranslatorTest extends TestCase
 
     public function testNullMessageArgumentShouldReturnAnEmptyString(): void
     {
-        $loader = new TestLoader();
+        $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
         $config             = new Config([
             'services' => [
                 'test' => $loader,
             ],
         ]);
-        $pm = $this->translator->getPluginManager();
+        $pm                 = $this->translator->getPluginManager();
         $config->configureServiceManager($pm);
         $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);

@@ -16,8 +16,10 @@ use Traversable;
 
 use function array_shift;
 use function get_debug_type;
+use function gettype;
 use function is_array;
 use function is_file;
+use function is_object;
 use function is_string;
 use function md5;
 use function rtrim;
@@ -219,12 +221,12 @@ class Translator implements TranslatorInterface
 
         // cache
         if (isset($options['cache'])) {
-            if (! ($options['cache'] instanceof CacheInterface)) {
+            if (! $options['cache'] instanceof CacheInterface) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     '%s expects a %s instance; received "%s"',
                     __METHOD__,
                     CacheInterface::class,
-                    (is_object($options) ? get_class($options) : gettype($options))
+                    is_object($options) ? $options::class : gettype($options)
                 ));
             }
                 $translator->setCache($options['cache']);
@@ -291,7 +293,6 @@ class Translator implements TranslatorInterface
     /**
      * Sets a cache
      *
-     * @param  CacheInterface|null $cache
      * @return $this
      */
     public function setCache(?CacheInterface $cache = null)
@@ -503,7 +504,7 @@ class Translator implements TranslatorInterface
         }
 
         $this->files[$textDomain][$locale][] = [
-            'type' => $type,
+            'type'     => $type,
             'filename' => $filename,
         ];
 
