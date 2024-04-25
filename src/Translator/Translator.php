@@ -221,15 +221,7 @@ class Translator implements TranslatorInterface
 
         // cache
         if (isset($options['cache'])) {
-            if (! $options['cache'] instanceof CacheInterface) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    '%s expects a %s instance; received "%s"',
-                    __METHOD__,
-                    CacheInterface::class,
-                    is_object($options) ? $options::class : gettype($options)
-                ));
-            }
-                $translator->setCache($options['cache']);
+            $translator->setCache($options['cache']);
         }
 
         // event manager enabled
