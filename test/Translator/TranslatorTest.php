@@ -139,7 +139,7 @@ class TranslatorTest extends TestCase
         ]);
 
         self::assertInstanceOf(Translator::class, $translator);
-        $this->assertEquals($cache, $translator->getCache());
+        $this->assertSame($cache, $translator->getCache());
     }
 
     public function testDefaultLocale(): void
