@@ -119,16 +119,11 @@ The following example is based on the use of the
 [laminas-cache](https://docs.laminas.dev/laminas-cache/) component.
 
 ```php
-$translator   = new Laminas\I18n\Translator\Translator();
-$cacheStorage = Laminas\Cache\StorageFactory::factory([
-    'adapter' => [
-        'name'    => Laminas\Cache\Storage\Adapter\Filesystem::class,
-        'options' => [
-            'cache_dir' => __DIR__ . '/cache',
-        ],
-    ],
+$translator = new Laminas\I18n\Translator\Translator();
+$cacheStorage = new Laminas\Cache\Storage\Adapter\Filesystem([
+    'cache_dir' => __DIR__ . '/cache',
 ]);
-$cache        = new Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator(cacheStorage);
+$cache = new Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator($cacheStorage);
 $translator = Laminas\I18n\Translator\Translator::factory([
     'cache' => $cache,
 ]);

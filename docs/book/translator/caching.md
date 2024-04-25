@@ -14,16 +14,11 @@ The following example is based on the use of the
 
 ```php
 $translator = new Laminas\I18n\Translator\Translator();
-$cacheStorage = Laminas\Cache\StorageFactory::factory([
-    'adapter' => [
-        'name'    => Laminas\Cache\Storage\Adapter\Filesystem::class,
-        'options' => [
-            'cache_dir' => __DIR__ . '/cache',
-        ],
-    ],
+$cacheStorage = new Laminas\Cache\Storage\Adapter\Filesystem([
+    'cache_dir' => __DIR__ . '/cache',
 ]);
-$cache        = new Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator(cacheStorage);
-$translator->setCache($cache);
+$cache = new Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator($cacheStorage);
+$translator->setCache($cache);``
 ```
 
 The explanation of creating a cache and using different adapters for caching
