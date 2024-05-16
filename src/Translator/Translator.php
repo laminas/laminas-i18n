@@ -446,7 +446,13 @@ class Translator implements TranslatorInterface
         }
 
         if (isset($this->messages[$textDomain][$locale][$message])) {
-            return $this->messages[$textDomain][$locale][$message];
+            return $this->placeholder ?
+                $this->placeholder->compile(
+                    $locale,
+                    $this->messages[$textDomain][$locale][$message],
+                    $placeholders
+                ) :
+                $this->messages[$textDomain][$locale][$message];
         }
 
         /**
@@ -463,7 +469,13 @@ class Translator implements TranslatorInterface
          * ]
          */
         if (isset($this->messages[$textDomain][$locale][$textDomain . "\x04" . $message])) {
-            return $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message];
+            return $this->placeholder ?
+                $this->placeholder->compile(
+                    $locale,
+                    $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message],
+                    $placeholders
+                ) :
+                $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message];
         }
 
         if ($this->isEventManagerEnabled()) {

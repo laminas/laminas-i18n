@@ -21,12 +21,13 @@ use function sprintf;
  *
  * @template InstanceType of Placeholder\PlaceholderInterface
  * @extends AbstractPluginManager<InstanceType>
- * @method Placeholder\PlaceholderInterface get(string $name)
+ * @method Placeholder\PlaceholderInterface get(string $name, ?array $options = null)
  */
 class PlaceholderPluginManager extends AbstractPluginManager
 {
     /** @inheritDoc */
     protected $aliases = [
+        'segment'    => Placeholder\SegmentPlaceholder::class,
         'colon'      => Placeholder\SegmentPlaceholder::class,
         'laravel'    => Placeholder\SegmentPlaceholder::class,
         'handlebar'  => Placeholder\HandlebarPlaceholder::class,
