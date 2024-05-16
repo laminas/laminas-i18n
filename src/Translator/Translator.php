@@ -850,9 +850,9 @@ class Translator implements TranslatorInterface
     /**
      * @param iterable<string|int, string> $placeholders
      */
-    protected function compileMessage(string $message, iterable $placeholders, string $locale): string
+    protected function compileMessage(?string $message, iterable $placeholders, string $locale): ?string
     {
-        return $this->placeholder ?
+        return $this->placeholder && $message ?
             $this->placeholder->compile(
                 $locale,
                 $message,
