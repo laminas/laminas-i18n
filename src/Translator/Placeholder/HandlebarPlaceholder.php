@@ -8,9 +8,6 @@ use function str_replace;
 
 class HandlebarPlaceholder implements PlaceholderInterface
 {
-    /**
-     * @param iterable<string, string> $placeholders
-     */
     public function compile(string $locale, string $message, iterable $placeholders = []): string
     {
         $compiled = $message;

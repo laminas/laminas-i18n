@@ -3,6 +3,7 @@
 namespace Laminas\I18n\Translator;
 
 use Laminas\Cache;
+use Laminas\Cache\Exception\ExceptionInterface;
 use Laminas\Cache\Storage\StorageInterface as CacheStorage;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManager;
@@ -43,28 +44,28 @@ class Translator implements TranslatorInterface
     /**
      * Messages loaded by the translator.
      *
-     * @var array
+     * @var array<array-key, array<string, TextDomain>|TextDomain>
      */
     protected $messages = [];
 
     /**
      * Files used for loading messages.
      *
-     * @var array
+     * @var array<array-key, array<array-key, array<array-key, mixed>>>
      */
     protected $files = [];
 
     /**
      * Patterns used for loading messages.
      *
-     * @var array
+     * @var array<array-key, array<array-key, array<array-key, string>>>
      */
     protected $patterns = [];
 
     /**
      * Remote locations for loading messages.
      *
-     * @var array
+     * @var array<array-key, array<array-key, string>>
      */
     protected $remote = [];
 
@@ -357,7 +358,7 @@ class Translator implements TranslatorInterface
 
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
-        if ($translation !== null && $translation !== '') {
+        if (is_string($translation) && $translation !== '') {
             return $this->compileMessage($translation, $placeholders, $locale);
         }
 
@@ -374,11 +375,11 @@ class Translator implements TranslatorInterface
     /**
      * Translate a plural message.
      *
-     * @param  string      $singular
-     * @param  string      $plural
-     * @param  int         $number
-     * @param  string      $textDomain
-     * @param  string|null $locale
+     * @param  string          $singular
+     * @param  string          $plural
+     * @param  int             $number
+     * @param  string|string[] $textDomain
+     * @param  string|null     $locale
      * @return string
      * @throws Exception\OutOfBoundsException
      */
@@ -408,7 +409,7 @@ class Translator implements TranslatorInterface
                 ->evaluate($number);
         }
 
-        if (isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null) {
+        if (isset($translation[$index]) && is_string($translation[$index]) && $translation[$index] !== '') {
             return $this->compileMessage($translation[$index], $placeholders, $locale);
         }
 
@@ -436,9 +437,9 @@ class Translator implements TranslatorInterface
      * Get a translated message.
      *
      * @triggers getTranslatedMessage.missing-translation
-     * @param    string          $message
-     * @param    string          $locale
-     * @param    string|string[] $textDomain or placeholders
+     * @param    string $message
+     * @param    string $locale
+     * @param    string $textDomain
      * @return   string|array|null
      */
     protected function getTranslatedMessage(
@@ -510,10 +511,14 @@ class Translator implements TranslatorInterface
         $textDomain = 'default',
         $locale = null
     ) {
-        $locale = $locale ?? '*';
+        $locale ??= '*';
 
         if (! isset($this->files[$textDomain])) {
             $this->files[$textDomain] = [];
+        }
+
+        if (! isset($this->files[$textDomain][$locale])) {
+            $this->files[$textDomain][$locale] = [];
         }
 
         $this->files[$textDomain][$locale][] = [
@@ -585,9 +590,10 @@ class Translator implements TranslatorInterface
     /**
      * Clears the cache for a specific textDomain and locale.
      *
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param string $textDomain
+     * @param string $locale
      * @return bool
+     * @throws ExceptionInterface
      */
     public function clearCache($textDomain, $locale)
     {
@@ -612,6 +618,7 @@ class Translator implements TranslatorInterface
             $this->messages[$textDomain] = [];
         }
 
+        $cacheId = '';
         if (null !== ($cache = $this->getCache())) {
             $cacheId = $this->getCacheId($textDomain, $locale);
 
@@ -673,12 +680,7 @@ class Translator implements TranslatorInterface
                     throw new Exception\RuntimeException('Specified loader is not a remote loader');
                 }
 
-                if (isset($this->messages[$textDomain][$locale])) {
-                    $this->messages[$textDomain][$locale]->merge($loader->load($locale, $textDomain));
-                } else {
-                    $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
-                }
-
+                $this->storeTextDomain($textDomain, $locale, $loader->load($locale, $textDomain));
                 $messagesLoaded = true;
             }
         }
@@ -709,11 +711,7 @@ class Translator implements TranslatorInterface
                         throw new Exception\RuntimeException('Specified loader is not a file loader');
                     }
 
-                    if (isset($this->messages[$textDomain][$locale])) {
-                        $this->messages[$textDomain][$locale]->merge($loader->load($locale, $filename));
-                    } else {
-                        $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
-                    }
+                    $this->storeTextDomain($textDomain, $locale, $loader->load($locale, $filename));
 
                     $messagesLoaded = true;
                 }
@@ -721,6 +719,22 @@ class Translator implements TranslatorInterface
         }
 
         return $messagesLoaded;
+    }
+
+    private function storeTextDomain(string $textDomain, string $locale, ?TextDomain $loaded): void
+    {
+        if (! $loaded instanceof TextDomain) {
+            return;
+        }
+
+        if (
+            isset($this->messages[$textDomain][$locale]) &&
+            $this->messages[$textDomain][$locale] instanceof TextDomain
+        ) {
+            $this->messages[$textDomain][$locale]->merge($loaded);
+        } else {
+            $this->messages[$textDomain][$locale] = $loaded;
+        }
     }
 
     /**
@@ -747,12 +761,7 @@ class Translator implements TranslatorInterface
                     throw new Exception\RuntimeException('Specified loader is not a file loader');
                 }
 
-                if (isset($this->messages[$textDomain][$locale])) {
-                    $this->messages[$textDomain][$locale]->merge($loader->load($locale, $file['filename']));
-                } else {
-                    $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
-                }
-
+                $this->storeTextDomain($textDomain, $locale, $loader->load($locale, $file['filename']));
                 $messagesLoaded = true;
             }
 
@@ -842,7 +851,7 @@ class Translator implements TranslatorInterface
         return $this;
     }
 
-    public function setPlaceholder(PlaceholderInterface $placeholder)
+    public function setPlaceholder(PlaceholderInterface $placeholder): void
     {
         $this->placeholder = $placeholder;
     }
@@ -850,14 +859,14 @@ class Translator implements TranslatorInterface
     /**
      * @param iterable<string|int, string> $placeholders
      */
-    protected function compileMessage(?string $message, iterable $placeholders, string $locale): ?string
+    protected function compileMessage(?string $message, iterable $placeholders, string $locale): string
     {
-        return $this->placeholder && $message ?
+        return $this->placeholder && $message !== '' && $message !== null ?
             $this->placeholder->compile(
                 $locale,
                 $message,
                 $placeholders
             ) :
-            $message;
+            ($message ?? '');
     }
 }

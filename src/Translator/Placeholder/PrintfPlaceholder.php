@@ -12,9 +12,6 @@ use function iterator_to_array;
 
 class PrintfPlaceholder implements PlaceholderInterface
 {
-    /**
-     * @param iterable<int, string> $placeholders
-     */
     public function compile(string $locale, string $message, iterable $placeholders = []): string
     {
         if ($placeholders instanceof Traversable) {
