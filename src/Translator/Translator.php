@@ -10,6 +10,7 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
+use Laminas\I18n\Translator\Placeholder\PlaceholderInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
 use Locale;
@@ -108,6 +109,8 @@ class Translator implements TranslatorInterface
      * @var bool
      */
     protected $eventsEnabled = false;
+
+    protected ?PlaceholderInterface $placeholder = null;
 
     /**
      * Instantiate a translator
@@ -338,14 +341,14 @@ class Translator implements TranslatorInterface
     /**
      * Translate a message.
      *
-     * @param  string      $message
-     * @param  string      $textDomain
-     * @param  string|null $locale
+     * @param  string          $message
+     * @param  string|string[] $textDomain
+     * @param  string|null     $locale
      * @return string
      */
     public function translate($message, $textDomain = 'default', $locale = null)
     {
-        $locale      = $locale ?? $this->getLocale();
+        $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if ($translation !== null && $translation !== '') {
@@ -418,9 +421,9 @@ class Translator implements TranslatorInterface
      * Get a translated message.
      *
      * @triggers getTranslatedMessage.missing-translation
-     * @param    string $message
-     * @param    string $locale
-     * @param    string $textDomain
+     * @param    string          $message
+     * @param    string          $locale
+     * @param    string|string[] $textDomain or placeholders
      * @return   string|null
      */
     protected function getTranslatedMessage(
@@ -430,6 +433,12 @@ class Translator implements TranslatorInterface
     ) {
         if ($message === '' || $message === null) {
             return '';
+        }
+
+        $placeholders = [];
+        if (is_array($textDomain)) {
+            $placeholders = $textDomain;
+            $textDomain   = $placeholders['_textDomain'] ?? 'default';
         }
 
         if (! isset($this->messages[$textDomain][$locale])) {
@@ -822,5 +831,10 @@ class Translator implements TranslatorInterface
     {
         $this->eventsEnabled = false;
         return $this;
+    }
+
+    public function setPlaceholder(PlaceholderInterface $placeholder)
+    {
+        $this->placeholder = $placeholder;
     }
 }
