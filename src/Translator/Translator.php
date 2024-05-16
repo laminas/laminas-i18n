@@ -362,7 +362,7 @@ class Translator implements TranslatorInterface
             return $this->translate($message, $textDomain, $fallbackLocale);
         }
 
-        return $message;
+        return $this->compileMessage($message, is_array($textDomain) ? $textDomain : []);
     }
 
     /**
@@ -446,13 +446,11 @@ class Translator implements TranslatorInterface
         }
 
         if (isset($this->messages[$textDomain][$locale][$message])) {
-            return $this->placeholder ?
-                $this->placeholder->compile(
-                    $locale,
-                    $this->messages[$textDomain][$locale][$message],
-                    $placeholders
-                ) :
-                $this->messages[$textDomain][$locale][$message];
+            return $this->compileMessage(
+                $this->messages[$textDomain][$locale][$message],
+                $placeholders,
+                $locale
+            );
         }
 
         /**
@@ -469,13 +467,11 @@ class Translator implements TranslatorInterface
          * ]
          */
         if (isset($this->messages[$textDomain][$locale][$textDomain . "\x04" . $message])) {
-            return $this->placeholder ?
-                $this->placeholder->compile(
-                    $locale,
-                    $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message],
-                    $placeholders
-                ) :
-                $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message];
+            return $this->compileMessage(
+                $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message],
+                $placeholders,
+                $locale
+            );
         }
 
         if ($this->isEventManagerEnabled()) {
@@ -848,5 +844,16 @@ class Translator implements TranslatorInterface
     public function setPlaceholder(PlaceholderInterface $placeholder)
     {
         $this->placeholder = $placeholder;
+    }
+
+    protected function compileMessage(string $message, array $placeholders, string $locale): string
+    {
+        return $this->placeholder ?
+            $this->placeholder->compile(
+                $locale,
+                $message,
+                $placeholders
+            ) :
+            $message;
     }
 }
