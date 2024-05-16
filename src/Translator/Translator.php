@@ -358,14 +358,14 @@ class Translator implements TranslatorInterface
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if ($translation !== null && $translation !== '') {
-            return $translation;
+            return $this->compileMessage($translation, $placeholders, $locale);
         }
 
         if (
             null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
-            return $this->translate($message, $textDomain, $fallbackLocale);
+            return $this->translate($message, $placeholders ?: $textDomain, $fallbackLocale);
         }
 
         return $this->compileMessage($message, $placeholders, $locale);
