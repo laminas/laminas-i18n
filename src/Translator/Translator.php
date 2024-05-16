@@ -348,7 +348,13 @@ class Translator implements TranslatorInterface
      */
     public function translate($message, $textDomain = 'default', $locale = null)
     {
-        $locale    ??= $this->getLocale();
+        $locale     ??= $this->getLocale();
+        $placeholders = [];
+        if (is_array($textDomain)) {
+            $placeholders = $textDomain;
+            $textDomain   = $placeholders['_textDomain'] ?? 'default';
+        }
+
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if ($translation !== null && $translation !== '') {
@@ -362,7 +368,7 @@ class Translator implements TranslatorInterface
             return $this->translate($message, $textDomain, $fallbackLocale);
         }
 
-        return $this->compileMessage($message, is_array($textDomain) ? $textDomain : []);
+        return $this->compileMessage($message, $placeholders, $locale);
     }
 
     /**
@@ -383,7 +389,12 @@ class Translator implements TranslatorInterface
         $textDomain = 'default',
         $locale = null
     ) {
-        $locale      = $locale ?? $this->getLocale();
+        $locale     ??= $this->getLocale();
+        $placeholders = [];
+        if (is_array($textDomain)) {
+            $placeholders = $textDomain;
+            $textDomain   = $placeholders['_textDomain'] ?? 'default';
+        }
         $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
         if (is_string($translation)) {
@@ -398,23 +409,27 @@ class Translator implements TranslatorInterface
         }
 
         if (isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null) {
-            return $translation[$index];
+            return $this->compileMessage($translation[$index], $placeholders, $locale);
         }
 
         if (
             null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
-            return $this->translatePlural(
-                $singular,
-                $plural,
-                $number,
-                $textDomain,
-                $fallbackLocale
+            return $this->compileMessage(
+                $this->translatePlural(
+                    $singular,
+                    $plural,
+                    $number,
+                    $textDomain,
+                    $fallbackLocale
+                ),
+                $placeholders,
+                $locale
             );
         }
 
-        return $index === 0 ? $singular : $plural;
+        return $this->compileMessage($index === 0 ? $singular : $plural, $placeholders, $locale);
     }
 
     /**
@@ -424,7 +439,7 @@ class Translator implements TranslatorInterface
      * @param    string          $message
      * @param    string          $locale
      * @param    string|string[] $textDomain or placeholders
-     * @return   string|null
+     * @return   string|array|null
      */
     protected function getTranslatedMessage(
         $message,
@@ -435,22 +450,12 @@ class Translator implements TranslatorInterface
             return '';
         }
 
-        $placeholders = [];
-        if (is_array($textDomain)) {
-            $placeholders = $textDomain;
-            $textDomain   = $placeholders['_textDomain'] ?? 'default';
-        }
-
         if (! isset($this->messages[$textDomain][$locale])) {
             $this->loadMessages($textDomain, $locale);
         }
 
         if (isset($this->messages[$textDomain][$locale][$message])) {
-            return $this->compileMessage(
-                $this->messages[$textDomain][$locale][$message],
-                $placeholders,
-                $locale
-            );
+            return $this->messages[$textDomain][$locale][$message];
         }
 
         /**
@@ -467,11 +472,7 @@ class Translator implements TranslatorInterface
          * ]
          */
         if (isset($this->messages[$textDomain][$locale][$textDomain . "\x04" . $message])) {
-            return $this->compileMessage(
-                $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message],
-                $placeholders,
-                $locale
-            );
+            return $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message];
         }
 
         if ($this->isEventManagerEnabled()) {
@@ -846,7 +847,10 @@ class Translator implements TranslatorInterface
         $this->placeholder = $placeholder;
     }
 
-    protected function compileMessage(string $message, array $placeholders, string $locale): string
+    /**
+     * @param iterable<string|int, string> $placeholders
+     */
+    protected function compileMessage(string $message, iterable $placeholders, string $locale): string
     {
         return $this->placeholder ?
             $this->placeholder->compile(
