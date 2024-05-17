@@ -6,7 +6,7 @@ use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\TranslatorWithParamsInterface;
 
 /**
- * View helper for translating messages.
+ * View helper for translating messages with placeholders.
  */
 class TranslatePluralWithParams extends AbstractTranslatorHelper
 {
