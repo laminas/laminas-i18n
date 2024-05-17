@@ -18,6 +18,7 @@ use Locale;
 use Traversable;
 
 use function array_shift;
+use function ctype_digit;
 use function get_debug_type;
 use function is_array;
 use function is_file;
@@ -29,7 +30,7 @@ use function sprintf;
 /**
  * Translator.
  */
-class Translator implements TranslatorInterface
+class Translator implements TranslatorInterface, TranslatorWithParamsInterface
 {
     /**
      * Event fired when the translation for a message is missing.
@@ -44,7 +45,7 @@ class Translator implements TranslatorInterface
     /**
      * Messages loaded by the translator.
      *
-     * @var array<array-key, array<string, TextDomain>|TextDomain>
+     * @var array<array-key, array<array-key, TextDomain>|TextDomain>
      */
     protected $messages = [];
 
@@ -349,27 +350,21 @@ class Translator implements TranslatorInterface
      */
     public function translate($message, $textDomain = 'default', $locale = null)
     {
-        $locale     ??= $this->getLocale();
-        $placeholders = [];
-        if (is_array($textDomain)) {
-            $placeholders = $textDomain;
-            $textDomain   = $placeholders['_textDomain'] ?? 'default';
-        }
-
+        $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if (is_string($translation) && $translation !== '') {
-            return $this->compileMessage($translation, $placeholders, $locale);
+            return $translation;
         }
 
         if (
             null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
-            return $this->translate($message, $placeholders ?: $textDomain, $fallbackLocale);
+            return $this->translate($message, $textDomain, $fallbackLocale);
         }
 
-        return $this->compileMessage($message, $placeholders, $locale);
+        return $message;
     }
 
     /**
@@ -390,12 +385,7 @@ class Translator implements TranslatorInterface
         $textDomain = 'default',
         $locale = null
     ) {
-        $locale     ??= $this->getLocale();
-        $placeholders = [];
-        if (is_array($textDomain)) {
-            $placeholders = $textDomain;
-            $textDomain   = $placeholders['_textDomain'] ?? 'default';
-        }
+        $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
         if (is_string($translation)) {
@@ -403,34 +393,76 @@ class Translator implements TranslatorInterface
         }
 
         $index = $number === 1 ? 0 : 1; // en_EN Plural rule
-        if ($this->messages[$textDomain][$locale] instanceof TextDomain) {
+        if (
+            isset($this->messages[$textDomain][$locale]) &&
+            $this->messages[$textDomain][$locale] instanceof TextDomain
+        ) {
             $index = $this->messages[$textDomain][$locale]
                 ->getPluralRule()
                 ->evaluate($number);
         }
 
         if (isset($translation[$index]) && is_string($translation[$index]) && $translation[$index] !== '') {
-            return $this->compileMessage($translation[$index], $placeholders, $locale);
+            return $translation[$index];
         }
 
         if (
             null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
-            return $this->compileMessage(
-                $this->translatePlural(
-                    $singular,
-                    $plural,
-                    $number,
-                    $textDomain,
-                    $fallbackLocale
-                ),
-                $placeholders,
-                $locale
+            return $this->translatePlural(
+                $singular,
+                $plural,
+                $number,
+                $textDomain,
+                $fallbackLocale
             );
         }
 
-        return $this->compileMessage($index === 0 ? $singular : $plural, $placeholders, $locale);
+        return $index === 0 ? $singular : $plural;
+    }
+
+    /**
+     * @param iterable<string|int, string> $params
+     */
+    public function translateWithParams(
+        string $message,
+        iterable $params = [],
+        string $textDomain = 'default',
+        ?string $locale = null
+    ): string {
+        $locale ??= $this->getLocale();
+
+        return $this->compileMessage($this->translate($message, $textDomain, $locale), $params, $locale);
+    }
+
+    /**
+     * The first number in params is used to determine the plural form.
+     *
+     * @param iterable<string|int, string> $params
+     */
+    public function translatePluralWithParams(
+        string $singular,
+        string $plural,
+        iterable $params = [],
+        string $textDomain = 'default',
+        ?string $locale = null
+    ): string {
+        $locale ??= $this->getLocale();
+
+        $number = 1;
+        foreach ($params as $param) {
+            if (ctype_digit($param)) {
+                $number = (int) $param;
+                break;
+            }
+        }
+
+        return $this->compileMessage(
+            $this->translatePlural($singular, $plural, $number, $textDomain, $locale),
+            $params,
+            $locale
+        );
     }
 
     /**
@@ -477,7 +509,7 @@ class Translator implements TranslatorInterface
         }
 
         if ($this->isEventManagerEnabled()) {
-            $until = static fn($r): bool => is_string($r);
+            $until = static fn(mixed $r): bool => is_string($r);
 
             $event = new Event(self::EVENT_MISSING_TRANSLATION, $this, [
                 'message'     => $message,
@@ -721,22 +753,6 @@ class Translator implements TranslatorInterface
         return $messagesLoaded;
     }
 
-    private function storeTextDomain(string $textDomain, string $locale, ?TextDomain $loaded): void
-    {
-        if (! $loaded instanceof TextDomain) {
-            return;
-        }
-
-        if (
-            isset($this->messages[$textDomain][$locale]) &&
-            $this->messages[$textDomain][$locale] instanceof TextDomain
-        ) {
-            $this->messages[$textDomain][$locale]->merge($loaded);
-        } else {
-            $this->messages[$textDomain][$locale] = $loaded;
-        }
-    }
-
     /**
      * Load messages from files.
      *
@@ -854,6 +870,22 @@ class Translator implements TranslatorInterface
     public function setPlaceholder(PlaceholderInterface $placeholder): void
     {
         $this->placeholder = $placeholder;
+    }
+
+    protected function storeTextDomain(string $textDomain, string $locale, ?TextDomain $loaded): void
+    {
+        if (! $loaded instanceof TextDomain) {
+            return;
+        }
+
+        if (
+            isset($this->messages[$textDomain][$locale]) &&
+            $this->messages[$textDomain][$locale] instanceof TextDomain
+        ) {
+            $this->messages[$textDomain][$locale]->merge($loaded);
+        } else {
+            $this->messages[$textDomain][$locale] = $loaded;
+        }
     }
 
     /**
