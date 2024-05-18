@@ -3,7 +3,7 @@
 `Laminas\I18n\Validator\DateTime` allows you to determine if a given value **is a
 valid date, time or datetime**.
 Internally, PHP's `IntlDateFormatter` tries to create a date time for the given
-value.
+value and locale.
 
 ## Basic Usage
 

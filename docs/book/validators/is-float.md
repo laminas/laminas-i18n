@@ -11,6 +11,8 @@ example, using English, you might write `1.5`, whereas in german you would write
 `Laminas\I18n\Validator\IsFloat` is able to validate such notations. However, it
 is limited to the locale you set.
 
+Internally, PHP's `NumberFormatter` (`ext/intl`) tries to create a formatted number for the given value and locale.
+
 ## Basic Usage
 
 ```php
