@@ -13,6 +13,8 @@ validity of an integer value. In such cases, it doesn't simply strip the
 separator, but instead validates that the correct separator as defined by used
 locale.
 
+Internally, PHP's `NumberFormatter` (`ext/intl`) tries to create a formatted number for the given value and locale.
+
 ## Basic Usage
 
 ```php
