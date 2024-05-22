@@ -126,18 +126,19 @@ class LoaderPluginManager extends AbstractPluginManager
      * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
      *             This method will be removed in version 3.0
      *
-     * @param mixed $plugin
+     * @param mixed $instance
+     * @return void
      * @throws Exception\RuntimeException
-     * @psalm-assert InstanceType $plugin
+     * @psalm-assert InstanceType $instance
      */
-    public function validatePlugin($plugin)
+    public function validatePlugin($instance)
     {
         try {
-            $this->validate($plugin);
+            $this->validate($instance);
         } catch (InvalidServiceException $e) {
             throw new Exception\RuntimeException(sprintf(
                 'Plugin of type %s is invalid; must implement %s or %s',
-                is_object($plugin) ? $plugin::class : gettype($plugin),
+                is_object($instance) ? $instance::class : gettype($instance),
                 FileLoaderInterface::class,
                 RemoteLoaderInterface::class
             ));

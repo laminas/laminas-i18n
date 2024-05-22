@@ -21,6 +21,8 @@ class PlaceholderPluginManagerFactory implements FactoryInterface
      * @param array<array-key, mixed>|null $options
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
+     * @psalm-suppress ArgumentTypeCoercion
+     * @psalm-suppress DeprecatedClass
      */
     public function __invoke(
         ContainerInterface $container,

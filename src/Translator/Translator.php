@@ -45,7 +45,7 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
     /**
      * Messages loaded by the translator.
      *
-     * @var array<array-key, array<array-key, TextDomain>|TextDomain>
+     * @var array<array-key, array<array-key, TextDomain<array-key, mixed>|null>>
      */
     protected $messages = [];
 
@@ -343,9 +343,9 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
     /**
      * Translate a message.
      *
-     * @param  string          $message
-     * @param  string|string[] $textDomain
-     * @param  string|null     $locale
+     * @param  string      $message
+     * @param  string|     $textDomain
+     * @param  string|null $locale
      * @return string
      */
     public function translate($message, $textDomain = 'default', $locale = null)
@@ -370,11 +370,11 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
     /**
      * Translate a plural message.
      *
-     * @param  string          $singular
-     * @param  string          $plural
-     * @param  int             $number
-     * @param  string|string[] $textDomain
-     * @param  string|null     $locale
+     * @param  string      $singular
+     * @param  string      $plural
+     * @param  int         $number
+     * @param  string      $textDomain
+     * @param  string|null $locale
      * @return string
      * @throws Exception\OutOfBoundsException
      */
@@ -393,16 +393,13 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
         }
 
         $index = $number === 1 ? 0 : 1; // en_EN Plural rule
-        if (
-            isset($this->messages[$textDomain][$locale]) &&
-            $this->messages[$textDomain][$locale] instanceof TextDomain
-        ) {
+        if (isset($this->messages[$textDomain][$locale])) {
             $index = $this->messages[$textDomain][$locale]
                 ->getPluralRule()
                 ->evaluate($number);
         }
 
-        if (isset($translation[$index]) && is_string($translation[$index]) && $translation[$index] !== '') {
+        if (isset($translation[$index]) && $translation[$index] !== '') {
             return $translation[$index];
         }
 
@@ -472,7 +469,7 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
      * @param    string $message
      * @param    string $locale
      * @param    string $textDomain
-     * @return   string|array|null
+     * @return   string|null
      */
     protected function getTranslatedMessage(
         $message,
@@ -639,10 +636,11 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
      * Load messages for a given language and domain.
      *
      * @triggers loadMessages.no-messages-loaded
-     * @param    string $textDomain
-     * @param    string $locale
-     * @throws   Exception\RuntimeException
-     * @return   void
+     * @param string $textDomain
+     * @param string $locale
+     * @return void
+     * @throws ExceptionInterface
+     * @throws Exception\RuntimeException
      */
     protected function loadMessages($textDomain, $locale)
     {
@@ -653,8 +651,9 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
         $cacheId = '';
         if (null !== ($cache = $this->getCache())) {
             $cacheId = $this->getCacheId($textDomain, $locale);
-
-            if (null !== ($result = $cache->getItem($cacheId))) {
+            /** @var TextDomain|null $result */
+            $result = $cache->getItem($cacheId);
+            if ($result instanceof TextDomain) {
                 $this->messages[$textDomain][$locale] = $result;
 
                 return;
@@ -878,10 +877,7 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
             return;
         }
 
-        if (
-            isset($this->messages[$textDomain][$locale]) &&
-            $this->messages[$textDomain][$locale] instanceof TextDomain
-        ) {
+        if (isset($this->messages[$textDomain][$locale])) {
             $this->messages[$textDomain][$locale]->merge($loaded);
         } else {
             $this->messages[$textDomain][$locale] = $loaded;
