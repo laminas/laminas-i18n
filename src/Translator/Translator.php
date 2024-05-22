@@ -344,7 +344,7 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
      * Translate a message.
      *
      * @param  string      $message
-     * @param  string|     $textDomain
+     * @param  string      $textDomain
      * @param  string|null $locale
      * @return string
      */
