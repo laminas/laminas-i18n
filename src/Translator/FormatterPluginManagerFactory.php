@@ -12,25 +12,22 @@ use Psr\Container\NotFoundExceptionInterface;
 use function is_array;
 
 /** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
-class PlaceholderPluginManagerFactory implements FactoryInterface
+final class FormatterPluginManagerFactory implements FactoryInterface
 {
     /**
-     * Create and return a PlaceholderPluginManager.
-     *
      * @param string $requestedName
      * @param array<array-key, mixed>|null $options
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
-     * @psalm-suppress ArgumentTypeCoercion
      * @psalm-suppress DeprecatedClass
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
         ?array $options = null
-    ): PlaceholderPluginManager {
+    ): FormatterPluginManager {
         $options     ??= [];
-        $pluginManager = new PlaceholderPluginManager($container, $options);
+        $pluginManager = new FormatterPluginManager($container, $options);
 
         // If this is in a laminas-mvc application, the ServiceListener will inject
         // merged configuration during bootstrap.
@@ -46,12 +43,12 @@ class PlaceholderPluginManagerFactory implements FactoryInterface
         $config = $container->get('config');
 
         // If we do not have translator_plugins configuration, nothing more to do
-        if (! isset($config['translator_placeholders']) || ! is_array($config['translator_placeholders'])) {
+        if (! isset($config['translator_formatter']) || ! is_array($config['translator_formatter'])) {
             return $pluginManager;
         }
 
         // Wire service configuration for translator_plugins
-        (new Config($config['translator_placeholders']))->configureServiceManager($pluginManager);
+        (new Config($config['translator_formatter']))->configureServiceManager($pluginManager);
 
         return $pluginManager;
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Laminas\I18n\Translator\Placeholder;
+namespace Laminas\I18n\Translator\Formatter;
 
 use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Exception\ParseException;
@@ -17,9 +17,9 @@ use function strtoupper;
 use function ucfirst;
 use function uksort;
 
-class SegmentPlaceholder implements PlaceholderInterface
+class SegmentFormatter implements FormatterInterface
 {
-    public function compile(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $placeholders = []): string
     {
         if ($placeholders instanceof Traversable) {
             $placeholders = iterator_to_array($placeholders);

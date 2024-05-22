@@ -11,14 +11,12 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
-use Laminas\I18n\Translator\Placeholder\PlaceholderInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
 use Locale;
 use Traversable;
 
 use function array_shift;
-use function ctype_digit;
 use function get_debug_type;
 use function is_array;
 use function is_file;
@@ -30,7 +28,7 @@ use function sprintf;
 /**
  * Translator.
  */
-class Translator implements TranslatorInterface, TranslatorWithParamsInterface
+class Translator implements TranslatorInterface
 {
     /**
      * Event fired when the translation for a message is missing.
@@ -111,8 +109,6 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
      * @var bool
      */
     protected $eventsEnabled = false;
-
-    protected ?PlaceholderInterface $placeholder = null;
 
     /**
      * Instantiate a translator
@@ -417,49 +413,6 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
         }
 
         return $index === 0 ? $singular : $plural;
-    }
-
-    /**
-     * @param iterable<string|int, string> $params
-     */
-    public function translateWithParams(
-        string $message,
-        iterable $params = [],
-        string $textDomain = 'default',
-        ?string $locale = null
-    ): string {
-        $locale ??= $this->getLocale();
-
-        return $this->compileMessage($this->translate($message, $textDomain, $locale), $params, $locale);
-    }
-
-    /**
-     * The first number in params is used to determine the plural form.
-     *
-     * @param iterable<string|int, string> $params
-     */
-    public function translatePluralWithParams(
-        string $singular,
-        string $plural,
-        iterable $params = [],
-        string $textDomain = 'default',
-        ?string $locale = null
-    ): string {
-        $locale ??= $this->getLocale();
-
-        $number = 1;
-        foreach ($params as $param) {
-            if (ctype_digit($param)) {
-                $number = (int) $param;
-                break;
-            }
-        }
-
-        return $this->compileMessage(
-            $this->translatePlural($singular, $plural, $number, $textDomain, $locale),
-            $params,
-            $locale
-        );
     }
 
     /**
@@ -866,11 +819,6 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
         return $this;
     }
 
-    public function setPlaceholder(PlaceholderInterface $placeholder): void
-    {
-        $this->placeholder = $placeholder;
-    }
-
     protected function storeTextDomain(string $textDomain, string $locale, ?TextDomain $loaded): void
     {
         if (! $loaded instanceof TextDomain) {
@@ -882,19 +830,5 @@ class Translator implements TranslatorInterface, TranslatorWithParamsInterface
         } else {
             $this->messages[$textDomain][$locale] = $loaded;
         }
-    }
-
-    /**
-     * @param iterable<string|int, string> $placeholders
-     */
-    protected function compileMessage(?string $message, iterable $placeholders, string $locale): string
-    {
-        return $this->placeholder && $message !== '' && $message !== null ?
-            $this->placeholder->compile(
-                $locale,
-                $message,
-                $placeholders
-            ) :
-            ($message ?? '');
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Laminas\I18n\Translator\Placeholder;
+namespace Laminas\I18n\Translator\Formatter;
 
 use Laminas\I18n\Exception\ParseException;
 use Traversable;
@@ -10,9 +10,9 @@ use Traversable;
 use function call_user_func_array;
 use function iterator_to_array;
 
-class PrintfPlaceholder implements PlaceholderInterface
+class PrintfFormatter implements FormatterInterface
 {
-    public function compile(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $placeholders = []): string
     {
         if ($placeholders instanceof Traversable) {
             $placeholders = iterator_to_array($placeholders);

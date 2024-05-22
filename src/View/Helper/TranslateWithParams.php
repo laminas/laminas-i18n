@@ -3,6 +3,7 @@
 namespace Laminas\I18n\View\Helper;
 
 use Laminas\I18n\Exception;
+use Laminas\I18n\Translator\TranslatorFormatterDecorator;
 use Laminas\I18n\Translator\TranslatorWithParamsInterface;
 
 /**
@@ -17,23 +18,23 @@ class TranslateWithParams extends AbstractTranslatorHelper
      */
     public function __invoke(
         string $message,
-        iterable $params = [],
         ?string $textDomain = null,
-        ?string $locale = null
+        ?string $locale = null,
+        iterable $params = []
     ): string {
         $translator = $this->getTranslator();
         if (null === $translator) {
             throw new Exception\RuntimeException('Translator has not been set');
         }
-        if (! $translator instanceof TranslatorWithParamsInterface) {
+        if (! $translator instanceof TranslatorFormatterDecorator) {
             throw new Exception\RuntimeException(
-                'No param support, the translator does not implement TranslatorWithParamsInterface'
+                'No param support, the translator must be wrapped with TranslatorFormatterDecorator'
             );
         }
         if (null === $textDomain) {
             $textDomain = $this->getTranslatorTextDomain();
         }
 
-        return $translator->translateWithParams($message, $params, $textDomain, $locale);
+        return $translator->translate($message, $textDomain, $locale, $params);
     }
 }

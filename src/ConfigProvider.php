@@ -52,10 +52,11 @@ class ConfigProvider
                 Geography\CountryCodeListInterface::class  => Geography\DefaultCountryCodeList::class,
             ],
             'factories' => [
-                Translator\TranslatorInterface::class      => Translator\TranslatorServiceFactory::class,
-                Translator\LoaderPluginManager::class      => Translator\LoaderPluginManagerFactory::class,
-                Translator\PlaceholderPluginManager::class => Translator\PlaceholderPluginManagerFactory::class,
-                Geography\DefaultCountryCodeList::class    => [Geography\DefaultCountryCodeList::class, 'create'],
+                Translator\TranslatorInterface::class          => Translator\TranslatorServiceFactory::class,
+                Translator\LoaderPluginManager::class          => Translator\LoaderPluginManagerFactory::class,
+                Translator\FormatterPluginManager::class       => Translator\FormatterPluginManagerFactory::class,
+                Translator\TranslatorFormatterDecorator::class => Translator\TranslatorFormatterDecoratorFactory::class,
+                Geography\DefaultCountryCodeList::class        => [Geography\DefaultCountryCodeList::class, 'create'],
             ],
         ];
     }

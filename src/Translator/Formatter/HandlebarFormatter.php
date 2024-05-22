@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Laminas\I18n\Translator\Placeholder;
+namespace Laminas\I18n\Translator\Formatter;
 
 use function str_replace;
 
-class HandlebarPlaceholder implements PlaceholderInterface
+class HandlebarFormatter implements FormatterInterface
 {
-    public function compile(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $placeholders = []): string
     {
         $compiled = $message;
         foreach ($placeholders as $key => $value) {

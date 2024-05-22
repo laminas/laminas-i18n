@@ -19,31 +19,31 @@ use function sprintf;
  * Placeholder\PlaceholderInterface. Additionally, it registers a number
  * of default placeholder compilers.
  *
- * @template InstanceType of Placeholder\PlaceholderInterface
+ * @template InstanceType of Formatter\FormatterInterface
  * @extends AbstractPluginManager<InstanceType>
- * @method Placeholder\PlaceholderInterface get(string $name, ?array $options = null)
+ * @method Formatter\FormatterInterface get(string $name, ?array $options = null)
  */
-class PlaceholderPluginManager extends AbstractPluginManager
+class FormatterPluginManager extends AbstractPluginManager
 {
     /** @inheritDoc */
     protected $aliases = [
-        'segment'    => Placeholder\SegmentPlaceholder::class,
-        'colon'      => Placeholder\SegmentPlaceholder::class,
-        'laravel'    => Placeholder\SegmentPlaceholder::class,
-        'handlebar'  => Placeholder\HandlebarPlaceholder::class,
-        'handlebars' => Placeholder\HandlebarPlaceholder::class,
-        'icu'        => Placeholder\IcuPlaceholder::class,
-        'vsprintf'   => Placeholder\PrintfPlaceholder::class,
-        'sprintf'    => Placeholder\PrintfPlaceholder::class,
-        'printf'     => Placeholder\PrintfPlaceholder::class,
+        'segment'    => Formatter\SegmentFormatter::class,
+        'colon'      => Formatter\SegmentFormatter::class,
+        'laravel'    => Formatter\SegmentFormatter::class,
+        'handlebar'  => Formatter\HandlebarFormatter::class,
+        'handlebars' => Formatter\HandlebarFormatter::class,
+        'icu'        => Formatter\IcuFormatter::class,
+        'vsprintf'   => Formatter\PrintfFormatter::class,
+        'sprintf'    => Formatter\PrintfFormatter::class,
+        'printf'     => Formatter\PrintfFormatter::class,
     ];
 
     /** @inheritDoc */
     protected $factories = [
-        Placeholder\SegmentPlaceholder::class   => InvokableFactory::class,
-        Placeholder\HandlebarPlaceholder::class => InvokableFactory::class,
-        Placeholder\IcuPlaceholder::class       => InvokableFactory::class,
-        Placeholder\PrintfPlaceholder::class    => InvokableFactory::class,
+        Formatter\SegmentFormatter::class   => InvokableFactory::class,
+        Formatter\HandlebarFormatter::class => InvokableFactory::class,
+        Formatter\IcuFormatter::class       => InvokableFactory::class,
+        Formatter\PrintfFormatter::class    => InvokableFactory::class,
     ];
 
     /**
@@ -57,7 +57,7 @@ class PlaceholderPluginManager extends AbstractPluginManager
      */
     public function validate(mixed $instance): void
     {
-        if ($instance instanceof Placeholder\PlaceholderInterface) {
+        if ($instance instanceof Formatter\FormatterInterface) {
             // we're okay
             return;
         }
@@ -65,7 +65,7 @@ class PlaceholderPluginManager extends AbstractPluginManager
         throw new InvalidServiceException(sprintf(
             'Plugin of type %s is invalid; must implement %s',
             is_object($instance) ? $instance::class : gettype($instance),
-            Placeholder\PlaceholderInterface::class
+            Formatter\FormatterInterface::class
         ));
     }
 }

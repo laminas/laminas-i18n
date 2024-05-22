@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Laminas\I18n\Translator\Placeholder;
+namespace Laminas\I18n\Translator\Formatter;
 
 use MessageFormatter;
 use Traversable;
 
 use function iterator_to_array;
 
-class IcuPlaceholder implements PlaceholderInterface
+class IcuFormatter implements FormatterInterface
 {
-    public function compile(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $placeholders = []): string
     {
         if ($placeholders instanceof Traversable) {
             $placeholders = iterator_to_array($placeholders);
