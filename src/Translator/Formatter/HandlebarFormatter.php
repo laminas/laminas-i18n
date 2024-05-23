@@ -8,10 +8,10 @@ use function str_replace;
 
 class HandlebarFormatter implements FormatterInterface
 {
-    public function format(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $params = []): string
     {
         $compiled = $message;
-        foreach ($placeholders as $key => $value) {
+        foreach ($params as $key => $value) {
             $compiled = str_replace("{{{$key}}}", $value, $compiled);
         }
 

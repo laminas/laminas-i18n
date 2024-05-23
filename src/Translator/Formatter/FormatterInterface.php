@@ -7,7 +7,7 @@ namespace Laminas\I18n\Translator\Formatter;
 interface FormatterInterface
 {
     /**
-     * @param iterable<array-key, string> $placeholders
+     * @param iterable<array-key, string> $params
      */
-    public function format(string $locale, string $message, iterable $placeholders = []): string;
+    public function format(string $locale, string $message, iterable $params = []): string;
 }

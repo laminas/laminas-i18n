@@ -13,11 +13,11 @@ use function is_object;
 use function sprintf;
 
 /**
- * Plugin manager implementation for translation placeholder compilers.
+ * Plugin manager implementation for translation message formatters.
  *
  * Enforces that placeholder compilers retrieved are either instances of
- * Placeholder\PlaceholderInterface. Additionally, it registers a number
- * of default placeholder compilers.
+ * Formatter\FormatterInterface. Additionally, it registers a number
+ * of default message formatters.
  *
  * @template InstanceType of Formatter\FormatterInterface
  * @extends AbstractPluginManager<InstanceType>
@@ -49,8 +49,7 @@ class FormatterPluginManager extends AbstractPluginManager
     /**
      * Validate the plugin.
      *
-     * Checks that the filter loaded is an instance of
-     * Loader\FileLoaderInterface or Loader\RemoteLoaderInterface.
+     * Checks that the filter loaded is an instance of Formatter\FormatterInterface
      *
      * @throws Exception\RuntimeException If invalid.
      * @psalm-assert RemoteLoaderInterface $instance

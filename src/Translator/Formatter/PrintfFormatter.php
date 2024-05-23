@@ -12,14 +12,14 @@ use function iterator_to_array;
 
 class PrintfFormatter implements FormatterInterface
 {
-    public function format(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $params = []): string
     {
-        if ($placeholders instanceof Traversable) {
-            $placeholders = iterator_to_array($placeholders);
+        if ($params instanceof Traversable) {
+            $params = iterator_to_array($params);
         }
 
         /** @var string|false $compiled */
-        $compiled = call_user_func_array('vsprintf', [$message, $placeholders]);
+        $compiled = call_user_func_array('vsprintf', [$message, $params]);
         if ($compiled === false) {
             throw new ParseException(
                 'Error occurred while processing sprintf placeholders for message "' . $message . '"'

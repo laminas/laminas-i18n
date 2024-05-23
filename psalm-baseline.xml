@@ -147,10 +147,16 @@
       <code><![CDATA[$container]]></code>
     </ParamNameMismatch>
   </file>
-  <file src="src/Translator/PlaceholderPluginManagerFactory.php">
+  <file src="src/Translator/FormatterPluginManagerFactory.php">
+    <DeprecatedClass>
+      <code><![CDATA[new Config($config['translator_formatter'])]]></code>
+    </DeprecatedClass>
     <MixedArgument>
-      <code><![CDATA[$config['translator_placeholders']]]></code>
+      <code><![CDATA[$config['translator_formatter']]]></code>
     </MixedArgument>
+    <MoreSpecificImplementedParamType>
+      <code><![CDATA[$options]]></code>
+    </MoreSpecificImplementedParamType>
   </file>
   <file src="src/Translator/Plural/Parser.php">
     <MixedArgument>

@@ -16,10 +16,9 @@ final class FormatterPluginManagerFactory implements FactoryInterface
 {
     /**
      * @param string $requestedName
-     * @param array<array-key, mixed>|null $options
+     * @psalm-param ServiceManagerConfiguration|null $options
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
-     * @psalm-suppress DeprecatedClass
      */
     public function __invoke(
         ContainerInterface $container,

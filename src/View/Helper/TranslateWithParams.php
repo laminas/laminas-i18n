@@ -4,7 +4,6 @@ namespace Laminas\I18n\View\Helper;
 
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\TranslatorFormatterDecorator;
-use Laminas\I18n\Translator\TranslatorWithParamsInterface;
 
 /**
  * View helper for translating messages with placeholders.

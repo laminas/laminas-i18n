@@ -19,17 +19,17 @@ use function uksort;
 
 class SegmentFormatter implements FormatterInterface
 {
-    public function format(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $params = []): string
     {
-        if ($placeholders instanceof Traversable) {
-            $placeholders = iterator_to_array($placeholders);
+        if ($params instanceof Traversable) {
+            $params = iterator_to_array($params);
         }
 
-        if (empty($placeholders)) {
+        if (empty($params)) {
             return $message;
         }
 
-        if (! ArrayUtils::hasStringKeys($placeholders)) {
+        if (! ArrayUtils::hasStringKeys($params)) {
             throw new InvalidArgumentException(
                 'SegmentPlaceholder expects an associative array of placeholder names and values'
             );
@@ -38,12 +38,12 @@ class SegmentFormatter implements FormatterInterface
         try {
             // Sorting the array by key length to replace placeholders with longer names first
             // to avoid replacing placeholders with shorter names that are part of longer names
-            uksort($placeholders, static function (string|int $a, string|int $b) {
+            uksort($params, static function (string|int $a, string|int $b) {
                 return strlen((string) $a) <=> strlen((string) $b);
             });
 
             $compiled = $message;
-            foreach ($placeholders as $key => $value) {
+            foreach ($params as $key => $value) {
                 $key      = (string) $key;
                 $compiled = str_replace([':' . $key, ':' . strtoupper($key), ':' . ucfirst($key)], [
                     $value,

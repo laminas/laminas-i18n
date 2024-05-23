@@ -11,12 +11,12 @@ use function iterator_to_array;
 
 class IcuFormatter implements FormatterInterface
 {
-    public function format(string $locale, string $message, iterable $placeholders = []): string
+    public function format(string $locale, string $message, iterable $params = []): string
     {
-        if ($placeholders instanceof Traversable) {
-            $placeholders = iterator_to_array($placeholders);
+        if ($params instanceof Traversable) {
+            $params = iterator_to_array($params);
         }
 
-        return MessageFormatter::formatMessage($locale, $message, $placeholders);
+        return MessageFormatter::formatMessage($locale, $message, $params);
     }
 }
