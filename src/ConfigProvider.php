@@ -173,13 +173,11 @@ class ConfigProvider
                 'NumberFormat'              => View\Helper\NumberFormat::class,
                 'plural'                    => View\Helper\Plural::class,
                 'Plural'                    => View\Helper\Plural::class,
-                'translate'                 => View\Helper\Translate::class,
-                'Translate'                 => View\Helper\Translate::class,
-                'translateplural'           => View\Helper\TranslatePlural::class,
-                'translatePlural'           => View\Helper\TranslatePlural::class,
-                'TranslatePlural'           => View\Helper\TranslatePlural::class,
-                'translateWithParams'       => View\Helper\TranslateWithParams::class,
-                'translatePluralWithParams' => View\Helper\TranslatePluralWithParams::class,
+                'translate'                 => View\Helper\TranslateWithParams::class,
+                'Translate'                 => View\Helper\TranslateWithParams::class,
+                'translateplural'           => View\Helper\TranslatePluralWithParams::class,
+                'translatePlural'           => View\Helper\TranslatePluralWithParams::class,
+                'TranslatePlural'           => View\Helper\TranslatePluralWithParams::class,
 
                 // Legacy Zend Framework aliases
                 'Zend\I18n\View\Helper\CurrencyFormat'  => View\Helper\CurrencyFormat::class,
