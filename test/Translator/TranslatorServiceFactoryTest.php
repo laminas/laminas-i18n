@@ -14,7 +14,7 @@ class TranslatorServiceFactoryTest extends TestCase
 {
     public function testCreateServiceWithNoTranslatorKeyDefined(): void
     {
-        $pluginManagerMock      = $this->createMock(LoaderPluginManager::class);
+        $pluginManagerMock = $this->createMock(LoaderPluginManager::class);
 
         $serviceLocator = $this->createMock(ContainerInterface::class);
         $serviceLocator->expects(self::once())
