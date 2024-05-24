@@ -44,7 +44,7 @@ class TranslatorServiceFactoryTest extends TestCase
             ->willReturn(false);
 
         $serviceLocator->expects(self::once())
-           ->method('get')
+            ->method('get')
             ->with('config')
             ->willReturn([]);
 

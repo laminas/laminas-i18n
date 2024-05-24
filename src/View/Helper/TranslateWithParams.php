@@ -27,7 +27,7 @@ class TranslateWithParams extends AbstractTranslatorHelper
         }
         if (! $translator instanceof TranslatorFormatterDecorator) {
             throw new Exception\RuntimeException(
-                'No param support, the translator must be wrapped with TranslatorFormatterDecorator'
+                'No param support, the translator bust be decorated with TranslatorFormatterDecorator'
             );
         }
         if (null === $textDomain) {

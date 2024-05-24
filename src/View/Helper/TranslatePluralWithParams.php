@@ -30,7 +30,7 @@ class TranslatePluralWithParams extends AbstractTranslatorHelper
         }
         if (! $translator instanceof TranslatorFormatterDecorator) {
             throw new Exception\RuntimeException(
-                'No param support, the translator does not implement TranslatorWithParamsInterface'
+                'No param support, the translator bust be decorated with TranslatorFormatterDecorator'
             );
         }
         if (null === $textDomain) {
