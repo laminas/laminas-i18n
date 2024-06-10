@@ -1637,16 +1637,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.34.0",
+            "version": "2.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "53136a59622c8809c519b29dbbaa346aa39e834a"
+                "reference": "f597148345dd406fb9d04d391a19c0c33bf71605"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/53136a59622c8809c519b29dbbaa346aa39e834a",
-                "reference": "53136a59622c8809c519b29dbbaa346aa39e834a",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/f597148345dd406fb9d04d391a19c0c33bf71605",
+                "reference": "f597148345dd406fb9d04d391a19c0c33bf71605",
                 "shasum": ""
             },
             "require": {
@@ -1681,11 +1681,11 @@
                 "laminas/laminas-navigation": "^2.19.1",
                 "laminas/laminas-paginator": "^2.18.1",
                 "laminas/laminas-permissions-acl": "^2.16",
-                "laminas/laminas-router": "^3.12.0",
+                "laminas/laminas-router": "^3.13.0",
                 "laminas/laminas-uri": "^2.11",
-                "phpunit/phpunit": "^10.5.9",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "vimeo/psalm": "^5.20"
+                "phpunit/phpunit": "^10.5.13",
+                "psalm/plugin-phpunit": "^0.19.0",
+                "vimeo/psalm": "^5.23.1"
             },
             "suggest": {
                 "laminas/laminas-authentication": "Laminas\\Authentication component",
@@ -1733,7 +1733,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2024-01-25T11:26:39+00:00"
+            "time": "2024-06-04T06:44:31+00:00"
         },
         {
             "name": "myclabs/deep-copy",
