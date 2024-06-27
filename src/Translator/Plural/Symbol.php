@@ -127,7 +127,6 @@ class Symbol
             throw new Exception\ParseException(sprintf('Syntax error: %s', $this->id));
         }
 
-        /** @var callable $function  */
         $function = $this->nullDenotationGetter;
         return $function($this);
     }
@@ -145,7 +144,6 @@ class Symbol
             throw new Exception\ParseException(sprintf('Unknown operator: %s', $this->id));
         }
 
-        /** @var callable $function  */
         $function = $this->leftDenotationGetter;
         return $function($this, $left);
     }

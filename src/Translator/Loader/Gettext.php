@@ -182,15 +182,14 @@ class Gettext extends AbstractFileLoader
     /**
      * Read an integer from the current file.
      *
-     * @param  int $num
-     * @return int
+     * @param int $num
+     * @return array<array-key, int>
      */
     protected function readIntegerList($num)
     {
-        if ($this->littleEndian) {
-            return unpack('V' . $num, fread($this->file, 4 * $num));
-        }
+        /** @var array<array-key, int>|false $integerList */
+        $integerList = unpack(($this->littleEndian ? 'V' : 'N') . $num, fread($this->file, 4 * $num));
 
-        return unpack('N' . $num, fread($this->file, 4 * $num));
+        return $integerList === false ? [] : $integerList;
     }
 }
