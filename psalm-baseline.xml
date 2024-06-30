@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.22.2@d768d914152dbbf3486c36398802f74e80cfde48">
+<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
+  <file src="src/ConfigProvider.php">
+    <DeprecatedClass>
+      <code><![CDATA[Validator\PhoneNumber::class]]></code>
+      <code><![CDATA[Validator\PhoneNumber::class]]></code>
+      <code><![CDATA[Validator\PhoneNumber::class]]></code>
+      <code><![CDATA[Validator\PhoneNumber::class]]></code>
+      <code><![CDATA[Validator\PhoneNumber::class]]></code>
+    </DeprecatedClass>
+  </file>
   <file src="src/Exception/ExtensionNotLoadedException.php">
     <UnusedClass>
       <code><![CDATA[ExtensionNotLoadedException]]></code>
@@ -861,6 +870,15 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Validator/PhoneNumberTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[PhoneNumber]]></code>
+      <code><![CDATA[new PhoneNumber($constructorOptions)]]></code>
+      <code><![CDATA[new PhoneNumber()]]></code>
+      <code><![CDATA[new PhoneNumber()]]></code>
+      <code><![CDATA[new PhoneNumber([
+            'country' => 'country-code',
+        ])]]></code>
+    </DeprecatedClass>
     <PossiblyUnusedMethod>
       <code><![CDATA[constructDataProvider]]></code>
       <code><![CDATA[numbersDataProvider]]></code>
