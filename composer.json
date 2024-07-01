@@ -34,11 +34,11 @@
     "require": {
         "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
         "ext-intl": "*",
-        "laminas/laminas-servicemanager": "^3.21.0",
+        "laminas/laminas-servicemanager": "^3.21.0 || ^4.0.0",
         "laminas/laminas-stdlib": "^3.0"
     },
     "require-dev": {
-        "laminas/laminas-cache": "^3.12.1",
+        "laminas/laminas-cache": "^4.0.0",
         "laminas/laminas-cache-storage-adapter-memory": "^2.3.0",
         "laminas/laminas-cache-storage-deprecated-factory": "^1.2",
         "laminas/laminas-coding-standard": "~2.5.0",
