@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
-use Laminas\Cache\Storage\StorageInterface;
-use Laminas\Cache\StorageFactory as CacheFactory;
+use Laminas\Cache\Psr\SimpleCache\SimpleCacheDecorator;
+use Laminas\Cache\Storage\Adapter\Memory;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\TextDomain;
@@ -124,6 +124,8 @@ class TranslatorTest extends TestCase
 
     public function testFactoryCreatesTranslatorWithCache(): void
     {
+        $cache = new SimpleCacheDecorator(new Memory());
+
         $translator = Translator::factory([
             'locale'   => 'de_DE',
             'patterns' => [
@@ -133,13 +135,11 @@ class TranslatorTest extends TestCase
                     'pattern'  => 'translation-%s.php',
                 ],
             ],
-            'cache'    => [
-                'adapter' => 'memory',
-            ],
+            'cache'    => $cache,
         ]);
 
         self::assertInstanceOf(Translator::class, $translator);
-        self::assertInstanceOf(StorageInterface::class, $translator->getCache());
+        $this->assertSame($cache, $translator->getCache());
     }
 
     public function testDefaultLocale(): void
@@ -172,10 +172,10 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsLoadedFromCache(): void
     {
-        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $cache = new SimpleCacheDecorator(new Memory());
         $this->translator->setCache($cache);
 
-        $cache->addItem(
+        $cache->set(
             $this->translator->getCacheId('default', 'en_EN'),
             new TextDomain(['foo' => 'bar'])
         );
@@ -185,7 +185,7 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsAreStoredInCache(): void
     {
-        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $cache = new SimpleCacheDecorator(new Memory());
         $this->translator->setCache($cache);
 
         $loader             = new TestLoader();
@@ -198,7 +198,7 @@ class TranslatorTest extends TestCase
 
         self::assertEquals('bar', $this->translator->translate('foo'));
 
-        $item = $cache->getItem($this->translator->getCacheId('default', 'en_EN'));
+        $item = $cache->get($this->translator->getCacheId('default', 'en_EN'));
         self::assertInstanceOf(TextDomain::class, $item);
         self::assertEquals('bar', $item['foo']);
     }
@@ -208,19 +208,18 @@ class TranslatorTest extends TestCase
         $textDomain = 'default';
         $locale     = 'en_EN';
 
-        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $cache = new SimpleCacheDecorator(new Memory());
         $this->translator->setCache($cache);
 
-        $cache->addItem(
+        $cache->set(
             $this->translator->getCacheId($textDomain, $locale),
             new TextDomain(['foo' => 'bar'])
         );
 
         self::assertTrue($this->translator->clearCache($textDomain, $locale));
 
-        $item = $cache->getItem($this->translator->getCacheId($textDomain, $locale), $success);
-        self::assertNull($item);
-        self::assertFalse($success);
+        $item = $cache->get($this->translator->getCacheId($textDomain, $locale));
+        $this->assertNull($item);
     }
 
     public function testClearCacheReturnsFalseIfNoCacheIsPresent(): void

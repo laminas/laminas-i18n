@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31ac363ec8bf003ee6a61b444948f2b2",
+    "content-hash": "34e420973a6a579c4fd6fb930fc5f68b",
     "packages": [
         {
             "name": "laminas/laminas-servicemanager",
@@ -202,6 +202,57 @@
                 "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
             "time": "2021-11-05T16:50:12+00:00"
+        },
+        {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/master"
+            },
+            "time": "2017-10-23T01:57:42+00:00"
         }
     ],
     "packages-dev": [
@@ -1097,65 +1148,6 @@
                 }
             ],
             "time": "2023-10-18T09:43:33+00:00"
-        },
-        {
-            "name": "laminas/laminas-cache-storage-deprecated-factory",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-cache-storage-deprecated-factory.git",
-                "reference": "276ffbb6c01400fb071d8f6167650e6112d2de2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-cache-storage-deprecated-factory/zipball/276ffbb6c01400fb071d8f6167650e6112d2de2f",
-                "reference": "276ffbb6c01400fb071d8f6167650e6112d2de2f",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-cache": "^3.0",
-                "laminas/laminas-servicemanager": "^3.7",
-                "laminas/laminas-stdlib": "^3.6",
-                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
-                "webmozart/assert": "^1.10"
-            },
-            "require-dev": {
-                "laminas/laminas-cache-storage-adapter-apcu": "^2.4",
-                "laminas/laminas-cache-storage-adapter-blackhole": "^2.2",
-                "laminas/laminas-cache-storage-adapter-ext-mongodb": "^2.3",
-                "laminas/laminas-cache-storage-adapter-filesystem": "^2.3",
-                "laminas/laminas-cache-storage-adapter-memcached": "^2.4",
-                "laminas/laminas-cache-storage-adapter-memory": "^2.2",
-                "laminas/laminas-cache-storage-adapter-redis": "^2.5",
-                "laminas/laminas-cache-storage-adapter-session": "^2.3",
-                "laminas/laminas-coding-standard": "2.3",
-                "laminas/laminas-serializer": "^2.14",
-                "phpunit/phpunit": "^9.5.27",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "vimeo/psalm": "^5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Cache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Temporary storage adapter factory for fluent migration to laminas-cache v3 when working with laminas components which depend on laminas-cache",
-            "support": {
-                "issues": "https://github.com/laminas/laminas-cache-storage-deprecated-factory/issues",
-                "source": "https://github.com/laminas/laminas-cache-storage-deprecated-factory/tree/1.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2024-01-08T14:30:59+00:00"
         },
         {
             "name": "laminas/laminas-coding-standard",
@@ -2910,57 +2902,6 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
             "time": "2021-07-14T16:46:02+00:00"
-        },
-        {
-            "name": "psr/simple-cache",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\SimpleCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for simple caching",
-            "keywords": [
-                "cache",
-                "caching",
-                "psr",
-                "psr-16",
-                "simple-cache"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/simple-cache/tree/master"
-            },
-            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "sebastian/cli-parser",
