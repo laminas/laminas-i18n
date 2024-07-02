@@ -2,14 +2,12 @@
 
 namespace Laminas\I18n;
 
-use Laminas\ServiceManager\ConfigInterface;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\ServiceManager;
 use Laminas\Translator\TranslatorInterface;
 
 /**
- * @see ConfigInterface
- *
- * @psalm-import-type ServiceManagerConfigurationType from ConfigInterface
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
  * @final
  */
 class ConfigProvider
@@ -18,10 +16,10 @@ class ConfigProvider
      * Return general-purpose laminas-i18n configuration.
      *
      * @return array{
-     *     dependencies: ServiceManagerConfigurationType,
-     *     filters: ServiceManagerConfigurationType,
-     *     validators: ServiceManagerConfigurationType,
-     *     view_helpers: ServiceManagerConfigurationType,
+     *     dependencies: ServiceManagerConfiguration,
+     *     filters: ServiceManagerConfiguration,
+     *     validators: ServiceManagerConfiguration,
+     *     view_helpers: ServiceManagerConfiguration,
      *     locale: string|null,
      * }
      */
@@ -39,7 +37,7 @@ class ConfigProvider
     /**
      * Return application-level dependency configuration.
      *
-     * @return ServiceManagerConfigurationType
+     * @return ServiceManagerConfiguration
      */
     public function getDependencyConfig()
     {
@@ -64,7 +62,7 @@ class ConfigProvider
     /**
      * Return laminas-filter configuration.
      *
-     * @return ServiceManagerConfigurationType
+     * @return ServiceManagerConfiguration
      */
     public function getFilterConfig()
     {
@@ -99,7 +97,7 @@ class ConfigProvider
     /**
      * Return laminas-validator configuration.
      *
-     * @return ServiceManagerConfigurationType
+     * @return ServiceManagerConfiguration
      */
     public function getValidatorConfig()
     {
@@ -155,7 +153,7 @@ class ConfigProvider
      *
      * Obsoletes View\HelperConfig.
      *
-     * @return ServiceManagerConfigurationType
+     * @return ServiceManagerConfiguration
      */
     public function getViewHelperConfig()
     {

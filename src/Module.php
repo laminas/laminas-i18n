@@ -3,12 +3,10 @@
 namespace Laminas\I18n;
 
 use Laminas\ModuleManager\ModuleManager;
-use Laminas\ServiceManager\ConfigInterface;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
- * @see ConfigInterface
- *
- * @psalm-import-type ServiceManagerConfigurationType from ConfigInterface
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
  */
 class Module
 {
@@ -16,10 +14,10 @@ class Module
      * Return laminas-i18n configuration for laminas-mvc application.
      *
      * @return array{
-     *     filters: ServiceManagerConfigurationType,
-     *     service_manager: ServiceManagerConfigurationType,
-     *     validators: ServiceManagerConfigurationType,
-     *     view_helpers: ServiceManagerConfigurationType,
+     *     filters: ServiceManagerConfiguration,
+     *     service_manager: ServiceManagerConfiguration,
+     *     validators: ServiceManagerConfiguration,
+     *     view_helpers: ServiceManagerConfiguration,
      * }
      */
     public function getConfig()
