@@ -584,6 +584,7 @@ example, using English, you might write <code>1.5</code>, whereas in german you 
 <code>1,5</code>, and in other languages you might use grouping.</p>
 <p><code>Laminas\I18n\Validator\IsFloat</code> is able to validate such notations. However, it
 is limited to the locale you set.</p>
+<p>Internally, PHP's <code>NumberFormatter</code> (<code>ext/intl</code>) tries to create a formatted number for the given value and locale.</p>
 <h2 id="basic-usage">Basic Usage</h2>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsFloat();
 

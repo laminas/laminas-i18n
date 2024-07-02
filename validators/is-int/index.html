@@ -590,6 +590,7 @@ French, <code>1 234</code>.</p>
 validity of an integer value. In such cases, it doesn't simply strip the
 separator, but instead validates that the correct separator as defined by used
 locale.</p>
+<p>Internally, PHP's <code>NumberFormatter</code> (<code>ext/intl</code>) tries to create a formatted number for the given value and locale.</p>
 <h2 id="basic-usage">Basic Usage</h2>
 <pre class="highlight"><code class="language-php">$validator = new Laminas\I18n\Validator\IsInt();
 

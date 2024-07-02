@@ -515,6 +515,29 @@
 
     
     
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#translation" class="toc__link nav-link">Translation</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#filters-and-validators" class="toc__link nav-link">Filters and Validators</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#view-helpers" class="toc__link nav-link">View Helpers</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#based-on-phps-intl-extension" class="toc__link nav-link">Based on PHP's intl extension</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
 
                 
 
@@ -545,13 +568,30 @@
     
 
     <h1 id="introduction">Introduction</h1>
-<p><code>Laminas\I18n</code> comes with a complete translation suite which supports all major
+<h2 id="translation">Translation</h2>
+<p><code>Laminas\I18n</code> comes with a <a href="../translation/">complete translation</a> suite which supports all major
 formats and includes popular features like plural translations and text domains.
 The Translator component is mostly dependency free, except for the fallback to a
-default locale, where it relies on the Intl PHP extension.</p>
+default locale, where it relies on the <code>intl</code> PHP extension.</p>
 <p>The translator itself is initialized without any parameters, as any configuration
 to it is optional. A translator without any translations will actually do nothing
 but just return the given message IDs.</p>
+<h2 id="filters-and-validators">Filters and Validators</h2>
+<p>The <code>Laminas\I18n</code> component also provides a <a href="../filters/introduction/">set of filters</a> for normalizing and formatting.</p>
+<p>The component also provides a <a href="../validators/introduction/">set of validators</a> for validating localized data.</p>
+<h2 id="view-helpers">View Helpers</h2>
+<p>The <code>Laminas\I18n</code> component provides also a <a href="../view-helpers/introduction/">set of view helpers</a> for formatting dates, times, numbers, currencies, and translating messages.</p>
+<h2 id="based-on-phps-intl-extension">Based on PHP's <code>intl</code> extension</h2>
+<p>The <a href="https://www.php.net/manual/book.intl.php"><code>intl</code> extension</a> is a wrapper for the ICU library, which provides a lot of
+internationalization functions. The <code>intl</code> extension is a standard PHP extension, and is required for the <code>Laminas\I18n</code> component to work.</p>
+<p>The <code>intl</code> functions are used for locale detection, filtering and validating localized data, formatting localized data and more.
+These functions are used in:</p>
+<ul>
+<li>Translator</li>
+<li>Filters</li>
+<li>Validators</li>
+<li>View Helpers</li>
+</ul>
 
 
 
