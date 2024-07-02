@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
+<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
   <file src="src/ConfigProvider.php">
     <DeprecatedClass>
       <code><![CDATA[Validator\PhoneNumber::class]]></code>
@@ -332,6 +332,9 @@
     </PossiblyNullReference>
   </file>
   <file src="src/Translator/Translator.php">
+    <DeprecatedInterface>
+      <code><![CDATA[Translator]]></code>
+    </DeprecatedInterface>
     <DocblockTypeContradiction>
       <code><![CDATA[$message === null]]></code>
       <code><![CDATA[$message === null]]></code>
@@ -444,6 +447,10 @@
     </UnsafeInstantiation>
   </file>
   <file src="src/Translator/TranslatorAwareInterface.php">
+    <DeprecatedInterface>
+      <code><![CDATA[TranslatorInterface|null]]></code>
+      <code><![CDATA[TranslatorInterface|null]]></code>
+    </DeprecatedInterface>
     <PossiblyUnusedMethod>
       <code><![CDATA[hasTranslator]]></code>
       <code><![CDATA[setTranslatorEnabled]]></code>
@@ -452,6 +459,13 @@
       <code><![CDATA[$this]]></code>
       <code><![CDATA[$this]]></code>
     </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Translator/TranslatorAwareTrait.php">
+    <DeprecatedInterface>
+      <code><![CDATA[?TranslatorInterface]]></code>
+      <code><![CDATA[TranslatorInterface|null]]></code>
+      <code><![CDATA[TranslatorInterface|null]]></code>
+    </DeprecatedInterface>
   </file>
   <file src="src/Translator/TranslatorServiceFactory.php">
     <DeprecatedInterface>
@@ -575,6 +589,11 @@
     </PossiblyInvalidArgument>
   </file>
   <file src="src/View/Helper/AbstractTranslatorHelper.php">
+    <DeprecatedInterface>
+      <code><![CDATA[Translator|null]]></code>
+      <code><![CDATA[Translator|null]]></code>
+      <code><![CDATA[Translator|null]]></code>
+    </DeprecatedInterface>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(bool) $enabled]]></code>
     </RedundantCastGivenDocblockType>
