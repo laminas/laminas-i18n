@@ -4,6 +4,7 @@ namespace Laminas\I18n;
 
 use Laminas\ServiceManager\ConfigInterface;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\Translator\TranslatorInterface;
 
 /**
  * @see ConfigInterface
@@ -50,6 +51,7 @@ class ConfigProvider
                 'Zend\I18n\Translator\TranslatorInterface' => Translator\TranslatorInterface::class,
                 'Zend\I18n\Translator\LoaderPluginManager' => Translator\LoaderPluginManager::class,
                 Geography\CountryCodeListInterface::class  => Geography\DefaultCountryCodeList::class,
+                TranslatorInterface::class                 => Translator\TranslatorInterface::class,
             ],
             'factories' => [
                 Translator\TranslatorInterface::class   => Translator\TranslatorServiceFactory::class,
