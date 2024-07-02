@@ -16,6 +16,15 @@ guarantees an optimized loading procedure.
 > ```bash
 > $ composer require laminas/laminas-cache-storage-deprecated-factory
 > ```
+>
+> laminas-cache is shipped without a specific cache adapter to allow free choice of storage backends and their dependencies.
+> So make sure that the required adapters are installed.
+>
+> The following example used the [memory adapter of laminas-cache](https://docs.laminas.dev/laminas-cache/storage/adapter/#memory-adapter):
+>
+> ```bash
+> $ composer require laminas/laminas-cache-storage-adapter-memory
+> ```
 
 ## Enable Caching
 
@@ -26,10 +35,7 @@ method.
 $translator = new Laminas\I18n\Translator\Translator();
 $cache      = Laminas\Cache\StorageFactory::factory([
     'adapter' => [
-        'name'    => Laminas\Cache\Storage\Adapter\Filesystem::class,
-        'options' => [
-            'cache_dir' => __DIR__ . '/cache',
-        ],
+        'name' => Laminas\Cache\Storage\Adapter\Memory::class,
     ],
 ]);
 $translator->setCache($cache);
