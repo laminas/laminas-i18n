@@ -484,21 +484,41 @@
     </MixedAssignment>
   </file>
   <file src="src/Validator/Alnum.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getAllowWhiteSpace]]></code>
+    </DeprecatedMethod>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(bool) $allowWhiteSpace]]></code>
       <code><![CDATA[(bool) $allowWhiteSpace]]></code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Validator/Alpha.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getAllowWhiteSpace]]></code>
+    </DeprecatedMethod>
     <InvalidClassConstantType>
       <code><![CDATA[INVALID]]></code>
       <code><![CDATA[STRING_EMPTY]]></code>
     </InvalidClassConstantType>
+    <InvalidExtendClass>
+      <code><![CDATA[Alnum]]></code>
+    </InvalidExtendClass>
+    <MethodSignatureMismatch>
+      <code><![CDATA[public function isValid($value)]]></code>
+    </MethodSignatureMismatch>
     <NonInvariantDocblockPropertyType>
       <code><![CDATA[$filter]]></code>
     </NonInvariantDocblockPropertyType>
   </file>
   <file src="src/Validator/DateTime.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getDateType]]></code>
+      <code><![CDATA[getLocale]]></code>
+      <code><![CDATA[getTimeType]]></code>
+      <code><![CDATA[setCalendar]]></code>
+      <code><![CDATA[setPattern]]></code>
+      <code><![CDATA[setTimezone]]></code>
+    </DeprecatedMethod>
     <DocblockTypeContradiction>
       <code><![CDATA[is_string($value)]]></code>
     </DocblockTypeContradiction>
@@ -517,11 +537,21 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Validator/IsFloat.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getLocale]]></code>
+      <code><![CDATA[getLocale]]></code>
+      <code><![CDATA[setLocale]]></code>
+    </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$options['locale']]]></code>
     </MixedArgument>
   </file>
   <file src="src/Validator/IsInt.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getLocale]]></code>
+      <code><![CDATA[setLocale]]></code>
+      <code><![CDATA[setStrict]]></code>
+    </DeprecatedMethod>
     <DocblockTypeContradiction>
       <code><![CDATA[is_bool($strict)]]></code>
     </DocblockTypeContradiction>
@@ -563,7 +593,13 @@
   </file>
   <file src="src/Validator/PostCode.php">
     <DeprecatedMethod>
+      <code><![CDATA[getFormat]]></code>
+      <code><![CDATA[getLocale]]></code>
       <code><![CDATA[getService]]></code>
+      <code><![CDATA[setFormat]]></code>
+      <code><![CDATA[setLocale]]></code>
+      <code><![CDATA[setLocale]]></code>
+      <code><![CDATA[setOptions]]></code>
       <code><![CDATA[setService]]></code>
     </DeprecatedMethod>
     <MixedArgument>
