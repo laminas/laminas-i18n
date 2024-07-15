@@ -6,6 +6,7 @@ use Laminas\I18n\Filter\Alpha as AlphaFilter;
 
 use function is_string;
 
+/** @final */
 class Alpha extends Alnum
 {
     public const INVALID      = 'alphaInvalid';
@@ -22,7 +23,7 @@ class Alpha extends Alnum
     /**
      * Validation failure message template definitions
      *
-     * @var string[]
+     * @var array<string, string>
      */
     protected $messageTemplates = [
         self::INVALID      => 'Invalid type given. String expected',

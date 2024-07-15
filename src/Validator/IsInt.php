@@ -18,6 +18,7 @@ use function is_int;
 use function is_string;
 use function strtr;
 
+/** @final */
 class IsInt extends AbstractValidator
 {
     public const INVALID        = 'intInvalid';
@@ -27,7 +28,7 @@ class IsInt extends AbstractValidator
     /**
      * Validation failure message template definitions
      *
-     * @var string[]
+     * @var array<string, string>
      */
     protected $messageTemplates = [
         self::INVALID        => 'Invalid type given. String or integer expected',
@@ -75,6 +76,8 @@ class IsInt extends AbstractValidator
     /**
      * Returns the set locale
      *
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0
+     *
      * @return string|null
      */
     public function getLocale()
@@ -88,7 +91,9 @@ class IsInt extends AbstractValidator
     /**
      * Sets the locale to use
      *
-     * @param  string|null $locale
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0. Provide options to the constructor instead.
+     *
+     * @param string|null $locale
      * @return $this
      */
     public function setLocale($locale)
@@ -100,6 +105,8 @@ class IsInt extends AbstractValidator
     /**
      * Returns the strict option
      *
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0
+     *
      * @return bool
      */
     public function getStrict()
@@ -109,6 +116,8 @@ class IsInt extends AbstractValidator
 
     /**
      * Sets the strict option mode
+     *
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0. Provide options to the constructor instead.
      *
      * @param bool $strict
      * @return $this

@@ -12,6 +12,7 @@ use function is_int;
 use function is_scalar;
 use function is_string;
 
+/** @final */
 class Alnum extends AbstractValidator
 {
     public const INVALID      = 'alnumInvalid';
@@ -28,7 +29,7 @@ class Alnum extends AbstractValidator
     /**
      * Validation failure message template definitions
      *
-     * @var string[]
+     * @var array<string, string>
      */
     protected $messageTemplates = [
         self::INVALID      => 'Invalid type given. String, integer or float expected',
@@ -63,6 +64,8 @@ class Alnum extends AbstractValidator
     /**
      * Returns the allowWhiteSpace option
      *
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0
+     *
      * @return bool
      */
     public function getAllowWhiteSpace()
@@ -73,7 +76,9 @@ class Alnum extends AbstractValidator
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param  bool $allowWhiteSpace
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0. Provide options to the constructor instead.
+     *
+     * @param bool $allowWhiteSpace
      * @return $this
      */
     public function setAllowWhiteSpace($allowWhiteSpace)

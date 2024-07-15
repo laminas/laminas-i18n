@@ -23,6 +23,7 @@ use function preg_match;
 use function preg_quote;
 use function str_replace;
 
+/** @final */
 class IsFloat extends AbstractValidator
 {
     public const INVALID   = 'floatInvalid';
@@ -31,7 +32,7 @@ class IsFloat extends AbstractValidator
     /**
      * Validation failure message template definitions
      *
-     * @var string[]
+     * @var array<string, string>
      */
     protected $messageTemplates = [
         self::INVALID   => 'Invalid type given. String, integer or float expected',
@@ -75,6 +76,8 @@ class IsFloat extends AbstractValidator
     /**
      * Returns the set locale
      *
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0
+     *
      * @return string
      */
     public function getLocale()
@@ -87,6 +90,8 @@ class IsFloat extends AbstractValidator
 
     /**
      * Sets the locale to use
+     *
+     * @deprecated Since 2.28.0 - This method will be removed in 3.0. Provide options to the constructor instead.
      *
      * @param string|null $locale
      * @return $this
