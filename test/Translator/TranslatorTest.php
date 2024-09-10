@@ -549,4 +549,17 @@ class TranslatorTest extends TestCase
 
         self::assertEquals('', $this->translator->translate(null));
     }
+
+    public function testTranslateWithEmptyStringLocale(): void
+    {
+        $this->translator->setLocale('en_US');
+        $this->translator->addTranslationFile(
+            'phparray',
+            $this->testFilesDir . '/testarray/translation-more-en_US.php',
+            'default',
+            'en_US'
+        );
+
+        self::assertEquals('Message 8 (en)', $this->translator->translate('Message 8', 'default', ''));
+    }
 }
