@@ -345,6 +345,7 @@ class Translator implements TranslatorInterface
      */
     public function translate($message, $textDomain = 'default', $locale = null)
     {
+        $locale      = $locale === '' ? null : $locale;
         $locale      = $locale ?? $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
