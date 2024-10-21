@@ -10,7 +10,6 @@ use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator;
-use Laminas\ServiceManager\Config;
 use LaminasTest\I18n\TestCase;
 use LaminasTest\I18n\Translator\TestAsset\Loader as TestLoader;
 use Locale;
@@ -157,13 +156,12 @@ class TranslatorTest extends TestCase
     {
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config             = new Config([
+        $pm                 = $this->translator->getPluginManager();
+        $pm->configure([
             'services' => [
                 'test' => $loader,
             ],
         ]);
-        $pm                 = $this->translator->getPluginManager();
-        $config->configureServiceManager($pm);
         $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);
 
@@ -190,9 +188,8 @@ class TranslatorTest extends TestCase
 
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config             = new Config(['services' => ['test' => $loader]]);
         $plugins            = $this->translator->getPluginManager();
-        $config->configureServiceManager($plugins);
+        $plugins->configure(['services' => ['test' => $loader]]);
         $this->translator->setPluginManager($plugins);
         $this->translator->addTranslationFile('test', null);
 
@@ -537,13 +534,12 @@ class TranslatorTest extends TestCase
     {
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $config             = new Config([
+        $pm                 = $this->translator->getPluginManager();
+        $pm->configure([
             'services' => [
                 'test' => $loader,
             ],
         ]);
-        $pm                 = $this->translator->getPluginManager();
-        $config->configureServiceManager($pm);
         $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);
 
