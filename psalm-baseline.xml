@@ -358,7 +358,6 @@
       <code><![CDATA[$file['type']]]></code>
       <code><![CDATA[$file['type']]]></code>
       <code><![CDATA[$loaderType]]></code>
-      <code><![CDATA[$options['cache']]]></code>
       <code><![CDATA[$pattern['base_dir']]]></code>
       <code><![CDATA[$pattern['pattern']]]></code>
       <code><![CDATA[$pattern['pattern']]]></code>

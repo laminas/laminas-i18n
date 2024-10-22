@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
+use Laminas\Cache\Storage\Adapter\Memory;
 use Laminas\Cache\Storage\StorageInterface;
-use Laminas\Cache\StorageFactory as CacheFactory;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\TextDomain;
@@ -133,9 +133,7 @@ class TranslatorTest extends TestCase
                     'pattern'  => 'translation-%s.php',
                 ],
             ],
-            'cache'    => [
-                'adapter' => 'memory',
-            ],
+            'cache'    => new Memory(),
         ]);
 
         self::assertInstanceOf(Translator::class, $translator);
@@ -172,7 +170,7 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsLoadedFromCache(): void
     {
-        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $cache = new Memory();
         $this->translator->setCache($cache);
 
         $cache->addItem(
@@ -185,7 +183,7 @@ class TranslatorTest extends TestCase
 
     public function testTranslationsAreStoredInCache(): void
     {
-        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $cache = new Memory();
         $this->translator->setCache($cache);
 
         $loader             = new TestLoader();
@@ -208,7 +206,7 @@ class TranslatorTest extends TestCase
         $textDomain = 'default';
         $locale     = 'en_EN';
 
-        $cache = CacheFactory::factory(['adapter' => 'memory']);
+        $cache = new Memory();
         $this->translator->setCache($cache);
 
         $cache->addItem(

@@ -223,6 +223,10 @@ class Translator implements TranslatorInterface
             if ($options['cache'] instanceof CacheStorage) {
                 $translator->setCache($options['cache']);
             } else {
+                /**
+                 * @psalm-suppress UndefinedClass
+                 * @psalm-suppress MixedArgument
+                 */
                 $translator->setCache(Cache\StorageFactory::factory($options['cache']));
             }
         }
