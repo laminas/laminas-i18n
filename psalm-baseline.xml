@@ -166,9 +166,6 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->creationOptions]]></code>
     </ArgumentTypeCoercion>
-    <DeprecatedClass>
-      <code><![CDATA[new Config($config['translator_plugins'])]]></code>
-    </DeprecatedClass>
     <DeprecatedInterface>
       <code><![CDATA[LoaderPluginManagerFactory]]></code>
     </DeprecatedInterface>
@@ -876,19 +873,6 @@
     </PossiblyNullReference>
   </file>
   <file src="test/Translator/TranslatorTest.php">
-    <DeprecatedClass>
-      <code><![CDATA[new Config([
-            'services' => [
-                'test' => $loader,
-            ],
-        ])]]></code>
-      <code><![CDATA[new Config([
-            'services' => [
-                'test' => $loader,
-            ],
-        ])]]></code>
-      <code><![CDATA[new Config(['services' => ['test' => $loader]])]]></code>
-    </DeprecatedClass>
     <NullArgument>
       <code><![CDATA[null]]></code>
       <code><![CDATA[null]]></code>

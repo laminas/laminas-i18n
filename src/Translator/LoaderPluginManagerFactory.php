@@ -2,7 +2,6 @@
 
 namespace Laminas\I18n\Translator;
 
-use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\ServiceManager\ServiceManager;
@@ -55,7 +54,7 @@ class LoaderPluginManagerFactory implements FactoryInterface
         }
 
         // Wire service configuration for translator_plugins
-        (new Config($config['translator_plugins']))->configureServiceManager($pluginManager);
+        $pluginManager->configure($config['translator_plugins']);
 
         return $pluginManager;
     }
