@@ -39,18 +39,18 @@
         "laminas/laminas-translator": "^1.0"
     },
     "require-dev": {
-        "laminas/laminas-cache": "^3.12.1",
+        "laminas/laminas-cache": "^3.12.2",
         "laminas/laminas-cache-storage-adapter-memory": "^2.3.0",
         "laminas/laminas-cache-storage-deprecated-factory": "^1.2",
         "laminas/laminas-coding-standard": "~2.5.0",
         "laminas/laminas-config": "^3.9.0",
-        "laminas/laminas-eventmanager": "^3.13",
-        "laminas/laminas-filter": "^2.34",
-        "laminas/laminas-validator": "^2.49",
-        "laminas/laminas-view": "^2.34",
-        "phpunit/phpunit": "^10.5.11",
+        "laminas/laminas-eventmanager": "^3.13.1",
+        "laminas/laminas-filter": "^2.37",
+        "laminas/laminas-validator": "^2.64.1",
+        "laminas/laminas-view": "^2.35",
+        "phpunit/phpunit": "^10.5.36",
         "psalm/plugin-phpunit": "^0.19.0",
-        "vimeo/psalm": "^5.22.2"
+        "vimeo/psalm": "^5.26.1"
     },
     "conflict": {
         "laminas/laminas-view": "<2.20.0",
