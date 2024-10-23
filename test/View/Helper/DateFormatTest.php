@@ -283,12 +283,15 @@ class DateFormatTest extends TestCase
 
     public function testIntlCalendarIsHandledAsWell(): void
     {
-        $calendar = new IntlGregorianCalendar(2013, 6, 1);
+        $date = DateTime::createFromFormat('!Y-m-d', '2013-06-01');
+        self::assertNotFalse($date);
+        $calendar = IntlGregorianCalendar::fromDateTime($date);
+        self::assertNotNull($calendar);
 
         $helper = new DateFormatHelper();
         $helper->setTimezone('Europe/Berlin');
         self::assertEquals(
-            '01-07-2013',
+            '01-06-2013',
             $helper->__invoke($calendar, IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'it_IT', 'dd-MM-Y')
         );
     }
