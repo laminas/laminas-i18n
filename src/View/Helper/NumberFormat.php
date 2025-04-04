@@ -13,18 +13,25 @@ use function md5;
 use function serialize;
 
 /**
- * View helper for formatting dates.
+ * View helper for formatting numbers.
  */
 class NumberFormat extends AbstractHelper
 {
     use DeprecatedAbstractHelperHierarchyTrait;
 
     /**
-     * number of decimals to use.
+     * The maximum number of decimals to use.
      *
      * @var int
      */
-    protected $decimals;
+    protected $maxDecimals;
+
+    /**
+     * The minimum number of decimals to use.
+     *
+     * @var int
+     */
+    protected $minDecimals;
 
     /**
      * NumberFormat style to use
@@ -50,7 +57,7 @@ class NumberFormat extends AbstractHelper
     /**
      * Text attributes.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $textAttributes = [];
 
@@ -64,12 +71,14 @@ class NumberFormat extends AbstractHelper
     /**
      * Format a number
      *
-     * @param  int|float   $number
-     * @param  int|null    $formatStyle
-     * @param  int|null    $formatType
-     * @param  string|null $locale
-     * @param  int|null    $decimals
-     * @param  array|null  $textAttributes
+     * @param int|float          $number
+     * @param int|null           $formatStyle
+     * @param int|null           $formatType
+     * @param string|null        $locale
+     * @param int|null           $maxDecimals
+     * @param array<int, string> $textAttributes
+     * @param int|float          $number
+     * @param int|null           $minDecimals
      * @return string
      */
     public function __invoke(
@@ -77,8 +86,9 @@ class NumberFormat extends AbstractHelper
         $formatStyle = null,
         $formatType = null,
         $locale = null,
-        $decimals = null,
-        ?array $textAttributes = null
+        $maxDecimals = null,
+        ?array $textAttributes = null,
+        $minDecimals = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();
@@ -89,15 +99,22 @@ class NumberFormat extends AbstractHelper
         if (null === $formatType) {
             $formatType = $this->getFormatType();
         }
-        if (! is_int($decimals) || $decimals < 0) {
-            $decimals = $this->getDecimals();
+        if (! is_int($minDecimals) || $minDecimals < 0) {
+            $minDecimals = $this->getMinDecimals();
+        }
+        if (! is_int($maxDecimals) || $maxDecimals < 0) {
+            $maxDecimals = $this->getMaxDecimals();
+        }
+        if (($maxDecimals !== null) && ($minDecimals === null)) {
+            // Fallback to old behavior
+            $minDecimals = $maxDecimals;
         }
         if (! is_array($textAttributes)) {
             $textAttributes = $this->getTextAttributes();
         }
 
         $formatterId = md5(
-            $formatStyle . "\0" . $locale . "\0" . $decimals . "\0"
+            $formatStyle . "\0" . $locale . "\0" . ($minDecimals ?? '') . "\0" . ($maxDecimals ?? '') . "\0"
             . md5(serialize($textAttributes))
         );
 
@@ -106,9 +123,12 @@ class NumberFormat extends AbstractHelper
         } else {
             $formatter = new NumberFormatter($locale, $formatStyle);
 
-            if ($decimals !== null) {
-                $formatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $decimals);
-                $formatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $decimals);
+            if ($minDecimals !== null) {
+                $formatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $minDecimals);
+            }
+
+            if ($maxDecimals !== null) {
+                $formatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $maxDecimals);
             }
 
             foreach ($textAttributes as $textAttribute => $value) {
@@ -173,14 +193,39 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * Set number of decimals to use instead of the default.
+     * Set number of decimals (both min & max) to use instead of the default.
      *
      * @param  int $decimals
      * @return $this
      */
     public function setDecimals($decimals)
     {
-        $this->decimals = $decimals;
+        $this->minDecimals = $decimals;
+        $this->maxDecimals = $decimals;
+        return $this;
+    }
+
+    /**
+     * Set the maximum number of decimals to use instead of the default.
+     *
+     * @param int $maxDecimals
+     * @return $this
+     */
+    public function setMaxDecimals($maxDecimals)
+    {
+        $this->maxDecimals = $maxDecimals;
+        return $this;
+    }
+
+    /**
+     * Set the minimum number of decimals to use instead of the default.
+     *
+     * @param int $minDecimals
+     * @return $this
+     */
+    public function setMinDecimals($minDecimals)
+    {
+        $this->minDecimals = $minDecimals;
         return $this;
     }
 
@@ -191,7 +236,27 @@ class NumberFormat extends AbstractHelper
      */
     public function getDecimals()
     {
-        return $this->decimals;
+        return $this->maxDecimals;
+    }
+
+    /**
+     * Get the maximum number of decimals.
+     *
+     * @return int
+     */
+    public function getMaxDecimals()
+    {
+        return $this->maxDecimals;
+    }
+
+    /**
+     * Get the minimum number of decimals.
+     *
+     * @return int
+     */
+    public function getMinDecimals()
+    {
+        return $this->minDecimals;
     }
 
     /**
@@ -221,7 +286,7 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * @return array
+     * @return array<int, string>
      */
     public function getTextAttributes()
     {
@@ -229,7 +294,7 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * @param array $textAttributes
+     * @param array<int, string> $textAttributes
      * @return $this
      */
     public function setTextAttributes(array $textAttributes)

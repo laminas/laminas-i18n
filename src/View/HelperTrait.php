@@ -22,7 +22,7 @@ use IntlDateFormatter;
  * @method string countryCodeDataList(?string $locale = null, array $dataListAttributes = [])
  * @method string currencyFormat(float $number, string|null $currencyCode = null, bool|null $showDecimals = null, string|null $locale = null, string|null $pattern = null)
  * @method string dateFormat(\DateTimeInterface|\IntlCalendar|int|array $date, int $dateType = IntlDateFormatter::NONE, int $timeType = IntlDateFormatter::NONE, string|null $locale = null, string|null $pattern = null)
- * @method string numberFormat(int|float $number, int|null $formatStyle = null, int|null $formatType = null, string|null $locale = null, int|null $decimals = null, array|null $textAttributes = null)
+ * @method string numberFormat(int|float $number, int|null $formatStyle = null, int|null $formatType = null, string|null $locale = null, int|null $maxDecimals = null, array|null $textAttributes = null, int|null $minDecimals = null)
  * @method string plural(array|string $strings, int $number)
  * @method string translate(string $message, string|null $textDomain = null, string|null $locale = null)
  * @method string translatePlural(string $singular, string $plural, int $number, string|null $textDomain = null, string|null $locale = null)
