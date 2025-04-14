@@ -7,7 +7,7 @@ namespace LaminasTest\I18n\Validator;
 use Laminas\I18n\Validator\Alnum as AlnumValidator;
 use LaminasTest\I18n\TestCase;
 
-class AlnumTest extends TestCase
+final class AlnumTest extends TestCase
 {
     /** @var AlnumValidator */
     protected $validator;

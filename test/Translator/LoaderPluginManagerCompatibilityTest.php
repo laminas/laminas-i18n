@@ -11,7 +11,7 @@ use Laminas\ServiceManager\ServiceManager;
 use Laminas\ServiceManager\Test\CommonPluginManagerTrait;
 use LaminasTest\I18n\TestCase;
 
-class LoaderPluginManagerCompatibilityTest extends TestCase
+final class LoaderPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 

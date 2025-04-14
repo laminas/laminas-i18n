@@ -13,7 +13,7 @@ use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
 
-class LoaderPluginManagerFactoryTest extends TestCase
+final class LoaderPluginManagerFactoryTest extends TestCase
 {
     public function testFactoryReturnsUnConfiguredPluginManagerWhenNoOptionsPresent(): void
     {

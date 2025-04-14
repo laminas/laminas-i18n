@@ -9,7 +9,7 @@ use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
 use LaminasTest\I18n\TestCase;
 
-class TextDomainTest extends TestCase
+final class TextDomainTest extends TestCase
 {
     public function testInstantiation(): void
     {

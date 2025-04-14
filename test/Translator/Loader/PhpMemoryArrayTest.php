@@ -12,7 +12,7 @@ use Locale;
 
 use function realpath;
 
-class PhpMemoryArrayTest extends TestCase
+final class PhpMemoryArrayTest extends TestCase
 {
     private string $testFilesDir;
 
@@ -21,7 +21,9 @@ class PhpMemoryArrayTest extends TestCase
         parent::setUp();
         Locale::setDefault('en_US');
 
-        $this->testFilesDir = realpath(__DIR__ . '/../_files/phpmemoryarray');
+        $realpath = realpath(__DIR__ . '/../_files/phpmemoryarray');
+        self::assertNotFalse($realpath);
+        $this->testFilesDir = $realpath;
     }
 
     public function testLoaderFailsToLoadNonArray(): void

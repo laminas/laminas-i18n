@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 use function sprintf;
 
-class CountryCodeTest extends TestCase
+final class CountryCodeTest extends TestCase
 {
     private CountryCodeValidator $validator;
 

@@ -72,7 +72,6 @@ final class CountryCode
     public static function fromLocaleString(string $locale): self
     {
         $region = Locale::getRegion($locale);
-        /** @psalm-suppress TypeDoesNotContainNull */
         if ($region === null || $region === '') {
             throw InvalidArgumentException::withUnrecognizableLocaleString($locale);
         }

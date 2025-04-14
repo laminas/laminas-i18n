@@ -9,7 +9,7 @@ use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\View\Helper\Translate as TranslateHelper;
 use LaminasTest\I18n\TestCase;
 
-class TranslateTest extends TestCase
+final class TranslateTest extends TestCase
 {
     public TranslateHelper $helper;
 

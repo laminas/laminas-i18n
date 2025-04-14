@@ -9,7 +9,7 @@ use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\View\Helper\TranslatePlural as TranslatePluralHelper;
 use LaminasTest\I18n\TestCase;
 
-class TranslatePluralTest extends TestCase
+final class TranslatePluralTest extends TestCase
 {
     /** @var TranslatePluralHelper */
     public $helper;

@@ -7,7 +7,7 @@ namespace LaminasTest\I18n;
 use Laminas\I18n\Module;
 use Psr\Container\ContainerInterface;
 
-class ModuleTest extends TestCase
+final class ModuleTest extends TestCase
 {
     private Module $module;
 

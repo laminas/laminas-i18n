@@ -7,7 +7,7 @@ namespace LaminasTest\I18n\Validator;
 use Laminas\I18n\Validator\Alpha as AlphaValidator;
 use LaminasTest\I18n\TestCase;
 
-class AlphaTest extends TestCase
+final class AlphaTest extends TestCase
 {
     /** @var AlphaValidator */
     protected $validator;

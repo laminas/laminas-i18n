@@ -11,6 +11,8 @@ use function sprintf;
 
 /**
  * Plural rule evaluator.
+ *
+ * @final
  */
 class Rule
 {

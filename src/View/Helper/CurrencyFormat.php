@@ -14,6 +14,8 @@ use function sprintf;
 
 /**
  * View helper for formatting currency.
+ *
+ * @final
  */
 class CurrencyFormat extends AbstractHelper
 {

@@ -12,6 +12,8 @@ use function sprintf;
 
 /**
  * PHP Memory array loader.
+ *
+ * @final
  */
 class PhpMemoryArray implements RemoteLoaderInterface
 {

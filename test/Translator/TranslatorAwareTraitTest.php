@@ -8,7 +8,7 @@ use Laminas\I18n\Translator\Translator;
 use LaminasTest\I18n\TestCase;
 use LaminasTest\I18n\Translator\TestAsset\TranslatorAwareObject;
 
-class TranslatorAwareTraitTest extends TestCase
+final class TranslatorAwareTraitTest extends TestCase
 {
     private TranslatorAwareObject $object;
 

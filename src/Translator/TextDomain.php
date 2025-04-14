@@ -14,6 +14,7 @@ use function array_replace;
  * @template TKey of array-key
  * @template TValue
  * @extends ArrayObject<TKey, TValue>
+ * @final
  */
 class TextDomain extends ArrayObject
 {

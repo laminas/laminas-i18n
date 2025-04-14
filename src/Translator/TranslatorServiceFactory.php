@@ -8,6 +8,8 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Translator.
+ *
+ * @final
  */
 class TranslatorServiceFactory implements FactoryInterface
 {

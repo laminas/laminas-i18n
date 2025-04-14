@@ -10,7 +10,7 @@ use LaminasTest\I18n\TestCase;
 use Locale;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-class IsIntTest extends TestCase
+final class IsIntTest extends TestCase
 {
     private IsIntValidator $validator;
 

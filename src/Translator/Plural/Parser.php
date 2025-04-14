@@ -13,6 +13,8 @@ use function sprintf;
  *
  * This plural rule parser is implemented after the article "Top Down Operator
  * Precedence" described in <http://javascript.crockford.com/tdop/tdop.html>.
+ *
+ * @final
  */
 class Parser
 {

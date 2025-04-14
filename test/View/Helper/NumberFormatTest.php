@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 use function str_replace;
 
-class NumberFormatTest extends TestCase
+final class NumberFormatTest extends TestCase
 {
     private NumberFormatHelper $helper;
 

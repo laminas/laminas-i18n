@@ -10,6 +10,7 @@ use function is_array;
 use function is_scalar;
 use function preg_replace;
 
+/** @final */
 class Alpha extends Alnum
 {
     /**

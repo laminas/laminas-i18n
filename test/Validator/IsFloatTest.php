@@ -15,7 +15,7 @@ use function sprintf;
 use const INTL_ICU_DATA_VERSION;
 use const INTL_ICU_VERSION;
 
-class IsFloatTest extends TestCase
+final class IsFloatTest extends TestCase
 {
     private IsFloatValidator $validator;
 

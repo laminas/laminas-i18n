@@ -14,6 +14,8 @@ use function md5;
 
 /**
  * View helper for formatting dates.
+ *
+ * @final
  */
 class DateFormat extends AbstractHelper
 {

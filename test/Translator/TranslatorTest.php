@@ -14,7 +14,7 @@ use LaminasTest\I18n\TestCase;
 use LaminasTest\I18n\Translator\TestAsset\Loader as TestLoader;
 use Locale;
 
-class TranslatorTest extends TestCase
+final class TranslatorTest extends TestCase
 {
     private Translator $translator;
     private string $testFilesDir;
