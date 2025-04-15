@@ -16,7 +16,7 @@ use function set_include_path;
 
 use const PATH_SEPARATOR;
 
-class GettextTest extends TestCase
+final class GettextTest extends TestCase
 {
     private string $testFilesDir;
     private string $originalIncludePath;
@@ -26,7 +26,9 @@ class GettextTest extends TestCase
         parent::setUp();
         Locale::setDefault('en_EN');
 
-        $this->testFilesDir = realpath(__DIR__ . '/../_files');
+        $realpath = realpath(__DIR__ . '/../_files');
+        self::assertNotFalse($realpath);
+        $this->testFilesDir = $realpath;
 
         $this->originalIncludePath = get_include_path();
         set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');

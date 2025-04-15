@@ -10,7 +10,7 @@ use Laminas\I18n\Geography\DefaultCountryCodeList;
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
 
-class DefaultCountryCodeListServiceManagerIntegrationTest extends TestCase
+final class DefaultCountryCodeListServiceManagerIntegrationTest extends TestCase
 {
     public function testAListCanBeRetrievedByFQCNWithDefaultConfiguration(): void
     {

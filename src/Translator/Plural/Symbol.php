@@ -14,6 +14,8 @@ use function sprintf;
  * access from the applied closures. An exception are the closure properties
  * themselves, as they have to be accessed via the appropriate getter and
  * setter methods.
+ *
+ * @final
  */
 class Symbol
 {

@@ -14,7 +14,7 @@ use function array_keys;
 use function array_values;
 use function preg_match;
 
-class AlnumTest extends TestCase
+final class AlnumTest extends TestCase
 {
     private AlnumFilter $filter;
 

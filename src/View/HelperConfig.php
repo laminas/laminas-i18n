@@ -12,6 +12,8 @@ use function method_exists;
  * Service manager configuration for i18n view helpers.
  *
  * @deprecated since 2.7.0; replaced by ConfigProvider and Module class.
+ *
+ * @final
  */
 class HelperConfig implements ConfigInterface
 {

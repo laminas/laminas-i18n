@@ -10,7 +10,7 @@ use NumberFormatter;
 use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 
-class NumberParseTest extends TestCase
+final class NumberParseTest extends TestCase
 {
     public function testConstructWithOptions(): void
     {

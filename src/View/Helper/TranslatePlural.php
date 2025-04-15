@@ -6,6 +6,8 @@ use Laminas\I18n\Exception;
 
 /**
  * View helper for translating plural messages.
+ *
+ * @final
  */
 class TranslatePlural extends AbstractTranslatorHelper
 {

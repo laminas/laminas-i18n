@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 use function str_replace;
 
-class CurrencyFormatTest extends TestCase
+final class CurrencyFormatTest extends TestCase
 {
     private CurrencyFormatHelper $helper;
 

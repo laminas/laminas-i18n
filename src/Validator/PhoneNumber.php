@@ -23,6 +23,8 @@ use function substr;
  * @deprecated This class is deprecated and will be removed in v3.0.0
  *             Use Laminas\I18n\PhoneNumber\Validator\PhoneNumber instead:
  *             https://github.com/laminas/laminas-i18n-phone-number
+ *
+ * @final
  */
 class PhoneNumber extends AbstractValidator
 {

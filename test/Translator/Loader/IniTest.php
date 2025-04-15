@@ -15,7 +15,7 @@ use function set_include_path;
 
 use const PATH_SEPARATOR;
 
-class IniTest extends TestCase
+final class IniTest extends TestCase
 {
     private string $testFilesDir;
     private string $originalIncludePath;
@@ -23,7 +23,9 @@ class IniTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->testFilesDir        = realpath(__DIR__ . '/../_files');
+        $realpath = realpath(__DIR__ . '/../_files');
+        self::assertNotFalse($realpath);
+        $this->testFilesDir        = $realpath;
         $this->originalIncludePath = get_include_path();
         set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
     }

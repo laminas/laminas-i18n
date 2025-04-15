@@ -12,7 +12,7 @@ use Locale;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-class CountryCodeDataListFactoryTest extends TestCase
+final class CountryCodeDataListFactoryTest extends TestCase
 {
     private string $backupLocale;
 

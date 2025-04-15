@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use function is_array;
 use function sprintf;
 
-class PhoneNumberTest extends TestCase
+final class PhoneNumberTest extends TestCase
 {
     private PhoneNumber $validator;
 

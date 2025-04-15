@@ -9,7 +9,10 @@ use Psr\Container\ContainerInterface;
 
 use function is_array;
 
-/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
+/**
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
+ * @final
+ */
 class LoaderPluginManagerFactory implements FactoryInterface
 {
     /**

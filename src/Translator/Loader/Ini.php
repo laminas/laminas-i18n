@@ -18,6 +18,8 @@ use function stream_resolve_include_path;
 
 /**
  * PHP INI format loader.
+ *
+ * @final
  */
 class Ini extends AbstractFileLoader
 {

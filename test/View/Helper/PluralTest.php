@@ -8,7 +8,7 @@ use Laminas\I18n\View\Helper\Plural as PluralHelper;
 use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-class PluralTest extends TestCase
+final class PluralTest extends TestCase
 {
     private PluralHelper $helper;
 

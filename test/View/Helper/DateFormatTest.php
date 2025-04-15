@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use function date_default_timezone_set;
 use function str_replace;
 
-class DateFormatTest extends TestCase
+final class DateFormatTest extends TestCase
 {
     private DateFormatHelper $helper;
 

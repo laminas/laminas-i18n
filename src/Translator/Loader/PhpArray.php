@@ -15,6 +15,8 @@ use function stream_resolve_include_path;
 
 /**
  * PHP array loader.
+ *
+ * @final
  */
 class PhpArray extends AbstractFileLoader
 {

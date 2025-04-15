@@ -8,7 +8,7 @@ use Laminas\I18n\Translator\Plural\Rule;
 use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-class RuleTest extends TestCase
+final class RuleTest extends TestCase
 {
     /** @return array<string, array{0: string, 1: int}> */
     public static function parseRuleProvider(): array

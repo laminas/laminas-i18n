@@ -9,7 +9,7 @@ use Laminas\I18n\Geography\DefaultCountryCodeList;
 use Laminas\I18n\View\Helper\CountryCodeDataList;
 use PHPUnit\Framework\TestCase;
 
-class CountryCodeDataListTest extends TestCase
+final class CountryCodeDataListTest extends TestCase
 {
     private CountryCodeDataList $helper;
 

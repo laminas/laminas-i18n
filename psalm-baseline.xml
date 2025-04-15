@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+<files psalm-version="6.10.0@9c0add4eb88d4b169ac04acb7c679918cbb9c252">
   <file src="src/ConfigProvider.php">
     <DeprecatedClass>
       <code><![CDATA[Validator\PhoneNumber::class]]></code>
@@ -22,9 +22,6 @@
       <code><![CDATA[$this->options]]></code>
       <code><![CDATA[$this->options]]></code>
     </InvalidPropertyAssignmentValue>
-    <MixedInferredReturnType>
-      <code><![CDATA[string]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->options['locale']]]></code>
       <code><![CDATA[$this->options['locale']]]></code>
@@ -49,6 +46,9 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$value]]></code>
     </ArgumentTypeCoercion>
+    <NullableReturnStatement>
+      <code><![CDATA[preg_replace($pattern, '', $value)]]></code>
+    </NullableReturnStatement>
   </file>
   <file src="src/Filter/NumberParse.php">
     <DeprecatedClass>
@@ -60,12 +60,12 @@
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Module.php">
-    <PossiblyUnusedParam>
-      <code><![CDATA[$moduleManager]]></code>
-    </PossiblyUnusedParam>
     <UndefinedDocblockClass>
       <code><![CDATA[ModuleManager]]></code>
     </UndefinedDocblockClass>
+    <UnusedParam>
+      <code><![CDATA[$moduleManager]]></code>
+    </UnusedParam>
   </file>
   <file src="src/Translator/Loader/AbstractFileLoader.php">
     <RedundantCastGivenDocblockType>
@@ -73,6 +73,10 @@
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Translator/Loader/Gettext.php">
+    <FalsableReturnStatement>
+      <code><![CDATA[unpack('N' . $num, fread($this->file, 4 * $num))]]></code>
+      <code><![CDATA[unpack('V' . $num, fread($this->file, 4 * $num))]]></code>
+    </FalsableReturnStatement>
     <InvalidArrayAccess>
       <code><![CDATA[$originalStringTable[$offsetKey]]]></code>
       <code><![CDATA[$originalStringTable[$sizeKey]]]></code>
@@ -108,12 +112,23 @@
       <code><![CDATA[$translationStringOffset]]></code>
       <code><![CDATA[$translationStringSize]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[int]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$result['int']]]></code>
     </MixedReturnStatement>
+    <PossiblyFalseArgument>
+      <code><![CDATA[fread($this->file, $originalStringSize)]]></code>
+      <code><![CDATA[fread($this->file, $translationStringSize)]]></code>
+      <code><![CDATA[fread($this->file, 4 * $num)]]></code>
+      <code><![CDATA[fread($this->file, 4 * $num)]]></code>
+      <code><![CDATA[fread($this->file, 4)]]></code>
+      <code><![CDATA[fread($this->file, 4)]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyFalsePropertyAssignmentValue>
+      <code><![CDATA[fopen($resolvedFile, 'rb')]]></code>
+    </PossiblyFalsePropertyAssignmentValue>
+    <PossiblyInvalidArrayAccess>
+      <code><![CDATA[$result['int']]]></code>
+    </PossiblyInvalidArrayAccess>
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$content]]></code>
     </PossiblyUndefinedArrayOffset>
@@ -131,6 +146,9 @@
       <code><![CDATA[$messages[$message['message']]]]></code>
       <code><![CDATA[$messages[array_shift($message)]]]></code>
     </MixedAssignment>
+    <PossiblyNullArrayOffset>
+      <code><![CDATA[$messages]]></code>
+    </PossiblyNullArrayOffset>
     <TypeDoesNotContainType>
       <code><![CDATA[is_array($messages)]]></code>
     </TypeDoesNotContainType>
@@ -172,9 +190,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Translator/LoaderPluginManagerFactory.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->creationOptions]]></code>
-    </ArgumentTypeCoercion>
     <DeprecatedInterface>
       <code><![CDATA[LoaderPluginManagerFactory]]></code>
     </DeprecatedInterface>
@@ -185,9 +200,6 @@
     <MixedArgument>
       <code><![CDATA[$config['translator_plugins']]]></code>
     </MixedArgument>
-    <MoreSpecificImplementedParamType>
-      <code><![CDATA[$options]]></code>
-    </MoreSpecificImplementedParamType>
     <ParamNameMismatch>
       <code><![CDATA[$container]]></code>
     </ParamNameMismatch>
@@ -290,28 +302,18 @@
     <MixedAssignment>
       <code><![CDATA[$ast['arguments'][]]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[int]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$ast['arguments'][0]]]></code>
     </MixedReturnStatement>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(int) $number]]></code>
     </RedundantCastGivenDocblockType>
-    <UnsafeInstantiation>
-      <code><![CDATA[new static($numPlurals, $ast)]]></code>
-    </UnsafeInstantiation>
   </file>
   <file src="src/Translator/Plural/Symbol.php">
     <DocblockTypeContradiction>
       <code><![CDATA[$this->leftDenotationGetter === null]]></code>
       <code><![CDATA[$this->nullDenotationGetter === null]]></code>
     </DocblockTypeContradiction>
-    <MixedInferredReturnType>
-      <code><![CDATA[Symbol]]></code>
-      <code><![CDATA[Symbol]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$function($this)]]></code>
       <code><![CDATA[$function($this, $left)]]></code>
@@ -423,9 +425,6 @@
       <code><![CDATA[$pattern]]></code>
       <code><![CDATA[$remote]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[string|null]]></code>
-    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[merge]]></code>
       <code><![CDATA[merge]]></code>
@@ -448,9 +447,6 @@
       <code><![CDATA[$translation[$index] !== null]]></code>
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>
     </RedundantCondition>
-    <UnsafeInstantiation>
-      <code><![CDATA[new static()]]></code>
-    </UnsafeInstantiation>
   </file>
   <file src="src/Translator/TranslatorAwareInterface.php">
     <DeprecatedInterface>
@@ -584,12 +580,12 @@
     <MixedAssignment>
       <code><![CDATA[static::$phone[$code]]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[array{code: string, patterns: array<string, array<string, string>>}|false]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[static::$phone[$code]]]></code>
     </MixedReturnStatement>
+    <PossiblyNullArgument>
+      <code><![CDATA[$country]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[$this|string[]]]></code>
     </PossiblyUnusedReturnValue>
@@ -644,11 +640,17 @@
     <DocblockTypeContradiction>
       <code><![CDATA[$this->locale === null]]></code>
     </DocblockTypeContradiction>
+    <InvalidNullableReturnType>
+      <code><![CDATA[string]]></code>
+    </InvalidNullableReturnType>
     <MissingConstructor>
       <code><![CDATA[$currencyCode]]></code>
       <code><![CDATA[$currencyPattern]]></code>
       <code><![CDATA[$locale]]></code>
     </MissingConstructor>
+    <NullableReturnStatement>
+      <code><![CDATA[preg_replace($pattern, '$1', $formattedNumber)]]></code>
+    </NullableReturnStatement>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(bool) $showDecimals]]></code>
       <code><![CDATA[(string) $locale]]></code>
@@ -703,23 +705,14 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/View/Helper/Plural.php">
-    <MixedInferredReturnType>
-      <code><![CDATA[string]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$strings[$pluralIndex]]]></code>
     </MixedReturnStatement>
   </file>
   <file src="src/View/HelperConfig.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->toArray()]]></code>
-    </ArgumentTypeCoercion>
     <DeprecatedInterface>
       <code><![CDATA[HelperConfig]]></code>
     </DeprecatedInterface>
-    <LessSpecificImplementedReturnType>
-      <code><![CDATA[array]]></code>
-    </LessSpecificImplementedReturnType>
     <MixedArgument>
       <code><![CDATA[$factory]]></code>
       <code><![CDATA[$target]]></code>
@@ -746,35 +739,6 @@
     <UnusedClass>
       <code><![CDATA[HelperConfig]]></code>
     </UnusedClass>
-  </file>
-  <file src="test/CountryCodeTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[detectProvider]]></code>
-      <code><![CDATA[localeToCountryCodeDataProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Filter/AlnumTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[returnUnfilteredDataProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Filter/AlphaTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[returnUnfilteredDataProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Filter/NumberFormatTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[formattedToNumberProvider]]></code>
-      <code><![CDATA[numberToFormattedProvider]]></code>
-      <code><![CDATA[returnUnfilteredDataProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Filter/NumberParseTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[formatNonNumberProvider]]></code>
-      <code><![CDATA[formattedToNumberProvider]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/TestAsset/ModuleEventInterface.php">
     <MissingReturnType>
@@ -851,18 +815,9 @@
     </UnresolvableInclude>
   </file>
   <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[provideLoader]]></code>
-    </PossiblyUnusedMethod>
     <UnusedClosureParam>
       <code><![CDATA[$container]]></code>
     </UnusedClosureParam>
-  </file>
-  <file src="test/Translator/Plural/RuleTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[completeRuleProvider]]></code>
-      <code><![CDATA[parseRuleProvider]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/Translator/TestAsset/Loader.php">
     <ParamNameMismatch>
@@ -889,33 +844,10 @@
       <code><![CDATA[null]]></code>
     </NullArgument>
   </file>
-  <file src="test/Validator/CountryCodeTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[invalidStringProvider]]></code>
-      <code><![CDATA[mixedDataProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Validator/DateTimeTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[basicProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="test/Validator/IsFloatTest.php">
     <MixedOperand>
       <code><![CDATA[$value]]></code>
     </MixedOperand>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[floatAndIntegerProvider]]></code>
-      <code><![CDATA[lookAlikeProvider]]></code>
-      <code><![CDATA[validationFailureProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/Validator/IsIntTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[intDataProvider]]></code>
-      <code><![CDATA[setStrictInvalidParameterDataProvider]]></code>
-      <code><![CDATA[strictIntDataProvider]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/Validator/PhoneNumberTest.php">
     <DeprecatedClass>
@@ -927,46 +859,40 @@
             'country' => 'country-code',
         ])]]></code>
     </DeprecatedClass>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[constructDataProvider]]></code>
-      <code><![CDATA[numbersDataProvider]]></code>
-    </PossiblyUnusedMethod>
+    <LessSpecificReturnStatement>
+      <code><![CDATA[[
+            [
+                [],
+                Locale::getRegion(Locale::getDefault()),
+                null,
+            ],
+            [
+                [],
+                'CN',
+                'zh_CN',
+            ],
+            [
+                ['country' => 'CN'],
+                'CN',
+                null,
+            ],
+        ]]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code><![CDATA[array<array-key, array{0: array<string, string>, 1: string, 2: string|null}>]]></code>
+    </MoreSpecificReturnType>
     <RedundantCast>
       <code><![CDATA[(string) $parameters['code']]]></code>
     </RedundantCast>
-  </file>
-  <file src="test/Validator/PostCodeTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[UKPostCodesDataProvider]]></code>
-      <code><![CDATA[liPostCode]]></code>
-      <code><![CDATA[postCodesDataProvider]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/View/Helper/CurrencyFormatTest.php">
     <PossiblyNullArgument>
       <code><![CDATA[$currencyPattern]]></code>
     </PossiblyNullArgument>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[currencyProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/View/Helper/DateFormatTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[dateTestsDataProvider]]></code>
-      <code><![CDATA[dateTestsDataProviderWithPattern]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/View/Helper/NumberFormatTest.php">
     <PossiblyNullArgument>
       <code><![CDATA[$decimals]]></code>
     </PossiblyNullArgument>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[currencyTestsDataProvider]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="test/View/Helper/PluralTest.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[pluralsTestProvider]]></code>
-    </PossiblyUnusedMethod>
   </file>
 </files>

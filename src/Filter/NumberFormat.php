@@ -8,6 +8,7 @@ use function is_float;
 use function is_int;
 use function is_scalar;
 
+/** @final */
 class NumberFormat extends NumberParse
 {
     /**

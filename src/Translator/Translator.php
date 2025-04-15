@@ -26,6 +26,8 @@ use function sprintf;
 
 /**
  * Translator.
+ *
+ * @final
  */
 class Translator implements TranslatorInterface
 {

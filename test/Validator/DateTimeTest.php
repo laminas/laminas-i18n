@@ -15,7 +15,7 @@ use function date_default_timezone_get;
 use function date_default_timezone_set;
 use function sprintf;
 
-class DateTimeTest extends TestCase
+final class DateTimeTest extends TestCase
 {
     private DateTimeValidator $validator;
     /** @var non-empty-string */

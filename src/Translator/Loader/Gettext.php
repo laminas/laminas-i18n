@@ -20,6 +20,8 @@ use function unpack;
 
 /**
  * Gettext loader.
+ *
+ * @final
  */
 class Gettext extends AbstractFileLoader
 {

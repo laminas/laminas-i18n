@@ -10,7 +10,7 @@ use Laminas\I18n\Translator\TranslatorServiceFactory;
 use LaminasTest\I18n\TestCase;
 use Psr\Container\ContainerInterface;
 
-class TranslatorServiceFactoryTest extends TestCase
+final class TranslatorServiceFactoryTest extends TestCase
 {
     public function testCreateServiceWithNoTranslatorKeyDefined(): void
     {

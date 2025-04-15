@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 use function count;
 
-class DefaultCountryCodeListTest extends TestCase
+final class DefaultCountryCodeListTest extends TestCase
 {
     public function testTheListContainsOnlyValueObjects(): void
     {

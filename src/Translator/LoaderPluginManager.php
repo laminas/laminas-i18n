@@ -54,6 +54,7 @@ use function sprintf;
  *
  * @template InstanceType of RemoteLoaderInterface|FileLoaderInterface
  * @extends AbstractPluginManager<InstanceType>
+ * @final
  */
 class LoaderPluginManager extends AbstractPluginManager
 {

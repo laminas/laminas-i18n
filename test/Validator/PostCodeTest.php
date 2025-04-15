@@ -10,7 +10,7 @@ use Laminas\Validator\Exception\InvalidArgumentException;
 use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-class PostCodeTest extends TestCase
+final class PostCodeTest extends TestCase
 {
     private PostCodeValidator $validator;
 

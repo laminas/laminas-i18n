@@ -14,7 +14,7 @@ use function array_keys;
 use function array_values;
 use function preg_match;
 
-class AlphaTest extends TestCase
+final class AlphaTest extends TestCase
 {
     private AlphaFilter $filter;
 
