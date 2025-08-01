@@ -2,7 +2,7 @@
 
 namespace Laminas\I18n\Filter;
 
-use Laminas\Filter\AbstractFilter;
+use Laminas\Filter\FilterInterface;
 use Locale;
 
 /**
@@ -11,9 +11,9 @@ use Locale;
  *     ...
  * }
  * @template TOptions of Options
- * @extends AbstractFilter<TOptions>
+ * @implements AbstractFilter<TOptions>
  */
-abstract class AbstractLocale extends AbstractFilter
+abstract class AbstractLocale implements FilterInterface
 {
     public function __construct()
     {
@@ -42,5 +42,18 @@ abstract class AbstractLocale extends AbstractFilter
             $this->options['locale'] = Locale::getDefault();
         }
         return $this->options['locale'];
+    }
+
+     /**
+     * Defined by Laminas\Filter\FilterInterface
+     */
+    abstract public function filter(mixed $value): mixed;
+
+    /**
+     * Defined by Laminas\Filter\FilterInterface
+     */
+    public function __invoke(mixed $value): mixed
+    {
+        return $this->filter($value);
     }
 }
