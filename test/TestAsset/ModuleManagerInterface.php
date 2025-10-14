@@ -6,5 +6,5 @@ namespace LaminasTest\I18n\TestAsset;
 
 interface ModuleManagerInterface
 {
-    public function getEvent();
+    public function getEvent(): object;
 }

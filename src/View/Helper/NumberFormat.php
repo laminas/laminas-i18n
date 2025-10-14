@@ -231,7 +231,6 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * @param array $textAttributes
      * @return $this
      */
     public function setTextAttributes(array $textAttributes)
