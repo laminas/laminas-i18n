@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.10.0@9c0add4eb88d4b169ac04acb7c679918cbb9c252">
+<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
   <file src="src/ConfigProvider.php">
     <DeprecatedClass>
       <code><![CDATA[Validator\PhoneNumber::class]]></code>
@@ -627,6 +627,9 @@
     </PossiblyInvalidArgument>
   </file>
   <file src="src/View/Helper/AbstractTranslatorHelper.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractHelper]]></code>
+    </DeprecatedClass>
     <DeprecatedInterface>
       <code><![CDATA[Translator|null]]></code>
       <code><![CDATA[Translator|null]]></code>
@@ -637,6 +640,9 @@
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/View/Helper/CurrencyFormat.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractHelper]]></code>
+    </DeprecatedClass>
     <DocblockTypeContradiction>
       <code><![CDATA[$this->locale === null]]></code>
     </DocblockTypeContradiction>
@@ -660,6 +666,9 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/View/Helper/DateFormat.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractHelper]]></code>
+    </DeprecatedClass>
     <DocblockTypeContradiction>
       <code><![CDATA[$this->locale === null]]></code>
     </DocblockTypeContradiction>
@@ -675,6 +684,9 @@
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/View/Helper/NumberFormat.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractHelper]]></code>
+    </DeprecatedClass>
     <DocblockTypeContradiction>
       <code><![CDATA[$this->locale === null]]></code>
       <code><![CDATA[null === $this->formatStyle]]></code>
@@ -705,6 +717,9 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/View/Helper/Plural.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractHelper]]></code>
+    </DeprecatedClass>
     <MixedReturnStatement>
       <code><![CDATA[$strings[$pluralIndex]]]></code>
     </MixedReturnStatement>
