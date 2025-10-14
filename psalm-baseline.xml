@@ -756,25 +756,16 @@
     </UnusedClass>
   </file>
   <file src="test/TestAsset/ModuleEventInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[getParam]]></code>
-    </MissingReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[getParam]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/TestAsset/ModuleManagerInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[getEvent]]></code>
-    </MissingReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[getEvent]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/TestAsset/ServiceListenerInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[addServiceManager]]></code>
-    </MissingReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[addServiceManager]]></code>
     </PossiblyUnusedMethod>

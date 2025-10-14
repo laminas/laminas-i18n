@@ -15,5 +15,5 @@ interface ModuleEventInterface
      * @param string $name
      * @param mixed $default
      */
-    public function getParam($name, $default = null);
+    public function getParam($name, $default = null): mixed;
 }

@@ -34,7 +34,6 @@ class Rule
      * Create a new plural rule.
      *
      * @param int   $numPlurals
-     * @param array $ast
      */
     protected function __construct(
         /**
@@ -79,7 +78,6 @@ class Rule
     /**
      * Evaluate a part of an ast.
      *
-     * @param  array $ast
      * @param  int   $number
      * @return int
      * @throws Exception\ParseException

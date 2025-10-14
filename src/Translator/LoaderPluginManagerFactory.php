@@ -81,7 +81,6 @@ class LoaderPluginManagerFactory implements FactoryInterface
      * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
      *             This method will be removed in version 3.0
      *
-     * @param array $options
      * @return void
      */
     public function setCreationOptions(array $options)
