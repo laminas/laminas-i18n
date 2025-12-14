@@ -1,4 +1,3 @@
-/.coveralls.yml export-ignore
 /.gitattributes export-ignore
 /.github/ export-ignore
 /.gitignore export-ignore
@@ -10,3 +9,9 @@
 /psalm.xml export-ignore
 /psalm-baseline.xml export-ignore
 /test/ export-ignore
+Dockerfile export-ignore
+Makefile export-ignore
+composer.lock export-ignore
+/tools/ export-ignore
+/.psr-container.php.stub export-ignore
+.infection.json5.dist export-ignore
