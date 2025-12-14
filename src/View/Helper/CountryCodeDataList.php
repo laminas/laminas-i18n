@@ -20,12 +20,12 @@ use const PHP_EOL;
 /**
  * A View Helper that outputs an HTML datalist of all the ISO-3166 countries
  */
-final class CountryCodeDataList
+final readonly class CountryCodeDataList
 {
     public function __construct(
-        private readonly CountryCodeListInterface $codeList,
-        private readonly Escaper $escaper,
-        private readonly string $defaultLocale
+        private CountryCodeListInterface $codeList,
+        private Escaper $escaper,
+        private string $defaultLocale
     ) {
     }
 
