@@ -140,6 +140,11 @@ cs: ## Run coding standards checks
 	@docker run $(DOCKER_PHP) vendor/bin/phpcs
 .PHONY: cs
 
+cs-fix: ## Fix coding standards violations
+	@$(call MK_INFO,"Fixing coding standards violations")
+	@docker run $(DOCKER_PHP) vendor/bin/phpcbf
+.PHONY: cs-fix
+
 test: ## Run tests
 	@$(call MK_INFO,"Running Tests")
 	@docker run $(DOCKER_PHP) vendor/bin/phpunit
