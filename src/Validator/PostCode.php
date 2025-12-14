@@ -356,7 +356,7 @@ class PostCode extends AbstractValidator
         $format  = $this->getFormat();
         if (($format === null || $format === '') && $locale !== null) {
             $region = Locale::getRegion($locale);
-            if ('' === $region) {
+            if ('' === $region || $region === null) {
                 throw new Exception\InvalidArgumentException('Locale must contain a region');
             }
             if (isset(static::$postCodeRegex[$region])) {
