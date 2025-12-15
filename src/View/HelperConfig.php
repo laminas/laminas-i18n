@@ -42,12 +42,12 @@ class HelperConfig implements ConfigInterface
 
         // Legacy Zend Framework aliases
         // @codingStandardsIgnoreStart
-        \Zend\I18n\View\Helper\CurrencyFormat::class => Helper\CurrencyFormat::class,
-        \Zend\I18n\View\Helper\DateFormat::class => Helper\DateFormat::class,
-        \Zend\I18n\View\Helper\NumberFormat::class => Helper\NumberFormat::class,
-        \Zend\I18n\View\Helper\Plural::class => Helper\Plural::class,
-        \Zend\I18n\View\Helper\Translate::class => Helper\Translate::class,
-        \Zend\I18n\View\Helper\TranslatePlural::class => Helper\TranslatePlural::class,
+        'Zend\I18n\View\Helper\CurrencyFormat' => Helper\CurrencyFormat::class,
+        'Zend\I18n\View\Helper\DateFormat' => Helper\DateFormat::class,
+        'Zend\I18n\View\Helper\NumberFormat' => Helper\NumberFormat::class,
+        'Zend\I18n\View\Helper\Plural' => Helper\Plural::class,
+        'Zend\I18n\View\Helper\Translate' => Helper\Translate::class,
+        'Zend\I18n\View\Helper\TranslatePlural' => Helper\TranslatePlural::class,
         // @codingStandardsIgnoreEnd
 
         // v2 normalized FQCNs
