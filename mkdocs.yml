@@ -17,17 +17,16 @@ nav:
             - Alpha: v3/filters/alpha.md
             - NumberFormat: v3/filters/number-format.md
             - NumberParse: v3/filters/number-parse.md
-        - Reference:
-            - Validators:
-                - Introduction: v3/validators/introduction.md
-                - Alnum: v3/validators/alnum.md
-                - Alpha: v3/validators/alpha.md
-                - CountryCode: v3/validators/country-code.md
-                - DateTime: v3/validators/date-time.md
-                - IsFloat: v3/validators/is-float.md
-                - IsInt: v3/validators/is-int.md
-                - PhoneNumber: v3/validators/phone-number.md
-                - PostCode: v3/validators/post-code.md
+        - Validators:
+            - Introduction: v3/validators/introduction.md
+            - Alnum: v3/validators/alnum.md
+            - Alpha: v3/validators/alpha.md
+            - CountryCode: v3/validators/country-code.md
+            - DateTime: v3/validators/date-time.md
+            - IsFloat: v3/validators/is-float.md
+            - IsInt: v3/validators/is-int.md
+            - PhoneNumber: v3/validators/phone-number.md
+            - PostCode: v3/validators/post-code.md
         - 'View Helpers':
             - Introduction: v3/view-helpers/introduction.md
             - CountryCodeDataList: v3/view-helpers/country-code-data-list.md
@@ -56,17 +55,16 @@ nav:
             - Alpha: v2/filters/alpha.md
             - NumberFormat: v2/filters/number-format.md
             - NumberParse: v2/filters/number-parse.md
-        - Reference:
-            - Validators:
-                - Introduction: v2/validators/introduction.md
-                - Alnum: v2/validators/alnum.md
-                - Alpha: v2/validators/alpha.md
-                - CountryCode: v2/validators/country-code.md
-                - DateTime: v2/validators/date-time.md
-                - IsFloat: v2/validators/is-float.md
-                - IsInt: v2/validators/is-int.md
-                - PhoneNumber: v2/validators/phone-number.md
-                - PostCode: v2/validators/post-code.md
+        - Validators:
+            - Introduction: v2/validators/introduction.md
+            - Alnum: v2/validators/alnum.md
+            - Alpha: v2/validators/alpha.md
+            - CountryCode: v2/validators/country-code.md
+            - DateTime: v2/validators/date-time.md
+            - IsFloat: v2/validators/is-float.md
+            - IsInt: v2/validators/is-int.md
+            - PhoneNumber: v2/validators/phone-number.md
+            - PostCode: v2/validators/post-code.md
         - 'View Helpers':
             - Introduction: v2/view-helpers/introduction.md
             - CountryCodeDataList: v2/view-helpers/country-code-data-list.md
