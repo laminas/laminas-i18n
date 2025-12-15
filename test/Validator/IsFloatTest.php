@@ -108,12 +108,19 @@ final class IsFloatTest extends TestCase
     #[DataProvider('lookAlikeProvider')]
     public function testLookALikes(string $value, bool $expected, string $locale): void
     {
-        $this->validator->setLocale($locale);
+        $validator = new IsFloatValidator([
+            'locale' => $locale,
+        ]);
 
         self::assertEquals(
             $expected,
-            $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(' (locale:%s)', $locale)
+            $validator->isValid($value),
+            sprintf(
+                'The value ' . "\n" . '%s' . "\n" . ' was expected to be %s for the locale "%s"',
+                $value,
+                $expected ? 'valid' : 'invalid',
+                $locale,
+            ),
         );
     }
 
@@ -122,8 +129,14 @@ final class IsFloatTest extends TestCase
     {
         $trueArray    = [];
         $testingArray = [
-            'ar' => "\xD9\xA1'\xD9\xA1\xD9\xA1\xD9\xA1,\xD9\xA2\xD9\xA3",
-            'ru' => '2 000,00',
+            /**
+             * 1,111.23 in Arabic
+             *
+             * This case fails on MacOS and in the shipped Docker image here without `@numbers=arab`
+             * https://stackoverflow.com/questions/78021672/missing-arabic-numbers-when-formatting-date-using-intldateformatter-on-php-8-2-a
+             */
+            'ar@numbers=arab' => "\xD9\xA1'\xD9\xA1\xD9\xA1\xD9\xA1,\xD9\xA2\xD9\xA3",
+            'ru'              => '2 000,00',
         ];
 
         //Loop locales and examples for a more thorough set of "true" test data
@@ -159,10 +172,11 @@ final class IsFloatTest extends TestCase
     {
         $trueArray    = [];
         $testingArray = [
-            'ar'    => ['10.1', '66notflot.6'],
-            'ru'    => ['10.1', '66notflot.6', '2,000.00', '2 00'],
-            'en'    => ['10,1', '66notflot.6', '2.000,00', '2 000', '2,00'],
-            'fr-CH' => ['66notflot.6', '2,000.00', "2'00"],
+            // Ensure arabic numerals are expected in order for this test to fail
+            'ar@numbers=arab' => ['10.1', '66notflot.6'],
+            'ru'              => ['10.1', '66notflot.6', '2,000.00', '2 00'],
+            'en'              => ['10,1', '66notflot.6', '2.000,00', '2 000', '2,00'],
+            'fr-CH'           => ['66notflot.6', '2,000.00', "2'00"],
         ];
 
         //Loop locales and examples for a more thorough set of "true" test data
