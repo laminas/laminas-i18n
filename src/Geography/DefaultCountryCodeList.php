@@ -291,7 +291,7 @@ final class DefaultCountryCodeList implements CountryCodeListInterface
     public function toArray(): array
     {
         return array_map(
-            static fn(string $code): CountryCode => CountryCode::fromString($code),
+            CountryCode::fromString(...),
             self::LIST
         );
     }

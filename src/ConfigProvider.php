@@ -54,7 +54,7 @@ class ConfigProvider
             'factories' => [
                 Translator\TranslatorInterface::class   => Translator\TranslatorServiceFactory::class,
                 Translator\LoaderPluginManager::class   => Translator\LoaderPluginManagerFactory::class,
-                Geography\DefaultCountryCodeList::class => [Geography\DefaultCountryCodeList::class, 'create'],
+                Geography\DefaultCountryCodeList::class => Geography\DefaultCountryCodeList::create(...),
             ],
         ];
     }

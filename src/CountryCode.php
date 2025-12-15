@@ -14,10 +14,10 @@ use function strtoupper;
 /**
  * @psalm-immutable
  */
-final class CountryCode
+final readonly class CountryCode
 {
     /** @param non-empty-string $code */
-    private function __construct(private readonly string $code)
+    private function __construct(private string $code)
     {
     }
 

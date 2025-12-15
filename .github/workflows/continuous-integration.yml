@@ -6,6 +6,68 @@ on:
     branches:
     tags:
 
+env:
+  default_php: 8.2
+  php_extensions: intl,mbstring,bcmath
+
 jobs:
   ci:
     uses: laminas/workflow-continuous-integration/.github/workflows/continuous-integration.yml@1.x
+
+  composer-require-checker:
+    name: "Check for missing dependencies"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: shivammathur/setup-php@2.32.0
+
+        with:
+          php-version: ${{ env.default_php }}
+          ini-values: memory_limit=-1
+          extensions: ${{ env.php_extensions }}
+      - uses: ramsey/composer-install@3.0.0
+      - run: make require-checker-ci
+
+  composer-unused:
+    name: Check for Unused Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: shivammathur/setup-php@2.34.1
+        with:
+          php-version: ${{ env.default_php }}
+          extensions: ${{ env.php_extensions }}
+          tools: composer
+      - uses: ramsey/composer-install@v3
+      - run: make unused-ci
+
+  psalm-security-report:
+    name: "Psalm Security Report"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: shivammathur/setup-php@2.32.0
+        with:
+          php-version: ${{ env.default_php }}
+          extensions: ${{ env.php_extensions }}
+      - uses: ramsey/composer-install@3.0.0
+      - name: "Psalm"
+        run: vendor/bin/psalm --report=results.sarif
+      - name: "Upload Security Analysis results to GitHub"
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
+
+  rector:
+    name: Rector on Default PHP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: shivammathur/setup-php@2.34.1
+        with:
+          php-version: ${{ env.default_php }}
+          extensions: ${{ env.php_extensions }}
+          tools: composer
+      - uses: ramsey/composer-install@v3
+      - run: make rector-ci

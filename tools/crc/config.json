@@ -1,0 +1,17 @@
+{
+    "symbol-whitelist" : [
+        "Laminas\\Cache\\StorageFactory",
+        "Laminas\\Cache\\Storage\\StorageInterface",
+        "Laminas\\Config\\Reader\\Ini",
+        "Laminas\\EventManager\\Event",
+        "Laminas\\EventManager\\EventManager",
+        "Laminas\\EventManager\\EventManagerInterface",
+        "Laminas\\Filter\\AbstractFilter",
+        "Laminas\\Validator\\AbstractValidator",
+        "Laminas\\Validator\\Callback",
+        "Laminas\\Validator\\Exception\\InvalidArgumentException",
+        "Laminas\\View\\Helper\\AbstractHelper",
+        "Laminas\\View\\Helper\\DeprecatedAbstractHelperHierarchyTrait",
+        "Laminas\\View\\HtmlAttributesSet"
+    ]
+}

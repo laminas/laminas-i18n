@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
+<files psalm-version="6.14.2@bbd217fc98c0daa0a13aea2a7f119d03ba3fc9a0">
   <file src="src/ConfigProvider.php">
     <DeprecatedClass>
       <code><![CDATA[Validator\PhoneNumber::class]]></code>
@@ -102,7 +102,6 @@
     <MixedArgument>
       <code><![CDATA[$originalStringOffset]]></code>
       <code><![CDATA[$originalStringSize]]></code>
-      <code><![CDATA[$textDomain['']]]></code>
       <code><![CDATA[$translationStringOffset]]></code>
       <code><![CDATA[$translationStringSize]]></code>
     </MixedArgument>
@@ -227,12 +226,6 @@
     <DocblockTypeContradiction>
       <code><![CDATA[static::$parser === null]]></code>
     </DocblockTypeContradiction>
-    <InvalidReturnStatement>
-      <code><![CDATA[floor(
-                    $this->evaluateAstPart($ast['arguments'][0], $number)
-                    / $this->evaluateAstPart($ast['arguments'][1], $number)
-                )]]></code>
-    </InvalidReturnStatement>
     <MixedArgument>
       <code><![CDATA[$ast['arguments'][0]]]></code>
       <code><![CDATA[$ast['arguments'][0]]]></code>
@@ -303,7 +296,108 @@
       <code><![CDATA[$ast['arguments'][]]]></code>
     </MixedAssignment>
     <MixedReturnStatement>
-      <code><![CDATA[$ast['arguments'][0]]]></code>
+      <code><![CDATA[match ($ast['id']) {
+            'number' => $ast['arguments'][0],
+            'n' => $number,
+            '+' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   + $this->evaluateAstPart($ast['arguments'][1], $number),
+            '-' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   - $this->evaluateAstPart($ast['arguments'][1], $number),
+            // Integer division
+            '/' => floor(
+                $this->evaluateAstPart($ast['arguments'][0], $number)
+                / $this->evaluateAstPart($ast['arguments'][1], $number)
+            ),
+            '*' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   * $this->evaluateAstPart($ast['arguments'][1], $number),
+            '%' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   % $this->evaluateAstPart($ast['arguments'][1], $number),
+            '>' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   > $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '>=' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   >= $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '<' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   < $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '<=' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   <= $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            // @codingStandardsIgnoreStart
+            '==' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   == $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '!=' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   != $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '&&' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   && $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '||' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   || $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '!' => ! $this->evaluateAstPart($ast['arguments'][0], $number)
+                   ? 1 : 0,
+            '?' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   ? $this->evaluateAstPart($ast['arguments'][1], $number)
+                   : $this->evaluateAstPart($ast['arguments'][2], $number),
+            default => throw new Exception\ParseException(sprintf(
+                'Unknown token: %s',
+                $ast['id']
+            )),
+        }]]></code>
+      <code><![CDATA[match ($ast['id']) {
+            'number' => $ast['arguments'][0],
+            'n' => $number,
+            '+' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   + $this->evaluateAstPart($ast['arguments'][1], $number),
+            '-' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   - $this->evaluateAstPart($ast['arguments'][1], $number),
+            // Integer division
+            '/' => floor(
+                $this->evaluateAstPart($ast['arguments'][0], $number)
+                / $this->evaluateAstPart($ast['arguments'][1], $number)
+            ),
+            '*' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   * $this->evaluateAstPart($ast['arguments'][1], $number),
+            '%' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   % $this->evaluateAstPart($ast['arguments'][1], $number),
+            '>' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   > $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '>=' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   >= $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '<' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   < $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '<=' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   <= $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            // @codingStandardsIgnoreStart
+            '==' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   == $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '!=' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   != $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '&&' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   && $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '||' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   || $this->evaluateAstPart($ast['arguments'][1], $number)
+                   ? 1 : 0,
+            '!' => ! $this->evaluateAstPart($ast['arguments'][0], $number)
+                   ? 1 : 0,
+            '?' => $this->evaluateAstPart($ast['arguments'][0], $number)
+                   ? $this->evaluateAstPart($ast['arguments'][1], $number)
+                   : $this->evaluateAstPart($ast['arguments'][2], $number),
+            default => throw new Exception\ParseException(sprintf(
+                'Unknown token: %s',
+                $ast['id']
+            )),
+        }]]></code>
     </MixedReturnStatement>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(int) $number]]></code>
@@ -606,13 +700,12 @@
     </DeprecatedMethod>
     <MixedArgument>
       <code><![CDATA[$format]]></code>
-      <code><![CDATA[$format]]></code>
       <code><![CDATA[$options['format']]]></code>
       <code><![CDATA[$options['locale']]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$format[0]]]></code>
-      <code><![CDATA[$format[strlen($format) - 1]]]></code>
+      <code><![CDATA[$format[strlen((string) $format) - 1]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
       <code><![CDATA[$format]]></code>
@@ -743,14 +836,6 @@
     <RedundantCondition>
       <code><![CDATA[method_exists($serviceManager, 'configure')]]></code>
     </RedundantCondition>
-    <UndefinedClass>
-      <code><![CDATA[\Zend\I18n\View\Helper\CurrencyFormat]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\DateFormat]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\NumberFormat]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\Plural]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\Translate]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\TranslatePlural]]></code>
-    </UndefinedClass>
     <UnusedClass>
       <code><![CDATA[HelperConfig]]></code>
     </UnusedClass>
