@@ -39,7 +39,7 @@ jobs:
           php-version: ${{ env.default_php }}
           extensions: ${{ env.php_extensions }}
           tools: composer
-      - uses: ramsey/composer-install@v3
+      - uses: ramsey/composer-install@3.1.1
       - run: make unused-ci
 
   psalm-security-report:
@@ -69,5 +69,5 @@ jobs:
           php-version: ${{ env.default_php }}
           extensions: ${{ env.php_extensions }}
           tools: composer
-      - uses: ramsey/composer-install@v3
+      - uses: ramsey/composer-install@3.1.1
       - run: make rector-ci
