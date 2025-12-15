@@ -836,14 +836,6 @@
     <RedundantCondition>
       <code><![CDATA[method_exists($serviceManager, 'configure')]]></code>
     </RedundantCondition>
-    <UndefinedClass>
-      <code><![CDATA[\Zend\I18n\View\Helper\CurrencyFormat]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\DateFormat]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\NumberFormat]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\Plural]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\Translate]]></code>
-      <code><![CDATA[\Zend\I18n\View\Helper\TranslatePlural]]></code>
-    </UndefinedClass>
     <UnusedClass>
       <code><![CDATA[HelperConfig]]></code>
     </UnusedClass>
