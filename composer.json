@@ -48,7 +48,6 @@
         "laminas/laminas-coding-standard": "^3.1",
         "laminas/laminas-config": "^3.10.1",
         "laminas/laminas-eventmanager": "^3.15.0",
-        "laminas/laminas-filter": "^2.42",
         "laminas/laminas-validator": "^2.65.0",
         "laminas/laminas-view": "^2.44",
         "phpunit/phpunit": "^11.5.46",

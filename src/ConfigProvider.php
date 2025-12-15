@@ -17,7 +17,6 @@ class ConfigProvider
      *
      * @return array{
      *     dependencies: ServiceManagerConfiguration,
-     *     filters: ServiceManagerConfiguration,
      *     validators: ServiceManagerConfiguration,
      *     view_helpers: ServiceManagerConfiguration,
      *     locale: string|null,
@@ -27,7 +26,6 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
-            'filters'      => $this->getFilterConfig(),
             'validators'   => $this->getValidatorConfig(),
             'view_helpers' => $this->getViewHelperConfig(),
             'locale'       => null,
@@ -55,41 +53,6 @@ class ConfigProvider
                 Translator\TranslatorInterface::class   => Translator\TranslatorServiceFactory::class,
                 Translator\LoaderPluginManager::class   => Translator\LoaderPluginManagerFactory::class,
                 Geography\DefaultCountryCodeList::class => Geography\DefaultCountryCodeListFactory::class,
-            ],
-        ];
-    }
-
-    /**
-     * Return laminas-filter configuration.
-     *
-     * @return ServiceManagerConfiguration
-     */
-    public function getFilterConfig()
-    {
-        return [
-            'aliases'   => [
-                'alnum'        => Filter\Alnum::class,
-                'Alnum'        => Filter\Alnum::class,
-                'alpha'        => Filter\Alpha::class,
-                'Alpha'        => Filter\Alpha::class,
-                'numberformat' => Filter\NumberFormat::class,
-                'numberFormat' => Filter\NumberFormat::class,
-                'NumberFormat' => Filter\NumberFormat::class,
-                'numberparse'  => Filter\NumberParse::class,
-                'numberParse'  => Filter\NumberParse::class,
-                'NumberParse'  => Filter\NumberParse::class,
-
-                // Legacy Zend Framework aliases
-                'Zend\I18n\Filter\Alnum'        => Filter\Alnum::class,
-                'Zend\I18n\Filter\Alpha'        => Filter\Alpha::class,
-                'Zend\I18n\Filter\NumberFormat' => Filter\NumberFormat::class,
-                'Zend\I18n\Filter\NumberParse'  => Filter\NumberParse::class,
-            ],
-            'factories' => [
-                Filter\Alnum::class        => InvokableFactory::class,
-                Filter\Alpha::class        => InvokableFactory::class,
-                Filter\NumberFormat::class => InvokableFactory::class,
-                Filter\NumberParse::class  => InvokableFactory::class,
             ],
         ];
     }

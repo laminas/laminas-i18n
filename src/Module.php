@@ -15,7 +15,6 @@ class Module
      * Return laminas-i18n configuration for laminas-mvc application.
      *
      * @return array{
-     *     filters: ServiceManagerConfiguration,
      *     service_manager: ServiceManagerConfiguration,
      *     validators: ServiceManagerConfiguration,
      *     view_helpers: ServiceManagerConfiguration,
@@ -25,7 +24,6 @@ class Module
     {
         $provider = new ConfigProvider();
         return [
-            'filters'         => $provider->getFilterConfig(),
             'service_manager' => $provider->getDependencyConfig(),
             'validators'      => $provider->getValidatorConfig(),
             'view_helpers'    => $provider->getViewHelperConfig(),
