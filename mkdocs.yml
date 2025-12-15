@@ -2,6 +2,44 @@ docs_dir: docs/book
 site_dir: docs/html
 nav:
     - Home: index.md
+    - v3:
+        - Introduction: v3/introduction.md
+        - Installation: v3/installation.md
+        - Translation: v3/translation.md
+        - Translator:
+            - Caching: v3/translator/caching.md
+            - Events: v3/translator/events.md
+            - Factory: v3/translator/factory.md
+            - 'Format Examples': v3/translator/format-examples.md
+        - Filters:
+            - Introduction: v3/filters/introduction.md
+            - Alnum: v3/filters/alnum.md
+            - Alpha: v3/filters/alpha.md
+            - NumberFormat: v3/filters/number-format.md
+            - NumberParse: v3/filters/number-parse.md
+        - Validators:
+            - Introduction: v3/validators/introduction.md
+            - Alnum: v3/validators/alnum.md
+            - Alpha: v3/validators/alpha.md
+            - CountryCode: v3/validators/country-code.md
+            - DateTime: v3/validators/date-time.md
+            - IsFloat: v3/validators/is-float.md
+            - IsInt: v3/validators/is-int.md
+            - PhoneNumber: v3/validators/phone-number.md
+            - PostCode: v3/validators/post-code.md
+        - 'View Helpers':
+            - Introduction: v3/view-helpers/introduction.md
+            - CountryCodeDataList: v3/view-helpers/country-code-data-list.md
+            - CurrencyFormat: v3/view-helpers/currency-format.md
+            - DateFormat: v3/view-helpers/date-format.md
+            - NumberFormat: v3/view-helpers/number-format.md
+            - Plural: v3/view-helpers/plural.md
+            - Translate: v3/view-helpers/translate.md
+            - TranslatePlural: v3/view-helpers/translate-plural.md
+        - 'Application Integration':
+            - 'Stand-Alone': v3/application-integration/stand-alone.md
+        - Migration:
+            - 'Migration from Version 2 to 3': v3/migration/migration-from-2-to-3.md
     - v2:
         - Introduction: v2/introduction.md
         - Installation: v2/installation.md
@@ -17,17 +55,16 @@ nav:
             - Alpha: v2/filters/alpha.md
             - NumberFormat: v2/filters/number-format.md
             - NumberParse: v2/filters/number-parse.md
-        - Reference:
-            - Validators:
-                - Introduction: v2/validators/introduction.md
-                - Alnum: v2/validators/alnum.md
-                - Alpha: v2/validators/alpha.md
-                - CountryCode: v2/validators/country-code.md
-                - DateTime: v2/validators/date-time.md
-                - IsFloat: v2/validators/is-float.md
-                - IsInt: v2/validators/is-int.md
-                - PhoneNumber: v2/validators/phone-number.md
-                - PostCode: v2/validators/post-code.md
+        - Validators:
+            - Introduction: v2/validators/introduction.md
+            - Alnum: v2/validators/alnum.md
+            - Alpha: v2/validators/alpha.md
+            - CountryCode: v2/validators/country-code.md
+            - DateTime: v2/validators/date-time.md
+            - IsFloat: v2/validators/is-float.md
+            - IsInt: v2/validators/is-int.md
+            - PhoneNumber: v2/validators/phone-number.md
+            - PostCode: v2/validators/post-code.md
         - 'View Helpers':
             - Introduction: v2/view-helpers/introduction.md
             - CountryCodeDataList: v2/view-helpers/country-code-data-list.md
@@ -53,44 +90,45 @@ extra:
         headline: Related Components
         links:
             - 'Translation Resources': https://docs.laminas.dev/laminas-i18n-resources/
-    current_version: v2
+    current_version: v3
     versions:
+        - v3
         - v2
 plugins:
     - search
     - redirects:
           redirect_maps:
-              filters.md: v2/filters/introduction.md
-              validators.md: v2/validators/introduction.md
-              view-helpers.md: v2/view-helpers/introduction.md
-              introduction.md: v2/introduction.md
-              installation.md: v2/installation.md
-              translation.md: v2/translation.md
-              translator/caching.md: v2/translator/caching.md
-              translator/events.md: v2/translator/events.md
-              translator/factory.md: v2/translator/factory.md
-              translator/format-examples.md: v2/translator/format-examples.md
-              filters/introduction.md: v2/filters/introduction.md
-              filters/alnum.md: v2/filters/alnum.md
-              filters/alpha.md: v2/filters/alpha.md
-              filters/number-format.md: v2/filters/number-format.md
-              filters/number-parse.md: v2/filters/number-parse.md
-              validators/introduction.md: v2/validators/introduction.md
-              validators/alnum.md: v2/validators/alnum.md
-              validators/alpha.md: v2/validators/alpha.md
-              validators/country-code.md: v2/validators/country-code.md
-              validators/date-time.md: v2/validators/date-time.md
-              validators/is-float.md: v2/validators/is-float.md
-              validators/is-int.md: v2/validators/is-int.md
-              validators/phone-number.md: v2/validators/phone-number.md
-              validators/post-code.md: v2/validators/post-code.md
-              view-helpers/introduction.md: v2/view-helpers/introduction.md
-              view-helpers/country-code-data-list.md: v2/view-helpers/country-code-data-list.md
-              view-helpers/currency-format.md: v2/view-helpers/currency-format.md
-              view-helpers/date-format.md: v2/view-helpers/date-format.md
-              view-helpers/number-format.md: v2/view-helpers/number-format.md
-              view-helpers/plural.md: v2/view-helpers/plural.md
-              view-helpers/translate.md: v2/view-helpers/translate.md
-              view-helpers/translate-plural.md: v2/view-helpers/translate-plural.md
-              application-integration/stand-alone.md: v2/application-integration/stand-alone.md
+              filters.md: v3/filters/introduction.md
+              validators.md: v3/validators/introduction.md
+              view-helpers.md: v3/view-helpers/introduction.md
+              introduction.md: v3/introduction.md
+              installation.md: v3/installation.md
+              translation.md: v3/translation.md
+              translator/caching.md: v3/translator/caching.md
+              translator/events.md: v3/translator/events.md
+              translator/factory.md: v3/translator/factory.md
+              translator/format-examples.md: v3/translator/format-examples.md
+              filters/introduction.md: v3/filters/introduction.md
+              filters/alnum.md: v3/filters/alnum.md
+              filters/alpha.md: v3/filters/alpha.md
+              filters/number-format.md: v3/filters/number-format.md
+              filters/number-parse.md: v3/filters/number-parse.md
+              validators/introduction.md: v3/validators/introduction.md
+              validators/alnum.md: v3/validators/alnum.md
+              validators/alpha.md: v3/validators/alpha.md
+              validators/country-code.md: v3/validators/country-code.md
+              validators/date-time.md: v3/validators/date-time.md
+              validators/is-float.md: v3/validators/is-float.md
+              validators/is-int.md: v3/validators/is-int.md
+              validators/phone-number.md: v3/validators/phone-number.md
+              validators/post-code.md: v3/validators/post-code.md
+              view-helpers/introduction.md: v3/view-helpers/introduction.md
+              view-helpers/country-code-data-list.md: v3/view-helpers/country-code-data-list.md
+              view-helpers/currency-format.md: v3/view-helpers/currency-format.md
+              view-helpers/date-format.md: v3/view-helpers/date-format.md
+              view-helpers/number-format.md: v3/view-helpers/number-format.md
+              view-helpers/plural.md: v3/view-helpers/plural.md
+              view-helpers/translate.md: v3/view-helpers/translate.md
+              view-helpers/translate-plural.md: v3/view-helpers/translate-plural.md
+              application-integration/stand-alone.md: v3/application-integration/stand-alone.md
               migration/migration-to-v2.4.md: v2/migration/migration-to-v2.4.md
