@@ -7,7 +7,7 @@ RUN apk add --no-cache git
 
 # Install necessary PHP extensions (Including those for external tools)
 COPY --from=ghcr.io/mlocati/php-extension-installer:2 /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions intl mbstring bcmath xdebug
+RUN install-php-extensions intl mbstring bcmath ctype xdebug
 
 # Install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer

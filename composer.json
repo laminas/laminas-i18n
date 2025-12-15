@@ -33,10 +33,13 @@
     },
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+        "ext-ctype": "*",
         "ext-intl": "*",
+        "laminas/laminas-escaper": "^2.0",
         "laminas/laminas-servicemanager": "^3.21.0",
         "laminas/laminas-stdlib": "^3.0",
-        "laminas/laminas-translator": "^1.0"
+        "laminas/laminas-translator": "^1.0",
+        "psr/container": "^1.0.0"
     },
     "require-dev": {
         "laminas/laminas-cache": "^3.13.0",
