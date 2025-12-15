@@ -19,7 +19,7 @@ Defining plural rules is left to the developer. To help you with this process,
 here are some links with up-to-date plural rules for tons of languages:
 
 - [www.unicode.org](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html)
-- [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_and_Plurals)
+- [developer.mozilla.org](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules)
 
 ### Define plural Rules
 
