@@ -153,27 +153,39 @@ final class DateTimeTest extends TestCase
     /**
      * Ensures that an omitted pattern results in a calculated pattern by IntlDateFormatter
      */
-    public function testOptionPatternOmitted(): void
+    public function testLocaleDependentPatternIsUsedWhenPatternIsOmitted(): void
     {
-        // null before validation
-        self::assertNull($this->validator->getPattern());
+        $validator = new DateTimeValidator([
+            'locale'   => 'en_GB',
+            'dateType' => IntlDateFormatter::SHORT,
+        ]);
 
-        $this->validator->isValid('does not matter');
-
-        // set after
-        self::assertEquals('yyyyMMdd hh:mm a', $this->validator->getPattern());
+        self::assertTrue($validator->isValid('1/1/2020 10:30'));
+        self::assertFalse($validator->isValid('2020-01-01 10:30'));
     }
 
     public function testSettingThePatternToNullIsAcceptable(): void
     {
-        $this->validator->setPattern(null);
-        self::assertTrue($this->validator->isValid('20200101 12:34 am'));
+        $validator = new DateTimeValidator([
+            'locale'   => 'en_GB',
+            'dateType' => IntlDateFormatter::SHORT,
+            'timeType' => IntlDateFormatter::SHORT,
+        ]);
+        $validator->setPattern(null);
+
+        self::assertTrue($validator->isValid('1/1/2020, 10:34'));
     }
 
     public function testSettingThePatternToAnEmptyStringIsAcceptable(): void
     {
-        $this->validator->setPattern('');
-        self::assertTrue($this->validator->isValid('20200101 12:34 am'));
+        $validator = new DateTimeValidator([
+            'locale'   => 'en_GB',
+            'dateType' => IntlDateFormatter::SHORT,
+            'timeType' => IntlDateFormatter::SHORT,
+        ]);
+        $validator->setPattern('');
+
+        self::assertTrue($validator->isValid('1/1/2020, 10:34'));
     }
 
     /**

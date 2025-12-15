@@ -9,6 +9,8 @@ I18N_IMAGE_ID := $(shell docker images -q ${I18N_IMAGE_NAME} | xargs)
 WORK = /app
 DOCKER_PHP=-it -w ${WORK} -v ${PWD}:/app --rm ${I18N_IMAGE_NAME}
 MDLINT_FILE = https://raw.githubusercontent.com/laminas/laminas-continuous-integration-action/e321dbdcc74e665512b5d2e8fd9012b3432df897/setup/markdownlint/markdownlint.json
+MDLINT_IMAGE := davidanson/markdownlint-cli2:v0.20.0
+LINK_CHECKER_IMAGE := lycheeverse/lychee:0.22-alpine
 
 MK_BLUE = echo -e "\033[34m"$(1)"\033[0m"
 MK_GREEN = echo -e "\033[32m"$(1)"\033[0m"
@@ -94,12 +96,12 @@ bump: bump-crc bump-infection bump-rector bump-unused ## Update dependencies and
 #
 docs-lint: .markdownlint.json ## Lint documentation
 	@$(call MK_INFO,"Linting documentation files")
-	@docker run -it -w /app -v ${PWD}:/app --rm davidanson/markdownlint-cli2 "docs/**/*.md" README.md
+	@docker run -it -w /app -v ${PWD}:/app --rm ${MDLINT_IMAGE} "docs/**/*.md" README.md
 .PHONY: docs-lint
 
 check-links: ## Check documentation links
 	@$(call MK_INFO,"Checking links in documentation files")
-	@docker run -it -w /app -v ${PWD}:/app --rm lycheeverse/lychee "docs/**/*.md" README.md
+	@docker run -it -w /app -v ${PWD}:/app --rm ${LINK_CHECKER_IMAGE} "docs/**/*.md" README.md
 .PHONY: check-links
 
 .markdownlint.json: ## Fetch the most recent settings for Markdown lint
