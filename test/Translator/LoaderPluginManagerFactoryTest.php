@@ -8,7 +8,6 @@ use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\LoaderPluginManagerFactory;
-use Laminas\ServiceManager\ServiceLocatorInterface;
 use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
@@ -21,15 +20,6 @@ final class LoaderPluginManagerFactoryTest extends TestCase
 
         $factory = new LoaderPluginManagerFactory();
         $loaders = $factory($container, 'TranslatorPluginManager');
-        self::assertInstanceOf(LoaderPluginManager::class, $loaders);
-        self::assertFalse($loaders->has('test'));
-    }
-
-    public function testCreateServiceReturnsUnConfiguredPluginManagerWhenNoOptionsPresent(): void
-    {
-        $container = $this->createMock(ServiceLocatorInterface::class);
-        $factory   = new LoaderPluginManagerFactory();
-        $loaders   = $factory->createService($container);
         self::assertInstanceOf(LoaderPluginManager::class, $loaders);
         self::assertFalse($loaders->has('test'));
     }
@@ -58,22 +48,6 @@ final class LoaderPluginManagerFactoryTest extends TestCase
                 'test' => $loader,
             ],
         ]);
-        self::assertInstanceOf(LoaderPluginManager::class, $loaders);
-        self::assertTrue($loaders->has('test'));
-    }
-
-    #[DataProvider('provideLoader')]
-    public function testCreateServiceCanConfigurePluginManagerViaOptions(string $loader): void
-    {
-        $container = $this->createMock(ServiceLocatorInterface::class);
-
-        $factory = new LoaderPluginManagerFactory();
-        $factory->setCreationOptions([
-            'aliases' => [
-                'test' => $loader,
-            ],
-        ]);
-        $loaders = $factory->createService($container);
         self::assertInstanceOf(LoaderPluginManager::class, $loaders);
         self::assertTrue($loaders->has('test'));
     }

@@ -2,39 +2,26 @@
 
 namespace Laminas\I18n\Translator;
 
-use Laminas\ServiceManager\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
 use function is_array;
 
-/**
- * @psalm-import-type ServiceManagerConfiguration from ServiceManager
- * @final
- */
-class LoaderPluginManagerFactory implements FactoryInterface
+/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
+final readonly class LoaderPluginManagerFactory implements FactoryInterface
 {
-    /**
-     * laminas-servicemanager v2 options passed to factory.
-     *
-     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
-     *             This property will be removed in version 3.0
-     *
-     * @var array
-     */
-    protected $creationOptions = [];
-
     /**
      * Create and return a LoaderPluginManager.
      *
-     * @param string $name
      * @param array<string, mixed>|null $options
      * @psalm-param ServiceManagerConfiguration|null $options
-     * @return LoaderPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        string $requestedName,
+        ?array $options = null,
+    ): LoaderPluginManager {
         $options     ??= [];
         $pluginManager = new LoaderPluginManager($container, $options);
 
@@ -60,31 +47,5 @@ class LoaderPluginManagerFactory implements FactoryInterface
         $pluginManager->configure($config['translator_plugins']);
 
         return $pluginManager;
-    }
-
-    /**
-     * laminas-servicemanager v2 factory to return LoaderPluginManager
-     *
-     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
-     *             This method will be removed in version 3.0
-     *
-     * @return LoaderPluginManager
-     */
-    public function createService(ServiceLocatorInterface $container)
-    {
-        return $this($container, 'TranslatorPluginManager', $this->creationOptions);
-    }
-
-    /**
-     * v2 support for instance creation options.
-     *
-     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
-     *             This method will be removed in version 3.0
-     *
-     * @return void
-     */
-    public function setCreationOptions(array $options)
-    {
-        $this->creationOptions = $options;
     }
 }
