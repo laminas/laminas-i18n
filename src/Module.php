@@ -16,7 +16,6 @@ class Module
      *
      * @return array{
      *     service_manager: ServiceManagerConfiguration,
-     *     view_helpers: ServiceManagerConfiguration,
      * }
      */
     public function getConfig()
@@ -24,7 +23,6 @@ class Module
         $provider = new ConfigProvider();
         return [
             'service_manager' => $provider->getDependencyConfig(),
-            'view_helpers'    => $provider->getViewHelperConfig(),
         ];
     }
 

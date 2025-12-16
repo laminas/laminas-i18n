@@ -35,7 +35,6 @@
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-ctype": "*",
         "ext-intl": "*",
-        "laminas/laminas-escaper": "^2.0",
         "laminas/laminas-servicemanager": "^3.21.0",
         "laminas/laminas-stdlib": "^3.0",
         "laminas/laminas-translator": "^1.0",
@@ -48,7 +47,6 @@
         "laminas/laminas-coding-standard": "^3.1",
         "laminas/laminas-config": "^3.10.1",
         "laminas/laminas-eventmanager": "^3.15.0",
-        "laminas/laminas-view": "^2.44",
         "phpunit/phpunit": "^11.5.46",
         "psalm/plugin-phpunit": "^0.19.5",
         "vimeo/psalm": "^6.14.2"
@@ -62,8 +60,7 @@
         "laminas/laminas-config": "You should install this package to use the INI translation format",
         "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
         "laminas/laminas-i18n-resources": "This package provides validator and captcha translations",
-        "laminas/laminas-i18n-phone-number": "Tools for filtering, validating and presenting phone numbers",
-        "laminas/laminas-view": "You should install this package to use the provided view helpers"
+        "laminas/laminas-i18n-phone-number": "Tools for filtering, validating and presenting phone numbers"
     },
     "autoload": {
         "psr-4": {
