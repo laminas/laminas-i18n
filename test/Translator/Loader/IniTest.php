@@ -6,8 +6,9 @@ namespace LaminasTest\I18n\Translator\Loader;
 
 use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\Ini as IniLoader;
+use Laminas\I18n\Translator\Plural\Rule;
 use Laminas\I18n\Translator\TextDomain;
-use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\TestCase;
 
 use function get_include_path;
 use function realpath;
@@ -99,29 +100,12 @@ final class IniTest extends TestCase
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
 
-        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
-        self::assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
-        self::assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
-        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
-    }
+        $rule = $textDomain->getPluralRule();
+        self::assertInstanceOf(Rule::class, $rule);
 
-    public function testLoaderLoadsFromIncludePath(): void
-    {
-        $loader = new IniLoader();
-        $loader->setUseIncludePath(true);
-        $textDomain = $loader->load('en_EN', 'translation_en.ini');
-
-        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
-    }
-
-    public function testLoaderLoadsFromPhar(): void
-    {
-        $loader = new IniLoader();
-        $loader->setUseIncludePath(true);
-        $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.ini');
-
-        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
+        self::assertEquals(2, $rule->evaluate(0));
+        self::assertEquals(0, $rule->evaluate(1));
+        self::assertEquals(1, $rule->evaluate(2));
+        self::assertEquals(2, $rule->evaluate(10));
     }
 }

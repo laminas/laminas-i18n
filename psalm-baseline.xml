@@ -78,26 +78,6 @@
       <code><![CDATA[$content]]></code>
     </PossiblyUndefinedArrayOffset>
   </file>
-  <file src="src/Translator/Loader/Ini.php">
-    <MixedArgument>
-      <code><![CDATA[$messagesNamespaced['plural']['plural_forms']]]></code>
-    </MixedArgument>
-    <MixedArrayOffset>
-      <code><![CDATA[$messages[$message['message']]]]></code>
-      <code><![CDATA[$messages[array_shift($message)]]]></code>
-    </MixedArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$list]]></code>
-      <code><![CDATA[$messages[$message['message']]]]></code>
-      <code><![CDATA[$messages[array_shift($message)]]]></code>
-    </MixedAssignment>
-    <PossiblyNullArrayOffset>
-      <code><![CDATA[$messages]]></code>
-    </PossiblyNullArrayOffset>
-    <TypeDoesNotContainType>
-      <code><![CDATA[is_array($messages)]]></code>
-    </TypeDoesNotContainType>
-  </file>
   <file src="src/Translator/Loader/PhpArray.php">
     <MixedArgument>
       <code><![CDATA[$textDomain['']['plural_forms']]]></code>
@@ -538,14 +518,6 @@
     </RedundantCondition>
   </file>
   <file src="test/Translator/Loader/GettextTest.php">
-    <PossiblyNullReference>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-    </PossiblyNullReference>
-  </file>
-  <file src="test/Translator/Loader/IniTest.php">
     <PossiblyNullReference>
       <code><![CDATA[evaluate]]></code>
       <code><![CDATA[evaluate]]></code>
