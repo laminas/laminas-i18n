@@ -5,9 +5,6 @@
         "Laminas\\Config\\Reader\\Ini",
         "Laminas\\EventManager\\Event",
         "Laminas\\EventManager\\EventManager",
-        "Laminas\\EventManager\\EventManagerInterface",
-        "Laminas\\View\\Helper\\AbstractHelper",
-        "Laminas\\View\\Helper\\DeprecatedAbstractHelperHierarchyTrait",
-        "Laminas\\View\\HtmlAttributesSet"
+        "Laminas\\EventManager\\EventManagerInterface"
     ]
 }

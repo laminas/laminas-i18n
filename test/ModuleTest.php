@@ -23,7 +23,6 @@ final class ModuleTest extends TestCase
         /** @psalm-suppress RedundantConditionGivenDocblockType */
         self::assertIsArray($config);
         self::assertArrayHasKey('service_manager', $config);
-        self::assertArrayHasKey('view_helpers', $config);
     }
 
     public function testInitRegistersPluginManagerSpecificationWithServiceListener(): void
