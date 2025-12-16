@@ -16,7 +16,6 @@ class Module
      *
      * @return array{
      *     service_manager: ServiceManagerConfiguration,
-     *     validators: ServiceManagerConfiguration,
      *     view_helpers: ServiceManagerConfiguration,
      * }
      */
@@ -25,7 +24,6 @@ class Module
         $provider = new ConfigProvider();
         return [
             'service_manager' => $provider->getDependencyConfig(),
-            'validators'      => $provider->getValidatorConfig(),
             'view_helpers'    => $provider->getViewHelperConfig(),
         ];
     }

@@ -5,51 +5,6 @@
       <code><![CDATA[ExtensionNotLoadedException]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Filter/AbstractLocale.php">
-    <DeprecatedClass>
-      <code><![CDATA[AbstractFilter]]></code>
-    </DeprecatedClass>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$this->options]]></code>
-      <code><![CDATA[$this->options]]></code>
-    </InvalidPropertyAssignmentValue>
-    <MixedReturnStatement>
-      <code><![CDATA[$this->options['locale']]]></code>
-      <code><![CDATA[$this->options['locale']]]></code>
-    </MixedReturnStatement>
-  </file>
-  <file src="src/Filter/Alnum.php">
-    <DeprecatedClass>
-      <code><![CDATA[$this->setOptions($allowWhiteSpaceOrOptions)]]></code>
-    </DeprecatedClass>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$value]]></code>
-    </MixedArgumentTypeCoercion>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$allowWhiteSpaceOrOptions]]></code>
-      <code><![CDATA[$allowWhiteSpaceOrOptions]]></code>
-    </PossiblyInvalidArgument>
-    <RedundantCastGivenDocblockType>
-      <code><![CDATA[(bool) $flag]]></code>
-    </RedundantCastGivenDocblockType>
-  </file>
-  <file src="src/Filter/Alpha.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$value]]></code>
-    </ArgumentTypeCoercion>
-    <NullableReturnStatement>
-      <code><![CDATA[preg_replace($pattern, '', $value)]]></code>
-    </NullableReturnStatement>
-  </file>
-  <file src="src/Filter/NumberParse.php">
-    <DeprecatedClass>
-      <code><![CDATA[$this->setOptions($localeOrOptions)]]></code>
-    </DeprecatedClass>
-    <RedundantCastGivenDocblockType>
-      <code><![CDATA[(int) $style]]></code>
-      <code><![CDATA[(int) $type]]></code>
-    </RedundantCastGivenDocblockType>
-  </file>
   <file src="src/Module.php">
     <UndefinedDocblockClass>
       <code><![CDATA[ModuleManager]]></code>
@@ -570,124 +525,6 @@
       <code><![CDATA[$trConfig]]></code>
     </MixedAssignment>
   </file>
-  <file src="src/Validator/Alnum.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getAllowWhiteSpace]]></code>
-    </DeprecatedMethod>
-    <RedundantCastGivenDocblockType>
-      <code><![CDATA[(bool) $allowWhiteSpace]]></code>
-      <code><![CDATA[(bool) $allowWhiteSpace]]></code>
-    </RedundantCastGivenDocblockType>
-  </file>
-  <file src="src/Validator/Alpha.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getAllowWhiteSpace]]></code>
-    </DeprecatedMethod>
-    <InvalidClassConstantType>
-      <code><![CDATA[INVALID]]></code>
-      <code><![CDATA[STRING_EMPTY]]></code>
-    </InvalidClassConstantType>
-    <InvalidExtendClass>
-      <code><![CDATA[Alnum]]></code>
-    </InvalidExtendClass>
-    <MethodSignatureMismatch>
-      <code><![CDATA[public function isValid($value)]]></code>
-    </MethodSignatureMismatch>
-    <NonInvariantDocblockPropertyType>
-      <code><![CDATA[$filter]]></code>
-    </NonInvariantDocblockPropertyType>
-  </file>
-  <file src="src/Validator/DateTime.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getDateType]]></code>
-      <code><![CDATA[getLocale]]></code>
-      <code><![CDATA[getTimeType]]></code>
-      <code><![CDATA[setCalendar]]></code>
-      <code><![CDATA[setPattern]]></code>
-      <code><![CDATA[setTimezone]]></code>
-    </DeprecatedMethod>
-    <DocblockTypeContradiction>
-      <code><![CDATA[is_string($value)]]></code>
-    </DocblockTypeContradiction>
-    <InvalidArgument>
-      <code><![CDATA[$this->formatter->getTimezone()]]></code>
-    </InvalidArgument>
-    <MoreSpecificImplementedParamType>
-      <code><![CDATA[$value]]></code>
-    </MoreSpecificImplementedParamType>
-    <PossiblyNullArgument>
-      <code><![CDATA[$this->getDateType()]]></code>
-      <code><![CDATA[$this->getTimeType()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[getCalendar]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Validator/IsFloat.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getLocale]]></code>
-      <code><![CDATA[getLocale]]></code>
-      <code><![CDATA[setLocale]]></code>
-    </DeprecatedMethod>
-    <MixedArgument>
-      <code><![CDATA[$options['locale']]]></code>
-    </MixedArgument>
-  </file>
-  <file src="src/Validator/IsInt.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getLocale]]></code>
-      <code><![CDATA[setLocale]]></code>
-      <code><![CDATA[setStrict]]></code>
-    </DeprecatedMethod>
-    <DocblockTypeContradiction>
-      <code><![CDATA[is_bool($strict)]]></code>
-    </DocblockTypeContradiction>
-    <InvalidArrayOffset>
-      <code><![CDATA[[
-            $groupingSep => '',
-            $decimalSep  => '.',
-        ]]]></code>
-    </InvalidArrayOffset>
-    <MixedArgument>
-      <code><![CDATA[$options['locale']]]></code>
-      <code><![CDATA[$options['strict']]]></code>
-    </MixedArgument>
-    <PossiblyNullArgument>
-      <code><![CDATA[$locale]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Validator/PostCode.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getFormat]]></code>
-      <code><![CDATA[getLocale]]></code>
-      <code><![CDATA[getService]]></code>
-      <code><![CDATA[setFormat]]></code>
-      <code><![CDATA[setLocale]]></code>
-      <code><![CDATA[setLocale]]></code>
-      <code><![CDATA[setOptions]]></code>
-      <code><![CDATA[setService]]></code>
-    </DeprecatedMethod>
-    <MixedArgument>
-      <code><![CDATA[$format]]></code>
-      <code><![CDATA[$options['format']]]></code>
-      <code><![CDATA[$options['locale']]]></code>
-    </MixedArgument>
-    <MixedArrayAccess>
-      <code><![CDATA[$format[0]]]></code>
-      <code><![CDATA[$format[strlen((string) $format) - 1]]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code><![CDATA[$format]]></code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$format]]></code>
-      <code><![CDATA[$format]]></code>
-    </MixedOperand>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-    </PossiblyInvalidArgument>
-  </file>
   <file src="src/View/Helper/AbstractTranslatorHelper.php">
     <DeprecatedClass>
       <code><![CDATA[AbstractHelper]]></code>
@@ -903,11 +740,6 @@
       <code><![CDATA[null]]></code>
       <code><![CDATA[null]]></code>
     </NullArgument>
-  </file>
-  <file src="test/Validator/IsFloatTest.php">
-    <MixedOperand>
-      <code><![CDATA[$value]]></code>
-    </MixedOperand>
   </file>
   <file src="test/View/Helper/CurrencyFormatTest.php">
     <PossiblyNullArgument>

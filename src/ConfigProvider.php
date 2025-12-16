@@ -17,7 +17,6 @@ class ConfigProvider
      *
      * @return array{
      *     dependencies: ServiceManagerConfiguration,
-     *     validators: ServiceManagerConfiguration,
      *     view_helpers: ServiceManagerConfiguration,
      *     locale: string|null,
      * }
@@ -26,7 +25,6 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
-            'validators'   => $this->getValidatorConfig(),
             'view_helpers' => $this->getViewHelperConfig(),
             'locale'       => null,
         ];
@@ -53,55 +51,6 @@ class ConfigProvider
                 Translator\TranslatorInterface::class   => Translator\TranslatorServiceFactory::class,
                 Translator\LoaderPluginManager::class   => Translator\LoaderPluginManagerFactory::class,
                 Geography\DefaultCountryCodeList::class => Geography\DefaultCountryCodeListFactory::class,
-            ],
-        ];
-    }
-
-    /**
-     * Return laminas-validator configuration.
-     *
-     * @return ServiceManagerConfiguration
-     */
-    public function getValidatorConfig()
-    {
-        return [
-            'aliases'   => [
-                'alnum'    => Validator\Alnum::class,
-                'Alnum'    => Validator\Alnum::class,
-                'alpha'    => Validator\Alpha::class,
-                'Alpha'    => Validator\Alpha::class,
-                'datetime' => Validator\DateTime::class,
-                'dateTime' => Validator\DateTime::class,
-                'DateTime' => Validator\DateTime::class,
-                'float'    => Validator\IsFloat::class,
-                'Float'    => Validator\IsFloat::class,
-                'int'      => Validator\IsInt::class,
-                'Int'      => Validator\IsInt::class,
-                'isfloat'  => Validator\IsFloat::class,
-                'isFloat'  => Validator\IsFloat::class,
-                'IsFloat'  => Validator\IsFloat::class,
-                'isint'    => Validator\IsInt::class,
-                'isInt'    => Validator\IsInt::class,
-                'IsInt'    => Validator\IsInt::class,
-                'postcode' => Validator\PostCode::class,
-                'postCode' => Validator\PostCode::class,
-                'PostCode' => Validator\PostCode::class,
-
-                // Legacy Zend Framework aliases
-                'Zend\I18n\Validator\Alnum'    => Validator\Alnum::class,
-                'Zend\I18n\Validator\Alpha'    => Validator\Alpha::class,
-                'Zend\I18n\Validator\DateTime' => Validator\DateTime::class,
-                'Zend\I18n\Validator\IsFloat'  => Validator\IsFloat::class,
-                'Zend\I18n\Validator\IsInt'    => Validator\IsInt::class,
-                'Zend\I18n\Validator\PostCode' => Validator\PostCode::class,
-            ],
-            'factories' => [
-                Validator\Alnum::class    => InvokableFactory::class,
-                Validator\Alpha::class    => InvokableFactory::class,
-                Validator\DateTime::class => InvokableFactory::class,
-                Validator\IsFloat::class  => InvokableFactory::class,
-                Validator\IsInt::class    => InvokableFactory::class,
-                Validator\PostCode::class => InvokableFactory::class,
             ],
         ];
     }
