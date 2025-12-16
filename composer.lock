@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7f353dc4791f566702f0c7650f1d039",
+    "content-hash": "61a1909ee0888e51cf9ebbe4e395c61a",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -312,16 +312,16 @@
         },
         {
             "name": "psr/cache",
-            "version": "2.0.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "213f9dbc5b9bfbc4f8db86d2838dc968752ce13b"
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/213f9dbc5b9bfbc4f8db86d2838dc968752ce13b",
-                "reference": "213f9dbc5b9bfbc4f8db86d2838dc968752ce13b",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
                 "shasum": ""
             },
             "require": {
@@ -355,28 +355,33 @@
                 "psr-6"
             ],
             "support": {
-                "source": "https://github.com/php-fig/cache/tree/2.0.0"
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
             },
-            "time": "2021-02-03T23:23:37+00:00"
+            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/container",
-            "version": "1.1.2",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
-                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963",
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Psr\\Container\\": "src/"
@@ -403,9 +408,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/1.1.2"
+                "source": "https://github.com/php-fig/container/tree/2.0.2"
             },
-            "time": "2021-11-05T16:50:12+00:00"
+            "time": "2021-11-05T16:47:00+00:00"
         }
     ],
     "packages-dev": [
@@ -2103,75 +2108,6 @@
                 }
             ],
             "time": "2025-05-13T08:37:04+00:00"
-        },
-        {
-            "name": "laminas/laminas-config",
-            "version": "3.10.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-config.git",
-                "reference": "0f50adbf2b2e01e0fe99c13e37d3a6c1ef645185"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-config/zipball/0f50adbf2b2e01e0fe99c13e37d3a6c1ef645185",
-                "reference": "0f50adbf2b2e01e0fe99c13e37d3a6c1ef645185",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laminas/laminas-stdlib": "^3.6",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
-                "psr/container": "^1.0"
-            },
-            "conflict": {
-                "container-interop/container-interop": "<1.2.0",
-                "zendframework/zend-config": "*"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "^3.0.1",
-                "laminas/laminas-filter": "^2.39.0",
-                "laminas/laminas-i18n": "^2.29.0",
-                "laminas/laminas-servicemanager": "^3.23.0",
-                "phpunit/phpunit": "^10.5.38"
-            },
-            "suggest": {
-                "laminas/laminas-filter": "^2.7.2; install if you want to use the Filter processor",
-                "laminas/laminas-i18n": "^2.7.4; install if you want to use the Translator processor",
-                "laminas/laminas-servicemanager": "^2.7.8 || ^3.3; if you need an extensible plugin manager for use with the Config Factory"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Config\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "provides a nested object property based user interface for accessing this configuration data within application code",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "config",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-config/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-config/issues",
-                "rss": "https://github.com/laminas/laminas-config/releases.atom",
-                "source": "https://github.com/laminas/laminas-config"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "abandoned": true,
-            "time": "2024-12-05T14:32:05+00:00"
         },
         {
             "name": "laminas/laminas-eventmanager",

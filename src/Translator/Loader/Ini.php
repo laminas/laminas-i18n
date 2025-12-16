@@ -2,82 +2,80 @@
 
 namespace Laminas\I18n\Translator\Loader;
 
-use Laminas\Config\Reader\Ini as IniReader;
-use Laminas\I18n\Exception;
+use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
 
 use function array_shift;
 use function count;
-use function gettype;
 use function is_array;
 use function is_file;
 use function is_readable;
+use function is_string;
 use function sprintf;
 use function stream_resolve_include_path;
 
 /**
  * PHP INI format loader.
- *
- * @final
  */
-class Ini extends AbstractFileLoader
+final class Ini implements FileLoaderInterface
 {
-    /**
-     * load(): defined by FileLoaderInterface.
-     *
-     * @see    FileLoaderInterface::load()
-     *
-     * @param  string $locale
-     * @param  string $filename
-     * @return TextDomain
-     * @throws Exception\InvalidArgumentException
-     */
-    public function load($locale, $filename)
+    /** @inheritDoc */
+    public function load($locale, $filename): TextDomain
     {
         $resolvedIncludePath = stream_resolve_include_path($filename);
         $fromIncludePath     = $resolvedIncludePath !== false ? $resolvedIncludePath : $filename;
         if (! $fromIncludePath || ! is_file($fromIncludePath) || ! is_readable($fromIncludePath)) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Could not find or open file %s for reading',
                 $filename
             ));
         }
 
         $messages           = [];
-        $iniReader          = new IniReader();
-        $messagesNamespaced = $iniReader->fromFile($fromIncludePath);
+        $iniReader          = new IniFileReader();
+        $messagesNamespaced = $iniReader->read($fromIncludePath);
 
         $list = $messagesNamespaced;
-        if (isset($messagesNamespaced['translation'])) {
+        if (isset($messagesNamespaced['translation']) && is_array($messagesNamespaced['translation'])) {
             $list = $messagesNamespaced['translation'];
         }
 
         foreach ($list as $message) {
             if (! is_array($message) || count($message) < 2) {
-                throw new Exception\InvalidArgumentException(
+                throw new InvalidArgumentException(
                     'Each INI row must be an array with message and translation'
                 );
             }
-            if (isset($message['message'], $message['translation'])) {
-                $messages[$message['message']] = $message['translation'];
+
+            /** @psalm-var mixed $key */
+            $key = $message['message'] ?? null;
+            /** @psalm-var mixed $value */
+            $value = $message['translation'] ?? null;
+
+            if (is_string($key) && is_string($value)) {
+                $messages[$key] = $value;
                 continue;
             }
-            $messages[array_shift($message)] = array_shift($message);
-        }
 
-        if (! is_array($messages)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected an array, but received %s',
-                gettype($messages)
-            ));
+            /** @psalm-var mixed $key */
+            $key = array_shift($message);
+            /** @psalm-var mixed $value */
+            $value = array_shift($message);
+
+            if (is_string($key) && is_string($value)) {
+                $messages[$key] = $value;
+            }
         }
 
         $textDomain = new TextDomain($messages);
 
-        if (isset($messagesNamespaced['plural']['plural_forms'])) {
+        /** @psalm-var mixed $pluralForms */
+        $pluralForms = $messagesNamespaced['plural']['plural_forms'] ?? null;
+
+        if (is_string($pluralForms)) {
             $textDomain->setPluralRule(
-                PluralRule::fromString($messagesNamespaced['plural']['plural_forms'])
+                PluralRule::fromString($pluralForms),
             );
         }
 
