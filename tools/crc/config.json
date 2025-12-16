@@ -1,6 +1,5 @@
 {
     "symbol-whitelist" : [
-        "Laminas\\Config\\Reader\\Ini",
         "Laminas\\EventManager\\Event",
         "Laminas\\EventManager\\EventManager",
         "Laminas\\EventManager\\EventManagerInterface"

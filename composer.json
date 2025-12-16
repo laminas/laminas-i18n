@@ -45,7 +45,6 @@
         "laminas/laminas-cache": "^4.1.0",
         "laminas/laminas-cache-storage-adapter-memory": "^3.1.0",
         "laminas/laminas-coding-standard": "^3.1",
-        "laminas/laminas-config": "^3.10.1",
         "laminas/laminas-eventmanager": "^3.15.0",
         "phpunit/phpunit": "^11.5.46",
         "psalm/plugin-phpunit": "^0.19.5",
@@ -57,7 +56,6 @@
     },
     "suggest": {
         "laminas/laminas-cache": "Provides a PSR-6 cache implementation for caching translations",
-        "laminas/laminas-config": "You should install this package to use the INI translation format",
         "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
         "laminas/laminas-i18n-resources": "This package provides validator and captcha translations",
         "laminas/laminas-i18n-phone-number": "Tools for filtering, validating and presenting phone numbers"
