@@ -22,9 +22,7 @@ final class ModuleTest extends TestCase
         $config = $this->module->getConfig();
         /** @psalm-suppress RedundantConditionGivenDocblockType */
         self::assertIsArray($config);
-        self::assertArrayHasKey('filters', $config);
         self::assertArrayHasKey('service_manager', $config);
-        self::assertArrayHasKey('validators', $config);
         self::assertArrayHasKey('view_helpers', $config);
     }
 
