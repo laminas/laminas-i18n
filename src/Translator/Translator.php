@@ -2,8 +2,6 @@
 
 namespace Laminas\I18n\Translator;
 
-use Laminas\Cache;
-use Laminas\Cache\Storage\StorageInterface as CacheStorage;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerInterface;
@@ -13,6 +11,7 @@ use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
 use Locale;
+use Psr\Cache\CacheItemPoolInterface;
 use Traversable;
 
 use function array_shift;
@@ -83,12 +82,7 @@ class Translator implements TranslatorInterface
      */
     protected $fallbackLocale;
 
-    /**
-     * Translation cache.
-     *
-     * @var CacheStorage|null
-     */
-    protected $cache;
+    private CacheItemPoolInterface|null $cache = null;
 
     /**
      * Plugin manager for translation loaders.
@@ -222,10 +216,8 @@ class Translator implements TranslatorInterface
 
         // cache
         if (isset($options['cache'])) {
-            if ($options['cache'] instanceof CacheStorage) {
+            if ($options['cache'] instanceof CacheItemPoolInterface) {
                 $translator->setCache($options['cache']);
-            } else {
-                $translator->setCache(Cache\StorageFactory::factory($options['cache']));
             }
         }
 
@@ -287,24 +279,14 @@ class Translator implements TranslatorInterface
         return $this->fallbackLocale;
     }
 
-    /**
-     * Sets a cache
-     *
-     * @return $this
-     */
-    public function setCache(?CacheStorage $cache = null)
+    public function setCache(CacheItemPoolInterface|null $cache = null): self
     {
         $this->cache = $cache;
 
         return $this;
     }
 
-    /**
-     * Returns the set cache
-     *
-     * @return CacheStorage|null The set cache
-     */
-    public function getCache()
+    public function getCache(): CacheItemPoolInterface|null
     {
         return $this->cache;
     }
@@ -569,39 +551,33 @@ class Translator implements TranslatorInterface
 
     /**
      * Clears the cache for a specific textDomain and locale.
-     *
-     * @param  string $textDomain
-     * @param  string $locale
-     * @return bool
      */
-    public function clearCache($textDomain, $locale)
+    public function clearCache(string $textDomain, string $locale): bool
     {
-        if (null === ($cache = $this->getCache())) {
+        if ($this->cache === null) {
             return false;
         }
-        return $cache->removeItem($this->getCacheId($textDomain, $locale));
+
+        return $this->cache->deleteItem($this->getCacheId($textDomain, $locale));
     }
 
     /**
      * Load messages for a given language and domain.
      *
      * @triggers loadMessages.no-messages-loaded
-     * @param    string $textDomain
-     * @param    string $locale
-     * @throws   Exception\RuntimeException
-     * @return   void
+     * @throws Exception\RuntimeException
      */
-    protected function loadMessages($textDomain, $locale)
+    protected function loadMessages(string $textDomain, string $locale): void
     {
         if (! isset($this->messages[$textDomain])) {
             $this->messages[$textDomain] = [];
         }
 
-        if (null !== ($cache = $this->getCache())) {
+        if ($this->cache !== null) {
             $cacheId = $this->getCacheId($textDomain, $locale);
-
-            if (null !== ($result = $cache->getItem($cacheId))) {
-                $this->messages[$textDomain][$locale] = $result;
+            $item    = $this->cache->getItem($cacheId);
+            if ($item->isHit()) {
+                $this->messages[$textDomain][$locale] = $item->get();
 
                 return;
             }
@@ -633,8 +609,11 @@ class Translator implements TranslatorInterface
             $this->messages[$textDomain][$locale] = $discoveredTextDomain;
         }
 
-        if ($cache !== null) {
-            $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
+        if ($this->cache !== null) {
+            $cacheId = $this->getCacheId($textDomain, $locale);
+            $item    = $this->cache->getItem($cacheId);
+            $item->set($this->messages[$textDomain][$locale]);
+            $this->cache->save($item);
         }
     }
 
