@@ -59,7 +59,7 @@ use function sprintf;
 class LoaderPluginManager extends AbstractPluginManager
 {
     /** @inheritDoc */
-    protected $aliases = [
+    protected array $aliases = [
         'gettext'  => Loader\Gettext::class,
         'getText'  => Loader\Gettext::class,
         'GetText'  => Loader\Gettext::class,
@@ -80,7 +80,7 @@ class LoaderPluginManager extends AbstractPluginManager
     ];
 
     /** @inheritDoc */
-    protected $factories = [
+    protected array $factories = [
         Loader\Gettext::class  => InvokableFactory::class,
         Loader\Ini::class      => InvokableFactory::class,
         Loader\PhpArray::class => InvokableFactory::class,
@@ -98,12 +98,10 @@ class LoaderPluginManager extends AbstractPluginManager
      * Checks that the filter loaded is an instance of
      * Loader\FileLoaderInterface or Loader\RemoteLoaderInterface.
      *
-     * @param  mixed $plugin
-     * @return void
      * @throws Exception\RuntimeException If invalid.
      * @psalm-assert InstanceType $plugin
      */
-    public function validate($plugin)
+    public function validate(mixed $plugin): void
     {
         if ($plugin instanceof FileLoaderInterface || $plugin instanceof RemoteLoaderInterface) {
             // we're okay

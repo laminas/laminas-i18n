@@ -1,27 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Translator;
 
-use Laminas\ServiceManager\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
-/**
- * Translator.
- *
- * @final
- */
-class TranslatorServiceFactory implements FactoryInterface
+final readonly class TranslatorServiceFactory implements FactoryInterface
 {
-    /**
-     * Create a Translator instance.
-     *
-     * @param string $requestedName
-     * @param null|array $options
-     * @return Translator
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        string $requestedName,
+        ?array $options = null,
+    ): Translator {
         // Configure the translator
         $config     = $container->get('config');
         $trConfig   = $config['translator'] ?? [];
@@ -30,20 +22,5 @@ class TranslatorServiceFactory implements FactoryInterface
             $translator->setPluginManager($container->get('TranslatorPluginManager'));
         }
         return $translator;
-    }
-
-    /**
-     * laminas-servicemanager v2 factory for creating Translator instance.
-     *
-     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
-     *             This method will be removed in version 3.0
-     *
-     * Proxies to `__invoke()`.
-     *
-     * @return Translator
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        return $this($serviceLocator, Translator::class);
     }
 }

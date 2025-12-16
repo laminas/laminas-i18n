@@ -123,11 +123,17 @@
     </MixedArrayAccess>
   </file>
   <file src="src/Translator/LoaderPluginManager.php">
+    <MethodSignatureMismatch>
+      <code><![CDATA[LoaderPluginManager]]></code>
+    </MethodSignatureMismatch>
     <MissingReturnType>
       <code><![CDATA[validatePlugin]]></code>
     </MissingReturnType>
+    <NonInvariantDocblockPropertyType>
+      <code><![CDATA[$aliases]]></code>
+      <code><![CDATA[$factories]]></code>
+    </NonInvariantDocblockPropertyType>
     <ParamNameMismatch>
-      <code><![CDATA[$plugin]]></code>
       <code><![CDATA[$plugin]]></code>
     </ParamNameMismatch>
     <PossiblyUnusedMethod>
@@ -135,19 +141,12 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Translator/LoaderPluginManagerFactory.php">
-    <DeprecatedInterface>
-      <code><![CDATA[LoaderPluginManagerFactory]]></code>
-    </DeprecatedInterface>
-    <DeprecatedProperty>
-      <code><![CDATA[$this->creationOptions]]></code>
-      <code><![CDATA[$this->creationOptions]]></code>
-    </DeprecatedProperty>
     <MixedArgument>
       <code><![CDATA[$config['translator_plugins']]]></code>
     </MixedArgument>
-    <ParamNameMismatch>
-      <code><![CDATA[$container]]></code>
-    </ParamNameMismatch>
+    <MoreSpecificImplementedParamType>
+      <code><![CDATA[$options]]></code>
+    </MoreSpecificImplementedParamType>
   </file>
   <file src="src/Translator/Plural/Parser.php">
     <MixedArgument>
@@ -397,7 +396,6 @@
       <code><![CDATA[$pluginManager]]></code>
     </MissingConstructor>
     <MixedArgument>
-      <code><![CDATA[$cacheId]]></code>
       <code><![CDATA[$file['filename']]]></code>
       <code><![CDATA[$file['filename']]]></code>
       <code><![CDATA[$file['filename']]]></code>
@@ -406,7 +404,6 @@
       <code><![CDATA[$file['type']]]></code>
       <code><![CDATA[$file['type']]]></code>
       <code><![CDATA[$loaderType]]></code>
-      <code><![CDATA[$options['cache']]]></code>
       <code><![CDATA[$pattern['base_dir']]]></code>
       <code><![CDATA[$pattern['pattern']]]></code>
       <code><![CDATA[$pattern['pattern']]]></code>
@@ -480,9 +477,6 @@
     <PossiblyNullReference>
       <code><![CDATA[evaluate]]></code>
     </PossiblyNullReference>
-    <PossiblyUndefinedVariable>
-      <code><![CDATA[$cacheId]]></code>
-    </PossiblyUndefinedVariable>
     <RedundantCondition>
       <code><![CDATA[$translation[$index] !== null]]></code>
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>
@@ -511,9 +505,6 @@
     </DeprecatedInterface>
   </file>
   <file src="src/Translator/TranslatorServiceFactory.php">
-    <DeprecatedInterface>
-      <code><![CDATA[TranslatorServiceFactory]]></code>
-    </DeprecatedInterface>
     <MixedArgument>
       <code><![CDATA[$container->get('TranslatorPluginManager')]]></code>
       <code><![CDATA[$trConfig]]></code>

@@ -1,7 +1,5 @@
 {
     "symbol-whitelist" : [
-        "Laminas\\Cache\\StorageFactory",
-        "Laminas\\Cache\\Storage\\StorageInterface",
         "Laminas\\Config\\Reader\\Ini",
         "Laminas\\EventManager\\Event",
         "Laminas\\EventManager\\EventManager",
