@@ -56,7 +56,7 @@
         "zendframework/zend-i18n": "*"
     },
     "suggest": {
-        "laminas/laminas-cache": "You should install this package to cache the translations",
+        "laminas/laminas-cache": "Provides a PSR-6 cache implementation for caching translations",
         "laminas/laminas-config": "You should install this package to use the INI translation format",
         "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
         "laminas/laminas-i18n-resources": "This package provides validator and captcha translations",
