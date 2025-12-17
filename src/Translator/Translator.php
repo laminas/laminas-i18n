@@ -10,7 +10,6 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
-use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Translator\TranslatorInterface;
 use Locale;
@@ -88,13 +87,6 @@ class Translator implements TranslatorInterface
     private CacheItemPoolInterface|null $cache = null;
 
     /**
-     * Plugin manager for translation loaders.
-     *
-     * @var LoaderPluginManager
-     */
-    protected $pluginManager;
-
-    /**
      * Event manager for triggering translator events.
      *
      * @var EventManagerInterface
@@ -108,6 +100,11 @@ class Translator implements TranslatorInterface
      */
     protected $eventsEnabled = false;
 
+    public function __construct(
+        private LoaderPluginManager $pluginManager,
+    ) {
+    }
+
     /**
      * Instantiate a translator
      *
@@ -115,7 +112,7 @@ class Translator implements TranslatorInterface
      * @return static
      * @throws Exception\InvalidArgumentException
      */
-    public static function factory($options)
+    public static function factory(LoaderPluginManager $pluginManager, $options)
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -127,7 +124,7 @@ class Translator implements TranslatorInterface
             ));
         }
 
-        $translator = new static();
+        $translator = new self($pluginManager);
 
         // locales
         if (isset($options['locale'])) {
@@ -142,7 +139,7 @@ class Translator implements TranslatorInterface
         if (isset($options['translation_file_patterns'])) {
             if (! is_array($options['translation_file_patterns'])) {
                 throw new Exception\InvalidArgumentException(
-                    '"translation_file_patterns" should be an array'
+                    '"translation_file_patterns" should be an array',
                 );
             }
 
@@ -151,7 +148,7 @@ class Translator implements TranslatorInterface
                 foreach ($requiredKeys as $key) {
                     if (! isset($pattern[$key])) {
                         throw new Exception\InvalidArgumentException(
-                            "'{$key}' is missing for translation pattern options"
+                            "'{$key}' is missing for translation pattern options",
                         );
                     }
                 }
@@ -160,7 +157,7 @@ class Translator implements TranslatorInterface
                     $pattern['type'],
                     $pattern['base_dir'],
                     $pattern['pattern'],
-                    $pattern['text_domain'] ?? 'default'
+                    $pattern['text_domain'] ?? 'default',
                 );
             }
         }
@@ -169,7 +166,7 @@ class Translator implements TranslatorInterface
         if (isset($options['translation_files'])) {
             if (! is_array($options['translation_files'])) {
                 throw new Exception\InvalidArgumentException(
-                    '"translation_files" should be an array'
+                    '"translation_files" should be an array',
                 );
             }
 
@@ -178,7 +175,7 @@ class Translator implements TranslatorInterface
                 foreach ($requiredKeys as $key) {
                     if (! isset($file[$key])) {
                         throw new Exception\InvalidArgumentException(
-                            "'{$key}' is missing for translation file options"
+                            "'{$key}' is missing for translation file options",
                         );
                     }
                 }
@@ -187,7 +184,7 @@ class Translator implements TranslatorInterface
                     $file['type'],
                     $file['filename'],
                     $file['text_domain'] ?? 'default',
-                    $file['locale'] ?? null
+                    $file['locale'] ?? null,
                 );
             }
         }
@@ -196,7 +193,7 @@ class Translator implements TranslatorInterface
         if (isset($options['remote_translation'])) {
             if (! is_array($options['remote_translation'])) {
                 throw new Exception\InvalidArgumentException(
-                    '"remote_translation" should be an array'
+                    '"remote_translation" should be an array',
                 );
             }
 
@@ -205,14 +202,14 @@ class Translator implements TranslatorInterface
                 foreach ($requiredKeys as $key) {
                     if (! isset($remote[$key])) {
                         throw new Exception\InvalidArgumentException(
-                            "'{$key}' is missing for remote translation options"
+                            "'{$key}' is missing for remote translation options",
                         );
                     }
                 }
 
                 $translator->addRemoteTranslations(
                     $remote['type'],
-                    $remote['text_domain'] ?? 'default'
+                    $remote['text_domain'] ?? 'default',
                 );
             }
         }
@@ -295,34 +292,6 @@ class Translator implements TranslatorInterface
     }
 
     /**
-     * Set the plugin manager for translation loaders
-     *
-     * @return $this
-     */
-    public function setPluginManager(LoaderPluginManager $pluginManager)
-    {
-        $this->pluginManager = $pluginManager;
-
-        return $this;
-    }
-
-    /**
-     * Retrieve the plugin manager for translation loaders.
-     *
-     * Lazy loads an instance if none currently set.
-     *
-     * @return LoaderPluginManager
-     */
-    public function getPluginManager()
-    {
-        if (! $this->pluginManager instanceof LoaderPluginManager) {
-            $this->setPluginManager(new LoaderPluginManager(new ServiceManager()));
-        }
-
-        return $this->pluginManager;
-    }
-
-    /**
      * Translate a message.
      *
      * @param  string      $message
@@ -366,7 +335,7 @@ class Translator implements TranslatorInterface
         $plural,
         $number,
         $textDomain = 'default',
-        $locale = null
+        $locale = null,
     ) {
         $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
@@ -395,7 +364,7 @@ class Translator implements TranslatorInterface
                 $plural,
                 $number,
                 $textDomain,
-                $fallbackLocale
+                $fallbackLocale,
             );
         }
 
@@ -414,7 +383,7 @@ class Translator implements TranslatorInterface
     protected function getTranslatedMessage(
         $message,
         $locale,
-        $textDomain = 'default'
+        $textDomain = 'default',
     ) {
         if ($message === '' || $message === null) {
             return '';
@@ -478,7 +447,7 @@ class Translator implements TranslatorInterface
         $type,
         $filename,
         $textDomain = 'default',
-        $locale = null
+        $locale = null,
     ) {
         $locale ??= '*';
 
@@ -507,7 +476,7 @@ class Translator implements TranslatorInterface
         $type,
         $baseDir,
         $pattern,
-        $textDomain = 'default'
+        $textDomain = 'default',
     ) {
         if (! isset($this->patterns[$textDomain])) {
             $this->patterns[$textDomain] = [];
@@ -634,7 +603,7 @@ class Translator implements TranslatorInterface
 
         if (isset($this->remote[$textDomain])) {
             foreach ($this->remote[$textDomain] as $loaderType) {
-                $loader = $this->getPluginManager()->get($loaderType);
+                $loader = $this->pluginManager->get($loaderType);
 
                 if (! $loader instanceof RemoteLoaderInterface) {
                     throw new Exception\RuntimeException('Specified loader is not a remote loader');
@@ -670,7 +639,7 @@ class Translator implements TranslatorInterface
                 $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
 
                 if (is_file($filename)) {
-                    $loader = $this->getPluginManager()->get($pattern['type']);
+                    $loader = $this->pluginManager->get($pattern['type']);
 
                     if (! $loader instanceof FileLoaderInterface) {
                         throw new Exception\RuntimeException('Specified loader is not a file loader');
@@ -708,7 +677,7 @@ class Translator implements TranslatorInterface
             }
 
             foreach ($this->files[$textDomain][$currentLocale] as $file) {
-                $loader = $this->getPluginManager()->get($file['type']);
+                $loader = $this->pluginManager->get($file['type']);
 
                 if (! $loader instanceof FileLoaderInterface) {
                     throw new Exception\RuntimeException('Specified loader is not a file loader');

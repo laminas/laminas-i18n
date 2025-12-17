@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Translator;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorServiceFactory;
+use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\I18n\TestCase;
 use Psr\Container\ContainerInterface;
@@ -15,42 +16,32 @@ final class TranslatorServiceFactoryTest extends TestCase
 {
     public function testCreateServiceWithNoTranslatorKeyDefined(): void
     {
-        $pluginManagerMock = new LoaderPluginManager(new ServiceManager());
+        $pluginManager = new LoaderPluginManager(new ServiceManager());
 
-        $serviceLocator = $this->createMock(ContainerInterface::class);
-        $serviceLocator->expects(self::once())
-            ->method('has')
-            ->with('TranslatorPluginManager')
-            ->willReturn(true);
-
-        $serviceLocator->expects(self::exactly(2))
+        $container = $this->createMock(ContainerInterface::class);
+        $container->expects(self::exactly(2))
             ->method('get')
             ->willReturnMap([
-                ['TranslatorPluginManager', $pluginManagerMock],
                 ['config', []],
+                [LoaderPluginManager::class, $pluginManager],
             ]);
 
         $factory    = new TranslatorServiceFactory();
-        $translator = $factory($serviceLocator, Translator::class);
+        $translator = $factory($container, Translator::class);
         self::assertInstanceOf(Translator::class, $translator);
-        self::assertSame($pluginManagerMock, $translator->getPluginManager());
     }
 
     public function testCreateServiceWithNoTranslatorPluginManagerDefined(): void
     {
-        $serviceLocator = $this->createMock(ContainerInterface::class);
-        $serviceLocator->expects(self::once())
-            ->method('has')
-            ->with('TranslatorPluginManager')
-            ->willReturn(false);
+        $serviceManager = new ServiceManager([
+            'services' => [
+                'config' => [],
+            ],
+        ]);
 
-        $serviceLocator->expects(self::once())
-            ->method('get')
-            ->with('config')
-            ->willReturn([]);
+        $factory = new TranslatorServiceFactory();
+        $this->expectException(ServiceNotFoundException::class);
 
-        $factory    = new TranslatorServiceFactory();
-        $translator = $factory($serviceLocator, Translator::class);
-        self::assertInstanceOf(Translator::class, $translator);
+        $factory->__invoke($serviceManager, 'whatever', []);
     }
 }

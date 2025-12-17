@@ -8,8 +8,10 @@ use Laminas\Cache\Psr\CacheItemPool\CacheItemPoolDecorator;
 use Laminas\Cache\Storage\Adapter\Memory;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
+use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator;
+use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\I18n\TestCase;
 use LaminasTest\I18n\Translator\TestAsset\Loader as TestLoader;
 use Locale;
@@ -18,18 +20,20 @@ final class TranslatorTest extends TestCase
 {
     private Translator $translator;
     private string $testFilesDir;
+    private LoaderPluginManager $pluginManager;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->translator = new Translator();
+        $this->pluginManager = new LoaderPluginManager(new ServiceManager());
+        $this->translator    = new Translator($this->pluginManager);
         Locale::setDefault('en_EN');
         $this->testFilesDir = __DIR__ . '/_files';
     }
 
     public function testFactoryCreatesTranslator(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'   => 'de_DE',
             'patterns' => [
                 [
@@ -52,7 +56,7 @@ final class TranslatorTest extends TestCase
 
     public function testTranslationFromSeveralTranslationFiles(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
@@ -100,7 +104,7 @@ final class TranslatorTest extends TestCase
 
     public function testTranslationFromDifferentSourceTypes(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
@@ -125,7 +129,7 @@ final class TranslatorTest extends TestCase
     {
         $cacheItemPool = new CacheItemPoolDecorator(new Memory());
 
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'   => 'de_DE',
             'patterns' => [
                 [
@@ -156,13 +160,11 @@ final class TranslatorTest extends TestCase
     {
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $pm                 = $this->translator->getPluginManager();
-        $pm->configure([
+        $this->pluginManager->configure([
             'services' => [
                 'test' => $loader,
             ],
         ]);
-        $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);
 
         self::assertEquals('bar', $this->translator->translate('foo'));
@@ -187,9 +189,7 @@ final class TranslatorTest extends TestCase
 
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $plugins            = $this->translator->getPluginManager();
-        $plugins->configure(['services' => ['test' => $loader]]);
-        $this->translator->setPluginManager($plugins);
+        $this->pluginManager->configure(['services' => ['test' => $loader]]);
         $this->translator->addTranslationFile('test', null);
 
         self::assertEquals('bar', $this->translator->translate('foo'));
@@ -349,12 +349,12 @@ final class TranslatorTest extends TestCase
 
     public function testEnableEventMangerViaFactory(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'event_manager_enabled' => true,
         ]);
         self::assertTrue($translator->isEventManagerEnabled());
 
-        $translator = Translator::factory([]);
+        $translator = Translator::factory($this->pluginManager, []);
         self::assertFalse($translator->isEventManagerEnabled());
     }
 
@@ -532,13 +532,11 @@ final class TranslatorTest extends TestCase
     {
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $pm                 = $this->translator->getPluginManager();
-        $pm->configure([
+        $this->pluginManager->configure([
             'services' => [
                 'test' => $loader,
             ],
         ]);
-        $this->translator->setPluginManager($pm);
         $this->translator->addTranslationFile('test', null);
 
         self::assertEquals('', $this->translator->translate(null));

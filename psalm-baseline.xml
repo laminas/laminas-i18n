@@ -126,10 +126,6 @@
       <code><![CDATA[$r]]></code>
       <code><![CDATA[$r]]></code>
     </MissingClosureParamType>
-    <MissingConstructor>
-      <code><![CDATA[$events]]></code>
-      <code><![CDATA[$pluginManager]]></code>
-    </MissingConstructor>
     <MixedArgument>
       <code><![CDATA[$file['filename']]]></code>
       <code><![CDATA[$file['filename']]]></code>
@@ -219,7 +215,6 @@
   </file>
   <file src="src/Translator/TranslatorServiceFactory.php">
     <MixedArgument>
-      <code><![CDATA[$container->get('TranslatorPluginManager')]]></code>
       <code><![CDATA[$trConfig]]></code>
     </MixedArgument>
     <MixedArrayAccess>
