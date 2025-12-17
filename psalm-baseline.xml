@@ -98,19 +98,6 @@
     <MethodSignatureMismatch>
       <code><![CDATA[LoaderPluginManager]]></code>
     </MethodSignatureMismatch>
-    <MissingReturnType>
-      <code><![CDATA[validatePlugin]]></code>
-    </MissingReturnType>
-    <NonInvariantDocblockPropertyType>
-      <code><![CDATA[$aliases]]></code>
-      <code><![CDATA[$factories]]></code>
-    </NonInvariantDocblockPropertyType>
-    <ParamNameMismatch>
-      <code><![CDATA[$plugin]]></code>
-    </ParamNameMismatch>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[validatePlugin]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Translator/LoaderPluginManagerFactory.php">
     <MixedArgument>

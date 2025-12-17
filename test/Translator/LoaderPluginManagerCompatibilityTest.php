@@ -11,7 +11,6 @@ use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;
-use ReflectionProperty;
 use stdClass;
 use Throwable;
 
@@ -82,15 +81,24 @@ final class LoaderPluginManagerCompatibilityTest extends TestCase
     /** @return list<array{0: string, 1: class-string}> */
     public static function aliasProvider(): array
     {
-        $manager    = self::getPluginManager();
-        $reflection = new ReflectionProperty($manager, 'aliases');
-        $data       = [];
-        foreach ($reflection->getValue($manager) as $alias => $expected) {
+        $manager         = self::getPluginManager();
+        $reflectionClass = new ReflectionClass($manager);
+        $constant        = $reflectionClass->getReflectionConstant('CONFIGURATION');
+
+        /** @psalm-var mixed $config */
+        $config = $constant->getValue();
+        self::assertIsArray($config);
+        self::assertArrayHasKey('aliases', $config);
+        self::assertIsArray($config['aliases']);
+
+        $data = [];
+        foreach ($config['aliases'] as $alias => $expected) {
             self::assertIsString($alias);
             self::assertIsString($expected);
             self::assertTrue(class_exists($expected));
             $data[] = [$alias, $expected];
         }
+
         return $data;
     }
 
