@@ -7,6 +7,7 @@ namespace LaminasTest\I18n\Translator;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorServiceFactory;
+use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\I18n\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -14,7 +15,7 @@ final class TranslatorServiceFactoryTest extends TestCase
 {
     public function testCreateServiceWithNoTranslatorKeyDefined(): void
     {
-        $pluginManagerMock = $this->createMock(LoaderPluginManager::class);
+        $pluginManagerMock = new LoaderPluginManager(new ServiceManager());
 
         $serviceLocator = $this->createMock(ContainerInterface::class);
         $serviceLocator->expects(self::once())
