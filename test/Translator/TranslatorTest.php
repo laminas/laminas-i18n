@@ -111,7 +111,7 @@ final class TranslatorTest extends TestCase
                 [
                     'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern'  => 'translation-de_DE.php',
+                    'pattern'  => 'translation-%s.php',
                 ],
             ],
             'translation_files'         => [

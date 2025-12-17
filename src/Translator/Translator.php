@@ -10,6 +10,7 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
+use Laminas\I18n\Translator\Value\TranslatorFilePattern;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Translator\TranslatorInterface;
 use Locale;
@@ -23,21 +24,22 @@ use function is_array;
 use function is_file;
 use function is_string;
 use function md5;
-use function realpath;
-use function rtrim;
 use function sprintf;
+
+use const DIRECTORY_SEPARATOR;
 
 /**
  * Translator.
  *
  * @psalm-type FileEntry = array{type: non-empty-string, filename: non-empty-string|null}
  * @psalm-type FileList = array<non-empty-string, array<non-empty-string, list<FileEntry>>>
- * @psalm-type FilePatternEntry = array{type: non-empty-string, baseDir: non-empty-string, pattern: non-empty-string}
- * @psalm-type FilePatternList = array<non-empty-string, list<FilePatternEntry>>
+ * @psalm-type FilePatternList = array<non-empty-string, list<TranslatorFilePattern>>
  * @final
  */
 class Translator implements TranslatorInterface
 {
+    public const DEFAULT_TEXT_DOMAIN = 'default';
+
     /**
      * Event fired when the translation for a message is missing.
      */
@@ -151,22 +153,17 @@ class Translator implements TranslatorInterface
                 );
             }
 
-            $requiredKeys = ['type', 'base_dir', 'pattern'];
-            foreach ($options['translation_file_patterns'] as $pattern) {
-                foreach ($requiredKeys as $key) {
-                    if (! isset($pattern[$key])) {
-                        throw new Exception\InvalidArgumentException(
-                            "'{$key}' is missing for translation pattern options",
-                        );
-                    }
+            foreach ($options['translation_file_patterns'] as $spec) {
+                if (! is_array($spec)) {
+                    continue;
                 }
 
-                $translator->addTranslationFilePattern(
-                    $pattern['type'],
-                    $pattern['base_dir'],
-                    $pattern['pattern'],
-                    $pattern['text_domain'] ?? 'default',
+                $pattern = TranslatorFilePattern::fromArray(
+                    $spec,
+                    self::DEFAULT_TEXT_DOMAIN,
                 );
+
+                $translator->patterns[$pattern->textDomain][] = $pattern;
             }
         }
 
@@ -191,7 +188,7 @@ class Translator implements TranslatorInterface
                 $translator->addTranslationFile(
                     $file['type'],
                     $file['filename'],
-                    $file['text_domain'] ?? 'default',
+                    $file['text_domain'] ?? self::DEFAULT_TEXT_DOMAIN,
                     $file['locale'] ?? null,
                 );
             }
@@ -217,7 +214,7 @@ class Translator implements TranslatorInterface
 
                 $translator->addRemoteTranslations(
                     $remote['type'],
-                    $remote['text_domain'] ?? 'default',
+                    $remote['text_domain'] ?? self::DEFAULT_TEXT_DOMAIN,
                 );
             }
         }
@@ -308,7 +305,7 @@ class Translator implements TranslatorInterface
      * @param non-empty-string|null $locale
      * @psalm-suppress MoreSpecificImplementedParamType This will be redundant when Translator interface is improved
      */
-    public function translate($message, $textDomain = 'default', $locale = null): string|null
+    public function translate($message, $textDomain = self::DEFAULT_TEXT_DOMAIN, $locale = null): string|null
     {
         $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
@@ -340,7 +337,7 @@ class Translator implements TranslatorInterface
         $singular,
         $plural,
         $number,
-        $textDomain = 'default',
+        $textDomain = self::DEFAULT_TEXT_DOMAIN,
         $locale = null,
     ) {
         $locale    ??= $this->getLocale();
@@ -384,7 +381,7 @@ class Translator implements TranslatorInterface
     protected function getTranslatedMessage(
         string|null $message,
         string $locale,
-        string $textDomain = 'default',
+        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
     ): string|array|null {
         if ($message === '' || $message === null) {
             return null;
@@ -447,7 +444,7 @@ class Translator implements TranslatorInterface
     public function addTranslationFile(
         string $type,
         string|null $filename,
-        string $textDomain = 'default',
+        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
         string|null $locale = null,
     ): self {
         $locale ??= '*';
@@ -477,20 +474,17 @@ class Translator implements TranslatorInterface
         string $type,
         string $baseDir,
         string $pattern,
-        string $textDomain = 'default',
+        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
     ): self {
-        if (! isset($this->patterns[$textDomain])) {
-            $this->patterns[$textDomain] = [];
-        }
+        $pattern = new TranslatorFilePattern(
+            $type,
+            $baseDir,
+            $pattern,
+            $textDomain,
+        );
 
-        $baseDir = realpath(rtrim($baseDir, '/'));
-        assert(is_string($baseDir) && $baseDir !== '');
-
-        $this->patterns[$textDomain][] = [
-            'type'    => $type,
-            'baseDir' => $baseDir,
-            'pattern' => $pattern,
-        ];
+        $this->patterns[$pattern->textDomain] ??= [];
+        $this->patterns[$pattern->textDomain][] = $pattern;
 
         return $this;
     }
@@ -502,7 +496,7 @@ class Translator implements TranslatorInterface
      * @param non-empty-string $textDomain
      * @return $this
      */
-    public function addRemoteTranslations(string $type, string $textDomain = 'default'): self
+    public function addRemoteTranslations(string $type, string $textDomain = self::DEFAULT_TEXT_DOMAIN): self
     {
         if (! isset($this->remote[$textDomain])) {
             $this->remote[$textDomain] = [];
@@ -648,28 +642,35 @@ class Translator implements TranslatorInterface
 
         if (isset($this->patterns[$textDomain])) {
             foreach ($this->patterns[$textDomain] as $pattern) {
-                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
+                $filename = sprintf(
+                    '%s%s%s',
+                    $pattern->baseDirectory,
+                    DIRECTORY_SEPARATOR,
+                    sprintf($pattern->pattern, $locale),
+                );
 
-                if (is_file($filename)) {
-                    $loader = $this->pluginManager->get($pattern['type']);
-
-                    if (! $loader instanceof FileLoaderInterface) {
-                        throw new Exception\RuntimeException('Specified loader is not a file loader');
-                    }
-
-                    $loadedTextDomain = $loader->load($locale, $filename);
-                    if ($loadedTextDomain === null) {
-                        continue;
-                    }
-
-                    if (isset($this->messages[$textDomain][$locale])) {
-                        $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
-                    } else {
-                        $this->messages[$textDomain][$locale] = $loadedTextDomain;
-                    }
-
-                    $messagesLoaded = true;
+                if (! is_file($filename)) {
+                    continue;
                 }
+
+                $loader = $this->pluginManager->get($pattern->type);
+
+                if (! $loader instanceof FileLoaderInterface) {
+                    throw new Exception\RuntimeException('Specified loader is not a file loader');
+                }
+
+                $loadedTextDomain = $loader->load($locale, $filename);
+                if ($loadedTextDomain === null) {
+                    continue;
+                }
+
+                if (isset($this->messages[$textDomain][$locale])) {
+                    $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
+                } else {
+                    $this->messages[$textDomain][$locale] = $loadedTextDomain;
+                }
+
+                $messagesLoaded = true;
             }
         }
 
@@ -725,8 +726,10 @@ class Translator implements TranslatorInterface
      * @param non-empty-string $textDomain
      * @param non-empty-string|null $locale
      */
-    public function getAllMessages(string $textDomain = 'default', string|null $locale = null): TextDomain|null
-    {
+    public function getAllMessages(
+        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string|null $locale = null,
+    ): TextDomain|null {
         $locale ??= $this->getLocale();
 
         if (! isset($this->messages[$textDomain][$locale])) {
