@@ -559,20 +559,6 @@ final class TranslatorTest extends TestCase
         self::assertNull($allMessages);
     }
 
-    public function testNullMessageArgumentShouldReturnAnEmptyString(): void
-    {
-        $loader             = new TestLoader();
-        $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $this->pluginManager->configure([
-            'services' => [
-                'test' => $loader,
-            ],
-        ]);
-        $this->translator->addTranslationFile('test', null);
-
-        self::assertEquals('', $this->translator->translate(null));
-    }
-
     public function testTranslateWithEmptyStringLocale(): void
     {
         $this->translator->setLocale('en_US');

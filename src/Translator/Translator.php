@@ -31,7 +31,7 @@ use const DIRECTORY_SEPARATOR;
 /**
  * Translator.
  *
- * @psalm-type FileEntry = array{type: non-empty-string, filename: non-empty-string|null}
+ * @psalm-type FileEntry = array{type: non-empty-string, filename: non-empty-string}
  * @psalm-type FileList = array<non-empty-string, array<non-empty-string, list<FileEntry>>>
  * @psalm-type FilePatternList = array<non-empty-string, list<TranslatorFilePattern>>
  * @final
@@ -436,14 +436,14 @@ class Translator implements TranslatorInterface
      * Add a translation file.
      *
      * @param non-empty-string $type
-     * @param non-empty-string|null $filename
+     * @param non-empty-string $filename
      * @param non-empty-string $textDomain
      * @param non-empty-string|null $locale
      * @return $this
      */
     public function addTranslationFile(
         string $type,
-        string|null $filename,
+        string $filename,
         string $textDomain = self::DEFAULT_TEXT_DOMAIN,
         string|null $locale = null,
     ): self {
