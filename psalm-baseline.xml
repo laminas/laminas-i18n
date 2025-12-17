@@ -359,9 +359,6 @@
     </PossiblyNullReference>
   </file>
   <file src="src/Translator/Translator.php">
-    <DeprecatedInterface>
-      <code><![CDATA[Translator]]></code>
-    </DeprecatedInterface>
     <DocblockTypeContradiction>
       <code><![CDATA[$message === null]]></code>
       <code><![CDATA[$message === null]]></code>
@@ -461,28 +458,6 @@
       <code><![CDATA[$translation[$index] !== null]]></code>
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>
     </RedundantCondition>
-  </file>
-  <file src="src/Translator/TranslatorAwareInterface.php">
-    <DeprecatedInterface>
-      <code><![CDATA[TranslatorInterface|null]]></code>
-      <code><![CDATA[TranslatorInterface|null]]></code>
-    </DeprecatedInterface>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[getTranslator]]></code>
-      <code><![CDATA[getTranslatorTextDomain]]></code>
-      <code><![CDATA[hasTranslator]]></code>
-      <code><![CDATA[isTranslatorEnabled]]></code>
-      <code><![CDATA[setTranslator]]></code>
-      <code><![CDATA[setTranslatorEnabled]]></code>
-      <code><![CDATA[setTranslatorTextDomain]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Translator/TranslatorAwareTrait.php">
-    <DeprecatedInterface>
-      <code><![CDATA[?TranslatorInterface]]></code>
-      <code><![CDATA[TranslatorInterface|null]]></code>
-      <code><![CDATA[TranslatorInterface|null]]></code>
-    </DeprecatedInterface>
   </file>
   <file src="src/Translator/TranslatorServiceFactory.php">
     <MixedArgument>

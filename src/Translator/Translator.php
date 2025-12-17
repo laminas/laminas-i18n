@@ -10,6 +10,7 @@ use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
+use Laminas\Translator\TranslatorInterface;
 use Locale;
 use Psr\Cache\CacheItemPoolInterface;
 use Traversable;
