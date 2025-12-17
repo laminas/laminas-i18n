@@ -1,26 +1,25 @@
 # Caching
 
-In production, it makes sense to cache your translations. This not only saves
-you from loading and parsing the individual formats each time, but also
-guarantees an optimized loading procedure.
+In production, it makes sense to cache your translations.
+This not only saves you from loading and parsing the individual formats each time, but also guarantees an optimized loading procedure.
+
+## PSR-6 Support
+
+laminas-i18n supports [PSR-6](https://www.php-fig.org/psr/psr-6/) caching.
+[laminas-cache](https://docs.laminas.dev/laminas-cache/psr6/) provides a PSR-6 implementation along with [many other libraries](https://packagist.org/providers/psr/cache-implementation).
 
 > MISSING: **Installation Requirements**
-> The cache support of laminas-i18n depends on the [laminas-cache](https://docs.laminas.dev/laminas-cache/) component, so be sure to have it installed before getting started:
+> 
+> The following example uses [laminas-cache](https://docs.laminas.dev/laminas-cache/), so make sure to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-cache
 > ```
->
-> Version 3 of laminas-cache removed support for factories required by this component, so if your application requires laminas-cache version 3 or later, you will also need to install `laminas-cache-storage-deprecated-factory`
->
-> ```bash
-> $ composer require laminas/laminas-cache-storage-deprecated-factory
-> ```
->
+> 
 > laminas-cache is shipped without a specific cache adapter to allow free choice of storage backends and their dependencies.
 > So make sure that the required adapters are installed.
 >
-> The following example used the [memory adapter of laminas-cache](https://docs.laminas.dev/laminas-cache/storage/adapter/#memory-adapter):
+> The following example uses the [memory adapter of laminas-cache](https://docs.laminas.dev/laminas-cache/storage/adapter/#memory-adapter):
 >
 > ```bash
 > $ composer require laminas/laminas-cache-storage-adapter-memory
@@ -28,16 +27,14 @@ guarantees an optimized loading procedure.
 
 ## Enable Caching
 
-To enable caching, pass a `Laminas\Cache\Storage\Adapter` to the `setCache()`
-method.
+To enable caching, pass an instance of `Psr\Cache\CacheItemPoolInterface` to the `setCache()` method.
+In combination with laminas-cache, use the `CacheItemPoolDecorator` to wrap the cache adapter:
 
 ```php
 $translator = new Laminas\I18n\Translator\Translator();
-$cache      = Laminas\Cache\StorageFactory::factory([
-    'adapter' => [
-        'name' => Laminas\Cache\Storage\Adapter\Memory::class,
-    ],
-]);
+$cache      = new Laminas\Cache\Psr\CacheItemPool\CacheItemPoolDecorator(
+    new Laminas\Cache\Storage\Adapter\Memory()
+);
 $translator->setCache($cache);
 ```
 
