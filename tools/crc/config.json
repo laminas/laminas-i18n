@@ -1,7 +1,4 @@
 {
     "symbol-whitelist" : [
-        "Laminas\\EventManager\\Event",
-        "Laminas\\EventManager\\EventManager",
-        "Laminas\\EventManager\\EventManagerInterface"
     ]
 }
