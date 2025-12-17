@@ -12,6 +12,7 @@ use function gettype;
 use function is_array;
 use function is_file;
 use function is_readable;
+use function is_string;
 use function sprintf;
 use function stream_resolve_include_path;
 
@@ -23,16 +24,9 @@ use function stream_resolve_include_path;
 class PhpArray extends AbstractFileLoader
 {
     /**
-     * load(): defined by FileLoaderInterface.
-     *
-     * @see    FileLoaderInterface::load()
-     *
-     * @param  string $locale
-     * @param  string $filename
-     * @return TextDomain
      * @throws Exception\InvalidArgumentException
      */
-    public function load($locale, $filename)
+    public function load(string $locale, string $filename): TextDomain|null
     {
         $resolvedIncludePath = stream_resolve_include_path($filename);
         $fromIncludePath     = $resolvedIncludePath !== false ? $resolvedIncludePath : $filename;
@@ -43,6 +37,7 @@ class PhpArray extends AbstractFileLoader
             ));
         }
 
+        /** @psalm-suppress UnresolvableInclude */
         $messages = include $fromIncludePath;
 
         if (! is_array($messages)) {
@@ -52,16 +47,16 @@ class PhpArray extends AbstractFileLoader
             ));
         }
 
+        /** @var mixed $pluralForms */
+        $pluralForms = $messages['']['plural_forms'] ?? null;
+        unset($messages['']);
+
         $textDomain = new TextDomain($messages);
 
-        if ($textDomain->offsetExists('')) {
-            if (isset($textDomain['']['plural_forms'])) {
-                $textDomain->setPluralRule(
-                    PluralRule::fromString($textDomain['']['plural_forms'])
-                );
-            }
-
-            unset($textDomain['']);
+        if (is_string($pluralForms) && $pluralForms !== '') {
+            $textDomain->setPluralRule(
+                PluralRule::fromString($pluralForms),
+            );
         }
 
         return $textDomain;

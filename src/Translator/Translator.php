@@ -17,17 +17,23 @@ use Psr\Cache\CacheItemPoolInterface;
 use Traversable;
 
 use function array_shift;
+use function assert;
 use function get_debug_type;
 use function is_array;
 use function is_file;
 use function is_string;
 use function md5;
+use function realpath;
 use function rtrim;
 use function sprintf;
 
 /**
  * Translator.
  *
+ * @psalm-type FileEntry = array{type: non-empty-string, filename: non-empty-string|null}
+ * @psalm-type FileList = array<non-empty-string, array<non-empty-string, list<FileEntry>>>
+ * @psalm-type FilePatternEntry = array{type: non-empty-string, baseDir: non-empty-string, pattern: non-empty-string}
+ * @psalm-type FilePatternList = array<non-empty-string, list<FilePatternEntry>>
  * @final
  */
 class Translator implements TranslatorInterface
@@ -45,44 +51,44 @@ class Translator implements TranslatorInterface
     /**
      * Messages loaded by the translator.
      *
-     * @var array
+     * @var array<non-empty-string, array<non-empty-string, TextDomain|null>>
      */
-    protected $messages = [];
+    private array $messages = [];
 
     /**
      * Files used for loading messages.
      *
-     * @var array
+     * @var FileList
      */
-    protected $files = [];
+    private array $files = [];
 
     /**
      * Patterns used for loading messages.
      *
-     * @var array
+     * @var FilePatternList
      */
-    protected $patterns = [];
+    private array $patterns = [];
 
     /**
      * Remote locations for loading messages.
      *
-     * @var array
+     * @var array<non-empty-string, list<non-empty-string>>
      */
-    protected $remote = [];
+    private array $remote = [];
 
     /**
      * Default locale.
      *
-     * @var string|null
+     * @var non-empty-string|null
      */
-    protected $locale;
+    private string|null $locale = null;
 
     /**
      * Locale to use as fallback if there is no translation.
      *
-     * @var string|null
+     * @var non-empty-string|null
      */
-    protected $fallbackLocale;
+    private string|null $fallbackLocale = null;
 
     private CacheItemPoolInterface|null $cache = null;
 
@@ -234,10 +240,10 @@ class Translator implements TranslatorInterface
     /**
      * Set the default locale.
      *
-     * @param  string|null $locale
+     * @param non-empty-string $locale
      * @return $this
      */
-    public function setLocale($locale)
+    public function setLocale(string $locale): self
     {
         $this->locale = $locale;
 
@@ -247,12 +253,15 @@ class Translator implements TranslatorInterface
     /**
      * Get the default locale.
      *
-     * @return string
+     * @return non-empty-string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
+            $default = Locale::getDefault();
+            assert($default !== '');
+
+            $this->locale = $default;
         }
 
         return $this->locale;
@@ -261,10 +270,10 @@ class Translator implements TranslatorInterface
     /**
      * Set the fallback locale.
      *
-     * @param  string|null $locale
+     * @param non-empty-string|null $locale
      * @return $this
      */
-    public function setFallbackLocale($locale)
+    public function setFallbackLocale(string|null $locale): self
     {
         $this->fallbackLocale = $locale;
 
@@ -273,10 +282,8 @@ class Translator implements TranslatorInterface
 
     /**
      * Get the fallback locale.
-     *
-     * @return string|null
      */
-    public function getFallbackLocale()
+    public function getFallbackLocale(): string|null
     {
         return $this->fallbackLocale;
     }
@@ -296,26 +303,22 @@ class Translator implements TranslatorInterface
     /**
      * Translate a message.
      *
-     * @param  string      $message
-     * @param  string      $textDomain
-     * @param  string|null $locale
-     * @return string
+     * @param non-empty-string $message
+     * @param non-empty-string $textDomain
+     * @param non-empty-string|null $locale
+     * @psalm-suppress MoreSpecificImplementedParamType This will be redundant when Translator interface is improved
      */
-    public function translate($message, $textDomain = 'default', $locale = null)
+    public function translate($message, $textDomain = 'default', $locale = null): string|null
     {
-        $locale      = $locale === '' ? null : $locale;
         $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
-        if ($translation !== null && $translation !== '') {
+        if (is_string($translation) && $translation !== '') {
             return $translation;
         }
 
-        if (
-            null !== ($fallbackLocale = $this->getFallbackLocale())
-            && $locale !== $fallbackLocale
-        ) {
-            return $this->translate($message, $textDomain, $fallbackLocale);
+        if ($this->fallbackLocale !== null && $locale !== $this->fallbackLocale) {
+            return $this->translate($message, $textDomain, $this->fallbackLocale);
         }
 
         return $message;
@@ -327,10 +330,11 @@ class Translator implements TranslatorInterface
      * @param  string      $singular
      * @param  string      $plural
      * @param  int         $number
-     * @param  string      $textDomain
-     * @param  string|null $locale
+     * @param  non-empty-string $textDomain
+     * @param  non-empty-string|null $locale
      * @return string
      * @throws Exception\OutOfBoundsException
+     * @psalm-suppress MoreSpecificImplementedParamType This will be redundant when Translator interface is improved
      */
     public function translatePlural(
         $singular,
@@ -348,25 +352,21 @@ class Translator implements TranslatorInterface
 
         $index = $number === 1 ? 0 : 1; // en_EN Plural rule
         if ($this->messages[$textDomain][$locale] instanceof TextDomain) {
-            $index = $this->messages[$textDomain][$locale]
-                ->getPluralRule()
-                ->evaluate($number);
+            $index = (int) $this->messages[$textDomain][$locale]
+                ->getPluralRule()->evaluate($number);
         }
 
         if (isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null) {
             return $translation[$index];
         }
 
-        if (
-            null !== ($fallbackLocale = $this->getFallbackLocale())
-            && $locale !== $fallbackLocale
-        ) {
+        if ($this->fallbackLocale !== null && $locale !== $this->fallbackLocale) {
             return $this->translatePlural(
                 $singular,
                 $plural,
                 $number,
                 $textDomain,
-                $fallbackLocale,
+                $this->fallbackLocale,
             );
         }
 
@@ -377,18 +377,17 @@ class Translator implements TranslatorInterface
      * Get a translated message.
      *
      * @triggers getTranslatedMessage.missing-translation
-     * @param    string $message
-     * @param    string $locale
-     * @param    string $textDomain
-     * @return   string|null
+     * @param non-empty-string $locale
+     * @param non-empty-string $textDomain
+     * @return string|null|list<string|null>
      */
     protected function getTranslatedMessage(
-        $message,
-        $locale,
-        $textDomain = 'default',
-    ) {
+        string|null $message,
+        string $locale,
+        string $textDomain = 'default',
+    ): string|array|null {
         if ($message === '' || $message === null) {
-            return '';
+            return null;
         }
 
         if (! isset($this->messages[$textDomain][$locale])) {
@@ -402,14 +401,14 @@ class Translator implements TranslatorInterface
         /**
          * issue https://github.com/zendframework/zend-i18n/issues/53
          *
-         * storage: array:8 [▼
-         *   "default\x04Welcome" => "Cześć"
-         *   "default\x04Top %s Product" => array:3 [▼
+         * storage: [
+         *   "default\x04Welcome" => "Cześć",
+         *   "default\x04Top %s Product" => [
          *     0 => "Top %s Produkt"
          *     1 => "Top %s Produkty"
          *     2 => "Top %s Produktów"
-         *   ]
-         *   "Top %s Products" => ""
+         *   ],
+         *   "Top %s Products" => "",
          * ]
          */
         if (isset($this->messages[$textDomain][$locale][$textDomain . "\x04" . $message])) {
@@ -417,7 +416,7 @@ class Translator implements TranslatorInterface
         }
 
         if ($this->isEventManagerEnabled()) {
-            $until = static fn($r): bool => is_string($r);
+            $until = static fn(mixed $r): bool => is_string($r);
 
             $event = new Event(self::EVENT_MISSING_TRANSLATION, $this, [
                 'message'     => $message,
@@ -439,18 +438,18 @@ class Translator implements TranslatorInterface
     /**
      * Add a translation file.
      *
-     * @param  string      $type
-     * @param  string      $filename
-     * @param  string      $textDomain
-     * @param  string|null $locale
+     * @param non-empty-string $type
+     * @param non-empty-string|null $filename
+     * @param non-empty-string $textDomain
+     * @param non-empty-string|null $locale
      * @return $this
      */
     public function addTranslationFile(
-        $type,
-        $filename,
-        $textDomain = 'default',
-        $locale = null,
-    ) {
+        string $type,
+        string|null $filename,
+        string $textDomain = 'default',
+        string|null $locale = null,
+    ): self {
         $locale ??= '*';
 
         if (! isset($this->files[$textDomain])) {
@@ -468,25 +467,28 @@ class Translator implements TranslatorInterface
     /**
      * Add multiple translations with a file pattern.
      *
-     * @param  string $type
-     * @param  string $baseDir
-     * @param  string $pattern
-     * @param  string $textDomain
+     * @param non-empty-string $type
+     * @param non-empty-string $baseDir
+     * @param non-empty-string $pattern
+     * @param non-empty-string $textDomain
      * @return $this
      */
     public function addTranslationFilePattern(
-        $type,
-        $baseDir,
-        $pattern,
-        $textDomain = 'default',
-    ) {
+        string $type,
+        string $baseDir,
+        string $pattern,
+        string $textDomain = 'default',
+    ): self {
         if (! isset($this->patterns[$textDomain])) {
             $this->patterns[$textDomain] = [];
         }
 
+        $baseDir = realpath(rtrim($baseDir, '/'));
+        assert(is_string($baseDir) && $baseDir !== '');
+
         $this->patterns[$textDomain][] = [
             'type'    => $type,
-            'baseDir' => rtrim($baseDir, '/'),
+            'baseDir' => $baseDir,
             'pattern' => $pattern,
         ];
 
@@ -496,11 +498,11 @@ class Translator implements TranslatorInterface
     /**
      * Add remote translations.
      *
-     * @param  string $type
-     * @param  string $textDomain
+     * @param non-empty-string $type
+     * @param non-empty-string $textDomain
      * @return $this
      */
-    public function addRemoteTranslations($type, $textDomain = 'default')
+    public function addRemoteTranslations(string $type, string $textDomain = 'default'): self
     {
         if (! isset($this->remote[$textDomain])) {
             $this->remote[$textDomain] = [];
@@ -538,10 +540,12 @@ class Translator implements TranslatorInterface
     /**
      * Load messages for a given language and domain.
      *
+     * @param non-empty-string $textDomain
+     * @param non-empty-string $locale
      * @triggers loadMessages.no-messages-loaded
      * @throws Exception\RuntimeException
      */
-    protected function loadMessages(string $textDomain, string $locale): void
+    private function loadMessages(string $textDomain, string $locale): void
     {
         if (! isset($this->messages[$textDomain])) {
             $this->messages[$textDomain] = [];
@@ -551,7 +555,10 @@ class Translator implements TranslatorInterface
             $cacheId = $this->getCacheId($textDomain, $locale);
             $item    = $this->cache->getItem($cacheId);
             if ($item->isHit()) {
-                $this->messages[$textDomain][$locale] = $item->get();
+                $value = $item->get();
+                assert($value instanceof TextDomain);
+
+                $this->messages[$textDomain][$locale] = $value;
 
                 return;
             }
@@ -594,12 +601,11 @@ class Translator implements TranslatorInterface
     /**
      * Load messages from remote sources.
      *
-     * @param  string $textDomain
-     * @param  string $locale
-     * @return bool
+     * @param non-empty-string $textDomain
+     * @param non-empty-string $locale
      * @throws Exception\RuntimeException When specified loader is not a remote loader.
      */
-    protected function loadMessagesFromRemote($textDomain, $locale)
+    private function loadMessagesFromRemote(string $textDomain, string $locale): bool
     {
         $messagesLoaded = false;
 
@@ -611,10 +617,15 @@ class Translator implements TranslatorInterface
                     throw new Exception\RuntimeException('Specified loader is not a remote loader');
                 }
 
+                $loadedTextDomain = $loader->load($locale, $textDomain);
+                if ($loadedTextDomain === null) {
+                    continue;
+                }
+
                 if (isset($this->messages[$textDomain][$locale])) {
-                    $this->messages[$textDomain][$locale]->merge($loader->load($locale, $textDomain));
+                    $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
                 } else {
-                    $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
+                    $this->messages[$textDomain][$locale] = $loadedTextDomain;
                 }
 
                 $messagesLoaded = true;
@@ -627,12 +638,11 @@ class Translator implements TranslatorInterface
     /**
      * Load messages from patterns.
      *
-     * @param  string $textDomain
-     * @param  string $locale
-     * @return bool
+     * @param non-empty-string $textDomain
+     * @param non-empty-string $locale
      * @throws Exception\RuntimeException When specified loader is not a file loader.
      */
-    protected function loadMessagesFromPatterns($textDomain, $locale)
+    private function loadMessagesFromPatterns(string $textDomain, string $locale): bool
     {
         $messagesLoaded = false;
 
@@ -647,10 +657,15 @@ class Translator implements TranslatorInterface
                         throw new Exception\RuntimeException('Specified loader is not a file loader');
                     }
 
+                    $loadedTextDomain = $loader->load($locale, $filename);
+                    if ($loadedTextDomain === null) {
+                        continue;
+                    }
+
                     if (isset($this->messages[$textDomain][$locale])) {
-                        $this->messages[$textDomain][$locale]->merge($loader->load($locale, $filename));
+                        $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
                     } else {
-                        $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
+                        $this->messages[$textDomain][$locale] = $loadedTextDomain;
                     }
 
                     $messagesLoaded = true;
@@ -664,12 +679,11 @@ class Translator implements TranslatorInterface
     /**
      * Load messages from files.
      *
-     * @param  string $textDomain
-     * @param  string $locale
-     * @return bool
+     * @param non-empty-string $textDomain
+     * @param non-empty-string $locale
      * @throws Exception\RuntimeException When specified loader is not a file loader.
      */
-    protected function loadMessagesFromFiles($textDomain, $locale)
+    private function loadMessagesFromFiles(string $textDomain, string $locale): bool
     {
         $messagesLoaded = false;
 
@@ -685,10 +699,15 @@ class Translator implements TranslatorInterface
                     throw new Exception\RuntimeException('Specified loader is not a file loader');
                 }
 
+                $loadedTextDomain = $loader->load($locale, $file['filename']);
+                if ($loadedTextDomain === null) {
+                    continue;
+                }
+
                 if (isset($this->messages[$textDomain][$locale])) {
-                    $this->messages[$textDomain][$locale]->merge($loader->load($locale, $file['filename']));
+                    $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
                 } else {
-                    $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
+                    $this->messages[$textDomain][$locale] = $loadedTextDomain;
                 }
 
                 $messagesLoaded = true;
@@ -703,11 +722,10 @@ class Translator implements TranslatorInterface
     /**
      * Return all the messages.
      *
-     * @param string      $textDomain
-     * @param string|null $locale
-     * @return mixed
+     * @param non-empty-string $textDomain
+     * @param non-empty-string|null $locale
      */
-    public function getAllMessages($textDomain = 'default', $locale = null)
+    public function getAllMessages(string $textDomain = 'default', string|null $locale = null): TextDomain|null
     {
         $locale ??= $this->getLocale();
 

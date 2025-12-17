@@ -15,6 +15,7 @@ use function fclose;
 use function fopen;
 use function fread;
 use function fseek;
+use function is_string;
 use function sprintf;
 use function strtolower;
 use function trim;
@@ -42,16 +43,9 @@ class Gettext extends AbstractFileLoader
     protected $littleEndian;
 
     /**
-     * load(): defined by FileLoaderInterface.
-     *
-     * @see    FileLoaderInterface::load()
-     *
-     * @param  string $locale
-     * @param  string $filename
-     * @return TextDomain
      * @throws Exception\InvalidArgumentException
      */
-    public function load($locale, $filename)
+    public function load(string $locale, string $filename): TextDomain|null
     {
         $resolvedFile = $this->resolveFile($filename);
         if ($resolvedFile === false) {
@@ -61,7 +55,7 @@ class Gettext extends AbstractFileLoader
             ));
         }
 
-        $textDomain = new TextDomain();
+        $textDomain = [];
 
         ErrorHandler::start();
         $this->file = fopen($resolvedFile, 'rb');
@@ -147,22 +141,27 @@ class Gettext extends AbstractFileLoader
             }
         }
 
+        fclose($this->file);
+
+        $pluralRule = null;
         // Read header entries
-        if ($textDomain->offsetExists('')) {
-            $rawHeaders = explode("\n", trim((string) $textDomain['']));
+        if (isset($textDomain['']) && is_string($textDomain[''])) {
+            $rawHeaders = explode("\n", trim($textDomain['']));
 
             foreach ($rawHeaders as $rawHeader) {
                 [$header, $content] = explode(':', $rawHeader, 2);
-
                 if (strtolower(trim($header)) === 'plural-forms') {
-                    $textDomain->setPluralRule(PluralRule::fromString($content));
+                    $pluralRule = $content;
                 }
             }
 
             unset($textDomain['']);
         }
 
-        fclose($this->file);
+        $textDomain = new TextDomain($textDomain);
+        if (is_string($pluralRule) && $pluralRule !== '') {
+            $textDomain->setPluralRule(PluralRule::fromString($pluralRule));
+        }
 
         return $textDomain;
     }

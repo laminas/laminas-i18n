@@ -66,6 +66,7 @@ final class PhpArrayTest extends TestCase
     {
         $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.php');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -75,6 +76,7 @@ final class PhpArrayTest extends TestCase
     {
         $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.php');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
         self::assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
@@ -87,6 +89,7 @@ final class PhpArrayTest extends TestCase
         $loader = new PhpArrayLoader();
         $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'translation_en.php');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -97,6 +100,7 @@ final class PhpArrayTest extends TestCase
         $loader = new PhpArrayLoader();
         $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.php');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);

@@ -166,7 +166,7 @@ final class TranslatorTest extends TestCase
                 'test' => $loader,
             ],
         ]);
-        $this->translator->addTranslationFile('test', null);
+        $this->translator->addTranslationFile('test', 'anything');
 
         self::assertEquals('bar', $this->translator->translate('foo'));
     }
@@ -191,7 +191,7 @@ final class TranslatorTest extends TestCase
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
         $this->pluginManager->configure(['services' => ['test' => $loader]]);
-        $this->translator->addTranslationFile('test', null);
+        $this->translator->addTranslationFile('test', 'anything');
 
         self::assertEquals('bar', $this->translator->translate('foo'));
 
@@ -583,6 +583,6 @@ final class TranslatorTest extends TestCase
             'en_US',
         );
 
-        self::assertEquals('Message 8 (en)', $this->translator->translate('Message 8', 'default', ''));
+        self::assertEquals('Message 8 (en)', $this->translator->translate('Message 8'));
     }
 }

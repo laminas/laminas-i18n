@@ -22,8 +22,7 @@ use function stream_resolve_include_path;
  */
 final class Ini implements FileLoaderInterface
 {
-    /** @inheritDoc */
-    public function load($locale, $filename): TextDomain
+    public function load(string $locale, string $filename): TextDomain|null
     {
         $resolvedIncludePath = stream_resolve_include_path($filename);
         $fromIncludePath     = $resolvedIncludePath !== false ? $resolvedIncludePath : $filename;

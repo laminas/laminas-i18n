@@ -72,6 +72,7 @@ final class IniTest extends TestCase
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -81,6 +82,7 @@ final class IniTest extends TestCase
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_without_plural.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -90,6 +92,7 @@ final class IniTest extends TestCase
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_simple_syntax.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -99,6 +102,7 @@ final class IniTest extends TestCase
     {
         $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         $rule = $textDomain->getPluralRule();
         self::assertInstanceOf(Rule::class, $rule);
