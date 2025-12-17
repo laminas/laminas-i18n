@@ -15,10 +15,6 @@
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>
-    <exclude-pattern>src/Validator/PhoneNumber/*</exclude-pattern>
-    <exclude-pattern>*/_files/*</exclude-pattern>
 
-    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
-        <exclude-pattern>src/</exclude-pattern>
-    </rule>
+    <exclude-pattern>*/_files/*</exclude-pattern>
 </ruleset>
