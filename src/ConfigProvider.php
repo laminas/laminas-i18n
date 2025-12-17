@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n;
 
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Translator\TranslatorInterface;
 
-/**
- * @psalm-import-type ServiceManagerConfiguration from ServiceManager
- * @final
- */
-class ConfigProvider
+/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
+final class ConfigProvider
 {
     /**
      * Return general-purpose laminas-i18n configuration.
@@ -19,7 +18,7 @@ class ConfigProvider
      *     locale: string|null,
      * }
      */
-    public function __invoke()
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
@@ -32,20 +31,16 @@ class ConfigProvider
      *
      * @return ServiceManagerConfiguration
      */
-    public function getDependencyConfig()
+    public function getDependencyConfig(): array
     {
         return [
             'aliases'   => [
-                'TranslatorPluginManager' => Translator\LoaderPluginManager::class,
-
-                // Legacy Zend Framework aliases
-                'Zend\I18n\Translator\TranslatorInterface' => Translator\TranslatorInterface::class,
-                'Zend\I18n\Translator\LoaderPluginManager' => Translator\LoaderPluginManager::class,
-                Geography\CountryCodeListInterface::class  => Geography\DefaultCountryCodeList::class,
-                TranslatorInterface::class                 => Translator\TranslatorInterface::class,
+                'TranslatorPluginManager'                 => Translator\LoaderPluginManager::class,
+                Geography\CountryCodeListInterface::class => Geography\DefaultCountryCodeList::class,
+                TranslatorInterface::class                => Translator\Translator::class,
             ],
             'factories' => [
-                Translator\TranslatorInterface::class   => Translator\TranslatorServiceFactory::class,
+                Translator\Translator::class            => Translator\TranslatorServiceFactory::class,
                 Translator\LoaderPluginManager::class   => Translator\LoaderPluginManagerFactory::class,
                 Geography\DefaultCountryCodeList::class => Geography\DefaultCountryCodeListFactory::class,
             ],
