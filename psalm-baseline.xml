@@ -208,9 +208,6 @@
     <PossiblyNullReference>
       <code><![CDATA[evaluate]]></code>
     </PossiblyNullReference>
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[$events]]></code>
-    </PropertyNotSetInConstructor>
     <RedundantCondition>
       <code><![CDATA[$translation[$index] !== null]]></code>
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>

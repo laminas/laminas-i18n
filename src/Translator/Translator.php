@@ -86,23 +86,25 @@ class Translator implements TranslatorInterface
 
     private CacheItemPoolInterface|null $cache = null;
 
-    /**
-     * Event manager for triggering translator events.
-     *
-     * @var EventManagerInterface
-     */
-    protected $events;
-
-    /**
-     * Whether events are enabled
-     *
-     * @var bool
-     */
-    protected $eventsEnabled = false;
+    private readonly EventManagerInterface $events;
+    private bool $eventsEnabled = false;
 
     public function __construct(
         private readonly LoaderPluginManagerInterface $pluginManager,
+        EventManagerInterface|null $eventManager = null,
     ) {
+        // When an EventManager is supplied to the constructor, enable events. The user clearly wants them!
+        if ($eventManager !== null) {
+            $this->eventsEnabled = true;
+        }
+
+        $eventManager ??= new EventManager();
+        $eventManager->setIdentifiers([
+            self::class,
+            'translator',
+        ]);
+
+        $this->events = $eventManager;
     }
 
     /**
@@ -716,42 +718,15 @@ class Translator implements TranslatorInterface
         return $this->messages[$textDomain][$locale];
     }
 
-    /**
-     * Get the event manager.
-     *
-     * @return EventManagerInterface
-     */
-    public function getEventManager()
+    public function getEventManager(): EventManagerInterface
     {
-        if (! $this->events instanceof EventManagerInterface) {
-            $this->setEventManager(new EventManager());
-        }
-
         return $this->events;
     }
 
     /**
-     * Set the event manager instance used by this translator.
-     *
-     * @return $this
-     */
-    public function setEventManager(EventManagerInterface $events)
-    {
-        $events->setIdentifiers([
-            self::class,
-            static::class,
-            'translator',
-        ]);
-        $this->events = $events;
-        return $this;
-    }
-
-    /**
      * Check whether the event manager is enabled.
-     *
-     * @return bool
      */
-    public function isEventManagerEnabled()
+    public function isEventManagerEnabled(): bool
     {
         return $this->eventsEnabled;
     }
@@ -761,7 +736,7 @@ class Translator implements TranslatorInterface
      *
      * @return $this
      */
-    public function enableEventManager()
+    public function enableEventManager(): self
     {
         $this->eventsEnabled = true;
         return $this;
@@ -772,7 +747,7 @@ class Translator implements TranslatorInterface
      *
      * @return $this
      */
-    public function disableEventManager()
+    public function disableEventManager(): self
     {
         $this->eventsEnabled = false;
         return $this;
