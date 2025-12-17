@@ -85,7 +85,6 @@ extra:
     project: Components
     installation:
         config_provider_class: 'Laminas\I18n\ConfigProvider'
-        module_class: 'Laminas\I18n\Module'
     related_documentations:
         headline: Related Components
         links:
