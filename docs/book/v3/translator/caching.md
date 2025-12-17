@@ -9,13 +9,13 @@ laminas-i18n supports [PSR-6](https://www.php-fig.org/psr/psr-6/) caching.
 [laminas-cache](https://docs.laminas.dev/laminas-cache/psr6/) provides a PSR-6 implementation along with [many other libraries](https://packagist.org/providers/psr/cache-implementation).
 
 > MISSING: **Installation Requirements**
-> 
+>
 > The following example uses [laminas-cache](https://docs.laminas.dev/laminas-cache/), so make sure to have it installed before getting started:
 >
 > ```bash
 > $ composer require laminas/laminas-cache
 > ```
-> 
+>
 > laminas-cache is shipped without a specific cache adapter to allow free choice of storage backends and their dependencies.
 > So make sure that the required adapters are installed.
 >
