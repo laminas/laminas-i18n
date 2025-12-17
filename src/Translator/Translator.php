@@ -10,6 +10,7 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
+use Laminas\I18n\Translator\Value\TranslationFile;
 use Laminas\I18n\Translator\Value\TranslatorFilePattern;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Translator\TranslatorInterface;
@@ -31,14 +32,14 @@ use const DIRECTORY_SEPARATOR;
 /**
  * Translator.
  *
- * @psalm-type FileEntry = array{type: non-empty-string, filename: non-empty-string}
- * @psalm-type FileList = array<non-empty-string, array<non-empty-string, list<FileEntry>>>
+ * @psalm-type FileList = array<non-empty-string, array<non-empty-string, list<TranslationFile>>>
  * @psalm-type FilePatternList = array<non-empty-string, list<TranslatorFilePattern>>
  * @final
  */
 class Translator implements TranslatorInterface
 {
     public const DEFAULT_TEXT_DOMAIN = 'default';
+    public const ANY_LOCALE          = '*';
 
     /**
      * Event fired when the translation for a message is missing.
@@ -175,22 +176,17 @@ class Translator implements TranslatorInterface
                 );
             }
 
-            $requiredKeys = ['type', 'filename'];
-            foreach ($options['translation_files'] as $file) {
-                foreach ($requiredKeys as $key) {
-                    if (! isset($file[$key])) {
-                        throw new Exception\InvalidArgumentException(
-                            "'{$key}' is missing for translation file options",
-                        );
-                    }
+            /** @psalm-var mixed $spec */
+            foreach ($options['translation_files'] as $spec) {
+                if (! is_array($spec)) {
+                    continue;
                 }
 
-                $translator->addTranslationFile(
-                    $file['type'],
-                    $file['filename'],
-                    $file['text_domain'] ?? self::DEFAULT_TEXT_DOMAIN,
-                    $file['locale'] ?? null,
-                );
+                $file = TranslationFile::fromArray($spec, self::ANY_LOCALE, self::DEFAULT_TEXT_DOMAIN);
+
+                $translator->files[$file->textDomain]                ??= [];
+                $translator->files[$file->textDomain][$file->locale] ??= [];
+                $translator->files[$file->textDomain][$file->locale][] = $file;
             }
         }
 
@@ -437,26 +433,28 @@ class Translator implements TranslatorInterface
      *
      * @param non-empty-string $type
      * @param non-empty-string $filename
-     * @param non-empty-string $textDomain
+     * @param non-empty-string|null $textDomain
      * @param non-empty-string|null $locale
      * @return $this
      */
     public function addTranslationFile(
         string $type,
         string $filename,
-        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string|null $textDomain = null,
         string|null $locale = null,
     ): self {
-        $locale ??= '*';
+        $file = TranslationFile::fromArray(
+            [
+                'type'     => $type,
+                'filename' => $filename,
+            ],
+            $locale ?? self::ANY_LOCALE,
+            $textDomain ?? self::DEFAULT_TEXT_DOMAIN,
+        );
 
-        if (! isset($this->files[$textDomain])) {
-            $this->files[$textDomain] = [];
-        }
-
-        $this->files[$textDomain][$locale][] = [
-            'type'     => $type,
-            'filename' => $filename,
-        ];
+        $this->files[$file->textDomain]                ??= [];
+        $this->files[$file->textDomain][$file->locale] ??= [];
+        $this->files[$file->textDomain][$file->locale][] = $file;
 
         return $this;
     }
@@ -541,9 +539,7 @@ class Translator implements TranslatorInterface
      */
     private function loadMessages(string $textDomain, string $locale): void
     {
-        if (! isset($this->messages[$textDomain])) {
-            $this->messages[$textDomain] = [];
-        }
+        $this->messages[$textDomain] ??= [];
 
         if ($this->cache !== null) {
             $cacheId = $this->getCacheId($textDomain, $locale);
@@ -566,7 +562,7 @@ class Translator implements TranslatorInterface
         if ($messagesLoaded === 0) {
             $discoveredTextDomain = null;
             if ($this->isEventManagerEnabled()) {
-                $until = static fn($r): bool => $r instanceof TextDomain;
+                $until = static fn(mixed $r): bool => $r instanceof TextDomain;
 
                 $event = new Event(self::EVENT_NO_MESSAGES_LOADED, $this, [
                     'locale'      => $locale,
@@ -581,7 +577,7 @@ class Translator implements TranslatorInterface
                 }
             }
 
-            $this->messages[$textDomain][$locale] = $discoveredTextDomain;
+            $this->insertLoadedTextDomain($discoveredTextDomain, $textDomain, $locale);
         }
 
         if ($this->cache !== null) {
@@ -611,16 +607,11 @@ class Translator implements TranslatorInterface
                     throw new Exception\RuntimeException('Specified loader is not a remote loader');
                 }
 
-                $loadedTextDomain = $loader->load($locale, $textDomain);
-                if ($loadedTextDomain === null) {
-                    continue;
-                }
-
-                if (isset($this->messages[$textDomain][$locale])) {
-                    $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
-                } else {
-                    $this->messages[$textDomain][$locale] = $loadedTextDomain;
-                }
+                $this->insertLoadedTextDomain(
+                    $loader->load($locale, $textDomain),
+                    $textDomain,
+                    $locale,
+                );
 
                 $messagesLoaded = true;
             }
@@ -659,16 +650,11 @@ class Translator implements TranslatorInterface
                     throw new Exception\RuntimeException('Specified loader is not a file loader');
                 }
 
-                $loadedTextDomain = $loader->load($locale, $filename);
-                if ($loadedTextDomain === null) {
-                    continue;
-                }
-
-                if (isset($this->messages[$textDomain][$locale])) {
-                    $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
-                } else {
-                    $this->messages[$textDomain][$locale] = $loadedTextDomain;
-                }
+                $this->insertLoadedTextDomain(
+                    $loader->load($locale, $filename),
+                    $textDomain,
+                    $locale,
+                );
 
                 $messagesLoaded = true;
             }
@@ -688,28 +674,23 @@ class Translator implements TranslatorInterface
     {
         $messagesLoaded = false;
 
-        foreach ([$locale, '*'] as $currentLocale) {
+        foreach ([$locale, self::ANY_LOCALE] as $currentLocale) {
             if (! isset($this->files[$textDomain][$currentLocale])) {
                 continue;
             }
 
             foreach ($this->files[$textDomain][$currentLocale] as $file) {
-                $loader = $this->pluginManager->get($file['type']);
+                $loader = $this->pluginManager->get($file->type);
 
                 if (! $loader instanceof FileLoaderInterface) {
                     throw new Exception\RuntimeException('Specified loader is not a file loader');
                 }
 
-                $loadedTextDomain = $loader->load($locale, $file['filename']);
-                if ($loadedTextDomain === null) {
-                    continue;
-                }
-
-                if (isset($this->messages[$textDomain][$locale])) {
-                    $this->messages[$textDomain][$locale]->merge($loadedTextDomain);
-                } else {
-                    $this->messages[$textDomain][$locale] = $loadedTextDomain;
-                }
+                $this->insertLoadedTextDomain(
+                    $loader->load($locale, $file->filename),
+                    $textDomain,
+                    $locale,
+                );
 
                 $messagesLoaded = true;
             }
@@ -718,6 +699,29 @@ class Translator implements TranslatorInterface
         }
 
         return $messagesLoaded;
+    }
+
+    /**
+     * @param non-empty-string $textDomain
+     * @param non-empty-string $locale
+     */
+    private function insertLoadedTextDomain(TextDomain|null $data, string $textDomain, string $locale): void
+    {
+        $this->messages[$textDomain] ??= [];
+
+        if ($data === null) {
+            $this->messages[$textDomain][$locale] ??= null;
+
+            return;
+        }
+
+        if (isset($this->messages[$textDomain][$locale])) {
+            $this->messages[$textDomain][$locale]->merge($data);
+
+            return;
+        }
+
+        $this->messages[$textDomain][$locale] = $data;
     }
 
     /**
