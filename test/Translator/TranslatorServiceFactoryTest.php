@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
-use Laminas\I18n\Translator\LoaderPluginManager;
+use Laminas\I18n\Translator\LoaderPluginManagerInterface;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorServiceFactory;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
@@ -16,14 +16,14 @@ final class TranslatorServiceFactoryTest extends TestCase
 {
     public function testCreateServiceWithNoTranslatorKeyDefined(): void
     {
-        $pluginManager = new LoaderPluginManager(new ServiceManager());
+        $pluginManager = self::createStub(LoaderPluginManagerInterface::class);
 
         $container = $this->createMock(ContainerInterface::class);
         $container->expects(self::exactly(2))
             ->method('get')
             ->willReturnMap([
                 ['config', []],
-                [LoaderPluginManager::class, $pluginManager],
+                [LoaderPluginManagerInterface::class, $pluginManager],
             ]);
 
         $factory    = new TranslatorServiceFactory();

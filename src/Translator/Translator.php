@@ -101,7 +101,7 @@ class Translator implements TranslatorInterface
     protected $eventsEnabled = false;
 
     public function __construct(
-        private LoaderPluginManager $pluginManager,
+        private readonly LoaderPluginManagerInterface $pluginManager,
     ) {
     }
 
@@ -112,7 +112,7 @@ class Translator implements TranslatorInterface
      * @return static
      * @throws Exception\InvalidArgumentException
      */
-    public static function factory(LoaderPluginManager $pluginManager, $options)
+    public static function factory(LoaderPluginManagerInterface $pluginManager, $options)
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
