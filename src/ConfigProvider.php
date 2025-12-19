@@ -43,6 +43,7 @@ final class ConfigProvider
                 Translator\Translator::class            => Translator\TranslatorServiceFactory::class,
                 Translator\LoaderPluginManager::class   => Translator\LoaderPluginManagerFactory::class,
                 Geography\DefaultCountryCodeList::class => Geography\DefaultCountryCodeListFactory::class,
+                DefaultLocale::class                    => Factory\DefaultLocaleFactory::class,
             ],
         ];
     }
