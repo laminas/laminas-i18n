@@ -18,6 +18,6 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
         $config   = $container->get('config');
         $trConfig = $config['translator'] ?? [];
 
-        return Translator::factory($container->get(LoaderPluginManagerInterface::class), $trConfig);
+        return Translator::factory($container->get(MessageLoaderPluginManagerInterface::class), $trConfig);
     }
 }

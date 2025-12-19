@@ -99,7 +99,7 @@ class Translator implements TranslatorInterface
     private bool $eventsEnabled = false;
 
     public function __construct(
-        private readonly LoaderPluginManagerInterface $pluginManager,
+        private readonly MessageLoaderPluginManagerInterface $pluginManager,
         EventManagerInterface|null $eventManager = null,
     ) {
         // When an EventManager is supplied to the constructor, enable events. The user clearly wants them!
@@ -123,7 +123,7 @@ class Translator implements TranslatorInterface
      * @return static
      * @throws Exception\InvalidArgumentException
      */
-    public static function factory(LoaderPluginManagerInterface $pluginManager, $options)
+    public static function factory(MessageLoaderPluginManagerInterface $pluginManager, $options)
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);

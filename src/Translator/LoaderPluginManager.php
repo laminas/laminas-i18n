@@ -24,10 +24,10 @@ use function sprintf;
  * it registers a number of default loaders.
  *
  * @psalm-import-type ServiceManagerConfiguration from ServiceManager
- * @psalm-import-type InstanceType from LoaderPluginManagerInterface
+ * @psalm-import-type InstanceType from MessageLoaderPluginManagerInterface
  * @extends AbstractPluginManager<InstanceType>
  */
-final class LoaderPluginManager extends AbstractPluginManager implements LoaderPluginManagerInterface
+final class LoaderPluginManager extends AbstractPluginManager implements MessageLoaderPluginManagerInterface
 {
     private const CONFIGURATION = [
         'factories' => [

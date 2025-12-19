@@ -12,6 +12,6 @@ use Laminas\ServiceManager\PluginManagerInterface;
  * @psalm-type InstanceType = RemoteLoaderInterface|FileLoaderInterface
  * @extends PluginManagerInterface<InstanceType>
  */
-interface LoaderPluginManagerInterface extends PluginManagerInterface
+interface MessageLoaderPluginManagerInterface extends PluginManagerInterface
 {
 }
