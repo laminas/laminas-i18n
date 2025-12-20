@@ -15,7 +15,14 @@ final class ConfigProvider
      *
      * @return array{
      *     dependencies: ServiceManagerConfiguration,
-     *     locale: string|null,
+     *     locale: non-empty-string|null,
+     *     timezone: non-empty-string|null,
+     *     laminas-i18n?: array{
+     *         defaultTimeZone?: non-empty-string|null,
+     *         defaultCurrency?: non-empty-string|null,
+     *         defaultTextDomain?: non-empty-string|null,
+     *         defaultCountry?: non-empty-string|null,
+     *     }
      * }
      */
     public function __invoke(): array
@@ -23,6 +30,7 @@ final class ConfigProvider
         return [
             'dependencies' => $this->getDependencyConfig(),
             'locale'       => null,
+            'timezone'     => null,
         ];
     }
 
@@ -44,6 +52,7 @@ final class ConfigProvider
                 Translator\LoaderPluginManager::class   => Translator\LoaderPluginManagerFactory::class,
                 Geography\DefaultCountryCodeList::class => Geography\DefaultCountryCodeListFactory::class,
                 DefaultLocale::class                    => Factory\DefaultLocaleFactory::class,
+                I18nDefaults::class                     => Factory\I18nDefaultsFactory::class,
             ],
         ];
     }
