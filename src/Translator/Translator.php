@@ -38,8 +38,7 @@ use const DIRECTORY_SEPARATOR;
  */
 class Translator implements TranslatorInterface
 {
-    public const DEFAULT_TEXT_DOMAIN = 'default';
-    public const ANY_LOCALE          = '*';
+    public const ANY_LOCALE = '*';
 
     /**
      * Event fired when the translation for a message is missing.
@@ -301,8 +300,11 @@ class Translator implements TranslatorInterface
      * @param non-empty-string|null $locale
      * @psalm-suppress MoreSpecificImplementedParamType This will be redundant when Translator interface is improved
      */
-    public function translate($message, $textDomain = self::DEFAULT_TEXT_DOMAIN, $locale = null): string|null
-    {
+    public function translate(
+        string $message,
+        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string|null $locale = null,
+    ): string {
         $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
@@ -320,22 +322,18 @@ class Translator implements TranslatorInterface
     /**
      * Translate a plural message.
      *
-     * @param  string      $singular
-     * @param  string      $plural
-     * @param  int         $number
-     * @param  non-empty-string $textDomain
-     * @param  non-empty-string|null $locale
-     * @return string
+     * @param non-empty-string $textDomain
+     * @param non-empty-string|null $locale
      * @throws Exception\OutOfBoundsException
      * @psalm-suppress MoreSpecificImplementedParamType This will be redundant when Translator interface is improved
      */
     public function translatePlural(
-        $singular,
-        $plural,
-        $number,
-        $textDomain = self::DEFAULT_TEXT_DOMAIN,
-        $locale = null,
-    ) {
+        string $singular,
+        string $plural,
+        int $number,
+        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string|null $locale = null,
+    ): string {
         $locale    ??= $this->getLocale();
         $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
