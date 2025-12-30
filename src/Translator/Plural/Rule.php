@@ -7,56 +7,31 @@ namespace Laminas\I18n\Translator\Plural;
 use Laminas\I18n\Exception;
 
 use function abs;
+use function assert;
 use function floor;
+use function is_int;
 use function preg_match;
 use function sprintf;
 
 /**
- * Plural rule evaluator.
- *
- * @final
+ * Plural rule evaluator
  */
-class Rule
+final readonly class Rule
 {
-    /**
-     * Parser instance.
-     *
-     * @var Parser
-     */
-    protected static $parser;
-
-    /**
-     * Abstract syntax tree.
-     *
-     * @var array
-     */
-    protected $ast;
-
-    /**
-     * Create a new plural rule.
-     *
-     * @param int   $numPlurals
-     */
-    protected function __construct(
-        /**
-         * Number of plurals in this rule.
-         */
-        protected $numPlurals,
-        array $ast
+    private function __construct(
+        private int $numPlurals,
+        private Node $ast,
     ) {
-        $this->ast = $ast;
     }
 
     /**
      * Evaluate a number and return the plural index.
      *
-     * @param  int $number
-     * @return int
      * @throws Exception\RangeException
      */
-    public function evaluate($number)
+    public function evaluate(int $number): int
     {
-        $result = $this->evaluateAstPart($this->ast, abs((int) $number));
+        $result = $this->evaluateAstPart($this->ast, abs($number));
 
         if ($result < 0 || $result >= $this->numPlurals) {
             throw new Exception\RangeException(
@@ -69,10 +44,8 @@ class Rule
 
     /**
      * Get number of possible plural forms.
-     *
-     * @return int
      */
-    public function getNumPlurals()
+    public function getNumPlurals(): int
     {
         return $this->numPlurals;
     }
@@ -80,61 +53,83 @@ class Rule
     /**
      * Evaluate a part of an ast.
      *
-     * @param  int   $number
-     * @return int
      * @throws Exception\ParseException
      */
-    protected function evaluateAstPart(array $ast, $number)
+    protected function evaluateAstPart(Node $ast, int $number): int
     {
-        return match ($ast['id']) {
-            'number' => $ast['arguments'][0],
-            'n' => $number,
-            '+' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   + $this->evaluateAstPart($ast['arguments'][1], $number),
-            '-' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   - $this->evaluateAstPart($ast['arguments'][1], $number),
+        $first  = $ast->arguments[0] ?? null;
+        $second = $ast->arguments[1] ?? null;
+        $third  = $ast->arguments[2] ?? null;
+
+        if ($ast->id === 'number') {
+            assert(is_int($first));
+
+            return $first;
+        }
+
+        if ($ast->id === 'n') {
+            return $number;
+        }
+
+        assert($first instanceof Node);
+
+        if ($ast->id === '!') {
+            $result = $this->evaluateAstPart($first, $number);
+
+            return $result === 0 ? 1 : 0;
+        }
+
+        assert($second instanceof Node);
+
+        if ($ast->id === '?') {
+            assert($third instanceof Node);
+
+            return $this->evaluateAstPart($first, $number)
+                ? $this->evaluateAstPart($second, $number)
+                : $this->evaluateAstPart($third, $number);
+        }
+
+        return match ($ast->id) {
+            '+' => $this->evaluateAstPart($first, $number)
+                   + $this->evaluateAstPart($second, $number),
+            '-' => $this->evaluateAstPart($first, $number)
+                   - $this->evaluateAstPart($second, $number),
             // Integer division
-            '/' => floor(
-                $this->evaluateAstPart($ast['arguments'][0], $number)
-                / $this->evaluateAstPart($ast['arguments'][1], $number)
+            '/' => (int) floor(
+                $this->evaluateAstPart($first, $number)
+                / $this->evaluateAstPart($second, $number)
             ),
-            '*' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   * $this->evaluateAstPart($ast['arguments'][1], $number),
-            '%' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   % $this->evaluateAstPart($ast['arguments'][1], $number),
-            '>' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   > $this->evaluateAstPart($ast['arguments'][1], $number)
+            '*' => $this->evaluateAstPart($first, $number)
+                   * $this->evaluateAstPart($second, $number),
+            '%' => $this->evaluateAstPart($first, $number)
+                   % $this->evaluateAstPart($second, $number),
+            '>' => $this->evaluateAstPart($first, $number)
+                   > $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            '>=' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   >= $this->evaluateAstPart($ast['arguments'][1], $number)
+            '>=' => $this->evaluateAstPart($first, $number)
+                   >= $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            '<' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   < $this->evaluateAstPart($ast['arguments'][1], $number)
+            '<' => $this->evaluateAstPart($first, $number)
+                   < $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            '<=' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   <= $this->evaluateAstPart($ast['arguments'][1], $number)
+            '<=' => $this->evaluateAstPart($first, $number)
+                   <= $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            // @codingStandardsIgnoreStart
-            '==' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   == $this->evaluateAstPart($ast['arguments'][1], $number)
+            '==' => $this->evaluateAstPart($first, $number)
+                   === $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            '!=' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   != $this->evaluateAstPart($ast['arguments'][1], $number)
+            '!=' => $this->evaluateAstPart($first, $number)
+                   !== $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            '&&' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   && $this->evaluateAstPart($ast['arguments'][1], $number)
+            '&&' => $this->evaluateAstPart($first, $number)
+                   && $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            '||' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   || $this->evaluateAstPart($ast['arguments'][1], $number)
+            '||' => $this->evaluateAstPart($first, $number)
+                   || $this->evaluateAstPart($second, $number)
                    ? 1 : 0,
-            '!' => ! $this->evaluateAstPart($ast['arguments'][0], $number)
-                   ? 1 : 0,
-            '?' => $this->evaluateAstPart($ast['arguments'][0], $number)
-                   ? $this->evaluateAstPart($ast['arguments'][1], $number)
-                   : $this->evaluateAstPart($ast['arguments'][2], $number),
             default => throw new Exception\ParseException(sprintf(
                 'Unknown token: %s',
-                $ast['id']
+                $ast->id,
             )),
         };
     }
@@ -142,16 +137,10 @@ class Rule
     /**
      * Create a new rule from a string.
      *
-     * @param  string $string
      * @throws Exception\ParseException
-     * @return Rule
      */
-    public static function fromString($string)
+    public static function fromString(string $string): Rule
     {
-        if (static::$parser === null) {
-            static::$parser = new Parser();
-        }
-
         if (! preg_match('(nplurals=(?P<nplurals>\d+))', $string, $match)) {
             throw new Exception\ParseException(sprintf(
                 'Unknown or invalid parser rule: %s',
@@ -168,10 +157,10 @@ class Rule
             ));
         }
 
-        $tree = static::$parser->parse($match['plural']);
-        $ast  = static::createAst($tree);
+        $tree = Parser::parse($match['plural']);
+        $ast  = self::createAst($tree);
 
-        return new static($numPlurals, $ast);
+        return new self($numPlurals, $ast);
     }
 
     /**
@@ -179,37 +168,42 @@ class Rule
      *
      * Theoretically we could just use the given Symbol, but that one is not
      * so easy to serialize and also takes up more memory.
-     *
-     * @return array
      */
-    protected static function createAst(Symbol $symbol)
+    protected static function createAst(Symbol $symbol): Node
     {
-        $ast = ['id' => $symbol->id, 'arguments' => []];
+        $args = [];
 
         switch ($symbol->id) {
             case 'n':
                 break;
 
             case 'number':
-                $ast['arguments'][] = $symbol->value;
+                assert(is_int($symbol->value));
+                $args[] = $symbol->value;
                 break;
 
             case '!':
-                $ast['arguments'][] = static::createAst($symbol->first);
+                assert($symbol->first !== null);
+                $args[] = self::createAst($symbol->first);
                 break;
 
             case '?':
-                $ast['arguments'][] = static::createAst($symbol->first);
-                $ast['arguments'][] = static::createAst($symbol->second);
-                $ast['arguments'][] = static::createAst($symbol->third);
+                assert($symbol->first !== null);
+                assert($symbol->second !== null);
+                assert($symbol->third !== null);
+                $args[] = self::createAst($symbol->first);
+                $args[] = self::createAst($symbol->second);
+                $args[] = self::createAst($symbol->third);
                 break;
 
             default:
-                $ast['arguments'][] = static::createAst($symbol->first);
-                $ast['arguments'][] = static::createAst($symbol->second);
+                assert($symbol->first !== null);
+                assert($symbol->second !== null);
+                $args[] = self::createAst($symbol->first);
+                $args[] = self::createAst($symbol->second);
                 break;
         }
 
-        return $ast;
+        return new Node($symbol->id, $args);
     }
 }
