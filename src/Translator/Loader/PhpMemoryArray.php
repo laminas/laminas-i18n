@@ -8,8 +8,8 @@ use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
 
-use function gettype;
 use function is_array;
+use function is_string;
 use function sprintf;
 
 /**
@@ -19,49 +19,42 @@ use function sprintf;
  */
 class PhpMemoryArray implements RemoteLoaderInterface
 {
-    /** @param array $messages */
-    public function __construct(protected $messages)
+    /** @param array<string, mixed> $messages */
+    public function __construct(private array $messages)
     {
     }
 
     /**
      * Load translations from a remote source.
      *
-     * @param  string $locale
-     * @param  string $textDomain
-     * @return TextDomain
      * @throws Exception\InvalidArgumentException
      */
-    public function load($locale, $textDomain)
+    public function load(string $locale, string $textDomain): TextDomain|null
     {
-        if (! is_array($this->messages)) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Expected an array, but received %s', gettype($this->messages))
-            );
-        }
-
         if (! isset($this->messages[$textDomain])) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Expected textdomain "%s" to be an array, but it is not set', $textDomain)
             );
         }
 
-        if (! isset($this->messages[$textDomain][$locale])) {
+        $messages = $this->messages[$textDomain][$locale] ?? null;
+
+        if (! is_array($messages)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Expected locale "%s" to be an array, but it is not set', $locale)
             );
         }
 
-        $textDomain = new TextDomain($this->messages[$textDomain][$locale]);
+        /** @psalm-var mixed $pluralRule */
+        $pluralRule = $messages['']['plural_forms'] ?? null;
+        unset($messages['']);
 
-        if ($textDomain->offsetExists('')) {
-            if (isset($textDomain['']['plural_forms'])) {
-                $textDomain->setPluralRule(
-                    PluralRule::fromString($textDomain['']['plural_forms'])
-                );
-            }
+        $textDomain = new TextDomain($messages);
 
-            unset($textDomain['']);
+        if (is_string($pluralRule) && $pluralRule !== '') {
+            $textDomain->setPluralRule(
+                PluralRule::fromString($pluralRule)
+            );
         }
 
         return $textDomain;

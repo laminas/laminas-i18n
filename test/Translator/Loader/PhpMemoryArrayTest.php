@@ -26,14 +26,6 @@ final class PhpMemoryArrayTest extends TestCase
         $this->testFilesDir = $realpath;
     }
 
-    public function testLoaderFailsToLoadNonArray(): void
-    {
-        $loader = new PhpMemoryArrayLoader('foo');
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected an array, but received');
-        $loader->load('en_US', 'default');
-    }
-
     public function testLoaderFailsToLoadMissingTextDomain(): void
     {
         $loader = new PhpMemoryArrayLoader([]);
@@ -61,6 +53,7 @@ final class PhpMemoryArrayTest extends TestCase
     {
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -70,6 +63,7 @@ final class PhpMemoryArrayTest extends TestCase
     {
         $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
         self::assertEquals(0, $textDomain->getPluralRule()->evaluate(1));

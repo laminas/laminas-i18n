@@ -13,9 +13,7 @@ use function array_replace;
 /**
  * Text domain.
  *
- * @template TKey of array-key
- * @template TValue
- * @extends ArrayObject<TKey, TValue>
+ * @extends ArrayObject<non-empty-string, non-empty-string|list<string|null>>
  * @final
  */
 class TextDomain extends ArrayObject
@@ -48,10 +46,9 @@ class TextDomain extends ArrayObject
     /**
      * Get the plural rule.
      *
-     * @param  bool $fallbackToDefaultRule
-     * @return PluralRule|null
+     * @psalm-return ($fallbackToDefaultRule is true ? PluralRule : PluralRule|null)
      */
-    public function getPluralRule($fallbackToDefaultRule = true)
+    public function getPluralRule(bool $fallbackToDefaultRule = true): PluralRule|null
     {
         if ($this->pluralRule === null && $fallbackToDefaultRule) {
             return static::getDefaultPluralRule();
@@ -93,12 +90,8 @@ class TextDomain extends ArrayObject
      *
      * @return $this
      * @throws Exception\RuntimeException
-     * @template TNewKey of array-key
-     * @template TNewValue
-     * @param self<TNewKey, TNewValue> $textDomain
-     * @psalm-self-out self<TKey|TNewKey, TValue|TNewValue>
      */
-    public function merge(TextDomain $textDomain)
+    public function merge(TextDomain $textDomain): self
     {
         if ($this->hasPluralRule() && $textDomain->hasPluralRule()) {
             if ($this->getPluralRule()->getNumPlurals() !== $textDomain->getPluralRule()->getNumPlurals()) {

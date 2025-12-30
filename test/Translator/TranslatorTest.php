@@ -8,8 +8,11 @@ use Laminas\Cache\Psr\CacheItemPool\CacheItemPoolDecorator;
 use Laminas\Cache\Storage\Adapter\Memory;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManager;
+use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator;
+use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\I18n\TestCase;
 use LaminasTest\I18n\Translator\TestAsset\Loader as TestLoader;
 use Locale;
@@ -18,18 +21,20 @@ final class TranslatorTest extends TestCase
 {
     private Translator $translator;
     private string $testFilesDir;
+    private LoaderPluginManager $pluginManager;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->translator = new Translator();
+        $this->pluginManager = new LoaderPluginManager(new ServiceManager());
+        $this->translator    = new Translator($this->pluginManager);
         Locale::setDefault('en_EN');
         $this->testFilesDir = __DIR__ . '/_files';
     }
 
     public function testFactoryCreatesTranslator(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'   => 'de_DE',
             'patterns' => [
                 [
@@ -52,7 +57,7 @@ final class TranslatorTest extends TestCase
 
     public function testTranslationFromSeveralTranslationFiles(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
@@ -74,39 +79,39 @@ final class TranslatorTest extends TestCase
         //Test translations
         self::assertEquals(
             'Nachricht 1',
-            $translator->translate('Message 1')
+            $translator->translate('Message 1'),
         ); //translation-de_DE.php
         self::assertEquals(
             'Nachricht 9',
-            $translator->translate('Message 9')
+            $translator->translate('Message 9'),
         ); //translation-more-de_DE.php
         self::assertEquals(
             'Nachricht 10 - 0',
-            $translator->translatePlural('Message 10', 'Message 10', 1)
+            $translator->translatePlural('Message 10', 'Message 10', 1),
         ); //translation-de_DE.php
         self::assertEquals(
             'Nachricht 10 - 1',
-            $translator->translatePlural('Message 10', 'Message 10', 2)
+            $translator->translatePlural('Message 10', 'Message 10', 2),
         ); //translation-de_DE.php
         self::assertEquals(
             'Nachricht 11 - 0',
-            $translator->translatePlural('Message 11', 'Message 11', 1)
+            $translator->translatePlural('Message 11', 'Message 11', 1),
         ); //translation-more-de_DE.php
         self::assertEquals(
             'Nachricht 11 - 1',
-            $translator->translatePlural('Message 11', 'Message 11', 2)
+            $translator->translatePlural('Message 11', 'Message 11', 2),
         ); //translation-more-de_DE.php
     }
 
     public function testTranslationFromDifferentSourceTypes(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'                    => 'de_DE',
             'translation_file_patterns' => [
                 [
                     'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern'  => 'translation-de_DE.php',
+                    'pattern'  => 'translation-%s.php',
                 ],
             ],
             'translation_files'         => [
@@ -125,7 +130,7 @@ final class TranslatorTest extends TestCase
     {
         $cacheItemPool = new CacheItemPoolDecorator(new Memory());
 
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'locale'   => 'de_DE',
             'patterns' => [
                 [
@@ -156,14 +161,12 @@ final class TranslatorTest extends TestCase
     {
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $pm                 = $this->translator->getPluginManager();
-        $pm->configure([
+        $this->pluginManager->configure([
             'services' => [
                 'test' => $loader,
             ],
         ]);
-        $this->translator->setPluginManager($pm);
-        $this->translator->addTranslationFile('test', null);
+        $this->translator->addTranslationFile('test', 'anything');
 
         self::assertEquals('bar', $this->translator->translate('foo'));
     }
@@ -187,10 +190,8 @@ final class TranslatorTest extends TestCase
 
         $loader             = new TestLoader();
         $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $plugins            = $this->translator->getPluginManager();
-        $plugins->configure(['services' => ['test' => $loader]]);
-        $this->translator->setPluginManager($plugins);
-        $this->translator->addTranslationFile('test', null);
+        $this->pluginManager->configure(['services' => ['test' => $loader]]);
+        $this->translator->addTranslationFile('test', 'anything');
 
         self::assertEquals('bar', $this->translator->translate('foo'));
 
@@ -230,7 +231,7 @@ final class TranslatorTest extends TestCase
             'phparray',
             $this->testFilesDir . '/translation_en.php',
             'default',
-            'en_EN'
+            'en_EN',
         );
 
         $pl0 = $this->translator->translatePlural('Message 5', 'Message 5 Plural', 1);
@@ -247,7 +248,7 @@ final class TranslatorTest extends TestCase
         $this->translator->addTranslationFilePattern(
             'phparray',
             $this->testFilesDir . '/testarray',
-            'translation-%s.php'
+            'translation-%s.php',
         );
 
         $this->translator->setLocale('es_ES');
@@ -266,7 +267,7 @@ final class TranslatorTest extends TestCase
         $this->translator->addTranslationFilePattern(
             'phparray',
             $this->testFilesDir . '/testarray',
-            'translation-%s.php'
+            'translation-%s.php',
         );
 
         $this->translator->setLocale('de_DE');
@@ -288,7 +289,7 @@ final class TranslatorTest extends TestCase
             'phparray',
             $this->testFilesDir . '/testarray/translation-noplural-ja_JP.php',
             'default',
-            'ja_JP'
+            'ja_JP',
         );
 
         $pl0 = $this->translator->translatePlural('Message 9', 'Message 9 Plural', 1);
@@ -305,7 +306,7 @@ final class TranslatorTest extends TestCase
         $this->translator->addTranslationFilePattern(
             'phparray',
             $this->testFilesDir . '/testarray',
-            'translation-%s.php'
+            'translation-%s.php',
         );
 
         // Test that a locale without translations does not cause warnings
@@ -326,7 +327,7 @@ final class TranslatorTest extends TestCase
         $this->translator->addTranslationFilePattern(
             'phparray',
             $this->testFilesDir . '/testarray',
-            'translation-%s.php'
+            'translation-%s.php',
         );
 
         // Test that a locale without translations does not cause warnings
@@ -349,12 +350,12 @@ final class TranslatorTest extends TestCase
 
     public function testEnableEventMangerViaFactory(): void
     {
-        $translator = Translator::factory([
+        $translator = Translator::factory($this->pluginManager, [
             'event_manager_enabled' => true,
         ]);
         self::assertTrue($translator->isEventManagerEnabled());
 
-        $translator = Translator::factory([]);
+        $translator = Translator::factory($this->pluginManager, []);
         self::assertFalse($translator->isEventManagerEnabled());
     }
 
@@ -365,11 +366,9 @@ final class TranslatorTest extends TestCase
         $this->translator->enableEventManager();
         $this->translator->getEventManager()->attach(
             Translator::EVENT_MISSING_TRANSLATION,
-            // @codingStandardsIgnoreStart Generic.WhiteSpace.ScopeIndent.IncorrectExact
             static function (EventInterface $event) use (&$actualEvent) {
                 $actualEvent = $event;
-            }
-            // @codingStandardsIgnoreEnd
+            },
         );
 
         $this->translator->translate('foo', 'bar', 'baz');
@@ -381,7 +380,7 @@ final class TranslatorTest extends TestCase
                 'locale'      => 'baz',
                 'text_domain' => 'bar',
             ],
-            $actualEvent->getParams()
+            $actualEvent->getParams(),
         );
 
         // But fire no event when disabled
@@ -389,6 +388,38 @@ final class TranslatorTest extends TestCase
         $this->translator->disableEventManager();
         $this->translator->translate('foo', 'bar', 'baz');
         self::assertNull($actualEvent);
+    }
+
+    public function testUsersCanSupplyASpecificEventManagerInstance(): void
+    {
+        $actualEvent  = null;
+        $eventManager = new EventManager();
+        $eventManager->attach(
+            Translator::EVENT_MISSING_TRANSLATION,
+            static function (EventInterface $event) use (&$actualEvent) {
+                $actualEvent = $event;
+            },
+        );
+
+        $translator = new Translator(
+            new LoaderPluginManager(new ServiceManager()),
+            $eventManager,
+        );
+
+        self::assertSame($eventManager, $translator->getEventManager());
+        self::assertTrue($translator->isEventManagerEnabled());
+
+        $translator->translate('foo', 'bar', 'baz');
+
+        self::assertInstanceOf(Event::class, $actualEvent);
+        self::assertEquals(
+            [
+                'message'     => 'foo',
+                'locale'      => 'baz',
+                'text_domain' => 'bar',
+            ],
+            $actualEvent->getParams(),
+        );
     }
 
     public function testListenerOnMissingTranslationEventCanReturnString(): void
@@ -402,17 +433,17 @@ final class TranslatorTest extends TestCase
             Translator::EVENT_MISSING_TRANSLATION,
             static function () use (&$trigger) {
                 $trigger = true;
-            }
+            },
         );
         $events->attach(
             Translator::EVENT_MISSING_TRANSLATION,
-            static fn() => 'EVENT TRIGGERED'
+            static fn() => 'EVENT TRIGGERED',
         );
         $events->attach(
             Translator::EVENT_MISSING_TRANSLATION,
             static function () use (&$doNotTrigger) {
                 $doNotTrigger = true;
-            }
+            },
         );
 
         $result = $this->translator->translate('foo', 'bar', 'baz');
@@ -440,7 +471,7 @@ final class TranslatorTest extends TestCase
                 'locale'      => 'baz',
                 'text_domain' => 'bar',
             ],
-            $actualEvent->getParams()
+            $actualEvent->getParams(),
         );
 
         // But fire no event when disabled
@@ -464,17 +495,17 @@ final class TranslatorTest extends TestCase
             Translator::EVENT_NO_MESSAGES_LOADED,
             static function () use (&$trigger): void {
                 $trigger = true;
-            }
+            },
         );
         $events->attach(
             Translator::EVENT_NO_MESSAGES_LOADED,
-            static fn() => $textDomain
+            static fn() => $textDomain,
         );
         $events->attach(
             Translator::EVENT_NO_MESSAGES_LOADED,
             static function () use (&$doNotTrigger) {
                 $doNotTrigger = true;
-            }
+            },
         );
 
         $result = $this->translator->translate('foo', 'bar', 'baz');
@@ -491,7 +522,7 @@ final class TranslatorTest extends TestCase
             'phparray',
             $this->testFilesDir . '/translation_en.php',
             'default',
-            'en_EN'
+            'en_EN',
         );
 
         $allMessages = $this->translator->getAllMessages();
@@ -507,7 +538,7 @@ final class TranslatorTest extends TestCase
             'phparray',
             $this->testFilesDir . '/translation_en.php',
             'default',
-            'en_EN'
+            'en_EN',
         );
 
         $allMessages = $this->translator->getAllMessages('foo_domain');
@@ -521,27 +552,11 @@ final class TranslatorTest extends TestCase
             'phparray',
             $this->testFilesDir . '/translation_en.php',
             'default',
-            'en_EN'
+            'en_EN',
         );
 
         $allMessages = $this->translator->getAllMessages('default', 'es_ES');
         self::assertNull($allMessages);
-    }
-
-    public function testNullMessageArgumentShouldReturnAnEmptyString(): void
-    {
-        $loader             = new TestLoader();
-        $loader->textDomain = new TextDomain(['foo' => 'bar']);
-        $pm                 = $this->translator->getPluginManager();
-        $pm->configure([
-            'services' => [
-                'test' => $loader,
-            ],
-        ]);
-        $this->translator->setPluginManager($pm);
-        $this->translator->addTranslationFile('test', null);
-
-        self::assertEquals('', $this->translator->translate(null));
     }
 
     public function testTranslateWithEmptyStringLocale(): void
@@ -551,9 +566,9 @@ final class TranslatorTest extends TestCase
             'phparray',
             $this->testFilesDir . '/testarray/translation-more-en_US.php',
             'default',
-            'en_US'
+            'en_US',
         );
 
-        self::assertEquals('Message 8 (en)', $this->translator->translate('Message 8', 'default', ''));
+        self::assertEquals('Message 8 (en)', $this->translator->translate('Message 8'));
     }
 }

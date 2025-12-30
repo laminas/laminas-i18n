@@ -5,12 +5,10 @@
       <code><![CDATA[ExtensionNotLoadedException]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Translator/Loader/AbstractFileLoader.php">
-    <RedundantCastGivenDocblockType>
-      <code><![CDATA[(bool) $flag]]></code>
-    </RedundantCastGivenDocblockType>
-  </file>
   <file src="src/Translator/Loader/Gettext.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$textDomain]]></code>
+    </ArgumentTypeCoercion>
     <FalsableReturnStatement>
       <code><![CDATA[unpack('N' . $num, fread($this->file, 4 * $num))]]></code>
       <code><![CDATA[unpack('V' . $num, fread($this->file, 4 * $num))]]></code>
@@ -70,27 +68,21 @@
       <code><![CDATA[$content]]></code>
     </PossiblyUndefinedArrayOffset>
   </file>
+  <file src="src/Translator/Loader/Ini.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$messages]]></code>
+    </ArgumentTypeCoercion>
+  </file>
   <file src="src/Translator/Loader/PhpArray.php">
-    <MixedArgument>
-      <code><![CDATA[$textDomain['']['plural_forms']]]></code>
-    </MixedArgument>
-    <MixedArrayAccess>
-      <code><![CDATA[$textDomain['']['plural_forms']]]></code>
-    </MixedArrayAccess>
-    <UnresolvableInclude>
-      <code><![CDATA[include $fromIncludePath]]></code>
-    </UnresolvableInclude>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$messages]]></code>
+    </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Translator/Loader/PhpMemoryArray.php">
-    <DocblockTypeContradiction>
-      <code><![CDATA[is_array($this->messages)]]></code>
-    </DocblockTypeContradiction>
-    <MixedArgument>
-      <code><![CDATA[$textDomain['']['plural_forms']]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$messages]]></code>
+    </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
-      <code><![CDATA[$textDomain['']['plural_forms']]]></code>
       <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
     </MixedArrayAccess>
   </file>
@@ -107,119 +99,41 @@
       <code><![CDATA[$options]]></code>
     </MoreSpecificImplementedParamType>
   </file>
-  <file src="src/Translator/TextDomain.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$textDomain->getPluralRule()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[getNumPlurals]]></code>
-      <code><![CDATA[getNumPlurals]]></code>
-    </PossiblyNullReference>
-  </file>
   <file src="src/Translator/Translator.php">
     <DocblockTypeContradiction>
-      <code><![CDATA[$message === null]]></code>
-      <code><![CDATA[$message === null]]></code>
       <code><![CDATA[is_array($options)]]></code>
     </DocblockTypeContradiction>
-    <MissingClosureParamType>
-      <code><![CDATA[$r]]></code>
-      <code><![CDATA[$r]]></code>
-    </MissingClosureParamType>
-    <MissingConstructor>
-      <code><![CDATA[$events]]></code>
-      <code><![CDATA[$pluginManager]]></code>
-    </MissingConstructor>
+    <ImplementedReturnTypeMismatch>
+      <code><![CDATA[string|null]]></code>
+    </ImplementedReturnTypeMismatch>
     <MixedArgument>
-      <code><![CDATA[$file['filename']]]></code>
-      <code><![CDATA[$file['filename']]]></code>
-      <code><![CDATA[$file['filename']]]></code>
-      <code><![CDATA[$file['locale'] ?? null]]></code>
-      <code><![CDATA[$file['text_domain'] ?? 'default']]></code>
-      <code><![CDATA[$file['type']]]></code>
-      <code><![CDATA[$file['type']]]></code>
-      <code><![CDATA[$loaderType]]></code>
-      <code><![CDATA[$pattern['base_dir']]]></code>
-      <code><![CDATA[$pattern['pattern']]]></code>
-      <code><![CDATA[$pattern['pattern']]]></code>
-      <code><![CDATA[$pattern['text_domain'] ?? 'default']]></code>
-      <code><![CDATA[$pattern['type']]]></code>
-      <code><![CDATA[$pattern['type']]]></code>
-      <code><![CDATA[$remote['text_domain'] ?? 'default']]></code>
+      <code><![CDATA[$remote['text_domain'] ?? self::DEFAULT_TEXT_DOMAIN]]></code>
       <code><![CDATA[$remote['type']]]></code>
       <code><![CDATA[array_shift($locales)]]></code>
       <code><![CDATA[array_shift($locales)]]></code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code><![CDATA[$file['filename']]]></code>
-      <code><![CDATA[$file['filename']]]></code>
-      <code><![CDATA[$file['filename']]]></code>
-      <code><![CDATA[$file['locale']]]></code>
-      <code><![CDATA[$file['text_domain']]]></code>
-      <code><![CDATA[$file['type']]]></code>
-      <code><![CDATA[$file['type']]]></code>
-      <code><![CDATA[$pattern['baseDir']]]></code>
-      <code><![CDATA[$pattern['base_dir']]]></code>
-      <code><![CDATA[$pattern['pattern']]]></code>
-      <code><![CDATA[$pattern['pattern']]]></code>
-      <code><![CDATA[$pattern['text_domain']]]></code>
-      <code><![CDATA[$pattern['type']]]></code>
-      <code><![CDATA[$pattern['type']]]></code>
       <code><![CDATA[$remote['text_domain']]]></code>
       <code><![CDATA[$remote['type']]]></code>
-      <code><![CDATA[$this->files[$textDomain][$currentLocale]]]></code>
-      <code><![CDATA[$this->files[$textDomain][$currentLocale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale][$message]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale][$textDomain . "\x04" . $message]]]></code>
     </MixedArrayAccess>
-    <MixedArrayAssignment>
-      <code><![CDATA[$this->files[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-      <code><![CDATA[$this->patterns[$textDomain][]]]></code>
-      <code><![CDATA[$this->remote[$textDomain][]]]></code>
-    </MixedArrayAssignment>
     <MixedAssignment>
-      <code><![CDATA[$file]]></code>
-      <code><![CDATA[$file]]></code>
       <code><![CDATA[$last]]></code>
       <code><![CDATA[$last]]></code>
-      <code><![CDATA[$loaderType]]></code>
-      <code><![CDATA[$pattern]]></code>
-      <code><![CDATA[$pattern]]></code>
       <code><![CDATA[$remote]]></code>
     </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[merge]]></code>
-      <code><![CDATA[merge]]></code>
-      <code><![CDATA[merge]]></code>
-    </MixedMethodCall>
-    <MixedOperand>
-      <code><![CDATA[$pattern['baseDir']]]></code>
-    </MixedOperand>
-    <MixedReturnStatement>
-      <code><![CDATA[$this->messages[$textDomain][$locale][$message]]]></code>
-      <code><![CDATA[$this->messages[$textDomain][$locale][$textDomain . "\x04" . $message]]]></code>
-    </MixedReturnStatement>
-    <PossiblyNullReference>
-      <code><![CDATA[evaluate]]></code>
-    </PossiblyNullReference>
-    <RedundantCondition>
+    <PossiblyNullArgument>
+      <code><![CDATA[array_shift($locales)]]></code>
+    </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getFallbackLocale]]></code>
+    </PossiblyUnusedMethod>
+    <RedundantConditionGivenDocblockType>
       <code><![CDATA[$translation[$index] !== null]]></code>
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>
-    </RedundantCondition>
+    </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Translator/TranslatorServiceFactory.php">
     <MixedArgument>
-      <code><![CDATA[$container->get('TranslatorPluginManager')]]></code>
       <code><![CDATA[$trConfig]]></code>
     </MixedArgument>
     <MixedArrayAccess>
@@ -235,37 +149,12 @@
       <code><![CDATA[assertNotNull]]></code>
     </RedundantCondition>
   </file>
-  <file src="test/Translator/Loader/GettextTest.php">
-    <PossiblyNullReference>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-    </PossiblyNullReference>
-  </file>
-  <file src="test/Translator/Loader/PhpArrayTest.php">
-    <PossiblyNullReference>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-    </PossiblyNullReference>
-  </file>
   <file src="test/Translator/Loader/PhpMemoryArrayTest.php">
-    <InvalidArgument>
-      <code><![CDATA['foo']]></code>
-    </InvalidArgument>
     <MixedArgument>
       <code><![CDATA[include $this->testFilesDir . '/translation_empty.php']]></code>
       <code><![CDATA[include $this->testFilesDir . '/translation_en.php']]></code>
       <code><![CDATA[include $this->testFilesDir . '/translation_en.php']]></code>
     </MixedArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-    </PossiblyNullReference>
     <UnresolvableInclude>
       <code><![CDATA[include $this->testFilesDir . '/translation_empty.php']]></code>
       <code><![CDATA[include $this->testFilesDir . '/translation_en.php']]></code>
@@ -276,30 +165,5 @@
     <UnusedClosureParam>
       <code><![CDATA[$container]]></code>
     </UnusedClosureParam>
-  </file>
-  <file src="test/Translator/TestAsset/Loader.php">
-    <ParamNameMismatch>
-      <code><![CDATA[$filename]]></code>
-      <code><![CDATA[$locale]]></code>
-    </ParamNameMismatch>
-  </file>
-  <file src="test/Translator/TextDomainTest.php">
-    <PossiblyNullReference>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[evaluate]]></code>
-      <code><![CDATA[getNumPlurals]]></code>
-      <code><![CDATA[getNumPlurals]]></code>
-      <code><![CDATA[getNumPlurals]]></code>
-    </PossiblyNullReference>
-  </file>
-  <file src="test/Translator/TranslatorTest.php">
-    <NullArgument>
-      <code><![CDATA[null]]></code>
-      <code><![CDATA[null]]></code>
-      <code><![CDATA[null]]></code>
-      <code><![CDATA[null]]></code>
-    </NullArgument>
   </file>
 </files>

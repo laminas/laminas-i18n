@@ -43,9 +43,10 @@ final class ConfigProvider
     {
         return [
             'aliases'   => [
-                'TranslatorPluginManager'                 => Translator\LoaderPluginManager::class,
-                Geography\CountryCodeListInterface::class => Geography\DefaultCountryCodeList::class,
-                TranslatorInterface::class                => Translator\Translator::class,
+                'TranslatorPluginManager'                             => Translator\LoaderPluginManager::class,
+                Translator\MessageLoaderPluginManagerInterface::class => Translator\LoaderPluginManager::class,
+                Geography\CountryCodeListInterface::class             => Geography\DefaultCountryCodeList::class,
+                TranslatorInterface::class                            => Translator\Translator::class,
             ],
             'factories' => [
                 Translator\Translator::class            => Translator\TranslatorServiceFactory::class,

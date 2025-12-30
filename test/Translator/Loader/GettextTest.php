@@ -74,6 +74,7 @@ final class GettextTest extends TestCase
     {
         $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -83,6 +84,7 @@ final class GettextTest extends TestCase
     {
         $loader     = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
         self::assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
@@ -95,6 +97,7 @@ final class GettextTest extends TestCase
         $loader = new GettextLoader();
         $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'translation_en.mo');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -105,6 +108,7 @@ final class GettextTest extends TestCase
         $loader = new GettextLoader();
         $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.mo');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -117,6 +121,7 @@ final class GettextTest extends TestCase
         $loader->setUseIncludePath(true);
 
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals(
             [
