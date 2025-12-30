@@ -31,8 +31,8 @@ final class LoaderPluginManager extends AbstractPluginManager implements Message
 {
     private const CONFIGURATION = [
         'factories' => [
-            Loader\Gettext::class  => InvokableFactory::class,
-            Loader\Ini::class      => InvokableFactory::class,
+            Loader\Gettext::class  => Loader\Factory\GettextFactory::class,
+            Loader\Ini::class      => Loader\Factory\IniFactory::class,
             Loader\PhpArray::class => InvokableFactory::class,
         ],
         'aliases'   => [

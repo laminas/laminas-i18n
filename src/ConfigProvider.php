@@ -49,6 +49,7 @@ final class ConfigProvider
                 TranslatorInterface::class                            => Translator\Translator::class,
             ],
             'factories' => [
+                Translator\Loader\IniFileReader::class  => Translator\Loader\Factory\IniFileReaderFactory::class,
                 Translator\Translator::class            => Translator\TranslatorServiceFactory::class,
                 Translator\LoaderPluginManager::class   => Translator\LoaderPluginManagerFactory::class,
                 Geography\DefaultCountryCodeList::class => Geography\DefaultCountryCodeListFactory::class,
