@@ -345,7 +345,7 @@ class Translator implements TranslatorInterface
 
         $index = $number === 1 ? 0 : 1; // en_EN Plural rule
         if ($this->messages[$textDomain][$locale] instanceof TextDomain) {
-            $index = (int) $this->messages[$textDomain][$locale]
+            $index = $this->messages[$textDomain][$locale]
                 ->getPluralRule()->evaluate($number);
         }
 
