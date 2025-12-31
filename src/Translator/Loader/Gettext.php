@@ -7,14 +7,17 @@ namespace Laminas\I18n\Translator\Loader;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
-use Laminas\Stdlib\ErrorHandler;
 
 use function array_shift;
+use function assert;
+use function count;
 use function explode;
 use function fclose;
 use function fopen;
 use function fread;
 use function fseek;
+use function is_array;
+use function is_int;
 use function is_string;
 use function sprintf;
 use function strtolower;
@@ -22,26 +25,10 @@ use function trim;
 use function unpack;
 
 /**
- * Gettext loader.
- *
- * @final
+ * Loads translation files in gettext format
  */
-class Gettext extends AbstractFileLoader
+final readonly class Gettext extends AbstractFileLoader
 {
-    /**
-     * Current file pointer.
-     *
-     * @var resource
-     */
-    protected $file;
-
-    /**
-     * Whether the current file is little endian.
-     *
-     * @var bool
-     */
-    protected $littleEndian;
-
     /**
      * @throws Exception\InvalidArgumentException
      */
@@ -51,60 +38,35 @@ class Gettext extends AbstractFileLoader
         if ($resolvedFile === false) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not find or open file %s for reading',
-                $filename
+                $filename,
             ));
         }
 
         $textDomain = [];
 
-        ErrorHandler::start();
-        $this->file = fopen($resolvedFile, 'rb');
-        $error      = ErrorHandler::stop();
-        if (false === $this->file) {
+        $file = fopen($resolvedFile, 'rb');
+        if ($file === false) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not open file %s for reading',
-                $filename
-            ), 0, $error);
+                $filename,
+            ), 0);
         }
 
-        // Verify magic number
-        $magic = fread($this->file, 4);
-
-        if ($magic === "\x95\x04\x12\xde") {
-            $this->littleEndian = false;
-        } elseif ($magic === "\xde\x12\x04\x95") {
-            $this->littleEndian = true;
-        } else {
-            fclose($this->file);
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s is not a valid gettext file',
-                $filename
-            ));
-        }
-
-        // Verify major revision (only 0 and 1 supported)
-        $majorRevision = $this->readInteger() >> 16;
-
-        if ($majorRevision !== 0 && $majorRevision !== 1) {
-            fclose($this->file);
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s has an unknown major revision',
-                $filename
-            ));
-        }
+        $littleEndian = $this->isLittleEndian($file, $filename);
+        $this->assertSupportedVersion($file, $littleEndian, $filename);
 
         // Gather main information
-        $numStrings                   = $this->readInteger();
-        $originalStringTableOffset    = $this->readInteger();
-        $translationStringTableOffset = $this->readInteger();
+        $numStrings                   = $this->readInteger($file, $littleEndian);
+        $originalStringTableOffset    = $this->readInteger($file, $littleEndian);
+        $translationStringTableOffset = $this->readInteger($file, $littleEndian);
 
         // Usually there follow size and offset of the hash table, but we have
         // no need for it, so we skip them.
-        fseek($this->file, $originalStringTableOffset);
-        $originalStringTable = $this->readIntegerList(2 * $numStrings);
+        fseek($file, $originalStringTableOffset);
+        $originalStringTable = $this->readIntegerList($file, $littleEndian, 2 * $numStrings);
 
-        fseek($this->file, $translationStringTableOffset);
-        $translationStringTable = $this->readIntegerList(2 * $numStrings);
+        fseek($file, $translationStringTableOffset);
+        $translationStringTable = $this->readIntegerList($file, $littleEndian, 2 * $numStrings);
 
         // Read in all translations
         for ($current = 0; $current < $numStrings; $current++) {
@@ -115,15 +77,25 @@ class Gettext extends AbstractFileLoader
             $translationStringSize   = $translationStringTable[$sizeKey];
             $translationStringOffset = $translationStringTable[$offsetKey];
 
+            assert(
+                is_int($originalStringSize)
+                &&
+                is_int($originalStringOffset)
+                &&
+                is_int($translationStringSize)
+                &&
+                is_int($translationStringOffset),
+            );
+
             $originalString = [''];
             if ($originalStringSize > 0) {
-                fseek($this->file, $originalStringOffset);
-                $originalString = explode("\0", fread($this->file, $originalStringSize));
+                fseek($file, $originalStringOffset);
+                $originalString = explode("\0", $this->read($file, $originalStringSize));
             }
 
             if ($translationStringSize > 0) {
-                fseek($this->file, $translationStringOffset);
-                $translationString = explode("\0", fread($this->file, $translationStringSize));
+                fseek($file, $translationStringOffset);
+                $translationString = explode("\0", $this->read($file, $translationStringSize));
 
                 if (isset($originalString[1], $translationString[1])) {
                     $textDomain[$originalString[0]] = $translationString;
@@ -141,7 +113,7 @@ class Gettext extends AbstractFileLoader
             }
         }
 
-        fclose($this->file);
+        fclose($file);
 
         $pluralRule = null;
         // Read header entries
@@ -149,7 +121,9 @@ class Gettext extends AbstractFileLoader
             $rawHeaders = explode("\n", trim($textDomain['']));
 
             foreach ($rawHeaders as $rawHeader) {
-                [$header, $content] = explode(':', $rawHeader, 2);
+                $data = explode(':', $rawHeader, 2);
+                assert(count($data) === 2);
+                [$header, $content] = $data;
                 if (strtolower(trim($header)) === 'plural-forms') {
                     $pluralRule = $content;
                 }
@@ -169,31 +143,96 @@ class Gettext extends AbstractFileLoader
     /**
      * Read a single integer from the current file.
      *
-     * @return int
+     * @param resource $file
      */
-    protected function readInteger()
+    private function readInteger($file, bool $littleEndian): int
     {
-        if ($this->littleEndian) {
-            $result = unpack('Vint', fread($this->file, 4));
+        $value = $this->read($file, 4);
+
+        if ($littleEndian) {
+            $result = unpack('Vint', $value);
         } else {
-            $result = unpack('Nint', fread($this->file, 4));
+            $result = unpack('Nint', $value);
         }
 
-        return $result['int'];
+        assert(is_array($result));
+
+        $integer = $result['int'] ?? null;
+
+        assert(is_int($integer));
+
+        return $integer;
     }
 
     /**
      * Read an integer from the current file.
      *
-     * @param  int $num
-     * @return int
+     * @param resource $file
      */
-    protected function readIntegerList($num)
+    private function readIntegerList($file, bool $littleEndian, int $num): array
     {
-        if ($this->littleEndian) {
-            return unpack('V' . $num, fread($this->file, 4 * $num));
+        $value = $this->read($file, 4 * $num);
+
+        $result = $littleEndian
+            ? unpack('V' . $num, $value)
+            : unpack('N' . $num, $value);
+
+        assert(is_array($result));
+
+        return $result;
+    }
+
+    /** @param resource $file */
+    private function read($file, int $bytes): string
+    {
+        $content = fread($file, $bytes);
+        assert($content !== false);
+
+        return $content;
+    }
+
+    /**
+     * @param resource $file
+     * @throws Exception\InvalidArgumentException
+     */
+    private function isLittleEndian($file, string $filename): bool
+    {
+        // Verify magic number
+        $magic = $this->read($file, 4);
+
+        if ($magic === "\x95\x04\x12\xde") {
+            return false;
         }
 
-        return unpack('N' . $num, fread($this->file, 4 * $num));
+        if ($magic === "\xde\x12\x04\x95") {
+            return true;
+        }
+
+        fclose($file);
+        throw new Exception\InvalidArgumentException(sprintf(
+            '%s is not a valid gettext file',
+            $filename
+        ));
+    }
+
+    /**
+     * Verify major revision (only 0 and 1 supported)
+     *
+     * @param resource $file
+     * @throws Exception\InvalidArgumentException
+     */
+    private function assertSupportedVersion($file, bool $littleEndian, string $filename): void
+    {
+        $majorRevision = $this->readInteger($file, $littleEndian) >> 16;
+
+        if ($majorRevision === 0 || $majorRevision === 1) {
+            return;
+        }
+
+        fclose($file);
+        throw new Exception\InvalidArgumentException(sprintf(
+            '%s has an unknown major revision',
+            $filename,
+        ));
     }
 }
