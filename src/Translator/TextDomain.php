@@ -13,7 +13,7 @@ use function array_replace;
 /**
  * Text domain.
  *
- * @extends ArrayObject<non-empty-string, non-empty-string|list<string|null>>
+ * @extends ArrayObject<string, string|list<string|null>>
  * @final
  */
 class TextDomain extends ArrayObject
