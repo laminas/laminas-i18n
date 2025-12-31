@@ -6,8 +6,8 @@ namespace LaminasTest\I18n\Translator\Plural;
 
 use Laminas\I18n\Exception\ParseException;
 use Laminas\I18n\Translator\Plural\Rule;
-use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
 final class RuleTest extends TestCase
 {

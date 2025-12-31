@@ -7,25 +7,10 @@ namespace LaminasTest\I18n\Translator\Loader;
 use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;
 use Laminas\I18n\Translator\TextDomain;
-use LaminasTest\I18n\TestCase;
-use Locale;
-
-use function realpath;
+use PHPUnit\Framework\TestCase;
 
 final class PhpMemoryArrayTest extends TestCase
 {
-    private string $testFilesDir;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        Locale::setDefault('en_US');
-
-        $realpath = realpath(__DIR__ . '/../_files/phpmemoryarray');
-        self::assertNotFalse($realpath);
-        $this->testFilesDir = $realpath;
-    }
-
     public function testLoaderFailsToLoadMissingTextDomain(): void
     {
         $loader = new PhpMemoryArrayLoader([]);
@@ -44,14 +29,14 @@ final class PhpMemoryArrayTest extends TestCase
 
     public function testLoaderLoadsEmptyArray(): void
     {
-        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_empty.php');
+        $loader     = new PhpMemoryArrayLoader(include __DIR__ . '/PhpMemoryArrayTest/translation_empty.php');
         $textDomain = $loader->load('en_US', 'default');
         self::assertInstanceOf(TextDomain::class, $textDomain);
     }
 
     public function testLoaderReturnsValidTextDomain(): void
     {
-        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
+        $loader     = new PhpMemoryArrayLoader(include __DIR__ . '/PhpMemoryArrayTest/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
         self::assertInstanceOf(TextDomain::class, $textDomain);
 
@@ -61,7 +46,7 @@ final class PhpMemoryArrayTest extends TestCase
 
     public function testLoaderLoadsPluralRules(): void
     {
-        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
+        $loader     = new PhpMemoryArrayLoader(include __DIR__ . '/PhpMemoryArrayTest/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
         self::assertInstanceOf(TextDomain::class, $textDomain);
 

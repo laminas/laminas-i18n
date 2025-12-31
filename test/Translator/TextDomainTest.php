@@ -7,7 +7,7 @@ namespace LaminasTest\I18n\Translator;
 use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
-use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\TestCase;
 
 final class TextDomainTest extends TestCase
 {

@@ -8,8 +8,8 @@ use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\LoaderPluginManagerFactory;
-use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 final class LoaderPluginManagerFactoryTest extends TestCase
