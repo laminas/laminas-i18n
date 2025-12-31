@@ -7,7 +7,11 @@ namespace Laminas\I18n;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Translator\TranslatorInterface;
 
-/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
+/**
+ * phpcs:disable Generic.Files.LineLength
+ *
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
+ */
 final class ConfigProvider
 {
     /**
@@ -22,7 +26,18 @@ final class ConfigProvider
      *         defaultCurrency?: non-empty-string|null,
      *         defaultTextDomain?: non-empty-string|null,
      *         defaultCountry?: non-empty-string|null,
-     *     }
+     *         ini-format-options?: array{
+     *             process-sections?: bool,
+     *             typed?: bool,
+     *             nest-separator?: string,
+     *         },
+     *         gettext-loader-options?: array{
+     *             use-include-path?: bool,
+     *         },
+     *         php-loader-options?: array{
+     *             use-include-path?: bool,
+     *         },
+     *     },
      * }
      */
     public function __invoke(): array
@@ -31,6 +46,19 @@ final class ConfigProvider
             'dependencies' => $this->getDependencyConfig(),
             'locale'       => null,
             'timezone'     => null,
+            'laminas-i18n' => [
+                'ini-format-options'     => [
+                    'process-sections' => true,
+                    'typed'            => false,
+                    'nest-separator'   => '.',
+                ],
+                'gettext-loader-options' => [
+                    'use-include-path' => false,
+                ],
+                'php-loader-options'     => [
+                    'use-include-path' => false,
+                ],
+            ],
         ];
     }
 
