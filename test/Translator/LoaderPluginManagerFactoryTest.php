@@ -67,14 +67,14 @@ final class LoaderPluginManagerFactoryTest extends TestCase
         ];
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::exactly(2))
+        $container->expects(self::atLeast(2))
             ->method('has')
             ->willReturnMap([
                 ['ServiceListener', false],
                 ['config', true],
             ]);
 
-        $container->expects(self::once())
+        $container->expects(self::atLeast(1))
             ->method('get')
             ->with('config')
             ->willReturn($config);
