@@ -10,15 +10,15 @@ use Psr\Container\ContainerInterface;
 
 use function is_array;
 
-/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
+/**
+ * @internal
+ *
+ * @psalm-internal Laminas\I18n
+ * @psalm-internal LaminasTest\I18n
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
+ */
 final readonly class LoaderPluginManagerFactory implements FactoryInterface
 {
-    /**
-     * Create and return a LoaderPluginManager.
-     *
-     * @param array<string, mixed>|null $options
-     * @psalm-param ServiceManagerConfiguration|null $options
-     */
     public function __invoke(
         ContainerInterface $container,
         string $requestedName,

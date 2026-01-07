@@ -7,6 +7,12 @@ namespace Laminas\I18n\Translator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
+/**
+ * @internal
+ *
+ * @psalm-internal Laminas\I18n
+ * @psalm-internal LaminasTest\I18n
+ */
 final readonly class TranslatorServiceFactory implements FactoryInterface
 {
     public function __invoke(

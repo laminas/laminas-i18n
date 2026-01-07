@@ -24,9 +24,6 @@
     <MixedArgument>
       <code><![CDATA[$config['translator_plugins']]]></code>
     </MixedArgument>
-    <MoreSpecificImplementedParamType>
-      <code><![CDATA[$options]]></code>
-    </MoreSpecificImplementedParamType>
   </file>
   <file src="src/Translator/Translator.php">
     <DocblockTypeContradiction>
