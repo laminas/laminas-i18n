@@ -67,12 +67,10 @@ final class LoaderPluginManagerFactoryTest extends TestCase
         ];
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::atLeast(2))
+        $container->expects(self::atLeast(1))
             ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', true],
-            ]);
+            ->with('config')
+            ->willReturn(true);
 
         $container->expects(self::atLeast(1))
             ->method('get')
@@ -89,33 +87,13 @@ final class LoaderPluginManagerFactoryTest extends TestCase
         self::assertSame($translator, $translators->get('test-too'));
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenServiceListenerPresent(): void
+    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $container->expects(self::once())
             ->method('has')
-            ->with('ServiceListener')
-            ->willReturn(true);
-
-        $container->expects(self::never())->method('get');
-
-        $factory     = new LoaderPluginManagerFactory();
-        $translators = $factory($container, 'TranslatorPluginManager');
-
-        self::assertInstanceOf(LoaderPluginManager::class, $translators);
-        self::assertFalse($translators->has('test'));
-        self::assertFalse($translators->has('test-too'));
-    }
-
-    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent(): void
-    {
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::exactly(2))
-            ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', false],
-            ]);
+            ->with('config')
+            ->willReturn(false);
 
         $container->expects(self::never())->method('get');
 
@@ -129,12 +107,10 @@ final class LoaderPluginManagerFactoryTest extends TestCase
     {
         $container = $this->createMock(ContainerInterface::class);
 
-        $container->expects(self::exactly(2))
+        $container->expects(self::once())
             ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', true],
-            ]);
+            ->with('config')
+            ->willReturn(true);
 
         $container->expects(self::once())
             ->method('get')

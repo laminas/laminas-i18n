@@ -8,7 +8,11 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
+use function array_replace_recursive;
+use function assert;
 use function is_array;
+use function is_iterable;
+use function iterator_to_array;
 
 /**
  * @internal
@@ -24,30 +28,19 @@ final readonly class LoaderPluginManagerFactory implements FactoryInterface
         string $requestedName,
         ?array $options = null,
     ): LoaderPluginManager {
-        $options     ??= [];
-        $pluginManager = new LoaderPluginManager($container, $options);
+        $options ??= [];
+        /** @psalm-var mixed $config */
+        $config = $container->has('config') ? $container->get('config') : [];
+        $config = ! is_iterable($config) ? [] : $config;
+        $config = iterator_to_array($config);
 
-        // If this is in a laminas-mvc application, the ServiceListener will inject
-        // merged configuration during bootstrap.
-        if ($container->has('ServiceListener')) {
-            return $pluginManager;
-        }
+        $plugins = $config['translator_plugins'] ?? [];
+        assert(is_array($plugins));
 
-        // If we do not have a config service, nothing more to do
-        if (! $container->has('config')) {
-            return $pluginManager;
-        }
+        // Merge arguments to build() over plugins in `config`
+        $plugins = array_replace_recursive($plugins, $options);
+        /** @psalm-var ServiceManagerConfiguration $plugins */
 
-        $config = $container->get('config');
-
-        // If we do not have translator_plugins configuration, nothing more to do
-        if (! isset($config['translator_plugins']) || ! is_array($config['translator_plugins'])) {
-            return $pluginManager;
-        }
-
-        // Wire service configuration for translator_plugins
-        $pluginManager->configure($config['translator_plugins']);
-
-        return $pluginManager;
+        return new LoaderPluginManager($container, $plugins);
     }
 }
