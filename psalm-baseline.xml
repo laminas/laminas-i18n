@@ -20,11 +20,6 @@
       <code><![CDATA[LoaderPluginManager]]></code>
     </MethodSignatureMismatch>
   </file>
-  <file src="src/Translator/LoaderPluginManagerFactory.php">
-    <MixedArgument>
-      <code><![CDATA[$config['translator_plugins']]]></code>
-    </MixedArgument>
-  </file>
   <file src="src/Translator/Translator.php">
     <DocblockTypeContradiction>
       <code><![CDATA[is_array($options)]]></code>

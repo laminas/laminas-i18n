@@ -51,8 +51,7 @@
         "vimeo/psalm": "^6.14.3"
     },
     "conflict": {
-        "laminas/laminas-view": "<2.20.0",
-        "zendframework/zend-i18n": "*"
+        "laminas/laminas-view": "<2.20.0"
     },
     "suggest": {
         "laminas/laminas-cache": "Provides a PSR-6 cache implementation for caching translations",
