@@ -21,6 +21,12 @@ use function is_string;
 use function iterator_to_array;
 use function preg_match;
 
+/**
+ * @internal
+ *
+ * @psalm-internal Laminas\I18n
+ * @psalm-internal LaminasTest\I18n
+ */
 final readonly class I18nDefaultsFactory implements FactoryInterface
 {
     /** @psalm-suppress MixedAssignment */
