@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
+use Laminas\I18n\ConfigProvider;
 use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\ServiceManager;
-use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use stdClass;
 use Throwable;
@@ -17,6 +18,7 @@ use Throwable;
 use function class_exists;
 use function method_exists;
 
+/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
 final class LoaderPluginManagerCompatibilityTest extends TestCase
 {
     /** @param class-string $expected */
@@ -28,7 +30,11 @@ final class LoaderPluginManagerCompatibilityTest extends TestCase
 
     protected static function getPluginManager(): LoaderPluginManager
     {
-        return new LoaderPluginManager(new ServiceManager());
+        $config           = (new ConfigProvider())->__invoke();
+        $deps             = $config['dependencies'] ?? [];
+        $deps['services'] = ['config' => $config];
+
+        return new LoaderPluginManager(new ServiceManager($deps));
     }
 
     /** @return class-string<Throwable> */

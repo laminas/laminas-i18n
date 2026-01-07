@@ -13,23 +13,28 @@ use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator;
 use Laminas\ServiceManager\ServiceManager;
-use LaminasTest\I18n\TestCase;
 use LaminasTest\I18n\Translator\TestAsset\Loader as TestLoader;
 use Locale;
+use PHPUnit\Framework\TestCase;
 
 final class TranslatorTest extends TestCase
 {
     private Translator $translator;
     private string $testFilesDir;
     private LoaderPluginManager $pluginManager;
+    private string $defaultLocale;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        $this->defaultLocale = Locale::getDefault();
         $this->pluginManager = new LoaderPluginManager(new ServiceManager());
         $this->translator    = new Translator($this->pluginManager);
-        Locale::setDefault('en_EN');
-        $this->testFilesDir = __DIR__ . '/_files';
+        $this->testFilesDir  = __DIR__ . '/TranslatorTest';
+    }
+
+    protected function tearDown(): void
+    {
+        Locale::setDefault($this->defaultLocale);
     }
 
     public function testFactoryCreatesTranslator(): void
@@ -148,7 +153,8 @@ final class TranslatorTest extends TestCase
 
     public function testDefaultLocale(): void
     {
-        self::assertEquals('en_EN', $this->translator->getLocale());
+        Locale::setDefault('en_FOO');
+        self::assertEquals('en_FOO', $this->translator->getLocale());
     }
 
     public function testForcedLocale(): void
@@ -173,6 +179,7 @@ final class TranslatorTest extends TestCase
 
     public function testTranslationsLoadedFromCache(): void
     {
+        Locale::setDefault('en_EN');
         $cache = new CacheItemPoolDecorator(new Memory());
         $this->translator->setCache($cache);
 
@@ -185,6 +192,7 @@ final class TranslatorTest extends TestCase
 
     public function testTranslationsAreStoredInCache(): void
     {
+        Locale::setDefault('en_EN');
         $cache = new CacheItemPoolDecorator(new Memory());
         $this->translator->setCache($cache);
 

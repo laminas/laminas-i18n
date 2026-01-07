@@ -8,7 +8,6 @@ use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
@@ -31,9 +30,9 @@ final class LoaderPluginManager extends AbstractPluginManager implements Message
 {
     private const CONFIGURATION = [
         'factories' => [
-            Loader\Gettext::class  => InvokableFactory::class,
-            Loader\Ini::class      => InvokableFactory::class,
-            Loader\PhpArray::class => InvokableFactory::class,
+            Loader\Gettext::class  => Loader\Factory\GettextFactory::class,
+            Loader\Ini::class      => Loader\Factory\IniFactory::class,
+            Loader\PhpArray::class => Loader\Factory\PhpArrayFactory::class,
         ],
         'aliases'   => [
             'gettext'  => Loader\Gettext::class,

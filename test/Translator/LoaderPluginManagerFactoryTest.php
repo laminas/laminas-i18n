@@ -8,8 +8,8 @@ use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\LoaderPluginManagerFactory;
-use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 final class LoaderPluginManagerFactoryTest extends TestCase
@@ -67,14 +67,14 @@ final class LoaderPluginManagerFactoryTest extends TestCase
         ];
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::exactly(2))
+        $container->expects(self::atLeast(2))
             ->method('has')
             ->willReturnMap([
                 ['ServiceListener', false],
                 ['config', true],
             ]);
 
-        $container->expects(self::once())
+        $container->expects(self::atLeast(1))
             ->method('get')
             ->with('config')
             ->willReturn($config);

@@ -18,10 +18,14 @@ use function sprintf;
 use function stream_resolve_include_path;
 
 /**
- * PHP INI format loader.
+ * A translation file loader for files in PHP's ini format
  */
-final class Ini implements FileLoaderInterface
+final readonly class Ini implements FileLoaderInterface
 {
+    public function __construct(private IniFileReader $fileReader)
+    {
+    }
+
     public function load(string $locale, string $filename): TextDomain|null
     {
         $resolvedIncludePath = stream_resolve_include_path($filename);
@@ -29,13 +33,12 @@ final class Ini implements FileLoaderInterface
         if (! $fromIncludePath || ! is_file($fromIncludePath) || ! is_readable($fromIncludePath)) {
             throw new InvalidArgumentException(sprintf(
                 'Could not find or open file %s for reading',
-                $filename
+                $filename,
             ));
         }
 
         $messages           = [];
-        $iniReader          = new IniFileReader();
-        $messagesNamespaced = $iniReader->read($fromIncludePath);
+        $messagesNamespaced = $this->fileReader->read($fromIncludePath);
 
         $list = $messagesNamespaced;
         if (isset($messagesNamespaced['translation']) && is_array($messagesNamespaced['translation'])) {
@@ -45,7 +48,7 @@ final class Ini implements FileLoaderInterface
         foreach ($list as $message) {
             if (! is_array($message) || count($message) < 2) {
                 throw new InvalidArgumentException(
-                    'Each INI row must be an array with message and translation'
+                    'Each INI row must be an array with message and translation',
                 );
             }
 

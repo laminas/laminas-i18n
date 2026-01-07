@@ -15,11 +15,14 @@ use function sprintf;
 /**
  * PHP Memory array loader.
  *
- * @final
+ * @psalm-type TextDomainKey = string
+ * @psalm-type LocaleKey = string
+ * @psalm-type MessagesShape = array<string, string|list<string|null>|array{plural_forms: string}>
+ * @psalm-type ArrayShape = array<TextDomainKey, array<LocaleKey, MessagesShape>>
  */
-class PhpMemoryArray implements RemoteLoaderInterface
+final readonly class PhpMemoryArray implements RemoteLoaderInterface
 {
-    /** @param array<string, mixed> $messages */
+    /** @param ArrayShape $messages */
     public function __construct(private array $messages)
     {
     }
@@ -45,7 +48,6 @@ class PhpMemoryArray implements RemoteLoaderInterface
             );
         }
 
-        /** @psalm-var mixed $pluralRule */
         $pluralRule = $messages['']['plural_forms'] ?? null;
         unset($messages['']);
 

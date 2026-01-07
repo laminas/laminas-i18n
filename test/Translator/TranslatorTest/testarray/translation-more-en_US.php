@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'Message 5' => 'Message 5 (en)',
     'Message 6' => 'Message 6 (en)',

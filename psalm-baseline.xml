@@ -5,86 +5,15 @@
       <code><![CDATA[ExtensionNotLoadedException]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Translator/Loader/Gettext.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$textDomain]]></code>
-    </ArgumentTypeCoercion>
-    <FalsableReturnStatement>
-      <code><![CDATA[unpack('N' . $num, fread($this->file, 4 * $num))]]></code>
-      <code><![CDATA[unpack('V' . $num, fread($this->file, 4 * $num))]]></code>
-    </FalsableReturnStatement>
-    <InvalidArrayAccess>
-      <code><![CDATA[$originalStringTable[$offsetKey]]]></code>
-      <code><![CDATA[$originalStringTable[$sizeKey]]]></code>
-      <code><![CDATA[$translationStringTable[$offsetKey]]]></code>
-      <code><![CDATA[$translationStringTable[$sizeKey]]]></code>
-    </InvalidArrayAccess>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$this->file]]></code>
-      <code><![CDATA[$this->file]]></code>
-      <code><![CDATA[$this->file]]></code>
-    </InvalidPropertyAssignmentValue>
-    <InvalidReturnStatement>
-      <code><![CDATA[unpack('N' . $num, fread($this->file, 4 * $num))]]></code>
-      <code><![CDATA[unpack('V' . $num, fread($this->file, 4 * $num))]]></code>
-    </InvalidReturnStatement>
-    <InvalidReturnType>
-      <code><![CDATA[int]]></code>
-    </InvalidReturnType>
-    <MissingConstructor>
-      <code><![CDATA[$file]]></code>
-      <code><![CDATA[$littleEndian]]></code>
-    </MissingConstructor>
-    <MixedArgument>
-      <code><![CDATA[$originalStringOffset]]></code>
-      <code><![CDATA[$originalStringSize]]></code>
-      <code><![CDATA[$translationStringOffset]]></code>
-      <code><![CDATA[$translationStringSize]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$originalStringOffset]]></code>
-      <code><![CDATA[$originalStringSize]]></code>
-      <code><![CDATA[$translationStringOffset]]></code>
-      <code><![CDATA[$translationStringSize]]></code>
-    </MixedAssignment>
-    <MixedReturnStatement>
-      <code><![CDATA[$result['int']]]></code>
-    </MixedReturnStatement>
-    <PossiblyFalseArgument>
-      <code><![CDATA[fread($this->file, $originalStringSize)]]></code>
-      <code><![CDATA[fread($this->file, $translationStringSize)]]></code>
-      <code><![CDATA[fread($this->file, 4 * $num)]]></code>
-      <code><![CDATA[fread($this->file, 4 * $num)]]></code>
-      <code><![CDATA[fread($this->file, 4)]]></code>
-      <code><![CDATA[fread($this->file, 4)]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyFalsePropertyAssignmentValue>
-      <code><![CDATA[fopen($resolvedFile, 'rb')]]></code>
-    </PossiblyFalsePropertyAssignmentValue>
-    <PossiblyInvalidArrayAccess>
-      <code><![CDATA[$result['int']]]></code>
-    </PossiblyInvalidArrayAccess>
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$content]]></code>
-    </PossiblyUndefinedArrayOffset>
-  </file>
-  <file src="src/Translator/Loader/Ini.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$messages]]></code>
-    </ArgumentTypeCoercion>
-  </file>
   <file src="src/Translator/Loader/PhpArray.php">
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$messages]]></code>
     </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Translator/Loader/PhpMemoryArray.php">
-    <MixedArgumentTypeCoercion>
+    <ArgumentTypeCoercion>
       <code><![CDATA[$messages]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedArrayAccess>
-      <code><![CDATA[$this->messages[$textDomain][$locale]]]></code>
-    </MixedArrayAccess>
+    </ArgumentTypeCoercion>
   </file>
   <file src="src/Translator/LoaderPluginManager.php">
     <MethodSignatureMismatch>
@@ -140,23 +69,6 @@
       <code><![CDATA[$config]]></code>
       <code><![CDATA[$trConfig]]></code>
     </MixedAssignment>
-  </file>
-  <file src="test/TestCase.php">
-    <RedundantCondition>
-      <code><![CDATA[assertNotNull]]></code>
-    </RedundantCondition>
-  </file>
-  <file src="test/Translator/Loader/PhpMemoryArrayTest.php">
-    <MixedArgument>
-      <code><![CDATA[include $this->testFilesDir . '/translation_empty.php']]></code>
-      <code><![CDATA[include $this->testFilesDir . '/translation_en.php']]></code>
-      <code><![CDATA[include $this->testFilesDir . '/translation_en.php']]></code>
-    </MixedArgument>
-    <UnresolvableInclude>
-      <code><![CDATA[include $this->testFilesDir . '/translation_empty.php']]></code>
-      <code><![CDATA[include $this->testFilesDir . '/translation_en.php']]></code>
-      <code><![CDATA[include $this->testFilesDir . '/translation_en.php']]></code>
-    </UnresolvableInclude>
   </file>
   <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
     <UnusedClosureParam>
