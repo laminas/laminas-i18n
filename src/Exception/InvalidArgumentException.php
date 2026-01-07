@@ -6,8 +6,7 @@ namespace Laminas\I18n\Exception;
 
 use function sprintf;
 
-/** @final */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
     /** @psalm-pure */
     public static function withInvalidCountryCode(string $received): self

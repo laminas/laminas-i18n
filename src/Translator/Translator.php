@@ -324,7 +324,6 @@ class Translator implements TranslatorInterface
      *
      * @param non-empty-string $textDomain
      * @param non-empty-string|null $locale
-     * @throws Exception\OutOfBoundsException
      * @psalm-suppress MoreSpecificImplementedParamType This will be redundant when Translator interface is improved
      */
     public function translatePlural(
