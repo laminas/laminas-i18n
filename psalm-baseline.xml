@@ -16,46 +16,10 @@
     </MethodSignatureMismatch>
   </file>
   <file src="src/Translator/Translator.php">
-    <DocblockTypeContradiction>
-      <code><![CDATA[is_array($options)]]></code>
-    </DocblockTypeContradiction>
-    <MixedArgument>
-      <code><![CDATA[$remote['text_domain'] ?? self::DEFAULT_TEXT_DOMAIN]]></code>
-      <code><![CDATA[$remote['type']]]></code>
-      <code><![CDATA[array_shift($locales)]]></code>
-      <code><![CDATA[array_shift($locales)]]></code>
-    </MixedArgument>
-    <MixedArrayAccess>
-      <code><![CDATA[$remote['text_domain']]]></code>
-      <code><![CDATA[$remote['type']]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code><![CDATA[$last]]></code>
-      <code><![CDATA[$last]]></code>
-      <code><![CDATA[$remote]]></code>
-    </MixedAssignment>
-    <PossiblyNullArgument>
-      <code><![CDATA[array_shift($locales)]]></code>
-    </PossiblyNullArgument>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[getFallbackLocale]]></code>
-    </PossiblyUnusedMethod>
     <RedundantConditionGivenDocblockType>
       <code><![CDATA[$translation[$index] !== null]]></code>
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>
     </RedundantConditionGivenDocblockType>
-  </file>
-  <file src="src/Translator/TranslatorServiceFactory.php">
-    <MixedArgument>
-      <code><![CDATA[$trConfig]]></code>
-    </MixedArgument>
-    <MixedArrayAccess>
-      <code><![CDATA[$config['translator']]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$trConfig]]></code>
-    </MixedAssignment>
   </file>
   <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
     <UnusedClosureParam>

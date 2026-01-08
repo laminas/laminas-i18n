@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasTest\i18n\Translator\Loader;
+namespace LaminasTest\I18n\Translator\Loader;
 
 use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Loader\IniFileReader;

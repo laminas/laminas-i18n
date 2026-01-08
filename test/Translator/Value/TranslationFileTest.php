@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasTest\i18n\Translator\Value;
+namespace LaminasTest\I18n\Translator\Value;
 
 use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Value\TranslationFile;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasTest\i18n\Factory;
+namespace LaminasTest\I18n\Factory;
 
 use ArrayObject;
 use Laminas\I18n\ConfigProvider;

@@ -4,44 +4,93 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
-use Laminas\I18n\Translator\MessageLoaderPluginManagerInterface;
-use Laminas\I18n\Translator\Translator;
+use ArrayObject;
+use Laminas\I18n\Translator\Loader\PhpMemoryArray;
 use Laminas\I18n\Translator\TranslatorServiceFactory;
-use Laminas\ServiceManager\Exception\ServiceNotFoundException;
-use Laminas\ServiceManager\ServiceManager;
+use LaminasTest\I18n\Translator\TranslationCollector\TestHelper;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 
 final class TranslatorServiceFactoryTest extends TestCase
 {
-    public function testCreateServiceWithNoTranslatorKeyDefined(): void
+    /** @return iterable<string, array{0: iterable, 1: non-empty-string, 2: non-empty-string}> */
+    public static function configScenarios(): iterable
     {
-        $pluginManager = self::createStub(MessageLoaderPluginManagerInterface::class);
-
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::exactly(2))
-            ->method('get')
-            ->willReturnMap([
-                ['config', []],
-                [MessageLoaderPluginManagerInterface::class, $pluginManager],
-            ]);
-
-        $factory    = new TranslatorServiceFactory();
-        $translator = $factory($container, Translator::class);
-        self::assertInstanceOf(Translator::class, $translator);
-    }
-
-    public function testCreateServiceWithNoTranslatorPluginManagerDefined(): void
-    {
-        $serviceManager = new ServiceManager([
-            'services' => [
-                'config' => [],
+        $messages = new PhpMemoryArray([
+            'default' => [
+                'en_GB' => [
+                    'Message 1' => 'Message 1 en_GB',
+                ],
+                'de_DE' => [
+                    'Message 1' => 'Message 1 de_DE',
+                    'DE Only'   => 'DE Only Message',
+                ],
             ],
         ]);
 
-        $factory = new TranslatorServiceFactory();
-        $this->expectException(ServiceNotFoundException::class);
+        $scenarios = [
+            'No config'               => [[], 'Foo', 'Foo'],
+            'Default locale is used'  => [
+                [
+                    'locale'             => 'en_GB',
+                    'laminas-i18n'       => [
+                        'translator' => [
+                            'remote_translation' => [
+                                ['type' => 'RemoteService'],
+                            ],
+                        ],
+                    ],
+                    'translator_plugins' => [
+                        'services' => [
+                            'RemoteService' => $messages,
+                        ],
+                    ],
+                ],
+                'Message 1',
+                'Message 1 en_GB',
+            ],
+            'Fallback locale is used' => [
+                [
+                    'locale'             => 'en_GB',
+                    'laminas-i18n'       => [
+                        'translator' => [
+                            'remote_translation' => [
+                                ['type' => 'RemoteService'],
+                            ],
+                            'fallback_locale'    => 'de_DE',
+                        ],
+                    ],
+                    'translator_plugins' => [
+                        'services' => [
+                            'RemoteService' => $messages,
+                        ],
+                    ],
+                ],
+                'DE Only',
+                'DE Only Message',
+            ],
+        ];
 
-        $factory->__invoke($serviceManager, 'whatever', []);
+        yield from $scenarios;
+
+        foreach ($scenarios as $key => $args) {
+            yield $key . ' (Object)' => [
+                new ArrayObject($args[0]),
+                $args[1],
+                $args[2],
+            ];
+        }
+    }
+
+    /** @param non-empty-string $messageKey */
+    #[DataProvider('configScenarios')]
+    public function testTranslatorIsProduced(iterable $config, string $messageKey, string $expect): void
+    {
+        $container = TestHelper::containerWithConfig($config);
+        $factory   = new TranslatorServiceFactory();
+
+        $translator = $factory->__invoke($container, 'foo');
+
+        self::assertSame($expect, $translator->translate($messageKey));
     }
 }

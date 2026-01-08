@@ -22,6 +22,12 @@ use const DIRECTORY_SEPARATOR;
  *
  * @psalm-internal Laminas
  * @psalm-internal LaminasTest
+ * @psalm-type TranslationFilePatternSpec = array{
+ *      type: non-empty-string|class-string<FileLoaderInterface>,
+ *      base_dir: non-empty-string,
+ *      pattern: non-empty-string,
+ *      text_domain?: non-empty-string,
+ *  }
  */
 final readonly class TranslatorFilePattern
 {
