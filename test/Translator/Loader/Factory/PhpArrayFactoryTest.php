@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasTest\i18n\Translator\Loader\Factory;
+namespace LaminasTest\I18n\Translator\Loader\Factory;
 
 use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Loader\Factory\PhpArrayFactory;
