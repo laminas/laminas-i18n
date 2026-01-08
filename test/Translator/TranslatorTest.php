@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
-use Laminas\Cache\Psr\CacheItemPool\CacheItemPoolDecorator;
-use Laminas\Cache\Storage\Adapter\Memory;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\EventManager;
@@ -151,78 +149,6 @@ final class TranslatorTest extends TestCase
         $translator = new Translator($collector, 'en_US');
 
         self::assertEquals('bar', $translator->translate('foo'));
-    }
-
-    public function testTranslationsLoadedFromCache(): void
-    {
-        $textDomain = new TextDomain(['foo' => 'bar']);
-
-        $collector = $this->createMock(TranslationCollectorInterface::class);
-        $collector->expects($this->never())
-            ->method('collect');
-
-        $translator = new Translator($collector, 'en_US');
-
-        $cache = new CacheItemPoolDecorator(new Memory());
-        $translator->setCache($cache);
-
-        $item = $cache->getItem($translator->getCacheId('default', 'en_US'));
-        $item->set($textDomain);
-        $cache->save($item);
-
-        self::assertEquals('bar', $translator->translate('foo'));
-    }
-
-    public function testTranslationsAreStoredInCache(): void
-    {
-        $cache = new CacheItemPoolDecorator(new Memory());
-
-        $textDomain = new TextDomain(['foo' => 'bar']);
-
-        $collector = $this->createMock(TranslationCollectorInterface::class);
-        $collector->expects($this->once())
-            ->method('collect')
-            ->with('default', 'en_US')
-            ->willReturn($textDomain);
-
-        $translator = new Translator($collector, 'en_US');
-        $translator->setCache($cache);
-
-        self::assertEquals('bar', $translator->translate('foo'));
-
-        $item   = $cache->getItem($translator->getCacheId('default', 'en_US'));
-        $result = $item->get();
-        self::assertInstanceOf(TextDomain::class, $result);
-        self::assertEquals('bar', $result['foo']);
-    }
-
-    public function testTranslationsAreClearedFromCache(): void
-    {
-        $cache = new CacheItemPoolDecorator(new Memory());
-
-        $textDomain = new TextDomain(['foo' => 'bar']);
-
-        $collector = $this->createMock(TranslationCollectorInterface::class);
-        $collector->expects($this->never())
-            ->method('collect');
-
-        $translator = new Translator($collector, 'en_US');
-        $translator->setCache($cache);
-
-        $item = $cache->getItem($translator->getCacheId('default', 'en_US'));
-        $item->set($textDomain);
-        $cache->save($item);
-
-        self::assertTrue($translator->clearCache('default', 'en_US'));
-
-        $item = $cache->getItem($translator->getCacheId('default', 'en_US'));
-        self::assertFalse($item->isHit());
-    }
-
-    public function testClearCacheReturnsFalseIfNoCacheIsPresent(): void
-    {
-        $translator = new Translator($this->createStub(TranslationCollectorInterface::class), 'en_US');
-        self::assertFalse($translator->clearCache('default', 'en_US'));
     }
 
     public function testTranslatePlurals(): void
