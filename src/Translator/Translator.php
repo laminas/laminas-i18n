@@ -10,11 +10,8 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\I18n\Exception\ExceptionInterface;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\Translator\TranslatorInterface;
-use Psr\Cache\CacheItemPoolInterface;
 
-use function assert;
 use function is_string;
-use function md5;
 
 final class Translator implements TranslatorInterface
 {
@@ -36,8 +33,6 @@ final class Translator implements TranslatorInterface
      * @var array<non-empty-string, array<non-empty-string, TextDomain|null>>
      */
     private array $messages = [];
-
-    private CacheItemPoolInterface|null $cache = null;
 
     private readonly EventManagerInterface $events;
     private bool $eventsEnabled = false;
@@ -87,13 +82,6 @@ final class Translator implements TranslatorInterface
     public function getLocale(): string
     {
         return $this->defaultLocale;
-    }
-
-    public function setCache(CacheItemPoolInterface|null $cache = null): self
-    {
-        $this->cache = $cache;
-
-        return $this;
     }
 
     /**
@@ -231,26 +219,6 @@ final class Translator implements TranslatorInterface
     }
 
     /**
-     * Get the cache identifier for a specific textDomain and locale.
-     */
-    public function getCacheId(string $textDomain, string $locale): string
-    {
-        return 'Laminas_I18n_Translator_Messages_' . md5($textDomain . $locale);
-    }
-
-    /**
-     * Clears the cache for a specific textDomain and locale.
-     */
-    public function clearCache(string $textDomain, string $locale): bool
-    {
-        if ($this->cache === null) {
-            return false;
-        }
-
-        return $this->cache->deleteItem($this->getCacheId($textDomain, $locale));
-    }
-
-    /**
      * Load messages for a given language and domain.
      *
      * @param non-empty-string $textDomain
@@ -261,19 +229,6 @@ final class Translator implements TranslatorInterface
     private function loadMessages(string $textDomain, string $locale): void
     {
         $this->messages[$textDomain] ??= [];
-
-        if ($this->cache !== null) {
-            $cacheId = $this->getCacheId($textDomain, $locale);
-            $item    = $this->cache->getItem($cacheId);
-            if ($item->isHit()) {
-                $value = $item->get();
-                assert($value instanceof TextDomain);
-
-                $this->messages[$textDomain][$locale] = $value;
-
-                return;
-            }
-        }
 
         $messages = $this->collector->collect($textDomain, $locale);
 
@@ -299,13 +254,6 @@ final class Translator implements TranslatorInterface
         }
 
         $this->messages[$textDomain][$locale] = $messages;
-
-        if ($this->cache !== null) {
-            $cacheId = $this->getCacheId($textDomain, $locale);
-            $item    = $this->cache->getItem($cacheId);
-            $item->set($messages);
-            $this->cache->save($item);
-        }
     }
 
     /**

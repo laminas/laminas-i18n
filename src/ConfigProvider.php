@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\I18n;
 
+use Laminas\I18n\Translator\TranslationCollector\Factory\PSR6CachingCollectorDelegatorFactory;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\I18n\Translator\Value\TranslationFile;
 use Laminas\I18n\Translator\Value\TranslatorFilePattern;
@@ -50,6 +51,8 @@ final class ConfigProvider
      *             cache?: string|null,
      *             event_manager_enabled?: bool,
      *             fallback_locale?: string|null,
+     *             psr6_cache?: string,
+     *             cache_key_prefix?: non-empty-string|null,
      *         },
      *     },
      *     translator_plugins?: ServiceManagerConfiguration,
@@ -171,11 +174,6 @@ final class ConfigProvider
                     //'aggregate_collector' => [CollectorOne::class, CollectorTwo::class],
 
                     /**
-                     * Provide the id of a cache instance retrievable from the container to enable caching in the translator
-                     */
-                    // 'cache' => SomeCacheService::class,
-
-                    /**
                      * Whether to enable the event manager in the translator
                      */
                     'event_manager_enabled' => false,
@@ -184,6 +182,19 @@ final class ConfigProvider
                      * Optionally provide a fallback locale for when the translators default locale has no translations
                      */
                     'fallback_locale' => null,
+
+                    /**
+                     * When you provide a service name here that points to a PSR-16 cache item pool that is
+                     * retrievable from the DI container, the default translation collector will be wrapped in
+                     * a {@link Translator\TranslationCollector\PSR6CachingCollector}
+                     */
+                    // 'psr6_cache' => 'Some Cache Service ID',
+
+                    /**
+                     * You can customise the cache-key prefix if you want.
+                     * By default, it is 'LaminasTranslations'
+                     */
+                    'cache_key_prefix' => null,
                 ],
             ],
         ];
@@ -197,14 +208,14 @@ final class ConfigProvider
     public function getDependencyConfig(): array
     {
         return [
-            'aliases'   => [
+            'aliases'    => [
                 'TranslatorPluginManager'                             => Translator\LoaderPluginManager::class,
                 Translator\MessageLoaderPluginManagerInterface::class => Translator\LoaderPluginManager::class,
                 TranslationCollectorInterface::class                  => Translator\TranslationCollector\AggregateCollector::class,
                 Geography\CountryCodeListInterface::class             => Geography\DefaultCountryCodeList::class,
                 TranslatorInterface::class                            => Translator\Translator::class,
             ],
-            'factories' => [
+            'factories'  => [
                 Translator\TranslationCollector\AggregateCollector::class   => Translator\TranslationCollector\Factory\AggregateCollectorFactory::class,
                 Translator\TranslationCollector\FileListCollector::class    => Translator\TranslationCollector\Factory\FileListCollectorFactory::class,
                 Translator\TranslationCollector\FilePatternCollector::class => Translator\TranslationCollector\Factory\FilePatternCollectorFactory::class,
@@ -215,6 +226,11 @@ final class ConfigProvider
                 Geography\DefaultCountryCodeList::class                     => Geography\DefaultCountryCodeListFactory::class,
                 DefaultLocale::class                                        => Factory\DefaultLocaleFactory::class,
                 I18nDefaults::class                                         => Factory\I18nDefaultsFactory::class,
+            ],
+            'delegators' => [
+                Translator\TranslationCollector\AggregateCollector::class => [
+                    PSR6CachingCollectorDelegatorFactory::class => PSR6CachingCollectorDelegatorFactory::class,
+                ],
             ],
         ];
     }

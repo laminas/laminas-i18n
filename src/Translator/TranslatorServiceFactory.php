@@ -7,7 +7,6 @@ namespace Laminas\I18n\Translator;
 use Laminas\I18n\I18nDefaults;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Psr\Cache\CacheItemPoolInterface;
 use Psr\Container\ContainerInterface;
 
 use function assert;
@@ -59,19 +58,6 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
         $fallbackLocale = $translator['fallback_locale'] ?? null;
         $fallbackLocale = is_string($fallbackLocale) && $fallbackLocale !== '' ? $fallbackLocale : null;
 
-        /**
-         * Retrieve the cache service (if any) from the container
-         *
-         * @todo Replace this with a caching decorator
-         * @psalm-var mixed $cacheService
-         */
-        $cacheService = $translator['cache'] ?? null;
-        /** @psalm-var mixed $cacheService */
-        $cacheService = is_string($cacheService) && $container->has($cacheService)
-            ? $container->get($cacheService)
-            : null;
-        assert($cacheService instanceof CacheItemPoolInterface || $cacheService === null);
-
         /** @psalm-var mixed $enableEvents */
         $enableEvents = $translator['event_manager_enabled'] ?? false;
         $enableEvents = is_bool($enableEvents) && $enableEvents;
@@ -81,10 +67,6 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
             $locale,
             $fallbackLocale,
         );
-
-        if ($cacheService instanceof CacheItemPoolInterface) {
-            $instance->setCache($cacheService);
-        }
 
         if ($enableEvents) {
             $instance->enableEventManager();
