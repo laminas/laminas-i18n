@@ -6,11 +6,13 @@ namespace Laminas\I18n\Translator\TranslationCollector\Factory;
 
 use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Exception\RuntimeException;
+use Laminas\I18n\Translator\TranslationCollector\PSR16CachingCollector;
 use Laminas\I18n\Translator\TranslationCollector\PSR6CachingCollector;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Container\ContainerInterface;
+use Psr\SimpleCache\CacheInterface;
 
 use function assert;
 use function get_debug_type;
@@ -26,7 +28,7 @@ use function sprintf;
  * @psalm-internal Laminas\I18n
  * @psalm-internal LaminasTest\I18n
  */
-final readonly class PSR6CachingCollectorDelegatorFactory implements DelegatorFactoryInterface
+final readonly class PSRCachingCollectorDelegatorFactory implements DelegatorFactoryInterface
 {
     public function __invoke(
         ContainerInterface $container,
@@ -52,14 +54,11 @@ final readonly class PSR6CachingCollectorDelegatorFactory implements DelegatorFa
         $translator = $i18n['translator'] ?? [];
         assert(is_array($translator));
 
-        /** @psalm-var mixed $cacheService */
-        $cacheService = $translator['psr6_cache'] ?? null;
-        if (! is_string($cacheService) || ! $container->has($cacheService)) {
-            return $collector;
-        }
+        $cache
+            = $this->getPsr6Cache($translator, $container)
+            ?? $this->getPsr16Cache($translator, $container);
 
-        $cache = $container->get($cacheService);
-        if (! $cache instanceof CacheItemPoolInterface) {
+        if ($cache === null) {
             return $collector;
         }
 
@@ -73,10 +72,48 @@ final readonly class PSR6CachingCollectorDelegatorFactory implements DelegatorFa
 
         /** @psalm-var non-empty-string|null $prefix */
 
-        return new PSR6CachingCollector(
-            $cache,
-            $collector,
-            $prefix,
-        );
+        return $cache instanceof CacheItemPoolInterface
+            ? new PSR6CachingCollector(
+                $cache,
+                $collector,
+                $prefix,
+            )
+            : new PSR16CachingCollector(
+                $cache,
+                $collector,
+                $prefix,
+            );
+    }
+
+    private function getPsr6Cache(array $options, ContainerInterface $container): CacheItemPoolInterface|null
+    {
+        /** @psalm-var mixed $cacheService */
+        $cacheService = $options['psr6_cache'] ?? null;
+        if (! is_string($cacheService) || ! $container->has($cacheService)) {
+            return null;
+        }
+
+        $cache = $container->get($cacheService);
+        if (! $cache instanceof CacheItemPoolInterface) {
+            return null;
+        }
+
+        return $cache;
+    }
+
+    private function getPsr16Cache(array $options, ContainerInterface $container): CacheInterface|null
+    {
+        /** @psalm-var mixed $cacheService */
+        $cacheService = $options['psr16_cache'] ?? null;
+        if (! is_string($cacheService) || ! $container->has($cacheService)) {
+            return null;
+        }
+
+        $cache = $container->get($cacheService);
+        if (! $cache instanceof CacheInterface) {
+            return null;
+        }
+
+        return $cache;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\I18n;
 
-use Laminas\I18n\Translator\TranslationCollector\Factory\PSR6CachingCollectorDelegatorFactory;
+use Laminas\I18n\Translator\TranslationCollector\Factory\PSRCachingCollectorDelegatorFactory;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\I18n\Translator\Value\TranslationFile;
 use Laminas\I18n\Translator\Value\TranslatorFilePattern;
@@ -184,11 +184,19 @@ final class ConfigProvider
                     'fallback_locale' => null,
 
                     /**
-                     * When you provide a service name here that points to a PSR-16 cache item pool that is
+                     * When you provide a service name here that points to a PSR-6 cache item pool that is
                      * retrievable from the DI container, the default translation collector will be wrapped in
                      * a {@link Translator\TranslationCollector\PSR6CachingCollector}
                      */
                     // 'psr6_cache' => 'Some Cache Service ID',
+
+                    /**
+                     * You can also use a PSR-16 cache if you prefer. Defining both caches is pointless and in this
+                     * case, the PSR-6 cache will be preferred.
+                     *
+                     * {@link Translator\TranslationCollector\PSR16CachingCollector}
+                     */
+                    // 'psr16_cache' => 'Some Cache Service ID',
 
                     /**
                      * You can customise the cache-key prefix if you want.
@@ -229,7 +237,7 @@ final class ConfigProvider
             ],
             'delegators' => [
                 Translator\TranslationCollector\AggregateCollector::class => [
-                    PSR6CachingCollectorDelegatorFactory::class => PSR6CachingCollectorDelegatorFactory::class,
+                    PSRCachingCollectorDelegatorFactory::class => PSRCachingCollectorDelegatorFactory::class,
                 ],
             ],
         ];

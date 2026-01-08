@@ -6,12 +6,12 @@ namespace Laminas\I18n\Translator\TranslationCollector;
 
 use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\TextDomain;
-use Psr\Cache\CacheItemPoolInterface;
+use Psr\SimpleCache\CacheInterface;
 
 use function get_debug_type;
 use function sprintf;
 
-final readonly class PSR6CachingCollector implements CachingCollectorInterface
+final readonly class PSR16CachingCollector implements CachingCollectorInterface
 {
     private const DEFAULT_PREFIX = 'LaminasTranslations';
     /** @var non-empty-string */
@@ -19,7 +19,7 @@ final readonly class PSR6CachingCollector implements CachingCollectorInterface
 
     /** @param non-empty-string|null $keyPrefix */
     public function __construct(
-        private CacheItemPoolInterface $cache,
+        private CacheInterface $cache,
         private TranslationCollectorInterface $collector,
         string|null $keyPrefix = null,
     ) {
@@ -28,15 +28,14 @@ final readonly class PSR6CachingCollector implements CachingCollectorInterface
 
     public function collect(string $textDomain, string $locale): TextDomain
     {
-        $key  = $this->cacheKey($textDomain, $locale);
-        $item = $this->cache->getItem($key);
-        if ($item->isHit()) {
-            return $this->assertTextDomain($key, $item->get());
+        $key = $this->cacheKey($textDomain, $locale);
+        if ($this->cache->has($key)) {
+            return $this->assertTextDomain($key, $this->cache->get($key));
         }
 
         $data = $this->collector->collect($textDomain, $locale);
-        $item->set($data);
-        $this->cache->save($item);
+
+        $this->cache->set($key, $data);
 
         return $data;
     }
@@ -48,7 +47,7 @@ final readonly class PSR6CachingCollector implements CachingCollectorInterface
 
     public function clearCache(string $textDomain, string $locale): void
     {
-        $this->cache->deleteItem($this->cacheKey($textDomain, $locale));
+        $this->cache->delete($this->cacheKey($textDomain, $locale));
     }
 
     private function assertTextDomain(string $key, mixed $value): TextDomain
