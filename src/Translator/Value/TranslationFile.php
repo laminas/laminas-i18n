@@ -15,6 +15,12 @@ use function sprintf;
  *
  * @psalm-internal Laminas
  * @psalm-internal LaminasTest
+ * @psalm-type TranslationFileSpec = array{
+ *     type: non-empty-string|class-string<FileLoaderInterface>,
+ *     filename: non-empty-string,
+ *     locale?: non-empty-string,
+ *     text_domain?: non-empty-string,
+ * }
  */
 final readonly class TranslationFile
 {
