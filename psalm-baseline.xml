@@ -21,9 +21,4 @@
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
-  <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
-    <UnusedClosureParam>
-      <code><![CDATA[$container]]></code>
-    </UnusedClosureParam>
-  </file>
 </files>
