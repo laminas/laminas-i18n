@@ -13,7 +13,7 @@ use function array_replace;
 /**
  * Text domain.
  *
- * @extends ArrayObject<string, string|list<string|null>>
+ * @extends ArrayObject<string, string|list<string|null>|null>
  * @final
  */
 class TextDomain extends ArrayObject
@@ -111,5 +111,19 @@ class TextDomain extends ArrayObject
         );
 
         return $this;
+    }
+
+    /**
+     * This method exists only to squash `Undefined array key` warnings from PHP
+     *
+     * @inheritDoc
+     */
+    public function offsetGet(mixed $offset): mixed
+    {
+        if (! isset($this[$offset])) {
+            return null;
+        }
+
+        return parent::offsetGet($offset);
     }
 }
