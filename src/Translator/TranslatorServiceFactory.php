@@ -4,8 +4,18 @@ declare(strict_types=1);
 
 namespace Laminas\I18n\Translator;
 
+use Laminas\I18n\I18nDefaults;
+use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Container\ContainerInterface;
+
+use function assert;
+use function is_array;
+use function is_bool;
+use function is_iterable;
+use function is_string;
+use function iterator_to_array;
 
 /**
  * @internal
@@ -20,10 +30,66 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
         string $requestedName,
         ?array $options = null,
     ): Translator {
-        // Configure the translator
-        $config   = $container->get('config');
-        $trConfig = $config['translator'] ?? [];
+        $defaults = $container->get(I18nDefaults::class);
 
-        return Translator::factory($container->get(MessageLoaderPluginManagerInterface::class), $trConfig);
+        /**
+         * Determine the default locale, allowing build-time locale to override configuration
+         *
+         * @psalm-var mixed $locale
+         */
+        $locale = $options['locale'] ?? null;
+        $locale = is_string($locale) && $locale !== '' ? $locale : $defaults->defaultLocale;
+
+        /** @psalm-var mixed $config */
+        $config = $container->has('config') ? $container->get('config') : [];
+        $config = is_iterable($config) ? iterator_to_array($config) : [];
+
+        $i18n = $config['laminas-i18n'] ?? [];
+        assert(is_array($i18n));
+
+        $translator = $i18n['translator'] ?? [];
+        assert(is_array($translator));
+
+        /**
+         * The fallback locale is optionally used to provide translations when none are available in the default, or
+         * runtime locale.
+         *
+         * @psalm-var mixed $fallbackLocale
+         */
+        $fallbackLocale = $translator['fallback_locale'] ?? null;
+        $fallbackLocale = is_string($fallbackLocale) && $fallbackLocale !== '' ? $fallbackLocale : null;
+
+        /**
+         * Retrieve the cache service (if any) from the container
+         *
+         * @todo Replace this with a caching decorator
+         * @psalm-var mixed $cacheService
+         */
+        $cacheService = $translator['cache'] ?? null;
+        /** @psalm-var mixed $cacheService */
+        $cacheService = is_string($cacheService) && $container->has($cacheService)
+            ? $container->get($cacheService)
+            : null;
+        assert($cacheService instanceof CacheItemPoolInterface || $cacheService === null);
+
+        /** @psalm-var mixed $enableEvents */
+        $enableEvents = $translator['event_manager_enabled'] ?? false;
+        $enableEvents = is_bool($enableEvents) && $enableEvents;
+
+        $instance = new Translator(
+            $container->get(TranslationCollectorInterface::class),
+            $locale,
+            $fallbackLocale,
+        );
+
+        if ($cacheService instanceof CacheItemPoolInterface) {
+            $instance->setCache($cacheService);
+        }
+
+        if ($enableEvents) {
+            $instance->enableEventManager();
+        }
+
+        return $instance;
     }
 }
