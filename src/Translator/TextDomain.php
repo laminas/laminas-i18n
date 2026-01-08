@@ -5,39 +5,22 @@ declare(strict_types=1);
 namespace Laminas\I18n\Translator;
 
 use ArrayObject;
-use Laminas\I18n\Exception;
+use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 
 use function array_replace;
 
 /**
- * Text domain.
+ * A collection of translated messages that behaves like an array
  *
  * @extends ArrayObject<string, string|list<string|null>|null>
- * @final
  */
-class TextDomain extends ArrayObject
+final class TextDomain extends ArrayObject
 {
-    /**
-     * Plural rule.
-     *
-     * @var PluralRule|null
-     */
-    protected $pluralRule;
+    private PluralRule|null $pluralRule               = null;
+    private static PluralRule|null $defaultPluralRule = null;
 
-    /**
-     * Default plural rule shared between instances.
-     *
-     * @var PluralRule|null
-     */
-    protected static $defaultPluralRule;
-
-    /**
-     * Set the plural rule
-     *
-     * @return $this
-     */
-    public function setPluralRule(PluralRule $rule)
+    public function setPluralRule(PluralRule $rule): self
     {
         $this->pluralRule = $rule;
         return $this;
@@ -51,7 +34,7 @@ class TextDomain extends ArrayObject
     public function getPluralRule(bool $fallbackToDefaultRule = true): PluralRule|null
     {
         if ($this->pluralRule === null && $fallbackToDefaultRule) {
-            return static::getDefaultPluralRule();
+            return self::getDefaultPluralRule();
         }
 
         return $this->pluralRule;
@@ -59,26 +42,22 @@ class TextDomain extends ArrayObject
 
     /**
      * Checks whether the text domain has a plural rule.
-     *
-     * @return bool
      */
-    public function hasPluralRule()
+    public function hasPluralRule(): bool
     {
         return $this->pluralRule !== null;
     }
 
     /**
      * Returns a shared default plural rule.
-     *
-     * @return PluralRule
      */
-    public static function getDefaultPluralRule()
+    public static function getDefaultPluralRule(): PluralRule
     {
-        if (static::$defaultPluralRule === null) {
-            static::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
+        if (self::$defaultPluralRule === null) {
+            self::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
         }
 
-        return static::$defaultPluralRule;
+        return self::$defaultPluralRule;
     }
 
     /**
@@ -89,13 +68,13 @@ class TextDomain extends ArrayObject
      * same rule could be made up with different expression.
      *
      * @return $this
-     * @throws Exception\RuntimeException
+     * @throws RuntimeException
      */
     public function merge(TextDomain $textDomain): self
     {
         if ($this->hasPluralRule() && $textDomain->hasPluralRule()) {
             if ($this->getPluralRule()->getNumPlurals() !== $textDomain->getPluralRule()->getNumPlurals()) {
-                throw new Exception\RuntimeException(
+                throw new RuntimeException(
                     'Plural rule of merging text domain is not compatible with the current one'
                 );
             }
