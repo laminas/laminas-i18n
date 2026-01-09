@@ -21,4 +21,14 @@
       <code><![CDATA[isset($translation[$index]) && $translation[$index] !== '' && $translation[$index] !== null]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
+  <file src="test/Translator/TranslationCollector/Factory/PSRCachingCollectorDelegatorFactoryTest.php">
+    <InvalidArgument>
+      <code><![CDATA[$adapter]]></code>
+    </InvalidArgument>
+  </file>
+  <file src="test/Translator/TranslationCollector/PSR16CachingCollectorTest.php">
+    <InvalidArgument>
+      <code><![CDATA[new Memory()]]></code>
+    </InvalidArgument>
+  </file>
 </files>
