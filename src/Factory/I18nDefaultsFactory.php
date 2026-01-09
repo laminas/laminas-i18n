@@ -9,6 +9,7 @@ use Laminas\I18n\CountryCode;
 use Laminas\I18n\DefaultLocale;
 use Laminas\I18n\I18nDefaults;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Translator\TranslatorInterface;
 use Locale;
 use NumberFormatter;
 use Psr\Container\ContainerInterface;
@@ -60,7 +61,9 @@ final readonly class I18nDefaultsFactory implements FactoryInterface
         assert(is_string($country) && $country !== '');
 
         $textDomain = $i18nDefaults['defaultTextDomain'] ?? null;
-        $textDomain = ! is_string($textDomain) || $textDomain === '' ? 'default' : $textDomain;
+        $textDomain = ! is_string($textDomain) || $textDomain === ''
+            ? TranslatorInterface::DEFAULT_TEXT_DOMAIN
+            : $textDomain;
 
         return new I18nDefaults(
             new DateTimeZone($timezone),

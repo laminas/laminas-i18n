@@ -8,6 +8,7 @@ use ArrayObject;
 use Laminas\I18n\ConfigProvider;
 use Laminas\I18n\Factory\I18nDefaultsFactory;
 use Laminas\ServiceManager\ServiceManager;
+use Laminas\Translator\TranslatorInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -192,7 +193,7 @@ final class I18nDefaultsFactoryTest extends TestCase
         $factory   = new I18nDefaultsFactory();
         $defaults  = $factory->__invoke($container, 'whatever');
 
-        self::assertSame('default', $defaults->defaultTextDomain);
+        self::assertSame(TranslatorInterface::DEFAULT_TEXT_DOMAIN, $defaults->defaultTextDomain);
     }
 
     public function testDefaultTextDomainCanBeConfigured(): void
