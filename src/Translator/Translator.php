@@ -40,11 +40,13 @@ final class Translator implements TranslatorInterface
     /**
      * @param non-empty-string $defaultLocale
      * @param non-empty-string|null $fallbackLocale
+     * @param non-empty-string $defaultTextDomain
      */
     public function __construct(
         private readonly TranslationCollectorInterface $collector,
         private string $defaultLocale,
         private readonly string|null $fallbackLocale = null,
+        private readonly string $defaultTextDomain = TranslatorInterface::DEFAULT_TEXT_DOMAIN,
         EventManagerInterface|null $eventManager = null,
     ) {
         // When an EventManager is supplied to the constructor, enable events. The user clearly wants them!
@@ -94,10 +96,11 @@ final class Translator implements TranslatorInterface
      */
     public function translate(
         string $message,
-        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string|null $textDomain = null,
         string|null $locale = null,
     ): string {
-        $locale    ??= $this->defaultLocale;
+        $locale     ??= $this->defaultLocale;
+        $textDomain ??= $this->defaultTextDomain;
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if (is_string($translation) && $translation !== '') {
@@ -114,7 +117,7 @@ final class Translator implements TranslatorInterface
     /**
      * Translate a plural message.
      *
-     * @param non-empty-string $textDomain
+     * @param non-empty-string|null $textDomain
      * @param non-empty-string|null $locale
      * @psalm-suppress MoreSpecificImplementedParamType This will be redundant when Translator interface is improved
      */
@@ -122,10 +125,11 @@ final class Translator implements TranslatorInterface
         string $singular,
         string $plural,
         int $number,
-        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string|null $textDomain = null,
         string|null $locale = null,
     ): string {
-        $locale    ??= $this->defaultLocale;
+        $locale     ??= $this->defaultLocale;
+        $textDomain ??= $this->defaultTextDomain;
         $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
         if (is_string($translation)) {
@@ -163,10 +167,10 @@ final class Translator implements TranslatorInterface
      * @param non-empty-string $textDomain
      * @return string|null|list<string|null>
      */
-    protected function getTranslatedMessage(
+    private function getTranslatedMessage(
         string|null $message,
         string $locale,
-        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string $textDomain,
     ): string|array|null {
         if ($message === '' || $message === null) {
             return null;
@@ -259,14 +263,15 @@ final class Translator implements TranslatorInterface
     /**
      * Return all the messages.
      *
-     * @param non-empty-string $textDomain
+     * @param non-empty-string|null $textDomain
      * @param non-empty-string|null $locale
      */
     public function getAllMessages(
-        string $textDomain = self::DEFAULT_TEXT_DOMAIN,
+        string|null $textDomain = null,
         string|null $locale = null,
     ): TextDomain|null {
-        $locale ??= $this->getLocale();
+        $locale     ??= $this->getLocale();
+        $textDomain ??= $this->defaultTextDomain;
 
         if (! isset($this->messages[$textDomain][$locale])) {
             $this->loadMessages($textDomain, $locale);
