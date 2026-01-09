@@ -72,7 +72,7 @@ final class TranslatorServiceFactoryTest extends TestCase
                     ],
                 ],
                 'Message 1',
-                'Message 1 (Other) en_GB',
+                'Message (Other) en_GB',
             ],
             'Fallback locale is used'     => [
                 [
