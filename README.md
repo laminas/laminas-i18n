@@ -1,6 +1,6 @@
 # laminas-i18n
 
-[![Build Status](https://github.com/laminas/laminas-i18n/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-i18n/actions?query=workflow%3A"Continuous+Integration")
+[![Build Status](https://github.com/laminas/laminas-i18n/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-i18n/actions?query=workflow%3A"Continuous+Integration") [![Type Coverage](https://shepherd.dev/github/laminas/laminas-i18n/coverage.svg)](https://shepherd.dev/github/laminas/laminas-i18n)
 
 > ## 🇷🇺 Русским гражданам
 >
