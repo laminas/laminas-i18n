@@ -26,11 +26,16 @@ final class TranslatorServiceFactoryTest extends TestCase
                     'DE Only'   => 'DE Only Message',
                 ],
             ],
+            'other'   => [
+                'en_GB' => [
+                    'Message 1' => 'Message (Other) en_GB',
+                ],
+            ],
         ]);
 
         $scenarios = [
-            'No config'               => [[], 'Foo', 'Foo'],
-            'Default locale is used'  => [
+            'No config'                   => [[], 'Foo', 'Foo'],
+            'Default locale is used'      => [
                 [
                     'locale'             => 'en_GB',
                     'laminas-i18n'       => [
@@ -49,7 +54,27 @@ final class TranslatorServiceFactoryTest extends TestCase
                 'Message 1',
                 'Message 1 en_GB',
             ],
-            'Fallback locale is used' => [
+            'Default text domain is used' => [
+                [
+                    'locale'             => 'en_GB',
+                    'laminas-i18n'       => [
+                        'defaultTextDomain' => 'other',
+                        'translator'        => [
+                            'remote_translation' => [
+                                ['type' => 'RemoteService'],
+                            ],
+                        ],
+                    ],
+                    'translator_plugins' => [
+                        'services' => [
+                            'RemoteService' => $messages,
+                        ],
+                    ],
+                ],
+                'Message 1',
+                'Message (Other) en_GB',
+            ],
+            'Fallback locale is used'     => [
                 [
                     'locale'             => 'en_GB',
                     'laminas-i18n'       => [

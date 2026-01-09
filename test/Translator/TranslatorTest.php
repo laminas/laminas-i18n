@@ -12,6 +12,7 @@ use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\I18n\Translator\Translator;
+use Laminas\Translator\TranslatorInterface;
 use LaminasTest\I18n\Translator\TranslationCollector\TestHelper;
 use Locale;
 use PHPUnit\Framework\TestCase;
@@ -367,6 +368,7 @@ final class TranslatorTest extends TestCase
             $container->get(TranslationCollectorInterface::class),
             'en_GB',
             null,
+            TranslatorInterface::DEFAULT_TEXT_DOMAIN,
             $eventManager,
         );
 
@@ -567,5 +569,29 @@ final class TranslatorTest extends TestCase
         ]);
 
         self::assertEquals('Message 8 (en)', $translator->translate('Message 8'));
+    }
+
+    public function testTheDefaultTextDomainIsUsedAsConfiguredInTranslate(): void
+    {
+        $collector = $this->createMock(TranslationCollectorInterface::class);
+        $collector->expects($this->once())
+            ->method('collect')
+            ->with('kermit', 'en_GB')
+            ->willReturn(new TextDomain(['foo' => 'bar']));
+
+        $translator = new Translator($collector, 'en_GB', null, 'kermit');
+        self::assertSame('bar', $translator->translate('foo'));
+    }
+
+    public function testTheGlobalDefaultTextDomainIsUsedWhenTextDomainIsNotSpecified(): void
+    {
+        $collector = $this->createMock(TranslationCollectorInterface::class);
+        $collector->expects($this->once())
+            ->method('collect')
+            ->with(TranslatorInterface::DEFAULT_TEXT_DOMAIN, 'en_GB')
+            ->willReturn(new TextDomain(['foo' => 'bar']));
+
+        $translator = new Translator($collector, 'en_GB');
+        self::assertSame('bar', $translator->translate('foo'));
     }
 }

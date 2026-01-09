@@ -66,6 +66,7 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
             $container->get(TranslationCollectorInterface::class),
             $locale,
             $fallbackLocale,
+            $defaults->defaultTextDomain,
         );
 
         if ($enableEvents) {
