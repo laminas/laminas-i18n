@@ -1,16 +1,16 @@
 # Events
 
-The translator of laminas-i18n triggers two events during the processing of
+The translator of laminas-i18n dispatches two events during the processing of
 translations:
 
-* `Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION`
-* `Laminas\I18n\Translator\Translator::EVENT_NO_MESSAGES_LOADED`
+* `Laminas\I18n\Translator\Event\MissingTranslationEvent`
+* `Laminas\I18n\Translator\Event\NoMessagesLoadedEvent`
 
 The typical usage for these events is to log missing translations and track when
 the loading of messages fails.
 
 > MISSING: **Installation Requirements**
-> The event support of laminas-i18n depends on the [laminas-eventmanager](https://docs.laminas.dev/laminas-eventmanager/) component, so be sure to have it installed before getting started:
+> The event support of laminas-i18n depends on a PSR-14 compatible event dispatcher.
 >
 > ```bash
 > $ composer require laminas/laminas-eventmanager
@@ -19,53 +19,54 @@ the loading of messages fails.
 ## Basic Usage
 
 ```php
+use Laminas\I18n\Translator\Event\MissingTranslationEvent;
+use Laminas\I18n\Translator\Translator;
+
 // Set locale
 Locale::setDefault('de_DE');
 
-// Create translator
-$translator = new Laminas\I18n\Translator\Translator();
+// Create translator with a PSR-14 dispatcher
+// $dispatcher = ...; 
+$translator = new Translator($collector, 'de_DE', null, 'default', $dispatcher);
 
-// Enable event manager
-$translator->enableEventManager();
-
-// Attach listener
-$translator->getEventManager()->attach(
-    Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION,
-    static function (Laminas\EventManager\EventInterface $event) {
-        var_dump($event->getName());
-        // 'missingTranslation' (Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION)
-        var_dump($event->getParams());
-        // ['message' => 'car', 'locale' => 'de_DE', 'text_domain' => 'default']
-    }
-);
+// In your dispatcher configuration, you can now listen to the events
+// Example with a hypothetical dispatcher:
+$dispatcher->addListener(MissingTranslationEvent::class, static function (MissingTranslationEvent $event) {
+    var_dump($event->getMessage());
+    // 'car'
+    var_dump($event->getLocale());
+    // 'de_DE'
+    var_dump($event->getTextDomain());
+    // 'default'
+});
 
 // Trigger related events
 echo $translator->translate('car');
 ```
 
-## Using Event Manager
+## Using Event Dispatcher
 
-### Enable Event Manager
+### Enable Event Dispatcher
 
-To enable the event manager, call the `enableEventManager()` method.
+To enable the event dispatcher, call the `enableEventManager()` method.
 
 ```php
 $translator->enableEventManager();
 ```
 
-The event manager can also be [enabled per factory](factory.md#enable-eventmanager).
+The event dispatcher can also be [enabled per factory](factory.md#enable-eventmanager).
 
-### Disable Event Manager
+### Disable Event Dispatcher
 
-To disable the event manager, call the `disableEventManager()` method.
+To disable the event dispatcher, call the `disableEventManager()` method.
 
 ```php
 $translator->disableEventManager();
 ```
 
-### Check Availability of Event Manager
+### Check Availability of Event Dispatcher
 
-To check the availability of the event manager, call the `isEventManagerEnabled()`
+To check the availability of the event dispatcher, call the `isEventManagerEnabled()`
 method.
 
 ```php
@@ -78,125 +79,61 @@ $result = $translator->isEventManagerEnabled(); // true
 
 The default value of this option is `false`.
 
-### Get Event Manager
+### Get Event Dispatcher
 
 ```php
-$eventManager = $translator->getEventManager(); // instance of Laminas\EventManager\EventManager
+$eventDispatcher = $translator->getEventDispatcher(); // returns Psr\EventDispatcher\EventDispatcherInterface or null
 ```
 
-INFO: **Automatic Instantiation**
-The translator can create an event manager instance independently. If no custom event manager is set for the translator, the `getEventManager()` method returns this instance.
+## Events
 
-#### Default Value
+### MissingTranslationEvent
 
-The default value of this option is an instance of
-`Laminas\EventManager\EventManager` class.
+Fired when the translation for a message is missing.
 
-### Set Custom Event Manager
+Available methods:
 
-```php
-$eventManager = Laminas\EventManager\EventManager();
-$translator->setEventManager($eventManager);
-```
+* `getMessage()`: returns the message string.
+* `getLocale()`: returns the locale string.
+* `getTextDomain()`: returns the text domain string.
+* `setTranslation(string $translation)`: allow providing a translation dynamically.
+* `getTranslation()`: returns the translation if set.
 
-## Attach Event Listener
+### NoMessagesLoadedEvent
 
-A listener is attached to the event manager.
+Fired when no messages were loaded for a locale/text-domain combination.
 
-```php
-$translator->getEventManager()->attach(
-    Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION,
-    static function (Laminas\EventManager\EventInterface $event) {
-        // …
-    }
-);
-```
+Available methods:
 
-### Event Target and Parameters
-
-In the previous code example the variable `$event` contains an instance of
-`Laminas\EventManager\Event` which implements `Laminas\EventManager\EventInterface`.
-
-As target of the event the current instance of
-`Laminas\I18n\Translator\Translator` is set.
-
-```php
-$target = $event->getTarget(); // instance of Laminas\I18n\Translator\Translator
-```
-
-For the event `Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION`
-the following parameters are set:
-
-* `message` (string)
-* `locale` (string)
-* `text_domain` (string)
-
-```php
-$params = $event->getParams(); // ['message' => '…', 'locale' => '…', 'text_domain' => '…']
-```
-
-For the event `Laminas\I18n\Translator\Translator::EVENT_NO_MESSAGES_LOADED`:
-
-* `locale` (string)
-* `text_domain` (string)
-
-```php
-$params = $event->getParams(); // ['locale' => '…', 'text_domain' => '…']
-```
+* `getLocale()`: returns the locale string.
+* `getTextDomain()`: returns the text domain string.
+* `setMessages(TextDomain $messages)`: allow providing messages dynamically.
+* `getMessages()`: returns the messages if set.
 
 ## Example
 
-> MISSING: **Installation Requirements**
-> The following examples depends on the [laminas-log](https://docs.laminas.dev/laminas-log/) component, so be sure to have it installed before getting started:
->
-> ```bash
-> $ composer require laminas/laminas-log
-> ```
-
-The following example does not add any translations to demonstrate the logging.
+The following example shows how to log missing translations.
 
 ```php
-// Set locale
-Locale::setDefault('de_DE');
+use Laminas\I18n\Translator\Event\MissingTranslationEvent;
+use Laminas\I18n\Translator\Event\NoMessagesLoadedEvent;
 
-// Create file logger
-$writer = new Laminas\Log\Writer\Stream(__DIR__ . '/translator.log');
-$logger = new Laminas\Log\Logger();
-$logger->addWriter($writer);
+// ... dispatcher configuration ...
+$dispatcher->addListener(MissingTranslationEvent::class, static function (MissingTranslationEvent $event) use ($logger) {
+    $logger->error('Missing translation', [
+        'message'     => $event->getMessage(),
+        'locale'      => $event->getLocale(),
+        'text_domain' => $event->getTextDomain(),
+    ]);
+});
 
-// Create translator
-$translator = new Laminas\I18n\Translator\Translator();
-
-// Omit adding translations for demonstration
-// $translator->addTranslationFile(…);
-
-// Enable event manager
-$translator->enableEventManager();
-
-// Attach listeners
-$translator->getEventManager()->attach(
-    Laminas\I18n\Translator\Translator::EVENT_MISSING_TRANSLATION,
-    static function (Laminas\EventManager\EventInterface $event) use ($logger) {
-        $logger->error('Missing translation', $event->getParams());
-    }
-);
-$translator->getEventManager()->attach(
-    Laminas\I18n\Translator\Translator::EVENT_NO_MESSAGES_LOADED,
-    static function (Laminas\EventManager\EventInterface $event) use ($logger) {
-        $logger->error('No messages loaded', $event->getParams());
-    }
-);
+$dispatcher->addListener(NoMessagesLoadedEvent::class, static function (NoMessagesLoadedEvent $event) use ($logger) {
+    $logger->error('No messages loaded', [
+        'locale'      => $event->getLocale(),
+        'text_domain' => $event->getTextDomain(),
+    ]);
+});
 
 // Trigger event for no messages loaded and missing translation
 echo $translator->translate('car'); // 'car'
 ```
-
-This creates two entries in the log file:
-
-```text
-2020-03-20T21:00:30+00:00 ERR (3): No messages loaded {"locale":"de_DE","text_domain":"default"}
-2020-03-20T21:00:30+00:00 ERR (3): Missing translation {"message":"car","locale":"de_DE","text_domain":"default"}
-```
-
-The concept of logging, creating logger with writer and to write messages can be
-found in [documentation of laminas-log](https://docs.laminas.dev/laminas-log/).

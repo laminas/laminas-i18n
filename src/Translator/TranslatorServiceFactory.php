@@ -8,6 +8,7 @@ use Laminas\I18n\I18nDefaults;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 use function assert;
 use function is_array;
@@ -67,6 +68,9 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
             $locale,
             $fallbackLocale,
             $defaults->defaultTextDomain,
+            $container->has(EventDispatcherInterface::class)
+                ? $container->get(EventDispatcherInterface::class)
+                : null,
         );
 
         if ($enableEvents) {
