@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.14.3@d0b040a91f280f071c1abcb1b77ce3822058725a">
+<files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
+  <file src="src/Exception/InvalidArgumentException.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[withUnknownCountryCode]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Translator/Loader/PhpArray.php">
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$messages]]></code>

@@ -152,6 +152,11 @@ test: ## Run tests
 	@docker run $(DOCKER_PHP) vendor/bin/phpunit
 .PHONY: test
 
+bench: ## Run benchmarks
+	@$(call MK_INFO,"Running Benchmarks")
+	docker run $(DOCKER_PHP) vendor/bin/phpbench run --report=aggregate
+.PHONY: bench
+
 composer-checks: ## Dump the composer autoloader
 	@$(call MK_INFO,"Validating composer.json and dumping the autoloader")
 	@docker run $(DOCKER_PHP) composer validate --strict
