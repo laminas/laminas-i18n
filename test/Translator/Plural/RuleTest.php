@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator\Plural;
 
+use Laminas\I18n\Exception\ParseException;
 use Laminas\I18n\Translator\Plural\Rule;
-use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
 final class RuleTest extends TestCase
 {
@@ -59,7 +60,7 @@ final class RuleTest extends TestCase
     {
         self::assertEquals(
             $expectedValue,
-            Rule::fromString('nplurals=9; plural=' . $rule)->evaluate(0)
+            Rule::fromString('nplurals=9; plural=' . $rule)->evaluate(0),
         );
     }
 
@@ -148,5 +149,33 @@ final class RuleTest extends TestCase
     {
         $rule = Rule::fromString('nplurals=9; plural=n');
         self::assertEquals(9, $rule->getNumPlurals());
+    }
+
+    public function testExceptionThrownForInvalidPluralCount(): void
+    {
+        $this->expectException(ParseException::class);
+        $this->expectExceptionMessage('Unknown or invalid parser rule');
+        Rule::fromString('nplurals=Kermit; plural=n');
+    }
+
+    public function testExceptionThrownForInvalidPluralRule(): void
+    {
+        $this->expectException(ParseException::class);
+        $this->expectExceptionMessage('Unknown or invalid parser rule');
+        Rule::fromString('nplurals=2; plural=;');
+    }
+
+    public function testInvalidSymbolsInRule(): void
+    {
+        $this->expectException(ParseException::class);
+        $this->expectExceptionMessage('Found invalid character "F" in input stream');
+        Rule::fromString('nplurals=2; plural=!Fred');
+    }
+
+    public function testUnmatchedBraces(): void
+    {
+        $this->expectException(ParseException::class);
+        $this->expectExceptionMessage('Expected token with id ) but received eof');
+        Rule::fromString('nplurals=2; plural=(n');
     }
 }

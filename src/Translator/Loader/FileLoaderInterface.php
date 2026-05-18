@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Translator\Loader;
 
 use Laminas\I18n\Translator\TextDomain;
@@ -12,9 +14,8 @@ interface FileLoaderInterface
     /**
      * Load translations from a file.
      *
-     * @param  string $locale
-     * @param  string $filename
-     * @return TextDomain|null
+     * @param non-empty-string $locale
+     * @param non-empty-string $filename
      */
-    public function load($locale, $filename);
+    public function load(string $locale, string $filename): TextDomain|null;
 }

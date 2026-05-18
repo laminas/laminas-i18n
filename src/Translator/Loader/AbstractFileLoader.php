@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Translator\Loader;
 
 use function is_file;
@@ -9,36 +11,16 @@ use function stream_resolve_include_path;
 /**
  * Abstract file loader implementation; provides facilities around resolving
  * files via the include_path.
+ *
+ * @internal
+ *
+ * @psalm-internal Laminas\I18n
+ * @psalm-internal LaminasTest\I18n
  */
-abstract class AbstractFileLoader implements FileLoaderInterface
+abstract readonly class AbstractFileLoader implements FileLoaderInterface
 {
-    /**
-     * Whether or not to consult the include_path when locating files
-     *
-     * @var bool
-     */
-    protected $useIncludePath = false;
-
-    /**
-     * Indicate whether or not to use the include_path to resolve translation files
-     *
-     * @param bool $flag
-     * @return self
-     */
-    public function setUseIncludePath($flag = true)
+    public function __construct(private bool $useIncludePath = false)
     {
-        $this->useIncludePath = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Are we using the include_path to resolve translation files?
-     *
-     * @return bool
-     */
-    public function useIncludePath()
-    {
-        return $this->useIncludePath;
     }
 
     /**
@@ -48,32 +30,42 @@ abstract class AbstractFileLoader implements FileLoaderInterface
      * flag is enabled, it will attempt to resolve the file from the
      * include_path if the file does not exist on the current working path.
      *
-     * @param string $filename
-     * @return string|false
+     * @param non-empty-string $filename
+     * @return non-empty-string|false
      */
-    protected function resolveFile($filename)
+    protected function resolveFile(string $filename): string|false
     {
         if (! is_file($filename) || ! is_readable($filename)) {
-            if (! $this->useIncludePath()) {
+            if (! $this->useIncludePath) {
                 return false;
             }
             return $this->resolveViaIncludePath($filename);
         }
+
         return $filename;
     }
 
     /**
      * Resolve a translation file via the include_path
      *
-     * @param string $filename
-     * @return string|false
+     * @param non-empty-string $filename
+     * @return non-empty-string|false
      */
-    protected function resolveViaIncludePath($filename)
+    protected function resolveViaIncludePath(string $filename): string|false
     {
         $resolvedIncludePath = stream_resolve_include_path($filename);
-        if ($resolvedIncludePath === false || ! is_file($resolvedIncludePath) || ! is_readable($resolvedIncludePath)) {
+        if (
+            $resolvedIncludePath === false
+            ||
+            ! is_file($resolvedIncludePath)
+            ||
+            ! is_readable($resolvedIncludePath)
+            ||
+            $resolvedIncludePath === ''
+        ) {
             return false;
         }
+
         return $resolvedIncludePath;
     }
 }

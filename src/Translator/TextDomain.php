@@ -1,43 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Translator;
 
 use ArrayObject;
-use Laminas\I18n\Exception;
+use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 
 use function array_replace;
 
 /**
- * Text domain.
+ * A collection of translated messages that behaves like an array
  *
- * @template TKey of array-key
- * @template TValue
- * @extends ArrayObject<TKey, TValue>
- * @final
+ * @extends ArrayObject<string, string|list<string|null>|null>
  */
-class TextDomain extends ArrayObject
+final class TextDomain extends ArrayObject
 {
-    /**
-     * Plural rule.
-     *
-     * @var PluralRule|null
-     */
-    protected $pluralRule;
+    private PluralRule|null $pluralRule               = null;
+    private static PluralRule|null $defaultPluralRule = null;
 
-    /**
-     * Default plural rule shared between instances.
-     *
-     * @var PluralRule|null
-     */
-    protected static $defaultPluralRule;
-
-    /**
-     * Set the plural rule
-     *
-     * @return $this
-     */
-    public function setPluralRule(PluralRule $rule)
+    public function setPluralRule(PluralRule $rule): self
     {
         $this->pluralRule = $rule;
         return $this;
@@ -46,13 +29,12 @@ class TextDomain extends ArrayObject
     /**
      * Get the plural rule.
      *
-     * @param  bool $fallbackToDefaultRule
-     * @return PluralRule|null
+     * @psalm-return ($fallbackToDefaultRule is true ? PluralRule : PluralRule|null)
      */
-    public function getPluralRule($fallbackToDefaultRule = true)
+    public function getPluralRule(bool $fallbackToDefaultRule = true): PluralRule|null
     {
         if ($this->pluralRule === null && $fallbackToDefaultRule) {
-            return static::getDefaultPluralRule();
+            return self::getDefaultPluralRule();
         }
 
         return $this->pluralRule;
@@ -60,26 +42,22 @@ class TextDomain extends ArrayObject
 
     /**
      * Checks whether the text domain has a plural rule.
-     *
-     * @return bool
      */
-    public function hasPluralRule()
+    public function hasPluralRule(): bool
     {
         return $this->pluralRule !== null;
     }
 
     /**
      * Returns a shared default plural rule.
-     *
-     * @return PluralRule
      */
-    public static function getDefaultPluralRule()
+    public static function getDefaultPluralRule(): PluralRule
     {
-        if (static::$defaultPluralRule === null) {
-            static::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
+        if (self::$defaultPluralRule === null) {
+            self::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
         }
 
-        return static::$defaultPluralRule;
+        return self::$defaultPluralRule;
     }
 
     /**
@@ -90,17 +68,13 @@ class TextDomain extends ArrayObject
      * same rule could be made up with different expression.
      *
      * @return $this
-     * @throws Exception\RuntimeException
-     * @template TNewKey of array-key
-     * @template TNewValue
-     * @param self<TNewKey, TNewValue> $textDomain
-     * @psalm-self-out self<TKey|TNewKey, TValue|TNewValue>
+     * @throws RuntimeException
      */
-    public function merge(TextDomain $textDomain)
+    public function merge(TextDomain $textDomain): self
     {
         if ($this->hasPluralRule() && $textDomain->hasPluralRule()) {
             if ($this->getPluralRule()->getNumPlurals() !== $textDomain->getPluralRule()->getNumPlurals()) {
-                throw new Exception\RuntimeException(
+                throw new RuntimeException(
                     'Plural rule of merging text domain is not compatible with the current one'
                 );
             }
@@ -116,5 +90,19 @@ class TextDomain extends ArrayObject
         );
 
         return $this;
+    }
+
+    /**
+     * This method exists only to squash `Undefined array key` warnings from PHP
+     *
+     * @inheritDoc
+     */
+    public function offsetGet(mixed $offset): mixed
+    {
+        if (! isset($this[$offset])) {
+            return null;
+        }
+
+        return parent::offsetGet($offset);
     }
 }

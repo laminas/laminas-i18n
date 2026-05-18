@@ -8,9 +8,8 @@ use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\LoaderPluginManager;
 use Laminas\I18n\Translator\LoaderPluginManagerFactory;
-use Laminas\ServiceManager\ServiceLocatorInterface;
-use LaminasTest\I18n\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 final class LoaderPluginManagerFactoryTest extends TestCase
@@ -21,15 +20,6 @@ final class LoaderPluginManagerFactoryTest extends TestCase
 
         $factory = new LoaderPluginManagerFactory();
         $loaders = $factory($container, 'TranslatorPluginManager');
-        self::assertInstanceOf(LoaderPluginManager::class, $loaders);
-        self::assertFalse($loaders->has('test'));
-    }
-
-    public function testCreateServiceReturnsUnConfiguredPluginManagerWhenNoOptionsPresent(): void
-    {
-        $container = $this->createMock(ServiceLocatorInterface::class);
-        $factory   = new LoaderPluginManagerFactory();
-        $loaders   = $factory->createService($container);
         self::assertInstanceOf(LoaderPluginManager::class, $loaders);
         self::assertFalse($loaders->has('test'));
     }
@@ -62,22 +52,6 @@ final class LoaderPluginManagerFactoryTest extends TestCase
         self::assertTrue($loaders->has('test'));
     }
 
-    #[DataProvider('provideLoader')]
-    public function testCreateServiceCanConfigurePluginManagerViaOptions(string $loader): void
-    {
-        $container = $this->createMock(ServiceLocatorInterface::class);
-
-        $factory = new LoaderPluginManagerFactory();
-        $factory->setCreationOptions([
-            'aliases' => [
-                'test' => $loader,
-            ],
-        ]);
-        $loaders = $factory->createService($container);
-        self::assertInstanceOf(LoaderPluginManager::class, $loaders);
-        self::assertTrue($loaders->has('test'));
-    }
-
     public function testConfiguresTranslatorServicesWhenFound(): void
     {
         $translator = $this->createMock(FileLoaderInterface::class);
@@ -87,20 +61,18 @@ final class LoaderPluginManagerFactoryTest extends TestCase
                     'test' => PhpArray::class,
                 ],
                 'factories' => [
-                    'test-too' => static fn(ContainerInterface $container): FileLoaderInterface => $translator,
+                    'test-too' => static fn(): FileLoaderInterface => $translator,
                 ],
             ],
         ];
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::exactly(2))
+        $container->expects(self::atLeast(1))
             ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', true],
-            ]);
+            ->with('config')
+            ->willReturn(true);
 
-        $container->expects(self::once())
+        $container->expects(self::atLeast(1))
             ->method('get')
             ->with('config')
             ->willReturn($config);
@@ -115,33 +87,13 @@ final class LoaderPluginManagerFactoryTest extends TestCase
         self::assertSame($translator, $translators->get('test-too'));
     }
 
-    public function testDoesNotConfigureTranslatorServicesWhenServiceListenerPresent(): void
+    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $container->expects(self::once())
             ->method('has')
-            ->with('ServiceListener')
-            ->willReturn(true);
-
-        $container->expects(self::never())->method('get');
-
-        $factory     = new LoaderPluginManagerFactory();
-        $translators = $factory($container, 'TranslatorPluginManager');
-
-        self::assertInstanceOf(LoaderPluginManager::class, $translators);
-        self::assertFalse($translators->has('test'));
-        self::assertFalse($translators->has('test-too'));
-    }
-
-    public function testDoesNotConfigureTranslatorServicesWhenConfigServiceNotPresent(): void
-    {
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::exactly(2))
-            ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', false],
-            ]);
+            ->with('config')
+            ->willReturn(false);
 
         $container->expects(self::never())->method('get');
 
@@ -155,12 +107,10 @@ final class LoaderPluginManagerFactoryTest extends TestCase
     {
         $container = $this->createMock(ContainerInterface::class);
 
-        $container->expects(self::exactly(2))
+        $container->expects(self::once())
             ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', true],
-            ]);
+            ->with('config')
+            ->willReturn(true);
 
         $container->expects(self::once())
             ->method('get')
