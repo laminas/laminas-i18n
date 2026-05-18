@@ -17,19 +17,6 @@ final class InvalidArgumentException extends \InvalidArgumentException implement
         ));
     }
 
-    /**
-     * @deprecated Since 2.33.0 This method is no longer used and will be removed in the next major version
-     *
-     * @psalm-pure
-     */
-    public static function withUnknownCountryCode(string $code): self
-    {
-        return new self(sprintf(
-            'The country code "%s" does not correspond to a known country',
-            $code
-        ));
-    }
-
     /** @psalm-pure */
     public static function withUnrecognizableLocaleString(string $locale): self
     {
