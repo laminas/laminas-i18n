@@ -51,6 +51,7 @@
         "laminas/laminas-filter": "^2.42",
         "laminas/laminas-validator": "^2.65.0",
         "laminas/laminas-view": "^2.44",
+        "phpbench/phpbench": "^1.6",
         "phpunit/phpunit": "^11.5.46",
         "psalm/plugin-phpunit": "^0.19.5",
         "vimeo/psalm": "^6.14.2"
@@ -75,7 +76,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\I18n\\": "test/"
+            "LaminasTest\\I18n\\": "test/",
+            "LaminasBench\\I18n\\": "benchmarks/"
         }
     },
     "scripts": {
