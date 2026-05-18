@@ -46,17 +46,34 @@ final readonly class CountryCode
      */
     public static function fromString(string $code): self
     {
-        $code = strtoupper($code);
-        if (! preg_match('/^[A-Z]{2}$/', $code)) {
+        $countryCode = self::validCountryCodeOrNull($code);
+        if ($countryCode === null) {
             throw InvalidArgumentException::withInvalidCountryCode($code);
+        }
+
+        return new self($countryCode);
+    }
+
+    /**
+     * @psalm-pure
+     * @return non-empty-string|null
+     */
+    private static function validCountryCodeOrNull(string $code): string|null
+    {
+        if ($code === '') {
+            return null;
+        }
+
+        if (! preg_match('/^[A-Z]{2}$/i', $code)) {
+            return null;
         }
 
         $displayName = Locale::getDisplayRegion('-' . $code, 'GB');
         if ($displayName === '' || $displayName === 'Unknown Region') {
-            throw InvalidArgumentException::withUnknownCountryCode($code);
+            return null;
         }
 
-        return new self($code);
+        return strtoupper($code);
     }
 
     /**
@@ -71,12 +88,30 @@ final readonly class CountryCode
      */
     public static function fromLocaleString(string $locale): self
     {
-        $region = Locale::getRegion($locale);
-        if ($region === null || $region === '') {
+        $region = self::countryCodeFromLocaleOrNull($locale);
+        if ($region === null) {
             throw InvalidArgumentException::withUnrecognizableLocaleString($locale);
         }
 
         return self::fromString($region);
+    }
+
+    /**
+     * @psalm-pure
+     * @return non-empty-string|null
+     */
+    private static function countryCodeFromLocaleOrNull(string $locale): string|null
+    {
+        if ($locale === '') {
+            return null;
+        }
+
+        $region = Locale::getRegion($locale);
+        if ($region === null || $region === '') {
+            return null;
+        }
+
+        return self::validCountryCodeOrNull($region);
     }
 
     /**
@@ -101,7 +136,7 @@ final readonly class CountryCode
         assert($countryCodeOrLocale !== '');
 
         $code = self::tryFromString($countryCodeOrLocale);
-        if ($code) {
+        if ($code instanceof self) {
             return $code;
         }
 
@@ -121,14 +156,14 @@ final readonly class CountryCode
      */
     public static function tryFromString(string $countryCodeOrLocale): ?self
     {
-        try {
-            return self::fromLocaleString($countryCodeOrLocale);
-        } catch (InvalidArgumentException) {
+        $country = self::validCountryCodeOrNull($countryCodeOrLocale);
+        if ($country !== null) {
+            return new self($country);
         }
 
-        try {
-            return self::fromString($countryCodeOrLocale);
-        } catch (InvalidArgumentException) {
+        $country = self::countryCodeFromLocaleOrNull($countryCodeOrLocale);
+        if ($country !== null) {
+            return new self($country);
         }
 
         return null;

@@ -16,7 +16,11 @@ class InvalidArgumentException extends \InvalidArgumentException implements Exce
         ));
     }
 
-    /** @psalm-pure */
+    /**
+     * @deprecated Since 2.33.0 This method is no longer used and will be removed in the next major version
+     *
+     * @psalm-pure
+     */
     public static function withUnknownCountryCode(string $code): self
     {
         return new self(sprintf(

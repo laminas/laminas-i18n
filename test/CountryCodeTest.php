@@ -38,8 +38,8 @@ final class CountryCodeTest extends TestCase
     {
         self::assertTrue(
             CountryCode::fromString('GB')->equals(
-                CountryCode::fromString('gB')
-            )
+                CountryCode::fromString('gB'),
+            ),
         );
     }
 
@@ -47,22 +47,30 @@ final class CountryCodeTest extends TestCase
     {
         self::assertFalse(
             CountryCode::fromString('ZA')->equals(
-                CountryCode::fromString('US')
-            )
+                CountryCode::fromString('US'),
+            ),
         );
+    }
+
+    public function testEmptyStringForCountryCode(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Country codes should be 2 letter ISO 3166 strings, received ""');
+        /** @psalm-suppress InvalidArgument */
+        CountryCode::fromString('');
     }
 
     public function testPatternMatchFailureForCountryCode(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Country codes should be 2 letter ISO 3166 strings');
+        $this->expectExceptionMessage('Country codes should be 2 letter ISO 3166 strings, received "Wrong"');
         CountryCode::fromString('Wrong');
     }
 
     public function testInvalidCountryCode(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The country code "ZZ" does not correspond to a known country');
+        $this->expectExceptionMessage('Country codes should be 2 letter ISO 3166 strings, received "ZZ"');
         CountryCode::fromString('ZZ');
     }
 
@@ -126,7 +134,7 @@ final class CountryCodeTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'The string "Wrong" could not be understood as either a locale or an ISO 3166 country code'
+            'The string "Wrong" could not be understood as either a locale or an ISO 3166 country code',
         );
         CountryCode::detect('Wrong');
     }
@@ -149,5 +157,50 @@ final class CountryCodeTest extends TestCase
         Locale::setDefault('en_GB');
         $code = CountryCode::detect('');
         self::assertEquals('GB', $code->toString());
+    }
+
+    /** @return list<array{0: string}> */
+    public static function invalidArbitraryStrings(): array
+    {
+        return [
+            ['zz'],
+            ['ZZ'],
+            [''],
+            ['wrong'],
+            ['bad-news'],
+            ['zz_ZZ'],
+        ];
+    }
+
+    #[DataProvider('invalidArbitraryStrings')]
+    public function testTryFromStringWithInvalidInput(string $input): void
+    {
+        /** @psalm-suppress ArgumentTypeCoercion */
+        self::assertNull(CountryCode::tryFromString($input));
+    }
+
+    /** @return list<array{0: non-empty-string, 1: non-empty-string}> */
+    public static function validArbitraryStrings(): array
+    {
+        return [
+            ['gb', 'GB'],
+            ['UA', 'UA'],
+            ['de_DE', 'DE'],
+            ['ZA', 'ZA'],
+            ['sl-Latn-IT-nedis', 'IT'],
+            ['FR-fr@EURO', 'FR'],
+        ];
+    }
+
+    /**
+     * @param non-empty-string $input
+     * @param non-empty-string $expect
+     */
+    #[DataProvider('validArbitraryStrings')]
+    public function testTryFromStringWithValidInput(string $input, string $expect): void
+    {
+        $countryCode = CountryCode::tryFromString($input);
+        self::assertNotNull($countryCode);
+        self::assertSame($expect, $countryCode->toString());
     }
 }
