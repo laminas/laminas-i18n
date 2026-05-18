@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.14.2@bbd217fc98c0daa0a13aea2a7f119d03ba3fc9a0">
+<files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
   <file src="src/ConfigProvider.php">
     <DeprecatedClass>
       <code><![CDATA[Validator\PhoneNumber::class]]></code>
@@ -13,6 +13,11 @@
     <UnusedClass>
       <code><![CDATA[ExtensionNotLoadedException]]></code>
     </UnusedClass>
+  </file>
+  <file src="src/Exception/InvalidArgumentException.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[withUnknownCountryCode]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Filter/AbstractLocale.php">
     <DeprecatedClass>

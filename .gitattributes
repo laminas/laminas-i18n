@@ -15,3 +15,5 @@ composer.lock export-ignore
 /tools/ export-ignore
 /.psr-container.php.stub export-ignore
 .infection.json5.dist export-ignore
+phpbench.json export-ignore
+benchmarks export-ignore
