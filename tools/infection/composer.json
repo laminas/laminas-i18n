@@ -11,9 +11,9 @@
         "php": "~8.2 || ~8.3 || ~8.4 || ~8.5"
     },
     "require-dev": {
-        "psalm/plugin-phpunit": "^0.19.5",
+        "psalm/plugin-phpunit": "^0.19.7",
         "roave/infection-static-analysis-plugin": "^1.40",
-        "vimeo/psalm": "^6.14.3"
+        "vimeo/psalm": "^6.16.1"
     },
     "autoload": {
         "psr-4": {
