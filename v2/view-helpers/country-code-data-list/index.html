@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Provide translations for your application, and filter and validate internationalized values."> 
+
+    
+    
+        
+    
+    <meta name="docsearch:version" content="2.0.0,latest">
+    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:component" content="laminas-i18n">
+
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/v2/view-helpers/country-code-data-list/">
+    <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>CountryCodeDataList - laminas-i18n - Laminas Docs</title>
+
+    <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
+    
+</head>
+<body id="page-top" class="components" data-spy="scroll" data-target=".toc" data-offset="20">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="https://docs.laminas.dev/img/laminas-foundation-white.svg" height="28" alt="Laminas">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div class="dropdown sub-project-selector">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a href="https://docs.mezzio.dev/" class="dropdown-item">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img src="https://docs.laminas.dev/img/mezzio-logo.svg">
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <strong>Mezzio</strong><br>
+                                        PSR-15 Middleware in Minutes
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://docs.laminas.dev/components/" class="dropdown-item">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img src="https://docs.laminas.dev/img/laminas-components-rgb.svg">
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <strong>Components</strong><br>
+                                        Components for Enterprise Applications
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/migration/">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        Migration to Laminas
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/tutorials/">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        Tutorials
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/mvc">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        MVC <small><em>(security-only maintenance mode)</em></small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../../..">
+                
+                
+    laminas-i18n
+
+            </a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Translator</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/events/" class="subnavigation__link">Events</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Filters</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Reference</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Validators</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">View Helpers</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CountryCodeDataList</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../plural/" class="subnavigation__link">Plural</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../translate/" class="subnavigation__link">Translate</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Application Integration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../application-integration/stand-alone/" class="subnavigation__link">Stand-Alone</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/migration-to-v2.4/" class="subnavigation__link">Migration from Versions prior to 2.4</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-8">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">
+                            
+                            
+    laminas-i18n
+
+                        </small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="bi bi-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-i18n" class="header__link header__link--github" title="Go to repository of laminas-i18n">
+                        <i class="bi-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12 content" role="main">
+                
+                
+                    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#customising-output" class="toc__link nav-link">Customising Output</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#restricting-the-list-of-available-countries" class="toc__link nav-link">Restricting the List of Available Countries</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+                
+
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
+
+            
+                <li class="breadcrumb-item">
+                    <a href="../../..">
+                        
+    laminas-i18n
+
+                    </a>
+                </li>
+
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">View Helpers</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">CountryCodeDataList</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">View Helpers</h2>
+    
+
+    <h1 id="countrycodedatalist">CountryCodeDataList</h1>
+<p>The <code>CountryCodeDataList</code> view helper can be used to render an HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist">&lt;datalist&gt;</a> element containing a list of ISO-3166 country codes with two-letter country codes and localised country names.</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<pre class="highlight"><code class="language-php">echo $this-&gt;countryCodeDataList();</code></pre>
+<p>By default, the helper will output a <code>datalist</code> with labels in the systems default locale such as:</p>
+<pre class="highlight"><code class="language-html">&lt;datalist &gt;
+    &lt;option value="AD" label="Andorra"&gt;
+    &lt;option value="AE" label="United&amp;#x20;Arab&amp;#x20;Emirates"&gt;
+    &lt;option value="AF" label="Afghanistan"&gt;
+    &lt;option value="AG" label="Antigua&amp;#x20;&amp;amp;&amp;#x20;Barbuda"&gt;
+    &lt;!-- …more items… --&gt;
+&lt;/datalist&gt;</code></pre>
+<h2 id="customising-output">Customising Output</h2>
+<h3 id="override-the-locale-at-runtime">Override the Locale at Runtime</h3>
+<p>The first, optional argument to the helper is a locale string used to format the country names:</p>
+<pre class="highlight"><code class="language-php">echo $this-&gt;countryCodeDataList('de_DE'); // or just 'DE'</code></pre>
+<p>Outputs:</p>
+<pre class="highlight"><code class="language-html">&lt;datalist&gt;
+    &lt;option value="AD" label="Andorra"&gt;
+    &lt;option value="AE" label="Vereinigte&amp;#x20;Arabische&amp;#x20;Emirate"&gt;
+    &lt;option value="AF" label="Afghanistan"&gt;
+    &lt;option value="AG" label="Antigua&amp;#x20;und&amp;#x20;Barbuda"&gt;
+    &lt;!-- etc… --&gt;
+&lt;/datalist&gt;</code></pre>
+<h3 id="set-html-attributes-on-the-data-list">Set HTML Attributes on the Data List</h3>
+<p>You can provide <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist#attributes">HTML attributes</a> to the second argument of the helper as an associative array.</p>
+<pre class="highlight"><code class="language-php">echo $this-&gt;countryCodeDataList(null, [
+    'id' =&gt; 'country-codes',
+]); // or just 'DE'</code></pre>
+<p>Outputs:</p>
+<pre class="highlight"><code class="language-html">&lt;datalist id="country-codes"&gt;
+    &lt;option value="AD" label="Andorra"&gt;
+    &lt;!-- etc… --&gt;
+&lt;/datalist&gt;</code></pre>
+<p>In order for the html data list to be used with a form input, you must target the list from the input using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list">the <code>list</code> attribute</a>.
+For example:</p>
+<pre class="highlight"><code class="language-php">$formElement = new Laminas\Form\Element\Text('country');
+$formElement-&gt;setAttribute('list', 'country-codes');</code></pre>
+<h2 id="restricting-the-list-of-available-countries">Restricting the List of Available Countries</h2>
+<h3 id="the-countrycodelistinterface-contract">The <code>CountryCodeListInterface</code> Contract</h3>
+<p>The helper's constructor accepts an object that implements <code>Laminas\I18n\Geography\CountryCodeListInterface</code>.
+This interface has no specific methods other than those it inherits from <a href="https://www.php.net/manual/en/class.iteratoraggregate.php"><code>IteratorAggregate</code></a> and <a href="https://www.php.net/manual/en/class.countable.php"><code>Countable</code></a>.
+This object must be an iterable that yields a list of <code>Laminas\I18n\CountryCode</code> value objects.</p>
+<p>The default implementation of this interface, <code>Laminas\I18n\Geography\DefaultCountryCodeList</code> provides a list of all known ISO-3166 codes.</p>
+<h3 id="overriding-the-list">Overriding the List</h3>
+<p>Once you have an implementation of <code>CountryCodeListInterface</code> that provides the list of countries that you require, the list must be made available to the view helper.</p>
+<p>This can be achieved in 2 ways:</p>
+<h4 id="1-a-custom-factory-for-the-helper">1. A Custom Factory for the Helper</h4>
+<p>In order to inject the list into the helper, you can set up a factory that replaces the view helpers default factory.</p>
+<p>Create a file for the factory e.g. <code>module/MyModule/src/Factory/MyCountryDataListFactory.php</code> with the following contents:</p>
+<pre class="highlight"><code class="language-php">namespace MyNameSpace;
+
+use Laminas\Escaper\Escaper;
+use Laminas\I18n\View\Helper\CountryCodeDataList;
+use Psr\Container\ContainerInterface;
+
+class MyCountryDataListFactory
+{
+    public function __invoke(ContainerInterface $container): CountryCodeDataList
+    {
+        return new CountryCodeDataList(
+            $container-&gt;get('ContainerIdForMyCountryCodeList'),
+            new Escaper(),
+            'en_US',
+        );
+    }
+}</code></pre>
+<p>You would then configure your application config to register this factory for the helper.</p>
+<p>For example, in a laminas-mvc module, the file might be <code>module/MyModule/config/module.config.php</code></p>
+<pre class="highlight"><code class="language-php">return [
+    'view_helpers' =&gt; [
+        'factories' =&gt; [
+            \Laminas\I18n\View\Helper\CountryCodeDataList::class =&gt; \MyNameSpace\MyCountryDataListFactory::class,
+        ],
+    ],
+];</code></pre>
+<h4 id="2-override-the-list-itself-in-the-di-container">2. Override the List Itself in the DI Container</h4>
+<p>Assuming your customised list is available in the DI container with the alias <code>MyCountryList</code>, modify your application configuration so that the list interface is aliased to your own implementation:</p>
+<p>Example configuration file path for a laminas-mvc module: <code>module/MyModule/config/module.config.php</code></p>
+<pre class="highlight"><code class="language-php">return [
+    /**
+     * 'service_manager' is the key used in a laminas-mvc application.
+     * For a Mezzio application, the key would be 'dependencies' 
+     */
+    'service_manager' =&gt; [
+        'aliases' =&gt; [
+            \Laminas\I18n\Geography\CountryCodeListInterface::class =&gt; 'MyCountryList',
+        ],
+    ],
+];</code></pre>
+<p>In the above scenario, the shipped factory for the view helper will inject your implementation of the country list into the view helper's constructor.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../introduction/">
+                    <small class="page-nav__label">Previous</small>
+                    <i class="bi bi-arrow-left"></i>
+                    Introduction
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../currency-format/">
+                    <small class="page-nav__label">Next</small>
+                    CurrencyFormat
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                <div class="donation-banner">
+    <a href="https://getlaminas.org/support/">
+        <h2>Donate</h2>
+        <p>Support Laminas Developers Directly</p>
+        <img src="https://funding.communitybridge.org/assets/cb-f-horizontal-white.svg">
+    </a>
+</div>
+
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../../..">
+                
+                
+    laminas-i18n
+
+            </a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../translation/" class="subnavigation__link">Translation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Translator</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/events/" class="subnavigation__link">Events</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/factory/" class="subnavigation__link">Factory</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Filters</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Reference</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Validators</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">View Helpers</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">CountryCodeDataList</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../currency-format/" class="subnavigation__link">CurrencyFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../date-format/" class="subnavigation__link">DateFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../plural/" class="subnavigation__link">Plural</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../translate/" class="subnavigation__link">Translate</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../translate-plural/" class="subnavigation__link">TranslatePlural</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Application Integration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../application-integration/stand-alone/" class="subnavigation__link">Stand-Alone</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/migration-to-v2.4/" class="subnavigation__link">Migration from Versions prior to 2.4</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+        </ul>
+    </div>
+
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">Related Components</h4>
+        <ul class="subnavigation__list">
+            
+                <li class="subnavigation__list-item">
+                    
+                        <a href="https://docs.laminas.dev/laminas-i18n-resources/" class="subnavigation__link">Translation Resources</a>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="bi bi-arrow-up-square" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h5 class="text-white">Laminas – The Linux Foundation's only PHP project</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas Components <a href="https://docs.laminas.dev/components">Enterprise-ready PHP components</a></li>
+                    <li>Maintenance Overview <a href="https://getlaminas.org/packages-maintenance-status/">Current maintenance status of Laminas &amp; Mezzio packages</a></li>
+                    <li>Laminas Integrations <a href="https://getlaminas.org/integrations/">List of packages using Laminas & Mezzio components</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">Support</h5>
+                        <ul class="support__list">
+                            <li class="support__list-item">
+                                <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="bi-chat-text-fill"></i><span class="visually-hidden">Laminas &amp; Mezzio Forum</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="bi-slack"></i><span class="visually-hidden">Laminas Community Slack</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://github.com/laminas" class="support__link" title="Github"><i class="bi-github"></i><span class="visually-hidden">Laminas GitHub Organisation Page</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://phpc.social/@getlaminas" class="support__link" title="Mastodon"><i class="bi-mastodon"></i><span class="visually-hidden">Laminas on Mastodon</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://getlaminas.org/blog/rss.xml" class="support__link" title="Blog feed"><i class="bi-rss"></i><span class="visually-hidden">Blog article RSS Feed</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed">
+                                    <i class="bi-rss-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">License</h5>
+                        <p>
+                            Code licensed under <a
+                                href="https://github.com/laminas/laminas-i18n/blob/-/LICENSE.md">BSD 3-Clause</a>.
+                        </p>
+                    </div>
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">Copyright</h5>
+                        <p>
+                            <!--Built with love by the Laminas team with the help of our
+                            <a href="https://github.com/laminas/laminas-i18n/graphs/contributors">contributors</a>.<br>-->
+                            &copy; 2026 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../../..',
+            project  = "components",
+            siteName = 'laminas-i18n';
+    </script>
+    <script src="https://docs.laminas.dev/js/scripts.js"></script>
+    
+        <script src="../../../search/main.js"></script>
+    
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-i18n" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
