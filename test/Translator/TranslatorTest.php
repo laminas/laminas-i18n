@@ -8,6 +8,7 @@ use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\EventManager;
 use Laminas\I18n\I18nDefaults;
+use Laminas\I18n\Translator\Loader\Ini;
 use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
@@ -162,6 +163,32 @@ final class TranslatorTest extends TestCase
                         [
                             'type'     => PhpArray::class,
                             'filename' => $this->testFilesDir . '/translation_en.php',
+                            'locale'   => 'en_US',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $pl0 = $translator->translatePlural('Message 5', 'Message 5 Plural', 1);
+        $pl1 = $translator->translatePlural('Message 5', 'Message 5 Plural', 2);
+        $pl2 = $translator->translatePlural('Message 5', 'Message 5 Plural', 10);
+
+        self::assertEquals('Message 5 (en) Plural 0', $pl0);
+        self::assertEquals('Message 5 (en) Plural 1', $pl1);
+        self::assertEquals('Message 5 (en) Plural 2', $pl2);
+    }
+
+    public function testTranslatePluralsUsingIniFileFormat(): void
+    {
+        $translator = $this->translatorWithConfig([
+            'locale'       => 'en_US',
+            'laminas-i18n' => [
+                'translator' => [
+                    'translation_files' => [
+                        [
+                            'type'     => Ini::class,
+                            'filename' => $this->testFilesDir . '/translation_en.ini',
                             'locale'   => 'en_US',
                         ],
                     ],
