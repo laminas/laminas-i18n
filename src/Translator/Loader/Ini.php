@@ -8,6 +8,7 @@ use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
 
+use function array_is_list;
 use function array_shift;
 use function count;
 use function is_array;
@@ -67,7 +68,10 @@ final readonly class Ini implements FileLoaderInterface
             /** @psalm-var mixed $value */
             $value = array_shift($message);
 
-            if (is_string($key) && is_string($value)) {
+            $validValue = is_string($value)
+                || (is_array($value) && self::isStringList($value));
+
+            if (is_string($key) && $validValue) {
                 $messages[$key] = $value;
             }
         }
@@ -84,5 +88,24 @@ final readonly class Ini implements FileLoaderInterface
         }
 
         return $textDomain;
+    }
+
+    /**
+     * @param array<array-key, mixed> $value
+     * @psalm-assert-if-true list<string> $value
+     */
+    private static function isStringList(array $value): bool
+    {
+        if (! array_is_list($value)) {
+            return false;
+        }
+
+        foreach ($value as $item) {
+            if (! is_string($item)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

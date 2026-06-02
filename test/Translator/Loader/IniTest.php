@@ -86,6 +86,20 @@ final class IniTest extends TestCase
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
+    public function testLoaderReturnsAnArrayOfEntriesForPlurals(): void
+    {
+        $loader     = new IniLoader(new IniFileReader());
+        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
+
+        $expect = [
+            0 => 'Message 5 (en) Plural 0',
+            1 => 'Message 5 (en) Plural 1',
+            2 => 'Message 5 (en) Plural 2',
+        ];
+        self::assertSame($expect, $textDomain['Message 5']);
+    }
+
     public function testLoaderLoadsPluralRules(): void
     {
         $loader     = new IniLoader(new IniFileReader());
