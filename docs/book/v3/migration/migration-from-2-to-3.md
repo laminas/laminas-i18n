@@ -25,7 +25,7 @@ The MVC `Module` class has been entirely removed from the package.
 
 ### Interface Namespace Extraction / Consolidation
 
-To better split component responsibilities and streamline the core architecture, core interfaces have been extracted or moved to separate, dedicated packages. 
+To better split component responsibilities and streamline the core architecture, core interfaces have been extracted or moved to separate, dedicated packages.
 
 Usages of `Laminas\I18n\Translator\TranslatorInterface` must be replaced with `Laminas\Translator\TranslatorInterface`.
 
@@ -101,24 +101,27 @@ return [
 The component's built-in filtering capabilities have been extracted into an external standalone package: [`laminas/laminas-i18n-filter`](https://github.com/laminas/laminas-i18n-filter).
 
 The following filter classes are no longer present in `laminas-i18n`:
-* `Laminas\I18n\Filter\Alnum`
-* `Laminas\I18n\Filter\Alpha`
-* `Laminas\I18n\Filter\NumberFormat`
-* `Laminas\I18n\Filter\NumberParse`
+
+- `Laminas\I18n\Filter\Alnum`
+- `Laminas\I18n\Filter\Alpha`
+- `Laminas\I18n\Filter\NumberFormat`
+- `Laminas\I18n\Filter\NumberParse`
 
 Additionally, these filters have been reworked to ensure native compatibility with `laminas-filter` v3 execution pipelines.
 
 > [!IMPORTANT] Migration Action Required
 > If your application relies on these filters, you must explicitly require the new satellite package:
-> ```bash
-> $ composer require laminas/laminas-i18n-filter
-> ```
+
+```bash
+$ composer require laminas/laminas-i18n-filter
+```
 
 ### Extraction of I18n Validators to Satellite Package
 
 The component's built-in validation capabilities have been extracted into an external standalone package: [`laminas/laminas-i18n-validator`](https://github.com/laminas/laminas-i18n-validator).
 
 The following validator classes are no longer present directly within `laminas-i18n`:
+
 - `Laminas\I18n\Validator\Alnum`
 - `Laminas\I18n\Validator\Alpha`
 - `Laminas\I18n\Validator\CountryCode`
@@ -132,9 +135,10 @@ Additionally, these extracted validators have been internally refactored to achi
 
 > [!IMPORTANT] Migration Action Required
 > If your validation chains or forms rely on any of these i18n validation plugins, you must explicitly require the new satellite package via Composer:
-> ```bash
-> $ composer require laminas/laminas-i18n-validator
-> ```
+
+```bash
+$ composer require laminas/laminas-i18n-validator
+```
 
 ### `Laminas\I18n\Translator\Loader\Ini` Initialization
 
