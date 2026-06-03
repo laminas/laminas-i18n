@@ -1,22 +1,21 @@
 # Introduction
 
-laminas-i18n ships with a set of internationalization-related filters.
+The `laminas-i18n` ecosystem provides a set of internationalization-related filters to sanitize and normalize localized data:
 
 - [Alnum](alnum.md)
 - [Alpha](alpha.md)
 - [NumberFormat](number-format.md)
 - [NumberParse](number-parse.md)
 
-These filters are based on Laminas component for filtering and
-normalizing data and files:
-[laminas-filter](https://docs.laminas.dev/laminas-filter/).
+These filters are designed to work seamlessly with the [laminas-filter](https://docs.laminas.dev/laminas-filter/) component pipeline. For general concepts, workflows, and basic usage instructions regarding filters, please refer to the [laminas-filter documentation](https://docs.laminas.dev/laminas-filter/).
 
-The concept and the basic usage of the filters can be found in the
-[documentation of laminas-filter](https://docs.laminas.dev/laminas-filter/).
+## Installation
 
-> MISSING: **Installation Requirements**
-> The filtering support of laminas-i18n depends on the [laminas-filter](https://docs.laminas.dev/laminas-filter/) component, so be sure to have it installed before getting started:
->
-> ```bash
-> $ composer require laminas/laminas-filter
-> ```
+Starting with version 3.0, the core `laminas-i18n` package no longer ships with these filters out of the box. They have been extracted into an optional satellite package.
+
+To use internationalization filters in your application, you must explicitly install the `laminas-i18n-filter` package, which will automatically bring in `laminas-filter` as a required dependency:
+
+```bash
+$ composer require laminas/laminas-i18n-filter
+
+```
