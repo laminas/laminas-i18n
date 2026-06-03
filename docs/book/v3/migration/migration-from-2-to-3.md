@@ -96,6 +96,24 @@ return [
 
 ```
 
+### Extraction of I18n Filters to Satellite Package
+
+The component's built-in filtering capabilities have been extracted into an external standalone package: [`laminas/laminas-i18n-filter`](https://github.com/laminas/laminas-i18n-filter).
+
+The following filter classes are no longer present in `laminas-i18n`:
+* `Laminas\I18n\Filter\Alnum`
+* `Laminas\I18n\Filter\Alpha`
+* `Laminas\I18n\Filter\NumberFormat`
+* `Laminas\I18n\Filter\NumberParse`
+
+Additionally, these filters have been reworked to ensure native compatibility with `laminas-filter` v3 execution pipelines.
+
+> [!IMPORTANT] Migration Action Required
+> If your application relies on these filters, you must explicitly require the new satellite package:
+> ```bash
+> $ composer require laminas/laminas-i18n-filter
+> ```
+
 ### `Laminas\I18n\Translator\Loader\Ini` Initialization
 
 Due to the removal of `laminas-config`, the `Ini` translator loader no longer implicitly instantiates an internal configuration reader. It now requires `Laminas\I18n\Translator\Loader\IniFileReader` passed explicitly to its constructor.
