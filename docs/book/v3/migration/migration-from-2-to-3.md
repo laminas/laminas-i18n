@@ -29,6 +29,73 @@ To better split component responsibilities and streamline the core architecture,
 
 Usages of `Laminas\I18n\Translator\TranslatorInterface` must be replaced with `Laminas\Translator\TranslatorInterface`.
 
+### Migration to Container-Driven Caching via Translation Collectors
+
+The `Translator` component no longer manages caching internally, and the legacy `$translator->setCache()` method has been entirely removed. Caching is now decoupled from the translator itself and is handled architectural-level by wrapping translation lookup routines inside specific Translation Collectors.
+
+When the `AggregateCollector` is resolved from the dependency injection container, an internal delegator factory checks the application configuration for a defined PSR-6 or PSR-16 cache service. If a valid cache service name is found and successfully retrieved from the container, the factory automatically wraps the `AggregateCollector` in a `CachingCollector`. This decorator transparently proxies all lookup tasks via `TranslationCollectorInterface::collect()` and caches the results.
+
+#### Configuration Changes
+
+To enable translation caching, the caching service must be registered within the dependency container and point to its service name under the consolidated `laminas-i18n` configuration block. Either a standard PSR-6 (`psr6_cache`) or a PSR-16 (`psr16_cache`) storage implementation can be provided.
+
+An optional `cache_key_prefix` can also be supplied to prevent key collisions in shared cache environments.
+
+> [!CAUTION] Type Errors on Direct Injections
+> Manual invocation of caching configurations on the translator object or attempting to pass raw legacy `laminas-cache` adapter instances via configuration arrays will result in a `TypeError`. All caching must be registered as container services.
+
+#### Prior to 3.0.0
+
+```php
+use Laminas\Cache\StorageFactory;
+use Laminas\I18n\Translator\Translator;
+
+$cache = StorageFactory::factory([
+    'adapter' => 'filesystem',
+]);
+
+$translator = new Translator();
+$translator->setCache($cache);
+
+```
+
+#### Since 3.0.0
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'dependencies' => [
+        'factories' => [
+            // Register the PSR-6 or PSR-16 compliant cache service factory
+            'MyApp\CacheService' => MyApp\Cache\CacheFactory::class,
+        ],
+    ],
+    'laminas-i18n' => [
+        'translator' => [
+            // Point to the service container key
+            'psr6_cache'       => 'MyApp\CacheService', 
+            // Alternatively, use a PSR-16 cache provider:
+            // 'psr16_cache'    => 'MyApp\SimpleCacheService',
+            
+            // Optional: Customize the translation cache isolation
+            'cache_key_prefix' => 'app_translation_',
+            
+            'translation_file_patterns' => [
+                [
+                    'type'     => 'phparray',
+                    'base_dir' => dirname(__DIR__, 2) . '/data/languages',
+                    'pattern'  => '%s.php',
+                ],
+            ],
+        ],
+    ],
+];
+
+```
+
 ### `Laminas\I18n\Translator\Loader\Ini` Initialization
 
 Due to the removal of `laminas-config`, the `Ini` translator loader no longer implicitly instantiates an internal configuration reader. It now requires `Laminas\I18n\Translator\Loader\IniFileReader` passed explicitly to its constructor.
