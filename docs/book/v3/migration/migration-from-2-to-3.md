@@ -16,6 +16,13 @@ In most cases, the phone number library can be used as a direct replacement by u
 
 ## Backward-Incompatible Changes
 
+### Drop MVC Support (`Laminas\I18n\Module` Removal)
+
+The MVC `Module` class has been entirely removed from the package.
+
+> [!CAUTION] No Migration Path for MVC Applications
+> Integration with `laminas-mvc` is completely dropped. There is no official upgrade path for legacy MVC applications because `laminas-mvc` will not be updated to support ServiceManager v4. Consequently, version 3.0+ of this component cannot be installed alongside the core MVC framework stack.
+
 ### Interface Namespace Extraction / Consolidation
 
 To better split component responsibilities and streamline the core architecture, core interfaces have been extracted or moved to separate, dedicated packages. 
