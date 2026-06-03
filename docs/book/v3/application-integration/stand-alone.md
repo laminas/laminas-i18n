@@ -19,14 +19,29 @@ return [
 Create the translator instance and add the translation file.
 
 ```php
-$translator = new Laminas\I18n\Translator\Translator();
-$translator->addTranslationFile(
-    Laminas\I18n\Translator\Loader\PhpArray::class,
-    __DIR__ . '/languages/de_DE.php',
-    'default',
-    'de_DE'
+$container = (new Laminas\ServiceManager\ServiceManager(
+    (new Laminas\I18n\ConfigProvider())->getDependencyConfig()
+));
+
+$container->setService(
+    'config',
+    [
+        'laminas-i18n' => [
+            'translator' => [
+                'translation_files' => [
+                    [
+                        'type'     => Laminas\I18n\Translator\Loader\PhpArray::class,
+                        'filename' => __DIR__ . '/languages/de_DE.php',
+                        'locale'   => 'de_DE',
+                    ],
+                ],
+            ],
+        ],
+    ]
 );
-```
+
+$translator = $container->get(Laminas\Translator\TranslatorInterface::class);
+ ```
 
 ### Translate Messages
 
