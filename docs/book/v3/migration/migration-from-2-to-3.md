@@ -42,6 +42,54 @@ $loader = new IniLoader(new IniFileReader());
 
 ```
 
+### Config Namespace Consolidation
+
+To prevent configuration key pollution in global configurations, all translator top-level options must now be nested under the `laminas-i18n` configuration key.
+
+#### Prior to 3.0.0
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'translator' => [
+        'translation_file_patterns' => [
+            [
+                'type'     => 'phparray',
+                'base_dir' => dirname(__DIR__, 2) . '/data/languages',
+                'pattern'  => '%s.php',
+            ],
+        ],
+    ],
+];
+
+```
+
+#### Since 3.0.0
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'laminas-i18n' => [
+        'translator' => [
+            'translation_file_patterns' => [
+                [
+                    'type'     => 'phparray',
+                    'base_dir' => dirname(__DIR__, 2) . '/data/languages',
+                    'pattern'  => '%s.php',
+                ],
+            ],
+        ],
+    ],
+];
+
+```
+
 ## Behaviour Changes
 
 The deprecated, static constructor `Laminas\I18n\Exception\InvalidArgumentException::withUnknownCountryCode()` has been removed.
