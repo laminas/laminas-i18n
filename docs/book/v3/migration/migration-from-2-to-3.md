@@ -16,6 +16,12 @@ In most cases, the phone number library can be used as a direct replacement by u
 
 ## Backward-Incompatible Changes
 
+### Interface Namespace Extraction / Consolidation
+
+To better split component responsibilities and streamline the core architecture, core interfaces have been extracted or moved to separate, dedicated packages. 
+
+Usages of `Laminas\I18n\Translator\TranslatorInterface` must be replaced with `Laminas\Translator\TranslatorInterface`.
+
 ### `Laminas\I18n\Translator\Loader\Ini` Initialization
 
 Due to the removal of `laminas-config`, the `Ini` translator loader no longer implicitly instantiates an internal configuration reader. It now requires `Laminas\I18n\Translator\Loader\IniFileReader` passed explicitly to its constructor.
