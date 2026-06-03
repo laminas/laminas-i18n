@@ -114,6 +114,28 @@ Additionally, these filters have been reworked to ensure native compatibility wi
 > $ composer require laminas/laminas-i18n-filter
 > ```
 
+### Extraction of I18n Validators to Satellite Package
+
+The component's built-in validation capabilities have been extracted into an external standalone package: [`laminas/laminas-i18n-validator`](https://github.com/laminas/laminas-i18n-validator).
+
+The following validator classes are no longer present directly within `laminas-i18n`:
+- `Laminas\I18n\Validator\Alnum`
+- `Laminas\I18n\Validator\Alpha`
+- `Laminas\I18n\Validator\CountryCode`
+- `Laminas\I18n\Validator\DateTime`
+- `Laminas\I18n\Validator\IsFloat`
+- `Laminas\I18n\Validator\IsInt`
+- `Laminas\I18n\Validator\PhoneNumber` (Note: Historical wrapper configuration only; see above for full structural replacement details)
+- `Laminas\I18n\Validator\PostCode`
+
+Additionally, these extracted validators have been internally refactored to achieve seamless native compatibility with the `laminas-validator` v3 engine and plugin management layers.
+
+> [!IMPORTANT] Migration Action Required
+> If your validation chains or forms rely on any of these i18n validation plugins, you must explicitly require the new satellite package via Composer:
+> ```bash
+> $ composer require laminas/laminas-i18n-validator
+> ```
+
 ### `Laminas\I18n\Translator\Loader\Ini` Initialization
 
 Due to the removal of `laminas-config`, the `Ini` translator loader no longer implicitly instantiates an internal configuration reader. It now requires `Laminas\I18n\Translator\Loader\IniFileReader` passed explicitly to its constructor.
