@@ -38,7 +38,7 @@
         "laminas/laminas-eventmanager": "^3.15.0",
         "laminas/laminas-servicemanager": "^4.5.0",
         "laminas/laminas-stdlib": "^3.0",
-        "laminas/laminas-translator": "^2.0.x-dev",
+        "laminas/laminas-translator": "^2.0",
         "psr/cache": "^2.0 || ^3.0",
         "psr/container": "^1.0 || ^2.0",
         "psr/simple-cache": "^3.0"
