@@ -1,7 +1,7 @@
 # Translate
 
 The `Translate` view helper can be used to **translate content**. It acts as a
-wrapper for the [`Laminas\I18n\Translator\Translator` class](../translation.md).
+wrapper for the [`Laminas\I18n\Translator\Translator` class](../translator/introduction.md).
 
 ## Setup
 

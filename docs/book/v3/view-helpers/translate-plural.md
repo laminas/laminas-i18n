@@ -7,7 +7,7 @@ or more than one car. Other languages like Russian or Polish have more plurals
 with different rules.
 
 The helper acts as a wrapper for the
-[`Laminas\I18n\Translator\Translator` class](../translation.md).
+[`Laminas\I18n\Translator\Translator` class](../translator/introduction.md).
 
 ## Setup
 
