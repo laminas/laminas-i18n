@@ -20,8 +20,10 @@ In most cases, the phone number library can be used as a direct replacement by u
 
 The MVC `Module` class has been entirely removed from the package.
 
-> [!CAUTION] No Migration Path for MVC Applications
-> Integration with `laminas-mvc` is completely dropped. There is no official upgrade path for legacy MVC applications because `laminas-mvc` will not be updated to support ServiceManager v4. Consequently, version 3.0+ of this component cannot be installed alongside the core MVC framework stack.
+CAUTION: **No Migration Path for MVC Applications**
+Integration with `laminas-mvc` is completely dropped.
+There is no official upgrade path for legacy MVC applications because `laminas-mvc` will not be updated to support ServiceManager v4.
+Consequently, version 3.0+ of this component cannot be installed alongside the core MVC framework stack.
 
 ### Interface Namespace Extraction / Consolidation
 
@@ -31,30 +33,32 @@ Usages of `Laminas\I18n\Translator\TranslatorInterface` must be replaced with `L
 
 ### Migration to Container-Driven Caching via Translation Collectors
 
-The `Translator` component no longer manages caching internally, and the legacy `$translator->setCache()` method has been entirely removed. Caching is now decoupled from the translator itself and is handled architectural-level by wrapping translation lookup routines inside specific Translation Collectors.
+The `Translator` component no longer manages caching internally, and the legacy `$translator->setCache()` method has been entirely removed.
+Caching is now decoupled from the translator itself and is handled architectural-level by wrapping translation lookup routines inside specific Translation Collectors.
 
-When the `AggregateCollector` is resolved from the dependency injection container, an internal delegator factory checks the application configuration for a defined PSR-6 or PSR-16 cache service. If a valid cache service name is found and successfully retrieved from the container, the factory automatically wraps the `AggregateCollector` in a `CachingCollector`. This decorator transparently proxies all lookup tasks via `TranslationCollectorInterface::collect()` and caches the results.
+When the `AggregateCollector` is resolved from the dependency injection container, an internal delegator factory checks the application configuration for a defined PSR-6 or PSR-16 cache service.
+If a valid cache service name is found and successfully retrieved from the container, the factory automatically wraps the `AggregateCollector` in a `CachingCollector`.
+This decorator transparently proxies all lookup tasks via `TranslationCollectorInterface::collect()` and caches the results.
 
 #### Configuration Changes
 
-To enable translation caching, the caching service must be registered within the dependency container and point to its service name under the consolidated `laminas-i18n` configuration block. Either a standard PSR-6 (`psr6_cache`) or a PSR-16 (`psr16_cache`) storage implementation can be provided.
+To enable translation caching, the caching service must be registered within the dependency container and point to its service name under the consolidated `laminas-i18n` configuration block.
+Either a standard PSR-6 (`psr6_cache`) or a PSR-16 (`psr16_cache`) storage implementation can be provided.
 
 An optional `cache_key_prefix` can also be supplied to prevent key collisions in shared cache environments.
 
-> [!CAUTION] Type Errors on Direct Injections
-> Manual invocation of caching configurations on the translator object or attempting to pass raw legacy `laminas-cache` adapter instances via configuration arrays will result in a `TypeError`. All caching must be registered as container services.
+CAUTION: **Type Errors on Direct Injections**
+Manual invocation of caching configurations on the translator object or attempting to pass raw legacy `laminas-cache` adapter instances via configuration arrays will result in a `TypeError`.
+All caching must be registered as container services.
 
 #### Prior to 3.0.0
 
 ```php
-use Laminas\Cache\StorageFactory;
-use Laminas\I18n\Translator\Translator;
-
-$cache = StorageFactory::factory([
+$cache = Laminas\Cache\StorageFactory::factory([
     'adapter' => 'filesystem',
 ]);
 
-$translator = new Translator();
+$translator = new Laminas\I18n\Translator\Translator();
 $translator->setCache($cache);
 
 ```
@@ -62,10 +66,6 @@ $translator->setCache($cache);
 #### Since 3.0.0
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 return [
     'dependencies' => [
         'factories' => [
@@ -109,8 +109,8 @@ The following filter classes are no longer present in `laminas-i18n`:
 
 Additionally, these filters have been reworked to ensure native compatibility with `laminas-filter` v3 execution pipelines.
 
-> [!IMPORTANT] Migration Action Required
-> If your application relies on these filters, you must explicitly require the new satellite package:
+IMPORTANT: **Migration Action Required**
+If your application relies on these filters, you must explicitly require the new satellite package:
 
 ```bash
 $ composer require laminas/laminas-i18n-filter
@@ -133,8 +133,8 @@ The following validator classes are no longer present directly within `laminas-i
 
 Additionally, these extracted validators have been internally refactored to achieve seamless native compatibility with the `laminas-validator` v3 engine and plugin management layers.
 
-> [!IMPORTANT] Migration Action Required
-> If your validation chains or forms rely on any of these i18n validation plugins, you must explicitly require the new satellite package via Composer:
+IMPORTANT: **Migration Action Required**
+If your validation chains or forms rely on any of these i18n validation plugins, you must explicitly require the new satellite package via Composer:
 
 ```bash
 $ composer require laminas/laminas-i18n-validator
@@ -142,10 +142,12 @@ $ composer require laminas/laminas-i18n-validator
 
 ### `Laminas\I18n\Translator\Loader\Ini` Initialization
 
-Due to the removal of `laminas-config`, the `Ini` translator loader no longer implicitly instantiates an internal configuration reader. It now requires `Laminas\I18n\Translator\Loader\IniFileReader` passed explicitly to its constructor.
+Due to the removal of `laminas-config`, the `Ini` translator loader no longer implicitly instantiates an internal configuration reader.
+It now requires `Laminas\I18n\Translator\Loader\IniFileReader` passed explicitly to its constructor.
 
-> [!NOTE] Service Container Notice
-> If your application resolves the `Ini` translation loader via a service container (such as `Laminas\ServiceManager`), this instantiation change is automatically handled by the component's internal factories. Manual intervention is only required if you instantiate the loader directly in your code.
+NOTE: **Service Container Notice**
+If your application resolves the `Ini` translation loader via a service container (such as `Laminas\ServiceManager`), this instantiation change is automatically handled by the component's internal factories.
+Manual intervention is only required if you instantiate the loader directly in your code.
 
 #### Prior to 3.0.0
 
@@ -159,10 +161,9 @@ $loader = new IniLoader();
 #### Since 3.0.0
 
 ```php
-use Laminas\I18n\Translator\Loader\Ini as IniLoader;
-use Laminas\I18n\Translator\Loader\IniFileReader;
-
-$loader = new IniLoader(new IniFileReader());
+$loader = new Laminas\I18n\Translator\Loader\Ini(
+    new Laminas\I18n\Translator\Loader\IniFileReader()
+);
 
 ```
 
@@ -173,10 +174,6 @@ To prevent configuration key pollution in global configurations, all translator 
 #### Prior to 3.0.0
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 return [
     'translator' => [
         'translation_file_patterns' => [
@@ -194,10 +191,6 @@ return [
 #### Since 3.0.0
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 return [
     'laminas-i18n' => [
         'translator' => [
