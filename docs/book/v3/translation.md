@@ -1,65 +1,131 @@
 # Translation
 
-laminas-i18n comes with a complete translation suite supporting all major formats
-and including popular features such as plural translations and text domains. The
-Translator subcomponent is mostly dependency free, except for the fallback to a
-default locale, where it relies on the PHP's intl extension.
+`laminas-i18n` comes with a complete translation suite supporting all major
+formats and including popular features such as plural translations and text
+domains.
 
-The translator itself is initialized without any parameters, as any
-configuration to it is optional. A translator without any translations will do
-nothing but return all messages verbatim.
+The component is entirely configuration-driven and designed to work seamlessly
+within a dependency injection environment. Instead of manual instantiation,
+instances should be fetched directly from a PSR-11 compatible service container
+(such as `laminas-servicemanager`).
 
-## Adding translations
+## Adding Translations
 
-Two options exist for adding translations to the translator:
+Translations are integrated into the translator via your application configuration files (e.g., `config/autoload/i18n.global.php`).
 
-- Add every translation file individually; use this for translation formats that
-  store multiple locales in the same file.
-- Add translation files based on a pattern; use this for formats that use one
-  file per locale.
+The translator is driven by an underlying `AggregateCollector` (which may be transparently wrapped in a `CachingCollector` if a cache service is configured). This aggregate collector orchestrates multiple specialized sub-collectors simultaneously:
 
-To add a single file to the translator, use the `addTranslationFile()` method:
+- `FileListCollector`: Inspects explicitly declared individual files.
+- `FilePatternCollector`: Scans directories using global matching layout patterns.
+- `RemoteListCollector`: Coordinates lookups from remote databases or API endpoints (available if custom remote loaders are registered).
 
-```php
-use Laminas\I18n\Translator\Translator;
+When a translation lookup occurs, all active collectors are consulted in parallel, and their translation assets are merged into a unified dataset. You can configure any combination of these strategies concurrently within your `laminas-i18n` configuration block.
 
-$translator = new Translator();
-$translator->addTranslationFile($type, $filename, $textDomain, $locale);
-```
+### Configuration via Explicit Files (FileListCollector)
 
-where the arguments are:
-
-- `$type`: the name of the format loader to use; see the next section for
-  details.
-- `$filename`: the file containing translations.
-- `$textDomain`: a "category" name for translations. If this is omitted, it
-  defaults to "default". Use text domains to segregate translations by context.
-- `$locale`: the language strings are translated from; this argument is only
-  required for formats which contain translations for single locales.
-
-When storing one locale per file, you should specify those files via a pattern.
-This allows you to add new translations to the file system, without touching
-your code. Patterns are added with the `addTranslationFilePattern()` method:
+To map single file targets manually file-by-file, utilize the `translation_files` configuration key. This is ideal for one-off locales, complex directory structures that layout patterns cannot easily scan, or assets isolated to specific text domains.
 
 ```php
-use Laminas\I18n\Translator\Translator;
+<?php
 
-$translator = new Translator();
-$translator->addTranslationFilePattern($type, $baseDir, $pattern, $textDomain);
+declare(strict_types=1);
+
+return [
+    'laminas-i18n' => [
+        'translator' => [
+            'translation_files' => [
+                [
+                    'type'        => 'phparray',
+                    'filename'    => dirname(__DIR__, 2) . '/data/languages/en_US.php',
+                    'locale'      => 'en_US',
+                ],
+            ],
+        ],
+    ],
+];
+
 ```
 
-where the arguments are roughly the same as for `addTranslationFile()`, with a
-few differences:
+- `type`: The identifier of the format loader to use (e.g., `phparray`, `gettext`, `ini`).
+- `filename`: The absolute path to the file containing your translation keys.
+- `locale`: The language locale target this file fulfills. This is required for flat formats hosting single-locale keys.
+- `text_domain`: An optional "category" name to isolate translations by context. If omitted, it defaults to `"default"`.
 
-- `$baseDir` is a directory containing translation files.
-- `$pattern` is an `sprintf()`-formatted string describing a pattern for
-  locating files under `$baseDir`. The `$pattern` should contain a substitution
-  character for the `$locale` &mdash; which is omitted from the
-  `addTranslationFilePattern()` call, but passed whenever a translation is
-  requested. Use either `%s` or `%1$s` in the `$pattern` as a placeholder for
-  the locale. As an example, if your translation files are located in
-  `/var/messages/<LOCALE>/messages.mo`, your pattern would be
-  `/var/messages/%s/messages.mo`.
+### Configuration via File Patterns (FilePatternCollector)
+
+When managing a modular dictionary structure where each locale owns its own distinct file, use the `translation_file_patterns` array. This enables your application to scale cleanly; dropping a new locale file into the target directory automatically makes it available without modifying any code or configuration arrays.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'laminas-i18n' => [
+        'translator' => [
+            'translation_file_patterns' => [
+                [
+                    'type'        => 'phparray',
+                    'base_dir'    => dirname(__DIR__, 2) . '/data/languages',
+                    'pattern'     => '%s.php',
+                ],
+            ],
+        ],
+    ],
+];
+
+```
+
+- `base_dir`: The root directory containing your structured translation file tree.
+- `pattern`: An `sprintf()`-compliant formatting string outlining how to locate files under the `base_dir`. It must include a string substitution placeholder (`%s` or `%1$s`) which represents the active `locale` being requested. For example, if your translation files reside at `/var/messages/{locale}/messages.mo`, your pattern string must be `/var/messages/%s/messages.mo`.
+- `text_domain`: An optional contextual category name. Defaults to `"default"`.
+
+### Configuration via Remote Assets (RemoteListCollector)
+
+If you serve translation values dynamically from a database table, a Redis instance, or an external translation API, you can supply a `remote_translation` array.
+
+> [!NOTE] Custom Implementations Required
+> The `RemoteListCollector` is configured and ready to execute out-of-the-box, but the core component does not bundle default, concrete remote loaders. You must implement `Laminas\I18n\Translator\Loader\RemoteLoaderInterface` and register your custom service key.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'laminas-i18n' => [
+        'translator' => [
+            'remote_translation' => [
+                [
+                    'type'        => 'MyCustomDatabaseLoader',
+                ],
+            ],
+        ],
+    ],
+];
+
+```
+
+- `type`: The identifier or class name of the custom remote format loader registered within the `MessageLoaderPluginManagerInterface`. It must resolve to a non-empty string.
+- `text_domain`: A contextual category name used to isolate or segment these remote translations. If this is omitted, it automatically falls back to your application's configured default text domain (via `I18nDefaults`). It must resolve to a non-empty string.
+
+## Container Retrieval
+
+To obtain the fully initialized and configured `Translator` instance, retrieve
+it directly from your DI container:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Laminas\I18n\Translator\Translator;
+use Psr\Container\ContainerInterface;
+
+/** @var ContainerInterface $container */
+$translator = $container->get(Translator::class);
+
+```
 
 ## Supported formats
 

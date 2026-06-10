@@ -1,12 +1,218 @@
 # Migration from Versions 2.x to 3.0
 
+## Removed Dependencies
+
+### `laminas/laminas-config`
+
+The dependency on `laminas/laminas-config` has been removed. The component now utilizes a built-in INI file reader implementation instead.
+
 ## Removed Classes
 
 ### `Laminas\I18n\Validator\PhoneNumber`
 
 The deprecated phone number validator has been removed in favour of the standalone library [`laminas-i18n-phone-number`](https://github.com/laminas/laminas-i18n-phone-number).
 
-In most cases, the phone number library can be used as a direct replacement by using `Laminas\I18n\PhoneNumber\Validator\PhoneNumber`
+In most cases, the phone number library can be used as a direct replacement by using `Laminas\I18n\PhoneNumber\Validator\PhoneNumber`.
+
+## Backward-Incompatible Changes
+
+### Drop MVC Support (`Laminas\I18n\Module` Removal)
+
+The MVC `Module` class has been entirely removed from the package.
+
+> [!CAUTION] No Migration Path for MVC Applications
+> Integration with `laminas-mvc` is completely dropped. There is no official upgrade path for legacy MVC applications because `laminas-mvc` will not be updated to support ServiceManager v4. Consequently, version 3.0+ of this component cannot be installed alongside the core MVC framework stack.
+
+### Interface Namespace Extraction / Consolidation
+
+To better split component responsibilities and streamline the core architecture, core interfaces have been extracted or moved to separate, dedicated packages.
+
+Usages of `Laminas\I18n\Translator\TranslatorInterface` must be replaced with `Laminas\Translator\TranslatorInterface`.
+
+### Migration to Container-Driven Caching via Translation Collectors
+
+The `Translator` component no longer manages caching internally, and the legacy `$translator->setCache()` method has been entirely removed. Caching is now decoupled from the translator itself and is handled architectural-level by wrapping translation lookup routines inside specific Translation Collectors.
+
+When the `AggregateCollector` is resolved from the dependency injection container, an internal delegator factory checks the application configuration for a defined PSR-6 or PSR-16 cache service. If a valid cache service name is found and successfully retrieved from the container, the factory automatically wraps the `AggregateCollector` in a `CachingCollector`. This decorator transparently proxies all lookup tasks via `TranslationCollectorInterface::collect()` and caches the results.
+
+#### Configuration Changes
+
+To enable translation caching, the caching service must be registered within the dependency container and point to its service name under the consolidated `laminas-i18n` configuration block. Either a standard PSR-6 (`psr6_cache`) or a PSR-16 (`psr16_cache`) storage implementation can be provided.
+
+An optional `cache_key_prefix` can also be supplied to prevent key collisions in shared cache environments.
+
+> [!CAUTION] Type Errors on Direct Injections
+> Manual invocation of caching configurations on the translator object or attempting to pass raw legacy `laminas-cache` adapter instances via configuration arrays will result in a `TypeError`. All caching must be registered as container services.
+
+#### Prior to 3.0.0
+
+```php
+use Laminas\Cache\StorageFactory;
+use Laminas\I18n\Translator\Translator;
+
+$cache = StorageFactory::factory([
+    'adapter' => 'filesystem',
+]);
+
+$translator = new Translator();
+$translator->setCache($cache);
+
+```
+
+#### Since 3.0.0
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'dependencies' => [
+        'factories' => [
+            // Register the PSR-6 or PSR-16 compliant cache service factory
+            'MyApp\CacheService' => MyApp\Cache\CacheFactory::class,
+        ],
+    ],
+    'laminas-i18n' => [
+        'translator' => [
+            // Point to the service container key
+            'psr6_cache'       => 'MyApp\CacheService', 
+            // Alternatively, use a PSR-16 cache provider:
+            // 'psr16_cache'    => 'MyApp\SimpleCacheService',
+            
+            // Optional: Customize the translation cache isolation
+            'cache_key_prefix' => 'app_translation_',
+            
+            'translation_file_patterns' => [
+                [
+                    'type'     => 'phparray',
+                    'base_dir' => dirname(__DIR__, 2) . '/data/languages',
+                    'pattern'  => '%s.php',
+                ],
+            ],
+        ],
+    ],
+];
+
+```
+
+### Extraction of I18n Filters to Satellite Package
+
+The component's built-in filtering capabilities have been extracted into an external standalone package: [`laminas/laminas-i18n-filter`](https://github.com/laminas/laminas-i18n-filter).
+
+The following filter classes are no longer present in `laminas-i18n`:
+
+- `Laminas\I18n\Filter\Alnum`
+- `Laminas\I18n\Filter\Alpha`
+- `Laminas\I18n\Filter\NumberFormat`
+- `Laminas\I18n\Filter\NumberParse`
+
+Additionally, these filters have been reworked to ensure native compatibility with `laminas-filter` v3 execution pipelines.
+
+> [!IMPORTANT] Migration Action Required
+> If your application relies on these filters, you must explicitly require the new satellite package:
+
+```bash
+$ composer require laminas/laminas-i18n-filter
+```
+
+### Extraction of I18n Validators to Satellite Package
+
+The component's built-in validation capabilities have been extracted into an external standalone package: [`laminas/laminas-i18n-validator`](https://github.com/laminas/laminas-i18n-validator).
+
+The following validator classes are no longer present directly within `laminas-i18n`:
+
+- `Laminas\I18n\Validator\Alnum`
+- `Laminas\I18n\Validator\Alpha`
+- `Laminas\I18n\Validator\CountryCode`
+- `Laminas\I18n\Validator\DateTime`
+- `Laminas\I18n\Validator\IsFloat`
+- `Laminas\I18n\Validator\IsInt`
+- `Laminas\I18n\Validator\PhoneNumber` (Note: Historical wrapper configuration only; see above for full structural replacement details)
+- `Laminas\I18n\Validator\PostCode`
+
+Additionally, these extracted validators have been internally refactored to achieve seamless native compatibility with the `laminas-validator` v3 engine and plugin management layers.
+
+> [!IMPORTANT] Migration Action Required
+> If your validation chains or forms rely on any of these i18n validation plugins, you must explicitly require the new satellite package via Composer:
+
+```bash
+$ composer require laminas/laminas-i18n-validator
+```
+
+### `Laminas\I18n\Translator\Loader\Ini` Initialization
+
+Due to the removal of `laminas-config`, the `Ini` translator loader no longer implicitly instantiates an internal configuration reader. It now requires `Laminas\I18n\Translator\Loader\IniFileReader` passed explicitly to its constructor.
+
+> [!NOTE] Service Container Notice
+> If your application resolves the `Ini` translation loader via a service container (such as `Laminas\ServiceManager`), this instantiation change is automatically handled by the component's internal factories. Manual intervention is only required if you instantiate the loader directly in your code.
+
+#### Prior to 3.0.0
+
+```php
+use Laminas\I18n\Translator\Loader\Ini as IniLoader;
+
+$loader = new IniLoader();
+
+```
+
+#### Since 3.0.0
+
+```php
+use Laminas\I18n\Translator\Loader\Ini as IniLoader;
+use Laminas\I18n\Translator\Loader\IniFileReader;
+
+$loader = new IniLoader(new IniFileReader());
+
+```
+
+### Config Namespace Consolidation
+
+To prevent configuration key pollution in global configurations, all translator top-level options must now be nested under the `laminas-i18n` configuration key.
+
+#### Prior to 3.0.0
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'translator' => [
+        'translation_file_patterns' => [
+            [
+                'type'     => 'phparray',
+                'base_dir' => dirname(__DIR__, 2) . '/data/languages',
+                'pattern'  => '%s.php',
+            ],
+        ],
+    ],
+];
+
+```
+
+#### Since 3.0.0
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'laminas-i18n' => [
+        'translator' => [
+            'translation_file_patterns' => [
+                [
+                    'type'     => 'phparray',
+                    'base_dir' => dirname(__DIR__, 2) . '/data/languages',
+                    'pattern'  => '%s.php',
+                ],
+            ],
+        ],
+    ],
+];
+
+```
 
 ## Behaviour Changes
 
