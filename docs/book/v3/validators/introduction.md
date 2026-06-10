@@ -16,13 +16,12 @@ pipeline: [laminas-validator](https://docs.laminas.dev/laminas-validator/). For
 information on standard validation workflows or error message localization,
 please consult the [laminas-validator documentation](https://docs.laminas.dev/laminas-validator/intro/#translating-messages).
 
-## Installation Requirements
-
-Starting with version 3.0, the core `laminas-i18n` package no longer ships with these validators built-in. They have been extracted into an optional satellite package to keep core component dependencies lightweight.
-
-To use internationalization validators in your application, you must explicitly require the standalone package:
-
-```bash
-$ composer require laminas/laminas-i18n-validator
-
-```
+> MISSING: **Installation Requirements**
+> Starting with version 3.0, the core `laminas-i18n` package no longer ships with these validators built-in.
+> They have been extracted into an optional satellite package to keep core component dependencies lightweight.
+>
+> To use internationalization validators in an application, the satellite package must be installed, which will automatically bring in `laminas-validator` as a required dependency:
+>
+> ```bash
+> $ composer require laminas/laminas-i18n-validator
+> ```
