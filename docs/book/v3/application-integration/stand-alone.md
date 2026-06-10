@@ -16,13 +16,12 @@ return [
 ];
 ```
 
-Create the translator instance and add the translation file.
+Configure the dependency-injection container with the help of the [config provider](https://docs.laminas.dev/laminas-config-aggregator/config-providers/) and add the translation file via configuration:
 
 ```php
 $container = (new Laminas\ServiceManager\ServiceManager(
     (new Laminas\I18n\ConfigProvider())->getDependencyConfig()
 ));
-
 $container->setService(
     'config',
     [
@@ -39,9 +38,13 @@ $container->setService(
         ],
     ]
 );
+```
 
+Fetch the translator from the container:
+
+```php
 $translator = $container->get(Laminas\Translator\TranslatorInterface::class);
- ```
+```
 
 ### Translate Messages
 
