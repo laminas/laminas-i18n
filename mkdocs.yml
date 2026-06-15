@@ -37,6 +37,8 @@ nav:
             - TranslatePlural: v3/view-helpers/translate-plural.md
         - 'Application Integration':
             - 'Stand-Alone': v3/application-integration/stand-alone.md
+        - Cookbook:
+            - 'Using laminas-cache for Caching': v3/cookbook/using-laminas-cache.md
         - Migration:
             - 'Migration from Version 2 to 3': v3/migration/migration-from-2-to-3.md
     - v2:
