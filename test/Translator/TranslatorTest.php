@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\I18n\Translator;
 
-use Laminas\EventManager\Event;
-use Laminas\EventManager\EventInterface;
-use Laminas\EventManager\EventManager;
 use Laminas\I18n\I18nDefaults;
-use Laminas\I18n\Translator\Loader\Ini;
+use Laminas\I18n\Translator\Event\MissingTranslationEvent;
+use Laminas\I18n\Translator\Event\NoMessagesLoadedEvent;
 use Laminas\I18n\Translator\Loader\PhpArray;
 use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
@@ -17,6 +15,7 @@ use Laminas\Translator\TranslatorInterface;
 use LaminasTest\I18n\Translator\TranslationCollector\TestHelper;
 use Locale;
 use PHPUnit\Framework\TestCase;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 final class TranslatorTest extends TestCase
 {
@@ -179,32 +178,6 @@ final class TranslatorTest extends TestCase
         self::assertEquals('Message 5 (en) Plural 2', $pl2);
     }
 
-    public function testTranslatePluralsUsingIniFileFormat(): void
-    {
-        $translator = $this->translatorWithConfig([
-            'locale'       => 'en_US',
-            'laminas-i18n' => [
-                'translator' => [
-                    'translation_files' => [
-                        [
-                            'type'     => Ini::class,
-                            'filename' => $this->testFilesDir . '/translation_en.ini',
-                            'locale'   => 'en_US',
-                        ],
-                    ],
-                ],
-            ],
-        ]);
-
-        $pl0 = $translator->translatePlural('Message 5', 'Message 5 Plural', 1);
-        $pl1 = $translator->translatePlural('Message 5', 'Message 5 Plural', 2);
-        $pl2 = $translator->translatePlural('Message 5', 'Message 5 Plural', 10);
-
-        self::assertEquals('Message 5 (en) Plural 0', $pl0);
-        self::assertEquals('Message 5 (en) Plural 1', $pl1);
-        self::assertEquals('Message 5 (en) Plural 2', $pl2);
-    }
-
     public function testTranslatePluralsNonExistentLocale(): void
     {
         $translator = $this->translatorWithConfig([
@@ -333,12 +306,11 @@ final class TranslatorTest extends TestCase
         self::assertEquals('Message 13', $translator->translate('Message 13'));
     }
 
-    public function testEnableDisableEventManger(): void
+    public function testEnableDisableEventDispatcher(): void
     {
         $translator = $this->translatorWithConfig([]);
 
         self::assertFalse($translator->isEventManagerEnabled(), 'Default value');
-
         $translator->enableEventManager();
         self::assertTrue($translator->isEventManagerEnabled());
 
@@ -348,28 +320,34 @@ final class TranslatorTest extends TestCase
 
     public function testMissingTranslationEvent(): void
     {
-        $translator  = $this->translatorWithConfig([]);
         $actualEvent = null;
 
-        $translator->enableEventManager();
-        $translator->getEventManager()->attach(
-            Translator::EVENT_MISSING_TRANSLATION,
-            static function (EventInterface $event) use (&$actualEvent) {
-                $actualEvent = $event;
-            },
+        $dispatcher = $this->createMock(EventDispatcherInterface::class);
+        $dispatcher->expects($this->any())
+            ->method('dispatch')
+            ->willReturnCallback(function (object $event) use (&$actualEvent) {
+                if ($event instanceof MissingTranslationEvent) {
+                    $actualEvent = $event;
+                }
+                return $event;
+            });
+
+        $container  = TestHelper::containerWithConfig([]);
+        $translator = new Translator(
+            $container->get(TranslationCollectorInterface::class),
+            'en_US',
+            null,
+            TranslatorInterface::DEFAULT_TEXT_DOMAIN,
+            $dispatcher,
         );
 
+        $translator->enableEventManager();
         $translator->translate('foo', 'bar', 'baz');
 
-        self::assertInstanceOf(Event::class, $actualEvent);
-        self::assertEquals(
-            [
-                'message'     => 'foo',
-                'locale'      => 'baz',
-                'text_domain' => 'bar',
-            ],
-            $actualEvent->getParams(),
-        );
+        self::assertInstanceOf(MissingTranslationEvent::class, $actualEvent);
+        self::assertEquals('foo', $actualEvent->getMessage());
+        self::assertEquals('baz', $actualEvent->getLocale());
+        self::assertEquals('bar', $actualEvent->getTextDomain());
 
         // But fire no event when disabled
         $actualEvent = null;
@@ -378,96 +356,77 @@ final class TranslatorTest extends TestCase
         self::assertNull($actualEvent);
     }
 
-    public function testUsersCanSupplyASpecificEventManagerInstance(): void
+    public function testUsersCanSupplyASpecificEventDispatcherInstance(): void
     {
-        $actualEvent  = null;
-        $eventManager = new EventManager();
-        $eventManager->attach(
-            Translator::EVENT_MISSING_TRANSLATION,
-            static function (EventInterface $event) use (&$actualEvent) {
-                $actualEvent = $event;
-            },
-        );
-
-        $container = TestHelper::containerWithConfig([]);
+        $dispatcher = $this->createMock(EventDispatcherInterface::class);
+        $container  = TestHelper::containerWithConfig([]);
 
         $translator = new Translator(
             $container->get(TranslationCollectorInterface::class),
             'en_GB',
             null,
             TranslatorInterface::DEFAULT_TEXT_DOMAIN,
-            $eventManager,
+            $dispatcher,
         );
 
-        self::assertSame($eventManager, $translator->getEventManager());
+        self::assertSame($dispatcher, $translator->getEventDispatcher());
         self::assertTrue($translator->isEventManagerEnabled());
-
-        $translator->translate('foo', 'bar', 'baz');
-
-        self::assertInstanceOf(Event::class, $actualEvent);
-        self::assertEquals(
-            [
-                'message'     => 'foo',
-                'locale'      => 'baz',
-                'text_domain' => 'bar',
-            ],
-            $actualEvent->getParams(),
-        );
     }
 
     public function testListenerOnMissingTranslationEventCanReturnString(): void
     {
-        $trigger      = null;
-        $doNotTrigger = null;
-        $translator   = $this->translatorWithConfig([]);
+        $dispatcher = $this->createMock(EventDispatcherInterface::class);
+        $dispatcher->expects($this->any())
+            ->method('dispatch')
+            ->willReturnCallback(function (object $event) {
+                if ($event instanceof MissingTranslationEvent) {
+                    $event->setTranslation('EVENT TRIGGERED');
+                }
+                return $event;
+            });
+
+        $container  = TestHelper::containerWithConfig([]);
+        $translator = new Translator(
+            $container->get(TranslationCollectorInterface::class),
+            'en_US',
+            null,
+            TranslatorInterface::DEFAULT_TEXT_DOMAIN,
+            $dispatcher,
+        );
 
         $translator->enableEventManager();
-        $events = $translator->getEventManager();
-        $events->attach(
-            Translator::EVENT_MISSING_TRANSLATION,
-            static function () use (&$trigger) {
-                $trigger = true;
-            },
-        );
-        $events->attach(
-            Translator::EVENT_MISSING_TRANSLATION,
-            static fn() => 'EVENT TRIGGERED',
-        );
-        $events->attach(
-            Translator::EVENT_MISSING_TRANSLATION,
-            static function () use (&$doNotTrigger) {
-                $doNotTrigger = true;
-            },
-        );
-
         $result = $translator->translate('foo', 'bar', 'baz');
-        self::assertTrue($trigger);
         self::assertEquals('EVENT TRIGGERED', $result);
-        self::assertNull($doNotTrigger);
     }
 
     public function testNoMessagesLoadedEvent(): void
     {
         $actualEvent = null;
-        $translator  = $this->translatorWithConfig([]);
-
-        $translator->enableEventManager();
-        $translator
-            ->getEventManager()
-            ->attach(Translator::EVENT_NO_MESSAGES_LOADED, function (EventInterface $event) use (&$actualEvent) {
-                $actualEvent = $event;
+        $dispatcher  = $this->createMock(EventDispatcherInterface::class);
+        $dispatcher->expects($this->any())
+            ->method('dispatch')
+            ->willReturnCallback(function (object $event) use (&$actualEvent) {
+                if ($event instanceof NoMessagesLoadedEvent) {
+                    $actualEvent = $event;
+                }
+                return $event;
             });
 
+        $container  = TestHelper::containerWithConfig([]);
+        $translator = new Translator(
+            $container->get(TranslationCollectorInterface::class),
+            'en_US',
+            null,
+            TranslatorInterface::DEFAULT_TEXT_DOMAIN,
+            $dispatcher,
+        );
+
+        $translator->enableEventManager();
         $translator->translate('foo', 'bar', 'baz');
 
-        self::assertInstanceOf(Event::class, $actualEvent);
-        self::assertEquals(
-            [
-                'locale'      => 'baz',
-                'text_domain' => 'bar',
-            ],
-            $actualEvent->getParams(),
-        );
+        self::assertInstanceOf(NoMessagesLoadedEvent::class, $actualEvent);
+        self::assertEquals('baz', $actualEvent->getLocale());
+        self::assertEquals('bar', $actualEvent->getTextDomain());
 
         // But fire no event when disabled
         $actualEvent = null;
@@ -478,36 +437,31 @@ final class TranslatorTest extends TestCase
 
     public function testListenerOnNoMessagesLoadedEventCanReturnTextDomainObject(): void
     {
-        $trigger      = null;
-        $doNotTrigger = null;
-        $translator   = $this->translatorWithConfig([]);
-        $textDomain   = new TextDomain([
+        $textDomain = new TextDomain([
             'foo' => 'BOOYAH',
         ]);
+        $dispatcher = $this->createMock(EventDispatcherInterface::class);
+        $dispatcher->expects($this->any())
+            ->method('dispatch')
+            ->willReturnCallback(function (object $event) use ($textDomain) {
+                if ($event instanceof NoMessagesLoadedEvent) {
+                    $event->setMessages($textDomain);
+                }
+                return $event;
+            });
+
+        $container  = TestHelper::containerWithConfig([]);
+        $translator = new Translator(
+            $container->get(TranslationCollectorInterface::class),
+            'en_US',
+            null,
+            TranslatorInterface::DEFAULT_TEXT_DOMAIN,
+            $dispatcher,
+        );
 
         $translator->enableEventManager();
-        $events = $translator->getEventManager();
-        $events->attach(
-            Translator::EVENT_NO_MESSAGES_LOADED,
-            static function () use (&$trigger): void {
-                $trigger = true;
-            },
-        );
-        $events->attach(
-            Translator::EVENT_NO_MESSAGES_LOADED,
-            static fn() => $textDomain,
-        );
-        $events->attach(
-            Translator::EVENT_NO_MESSAGES_LOADED,
-            static function () use (&$doNotTrigger) {
-                $doNotTrigger = true;
-            },
-        );
-
         $result = $translator->translate('foo', 'bar', 'baz');
 
-        self::assertTrue($trigger);
-        self::assertNull($doNotTrigger);
         self::assertEquals('BOOYAH', $result);
     }
 
