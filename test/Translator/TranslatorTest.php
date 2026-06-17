@@ -576,4 +576,47 @@ final class TranslatorTest extends TestCase
         $translator = new Translator($collector, 'en_GB');
         self::assertSame('bar', $translator->translate('foo'));
     }
+
+    public function testMissingTranslationEventShortCircuitsWhenTranslationIsProvided(): void
+    {
+        $listenerExecution = [
+            'first'  => false,
+            'second' => false,
+        ];
+
+        $dispatcher = $this->createMock(EventDispatcherInterface::class);
+        $dispatcher->method('dispatch')
+            ->willReturnCallback(function (object $event) use (&$listenerExecution) {
+                if ($event instanceof MissingTranslationEvent) {
+                    $listenerExecution['first'] = true;
+                    $event->setTranslation('Found by first listener!');
+
+                    if ($event->isPropagationStopped()) {
+                        return $event;
+                    }
+
+                    $listenerExecution['second'] = true;
+                    $event->setTranslation('Overwritten by second listener!');
+                }
+
+                return $event;
+            });
+
+        $collector = $this->createMock(TranslationCollectorInterface::class);
+        $collector->method('collect')->willReturn(new TextDomain());
+
+        $translator = new Translator(
+            $collector,
+            'en_US',
+            null,
+            TranslatorInterface::DEFAULT_TEXT_DOMAIN,
+            $dispatcher
+        );
+
+        $result = $translator->translate('some-missing-key', 'default', 'en_US');
+
+        self::assertSame('Found by first listener!', $result);
+        self::assertTrue($listenerExecution['first'], 'First listener should have executed.');
+        self::assertFalse($listenerExecution['second'], 'Second listener should have been skipped entirely.');
+    }
 }

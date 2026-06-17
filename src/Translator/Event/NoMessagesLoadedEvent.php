@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Laminas\I18n\Translator\Event;
 
 use Laminas\I18n\Translator\TextDomain;
+use Psr\EventDispatcher\StoppableEventInterface;
 
 /**
  * Event fired when no messages were loaded for a locale/text-domain combination.
  */
-final class NoMessagesLoadedEvent
+final class NoMessagesLoadedEvent implements StoppableEventInterface
 {
     private ?TextDomain $messages = null;
 
@@ -47,5 +48,10 @@ final class NoMessagesLoadedEvent
     public function getMessages(): ?TextDomain
     {
         return $this->messages;
+    }
+
+    public function isPropagationStopped(): bool
+    {
+        return $this->messages !== null;
     }
 }

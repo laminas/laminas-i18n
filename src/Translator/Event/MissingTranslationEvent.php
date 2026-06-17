@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Laminas\I18n\Translator\Event;
 
+use Psr\EventDispatcher\StoppableEventInterface;
+
 /**
  * Event fired when the translation for a message is missing.
  */
-final class MissingTranslationEvent
+final class MissingTranslationEvent implements StoppableEventInterface
 {
     private ?string $translation = null;
 
@@ -55,5 +57,10 @@ final class MissingTranslationEvent
     public function getTranslation(): ?string
     {
         return $this->translation;
+    }
+
+    public function isPropagationStopped(): bool
+    {
+        return $this->translation !== null;
     }
 }
