@@ -310,7 +310,7 @@ final class TranslatorTest extends TestCase
     {
         $actualEvent = null;
         $dispatcher  = $this->createMock(EventDispatcherInterface::class);
-        $dispatcher->expects($this->any())
+        $dispatcher->expects($this->exactly(2))
             ->method('dispatch')
             ->willReturnCallback(function (object $event) use (&$actualEvent) {
                 if ($event instanceof MissingTranslationEvent) {
@@ -371,7 +371,7 @@ final class TranslatorTest extends TestCase
     public function testListenerOnMissingTranslationEventCanReturnString(): void
     {
         $dispatcher = $this->createMock(EventDispatcherInterface::class);
-        $dispatcher->expects($this->any())
+        $dispatcher->expects($this->exactly(2))
             ->method('dispatch')
             ->willReturnCallback(function (object $event) {
                 if ($event instanceof MissingTranslationEvent) {
@@ -397,7 +397,7 @@ final class TranslatorTest extends TestCase
     {
         $actualEvent = null;
         $dispatcher  = $this->createMock(EventDispatcherInterface::class);
-        $dispatcher->expects($this->any())
+        $dispatcher->expects($this->exactly(2))
             ->method('dispatch')
             ->willReturnCallback(function (object $event) use (&$actualEvent) {
                 if ($event instanceof NoMessagesLoadedEvent) {
@@ -443,7 +443,7 @@ final class TranslatorTest extends TestCase
             'foo' => 'BOOYAH',
         ]);
         $dispatcher = $this->createMock(EventDispatcherInterface::class);
-        $dispatcher->expects($this->any())
+        $dispatcher->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(function (object $event) use ($textDomain) {
                 if ($event instanceof NoMessagesLoadedEvent) {
