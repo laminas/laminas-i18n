@@ -175,15 +175,19 @@ final class Translator implements TranslatorInterface
             return $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message];
         }
 
-        if ($this->events !== null) {
-            $event = $this->events->dispatch(new MissingTranslationEvent($message, $locale, $textDomain));
-            if ($event instanceof MissingTranslationEvent) {
-                $last = $event->getTranslation();
+        if ($this->events === null) {
+            return null;
+        }
 
-                if (is_string($last) && $last !== '') {
-                    return $last;
-                }
-            }
+        $event = $this->events->dispatch(new MissingTranslationEvent($message, $locale, $textDomain));
+        if (! $event instanceof MissingTranslationEvent) {
+            return null;
+        }
+
+        $translation = $event->getTranslation();
+
+        if (is_string($translation) && $translation !== '') {
+            return $translation;
         }
 
         return null;
@@ -203,21 +207,28 @@ final class Translator implements TranslatorInterface
 
         $messages = $this->collector->collect($textDomain, $locale);
 
-        $messagesLoaded = $messages->count();
+        $this->messages[$textDomain][$locale] = $messages;
 
-        if ($messagesLoaded === 0) {
-            if ($this->events !== null) {
-                $event = $this->events->dispatch(new NoMessagesLoadedEvent($locale, $textDomain));
-
-                if ($event instanceof NoMessagesLoadedEvent) {
-                    $last = $event->getMessages();
-                    if ($last instanceof TextDomain) {
-                        $messages = $last;
-                    }
-                }
-            }
+        if ($messages->count() > 0) {
+            return;
         }
 
+        if ($this->events === null) {
+            return;
+        }
+
+        $event = $this->events->dispatch(new NoMessagesLoadedEvent($locale, $textDomain));
+
+        if (! $event instanceof NoMessagesLoadedEvent) {
+            return;
+        }
+
+        $messages = $event->getMessages();
+        if (! $messages instanceof TextDomain) {
+            return;
+        }
+
+        // Override with fallback messages if the event successfully provided them
         $this->messages[$textDomain][$locale] = $messages;
     }
 
