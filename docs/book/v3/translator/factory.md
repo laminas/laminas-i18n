@@ -144,10 +144,17 @@ $translator = Laminas\I18n\Translator\Translator::factory([
 ]);
 ```
 
-## Enable EventManager
+## Event Dispatcher Configuration
+
+Events are automatically handled based on whether a PSR-14 `Psr\EventDispatcher\EventDispatcherInterface` implementation is passed to the `Translator` constructor.
 
 ```php
-$translator = Laminas\I18n\Translator\Translator::factory([
-    'event_manager_enabled' => true,
-]);
+return [
+    'dependencies' => [
+        'factories' => [
+            // Register PSR-14 compliant event dispatcher implementation
+            \Psr\EventDispatcher\EventDispatcherInterface::class => \MyEventDispatcherFactory::class,
+        ],
+    ],
+];
 ```

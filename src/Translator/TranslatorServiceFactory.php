@@ -12,7 +12,6 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 
 use function assert;
 use function is_array;
-use function is_bool;
 use function is_iterable;
 use function is_string;
 use function iterator_to_array;
@@ -59,11 +58,7 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
         $fallbackLocale = $translator['fallback_locale'] ?? null;
         $fallbackLocale = is_string($fallbackLocale) && $fallbackLocale !== '' ? $fallbackLocale : null;
 
-        /** @psalm-var mixed $enableEvents */
-        $enableEvents = $translator['event_manager_enabled'] ?? false;
-        $enableEvents = is_bool($enableEvents) && $enableEvents;
-
-        $instance = new Translator(
+        return new Translator(
             $container->get(TranslationCollectorInterface::class),
             $locale,
             $fallbackLocale,
@@ -72,11 +67,5 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
                 ? $container->get(EventDispatcherInterface::class)
                 : null,
         );
-
-        if ($enableEvents) {
-            $instance->enableEventManager();
-        }
-
-        return $instance;
     }
 }

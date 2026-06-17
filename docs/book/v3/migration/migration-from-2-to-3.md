@@ -214,6 +214,57 @@ return [
 
 ```
 
+### Implicit Event Dispatcher Activation
+
+The internal property `eventsEnabled` along with the manual toggle methods `enableEventManager()`, `disableEventManager()`, and `isEventManagerEnabled()` have been completely removed from the `Translator` class.
+
+The `Translator` now implicitly manages events based entirely on the presence of a PSR-14 event dispatcher. If an `EventDispatcherInterface` instance is supplied to the constructor, events (such as `MissingTranslationEvent` or `NoMessagesLoadedEvent`) will automatically be active. If no dispatcher is supplied (or it is `null`), event management remains inactive without causing overhead or requiring code initialization.
+
+In alignment with this architectural change, the `'event_manager_enabled'` configuration option flag has been removed from the factory configuration payload.
+
+#### Prior to 3.0.0
+
+```php
+use Laminas\I18n\Translator\Translator;
+
+// 1. Array configuration toggle
+$translator = Translator::factory([
+    'event_manager_enabled' => true,
+]);
+
+// 2. Direct method calls
+$translator->enableEventManager();
+$translator->disableEventManager();
+
+```
+
+#### Since 3.0.0
+
+```php
+use Laminas\I18n\Translator\Translator;
+
+// Events are implicitly ACTIVE because a dispatcher instance is provided to the constructor
+$translatorWithEvents = new Translator(
+    $collector,
+    'en_US',
+    null,
+    'default',
+    $eventDispatcher
+);
+
+// Events are implicitly INACTIVE because no dispatcher is present
+$translatorWithoutEvents = new Translator(
+    $collector,
+    'en_US'
+);
+
+```
+
+IMPORTANT: **Migration Action Required**
+
+- Remove the `'event_manager_enabled'` option key from your configuration files and factory option arrays.
+- Remove any direct calls to `enableEventManager()`, `disableEventManager()`, or `isEventManagerEnabled()`.
+
 ## Behaviour Changes
 
 The deprecated, static constructor `Laminas\I18n\Exception\InvalidArgumentException::withUnknownCountryCode()` has been removed.

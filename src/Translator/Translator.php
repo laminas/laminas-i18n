@@ -23,8 +23,6 @@ final class Translator implements TranslatorInterface
      */
     private array $messages = [];
 
-    private bool $eventsEnabled = false;
-
     /**
      * @param non-empty-string $defaultLocale
      * @param non-empty-string|null $fallbackLocale
@@ -37,8 +35,6 @@ final class Translator implements TranslatorInterface
         private readonly string $defaultTextDomain = TranslatorInterface::DEFAULT_TEXT_DOMAIN,
         private readonly EventDispatcherInterface|null $events = null,
     ) {
-        // When an EventDispatcher is supplied to the constructor, enable events. The user clearly wants them!
-        $this->eventsEnabled = $this->events !== null;
     }
 
     /**
@@ -179,7 +175,7 @@ final class Translator implements TranslatorInterface
             return $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message];
         }
 
-        if ($this->isEventManagerEnabled() && $this->events !== null) {
+        if ($this->events !== null) {
             $event = $this->events->dispatch(new MissingTranslationEvent($message, $locale, $textDomain));
             if ($event instanceof MissingTranslationEvent) {
                 $last = $event->getTranslation();
@@ -210,7 +206,7 @@ final class Translator implements TranslatorInterface
         $messagesLoaded = $messages->count();
 
         if ($messagesLoaded === 0) {
-            if ($this->isEventManagerEnabled() && $this->events !== null) {
+            if ($this->events !== null) {
                 $event = $this->events->dispatch(new NoMessagesLoadedEvent($locale, $textDomain));
 
                 if ($event instanceof NoMessagesLoadedEvent) {
@@ -248,35 +244,5 @@ final class Translator implements TranslatorInterface
     public function getEventDispatcher(): EventDispatcherInterface|null
     {
         return $this->events;
-    }
-
-    /**
-     * Check whether the event manager is enabled.
-     */
-    public function isEventManagerEnabled(): bool
-    {
-        return $this->eventsEnabled;
-    }
-
-    /**
-     * Enable the event manager.
-     *
-     * @return $this
-     */
-    public function enableEventManager(): self
-    {
-        $this->eventsEnabled = true;
-        return $this;
-    }
-
-    /**
-     * Disable the event manager.
-     *
-     * @return $this
-     */
-    public function disableEventManager(): self
-    {
-        $this->eventsEnabled = false;
-        return $this;
     }
 }
