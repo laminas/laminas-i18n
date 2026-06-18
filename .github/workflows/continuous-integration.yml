@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v7.0.0
       - uses: shivammathur/setup-php@2.37.1
 
         with:
@@ -33,7 +33,7 @@ jobs:
     name: Check for Unused Dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v7.0.0
       - uses: shivammathur/setup-php@2.37.1
         with:
           php-version: ${{ env.default_php }}
@@ -46,7 +46,7 @@ jobs:
     name: "Psalm Security Report"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v7.0.0
       - uses: shivammathur/setup-php@2.37.1
         with:
           php-version: ${{ env.default_php }}
@@ -63,7 +63,7 @@ jobs:
     name: Rector on Default PHP
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v7.0.0
       - uses: shivammathur/setup-php@2.37.1
         with:
           php-version: ${{ env.default_php }}
