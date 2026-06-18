@@ -49,7 +49,6 @@ final class ConfigProvider
      *             remote_translation?: list<array{type: non-empty-string, text_domain?: non-empty-string}>,
      *             aggregate_collector?: list<class-string<TranslationCollectorInterface>>,
      *             cache?: string|null,
-     *             event_manager_enabled?: bool,
      *             fallback_locale?: string|null,
      *             psr6_cache?: string,
      *             cache_key_prefix?: non-empty-string|null,
@@ -172,11 +171,6 @@ final class ConfigProvider
                      * You can override the defaults by configuring a list of collector class names
                      */
                     //'aggregate_collector' => [CollectorOne::class, CollectorTwo::class],
-
-                    /**
-                     * Whether to enable the event manager in the translator
-                     */
-                    'event_manager_enabled' => false,
 
                     /**
                      * Optionally provide a fallback locale for when the translators default locale has no translations

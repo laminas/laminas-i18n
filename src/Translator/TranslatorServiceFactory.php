@@ -8,10 +8,10 @@ use Laminas\I18n\I18nDefaults;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 use function assert;
 use function is_array;
-use function is_bool;
 use function is_iterable;
 use function is_string;
 use function iterator_to_array;
@@ -58,21 +58,14 @@ final readonly class TranslatorServiceFactory implements FactoryInterface
         $fallbackLocale = $translator['fallback_locale'] ?? null;
         $fallbackLocale = is_string($fallbackLocale) && $fallbackLocale !== '' ? $fallbackLocale : null;
 
-        /** @psalm-var mixed $enableEvents */
-        $enableEvents = $translator['event_manager_enabled'] ?? false;
-        $enableEvents = is_bool($enableEvents) && $enableEvents;
-
-        $instance = new Translator(
+        return new Translator(
             $container->get(TranslationCollectorInterface::class),
             $locale,
             $fallbackLocale,
             $defaults->defaultTextDomain,
+            $container->has(EventDispatcherInterface::class)
+                ? $container->get(EventDispatcherInterface::class)
+                : null,
         );
-
-        if ($enableEvents) {
-            $instance->enableEventManager();
-        }
-
-        return $instance;
     }
 }

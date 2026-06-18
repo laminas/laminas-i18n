@@ -4,38 +4,24 @@ declare(strict_types=1);
 
 namespace Laminas\I18n\Translator;
 
-use Laminas\EventManager\Event;
-use Laminas\EventManager\EventManager;
-use Laminas\EventManager\EventManagerInterface;
 use Laminas\I18n\Exception\ExceptionInterface;
+use Laminas\I18n\Translator\Event\MissingTranslationEvent;
+use Laminas\I18n\Translator\Event\NoMessagesLoadedEvent;
 use Laminas\I18n\Translator\TranslationCollector\TranslationCollectorInterface;
 use Laminas\Translator\TranslatorInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 use function is_string;
 
 final class Translator implements TranslatorInterface
 {
     public const ANY_LOCALE = '*';
-
-    /**
-     * Event fired when the translation for a message is missing.
-     */
-    public const EVENT_MISSING_TRANSLATION = 'missingTranslation';
-
-    /**
-     * Event fired when no messages were loaded for a locale/text-domain combination.
-     */
-    public const EVENT_NO_MESSAGES_LOADED = 'noMessagesLoaded';
-
     /**
      * Messages loaded by the translator.
      *
      * @var array<non-empty-string, array<non-empty-string, TextDomain|null>>
      */
     private array $messages = [];
-
-    private readonly EventManagerInterface $events;
-    private bool $eventsEnabled = false;
 
     /**
      * @param non-empty-string $defaultLocale
@@ -47,20 +33,8 @@ final class Translator implements TranslatorInterface
         private string $defaultLocale,
         private readonly string|null $fallbackLocale = null,
         private readonly string $defaultTextDomain = TranslatorInterface::DEFAULT_TEXT_DOMAIN,
-        EventManagerInterface|null $eventManager = null,
+        private readonly EventDispatcherInterface|null $events = null,
     ) {
-        // When an EventManager is supplied to the constructor, enable events. The user clearly wants them!
-        if ($eventManager !== null) {
-            $this->eventsEnabled = true;
-        }
-
-        $eventManager ??= new EventManager();
-        $eventManager->setIdentifiers([
-            self::class,
-            'translator',
-        ]);
-
-        $this->events = $eventManager;
     }
 
     /**
@@ -201,22 +175,19 @@ final class Translator implements TranslatorInterface
             return $this->messages[$textDomain][$locale][$textDomain . "\x04" . $message];
         }
 
-        if ($this->isEventManagerEnabled()) {
-            $until = static fn(mixed $r): bool => is_string($r);
+        if ($this->events === null) {
+            return null;
+        }
 
-            $event = new Event(self::EVENT_MISSING_TRANSLATION, $this, [
-                'message'     => $message,
-                'locale'      => $locale,
-                'text_domain' => $textDomain,
-            ]);
+        $event = $this->events->dispatch(new MissingTranslationEvent($message, $locale, $textDomain));
+        if (! $event instanceof MissingTranslationEvent) {
+            return null;
+        }
 
-            $results = $this->getEventManager()->triggerEventUntil($until, $event);
+        $translation = $event->getTranslation();
 
-            /** @psalm-var mixed $last */
-            $last = $results->last();
-            if (is_string($last)) {
-                return $last;
-            }
+        if (is_string($translation) && $translation !== '') {
+            return $translation;
         }
 
         return null;
@@ -236,27 +207,28 @@ final class Translator implements TranslatorInterface
 
         $messages = $this->collector->collect($textDomain, $locale);
 
-        $messagesLoaded = $messages->count();
+        $this->messages[$textDomain][$locale] = $messages;
 
-        if ($messagesLoaded === 0) {
-            if ($this->isEventManagerEnabled()) {
-                $until = static fn(mixed $r): bool => $r instanceof TextDomain;
-
-                $event = new Event(self::EVENT_NO_MESSAGES_LOADED, $this, [
-                    'locale'      => $locale,
-                    'text_domain' => $textDomain,
-                ]);
-
-                $results = $this->getEventManager()->triggerEventUntil($until, $event);
-
-                /** @psalm-var mixed $last */
-                $last = $results->last();
-                if ($last instanceof TextDomain) {
-                    $messages = $last;
-                }
-            }
+        if ($messages->count() > 0) {
+            return;
         }
 
+        if ($this->events === null) {
+            return;
+        }
+
+        $event = $this->events->dispatch(new NoMessagesLoadedEvent($locale, $textDomain));
+
+        if (! $event instanceof NoMessagesLoadedEvent) {
+            return;
+        }
+
+        $messages = $event->getMessages();
+        if (! $messages instanceof TextDomain) {
+            return;
+        }
+
+        // Override with fallback messages if the event successfully provided them
         $this->messages[$textDomain][$locale] = $messages;
     }
 
@@ -280,38 +252,8 @@ final class Translator implements TranslatorInterface
         return $this->messages[$textDomain][$locale];
     }
 
-    public function getEventManager(): EventManagerInterface
+    public function getEventDispatcher(): EventDispatcherInterface|null
     {
         return $this->events;
-    }
-
-    /**
-     * Check whether the event manager is enabled.
-     */
-    public function isEventManagerEnabled(): bool
-    {
-        return $this->eventsEnabled;
-    }
-
-    /**
-     * Enable the event manager.
-     *
-     * @return $this
-     */
-    public function enableEventManager(): self
-    {
-        $this->eventsEnabled = true;
-        return $this;
-    }
-
-    /**
-     * Disable the event manager.
-     *
-     * @return $this
-     */
-    public function disableEventManager(): self
-    {
-        $this->eventsEnabled = false;
-        return $this;
     }
 }
