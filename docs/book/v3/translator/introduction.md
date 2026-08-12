@@ -107,7 +107,7 @@ it directly from your DI container:
 $translator = $container->get(Laminas\I18n\Translator\Translator::class);
 ```
 
-## Supported formats
+## Supported Formats
 
 The translator supports the following major translation formats:
 
@@ -120,7 +120,9 @@ Additionally, you can use custom formats by implementing one or more of
 `Laminas\I18n\Translator\Loader\RemoteLoaderInterface`, and registering your loader
 with the `Translator` instance's composed plugin manager.
 
-## Setting a locale
+Examples can be found in the section [Format Examples](format-examples.md).
+
+## Setting a Locale
 
 By default, the translator will get the locale to use from ext/intl's `Locale`
 class. If you want to set an alternative locale explicitly, you can do so by
