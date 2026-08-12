@@ -117,24 +117,43 @@ $validator = $validatorManager->get(Laminas\I18n\Validator\Alnum::class);
 
 ## View Helpers
 
+> MISSING: **Installation Requirements**
+> Starting with version 3.0, the core `laminas-i18n` package no longer ships with these view helpers out of the box.
+> They have been extracted into an optional satellite package.
+>
+> To use internationalization view helpers in an application, the satellite package must be installed, which will automatically bring in `laminas-view` as a required dependency:
+>
+> ```bash
+> $ composer require laminas/laminas-i18n-view
+> ```
+
 ### Setup laminas-view
 
-Create the renderer:
+Configure the dependency-injection container with the help of the config provider of laminas-view:
 
 ```php
-$renderer = new Laminas\View\Renderer\PhpRenderer();
+$container = new Laminas\ServiceManager\ServiceManager(
+    (new Laminas\View\ConfigProvider())->getDependencies()
+);
 ```
 
-Register all standard view-helpers of laminas-i18n in the helper-plugin-manager:
+Register all standard view-helpers of laminas-i18n-view in the helper-plugin-manager:
 
 ```php
-$renderer->getHelperPluginManager()->configure(
-    (new Laminas\I18n\ConfigProvider())->getViewHelperConfig()
+$viewHelperManager = $container->get(Laminas\View\HelperPluginManager::class);
+$viewHelperManager->configure(
+    (new Laminas\I18n\View\ConfigProvider())['view_helpers']
 );
+```
+
+Fetch the renderer:
+
+```php
+$renderer = $container->get(Laminas\View\Renderer\PhpRenderer::class);
 ```
 
 ### Using Helper
 
 ```php
-echo $renderer->currencyFormat(1234.56, 'USD', null, 'en_US'); // "$1,234.56"
+echo $renderer->amount(123.45, 'EUR'); // "€123.45"
 ```
