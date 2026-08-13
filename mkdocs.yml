@@ -9,6 +9,7 @@ nav:
             - Introduction: v3/translator/introduction.md
             - Caching: v3/translator/caching.md
             - Events: v3/translator/events.md
+            - Configuration: v3/translator/configuration.md
             - 'Format Examples': v3/translator/format-examples.md
         - Filters:
             - Introduction: v3/filters/introduction.md
