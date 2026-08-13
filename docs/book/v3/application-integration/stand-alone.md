@@ -129,12 +129,13 @@ $validator = $validatorManager->get(Laminas\I18n\Validator\Alnum::class);
 
 ### Setup laminas-view
 
-Configure the dependency-injection container with the help of the config provider of laminas-view:
+Configure the dependency-injection container with the help via the config providers of laminas-view, laminas-i18n, and laminas-i18n-view:
 
 ```php
-$container = new Laminas\ServiceManager\ServiceManager(
-    (new Laminas\View\ConfigProvider())->getDependencies()
-);
+$container = new Laminas\ServiceManager\ServiceManager();
+$container->configure((new Laminas\View\ConfigProvider())->getDependencies());
+$container->configure((new Laminas\I18n\ConfigProvider())->getDependencyConfig());
+$container->configure((new Laminas\I18n\View\ConfigProvider())()['dependencies']);
 ```
 
 Register all standard view-helpers of laminas-i18n-view in the helper-plugin-manager:
@@ -142,18 +143,14 @@ Register all standard view-helpers of laminas-i18n-view in the helper-plugin-man
 ```php
 $viewHelperManager = $container->get(Laminas\View\HelperPluginManager::class);
 $viewHelperManager->configure(
-    (new Laminas\I18n\View\ConfigProvider())['view_helpers']
+    (new Laminas\I18n\View\ConfigProvider())()['view_helpers']
 );
-```
-
-Fetch the renderer:
-
-```php
-$renderer = $container->get(Laminas\View\Renderer\PhpRenderer::class);
 ```
 
 ### Using Helper
 
 ```php
-echo $renderer->amount(123.45, 'EUR'); // "€123.45"
+$helper = $viewHelperManager->get(Laminas\I18n\View\Helper\CurrencyFormat::class);
+
+$helper->amount(123.45, 'EUR'); // "€ 123.45"
 ```
