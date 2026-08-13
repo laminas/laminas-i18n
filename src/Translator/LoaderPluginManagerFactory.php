@@ -1,90 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Translator;
 
-use Laminas\ServiceManager\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
+use function array_replace_recursive;
+use function assert;
 use function is_array;
+use function is_iterable;
+use function iterator_to_array;
 
 /**
+ * @internal
+ *
+ * @psalm-internal Laminas\I18n
+ * @psalm-internal LaminasTest\I18n
  * @psalm-import-type ServiceManagerConfiguration from ServiceManager
- * @final
  */
-class LoaderPluginManagerFactory implements FactoryInterface
+final readonly class LoaderPluginManagerFactory implements FactoryInterface
 {
-    /**
-     * laminas-servicemanager v2 options passed to factory.
-     *
-     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
-     *             This property will be removed in version 3.0
-     *
-     * @var array
-     */
-    protected $creationOptions = [];
+    public function __invoke(
+        ContainerInterface $container,
+        string $requestedName,
+        ?array $options = null,
+    ): LoaderPluginManager {
+        $options ??= [];
+        /** @psalm-var mixed $config */
+        $config = $container->has('config') ? $container->get('config') : [];
+        $config = ! is_iterable($config) ? [] : $config;
+        $config = iterator_to_array($config);
 
-    /**
-     * Create and return a LoaderPluginManager.
-     *
-     * @param string $name
-     * @param array<string, mixed>|null $options
-     * @psalm-param ServiceManagerConfiguration|null $options
-     * @return LoaderPluginManager
-     */
-    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
-    {
-        $options     ??= [];
-        $pluginManager = new LoaderPluginManager($container, $options);
+        $plugins = $config['translator_plugins'] ?? [];
+        assert(is_array($plugins));
 
-        // If this is in a laminas-mvc application, the ServiceListener will inject
-        // merged configuration during bootstrap.
-        if ($container->has('ServiceListener')) {
-            return $pluginManager;
-        }
+        // Merge arguments to build() over plugins in `config`
+        $plugins = array_replace_recursive($plugins, $options);
+        /** @psalm-var ServiceManagerConfiguration $plugins */
 
-        // If we do not have a config service, nothing more to do
-        if (! $container->has('config')) {
-            return $pluginManager;
-        }
-
-        $config = $container->get('config');
-
-        // If we do not have translator_plugins configuration, nothing more to do
-        if (! isset($config['translator_plugins']) || ! is_array($config['translator_plugins'])) {
-            return $pluginManager;
-        }
-
-        // Wire service configuration for translator_plugins
-        $pluginManager->configure($config['translator_plugins']);
-
-        return $pluginManager;
-    }
-
-    /**
-     * laminas-servicemanager v2 factory to return LoaderPluginManager
-     *
-     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
-     *             This method will be removed in version 3.0
-     *
-     * @return LoaderPluginManager
-     */
-    public function createService(ServiceLocatorInterface $container)
-    {
-        return $this($container, 'TranslatorPluginManager', $this->creationOptions);
-    }
-
-    /**
-     * v2 support for instance creation options.
-     *
-     * @deprecated Since 2.16.0 - This component is no longer compatible with Service Manager v2.
-     *             This method will be removed in version 3.0
-     *
-     * @return void
-     */
-    public function setCreationOptions(array $options)
-    {
-        $this->creationOptions = $options;
+        return new LoaderPluginManager($container, $plugins);
     }
 }

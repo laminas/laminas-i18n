@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Translator\Loader;
 
 use Laminas\I18n\Translator\TextDomain;
@@ -12,9 +14,8 @@ interface RemoteLoaderInterface
     /**
      * Load translations from a remote source.
      *
-     * @param  string $locale
-     * @param  string $textDomain
-     * @return TextDomain|null
+     * @param non-empty-string $locale
+     * @param non-empty-string $textDomain
      */
-    public function load($locale, $textDomain);
+    public function load(string $locale, string $textDomain): TextDomain|null;
 }

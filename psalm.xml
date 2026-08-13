@@ -8,6 +8,7 @@
     findUnusedPsalmSuppress="true"
     findUnusedCode="true"
     findUnusedBaselineEntry="true"
+    ensureOverrideAttribute="false"
 >
     <projectFiles>
         <directory name="src"/>
@@ -23,13 +24,6 @@
                 <directory name="test" />
             </errorLevel>
         </DeprecatedMethod>
-
-        <MissingOverrideAttribute>
-            <errorLevel type="suppress">
-                <directory name="src" />
-                <directory name="test" />
-            </errorLevel>
-        </MissingOverrideAttribute>
     </issueHandlers>
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>

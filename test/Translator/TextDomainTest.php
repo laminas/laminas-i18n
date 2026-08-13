@@ -7,7 +7,13 @@ namespace LaminasTest\I18n\Translator;
 use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\Translator\Plural\Rule as PluralRule;
 use Laminas\I18n\Translator\TextDomain;
-use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\TestCase;
+
+use function restore_error_handler;
+use function serialize;
+use function set_error_handler;
+use function sprintf;
+use function unserialize;
 
 final class TextDomainTest extends TestCase
 {
@@ -93,5 +99,58 @@ final class TextDomainTest extends TestCase
         $domainA->merge($domainB);
         self::assertEquals(3, $domainA->getPluralRule()->getNumPlurals());
         self::assertFalse($domainB->hasPluralRule());
+    }
+
+    public function testSerialisationRoundTripYieldsExpectedInstance(): void
+    {
+        $set   = new TextDomain(['foo' => 'bar']);
+        $data  = serialize($set);
+        $clone = unserialize($data);
+
+        self::assertInstanceOf(TextDomain::class, $clone);
+        self::assertSame(['foo' => 'bar'], $clone->getArrayCopy());
+    }
+
+    public function testSerialisationWithPluralRule(): void
+    {
+        // A rule that is not the same as the default rule
+        $rule = PluralRule::fromString('nplurals=2; plural=n>1');
+        self::assertSame(0, $rule->evaluate(0));
+        self::assertSame(0, $rule->evaluate(1));
+        self::assertSame(1, $rule->evaluate(2));
+
+        $set = new TextDomain(['foo' => 'bar']);
+        $set->setPluralRule($rule);
+
+        $data  = serialize($set);
+        $clone = unserialize($data);
+
+        self::assertInstanceOf(TextDomain::class, $clone);
+        $clonedRule = $clone->getPluralRule();
+        self::assertInstanceOf(PluralRule::class, $clonedRule);
+
+        self::assertSame(0, $clonedRule->evaluate(0));
+        self::assertSame(0, $clonedRule->evaluate(1));
+        self::assertSame(1, $clonedRule->evaluate(2));
+    }
+
+    public function testWarningsAreNotIssuedForMissingKeys(): void
+    {
+        $warning = false;
+        $set     = new TextDomain(['foo' => 'bar']);
+        $handler = static function (int $error, string $message) use (&$warning): void {
+            $warning = true;
+            self::fail(sprintf('Error emitted: %s (%d)', $message, $error));
+        };
+
+        set_error_handler($handler);
+
+        try {
+            self::assertNull($set['not-there']);
+        } finally {
+            restore_error_handler();
+        }
+
+        self::assertFalse($warning);
     }
 }

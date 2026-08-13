@@ -6,39 +6,28 @@ namespace LaminasTest\I18n\Translator\Loader;
 
 use Laminas\I18n\Exception\InvalidArgumentException;
 use Laminas\I18n\Translator\Loader\Ini as IniLoader;
+use Laminas\I18n\Translator\Loader\IniFileReader;
+use Laminas\I18n\Translator\Plural\Rule;
 use Laminas\I18n\Translator\TextDomain;
-use LaminasTest\I18n\TestCase;
+use PHPUnit\Framework\TestCase;
 
-use function get_include_path;
 use function realpath;
-use function set_include_path;
-
-use const PATH_SEPARATOR;
 
 final class IniTest extends TestCase
 {
     private string $testFilesDir;
-    private string $originalIncludePath;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $realpath = realpath(__DIR__ . '/../_files');
+        $realpath = realpath(__DIR__ . '/IniTest');
         self::assertNotFalse($realpath);
-        $this->testFilesDir        = $realpath;
-        $this->originalIncludePath = get_include_path();
-        set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
-    }
-
-    protected function tearDown(): void
-    {
-        set_include_path($this->originalIncludePath);
-        parent::tearDown();
+        $this->testFilesDir = $realpath;
     }
 
     public function testLoaderFailsToLoadMissingFile(): void
     {
-        $loader = new IniLoader();
+        $loader = new IniLoader(new IniFileReader());
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Could not find or open file');
         $loader->load('en_EN', 'missing');
@@ -46,14 +35,14 @@ final class IniTest extends TestCase
 
     public function testLoaderLoadsEmptyFile(): void
     {
-        $loader     = new IniLoader();
+        $loader     = new IniLoader(new IniFileReader());
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.ini');
         self::assertInstanceOf(TextDomain::class, $textDomain);
     }
 
     public function testLoaderFailsToLoadNonArray(): void
     {
-        $loader = new IniLoader();
+        $loader = new IniLoader(new IniFileReader());
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
@@ -61,7 +50,7 @@ final class IniTest extends TestCase
 
     public function testLoaderFailsToLoadBadSyntax(): void
     {
-        $loader = new IniLoader();
+        $loader = new IniLoader(new IniFileReader());
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
@@ -69,8 +58,9 @@ final class IniTest extends TestCase
 
     public function testLoaderReturnsValidTextDomain(): void
     {
-        $loader     = new IniLoader();
+        $loader     = new IniLoader(new IniFileReader());
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -78,8 +68,9 @@ final class IniTest extends TestCase
 
     public function testLoaderReturnsValidTextDomainWithFileWithoutPlural(): void
     {
-        $loader     = new IniLoader();
+        $loader     = new IniLoader(new IniFileReader());
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_without_plural.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -87,41 +78,40 @@ final class IniTest extends TestCase
 
     public function testLoaderReturnsValidTextDomainWithSimpleSyntax(): void
     {
-        $loader     = new IniLoader();
+        $loader     = new IniLoader(new IniFileReader());
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_simple_syntax.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
         self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
         self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
+    }
+
+    public function testLoaderReturnsAnArrayOfEntriesForPlurals(): void
+    {
+        $loader     = new IniLoader(new IniFileReader());
+        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
+
+        $expect = [
+            0 => 'Message 5 (en) Plural 0',
+            1 => 'Message 5 (en) Plural 1',
+            2 => 'Message 5 (en) Plural 2',
+        ];
+        self::assertSame($expect, $textDomain['Message 5']);
     }
 
     public function testLoaderLoadsPluralRules(): void
     {
-        $loader     = new IniLoader();
+        $loader     = new IniLoader(new IniFileReader());
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        self::assertInstanceOf(TextDomain::class, $textDomain);
 
-        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
-        self::assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
-        self::assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
-        self::assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
-    }
+        $rule = $textDomain->getPluralRule();
+        self::assertInstanceOf(Rule::class, $rule);
 
-    public function testLoaderLoadsFromIncludePath(): void
-    {
-        $loader = new IniLoader();
-        $loader->setUseIncludePath(true);
-        $textDomain = $loader->load('en_EN', 'translation_en.ini');
-
-        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
-    }
-
-    public function testLoaderLoadsFromPhar(): void
-    {
-        $loader = new IniLoader();
-        $loader->setUseIncludePath(true);
-        $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.ini');
-
-        self::assertEquals('Message 1 (en)', $textDomain['Message 1']);
-        self::assertEquals('Message 4 (en)', $textDomain['Message 4']);
+        self::assertEquals(2, $rule->evaluate(0));
+        self::assertEquals(0, $rule->evaluate(1));
+        self::assertEquals(1, $rule->evaluate(2));
+        self::assertEquals(2, $rule->evaluate(10));
     }
 }

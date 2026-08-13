@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\I18n\Exception;
 
 use function sprintf;
 
-/** @final */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
     /** @psalm-pure */
     public static function withInvalidCountryCode(string $received): self
@@ -13,19 +14,6 @@ class InvalidArgumentException extends \InvalidArgumentException implements Exce
         return new self(sprintf(
             'Country codes should be 2 letter ISO 3166 strings, received "%s"',
             $received
-        ));
-    }
-
-    /**
-     * @deprecated Since 2.33.0 This method is no longer used and will be removed in the next major version
-     *
-     * @psalm-pure
-     */
-    public static function withUnknownCountryCode(string $code): self
-    {
-        return new self(sprintf(
-            'The country code "%s" does not correspond to a known country',
-            $code
         ));
     }
 
