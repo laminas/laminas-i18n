@@ -54,7 +54,7 @@ To enable the event dispatcher, call the `enableEventManager()` method.
 $translator->enableEventManager();
 ```
 
-The event dispatcher can also be [enabled per factory](factory.md#enable-eventmanager).
+The event dispatcher can also be [enabled per configuration](configuration.md#event-dispatcher).
 
 ### Disable Event Dispatcher
 
