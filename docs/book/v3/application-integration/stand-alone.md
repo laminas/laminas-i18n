@@ -16,13 +16,12 @@ return [
 ];
 ```
 
-Create the translator instance and add the translation file.
+Configure the dependency-injection container with the help of the [config provider](https://docs.laminas.dev/laminas-config-aggregator/config-providers/) and add the translation file via configuration:
 
 ```php
 $container = (new Laminas\ServiceManager\ServiceManager(
     (new Laminas\I18n\ConfigProvider())->getDependencyConfig()
 ));
-
 $container->setService(
     'config',
     [
@@ -39,9 +38,13 @@ $container->setService(
         ],
     ]
 );
+```
 
+Fetch the translator from the container:
+
+```php
 $translator = $container->get(Laminas\Translator\TranslatorInterface::class);
- ```
+```
 
 ### Translate Messages
 
@@ -114,24 +117,40 @@ $validator = $validatorManager->get(Laminas\I18n\Validator\Alnum::class);
 
 ## View Helpers
 
+> MISSING: **Installation Requirements**
+> Starting with version 3.0, the core `laminas-i18n` package no longer ships with these view helpers out of the box.
+> They have been extracted into an optional satellite package.
+>
+> To use internationalization view helpers in an application, the satellite package must be installed, which will automatically bring in `laminas-view` as a required dependency:
+>
+> ```bash
+> $ composer require laminas/laminas-i18n-view
+> ```
+
 ### Setup laminas-view
 
-Create the renderer:
+Configure the dependency-injection container with the help via the config providers of laminas-view, laminas-i18n, and laminas-i18n-view:
 
 ```php
-$renderer = new Laminas\View\Renderer\PhpRenderer();
+$container = new Laminas\ServiceManager\ServiceManager();
+$container->configure((new Laminas\View\ConfigProvider())->getDependencies());
+$container->configure((new Laminas\I18n\ConfigProvider())->getDependencyConfig());
+$container->configure((new Laminas\I18n\View\ConfigProvider())()['dependencies']);
 ```
 
-Register all standard view-helpers of laminas-i18n in the helper-plugin-manager:
+Register all standard view-helpers of laminas-i18n-view in the helper-plugin-manager:
 
 ```php
-$renderer->getHelperPluginManager()->configure(
-    (new Laminas\I18n\ConfigProvider())->getViewHelperConfig()
+$viewHelperManager = $container->get(Laminas\View\HelperPluginManager::class);
+$viewHelperManager->configure(
+    (new Laminas\I18n\View\ConfigProvider())()['view_helpers']
 );
 ```
 
 ### Using Helper
 
 ```php
-echo $renderer->currencyFormat(1234.56, 'USD', null, 'en_US'); // "$1,234.56"
+$helper = $viewHelperManager->get(Laminas\I18n\View\Helper\CurrencyFormat::class);
+
+$helper->amount(123.45, 'EUR'); // "€ 123.45"
 ```

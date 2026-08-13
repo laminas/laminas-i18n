@@ -1,6 +1,6 @@
 # Format Examples
 
-## PHP
+## PHP Array
 
 For example `languages/de_DE.php`:
 
@@ -101,3 +101,11 @@ identifier1.translation = "voiture"
 identifier2.message = "train"
 identifier2.translation = "train"
 ```
+
+> NOTE: **Plural Formats**
+>
+> The plural formats are follow the GNU gettext conventions.
+> These formats are defined in [GNU gettext manual](https://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html).
+> The plural formats are:
+>
+> `nplurals=INTEGER; plural=EXPRESSION`

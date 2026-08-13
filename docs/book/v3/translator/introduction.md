@@ -1,4 +1,4 @@
-# Translation
+# Introduction
 
 `laminas-i18n` comes with a complete translation suite supporting all major
 formats and including popular features such as plural translations and text
@@ -26,10 +26,6 @@ When a translation lookup occurs, all active collectors are consulted in paralle
 To map single file targets manually file-by-file, utilize the `translation_files` configuration key. This is ideal for one-off locales, complex directory structures that layout patterns cannot easily scan, or assets isolated to specific text domains.
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 return [
     'laminas-i18n' => [
         'translator' => [
@@ -56,10 +52,6 @@ return [
 When managing a modular dictionary structure where each locale owns its own distinct file, use the `translation_file_patterns` array. This enables your application to scale cleanly; dropping a new locale file into the target directory automatically makes it available without modifying any code or configuration arrays.
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 return [
     'laminas-i18n' => [
         'translator' => [
@@ -84,14 +76,10 @@ return [
 
 If you serve translation values dynamically from a database table, a Redis instance, or an external translation API, you can supply a `remote_translation` array.
 
-> [!NOTE] Custom Implementations Required
-> The `RemoteListCollector` is configured and ready to execute out-of-the-box, but the core component does not bundle default, concrete remote loaders. You must implement `Laminas\I18n\Translator\Loader\RemoteLoaderInterface` and register your custom service key.
+NOTE: **Custom Implementations Required**
+The `RemoteListCollector` is configured and ready to execute out-of-the-box, but the core component does not bundle default, concrete remote loaders. You must implement `Laminas\I18n\Translator\Loader\RemoteLoaderInterface` and register your custom service key.
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 return [
     'laminas-i18n' => [
         'translator' => [
@@ -115,19 +103,11 @@ To obtain the fully initialized and configured `Translator` instance, retrieve
 it directly from your DI container:
 
 ```php
-<?php
-
-declare(strict_types=1);
-
-use Laminas\I18n\Translator\Translator;
-use Psr\Container\ContainerInterface;
-
-/** @var ContainerInterface $container */
-$translator = $container->get(Translator::class);
-
+/** @var Psr\Container\ContainerInterface $container */
+$translator = $container->get(Laminas\I18n\Translator\Translator::class);
 ```
 
-## Supported formats
+## Supported Formats
 
 The translator supports the following major translation formats:
 
@@ -140,7 +120,9 @@ Additionally, you can use custom formats by implementing one or more of
 `Laminas\I18n\Translator\Loader\RemoteLoaderInterface`, and registering your loader
 with the `Translator` instance's composed plugin manager.
 
-## Setting a locale
+Examples can be found in the section [Format Examples](format-examples.md).
+
+## Setting a Locale
 
 By default, the translator will get the locale to use from ext/intl's `Locale`
 class. If you want to set an alternative locale explicitly, you can do so by

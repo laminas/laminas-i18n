@@ -11,15 +11,16 @@ internationalization.
 - [Translate](translate.md)
 - [TranslatePlural](translate-plural.md)
 
-These helpers are based on Laminas component for the view layer:
-[laminas-view](https://docs.laminas.dev/laminas-view/) and their
-[helpers](https://docs.laminas.dev/laminas-view/helpers/intro/).
+These helpers are based on Laminas component for the view layer: [laminas-view](https://docs.laminas.dev/laminas-view/) and their [helpers](https://docs.laminas.dev/laminas-view/helpers/intro/).
 
 > MISSING: **Installation Requirements**
-> The view-helper support of laminas-i18n depends on the [laminas-view](https://docs.laminas.dev/laminas-view/) component, so be sure to have it installed before getting started:
+> Starting with version 3.0, the core `laminas-i18n` package no longer ships with these view helpers built-in.
+> They have been extracted into an optional satellite package to keep core component dependencies lightweight.
+>
+> To use internationalization view helpers in an application, the satellite package must be installed, which will automatically bring in `laminas-view` as a required dependency:
 >
 > ```bash
-> $ composer require laminas/laminas-view
+> $ composer require laminas/laminas-i18n-view
 > ```
 
 ---

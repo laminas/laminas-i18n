@@ -5,11 +5,11 @@ nav:
     - v3:
         - Introduction: v3/introduction.md
         - Installation: v3/installation.md
-        - Translation: v3/translation.md
         - Translator:
+            - Introduction: v3/translator/introduction.md
             - Caching: v3/translator/caching.md
             - Events: v3/translator/events.md
-            - Factory: v3/translator/factory.md
+            - Configuration: v3/translator/configuration.md
             - 'Format Examples': v3/translator/format-examples.md
         - Filters:
             - Introduction: v3/filters/introduction.md
@@ -38,6 +38,8 @@ nav:
             - TranslatePlural: v3/view-helpers/translate-plural.md
         - 'Application Integration':
             - 'Stand-Alone': v3/application-integration/stand-alone.md
+        - Cookbook:
+            - 'Using laminas-cache for Caching': v3/cookbook/using-laminas-cache.md
         - Migration:
             - 'Migration from Version 2 to 3': v3/migration/migration-from-2-to-3.md
     - v2:
@@ -102,10 +104,10 @@ plugins:
               view-helpers.md: v3/view-helpers/introduction.md
               introduction.md: v3/introduction.md
               installation.md: v3/installation.md
-              translation.md: v3/translation.md
+              translation.md: v3/translator/introduction.md
               translator/caching.md: v3/translator/caching.md
               translator/events.md: v3/translator/events.md
-              translator/factory.md: v3/translator/factory.md
+              translator/factory.md: v2/translator/factory.md
               translator/format-examples.md: v3/translator/format-examples.md
               filters/introduction.md: v3/filters/introduction.md
               filters/alnum.md: v3/filters/alnum.md
