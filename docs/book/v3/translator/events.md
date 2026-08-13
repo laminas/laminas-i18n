@@ -9,12 +9,9 @@ translations:
 The typical usage for these events is to log missing translations and track when
 the loading of messages fails.
 
-> MISSING: **Installation Requirements**
-> The event support of laminas-i18n depends on a PSR-14 compatible event dispatcher.
->
-> ```bash
-> $ composer require laminas/laminas-eventmanager
-> ```
+MISSING: **Installation Requirements**
+The event support of laminas-i18n depends on a [PSR-14](https://www.php-fig.org/psr/psr-14/) compatible event dispatcher.
+Choose any PSR-14 compatible event dispatcher.
 
 ## Basic Usage
 
