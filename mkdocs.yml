@@ -107,7 +107,7 @@ plugins:
               translation.md: v3/translator/introduction.md
               translator/caching.md: v3/translator/caching.md
               translator/events.md: v3/translator/events.md
-              translator/factory.md: v3/translator/factory.md
+              translator/factory.md: v2/translator/factory.md
               translator/format-examples.md: v3/translator/format-examples.md
               filters/introduction.md: v3/filters/introduction.md
               filters/alnum.md: v3/filters/alnum.md
