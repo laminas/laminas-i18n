@@ -19,43 +19,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6.0.2
-      - uses: shivammathur/setup-php@2.37.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
 
         with:
           php-version: ${{ env.default_php }}
           ini-values: memory_limit=-1
           extensions: ${{ env.php_extensions }}
-      - uses: ramsey/composer-install@4.0.0
+      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
       - run: make require-checker-ci
 
   composer-unused:
     name: Check for Unused Dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
-      - uses: shivammathur/setup-php@2.37.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
         with:
           php-version: ${{ env.default_php }}
           extensions: ${{ env.php_extensions }}
           tools: composer
-      - uses: ramsey/composer-install@4.0.0
+      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
       - run: make unused-ci
 
   psalm-security-report:
     name: "Psalm Security Report"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
-      - uses: shivammathur/setup-php@2.37.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
         with:
           php-version: ${{ env.default_php }}
           extensions: ${{ env.php_extensions }}
-      - uses: ramsey/composer-install@4.0.0
+      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
       - name: "Psalm"
         run: vendor/bin/psalm --report=results.sarif
       - name: "Upload Security Analysis results to GitHub"
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4
         with:
           sarif_file: results.sarif
 
@@ -63,11 +63,11 @@ jobs:
     name: Rector on Default PHP
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
-      - uses: shivammathur/setup-php@2.37.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
         with:
           php-version: ${{ env.default_php }}
           extensions: ${{ env.php_extensions }}
           tools: composer
-      - uses: ramsey/composer-install@4.0.0
+      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
       - run: make rector-ci
