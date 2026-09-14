@@ -53,9 +53,7 @@ final class TextDomain extends ArrayObject
      */
     public static function getDefaultPluralRule(): PluralRule
     {
-        if (self::$defaultPluralRule === null) {
-            self::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
-        }
+        self::$defaultPluralRule ??= PluralRule::fromString('nplurals=2; plural=n != 1;');
 
         return self::$defaultPluralRule;
     }
