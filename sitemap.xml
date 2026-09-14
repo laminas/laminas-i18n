@@ -2,130 +2,258 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/installation/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/introduction/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/translation/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/application-integration/stand-alone/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/filters/alnum/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/filters/alpha/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/filters/introduction/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/filters/number-format/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/filters/number-parse/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/migration/migration-to-v2.4/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/translator/caching/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/translator/events/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/translator/factory/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/translator/format-examples/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/alnum/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/alpha/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/country-code/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/date-time/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/introduction/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/is-float/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/is-int/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/phone-number/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/validators/post-code/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/country-code-data-list/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/currency-format/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/date-format/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/introduction/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/number-format/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/plural/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/translate-plural/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-i18n/v2/view-helpers/translate/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/installation/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/introduction/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/application-integration/stand-alone/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/cookbook/using-laminas-cache/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/filters/alnum/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/filters/alpha/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/filters/introduction/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/filters/number-format/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/filters/number-parse/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/migration/migration-from-2-to-3/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/translator/caching/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/translator/configuration/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/translator/events/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/translator/format-examples/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/translator/introduction/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/alnum/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/alpha/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/country-code/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/date-time/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/introduction/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/is-float/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/is-int/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/phone-number/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/validators/post-code/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/country-code-data-list/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/currency-format/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/date-format/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/introduction/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/number-format/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/plural/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/translate-plural/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-i18n/v3/view-helpers/translate/</loc>
+         <lastmod>2026-09-14</lastmod>
     </url>
 </urlset>

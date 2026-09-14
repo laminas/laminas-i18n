@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Provide translations for your application, and filter and validate internationalized values."> 
+
+    
+    
+        
+    
+    <meta name="docsearch:version" content="3.0.0,latest">
+    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:component" content="laminas-i18n">
+
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-i18n/v3/migration/migration-from-2-to-3/">
+    <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Migration from Version 2 to 3 - laminas-i18n - Laminas Docs</title>
+
+    <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
+    
+</head>
+<body id="page-top" class="components" data-spy="scroll" data-target=".toc" data-offset="20">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="https://docs.laminas.dev/img/laminas-foundation-white.svg" height="28" alt="Laminas">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div class="dropdown sub-project-selector">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a href="https://docs.mezzio.dev/" class="dropdown-item">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img src="https://docs.laminas.dev/img/mezzio-logo.svg">
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <strong>Mezzio</strong><br>
+                                        PSR-15 Middleware in Minutes
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://docs.laminas.dev/components/" class="dropdown-item">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img src="https://docs.laminas.dev/img/laminas-components-rgb.svg">
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <strong>Components</strong><br>
+                                        Components for Enterprise Applications
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/migration/">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        Migration to Laminas
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/tutorials/">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        Tutorials
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/mvc">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        MVC <small><em>(security-only maintenance mode)</em></small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../../..">
+                
+                
+    laminas-i18n
+
+            </a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Translator</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/events/" class="subnavigation__link">Events</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/configuration/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Filters</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Validators</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">View Helpers</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/country-code-data-list/" class="subnavigation__link">CountryCodeDataList</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Application Integration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../application-integration/stand-alone/" class="subnavigation__link">Stand-Alone</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/using-laminas-cache/" class="subnavigation__link">Using laminas-cache for Caching</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-8">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">
+                            
+                            
+    laminas-i18n
+
+                        </small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-right">
+                
+                    
+<div class="version-selector">
+    <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
+            
+                v3
+            
+        </button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
+            
+                
+                    <a href="../../introduction/" class="dropdown-item active">
+                        
+                            v3 (latest)
+                        
+                    </a>
+                
+            
+                
+                    <a href="../../../v2/introduction/" class="dropdown-item">
+                        
+                            v2
+                        
+                    </a>
+                
+            
+        </div>
+    </div>
+</div>
+
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="bi bi-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-i18n" class="header__link header__link--github" title="Go to repository of laminas-i18n">
+                        <i class="bi-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12 content" role="main">
+                
+                
+                    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#new-features-and-enhancements" class="toc__link nav-link">New Features and Enhancements</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#structural-changes" class="toc__link nav-link">Structural Changes</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#removed-features" class="toc__link nav-link">Removed Features</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+                
+
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
+
+            
+                <li class="breadcrumb-item">
+                    <a href="../../..">
+                        
+    laminas-i18n
+
+                    </a>
+                </li>
+
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Migration</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Migration from Version 2 to 3</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Migration</h2>
+    
+
+    <h1 id="migration-from-versions-2x-to-30">Migration from Versions 2.x to 3.0</h1>
+<h2 id="new-features-and-enhancements">New Features and Enhancements</h2>
+<h3 id="migration-to-container-driven-caching-via-translation-collectors">Migration to Container-Driven Caching via Translation Collectors</h3>
+<p>The <code>Translator</code> component no longer manages caching internally, and the legacy <code>$translator-&gt;setCache()</code> method has been entirely removed.
+Caching is now decoupled from the translator itself and is handled architectural-level by wrapping translation lookup routines inside specific Translation Collectors.</p>
+<p>When the <code>AggregateCollector</code> is resolved from the dependency injection container, an internal delegator factory checks the application configuration for a defined PSR-6 or PSR-16 cache service.
+If a valid cache service name is found and successfully retrieved from the container, the factory automatically wraps the <code>AggregateCollector</code> in a <code>CachingCollector</code>.
+This decorator transparently proxies all lookup tasks via <code>TranslationCollectorInterface::collect()</code> and caches the results.</p>
+<h4 id="configuration-changes">Configuration Changes</h4>
+<p>To enable translation caching, the caching service must be registered within the dependency container and point to its service name under the consolidated <code>laminas-i18n</code> configuration block.
+Either a standard PSR-6 (<code>psr6_cache</code>) or a PSR-16 (<code>psr16_cache</code>) storage implementation can be provided.</p>
+<p>An optional <code>cache_key_prefix</code> can also be supplied to prevent key collisions in shared cache environments.</p>
+<div class="admonition caution">
+<p class="admonition-title">Type Errors on Direct Injections</p>
+<p>
+Manual invocation of caching configurations on the translator object or attempting to pass raw legacy <code>laminas-cache</code> adapter instances via configuration arrays will result in a <code>TypeError</code>.
+All caching must be registered as container services.</p>
+</div>
+<h4 id="prior-to-300">Prior to 3.0.0</h4>
+<pre class="highlight"><code class="language-php">$cache = Laminas\Cache\StorageFactory::factory([
+    'adapter' =&gt; 'filesystem',
+]);
+
+$translator = new Laminas\I18n\Translator\Translator();
+$translator-&gt;setCache($cache);</code></pre>
+<h4 id="since-300">Since 3.0.0</h4>
+<pre class="highlight"><code class="language-php">return [
+    'dependencies' =&gt; [
+        'factories' =&gt; [
+            // Register the PSR-6 or PSR-16 compliant cache service factory
+            'MyApp\CacheService' =&gt; MyApp\Cache\CacheFactory::class,
+        ],
+    ],
+    'laminas-i18n' =&gt; [
+        'translator' =&gt; [
+            // Point to the service container key
+            'psr6_cache'       =&gt; 'MyApp\CacheService', 
+            // Alternatively, use a PSR-16 cache provider:
+            // 'psr16_cache'    =&gt; 'MyApp\SimpleCacheService',
+
+            // Optional: Customize the translation cache isolation
+            'cache_key_prefix' =&gt; 'app_translation_',
+
+            'translation_file_patterns' =&gt; [
+                [
+                    'type'     =&gt; 'phparray',
+                    'base_dir' =&gt; dirname(__DIR__, 2) . '/data/languages',
+                    'pattern'  =&gt; '%s.php',
+                ],
+            ],
+        ],
+    ],
+];</code></pre>
+<h3 id="implicit-event-dispatcher-activation">Implicit Event Dispatcher Activation</h3>
+<p>The internal property <code>eventsEnabled</code> along with the manual toggle methods <code>enableEventManager()</code>, <code>disableEventManager()</code>, and <code>isEventManagerEnabled()</code> have been completely removed from the <code>Translator</code> class.</p>
+<p>The <code>Translator</code> now implicitly manages events based entirely on the presence of a PSR-14 event dispatcher. If an <code>EventDispatcherInterface</code> instance is supplied to the constructor, events (such as <code>MissingTranslationEvent</code> or <code>NoMessagesLoadedEvent</code>) will automatically be active. If no dispatcher is supplied (or it is <code>null</code>), event management remains inactive without causing overhead or requiring code initialization.</p>
+<p>In alignment with this architectural change, the <code>'event_manager_enabled'</code> configuration option flag has been removed from the factory configuration payload.</p>
+<h4 id="prior-to-300_1">Prior to 3.0.0</h4>
+<pre class="highlight"><code class="language-php">use Laminas\I18n\Translator\Translator;
+
+// 1. Array configuration toggle
+$translator = Translator::factory([
+    'event_manager_enabled' =&gt; true,
+]);
+
+// 2. Direct method calls
+$translator-&gt;enableEventManager();
+$translator-&gt;disableEventManager();</code></pre>
+<h4 id="since-300_1">Since 3.0.0</h4>
+<pre class="highlight"><code class="language-php">use Laminas\I18n\Translator\Translator;
+
+// Events are implicitly ACTIVE because a dispatcher instance is provided to the constructor
+$translatorWithEvents = new Translator(
+    $collector,
+    'en_US',
+    null,
+    'default',
+    $eventDispatcher
+);
+
+// Events are implicitly INACTIVE because no dispatcher is present
+$translatorWithoutEvents = new Translator(
+    $collector,
+    'en_US'
+);</code></pre>
+<div class="admonition important">
+<p class="admonition-title">Migration Action Required</p>
+<ul>
+<li>Remove the <code>'event_manager_enabled'</code> option key from your configuration files and factory option arrays.</li>
+<li>Remove any direct calls to <code>enableEventManager()</code>, <code>disableEventManager()</code>, or <code>isEventManagerEnabled()</code>.</li>
+</ul>
+</div>
+<h3 id="propagation-control-for-translator-events">Propagation Control for Translator Events</h3>
+<p>Both <code>MissingTranslationEvent</code> and <code>NoMessagesLoadedEvent</code> now implement <code>Psr\EventDispatcher\StoppableEventInterface</code>.
+This allows listeners to stop event propagation by providing a translation or a text domain dynamically.
+For <code>MissingTranslationEvent</code>, calling <code>setTranslation()</code> will automatically stop further propagation, and the provided translation will be used by the translator.</p>
+<h3 id="introduction-of-i18ndefaults">Introduction of <code>I18nDefaults</code></h3>
+<p>A new <code>Laminas\I18n\I18nDefaults</code> value object has been introduced to encapsulate shared internationalization settings such as default locale, timezone, currency, and country.
+This object is registered in the service container and can be used by satellite packages to ensure consistent defaults across the application.</p>
+<h3 id="default-text-domain-support">Default Text Domain Support</h3>
+<p>The <code>Translator</code> now supports a configurable default text domain. This can be set via the <code>default_text_domain</code> configuration key under the <code>translator</code> block.
+If not specified, it continues to default to <code>default</code>.</p>
+<h4 id="since-300_2">Since 3.0.0</h4>
+<pre class="highlight"><code class="language-php">return [
+    'laminas-i18n' =&gt; [
+        'translator' =&gt; [
+            'default_text_domain' =&gt; 'my-app-domain',
+            // ...
+        ],
+    ],
+];</code></pre>
+<h2 id="structural-changes">Structural Changes</h2>
+<h3 id="textdomain-and-exception-finality"><code>TextDomain</code> and Exception Finality</h3>
+<p>The <code>Laminas\I18n\Translator\TextDomain</code> class and all exception classes in <code>Laminas\I18n\Exception</code> have been marked as <code>final</code>.
+This change reinforces the architectural decision to favor composition over inheritance and ensures consistency across the component.</p>
+<h3 id="interface-namespace-extraction-consolidation">Interface Namespace Extraction / Consolidation</h3>
+<p>To better split component responsibilities and streamline the core architecture, core interfaces have been extracted or moved to separate, dedicated packages.</p>
+<p>Usages of <code>Laminas\I18n\Translator\TranslatorInterface</code> must be replaced with <code>Laminas\Translator\TranslatorInterface</code>.</p>
+<h3 id="extraction-of-i18n-filters-to-satellite-package">Extraction of I18n Filters to Satellite Package</h3>
+<p>The component's built-in filtering capabilities have been extracted into an external standalone package: <a href="https://github.com/laminas/laminas-i18n-filter"><code>laminas/laminas-i18n-filter</code></a>.</p>
+<p>The following filter classes are no longer present in <code>laminas-i18n</code>:</p>
+<ul>
+<li><code>Laminas\I18n\Filter\Alnum</code></li>
+<li><code>Laminas\I18n\Filter\Alpha</code></li>
+<li><code>Laminas\I18n\Filter\NumberFormat</code></li>
+<li><code>Laminas\I18n\Filter\NumberParse</code></li>
+</ul>
+<p>Additionally, these filters have been reworked to ensure native compatibility with <code>laminas-filter</code> v3 execution pipelines.</p>
+<div class="admonition important">
+<p class="admonition-title">Migration Action Required</p>
+<p>
+If your application relies on these filters, you must explicitly require the new satellite package:</p>
+<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-i18n-filter</code></pre>
+</div>
+<h3 id="extraction-of-i18n-validators-to-satellite-package">Extraction of I18n Validators to Satellite Package</h3>
+<p>The component's built-in validation capabilities have been extracted into an external standalone package: <a href="https://github.com/laminas/laminas-i18n-validator"><code>laminas/laminas-i18n-validator</code></a>.</p>
+<p>The following validator classes are no longer present directly within <code>laminas-i18n</code>:</p>
+<ul>
+<li><code>Laminas\I18n\Validator\Alnum</code></li>
+<li><code>Laminas\I18n\Validator\Alpha</code></li>
+<li><code>Laminas\I18n\Validator\CountryCode</code></li>
+<li><code>Laminas\I18n\Validator\DateTime</code></li>
+<li><code>Laminas\I18n\Validator\IsFloat</code></li>
+<li><code>Laminas\I18n\Validator\IsInt</code></li>
+<li><code>Laminas\I18n\Validator\PhoneNumber</code> (Note: Historical wrapper configuration only; see above for full structural replacement details)</li>
+<li><code>Laminas\I18n\Validator\PostCode</code></li>
+</ul>
+<p>Additionally, these extracted validators have been internally refactored to achieve seamless native compatibility with the <code>laminas-validator</code> v3 engine and plugin management layers.</p>
+<div class="admonition important">
+<p class="admonition-title">Migration Action Required</p>
+<p>
+If your validation chains or forms rely on any of these i18n validation plugins, you must explicitly require the new satellite package via Composer:</p>
+<pre class="highlight"><code class="language-bash"> composer require laminas/laminas-i18n-validator</code></pre>
+</div>
+<h3 id="extraction-of-i18n-view-helpers-to-satellite-package">Extraction of I18n View Helpers to Satellite Package</h3>
+<p>The component's built-in view helper capabilities have been extracted into an external standalone package: <a href="https://github.com/laminas/laminas-i18n-view"><code>laminas/laminas-i18n-view</code></a>.</p>
+<ul>
+<li><code>Laminas\I18n\View\Helper\CurrencyFormat</code></li>
+<li><code>Laminas\I18n\View\Helper\DateFormat</code></li>
+<li><code>Laminas\I18n\View\Helper\NumberFormat</code></li>
+<li><code>Laminas\I18n\View\Helper\Plural</code></li>
+<li><code>Laminas\I18n\View\Helper\Translate</code></li>
+<li><code>Laminas\I18n\View\Helper\TranslatePlural</code></li>
+</ul>
+<p>Additionally, these extracted view helpers have been internally refactored to support <code>laminas-view</code> with version 3.</p>
+<div class="admonition important">
+<p class="admonition-title">Migration Action Required</p>
+<p>
+To obtain or retain support from the helpers, the package must also be installed:</p>
+<pre class="highlight"><code class="language-bash"> composer require laminas/laminas-i18n-view</code></pre>
+</div>
+<h3 id="laminasi18ntranslatorloaderini-initialization"><code>Laminas\I18n\Translator\Loader\Ini</code> Initialization</h3>
+<p>Due to the removal of <code>laminas-config</code>, the <code>Ini</code> translator loader no longer implicitly instantiates an internal configuration reader.
+It now requires <code>Laminas\I18n\Translator\Loader\IniFileReader</code> passed explicitly to its constructor.</p>
+<div class="admonition note">
+<p class="admonition-title">Service Container Notice</p>
+<p>
+If your application resolves the <code>Ini</code> translation loader via a service container (such as <code>Laminas\ServiceManager</code>), this instantiation change is automatically handled by the component's internal factories.
+Manual intervention is only required if you instantiate the loader directly in your code.</p>
+</div>
+<h4 id="prior-to-300_2">Prior to 3.0.0</h4>
+<pre class="highlight"><code class="language-php">use Laminas\I18n\Translator\Loader\Ini as IniLoader;
+
+$loader = new IniLoader();</code></pre>
+<h4 id="since-300_3">Since 3.0.0</h4>
+<pre class="highlight"><code class="language-php">$loader = new Laminas\I18n\Translator\Loader\Ini(
+    new Laminas\I18n\Translator\Loader\IniFileReader()
+);</code></pre>
+<h3 id="config-namespace-consolidation">Config Namespace Consolidation</h3>
+<p>To prevent configuration key pollution in global configurations, all translator top-level options must now be nested under the <code>laminas-i18n</code> configuration key.</p>
+<h4 id="prior-to-300_3">Prior to 3.0.0</h4>
+<pre class="highlight"><code class="language-php">return [
+    'translator' =&gt; [
+        'translation_file_patterns' =&gt; [
+            [
+                'type'     =&gt; 'phparray',
+                'base_dir' =&gt; dirname(__DIR__, 2) . '/data/languages',
+                'pattern'  =&gt; '%s.php',
+            ],
+        ],
+    ],
+];</code></pre>
+<h4 id="since-300_4">Since 3.0.0</h4>
+<pre class="highlight"><code class="language-php">return [
+    'laminas-i18n' =&gt; [
+        'translator' =&gt; [
+            'translation_file_patterns' =&gt; [
+                [
+                    'type'     =&gt; 'phparray',
+                    'base_dir' =&gt; dirname(__DIR__, 2) . '/data/languages',
+                    'pattern'  =&gt; '%s.php',
+                ],
+            ],
+        ],
+    ],
+];</code></pre>
+<h3 id="behaviour-changes">Behaviour Changes</h3>
+<p>The deprecated static constructor <code>Laminas\I18n\Exception\InvalidArgumentException::withUnknownCountryCode()</code> has been removed.</p>
+<h2 id="removed-features">Removed Features</h2>
+<h3 id="drop-mvc-support-laminasi18nmodule-removal">Drop MVC Support (<code>Laminas\I18n\Module</code> Removal)</h3>
+<p>The MVC <code>Module</code> class has been entirely removed from the package.</p>
+<div class="admonition caution">
+<p class="admonition-title">No Migration Path for MVC Applications</p>
+<p>
+Integration with <code>laminas-mvc</code> is completely dropped.
+There is no official upgrade path for legacy MVC applications because <code>laminas-mvc</code> will not be updated to support ServiceManager v4.
+Consequently, version 3.0+ of this component cannot be installed alongside the core MVC framework stack.</p>
+</div>
+<h3 id="removed-dependencies">Removed Dependencies</h3>
+<h4 id="laminaslaminas-config"><code>laminas/laminas-config</code></h4>
+<p>The dependency on <code>laminas/laminas-config</code> has been removed. The component now utilizes a built-in INI file reader implementation instead.</p>
+<h3 id="removed-classes">Removed Classes</h3>
+<h4 id="laminasi18nvalidatorphonenumber"><code>Laminas\I18n\Validator\PhoneNumber</code></h4>
+<p>The deprecated phone number validator has been removed in favour of the standalone library <a href="https://github.com/laminas/laminas-i18n-phone-number"><code>laminas-i18n-phone-number</code></a>.</p>
+<p>In most cases, the phone number library can be used as a direct replacement by using <code>Laminas\I18n\PhoneNumber\Validator\PhoneNumber</code>.</p>
+<h3 id="removed-exceptions">Removed Exceptions</h3>
+<p>The following unused exception classes have been removed:</p>
+<ul>
+<li><code>Laminas\I18n\Exception\OutOfBoundsException</code></li>
+<li><code>Laminas\I18n\Exception\ExtensionNotLoadedException</code></li>
+</ul>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../cookbook/using-laminas-cache/">
+                    <small class="page-nav__label">Previous</small>
+                    <i class="bi bi-arrow-left"></i>
+                    Using laminas-cache for Caching
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../../../v2/introduction/">
+                    <small class="page-nav__label">Next</small>
+                    Introduction
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                <div class="donation-banner">
+    <a href="https://getlaminas.org/support/">
+        <h2>Donate</h2>
+        <p>Support Laminas Developers Directly</p>
+        <img src="https://funding.communitybridge.org/assets/cb-f-horizontal-white.svg">
+    </a>
+</div>
+
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../../..">
+                
+                
+    laminas-i18n
+
+            </a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Translator</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/caching/" class="subnavigation__link">Caching</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/events/" class="subnavigation__link">Events</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/configuration/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../translator/format-examples/" class="subnavigation__link">Format Examples</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Filters</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../filters/number-parse/" class="subnavigation__link">NumberParse</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Validators</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alnum/" class="subnavigation__link">Alnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/alpha/" class="subnavigation__link">Alpha</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/country-code/" class="subnavigation__link">CountryCode</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/date-time/" class="subnavigation__link">DateTime</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-float/" class="subnavigation__link">IsFloat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/is-int/" class="subnavigation__link">IsInt</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/phone-number/" class="subnavigation__link">PhoneNumber</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../validators/post-code/" class="subnavigation__link">PostCode</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">View Helpers</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/country-code-data-list/" class="subnavigation__link">CountryCodeDataList</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/currency-format/" class="subnavigation__link">CurrencyFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/date-format/" class="subnavigation__link">DateFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/number-format/" class="subnavigation__link">NumberFormat</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/plural/" class="subnavigation__link">Plural</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/translate/" class="subnavigation__link">Translate</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../view-helpers/translate-plural/" class="subnavigation__link">TranslatePlural</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Application Integration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../application-integration/stand-alone/" class="subnavigation__link">Stand-Alone</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/using-laminas-cache/" class="subnavigation__link">Using laminas-cache for Caching</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+        </ul>
+    </div>
+
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">Related Components</h4>
+        <ul class="subnavigation__list">
+            
+                <li class="subnavigation__list-item">
+                    
+                        <a href="https://docs.laminas.dev/laminas-i18n-resources/" class="subnavigation__link">Translation Resources</a>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="bi bi-arrow-up-square" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h5 class="text-white">Laminas – The Linux Foundation's only PHP project</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas Components <a href="https://docs.laminas.dev/components">Enterprise-ready PHP components</a></li>
+                    <li>Maintenance Overview <a href="https://getlaminas.org/packages-maintenance-status/">Current maintenance status of Laminas &amp; Mezzio packages</a></li>
+                    <li>Laminas Integrations <a href="https://getlaminas.org/integrations/">List of packages using Laminas & Mezzio components</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">Support</h5>
+                        <ul class="support__list">
+                            <li class="support__list-item">
+                                <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="bi-chat-text-fill"></i><span class="visually-hidden">Laminas &amp; Mezzio Forum</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="bi-slack"></i><span class="visually-hidden">Laminas Community Slack</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://github.com/laminas" class="support__link" title="Github"><i class="bi-github"></i><span class="visually-hidden">Laminas GitHub Organisation Page</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://phpc.social/@getlaminas" class="support__link" title="Mastodon"><i class="bi-mastodon"></i><span class="visually-hidden">Laminas on Mastodon</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://getlaminas.org/blog/rss.xml" class="support__link" title="Blog feed"><i class="bi-rss"></i><span class="visually-hidden">Blog article RSS Feed</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed">
+                                    <i class="bi-rss-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">License</h5>
+                        <p>
+                            Code licensed under <a
+                                href="https://github.com/laminas/laminas-i18n/blob/-/LICENSE.md">BSD 3-Clause</a>.
+                        </p>
+                    </div>
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">Copyright</h5>
+                        <p>
+                            <!--Built with love by the Laminas team with the help of our
+                            <a href="https://github.com/laminas/laminas-i18n/graphs/contributors">contributors</a>.<br>-->
+                            &copy; 2026 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../../..',
+            project  = "components",
+            siteName = 'laminas-i18n';
+    </script>
+    <script src="https://docs.laminas.dev/js/scripts.js"></script>
+    
+        <script src="../../../search/main.js"></script>
+    
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-i18n" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
