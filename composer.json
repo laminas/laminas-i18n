@@ -49,11 +49,12 @@
         "laminas/laminas-coding-standard": "^3.1",
         "phpbench/phpbench": "^1.7.0",
         "phpunit/phpunit": "^11.5.56",
-        "psalm/plugin-phpunit": "^0.20.0",
-        "vimeo/psalm": "^6.16.1"
+        "psalm/plugin-phpunit": "^0.19.7",
+        "vimeo/psalm": "^6.17.1"
     },
     "conflict": {
-        "laminas/laminas-view": "<2.20.0"
+        "laminas/laminas-view": "<2.20.0",
+        "psalm/plugin-phpunit": "^0.20.0"
     },
     "suggest": {
         "laminas/laminas-cache": "Provides a PSR-6 cache implementation for caching translations",
