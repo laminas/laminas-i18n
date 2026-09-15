@@ -12,6 +12,9 @@ MDLINT_FILE = https://raw.githubusercontent.com/laminas/laminas-continuous-integ
 MDLINT_IMAGE := davidanson/markdownlint-cli2:v0.20.0
 LINK_CHECKER_IMAGE := lycheeverse/lychee:0.22-alpine
 
+LAMINAS_I18N_PHONE_NUMBER_VERSION := 1.6.0
+LAMINAS_I18N_PHONE_NUMBER_TMP := docs/tmp
+
 MK_BLUE = echo -e "\033[34m"$(1)"\033[0m"
 MK_GREEN = echo -e "\033[32m"$(1)"\033[0m"
 
@@ -111,6 +114,18 @@ check-links: ## Check documentation links
 documentation-theme: ## fetch the documentation theme repo
 	@$(call MK_INFO,"Fetching documentation theme resources")
 	@git clone git@github.com:laminas/documentation-theme.git
+
+fetch-laminas-i18n-phone-number-docs:
+	rm -rf $(LAMINAS_I18N_PHONE_NUMBER_TMP)
+	git clone --depth 1 --filter=blob:none --sparse \
+		--branch $(LAMINAS_I18N_PHONE_NUMBER_VERSION) \
+		https://github.com/laminas/laminas-i18n-phone-number.git \
+		$(LAMINAS_I18N_PHONE_NUMBER_TMP)
+	cd $(LAMINAS_I18N_PHONE_NUMBER_TMP) && \
+		git sparse-checkout set docs/book
+	mkdir -p docs/book
+	cp -R $(LAMINAS_I18N_PHONE_NUMBER_TMP)/docs/book/. docs/book/v3/phone-number
+	rm -rf $(LAMINAS_I18N_PHONE_NUMBER_TMP)
 
 docs: build-mkdocs-image ## build the docs using a Docker container
 	@$(call MK_INFO,"Building documentation")

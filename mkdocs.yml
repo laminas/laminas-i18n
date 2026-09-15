@@ -17,6 +17,11 @@ nav:
             - Alpha: v3/filters/alpha.md
             - NumberFormat: v3/filters/number-format.md
             - NumberParse: v3/filters/number-parse.md
+            - ToE164: v3/phone-number/filters/to-e164.md
+            - ToInternationalPhoneNumber: v3/phone-number/filters/to-international-phone-number.md
+            - ToNationalPhoneNumber: v3/phone-number/filters/to-national-phone-number.md
+        - "Form Elements":
+           -  PhoneNumber: v3/phone-number/element/phone-number.md
         - Validators:
             - Introduction: v3/validators/introduction.md
             - Alnum: v3/validators/alnum.md
@@ -25,7 +30,7 @@ nav:
             - DateTime: v3/validators/date-time.md
             - IsFloat: v3/validators/is-float.md
             - IsInt: v3/validators/is-int.md
-            - PhoneNumber: v3/validators/phone-number.md
+            - PhoneNumber: v3/phone-number/validators/phone-number.md
             - PostCode: v3/validators/post-code.md
         - 'View Helpers':
             - Introduction: v3/view-helpers/introduction.md
@@ -33,6 +38,7 @@ nav:
             - CurrencyFormat: v3/view-helpers/currency-format.md
             - DateFormat: v3/view-helpers/date-format.md
             - NumberFormat: v3/view-helpers/number-format.md
+            - PhoneNumberFormat: v3/phone-number/helper/phone-number-format.md
             - Plural: v3/view-helpers/plural.md
             - Translate: v3/view-helpers/translate.md
             - TranslatePlural: v3/view-helpers/translate-plural.md
