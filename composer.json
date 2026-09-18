@@ -44,6 +44,7 @@
         "psr/simple-cache": "^3.0"
     },
     "require-dev": {
+        "boundwize/structarmed": "^0.17.10",
         "laminas/laminas-cache": "^4.3.0",
         "laminas/laminas-cache-storage-adapter-memory": "^3.2.0",
         "laminas/laminas-coding-standard": "^3.1",

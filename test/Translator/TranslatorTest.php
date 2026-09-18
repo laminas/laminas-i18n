@@ -312,7 +312,7 @@ final class TranslatorTest extends TestCase
         $dispatcher  = $this->createMock(EventDispatcherInterface::class);
         $dispatcher->expects($this->exactly(2))
             ->method('dispatch')
-            ->willReturnCallback(function (object $event) use (&$actualEvent) {
+            ->willReturnCallback(static function (object $event) use (&$actualEvent) {
                 if ($event instanceof MissingTranslationEvent) {
                     $actualEvent = $event;
                 }
@@ -373,7 +373,7 @@ final class TranslatorTest extends TestCase
         $dispatcher = $this->createMock(EventDispatcherInterface::class);
         $dispatcher->expects($this->exactly(2))
             ->method('dispatch')
-            ->willReturnCallback(function (object $event) {
+            ->willReturnCallback(static function (object $event) {
                 if ($event instanceof MissingTranslationEvent) {
                     $event->setTranslation('EVENT TRIGGERED');
                 }
@@ -399,7 +399,7 @@ final class TranslatorTest extends TestCase
         $dispatcher  = $this->createMock(EventDispatcherInterface::class);
         $dispatcher->expects($this->exactly(2))
             ->method('dispatch')
-            ->willReturnCallback(function (object $event) use (&$actualEvent) {
+            ->willReturnCallback(static function (object $event) use (&$actualEvent) {
                 if ($event instanceof NoMessagesLoadedEvent) {
                     $actualEvent = $event;
                 }
@@ -445,7 +445,7 @@ final class TranslatorTest extends TestCase
         $dispatcher = $this->createMock(EventDispatcherInterface::class);
         $dispatcher->expects($this->once())
             ->method('dispatch')
-            ->willReturnCallback(function (object $event) use ($textDomain) {
+            ->willReturnCallback(static function (object $event) use ($textDomain) {
                 if ($event instanceof NoMessagesLoadedEvent) {
                     $event->setMessages($textDomain);
                 }
@@ -586,7 +586,7 @@ final class TranslatorTest extends TestCase
 
         $dispatcher = $this->createMock(EventDispatcherInterface::class);
         $dispatcher->method('dispatch')
-            ->willReturnCallback(function (object $event) use (&$listenerExecution) {
+            ->willReturnCallback(static function (object $event) use (&$listenerExecution) {
                 if ($event instanceof MissingTranslationEvent) {
                     $listenerExecution['first'] = true;
                     $event->setTranslation('Found by first listener!');

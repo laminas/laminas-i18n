@@ -52,7 +52,7 @@ final readonly class IniFileReader
         }
 
         set_error_handler(
-            function ($error, $message = '') {
+            static function ($error, $message = '') {
                 throw new RuntimeException(
                     sprintf('Error reading INI file: %s', $message),
                     $error,
@@ -87,7 +87,7 @@ final readonly class IniFileReader
         }
 
         set_error_handler(
-            function ($error, $message = '') {
+            static function ($error, $message = '') {
                 throw new RuntimeException(
                     sprintf('Error reading INI string: %s', $message),
                     $error,
