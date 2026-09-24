@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1df096a6e4e134d7a1295c0277c456aa",
+    "content-hash": "7df85171ba53f966d78d1400cd52aebf",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -1403,23 +1403,23 @@
         },
         {
             "name": "boundwize/structarmed",
-            "version": "0.17.12",
+            "version": "0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boundwize/structarmed.git",
-                "reference": "05a625da831db09d581f37357682d6cbce4db603"
+                "reference": "f2728fead5f561ad91aead1a985728403678c88d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/05a625da831db09d581f37357682d6cbce4db603",
-                "reference": "05a625da831db09d581f37357682d6cbce4db603",
+                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/f2728fead5f561ad91aead1a985728403678c88d",
+                "reference": "f2728fead5f561ad91aead1a985728403678c88d",
                 "shasum": ""
             },
             "require": {
                 "boundwize/jsonrecast": "^1.0",
                 "composer-runtime-api": "^2.0",
                 "fidry/cpu-core-counter": "^1.3",
-                "nikic/php-parser": "^5.8",
+                "nikic/php-parser": "^5.9",
                 "php": "^8.2"
             },
             "require-dev": {
@@ -1469,7 +1469,7 @@
             ],
             "support": {
                 "issues": "https://github.com/boundwize/structarmed/issues",
-                "source": "https://github.com/boundwize/structarmed/tree/0.17.12"
+                "source": "https://github.com/boundwize/structarmed/tree/0.18.0"
             },
             "funding": [
                 {
@@ -1477,7 +1477,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-09-20T13:16:10+00:00"
+            "time": "2026-09-24T03:45:31+00:00"
         },
         {
             "name": "composer/pcre",
