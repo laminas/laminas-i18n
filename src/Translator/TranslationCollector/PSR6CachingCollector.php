@@ -13,7 +13,7 @@ use function sprintf;
 
 final readonly class PSR6CachingCollector implements CachingCollectorInterface
 {
-    private const DEFAULT_PREFIX = 'LaminasTranslations';
+    private const string DEFAULT_PREFIX = 'LaminasTranslations';
     /** @var non-empty-string */
     private string $keyPrefix;
 

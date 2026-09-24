@@ -14,7 +14,7 @@ use function count;
 final class DefaultCountryCodeList implements CountryCodeListInterface
 {
     /** @psalm-var non-empty-list<non-empty-string> */
-    private const LIST = [
+    private const array LIST = [
         'AD',
         'AE',
         'AF',
