@@ -190,7 +190,12 @@ rector-fix: ## Apply Rector changes
 	@docker run $(DOCKER_PHP) tools/rector/vendor/bin/rector process -c tools/rector/rector.php
 .PHONY: rector-fix
 
-qa: composer-checks cs test sa composer-require-checker unused rector docs-lint check-links ## Run all QA checks
+struct: ## Run `structarmed` in check mode
+	@$(call MK_INFO,"Checking inconsistencies with structarmed")
+	@docker run $(DOCKER_PHP) vendor/bin/structarmed analyse
+.PHONY: struct
+
+qa: composer-checks cs test sa composer-require-checker unused struct rector docs-lint check-links ## Run all QA checks
 
 clean: ## Delete caches and docs-build assets
 	@$(call MK_INFO,"Cleaning up")
