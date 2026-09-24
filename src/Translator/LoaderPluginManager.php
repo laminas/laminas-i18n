@@ -28,7 +28,7 @@ use function sprintf;
  */
 final class LoaderPluginManager extends AbstractPluginManager implements MessageLoaderPluginManagerInterface
 {
-    private const CONFIGURATION = [
+    private const array CONFIGURATION = [
         'factories' => [
             Loader\Gettext::class  => Loader\Factory\GettextFactory::class,
             Loader\Ini::class      => Loader\Factory\IniFactory::class,

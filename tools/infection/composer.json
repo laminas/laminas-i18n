@@ -1,19 +1,19 @@
 {
     "config": {
         "platform": {
-            "php": "8.2.99"
+            "php": "8.3.99"
         },
         "allow-plugins": {
             "infection/extension-installer": true
         }
     },
     "require": {
-        "php": "~8.2 || ~8.3 || ~8.4 || ~8.5"
+        "php": "~8.3 || ~8.4 || ~8.5 || ~8.6"
     },
     "require-dev": {
         "psalm/plugin-phpunit": "^0.19.7",
-        "roave/infection-static-analysis-plugin": "^1.40",
-        "vimeo/psalm": "^6.17.1"
+        "roave/infection-static-analysis-plugin": "^1.43",
+        "vimeo/psalm": "^6.18.0"
     },
     "conflict": {
         "psalm/plugin-phpunit": "^0.20.0"
