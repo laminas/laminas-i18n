@@ -44,13 +44,13 @@
         "psr/simple-cache": "^3.0"
     },
     "require-dev": {
-        "boundwize/structarmed": "^0.17.10",
+        "boundwize/structarmed": "^0.18.0",
         "laminas/laminas-cache": "^4.3.0",
         "laminas/laminas-cache-storage-adapter-memory": "^3.2.0",
         "laminas/laminas-coding-standard": "^3.1",
         "phpbench/phpbench": "^1.7.0",
         "phpunit/phpunit": "^11.5.56",
-        "psalm/plugin-phpunit": "^0.19.7",
+        "psalm/plugin-phpunit": "^0.20.0",
         "vimeo/psalm": "^6.17.1"
     },
     "conflict": {
