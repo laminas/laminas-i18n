@@ -18,14 +18,12 @@ final class CountryCodeTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         $this->preserveLocale = Locale::getDefault();
     }
 
     protected function tearDown(): void
     {
         Locale::setDefault($this->preserveLocale);
-        parent::tearDown();
     }
 
     public function testCountryCodesAreNormalisedToUppercase(): void

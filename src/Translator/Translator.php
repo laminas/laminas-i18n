@@ -15,7 +15,7 @@ use function is_string;
 
 final class Translator implements TranslatorInterface
 {
-    public const ANY_LOCALE = '*';
+    public const string ANY_LOCALE = '*';
     /**
      * Messages loaded by the translator.
      *

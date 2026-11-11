@@ -19,7 +19,6 @@ final class IniTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         $realpath = realpath(__DIR__ . '/IniTest');
         self::assertNotFalse($realpath);
         $this->testFilesDir = $realpath;

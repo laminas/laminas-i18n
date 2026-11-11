@@ -32,7 +32,6 @@ final class GettextTest extends TestCase
     protected function tearDown(): void
     {
         set_include_path($this->originalIncludePath);
-        parent::tearDown();
     }
 
     public function testLoaderFailsToLoadMissingFile(): void
