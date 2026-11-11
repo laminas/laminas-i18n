@@ -1,73 +1,81 @@
-name: "Continuous Integration"
-
-on:
-  pull_request:
+name: 'Continuous Integration'
+'on':
+  pull_request: 
   push:
-    branches:
-    tags:
-
+    branches: 
+    tags: 
 env:
-  default_php: 8.2
-  php_extensions: intl,mbstring,bcmath
-
+  default_php: '8.3'
+  php_extensions: 'intl,mbstring,bcmath'
 jobs:
   ci:
     uses: laminas/workflow-continuous-integration/.github/workflows/continuous-integration.yml@1.x
-
   composer-require-checker:
-    name: "Check for missing dependencies"
+    name: 'Check for missing dependencies'
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
-
+      -
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      -
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962
         with:
-          php-version: ${{ env.default_php }}
+          php-version: '${{ env.default_php }}'
           ini-values: memory_limit=-1
-          extensions: ${{ env.php_extensions }}
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - run: make require-checker-ci
-
+          extensions: '${{ env.php_extensions }}'
+      -
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda
+      -
+        run: 'make require-checker-ci'
   composer-unused:
-    name: Check for Unused Dependencies
+    name: 'Check for Unused Dependencies'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+      -
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      -
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962
         with:
-          php-version: ${{ env.default_php }}
-          extensions: ${{ env.php_extensions }}
+          php-version: '${{ env.default_php }}'
+          extensions: '${{ env.php_extensions }}'
           tools: composer
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - run: make unused-ci
-
+      -
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda
+      -
+        run: 'make unused-ci'
   psalm-security-report:
-    name: "Psalm Security Report"
+    name: 'Psalm Security Report'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+      -
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      -
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962
         with:
-          php-version: ${{ env.default_php }}
-          extensions: ${{ env.php_extensions }}
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - name: "Psalm"
-        run: vendor/bin/psalm --report=results.sarif
-      - name: "Upload Security Analysis results to GitHub"
-        uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 # v4
+          php-version: '${{ env.default_php }}'
+          extensions: '${{ env.php_extensions }}'
+      -
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda
+      -
+        name: Psalm
+        run: 'vendor/bin/psalm --report=results.sarif'
+      -
+        name: 'Upload Security Analysis results to GitHub'
+        uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066
         with:
           sarif_file: results.sarif
-
   rector:
-    name: Rector on Default PHP
+    name: 'Rector on Default PHP'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+      -
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      -
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962
         with:
-          php-version: ${{ env.default_php }}
-          extensions: ${{ env.php_extensions }}
+          php-version: '${{ env.default_php }}'
+          extensions: '${{ env.php_extensions }}'
           tools: composer
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - run: make rector-ci
+      -
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda
+      -
+        run: 'make rector-ci'
